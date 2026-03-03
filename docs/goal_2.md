@@ -129,13 +129,13 @@ For each genre, map each node and edge to one concrete moment in one of the thre
 
 ## Phase 11 — Example Mappings (Batch 2: Genres 8–14)
 
-- [ ] 8 — Romance example mapping → `data/genres/08_romance/examples.md`
-- [ ] 9 — Romantic Comedy example mapping → `data/genres/09_romantic_comedy/examples.md`
-- [ ] 10 — Horror example mapping → `data/genres/10_horror/examples.md`
-- [ ] 11 — Mystery example mapping → `data/genres/11_mystery/examples.md`
-- [ ] 12 — Crime example mapping → `data/genres/12_crime/examples.md`
-- [ ] 13 — Detective example mapping → `data/genres/13_detective/examples.md`
-- [ ] 14 — Superhero example mapping → `data/genres/14_superhero/examples.md`
+- [X] 8 — Romance example mapping → `data/genres/08_romance/examples.md`
+- [X] 9 — Romantic Comedy example mapping → `data/genres/09_romantic_comedy/examples.md`
+- [X] 10 — Horror example mapping → `data/genres/10_horror/examples.md`
+- [X] 11 — Mystery example mapping → `data/genres/11_mystery/examples.md`
+- [X] 12 — Crime example mapping → `data/genres/12_crime/examples.md`
+- [X] 13 — Detective example mapping → `data/genres/13_detective/examples.md`
+- [X] 14 — Superhero example mapping → `data/genres/14_superhero/examples.md`
 
 ---
 
