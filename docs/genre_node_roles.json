@@ -1,0 +1,55 @@
+{
+  "title": "Controlled Vocabulary: Genre Depth Graph Node Roles",
+  "description": "Canonical set of node roles used across all 27 genre depth graphs. Every node must be assigned exactly one role. The first five roles form the five-level spine defined in v0_plan.md §3.3. The additional roles handle structural concepts that appear across multiple levels.",
+  "node_roles": [
+    {
+      "role": "Genre Promise",
+      "level": 1,
+      "definition": "The emotional and experiential contract with the audience — what the genre commits to delivering.",
+      "structural_function": "Root node. Every genre graph has exactly one. All other nodes trace back to this promise.",
+      "examples_across_genres": "Fear and dread (Horror), Solvable puzzle with fair resolution (Mystery), Wonder and mythic stakes (Fantasy)"
+    },
+    {
+      "role": "Core Constraint",
+      "level": 2,
+      "definition": "A non-negotiable rule that must hold for the genre to function — what must be true in any story claiming this genre.",
+      "structural_function": "Direct children of Genre Promise. Define the minimum viable genre contract. Typically 3–6 per graph.",
+      "examples_across_genres": "Threat must be present and escalating (Horror), Fair clueing required (Mystery), Physical confrontation must resolve the central conflict (Action)"
+    },
+    {
+      "role": "Subgenre Pattern",
+      "level": 3,
+      "definition": "A recognized subtype with its own distinct constraint profile that inherits from but modifies the core constraints.",
+      "structural_function": "Branching layer. Each subgenre carries forward core constraints while adding or adjusting requirements. Typically 3–6 per graph.",
+      "examples_across_genres": "Cozy vs. Hardboiled vs. Police Procedural (Mystery), Space Opera vs. Cyberpunk vs. Hard SF (Science Fiction), Slasher vs. Supernatural vs. Cosmic (Horror)"
+    },
+    {
+      "role": "Setting Rule",
+      "level": 4,
+      "definition": "A world-building or setting requirement that concretely expresses the genre — how the story's environment must behave.",
+      "structural_function": "Makes genre constraints tangible through setting mechanics. Specifies what must remain consistent in the story's world.",
+      "examples_across_genres": "Magic system must have costs and limits (Fantasy), Period-accurate social norms and technology (Historical), Isolation amplifies threat (Horror)"
+    },
+    {
+      "role": "Scene Obligation",
+      "level": 5,
+      "definition": "A specific, recurring scene type or beat that the audience expects and the genre contract demands.",
+      "structural_function": "Terminal or near-terminal nodes. The most concrete and testable layer — can be checked against a draft.",
+      "examples_across_genres": "First scare or anomaly (Horror), Investigation pivot scene (Mystery), Declaration or commitment scene (Romance)"
+    },
+    {
+      "role": "Tone Marker",
+      "level": null,
+      "definition": "A required atmospheric, emotional, or stylistic quality that the genre mandates — not a plot element but a register the story must sustain.",
+      "structural_function": "Can appear at Levels 2–4. Constrains how the story feels rather than what happens. Often connects to multiple scene obligations.",
+      "examples_across_genres": "Sustained dread atmosphere (Horror), Wit and verbal sparring (Romantic Comedy), Grandeur and awe (Fantasy)"
+    },
+    {
+      "role": "Anti-Pattern",
+      "level": null,
+      "definition": "An explicit prohibition — an approach, trope, or element that violates the genre contract if present.",
+      "structural_function": "Can appear at Levels 2–5. Defines the genre by exclusion. Useful for distinguishing similar genres and preventing common mistakes.",
+      "examples_across_genres": "Unsolvable puzzle or withheld clues (Mystery), Consequence-free violence (War), Unearned happy ending (Tragedy)"
+    }
+  ]
+}

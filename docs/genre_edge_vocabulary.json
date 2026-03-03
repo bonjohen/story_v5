@@ -1,0 +1,66 @@
+{
+  "title": "Controlled Vocabulary: Genre Depth Graph Edge Meanings",
+  "description": "Canonical set of edge labels used across all 27 genre depth graphs. Every edge in every graph must use exactly one of these meanings. These represent refinement relationships — how moving deeper through genre levels narrows creative degrees of freedom and increases specificity.",
+  "edge_meanings": [
+    {
+      "label": "specifies constraint",
+      "definition": "The edge translates a broad expectation into a concrete, enforceable rule that the story must follow.",
+      "typical_context": "Level 1→2 transitions where a genre promise generates specific requirements"
+    },
+    {
+      "label": "narrows scope",
+      "definition": "The edge reduces the range of valid creative choices by focusing on a more specific pattern or requirement.",
+      "typical_context": "Any downward transition where options decrease and specificity increases"
+    },
+    {
+      "label": "branches into subtype",
+      "definition": "The edge splits into a recognized subgenre or variant that carries its own distinct constraint profile.",
+      "typical_context": "Level 2→3 transitions where core constraints generate distinct subgenre patterns"
+    },
+    {
+      "label": "mandates element",
+      "definition": "The edge requires a specific scene type, beat, or structural element to be present in the story.",
+      "typical_context": "Level 4→5 transitions where setting rules generate concrete scene obligations"
+    },
+    {
+      "label": "prohibits element",
+      "definition": "The edge forbids specific choices, tropes, or approaches that would violate genre expectations at this level.",
+      "typical_context": "Edges leading to anti-pattern nodes, or constraints that explicitly exclude certain techniques"
+    },
+    {
+      "label": "inherits constraint",
+      "definition": "The edge carries a parent-level constraint forward into a more specific context, applying it unchanged.",
+      "typical_context": "Level 2→3 or 3→4 transitions where a core rule persists across subgenres or settings"
+    },
+    {
+      "label": "sets tone",
+      "definition": "The edge establishes or adjusts the required emotional, atmospheric, or stylistic register.",
+      "typical_context": "Edges leading to tone marker nodes, or transitions that define mood requirements"
+    },
+    {
+      "label": "introduces setting rule",
+      "definition": "The edge adds a world-building or setting requirement specific to this genre context.",
+      "typical_context": "Level 3→4 transitions where subgenre patterns generate concrete setting requirements"
+    },
+    {
+      "label": "specializes threat",
+      "definition": "The edge makes the genre's source of tension, conflict, or danger more concrete and genre-specific.",
+      "typical_context": "Genres with strong threat models (Horror, Thriller, War) where threat type defines constraints"
+    },
+    {
+      "label": "restricts resolution",
+      "definition": "The edge constrains how the story can acceptably end, limiting valid outcomes for the genre.",
+      "typical_context": "Constraints that govern endings (Romance requires commitment proof; Tragedy requires downfall)"
+    },
+    {
+      "label": "differentiates from",
+      "definition": "The edge distinguishes this pattern from a related alternative, marking what makes this subtype unique.",
+      "typical_context": "Between Level 3 nodes where subgenres define themselves against sibling patterns"
+    },
+    {
+      "label": "requires payoff",
+      "definition": "The edge demands the story deliver a specific audience-facing reward that fulfills the genre contract.",
+      "typical_context": "Level 4→5 or 2→5 transitions where constraints generate testable delivery requirements"
+    }
+  ]
+}
