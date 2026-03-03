@@ -19,13 +19,13 @@ Establish the shared foundation that all 27 genre graphs will depend on.
 
 Build the first seven genre depth graph JSON documents following the schema in `v0_plan.md` §1.2A and the five-level spine in §3.3.
 
-- [ ] 1 — Drama graph JSON → `data/genres/01_drama/graph.json`
-- [ ] 2 — Action graph JSON → `data/genres/02_action/graph.json`
-- [ ] 3 — Comedy graph JSON → `data/genres/03_comedy/graph.json`
-- [ ] 4 — Thriller graph JSON → `data/genres/04_thriller/graph.json`
-- [ ] 5 — Fantasy graph JSON → `data/genres/05_fantasy/graph.json`
-- [ ] 6 — Science Fiction graph JSON → `data/genres/06_science_fiction/graph.json`
-- [ ] 7 — Adventure graph JSON → `data/genres/07_adventure/graph.json`
+- [X] 1 — Drama graph JSON → `data/genres/01_drama/graph.json`
+- [X] 2 — Action graph JSON → `data/genres/02_action/graph.json`
+- [X] 3 — Comedy graph JSON → `data/genres/03_comedy/graph.json`
+- [X] 4 — Thriller graph JSON → `data/genres/04_thriller/graph.json`
+- [X] 5 — Fantasy graph JSON → `data/genres/05_fantasy/graph.json`
+- [X] 6 — Science Fiction graph JSON → `data/genres/06_science_fiction/graph.json`
+- [X] 7 — Adventure graph JSON → `data/genres/07_adventure/graph.json`
 
 ---
 
