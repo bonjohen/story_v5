@@ -1,0 +1,182 @@
+{
+  "id": "archetype_13_the_mystery_unveiled",
+  "name": "The Mystery Unveiled",
+  "type": "archetype",
+  "description": "An investigation reveals hidden truths, progressively reshaping understanding of events and characters.",
+  "nodes": [
+    {
+      "node_id": "MU_N01_SURFACE_ORDER",
+      "label": "Surface Order",
+      "role": "Origin",
+      "definition": "The world appears to be in a stable state, but something is hidden beneath the surface — a crime, a lie, a secret, or a concealed truth that will drive the story.",
+      "entry_conditions": ["Story opening", "The audience sees a world that will soon be disrupted by a question"],
+      "exit_conditions": ["An event reveals that something is wrong, hidden, or unexplained"],
+      "typical_variants": ["Apparently normal community with a dark secret", "Crime scene that presents a puzzle", "A death or disappearance that doesn't add up", "An anomaly that demands explanation"],
+      "failure_modes": ["Surface order is so dull the audience doesn't engage", "The hidden truth is so obvious from the start that there's no mystery"],
+      "signals_in_text": ["Normalcy with subtle wrongness", "An event that raises a question", "Someone who notices what others don't"]
+    },
+    {
+      "node_id": "MU_N02_QUESTION_POSED",
+      "label": "Central Question Posed",
+      "role": "Disruption",
+      "definition": "The mystery is formalized — a specific question demands an answer. Who did it? What happened? What is being hidden? The investigator (or protagonist) commits to finding out.",
+      "entry_conditions": ["The surface order is cracked", "A question crystallizes that cannot be ignored"],
+      "exit_conditions": ["The protagonist begins actively investigating"],
+      "typical_variants": ["A murder to solve", "A disappearance to explain", "A conspiracy to uncover", "A personal secret that must be understood"],
+      "failure_modes": ["Question is too vague to drive investigation", "Question is answered too quickly"],
+      "signals_in_text": ["The first investigation scene", "Commitment to finding the truth", "Initial hypotheses formed"]
+    },
+    {
+      "node_id": "MU_N03_INITIAL_CLUES",
+      "label": "Initial Clues",
+      "role": "Catalyst",
+      "definition": "The investigator gathers the first evidence — witness statements, physical clues, patterns, or anomalies. An initial theory forms, but it is incomplete or misleading.",
+      "entry_conditions": ["Investigation has begun", "Evidence is available"],
+      "exit_conditions": ["The investigator has a working theory that will later prove incomplete"],
+      "typical_variants": ["Physical evidence at the scene", "Witness testimony with contradictions", "Documentary evidence that raises more questions", "A pattern that suggests a suspect"],
+      "failure_modes": ["Clues are so clear the mystery is already solved", "Clues are so opaque no theory is possible"],
+      "signals_in_text": ["Examining evidence", "Interviewing witnesses", "Connecting dots", "Forming a hypothesis"]
+    },
+    {
+      "node_id": "MU_N04_FALSE_TRAIL",
+      "label": "False Trail",
+      "role": "Trial",
+      "definition": "The investigation pursues a lead that appears promising but proves misleading. The false trail tests the investigator's judgment and delays the truth.",
+      "entry_conditions": ["Initial clues have suggested a direction", "The investigator commits resources to pursuing it"],
+      "exit_conditions": ["The false trail is exposed and the investigation must reorient"],
+      "typical_variants": ["Wrong suspect identified", "Planted evidence followed", "A confession that turns out to be false", "A theory that explains some facts but not all"],
+      "failure_modes": ["False trail is obviously wrong from the start", "False trail consumes so much time the story stalls", "No consequences for following the wrong path"],
+      "signals_in_text": ["Pursuing a suspect with apparent evidence", "Confidence building then crumbling", "A fact that doesn't fit the theory"]
+    },
+    {
+      "node_id": "MU_N05_DEEPENING",
+      "label": "Deepening Complexity",
+      "role": "Descent",
+      "definition": "New evidence complicates the picture. The mystery is larger, darker, or more personal than initially assumed. The investigator discovers that the truth threatens powerful interests or their own assumptions.",
+      "entry_conditions": ["The false trail has been abandoned", "New evidence reframes the investigation"],
+      "exit_conditions": ["The investigator understands the true scope and danger of the mystery"],
+      "typical_variants": ["More victims or instances discovered", "Conspiracy extends to trusted figures", "The investigator's own past or relationships are entangled", "The question shifts from 'who' to 'why'"],
+      "failure_modes": ["Deepening is just more clues without changing the nature of the mystery", "The conspiracy becomes so large it's implausible"],
+      "signals_in_text": ["Scope expansion", "Danger to the investigator", "Moral complexity emerging", "Trusted figures becoming suspects"]
+    },
+    {
+      "node_id": "MU_N06_BREAKTHROUGH",
+      "label": "Key Breakthrough",
+      "role": "Revelation",
+      "definition": "A critical piece of evidence or insight connects the disparate clues into a coherent picture. The truth becomes visible — or nearly visible — for the first time.",
+      "entry_conditions": ["Enough evidence has accumulated", "A new clue or perspective provides the missing link"],
+      "exit_conditions": ["The investigator knows (or strongly suspects) the truth and must act on it"],
+      "typical_variants": ["A witness comes forward", "Physical evidence is re-examined with new eyes", "The investigator realizes what they overlooked", "A pattern becomes visible that was hidden in plain sight"],
+      "failure_modes": ["Breakthrough is a convenient coincidence rather than earned", "Breakthrough solves everything at once with no remaining uncertainty"],
+      "signals_in_text": ["'Of course!' moment", "Rapid reassembly of prior clues", "The investigator's demeanor changes — they know"]
+    },
+    {
+      "node_id": "MU_N07_CONFRONTATION",
+      "label": "Confrontation with Truth",
+      "role": "Crisis",
+      "definition": "The investigator confronts the responsible party or forces the truth into the open. This is dangerous — the truth threatens someone with power, and the investigator may pay a price for revealing it.",
+      "entry_conditions": ["The breakthrough has identified the truth", "The investigator must act to expose or resolve it"],
+      "exit_conditions": ["The truth is publicly revealed or privately confirmed; the mystery is solved"],
+      "typical_variants": ["Direct accusation in front of witnesses", "Trap set to provoke a confession", "Physical confrontation with the culprit", "Public revelation of evidence"],
+      "failure_modes": ["Confrontation is anticlimactic — the guilty party simply confesses", "The investigator is not in danger during the confrontation", "The truth is revealed by accident rather than by the investigator's action"],
+      "signals_in_text": ["Face-to-face with the truth", "Tension and danger", "The reveal scene"]
+    },
+    {
+      "node_id": "MU_N08_NEW_UNDERSTANDING",
+      "label": "New Understanding",
+      "role": "Resolution",
+      "definition": "The mystery is solved and the world is seen clearly — often for the first time. The resolution may bring justice, but it always brings knowledge. The surface order is replaced by a deeper, more honest understanding.",
+      "entry_conditions": ["The confrontation has resolved the mystery"],
+      "exit_conditions": ["A new equilibrium is established based on truth rather than concealment"],
+      "typical_variants": ["Justice is served and order is restored", "Truth is known but justice is incomplete", "The investigator is changed by what they learned", "The world is darker but more honest"],
+      "failure_modes": ["Resolution is too neat — all questions are perfectly answered", "Resolution ignores the moral or emotional cost of the investigation", "The truth doesn't matter — nothing changes because of it"],
+      "signals_in_text": ["Explanation of the full truth", "Reactions of those affected", "The investigator alone with their knowledge"]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "MU_E01_QUESTION_EMERGES",
+      "from": "MU_N01_SURFACE_ORDER",
+      "to": "MU_N02_QUESTION_POSED",
+      "label": "Question Emerges",
+      "meaning": "disrupts order",
+      "preconditions": "Surface order is in place; an event reveals that something is hidden",
+      "effects_on_stakes": "The stable world is shown to be built on something concealed",
+      "effects_on_character": "The investigator becomes driven by the need to know",
+      "common_alternatives": "Question is posed by a crime; question is posed by a personal anomaly",
+      "anti_patterns": "The question is rhetorical — no one actually needs or wants to investigate"
+    },
+    {
+      "edge_id": "MU_E02_GATHERS_CLUES",
+      "from": "MU_N02_QUESTION_POSED",
+      "to": "MU_N03_INITIAL_CLUES",
+      "label": "Gathers First Clues",
+      "meaning": "grants insight",
+      "preconditions": "The investigation has begun; evidence is accessible",
+      "effects_on_stakes": "The mystery begins to take shape — but incompletely",
+      "effects_on_character": "The investigator forms initial judgments that will be tested",
+      "common_alternatives": "Clues come easily; clues require effort and risk to obtain",
+      "anti_patterns": "First clues solve the mystery entirely"
+    },
+    {
+      "edge_id": "MU_E03_FOLLOWS_WRONG",
+      "from": "MU_N03_INITIAL_CLUES",
+      "to": "MU_N04_FALSE_TRAIL",
+      "label": "Follows the Wrong Lead",
+      "meaning": "tests resolve",
+      "preconditions": "Initial theory is formed; evidence appears to support it",
+      "effects_on_stakes": "Time and credibility are spent on a dead end",
+      "effects_on_character": "The investigator's confidence is tested; humility is forced",
+      "common_alternatives": "False trail is planted by the culprit; false trail is the investigator's own bias",
+      "anti_patterns": "False trail is obviously wrong — no reasonable person would follow it"
+    },
+    {
+      "edge_id": "MU_E04_REORIENTS",
+      "from": "MU_N04_FALSE_TRAIL",
+      "to": "MU_N05_DEEPENING",
+      "label": "Reorients the Investigation",
+      "meaning": "reframes goal",
+      "preconditions": "The false trail is exposed; new evidence redirects the search",
+      "effects_on_stakes": "The mystery is bigger or more dangerous than initially thought",
+      "effects_on_character": "The investigator must reconsider assumptions and face greater risk",
+      "common_alternatives": "Reorientation comes from a new piece of evidence; from a re-examination of old evidence",
+      "anti_patterns": "Reorientation is arbitrary — no logical connection to the false trail's failure"
+    },
+    {
+      "edge_id": "MU_E05_CONNECTS_DOTS",
+      "from": "MU_N05_DEEPENING",
+      "to": "MU_N06_BREAKTHROUGH",
+      "label": "Connects the Dots",
+      "meaning": "reveals truth",
+      "preconditions": "Enough evidence has accumulated; a new perspective or clue provides the key",
+      "effects_on_stakes": "The truth is within reach but acting on it is dangerous",
+      "effects_on_character": "The investigator's persistence is validated; they must now choose to act",
+      "common_alternatives": "Breakthrough is a flash of insight; breakthrough is methodical assembly of evidence",
+      "anti_patterns": "Breakthrough falls into the investigator's lap with no earned effort"
+    },
+    {
+      "edge_id": "MU_E06_FORCES_TRUTH",
+      "from": "MU_N06_BREAKTHROUGH",
+      "to": "MU_N07_CONFRONTATION",
+      "label": "Forces the Truth Into the Open",
+      "meaning": "triggers crisis",
+      "preconditions": "The truth is known; the investigator must act to reveal or resolve it",
+      "effects_on_stakes": "Maximum danger — the culprit or system fights back",
+      "effects_on_character": "The investigator risks everything for the truth",
+      "common_alternatives": "Confrontation is public; confrontation is private; confrontation is violent",
+      "anti_patterns": "Confrontation is safe — no risk to the investigator"
+    },
+    {
+      "edge_id": "MU_E07_TRUTH_SETTLES",
+      "from": "MU_N07_CONFRONTATION",
+      "to": "MU_N08_NEW_UNDERSTANDING",
+      "label": "Truth Settles",
+      "meaning": "restores equilibrium",
+      "preconditions": "The confrontation has resolved the mystery; the truth is known",
+      "effects_on_stakes": "External stakes dissolve; the world is seen clearly",
+      "effects_on_character": "The investigator carries the knowledge — sometimes at personal cost",
+      "common_alternatives": "Resolution brings justice; resolution brings only knowledge; resolution is ambiguous",
+      "anti_patterns": "Resolution ignores loose ends; resolution pretends the investigation had no cost"
+    }
+  ]
+}

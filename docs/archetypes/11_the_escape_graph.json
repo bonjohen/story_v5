@@ -1,0 +1,194 @@
+{
+  "id": "archetype_11_the_escape",
+  "name": "The Escape",
+  "type": "archetype",
+  "description": "A protagonist trapped by physical, social, or psychological confinement engineers liberation.",
+  "nodes": [
+    {
+      "node_id": "ES_N01_CONFINEMENT",
+      "label": "Confinement",
+      "role": "Origin",
+      "definition": "The protagonist is trapped — in a prison, an oppressive system, a controlling relationship, or a psychological cage. The walls are established as real and difficult to breach.",
+      "entry_conditions": ["Story opening", "Audience sees the nature and severity of the confinement"],
+      "exit_conditions": ["The protagonist decides that escape is necessary and begins to assess the possibility"],
+      "typical_variants": ["Physical prison or captivity", "Totalitarian society", "Abusive relationship or household", "Psychological entrapment (addiction, delusion, grief)"],
+      "failure_modes": ["Confinement is too comfortable — no urgency to escape", "The walls are never made concrete enough for the audience to feel them"],
+      "signals_in_text": ["Walls, guards, rules", "Attempts at autonomy punished", "Other trapped characters who have given up"]
+    },
+    {
+      "node_id": "ES_N02_SPARK_OF_HOPE",
+      "label": "Spark of Hope",
+      "role": "Disruption",
+      "definition": "Something reveals that escape might be possible — a weakness in the system, an ally, a piece of knowledge, or a change in circumstances.",
+      "entry_conditions": ["Confinement is established", "A new element enters that changes the calculus"],
+      "exit_conditions": ["The protagonist begins to believe escape is possible and starts planning"],
+      "typical_variants": ["Discovery of a flaw in the prison", "Arrival of a new ally or prisoner with key knowledge", "Overhearing information", "An internal realization that the confinement is not as absolute as it seemed"],
+      "failure_modes": ["Hope is so faint the audience doesn't believe it", "Hope is so obvious the confinement seems incompetent"],
+      "signals_in_text": ["A glimmer of possibility", "A secret shared", "New information that changes the protagonist's posture"]
+    },
+    {
+      "node_id": "ES_N03_PLANNING",
+      "label": "Planning the Escape",
+      "role": "Catalyst",
+      "definition": "The protagonist develops a plan — gathering resources, recruiting co-conspirators, studying routines, and identifying the critical moments where the system is vulnerable.",
+      "entry_conditions": ["The spark of hope has been identified", "The protagonist has the will to act"],
+      "exit_conditions": ["The plan is ready to execute (or as ready as it can be)"],
+      "typical_variants": ["Elaborate multi-step scheme", "Simple but risky direct action", "Gradual undermining of the confinement over time", "Plan developed in partnership with others"],
+      "failure_modes": ["Planning is too thorough — no remaining uncertainty", "Plan is never shown — the escape seems improvised without justification"],
+      "signals_in_text": ["Whispered conversations", "Acquiring tools or knowledge", "Timing routines", "Recruiting allies"]
+    },
+    {
+      "node_id": "ES_N04_SETBACKS",
+      "label": "Setbacks and Near-Discovery",
+      "role": "Trial",
+      "definition": "The escape plan is threatened by complications — increased surveillance, betrayal, a change in routine, or the protagonist's own mistakes. Each setback tests resolve and forces adaptation.",
+      "entry_conditions": ["Planning is underway", "The system or antagonist creates obstacles"],
+      "exit_conditions": ["The setbacks are overcome or worked around; the plan is adjusted and still viable"],
+      "typical_variants": ["A guard becomes suspicious", "A co-conspirator is caught or turns traitor", "The window of opportunity shrinks", "An unexpected change invalidates part of the plan"],
+      "failure_modes": ["Setbacks are too minor to create tension", "Setbacks are so severe the plan should be impossible but continues anyway"],
+      "signals_in_text": ["Close calls", "Hasty improvisations", "Fear of exposure", "Arguments among conspirators"]
+    },
+    {
+      "node_id": "ES_N05_POINT_OF_NO_RETURN",
+      "label": "Point of No Return",
+      "role": "Commitment",
+      "definition": "The protagonist commits to executing the escape. After this moment, failure means not just continued confinement but worse punishment. There is no going back to quiet endurance.",
+      "entry_conditions": ["The plan is viable despite setbacks", "A triggering event forces the protagonist to act now or never"],
+      "exit_conditions": ["The escape attempt is underway"],
+      "typical_variants": ["Deadline imposed by external event", "Discovery is imminent and delay means capture", "An ally's situation becomes desperate", "The protagonist's mental state demands action now"],
+      "failure_modes": ["No sense that commitment raises the stakes", "The protagonist can still abort without consequence"],
+      "signals_in_text": ["A deep breath before action", "Destroying the means of return", "Saying goodbye"]
+    },
+    {
+      "node_id": "ES_N06_ESCAPE_ATTEMPT",
+      "label": "The Escape Attempt",
+      "role": "Crisis",
+      "definition": "The plan is executed. Things go wrong, improvisation is required, and the outcome hangs in the balance. This is the story's climactic sequence.",
+      "entry_conditions": ["The point of no return is passed", "The escape is underway"],
+      "exit_conditions": ["The protagonist either breaks free or is captured"],
+      "typical_variants": ["Multi-stage breakout with cascading complications", "Single desperate sprint for freedom", "Psychological escape (breaking a mental prison)", "Escape that requires sacrifice of a co-conspirator"],
+      "failure_modes": ["Escape goes exactly as planned — no tension", "Escape depends entirely on luck rather than the protagonist's capability or growth"],
+      "signals_in_text": ["Action sequence", "Alarms and pursuit", "Improvisation under pressure", "Near-failures overcome"]
+    },
+    {
+      "node_id": "ES_N07_FREEDOM",
+      "label": "Freedom",
+      "role": "Resolution",
+      "definition": "The protagonist has escaped. Freedom is real but not free — it carries the cost of what was endured, what was sacrificed, and the knowledge that confinement exists.",
+      "entry_conditions": ["The escape attempt succeeds"],
+      "exit_conditions": ["A new equilibrium is established outside the confinement"],
+      "typical_variants": ["Joyful liberation with scars", "Bittersweet freedom — others remain trapped", "Freedom into an uncertain world", "Freedom that reveals the outside world has its own constraints"],
+      "failure_modes": ["Freedom is purely celebratory with no acknowledgment of cost", "Freedom scene is rushed or absent", "Character shows no lasting effect of the confinement"],
+      "signals_in_text": ["First breath of free air", "Looking back at what was left behind", "Adjusting to a world without walls"]
+    },
+    {
+      "node_id": "ES_N50_RECAPTURE",
+      "label": "Recapture",
+      "role": "Reversal",
+      "definition": "The escape attempt fails and the protagonist is recaptured, facing worse conditions than before. This variant forces a second, harder attempt or redefines the escape as internal.",
+      "entry_conditions": ["The escape attempt has failed"],
+      "exit_conditions": ["The protagonist must choose between despair and a new plan"],
+      "typical_variants": ["Caught at the last moment", "Betrayed by a co-conspirator", "The outside world is itself a prison"],
+      "failure_modes": ["Recapture feels like padding rather than escalation", "No new information or stakes come from the recapture"],
+      "signals_in_text": ["Return to the cell", "Harsher punishment", "Others lost hope"]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "ES_E01_HOPE_APPEARS",
+      "from": "ES_N01_CONFINEMENT",
+      "to": "ES_N02_SPARK_OF_HOPE",
+      "label": "Hope Appears",
+      "meaning": "disrupts order",
+      "preconditions": "Confinement is fully established; a new element changes the possibility",
+      "effects_on_stakes": "The protagonist now has something to lose beyond endurance — they have hope",
+      "effects_on_character": "Shifts from passive survival to active assessment",
+      "common_alternatives": "Hope comes from outside; hope comes from within (a realization)",
+      "anti_patterns": "Hope is implausible given the established confinement"
+    },
+    {
+      "edge_id": "ES_E02_BEGINS_PLANNING",
+      "from": "ES_N02_SPARK_OF_HOPE",
+      "to": "ES_N03_PLANNING",
+      "label": "Begins Planning",
+      "meaning": "grants insight",
+      "preconditions": "The spark of hope is identified; the protagonist decides to act on it",
+      "effects_on_stakes": "Planning creates both hope and risk — discovery means punishment",
+      "effects_on_character": "Protagonist becomes strategic, purposeful, and secretive",
+      "common_alternatives": "Planning is solo; planning requires recruiting allies",
+      "anti_patterns": "Plan is fully formed instantly with no process of development"
+    },
+    {
+      "edge_id": "ES_E03_OBSTACLES_ARISE",
+      "from": "ES_N03_PLANNING",
+      "to": "ES_N04_SETBACKS",
+      "label": "Obstacles Arise",
+      "meaning": "narrows options",
+      "preconditions": "The plan is in development; the system or antagonist creates complications",
+      "effects_on_stakes": "Each setback raises the risk and narrows the margin for error",
+      "effects_on_character": "Resolve and ingenuity are tested; trust among co-conspirators is strained",
+      "common_alternatives": "Setbacks come from external changes; setbacks come from internal betrayal",
+      "anti_patterns": "Setbacks are cosmetic and don't actually threaten the plan"
+    },
+    {
+      "edge_id": "ES_E04_NOW_OR_NEVER",
+      "from": "ES_N04_SETBACKS",
+      "to": "ES_N05_POINT_OF_NO_RETURN",
+      "label": "Now or Never",
+      "meaning": "forces commitment",
+      "preconditions": "Setbacks have been managed; a trigger demands immediate action",
+      "effects_on_stakes": "Failure now means not just continued confinement but worse punishment",
+      "effects_on_character": "The protagonist commits fully — fear is overridden by determination",
+      "common_alternatives": "Trigger is an external deadline; trigger is imminent discovery",
+      "anti_patterns": "Commitment carries no additional risk beyond what already existed"
+    },
+    {
+      "edge_id": "ES_E05_EXECUTES",
+      "from": "ES_N05_POINT_OF_NO_RETURN",
+      "to": "ES_N06_ESCAPE_ATTEMPT",
+      "label": "Executes the Plan",
+      "meaning": "triggers crisis",
+      "preconditions": "The point of no return is passed; action begins",
+      "effects_on_stakes": "Maximum — freedom or capture, life or death",
+      "effects_on_character": "Everything the protagonist has become during confinement is tested",
+      "common_alternatives": "Execution is methodical; execution is desperate improvisation",
+      "anti_patterns": "Escape goes exactly as planned with no complications"
+    },
+    {
+      "edge_id": "ES_E06_BREAKS_FREE",
+      "from": "ES_N06_ESCAPE_ATTEMPT",
+      "to": "ES_N07_FREEDOM",
+      "label": "Breaks Free",
+      "meaning": "restores equilibrium",
+      "preconditions": "The escape attempt succeeds",
+      "effects_on_stakes": "External confinement is over; internal stakes remain",
+      "effects_on_character": "The protagonist is free but permanently marked by the experience",
+      "common_alternatives": "Freedom is immediate; freedom requires a final sprint or sacrifice",
+      "anti_patterns": "Freedom is costless and purely joyful"
+    },
+    {
+      "edge_id": "ES_E50_CAUGHT",
+      "from": "ES_N06_ESCAPE_ATTEMPT",
+      "to": "ES_N50_RECAPTURE",
+      "label": "Caught",
+      "meaning": "inverts expectation",
+      "preconditions": "The escape attempt fails at a critical point",
+      "effects_on_stakes": "Stakes escalate — the protagonist now faces worse conditions",
+      "effects_on_character": "Despair threatens; the protagonist must find deeper reserves",
+      "common_alternatives": "Caught by the antagonist; caught by circumstance; betrayed",
+      "anti_patterns": "Recapture has no consequences — the protagonist simply tries again"
+    },
+    {
+      "edge_id": "ES_E51_TRIES_AGAIN",
+      "from": "ES_N50_RECAPTURE",
+      "to": "ES_N05_POINT_OF_NO_RETURN",
+      "label": "Tries Again",
+      "meaning": "raises cost",
+      "preconditions": "Recapture has occurred; the protagonist finds new resolve or new means",
+      "effects_on_stakes": "The second attempt carries even higher stakes — there will not be a third chance",
+      "effects_on_character": "Deepened determination; the confinement has forged something harder",
+      "common_alternatives": "New plan based on what was learned from failure; same plan adapted",
+      "anti_patterns": "Second attempt is identical to the first with no adaptation"
+    }
+  ]
+}

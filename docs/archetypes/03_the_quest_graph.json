@@ -1,0 +1,205 @@
+{
+  "id": "archetype_03_the_quest",
+  "name": "The Quest",
+  "type": "archetype",
+  "description": "A protagonist or group pursues a defined objective, overcoming escalating obstacles that test commitment and cohesion.",
+  "nodes": [
+    {
+      "node_id": "QU_N01_HOME_GROUND",
+      "label": "Home Ground",
+      "role": "Origin",
+      "definition": "The protagonist's starting community or environment, which either sends or compels the quester toward the objective.",
+      "entry_conditions": ["Story opening", "The objective is not yet known or not yet urgent"],
+      "exit_conditions": ["The objective is defined and departure becomes necessary"],
+      "typical_variants": ["Peaceful community under distant threat", "Stagnant society needing something to survive", "Character with a personal lack the quest may fill"],
+      "failure_modes": ["No reason for the audience to care about this community or character", "Home is so unpleasant that departure carries no weight"],
+      "signals_in_text": ["Community scenes", "Established relationships", "Hints of the coming need"]
+    },
+    {
+      "node_id": "QU_N02_OBJECTIVE_SET",
+      "label": "Objective Defined",
+      "role": "Disruption",
+      "definition": "The quest's target is identified — an object, place, person, or piece of knowledge that must be obtained. The goal is specific and external.",
+      "entry_conditions": ["Home ground is established", "A need or threat makes the objective urgent"],
+      "exit_conditions": ["The protagonist accepts the mission and begins assembling resources"],
+      "typical_variants": ["MacGuffin revealed", "Prophecy or map discovered", "Dying request or command from authority"],
+      "failure_modes": ["Objective is too vague to drive action", "Objective seems trivial — why risk everything for it?"],
+      "signals_in_text": ["Naming the target", "Urgency established", "Discussion of what success requires"]
+    },
+    {
+      "node_id": "QU_N03_COMPANIONS",
+      "label": "Gathering Companions",
+      "role": "Catalyst",
+      "definition": "The protagonist assembles the group needed for the journey. Each companion brings a distinct capability or perspective.",
+      "entry_conditions": ["Objective is set", "The quest cannot be accomplished alone"],
+      "exit_conditions": ["The core group is formed and the journey begins"],
+      "typical_variants": ["Recruited by the leader", "Volunteers drawn by shared cause", "Unlikely allies forced together by circumstance"],
+      "failure_modes": ["Companions are interchangeable or have no distinct function", "Assembly takes so long it delays momentum"],
+      "signals_in_text": ["Introduction of new characters with distinct traits", "Negotiation or persuasion scenes", "First group interaction"]
+    },
+    {
+      "node_id": "QU_N04_JOURNEY_TRIALS",
+      "label": "Journey Trials",
+      "role": "Trial",
+      "definition": "The group encounters obstacles on the path — environmental, adversarial, or interpersonal — that test their capabilities and commitment.",
+      "entry_conditions": ["The group is formed and traveling", "The objective is not yet within reach"],
+      "exit_conditions": ["The group has been tested enough to face the central obstacle"],
+      "typical_variants": ["Sequential geographic challenges", "Encounters with hostile forces", "Internal conflict that threatens group cohesion"],
+      "failure_modes": ["Trials are episodic with no escalation", "No trial threatens the group's unity", "Trials don't connect to the objective"],
+      "signals_in_text": ["Travel sequences", "Obstacles overcome or failed", "Interpersonal friction and bonding"]
+    },
+    {
+      "node_id": "QU_N05_COHESION_TEST",
+      "label": "Cohesion Test",
+      "role": "Revelation",
+      "definition": "A crisis reveals hidden fractures in the group — conflicting motives, secrets, or breaking points that threaten to dissolve the quest.",
+      "entry_conditions": ["Journey trials have stressed the group", "A trigger exposes underlying tensions"],
+      "exit_conditions": ["The group either fractures or recommits with renewed clarity"],
+      "typical_variants": ["Betrayal by one member", "Disagreement over method or morality", "Discovery that the objective is not what it seemed"],
+      "failure_modes": ["Tension resolves too easily", "No real consequence of the fracture"],
+      "signals_in_text": ["Arguments", "Defections or threatened defections", "Truth-telling under pressure"]
+    },
+    {
+      "node_id": "QU_N06_FINAL_APPROACH",
+      "label": "Final Approach",
+      "role": "Descent",
+      "definition": "The group nears the objective, entering the most dangerous territory. Resources are depleted, options are few, and the cost of the quest is fully visible.",
+      "entry_conditions": ["The group has recommitted after the cohesion test", "The objective is close but heavily guarded"],
+      "exit_conditions": ["The group stands at the threshold of the final challenge"],
+      "typical_variants": ["Crossing enemy territory", "Navigating a trap-laden environment", "A last calm before the storm"],
+      "failure_modes": ["No escalation from the journey trials", "Approach is trivially easy"],
+      "signals_in_text": ["Exhaustion", "Final planning", "Goodbyes or final confessions"]
+    },
+    {
+      "node_id": "QU_N07_CLIMACTIC_ORDEAL",
+      "label": "Climactic Ordeal",
+      "role": "Crisis",
+      "definition": "The final confrontation with the obstacle guarding the objective. Success requires applying everything the group has learned and sacrificing something irreplaceable.",
+      "entry_conditions": ["Final approach is complete", "The group is at the point of the objective"],
+      "exit_conditions": ["The objective is obtained or definitively lost"],
+      "typical_variants": ["Battle with a guardian", "Puzzle or test of worthiness", "Sacrifice of a companion"],
+      "failure_modes": ["Ordeal is won without cost", "Victory depends on a convenient power-up rather than earned capability"],
+      "signals_in_text": ["Climactic action sequence", "Sacrifice", "Use of skills or knowledge from earlier trials"]
+    },
+    {
+      "node_id": "QU_N08_OBJECTIVE_WON",
+      "label": "Objective Won",
+      "role": "Transformation",
+      "definition": "The quest's target is obtained. The group possesses what they came for, but the cost is now clear.",
+      "entry_conditions": ["The climactic ordeal is survived"],
+      "exit_conditions": ["The group must decide what to do with the objective"],
+      "typical_variants": ["Object claimed", "Knowledge acquired", "Person rescued"],
+      "failure_modes": ["Obtaining the objective feels anticlimactic", "No reflection on cost paid"],
+      "signals_in_text": ["Moment of achievement", "Inventory of losses", "Brief relief"]
+    },
+    {
+      "node_id": "QU_N09_HOMECOMING",
+      "label": "Homecoming",
+      "role": "Resolution",
+      "definition": "The group returns (or settles) with the objective fulfilled. The community or the questers themselves are changed by what was gained and what was lost.",
+      "entry_conditions": ["The objective is secured", "The return journey is complete or underway"],
+      "exit_conditions": ["A new equilibrium is established"],
+      "typical_variants": ["Triumphant return to the community", "Bittersweet return with losses mourned", "The group disperses, each changed", "Home is no longer the same"],
+      "failure_modes": ["Return is skipped entirely", "No visible impact of the quest on the characters or community"],
+      "signals_in_text": ["Return scenes", "Honoring the fallen", "Changed relationships"]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "QU_E01_NEED_EMERGES",
+      "from": "QU_N01_HOME_GROUND",
+      "to": "QU_N02_OBJECTIVE_SET",
+      "label": "Need Emerges",
+      "meaning": "disrupts order",
+      "preconditions": "Home ground is established; an external or internal need becomes urgent",
+      "effects_on_stakes": "The community's or character's survival becomes conditional on obtaining the objective",
+      "effects_on_character": "Protagonist shifts from passive to purposeful",
+      "common_alternatives": "Objective was always known but urgency suddenly increases",
+      "anti_patterns": "Objective appears arbitrarily with no connection to the home ground"
+    },
+    {
+      "edge_id": "QU_E02_ASSEMBLES_TEAM",
+      "from": "QU_N02_OBJECTIVE_SET",
+      "to": "QU_N03_COMPANIONS",
+      "label": "Assembles the Team",
+      "meaning": "grants insight",
+      "preconditions": "The objective requires capabilities the protagonist lacks alone",
+      "effects_on_stakes": "New interpersonal dynamics create both strength and vulnerability",
+      "effects_on_character": "Protagonist becomes a leader; must negotiate and delegate",
+      "common_alternatives": "Companions are pre-existing allies rather than newly recruited",
+      "anti_patterns": "Team is assembled instantly with no friction or negotiation"
+    },
+    {
+      "edge_id": "QU_E03_SETS_OUT",
+      "from": "QU_N03_COMPANIONS",
+      "to": "QU_N04_JOURNEY_TRIALS",
+      "label": "Sets Out",
+      "meaning": "forces commitment",
+      "preconditions": "The group is formed; departure marks the point of no return",
+      "effects_on_stakes": "Home recedes; the group is now on its own",
+      "effects_on_character": "Group dynamics begin to form under pressure",
+      "common_alternatives": "Departure is forced by attack on the home ground",
+      "anti_patterns": "Departure has no emotional weight; no one cares about leaving"
+    },
+    {
+      "edge_id": "QU_E04_TENSIONS_SURFACE",
+      "from": "QU_N04_JOURNEY_TRIALS",
+      "to": "QU_N05_COHESION_TEST",
+      "label": "Tensions Surface",
+      "meaning": "reveals truth",
+      "preconditions": "Trials have stressed the group; hidden conflicts emerge",
+      "effects_on_stakes": "The quest itself is at risk if the group fragments",
+      "effects_on_character": "True motives and loyalties are exposed",
+      "common_alternatives": "Cohesion test is triggered by an external event that exposes fractures",
+      "anti_patterns": "Group conflict is artificial or resolves in a single scene"
+    },
+    {
+      "edge_id": "QU_E05_RECOMMITS",
+      "from": "QU_N05_COHESION_TEST",
+      "to": "QU_N06_FINAL_APPROACH",
+      "label": "Group Recommits",
+      "meaning": "forces commitment",
+      "preconditions": "The cohesion crisis is resolved; the group is smaller or more unified",
+      "effects_on_stakes": "Remaining members are fully invested; no more half-measures",
+      "effects_on_character": "Bonds are deepened through shared crisis",
+      "common_alternatives": "A member leaves but the rest carry on; a member's sacrifice reunites the group",
+      "anti_patterns": "Recommitment is costless; nothing changed from the cohesion test"
+    },
+    {
+      "edge_id": "QU_E06_ENGAGES_FINAL",
+      "from": "QU_N06_FINAL_APPROACH",
+      "to": "QU_N07_CLIMACTIC_ORDEAL",
+      "label": "Engages Final Obstacle",
+      "meaning": "triggers crisis",
+      "preconditions": "The group is at the threshold of the objective; the guardian or barrier is present",
+      "effects_on_stakes": "All-or-nothing; the quest succeeds or fails here",
+      "effects_on_character": "Each member's distinct capability is called upon",
+      "common_alternatives": "The ordeal is a test of worthiness rather than combat",
+      "anti_patterns": "Final obstacle is easier than the journey trials"
+    },
+    {
+      "edge_id": "QU_E07_CLAIMS_PRIZE",
+      "from": "QU_N07_CLIMACTIC_ORDEAL",
+      "to": "QU_N08_OBJECTIVE_WON",
+      "label": "Claims the Prize",
+      "meaning": "demands sacrifice",
+      "preconditions": "The ordeal is survived; the cost is paid",
+      "effects_on_stakes": "Immediate danger subsides but loss is felt",
+      "effects_on_character": "The group is changed; victory is tempered by what was lost",
+      "common_alternatives": "Prize is different from what was expected; winning transforms the prize itself",
+      "anti_patterns": "Victory is costless; nothing was sacrificed"
+    },
+    {
+      "edge_id": "QU_E08_RETURNS_HOME",
+      "from": "QU_N08_OBJECTIVE_WON",
+      "to": "QU_N09_HOMECOMING",
+      "label": "Returns Home",
+      "meaning": "restores equilibrium",
+      "preconditions": "The objective is secured; the return journey is possible",
+      "effects_on_stakes": "Stakes resolve as the community receives what it needed",
+      "effects_on_character": "Questers are permanently changed; home no longer fits the same way",
+      "common_alternatives": "Questers settle elsewhere; home has changed in their absence",
+      "anti_patterns": "Return is glossed over; no reflection on the journey's impact"
+    }
+  ]
+}

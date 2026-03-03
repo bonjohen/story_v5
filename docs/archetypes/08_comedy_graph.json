@@ -1,0 +1,159 @@
+{
+  "id": "archetype_08_comedy",
+  "name": "Comedy (Restoration of Order)",
+  "type": "archetype",
+  "description": "Social disorder, confusion, or misunderstanding is resolved through reconciliation, restoring harmony.",
+  "nodes": [
+    {
+      "node_id": "CO_N01_CONSTRAINED_ORDER",
+      "label": "Constrained Order",
+      "role": "Origin",
+      "definition": "A social world governed by rigid rules, hierarchy, or convention. Characters are boxed in by expectations, mistaken identities, or repressive norms. The order is stable but stifling.",
+      "entry_conditions": ["Story opening", "Audience sees the social structure and its constraints on the characters"],
+      "exit_conditions": ["A disruption introduces confusion, misunderstanding, or transgression"],
+      "typical_variants": ["Strict household or court", "Rigid social hierarchy", "Community governed by outdated custom", "Workplace with absurd rules"],
+      "failure_modes": ["The order is too pleasant — no reason to disrupt it", "Constraints are not visible, so the later liberation has no contrast"],
+      "signals_in_text": ["Rules and expectations stated or enforced", "Characters performing roles they don't fit", "Tension beneath a polished surface"]
+    },
+    {
+      "node_id": "CO_N02_DISRUPTION",
+      "label": "Disruption of Order",
+      "role": "Disruption",
+      "definition": "An event introduces confusion into the social order — mistaken identity, a forbidden attraction, an outsider's arrival, or a scheme that goes sideways.",
+      "entry_conditions": ["The constrained order is established", "A catalyst for confusion arrives"],
+      "exit_conditions": ["The social order is destabilized; characters are displaced from their expected roles"],
+      "typical_variants": ["Disguise or mistaken identity", "Forbidden relationship discovered", "Outsider enters and doesn't follow the rules", "A plan or scheme is set in motion"],
+      "failure_modes": ["Disruption is too mild to create real confusion", "Disruption has no connection to the social constraints"],
+      "signals_in_text": ["Misunderstandings begin", "Characters are placed in wrong contexts", "Plans are hatched"]
+    },
+    {
+      "node_id": "CO_N03_ESCALATING_CHAOS",
+      "label": "Escalating Chaos",
+      "role": "Trial",
+      "definition": "Misunderstandings compound, schemes collide, and characters become increasingly entangled. Each attempt to fix the confusion makes it worse.",
+      "entry_conditions": ["The disruption has taken effect", "Multiple characters are now caught in the confusion"],
+      "exit_conditions": ["The chaos reaches a peak where resolution or total disaster is imminent"],
+      "typical_variants": ["Cascading misunderstandings", "Multiple schemes interfering with each other", "Characters adopting ever more absurd disguises or lies", "Cross-purposes creating farcical collisions"],
+      "failure_modes": ["Chaos is random rather than escalating from the initial disruption", "No stakes — the confusion is amusing but inconsequential", "One character could easily resolve everything but doesn't for no reason"],
+      "signals_in_text": ["Doors slamming", "Near-misses of discovery", "Absurd complications", "Characters talking past each other"]
+    },
+    {
+      "node_id": "CO_N04_DARK_MOMENT",
+      "label": "Dark Moment",
+      "role": "Crisis",
+      "definition": "The confusion reaches a point where it threatens real harm — relationships may be permanently broken, someone may be unjustly punished, or the truth may never emerge.",
+      "entry_conditions": ["Chaos is at its peak", "The confusion now threatens genuine loss"],
+      "exit_conditions": ["A revelation, confession, or act of honesty begins to untangle the knot"],
+      "typical_variants": ["Lovers believe they've lost each other", "An innocent is about to be condemned", "A friendship seems irrecoverably broken", "The scheme appears to have succeeded at someone's permanent expense"],
+      "failure_modes": ["Dark moment is too light — no genuine threat to anything that matters", "Dark moment is too dark — the tone breaks and the comedy can't recover"],
+      "signals_in_text": ["Apparent betrayal", "Anger or tears", "A moment where laughter stops"]
+    },
+    {
+      "node_id": "CO_N05_UNMASKING",
+      "label": "Unmasking and Recognition",
+      "role": "Revelation",
+      "definition": "The truth comes out — disguises are removed, misunderstandings are explained, schemes are exposed. Characters see each other and themselves clearly.",
+      "entry_conditions": ["The dark moment has created enough pressure for truth to emerge"],
+      "exit_conditions": ["All parties know the real situation"],
+      "typical_variants": ["Public revelation at a gathering", "Confession by the schemer", "Accidental exposure of the truth", "A third party connects the dots"],
+      "failure_modes": ["Unmasking is arbitrary rather than triggered by the story's logic", "Not all misunderstandings are addressed — loose threads remain"],
+      "signals_in_text": ["Identities revealed", "Explanations given", "Reactions of surprise and relief"]
+    },
+    {
+      "node_id": "CO_N06_RECONCILIATION",
+      "label": "Reconciliation",
+      "role": "Commitment",
+      "definition": "Characters choose to forgive, accept, and reconnect. Those who caused the confusion are pardoned (or reformed), and those who suffered it are made whole.",
+      "entry_conditions": ["The truth is known", "Characters must decide how to respond"],
+      "exit_conditions": ["Key relationships are repaired or newly formed"],
+      "typical_variants": ["Lovers reunited", "Parental or authority figure relents", "Schemer is forgiven or humbled", "Outsider is accepted into the community"],
+      "failure_modes": ["Forgiveness is too easy — serious harm is hand-waved", "Some characters are excluded from reconciliation without reason"],
+      "signals_in_text": ["Apologies and embraces", "Laughter shared", "Former adversaries shaking hands"]
+    },
+    {
+      "node_id": "CO_N07_NEW_HARMONY",
+      "label": "New Harmony",
+      "role": "Resolution",
+      "definition": "A new social order is established — freer, more honest, or more inclusive than the original. The rigid constraints of the opening are relaxed or replaced.",
+      "entry_conditions": ["Reconciliation is complete", "The original constraints have been challenged"],
+      "exit_conditions": ["A stable, improved equilibrium is in place"],
+      "typical_variants": ["Marriage or union celebrating the new order", "Community feast or festival", "New rules or attitudes replacing the old", "Characters in new, more authentic roles"],
+      "failure_modes": ["New order is identical to the old one — nothing was learned", "Resolution is so thorough that the original constraints seem trivial in retrospect"],
+      "signals_in_text": ["Celebration", "Pairing off", "Laughter", "The rigid character finally relaxes"]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "CO_E01_ORDER_BROKEN",
+      "from": "CO_N01_CONSTRAINED_ORDER",
+      "to": "CO_N02_DISRUPTION",
+      "label": "Order Broken",
+      "meaning": "disrupts order",
+      "preconditions": "Social order is established; a catalyst for confusion arrives",
+      "effects_on_stakes": "Social stability is threatened; characters risk exposure or loss of status",
+      "effects_on_character": "Characters are forced out of their assigned roles",
+      "common_alternatives": "Disruption is accidental; disruption is deliberately engineered by a trickster",
+      "anti_patterns": "Disruption has nothing to do with the constraints of the opening order"
+    },
+    {
+      "edge_id": "CO_E02_COMPOUNDS",
+      "from": "CO_N02_DISRUPTION",
+      "to": "CO_N03_ESCALATING_CHAOS",
+      "label": "Confusion Compounds",
+      "meaning": "narrows options",
+      "preconditions": "Initial disruption is in place; characters attempt to manage it",
+      "effects_on_stakes": "Each fix creates new problems; the tangle deepens",
+      "effects_on_character": "Characters become more entrenched in false positions",
+      "common_alternatives": "Chaos escalates through multiple schemes colliding; chaos escalates through a single lie branching",
+      "anti_patterns": "Chaos is episodic rather than compounding from the original disruption"
+    },
+    {
+      "edge_id": "CO_E03_THREATENS_HARM",
+      "from": "CO_N03_ESCALATING_CHAOS",
+      "to": "CO_N04_DARK_MOMENT",
+      "label": "Threatens Real Harm",
+      "meaning": "raises cost",
+      "preconditions": "Chaos has escalated enough that real relationships or well-being are at risk",
+      "effects_on_stakes": "Comedy momentarily becomes serious; genuine loss is possible",
+      "effects_on_character": "Characters realize the confusion has gone too far",
+      "common_alternatives": "Dark moment involves romantic loss; dark moment involves injustice to an innocent",
+      "anti_patterns": "Dark moment is so brief or shallow it carries no weight"
+    },
+    {
+      "edge_id": "CO_E04_TRUTH_EMERGES",
+      "from": "CO_N04_DARK_MOMENT",
+      "to": "CO_N05_UNMASKING",
+      "label": "Truth Emerges",
+      "meaning": "reveals truth",
+      "preconditions": "The pressure of the dark moment forces honesty or exposure",
+      "effects_on_stakes": "The source of confusion is eliminated; characters can see clearly",
+      "effects_on_character": "Characters must face each other honestly, often for the first time",
+      "common_alternatives": "Truth comes through confession; truth comes through accidental exposure",
+      "anti_patterns": "Truth emerges through a coincidence unrelated to the characters' actions"
+    },
+    {
+      "edge_id": "CO_E05_FORGIVES",
+      "from": "CO_N05_UNMASKING",
+      "to": "CO_N06_RECONCILIATION",
+      "label": "Chooses Forgiveness",
+      "meaning": "enables transformation",
+      "preconditions": "The truth is known; characters must decide how to respond",
+      "effects_on_stakes": "Threat of permanent damage dissolves through generosity",
+      "effects_on_character": "Characters grow by choosing connection over pride or punishment",
+      "common_alternatives": "Forgiveness is immediate; forgiveness requires a gesture of goodwill first",
+      "anti_patterns": "Forgiveness is automatic with no moment of decision"
+    },
+    {
+      "edge_id": "CO_E06_HARMONY_RESTORED",
+      "from": "CO_N06_RECONCILIATION",
+      "to": "CO_N07_NEW_HARMONY",
+      "label": "Harmony Restored",
+      "meaning": "restores equilibrium",
+      "preconditions": "Reconciliation is complete; the social order can be rebuilt",
+      "effects_on_stakes": "Stakes dissolve into celebration and stability",
+      "effects_on_character": "Characters occupy new, more authentic roles in the social order",
+      "common_alternatives": "New order is celebrated with a wedding or feast; new order is quiet but warmer",
+      "anti_patterns": "New harmony is identical to the old constrained order — the disruption changed nothing"
+    }
+  ]
+}

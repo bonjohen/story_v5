@@ -1,0 +1,182 @@
+{
+  "id": "archetype_05_overcoming_the_monster",
+  "name": "Overcoming the Monster",
+  "type": "archetype",
+  "description": "A protagonist confronts and defeats a powerful antagonist or existential threat that endangers a community or world.",
+  "nodes": [
+    {
+      "node_id": "OM_N01_PEACEFUL_STATE",
+      "label": "Peaceful State Under Threat",
+      "role": "Origin",
+      "definition": "A community or world exists in relative peace, but a monstrous force threatens to destroy it. The protagonist is part of or connected to what is threatened.",
+      "entry_conditions": ["Story opening", "The audience sees both the world worth saving and the shadow of the threat"],
+      "exit_conditions": ["The monster's threat becomes immediate and undeniable"],
+      "typical_variants": ["Idyllic community with a distant menace", "World already under partial siege", "Protagonist unaware of the threat's true scale"],
+      "failure_modes": ["Community is so underdeveloped that its destruction wouldn't matter", "Threat is mentioned but not felt"],
+      "signals_in_text": ["Establishing shots of normal life", "Rumors or warnings", "Small signs of the monster's influence"]
+    },
+    {
+      "node_id": "OM_N02_MONSTER_REVEALED",
+      "label": "Monster Revealed",
+      "role": "Disruption",
+      "definition": "The monster's nature, power, and threat become clear. The community and protagonist understand what they face.",
+      "entry_conditions": ["The monster acts or is discovered in a way that cannot be ignored"],
+      "exit_conditions": ["The protagonist accepts the need to confront the monster"],
+      "typical_variants": ["First attack on the community", "Discovery of the monster's lair or nature", "Witness to the monster's destructive power"],
+      "failure_modes": ["Monster is revealed but seems beatable without effort", "Monster's reveal is underwhelming"],
+      "signals_in_text": ["Destruction or death caused by the monster", "Fear spreading", "The protagonist's first encounter"]
+    },
+    {
+      "node_id": "OM_N03_CALL_TO_CONFRONT",
+      "label": "Call to Confront",
+      "role": "Commitment",
+      "definition": "The protagonist accepts the mission to face the monster, either by choice, duty, or necessity. Others may refuse or be unable.",
+      "entry_conditions": ["The monster is known", "No one else can or will act"],
+      "exit_conditions": ["The protagonist is committed to the confrontation"],
+      "typical_variants": ["Volunteering when others won't", "Being the only one with a specific capability", "Forced by circumstance — the monster targets the protagonist personally"],
+      "failure_modes": ["Commitment is forced so completely that the character has no agency", "No reason this specific character must be the one to act"],
+      "signals_in_text": ["Declaration of intent", "Separation from the community", "Accepting the risk"]
+    },
+    {
+      "node_id": "OM_N04_PREPARATION",
+      "label": "Preparation and Reconnaissance",
+      "role": "Catalyst",
+      "definition": "The protagonist gathers intelligence, allies, weapons, or skills needed to face the monster. The monster's weakness or pattern is studied.",
+      "entry_conditions": ["Commitment is made", "The protagonist lacks something needed for the confrontation"],
+      "exit_conditions": ["The protagonist has what they need (or believes they do) and moves toward the monster"],
+      "typical_variants": ["Studying the monster's weakness", "Building a weapon or trap", "Training or acquiring a skill", "Recruiting a specialist"],
+      "failure_modes": ["Preparation gives the hero everything — no remaining uncertainty", "Preparation is skipped, making victory feel unearned"],
+      "signals_in_text": ["Research scenes", "Weapon forging or training", "Planning discussions"]
+    },
+    {
+      "node_id": "OM_N05_INITIAL_ENCOUNTER",
+      "label": "Initial Encounter",
+      "role": "Trial",
+      "definition": "The protagonist engages the monster for the first time in a meaningful way. This encounter reveals the monster's true power and the protagonist's inadequacy.",
+      "entry_conditions": ["Preparation is complete", "The protagonist enters the monster's domain or the monster comes to them"],
+      "exit_conditions": ["The protagonist survives but realizes the task is harder than expected"],
+      "typical_variants": ["First battle that goes badly", "Failed trap that only angers the monster", "Narrow escape that reveals a vulnerability"],
+      "failure_modes": ["Initial encounter is too easy — no sense of the monster's superiority", "Protagonist is defeated so thoroughly there's no plausible recovery"],
+      "signals_in_text": ["First combat or confrontation", "The plan fails or partially succeeds", "Injury or loss"]
+    },
+    {
+      "node_id": "OM_N06_NIGHTMARE",
+      "label": "Nightmare Phase",
+      "role": "Descent",
+      "definition": "The monster demonstrates its full power. The protagonist suffers losses, setbacks, or revelations that make victory seem impossible.",
+      "entry_conditions": ["Initial encounter has shown the monster's strength", "The protagonist must regroup"],
+      "exit_conditions": ["The protagonist discovers or earns the key insight needed for the final confrontation"],
+      "typical_variants": ["Allies killed or captured", "Monster attacks the community directly", "Protagonist's confidence shattered", "Discovery that the monster has a deeper nature"],
+      "failure_modes": ["Nightmare is one-note — just more destruction without character impact", "No new information about the monster emerges"],
+      "signals_in_text": ["Escalating destruction", "Despair", "Loss of allies", "Moment of reckoning"]
+    },
+    {
+      "node_id": "OM_N07_FINAL_CONFRONT",
+      "label": "Final Confrontation",
+      "role": "Crisis",
+      "definition": "The protagonist faces the monster in the decisive battle. Victory requires exploiting the discovered weakness and accepting personal risk or sacrifice.",
+      "entry_conditions": ["The key insight is gained", "The protagonist has nothing left to try except the final confrontation"],
+      "exit_conditions": ["The monster is defeated or the protagonist fails"],
+      "typical_variants": ["Direct combat using the discovered weakness", "Outwitting the monster through a trap", "Sacrifice that destroys both monster and something precious", "Turning the monster's power against itself"],
+      "failure_modes": ["Victory comes from a power not previously established", "Monster is defeated too easily given prior buildup", "Victory requires no sacrifice or cost"],
+      "signals_in_text": ["Climactic battle", "Use of the discovered weakness", "Moment of maximum danger", "Sacrifice or extreme effort"]
+    },
+    {
+      "node_id": "OM_N08_WORLD_RESTORED",
+      "label": "World Restored",
+      "role": "Resolution",
+      "definition": "With the monster defeated, the threatened community or world is safe. The protagonist is recognized, mourned, or changed by the confrontation.",
+      "entry_conditions": ["The monster is defeated", "The immediate threat is over"],
+      "exit_conditions": ["A new equilibrium is established"],
+      "typical_variants": ["Community celebration and recognition of the hero", "Quiet restoration with scars remaining", "Hero's sacrifice is honored", "The world is safe but forever changed"],
+      "failure_modes": ["Restoration is too neat — the monster's destruction had no lasting impact", "Hero's cost is ignored in the celebration"],
+      "signals_in_text": ["Community reassembling", "Mourning the fallen", "Rebuilding", "Hero's changed status"]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "OM_E01_THREAT_STRIKES",
+      "from": "OM_N01_PEACEFUL_STATE",
+      "to": "OM_N02_MONSTER_REVEALED",
+      "label": "Threat Strikes",
+      "meaning": "disrupts order",
+      "preconditions": "Peaceful state is established; the monster acts or is discovered",
+      "effects_on_stakes": "The community's survival is now in question",
+      "effects_on_character": "Protagonist is forced to confront the existence of the threat",
+      "common_alternatives": "Monster has been present all along but its true nature is only now revealed",
+      "anti_patterns": "Monster appears with no prior hints or foreshadowing"
+    },
+    {
+      "edge_id": "OM_E02_ACCEPTS_MISSION",
+      "from": "OM_N02_MONSTER_REVEALED",
+      "to": "OM_N03_CALL_TO_CONFRONT",
+      "label": "Accepts the Mission",
+      "meaning": "forces commitment",
+      "preconditions": "The monster's threat is clear; someone must act",
+      "effects_on_stakes": "The protagonist's personal survival is now tied to the community's fate",
+      "effects_on_character": "Transitions from witness to combatant; accepts the mantle",
+      "common_alternatives": "Others push the protagonist to act; protagonist is the only option",
+      "anti_patterns": "Commitment is costless — the protagonist has nothing to lose"
+    },
+    {
+      "edge_id": "OM_E03_GATHERS_TOOLS",
+      "from": "OM_N03_CALL_TO_CONFRONT",
+      "to": "OM_N04_PREPARATION",
+      "label": "Gathers Tools and Knowledge",
+      "meaning": "grants insight",
+      "preconditions": "Commitment is made; the protagonist recognizes they are not yet ready",
+      "effects_on_stakes": "Each preparation step raises hope but also reveals the scale of the task",
+      "effects_on_character": "Protagonist grows in capability and understanding of the monster",
+      "common_alternatives": "Preparation is compressed into a single discovery; preparation spans multiple locations",
+      "anti_patterns": "Preparation solves everything — no remaining uncertainty"
+    },
+    {
+      "edge_id": "OM_E04_ENGAGES_MONSTER",
+      "from": "OM_N04_PREPARATION",
+      "to": "OM_N05_INITIAL_ENCOUNTER",
+      "label": "First Engagement",
+      "meaning": "tests resolve",
+      "preconditions": "Preparation is done; the protagonist moves to engage",
+      "effects_on_stakes": "The theoretical threat becomes viscerally real",
+      "effects_on_character": "Protagonist's confidence is tested; often humbled",
+      "common_alternatives": "The monster comes to the protagonist rather than the reverse",
+      "anti_patterns": "First encounter goes well — no sense of the monster's superiority"
+    },
+    {
+      "edge_id": "OM_E05_OVERWHELMED",
+      "from": "OM_N05_INITIAL_ENCOUNTER",
+      "to": "OM_N06_NIGHTMARE",
+      "label": "Overwhelmed",
+      "meaning": "escalates conflict",
+      "preconditions": "Initial encounter has shown the protagonist's inadequacy",
+      "effects_on_stakes": "Everything worsens — the monster retaliates and the community suffers",
+      "effects_on_character": "Protagonist must dig deeper; questions whether victory is possible",
+      "common_alternatives": "Nightmare is triggered by the monster's retaliation for the initial encounter",
+      "anti_patterns": "Nightmare phase is just more of the same without escalation or new information"
+    },
+    {
+      "edge_id": "OM_E06_KEY_INSIGHT",
+      "from": "OM_N06_NIGHTMARE",
+      "to": "OM_N07_FINAL_CONFRONT",
+      "label": "Key Insight Gained",
+      "meaning": "reframes goal",
+      "preconditions": "The nightmare reveals something new about the monster or the protagonist",
+      "effects_on_stakes": "A path to victory is visible but narrow and costly",
+      "effects_on_character": "Protagonist refocuses — the approach changes based on new understanding",
+      "common_alternatives": "Insight comes from an ally, a prior clue, or the monster's own behavior",
+      "anti_patterns": "Insight is a convenient power-up with no narrative basis"
+    },
+    {
+      "edge_id": "OM_E07_MONSTER_FALLS",
+      "from": "OM_N07_FINAL_CONFRONT",
+      "to": "OM_N08_WORLD_RESTORED",
+      "label": "Monster Falls",
+      "meaning": "restores equilibrium",
+      "preconditions": "The final confrontation is resolved; the monster is defeated",
+      "effects_on_stakes": "Existential threat is removed; the community can rebuild",
+      "effects_on_character": "Protagonist carries the cost of the confrontation; is changed by it",
+      "common_alternatives": "Monster is contained rather than destroyed; victory is pyrrhic",
+      "anti_patterns": "Restoration erases all consequences; the world is exactly as it was"
+    }
+  ]
+}

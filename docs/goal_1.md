@@ -19,31 +19,31 @@ Establish the shared foundation that all 15 archetype graphs will depend on.
 
 Build the first five archetype graph JSON documents following the schema in `v0_plan.md` §1.2A.
 
-- [ ] 1 — The Hero's Journey graph JSON → `docs/archetypes/01_heros_journey_graph.json`
-- [ ] 2 — Rags to Riches graph JSON → `docs/archetypes/02_rags_to_riches_graph.json`
-- [ ] 3 — The Quest graph JSON → `docs/archetypes/03_the_quest_graph.json`
-- [ ] 4 — Voyage and Return graph JSON → `docs/archetypes/04_voyage_and_return_graph.json`
-- [ ] 5 — Overcoming the Monster graph JSON → `docs/archetypes/05_overcoming_the_monster_graph.json`
+- [X] 1 — The Hero's Journey graph JSON → `docs/archetypes/01_heros_journey_graph.json`
+- [X] 2 — Rags to Riches graph JSON → `docs/archetypes/02_rags_to_riches_graph.json`
+- [X] 3 — The Quest graph JSON → `docs/archetypes/03_the_quest_graph.json`
+- [X] 4 — Voyage and Return graph JSON → `docs/archetypes/04_voyage_and_return_graph.json`
+- [X] 5 — Overcoming the Monster graph JSON → `docs/archetypes/05_overcoming_the_monster_graph.json`
 
 ---
 
 ## Phase 3 — Archetype Graph JSONs (Batch 2: Archetypes 6–10)
 
-- [ ] 6 — Rebirth graph JSON → `docs/archetypes/06_rebirth_graph.json`
-- [ ] 7 — Tragedy graph JSON → `docs/archetypes/07_tragedy_graph.json`
-- [ ] 8 — Comedy (Restoration of Order) graph JSON → `docs/archetypes/08_comedy_graph.json`
-- [ ] 9 — Coming of Age graph JSON → `docs/archetypes/09_coming_of_age_graph.json`
-- [ ] 10 — The Revenge graph JSON → `docs/archetypes/10_the_revenge_graph.json`
+- [X] 6 — Rebirth graph JSON → `docs/archetypes/06_rebirth_graph.json`
+- [X] 7 — Tragedy graph JSON → `docs/archetypes/07_tragedy_graph.json`
+- [X] 8 — Comedy (Restoration of Order) graph JSON → `docs/archetypes/08_comedy_graph.json`
+- [X] 9 — Coming of Age graph JSON → `docs/archetypes/09_coming_of_age_graph.json`
+- [X] 10 — The Revenge graph JSON → `docs/archetypes/10_the_revenge_graph.json`
 
 ---
 
 ## Phase 4 — Archetype Graph JSONs (Batch 3: Archetypes 11–15)
 
-- [ ] 11 — The Escape graph JSON → `docs/archetypes/11_the_escape_graph.json`
-- [ ] 12 — The Sacrifice graph JSON → `docs/archetypes/12_the_sacrifice_graph.json`
-- [ ] 13 — The Mystery Unveiled graph JSON → `docs/archetypes/13_the_mystery_unveiled_graph.json`
-- [ ] 14 — The Transformation graph JSON → `docs/archetypes/14_the_transformation_graph.json`
-- [ ] 15 — The Rise and Fall graph JSON → `docs/archetypes/15_the_rise_and_fall_graph.json`
+- [X] 11 — The Escape graph JSON → `docs/archetypes/11_the_escape_graph.json`
+- [X] 12 — The Sacrifice graph JSON → `docs/archetypes/12_the_sacrifice_graph.json`
+- [X] 13 — The Mystery Unveiled graph JSON → `docs/archetypes/13_the_mystery_unveiled_graph.json`
+- [X] 14 — The Transformation graph JSON → `docs/archetypes/14_the_transformation_graph.json`
+- [X] 15 — The Rise and Fall graph JSON → `docs/archetypes/15_the_rise_and_fall_graph.json`
 
 ---
 
@@ -51,7 +51,7 @@ Build the first five archetype graph JSON documents following the schema in `v0_
 
 For each archetype, produce the narrative spec defined in `v0_plan.md` §1.2B: overview, node explanations, edge explanations, canonical walkthrough, variant walkthroughs (2–4), and diagnostic checklist.
 
-- [ ] 1 — The Hero's Journey narrative spec → `docs/archetypes/01_heros_journey_narrative.md`
+- [~] 1 — The Hero's Journey narrative spec → `docs/archetypes/01_heros_journey_narrative.md`
 - [ ] 2 — Rags to Riches narrative spec → `docs/archetypes/02_rags_to_riches_narrative.md`
 - [ ] 3 — The Quest narrative spec → `docs/archetypes/03_the_quest_narrative.md`
 - [ ] 4 — Voyage and Return narrative spec → `docs/archetypes/04_voyage_and_return_narrative.md`

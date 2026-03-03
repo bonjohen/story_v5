@@ -1,0 +1,159 @@
+{
+  "id": "archetype_04_voyage_and_return",
+  "name": "Voyage and Return",
+  "type": "archetype",
+  "description": "A protagonist enters an unfamiliar world, survives its rules and dangers, and returns home with insight or maturity.",
+  "nodes": [
+    {
+      "node_id": "VR_N01_FAMILIAR_WORLD",
+      "label": "Familiar World",
+      "role": "Origin",
+      "definition": "The protagonist's known environment, which feels limited, stifling, or simply normal. Something about the character is restless or incomplete.",
+      "entry_conditions": ["Story opening", "Audience sees the character's dissatisfaction or innocence"],
+      "exit_conditions": ["A passage to the unfamiliar world opens"],
+      "typical_variants": ["Bored child in a mundane setting", "Adult trapped in routine", "Character at the edge of a boundary they've been told not to cross"],
+      "failure_modes": ["Familiar world is too pleasant — no reason to leave", "Character's restlessness is stated but not shown"],
+      "signals_in_text": ["Routine scenes", "Longing for something more", "Proximity to a boundary"]
+    },
+    {
+      "node_id": "VR_N02_PASSAGE",
+      "label": "Passage Into the Unknown",
+      "role": "Threshold",
+      "definition": "The protagonist crosses into a radically different world — by accident, curiosity, or force. The crossing is sudden and disorienting.",
+      "entry_conditions": ["Familiar world is established", "A portal, accident, or transgression occurs"],
+      "exit_conditions": ["The protagonist is fully in the unfamiliar world with no immediate way back"],
+      "typical_variants": ["Falling through a portal", "Shipwreck or crash in alien territory", "Dream or drug-induced transition", "Deliberate trespass that goes wrong"],
+      "failure_modes": ["Crossing is too gradual to feel like a shock", "The character can trivially return at any time"],
+      "signals_in_text": ["Sudden environmental shift", "Disorientation", "Loss of familiar bearings"]
+    },
+    {
+      "node_id": "VR_N03_FASCINATION",
+      "label": "Fascination Phase",
+      "role": "Trial",
+      "definition": "The protagonist explores the new world with wonder, excitement, or naive confidence. The world seems marvelous and the character feels liberated.",
+      "entry_conditions": ["Character is in the unfamiliar world", "Initial danger is not yet apparent"],
+      "exit_conditions": ["The world's darker rules begin to surface"],
+      "typical_variants": ["Delighted exploration", "Making allies among strange inhabitants", "Enjoying freedoms impossible at home"],
+      "failure_modes": ["Fascination phase is so long the story stalls", "No foreshadowing of coming danger"],
+      "signals_in_text": ["Wonder and delight", "Learning new rules", "Playful interactions"]
+    },
+    {
+      "node_id": "VR_N04_SHADOW_EMERGES",
+      "label": "Shadow Emerges",
+      "role": "Revelation",
+      "definition": "The unfamiliar world reveals its dangerous, oppressive, or incomprehensible aspects. What seemed wondrous now threatens the protagonist.",
+      "entry_conditions": ["Fascination has been established", "A darker element is triggered or discovered"],
+      "exit_conditions": ["The protagonist recognizes that the world is hostile and they are vulnerable"],
+      "typical_variants": ["Powerful ruler turns hostile", "Natural law of the world threatens survival", "An ally reveals sinister motives", "The world's beauty masks a trap"],
+      "failure_modes": ["Shadow appears abruptly with no buildup", "Shadow is too mild to create genuine fear"],
+      "signals_in_text": ["First moment of real fear", "Betrayal or threat", "Realization that the rules are different"]
+    },
+    {
+      "node_id": "VR_N05_FRUSTRATION",
+      "label": "Frustration and Imprisonment",
+      "role": "Descent",
+      "definition": "The protagonist is trapped, pursued, or constrained by the unfamiliar world's power. The initial delight is replaced by desperation to survive or escape.",
+      "entry_conditions": ["The shadow is fully active", "The protagonist cannot easily leave"],
+      "exit_conditions": ["The protagonist finds or creates a means of escape"],
+      "typical_variants": ["Physical imprisonment", "Pursuit by the world's ruling force", "Psychological entrapment (loss of identity or memory)"],
+      "failure_modes": ["Imprisonment feels arbitrary rather than consequential", "Protagonist is passive and waits for rescue"],
+      "signals_in_text": ["Confinement", "Failed escape attempts", "Despair", "Longing for home"]
+    },
+    {
+      "node_id": "VR_N06_ESCAPE",
+      "label": "Thrilling Escape",
+      "role": "Crisis",
+      "definition": "The protagonist breaks free from the unfamiliar world's grip in a climactic sequence. Success depends on something learned during the voyage.",
+      "entry_conditions": ["A means of escape is identified", "The stakes are at their peak"],
+      "exit_conditions": ["The protagonist is on the path back to the familiar world"],
+      "typical_variants": ["Physical flight from a pursuer", "Solving a riddle or breaking a spell", "Sacrifice that opens the way home", "Outsmarting the world's guardian"],
+      "failure_modes": ["Escape is too easy — no climax", "Escape depends on luck rather than growth", "Escape is achieved by someone else"],
+      "signals_in_text": ["Chase sequence", "Climactic confrontation", "Using knowledge gained during fascination"]
+    },
+    {
+      "node_id": "VR_N07_RETURN_CHANGED",
+      "label": "Return Changed",
+      "role": "Resolution",
+      "definition": "The protagonist returns to the familiar world carrying insight, maturity, or a new perspective. The familiar world is the same but the character sees it differently.",
+      "entry_conditions": ["Escape is successful", "The character is back in the familiar world"],
+      "exit_conditions": ["The character demonstrates that the voyage has changed them"],
+      "typical_variants": ["Quiet return with internal change", "Return treated as waking from a dream", "Return with proof of the voyage (an object, scar, or story)", "Return to find the familiar world now feels small"],
+      "failure_modes": ["Character seems unchanged by the experience", "Return is rushed with no reflection", "The voyage's lessons are never applied"],
+      "signals_in_text": ["Contrast with the opening", "New appreciation or dissatisfaction with home", "Changed behavior or attitude"]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "VR_E01_CROSSES_OVER",
+      "from": "VR_N01_FAMILIAR_WORLD",
+      "to": "VR_N02_PASSAGE",
+      "label": "Crosses Over",
+      "meaning": "disrupts order",
+      "preconditions": "Familiar world is established; a portal or accident occurs",
+      "effects_on_stakes": "The character is separated from all known support; survival is now the baseline concern",
+      "effects_on_character": "Forced out of complacency into radical novelty",
+      "common_alternatives": "Character is pulled into the other world rather than stumbling in",
+      "anti_patterns": "Crossing is so gentle there's no sense of dislocation"
+    },
+    {
+      "edge_id": "VR_E02_EXPLORES",
+      "from": "VR_N02_PASSAGE",
+      "to": "VR_N03_FASCINATION",
+      "label": "Begins Exploring",
+      "meaning": "grants insight",
+      "preconditions": "Character is in the unfamiliar world; immediate danger is not yet present",
+      "effects_on_stakes": "Low immediate danger but the character is investing in a world they don't understand",
+      "effects_on_character": "Openness, curiosity, and adaptability emerge",
+      "common_alternatives": "Fascination begins immediately upon arrival; fascination develops slowly",
+      "anti_patterns": "Character is never fascinated — the world is hostile from the start (this is a different archetype)"
+    },
+    {
+      "edge_id": "VR_E03_DARKNESS_APPEARS",
+      "from": "VR_N03_FASCINATION",
+      "to": "VR_N04_SHADOW_EMERGES",
+      "label": "Darkness Appears",
+      "meaning": "reveals truth",
+      "preconditions": "Fascination has built false confidence; a darker reality surfaces",
+      "effects_on_stakes": "The world is now genuinely dangerous; the character cannot simply enjoy it",
+      "effects_on_character": "Innocence or naivety is punctured; fear and caution emerge",
+      "common_alternatives": "Shadow was always visible but the character ignored it",
+      "anti_patterns": "Transition to danger is arbitrary with no seeds planted during fascination"
+    },
+    {
+      "edge_id": "VR_E04_TRAPPED",
+      "from": "VR_N04_SHADOW_EMERGES",
+      "to": "VR_N05_FRUSTRATION",
+      "label": "Becomes Trapped",
+      "meaning": "narrows options",
+      "preconditions": "The shadow is active; the character tries and fails to avoid it",
+      "effects_on_stakes": "Survival is now the primary concern; returning home seems impossible",
+      "effects_on_character": "Desperation replaces curiosity; the character's true resilience is tested",
+      "common_alternatives": "Trapping is immediate and violent; trapping is gradual as the world closes in",
+      "anti_patterns": "Character is never truly trapped; escape is always obviously available"
+    },
+    {
+      "edge_id": "VR_E05_BREAKS_FREE",
+      "from": "VR_N05_FRUSTRATION",
+      "to": "VR_N06_ESCAPE",
+      "label": "Breaks Free",
+      "meaning": "triggers crisis",
+      "preconditions": "A means of escape is discovered or created; the character commits to the attempt",
+      "effects_on_stakes": "All-or-nothing moment; failure means permanent loss",
+      "effects_on_character": "Character applies everything learned; agency is reclaimed",
+      "common_alternatives": "Escape is aided by an ally from the fascination phase",
+      "anti_patterns": "Escape is handed to the character; no earned capability is required"
+    },
+    {
+      "edge_id": "VR_E06_RETURNS",
+      "from": "VR_N06_ESCAPE",
+      "to": "VR_N07_RETURN_CHANGED",
+      "label": "Returns Home",
+      "meaning": "restores equilibrium",
+      "preconditions": "Escape is successful; the path back to the familiar world is open",
+      "effects_on_stakes": "External danger dissolves; the internal stakes now dominate (has the character changed?)",
+      "effects_on_character": "Character must integrate the voyage's lessons into ordinary life",
+      "common_alternatives": "Return is ambiguous (was it real?); return involves proving the voyage happened",
+      "anti_patterns": "Return is instantaneous with no transition; character shows no change"
+    }
+  ]
+}
