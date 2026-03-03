@@ -23,40 +23,67 @@ Goal 1 references `docs/archetypes/` paths throughout, but archetype files have 
 5. [ ] **cross_archetype_index.json references long-form node IDs inconsistently**
 The index uses short archetype names (e.g., "Comedy" instead of "Comedy (Restoration of Order)") in some places. Standardize naming to match `archtypes.json` exactly.
 
+6. [X] **Musical narrative.md had incorrect node ID references**
+`data/genres/26_musical/narrative.md` referenced `MU_N40_HEIGHTENED_EMOTIONAL_REALITY` instead of the correct `MU_N40_HEIGHTENED_REALITY` in two places (node explanation and canonical walkthrough). Fixed.
+
+7. [ ] **Genre vocabulary files live in docs/ alongside archetype vocabulary files**
+`docs/genre_edge_vocabulary.json`, `docs/genre_node_roles.json`, and `docs/genre_id_convention.md` are in `docs/` while genre deliverables are in `data/genres/`. Same structural inconsistency as archetype vocabs (#4). Consider a unified `data/vocabulary/` directory or co-locating with deliverables.
+
+8. [ ] **Unused genre edge vocabulary terms**
+The edge meanings "narrows scope", "inherits constraint", "specializes threat", and "differentiates from" appear in `docs/genre_edge_vocabulary.json` but may have very limited or zero usage across the 27 genre graphs. Audit usage counts and decide whether to remove unused terms, document them as reserved, or find graphs where they should apply.
+
+9. [ ] **Genre graph node/edge counts vary without documented rationale**
+Most genres have 15–18 nodes and 18–22 edges, but some variation exists (e.g., Drama has 2 anti-patterns, most genres have 1). The variation is structurally justified but undocumented. Consider adding a brief structural note explaining why certain genres have extra nodes.
+
+10. [ ] **No automated validation for graph-narrative correspondence**
+Narrative specs reference node/edge IDs from their graph.json, but there is no script to verify these references are correct. The Musical issue (#6) was caught by manual audit. A validation script would catch such mismatches automatically across all 27 genres.
+
 ---
 
 ## Suggestions
 
-6. [ ] **Hybrid archetype modeling**
+11. [ ] **Hybrid archetype modeling**
 Many stories blend two or more archetypes (e.g., Hero's Journey + Coming of Age, Revenge + Tragedy). Add a document describing common hybrid patterns and how graphs can be composed or layered.
 
-7. [ ] **Archetype variant graphs as separate JSON files**
+12. [ ] **Archetype variant graphs as separate JSON files**
 Currently, variant branches (Refusal of the Call, Recapture) are embedded in the main graph JSON using the 50-79 ID range. Consider splitting variants into separate graph files for cleaner tooling.
 
-8. [ ] **Graph visualization tooling**
+13. [ ] **Graph visualization tooling**
 The JSON graph format is machine-readable but has no rendering pipeline. Consider adding a script or tool that generates visual diagrams (e.g., Mermaid, D3, Graphviz) from the graph JSONs.
 
-9. [X] **CLAUDE.md update**
+14. [X] **CLAUDE.md update**
 CLAUDE.md was written before the folder restructure and before goal_1 completion. Update it to reflect the current project state, file locations, and completed deliverables.
 
 ---
 
 ## Enhancements
 
-10. [ ] **Scene-level beat sheets**
+15. [ ] **Scene-level beat sheets**
 Extend archetype graphs to scene-level resolution for specific example works — mapping each node/edge to specific scenes with timestamps or page numbers. Currently excluded per `v0_plan.md` §2.2.
 
-11. [ ] **Interactive story planner**
-Build a web-based tool that lets a writer select an archetype and genre, then walks them through the combined graph as a planning scaffold. Requires graph visualization (#8) and the genre × archetype matrix (goal 2, phase 15) as prerequisites.
+16. [ ] **Interactive story planner**
+Build a web-based tool that lets a writer select an archetype and genre, then walks them through the combined graph as a planning scaffold. Requires graph visualization (#13) and the genre × archetype matrix (goal 2, phase 15) as prerequisites.
 
-12. [ ] **Non-Western archetype analysis**
+17. [ ] **Non-Western archetype analysis**
 The current 15 archetypes draw primarily from Western storytelling traditions. Research and potentially add archetypes from East Asian, South Asian, African, Indigenous, and Middle Eastern narrative traditions.
 
-13. [ ] **Audience-facing genre depth selector**
+18. [ ] **Audience-facing genre depth selector**
 Build a tool that lets a writer drill down through the five genre levels interactively, making constraint choices at each level and producing a tailored constraint sheet for their project.
 
-14. [ ] **Cross-medium adaptation mapping**
+19. [ ] **Cross-medium adaptation mapping**
 Analyze how archetype graphs shift when a story moves between mediums (novel → film → TV series → game). Document which nodes compress, expand, or change role.
 
-15. [ ] **Quantitative validation against a story corpus**
+20. [ ] **Quantitative validation against a story corpus**
 Test the archetype and genre graphs against a corpus of actual stories (e.g., 100 films, 100 novels) to measure coverage, identify missing patterns, and validate the controlled vocabularies empirically.
+
+21. [ ] **Genre blending/hybridization model**
+Many stories operate in two or more genres simultaneously (e.g., Sci-Fi + Thriller, Romance + Comedy, Horror + Mystery). Model how genre constraint graphs compose, which constraints dominate in conflicts, and which subgenre combinations are structurally stable vs. unstable.
+
+22. [ ] **Narrative spec variant walkthrough expansion**
+Each narrative spec currently includes 3–4 variant walkthroughs. Consider expanding to cover every subgenre path in every genre, ensuring complete coverage of all Level 3 nodes.
+
+23. [ ] **Genre constraint severity weighting**
+Not all constraints carry equal weight. Some are hard requirements (violating them breaks the genre), others are soft expectations (deviating is uncommon but valid). Consider adding a severity field to nodes/edges to distinguish must-have from should-have constraints.
+
+24. [ ] **Tone marker integration with archetype graphs**
+Genre tone markers (e.g., sustained dread for Horror, stoic and spare for Western) interact with archetype emotional arcs but this interaction is currently unmodeled. The genre × archetype matrix (Phase 15) could include tone compatibility notes.

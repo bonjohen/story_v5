@@ -113,8 +113,6 @@ For each genre, produce the narrative spec defined in `v0_plan.md` §1.2B: overv
 
 ---
 
-Pause here, and allow me to evaluate the results before you proceed.
-
 ## Phase 10 — Example Mappings (Batch 1: Genres 1–7)
 
 For each genre, map each node and edge to one concrete moment in one of the three example works listed in `docs/genres.json`. Cross-reference the other two works.

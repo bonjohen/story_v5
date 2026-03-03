@@ -45,7 +45,7 @@ A musical in which comedy is the primary mode and the numbers amplify, accelerat
 
 ### Level 4 — Setting Rules
 
-**MU_N40_HEIGHTENED_EMOTIONAL REALITY — Heightened Emotional Reality**
+**MU_N40_HEIGHTENED_REALITY — Heightened Emotional Reality**
 The world of a musical operates at a register of emotional intensity above naturalistic reality, where feelings are larger, desires more urgent, and the expression of interiority more immediate than in everyday life. This heightening is not a failure of realism but the genre's fundamental operating principle — the atmospheric condition that makes song feel natural rather than strange. In the story, non-musical scenes maintain a slightly elevated emotional pitch that anticipates the next number, characters express desire, joy, and grief more directly than people typically do in life, and production choices support a world where beauty and feeling are conspicuous. While this rule is active, the writer must refuse naturalistic scene work that sets an emotional baseline from which song cannot plausibly arise.
 
 **MU_N41_NUMBERS_HAVE_FUNCTION — Musical Numbers Have Narrative Function**
@@ -150,7 +150,7 @@ When a musical fails to establish or maintain a coherent internal logic for when
 
 6. **MU_N60_I_WANT_SONG** (via E50): Late in act one's first half, Elena stands in the overgrown field behind the farmhouse and sings what she has never said to anyone: she didn't leave because she wanted to. She left because she believed the town would fail with or without her, and she couldn't watch. The I Want song is not simple — it is the desire to have left *and* the desire to have stayed, coexisting. The audience now holds the compass for her entire journey.
 
-7. **MU_N40_HEIGHTENED_EMOTIONAL_REALITY** (via E30): As the first act develops, the world's emotional pitch rises. Mae's anger is expressed in a duet that is combative and musical in a way the preceding book scenes were building toward. The community hall scene has twenty people moving and singing together. The world is operating at full musical register.
+7. **MU_N40_HEIGHTENED_REALITY** (via E30): As the first act develops, the world's emotional pitch rises. Mae's anger is expressed in a duet that is combative and musical in a way the preceding book scenes were building toward. The community hall scene has twenty people moving and singing together. The world is operating at full musical register.
 
 8. **MU_N41_NUMBERS_HAVE_FUNCTION** (via E31): The act-one development numbers each turn something: the duet with Mae shifts their relationship from cold to incandescent; a number with Mae's daughter reveals that the town's mythology about Elena is wrong and the daughter knows it; a community number reveals that the sale will destroy not just the farm but the center of town life.
 
