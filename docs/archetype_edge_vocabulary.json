@@ -1,0 +1,81 @@
+{
+  "title": "Controlled Vocabulary: Archetype Graph Edge Meanings",
+  "description": "Canonical set of edge labels used across all 15 archetype graphs. Every edge in every graph must use exactly one of these meanings. This ensures consistency and enables cross-archetype analysis.",
+  "edge_meanings": [
+    {
+      "label": "forces commitment",
+      "definition": "The transition compels the character to make an irreversible choice, closing off prior options.",
+      "typical_context": "Threshold crossings, point-of-no-return moments"
+    },
+    {
+      "label": "reveals truth",
+      "definition": "The transition exposes hidden information that reshapes the character's or audience's understanding of the situation.",
+      "typical_context": "Revelations, unmasking, discovery of betrayal or secret"
+    },
+    {
+      "label": "narrows options",
+      "definition": "The transition eliminates available paths, increasing pressure and focusing the character toward fewer viable choices.",
+      "typical_context": "Escalating danger, resource depletion, ally loss"
+    },
+    {
+      "label": "raises cost",
+      "definition": "The transition increases what the character stands to lose, making subsequent choices more consequential.",
+      "typical_context": "Stakes escalation, new threats to loved ones, personal risk"
+    },
+    {
+      "label": "reframes goal",
+      "definition": "The transition changes what the character is pursuing or why, shifting the story's central question.",
+      "typical_context": "Midpoint reversals, redefinition of success, moral recalibration"
+    },
+    {
+      "label": "tests resolve",
+      "definition": "The transition subjects the character to a challenge that measures commitment to the current path.",
+      "typical_context": "Trials, temptations, ordeals, loyalty tests"
+    },
+    {
+      "label": "grants insight",
+      "definition": "The transition provides the character with new knowledge, skill, or perspective needed for future action.",
+      "typical_context": "Mentor encounters, training, reflection, earned wisdom"
+    },
+    {
+      "label": "triggers crisis",
+      "definition": "The transition initiates a moment of maximum threat or uncertainty that demands immediate response.",
+      "typical_context": "Climactic confrontations, catastrophic failures, betrayals"
+    },
+    {
+      "label": "enables transformation",
+      "definition": "The transition creates conditions under which the character can fundamentally change in identity, belief, or capability.",
+      "typical_context": "Death-and-rebirth moments, moral turning points, metamorphosis"
+    },
+    {
+      "label": "restores equilibrium",
+      "definition": "The transition returns the story to a stable state, resolving the central tension (though the new equilibrium may differ from the original).",
+      "typical_context": "Denouement, homecoming, reconciliation, new normal"
+    },
+    {
+      "label": "disrupts order",
+      "definition": "The transition breaks an existing stable state, creating the disequilibrium that drives the story forward.",
+      "typical_context": "Inciting incidents, catastrophes, provocations, rule-breaking"
+    },
+    {
+      "label": "demands sacrifice",
+      "definition": "The transition requires the character to give up something of genuine value to proceed.",
+      "typical_context": "Moral dilemmas, costly victories, trades of safety for principle"
+    },
+    {
+      "label": "inverts expectation",
+      "definition": "The transition subverts the anticipated outcome, forcing reassessment of what was assumed.",
+      "typical_context": "Plot twists, reversals of fortune, ironic outcomes"
+    },
+    {
+      "label": "escalates conflict",
+      "definition": "The transition intensifies the opposition between the character and the antagonist or central obstacle.",
+      "typical_context": "Rising action, provocation, retaliation cycles"
+    },
+    {
+      "label": "compels return",
+      "definition": "The transition forces or draws the character back toward the ordinary world or a prior state, carrying new weight.",
+      "typical_context": "Homecoming under changed circumstances, confronting origin"
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "title": "Common Genres (With Descriptions, Examples, and Popularity Index)",
+  "genres": [
+    {
+      "number": 1,
+      "name": "Drama",
+      "description": "Character-driven stories that emphasize emotional stakes, interpersonal conflict, and consequential choices, often grounded in plausible human experience.",
+      "popularity_index": 0.95,
+      "examples": [
+        "The Shawshank Redemption (1994 film)",
+        "The Godfather (1972 film)",
+        "Parasite (2019 film)"
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Action",
+      "description": "Stories propelled by physical conflict, high-stakes confrontation, and kinetic set pieces, often centered on survival, rescue, or victory over an adversary.",
+      "popularity_index": 0.90,
+      "examples": [
+        "Mad Max: Fury Road (2015 film)",
+        "Die Hard (1988 film)",
+        "John Wick (2014 film)"
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Comedy",
+      "description": "Stories designed to amuse through humor, incongruity, and social friction, typically resolving tension through reconciliation or restored balance.",
+      "popularity_index": 0.86,
+      "examples": [
+        "Groundhog Day (1993 film)",
+        "Some Like It Hot (1959 film)",
+        "Superbad (2007 film)"
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Thriller",
+      "description": "Suspense-driven stories focused on danger, uncertainty, and escalating tension, often involving pursuit, conspiracies, or time pressure.",
+      "popularity_index": 0.88,
+      "examples": [
+        "Gone Girl (2014 film)",
+        "Se7en (1995 film)",
+        "The Silence of the Lambs (1991 film)"
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Fantasy",
+      "description": "Stories set in worlds with magical rules or supernatural forces, emphasizing wonder, mythic stakes, and transformative journeys.",
+      "popularity_index": 0.89,
+      "examples": [
+        "The Lord of the Rings: The Fellowship of the Ring (2001 film)",
+        "Harry Potter and the Sorcerer’s Stone (2001 film)",
+        "A Game of Thrones (1996 novel)"
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Science Fiction",
+      "description": "Stories exploring speculative technology, future societies, or alternative realities, using 'what if' premises to test ideas and consequences.",
+      "popularity_index": 0.84,
+      "examples": [
+        "The Matrix (1999 film)",
+        "Dune (1965 novel)",
+        "Blade Runner (1982 film)"
+      ]
+    },
+    {
+      "number": 7,
+      "name": "Adventure",
+      "description": "Journey-centered stories defined by exploration, discovery, and escalating obstacles, often emphasizing movement through varied settings.",
+      "popularity_index": 0.82,
+      "examples": [
+        "Indiana Jones and the Last Crusade (1989 film)",
+        "The Hobbit (1937 novel)",
+        "Pirates of the Caribbean: The Curse of the Black Pearl (2003 film)"
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Romance",
+      "description": "Stories where the central arc focuses on forming, testing, or restoring an intimate relationship, with emotional choice as the primary engine.",
+      "popularity_index": 0.83,
+      "examples": [
+        "Pride and Prejudice (1813 novel)",
+        "Titanic (1997 film)",
+        "The Notebook (1996 novel)"
+      ]
+    },
+    {
+      "number": 9,
+      "name": "Romantic Comedy",
+      "description": "Romance structured around humor and social friction, typically moving from mismatch and misunderstanding toward commitment or reconciliation.",
+      "popularity_index": 0.78,
+      "examples": [
+        "When Harry Met Sally... (1989 film)",
+        "Bridget Jones’s Diary (2001 film)",
+        "Crazy Rich Asians (2018 film)"
+      ]
+    },
+    {
+      "number": 10,
+      "name": "Horror",
+      "description": "Stories designed to evoke fear or dread through threat, the uncanny, or the monstrous, often emphasizing vulnerability and survival.",
+      "popularity_index": 0.80,
+      "examples": [
+        "Get Out (2017 film)",
+        "The Shining (1977 novel)",
+        "The Exorcist (1971 novel)"
+      ]
+    },
+    {
+      "number": 11,
+      "name": "Mystery",
+      "description": "Investigation-centered stories driven by unanswered questions, clues, and revelations, culminating in explanation or exposure of hidden truth.",
+      "popularity_index": 0.81,
+      "examples": [
+        "Knives Out (2019 film)",
+        "The Hound of the Baskervilles (1902 novel)",
+        "Murder on the Orient Express (1934 novel)"
+      ]
+    },
+    {
+      "number": 12,
+      "name": "Crime",
+      "description": "Stories focused on criminal acts and their consequences, often emphasizing investigation, moral compromise, power, and social order.",
+      "popularity_index": 0.83,
+      "examples": [
+        "The Godfather (1972 film)",
+        "Scarface (1983 film)",
+        "The Wire (2002 TV series)"
+      ]
+    },
+    {
+      "number": 13,
+      "name": "Detective",
+      "description": "A mystery subgenre centered on a dedicated investigator whose method—logic, observation, or persistence—drives the unraveling of a case.",
+      "popularity_index": 0.70,
+      "examples": [
+        "Sherlock Holmes (1887–1927 stories)",
+        "Chinatown (1974 film)",
+        "True Detective (2014 TV series)"
+      ]
+    },
+    {
+      "number": 14,
+      "name": "Superhero",
+      "description": "Stories featuring extraordinary abilities or symbolic vigilante roles, emphasizing identity, moral responsibility, and conflict with major threats.",
+      "popularity_index": 0.87,
+      "examples": [
+        "The Dark Knight (2008 film)",
+        "Spider-Man (2002 film)",
+        "Black Panther (2018 film)"
+      ]
+    },
+    {
+      "number": 15,
+      "name": "Historical",
+      "description": "Stories set in a recognizable past, using period detail and historical context as a primary source of stakes and theme.",
+      "popularity_index": 0.72,
+      "examples": [
+        "Schindler’s List (1993 film)",
+        "Wolf Hall (2009 novel)",
+        "Gladiator (2000 film)"
+      ]
+    },
+    {
+      "number": 16,
+      "name": "War",
+      "description": "Stories in which armed conflict is central, emphasizing combat, strategy, survival, and the human cost of violence and duty.",
+      "popularity_index": 0.68,
+      "examples": [
+        "Saving Private Ryan (1998 film)",
+        "All Quiet on the Western Front (1929 novel)",
+        "Apocalypse Now (1979 film)"
+      ]
+    },
+    {
+      "number": 17,
+      "name": "Biography",
+      "description": "Narratives based on real individuals, emphasizing formative events and character development while balancing fidelity and dramatic structure.",
+      "popularity_index": 0.66,
+      "examples": [
+        "The Wolf of Wall Street (2013 film)",
+        "Oppenheimer (2023 film)",
+        "Steve Jobs (2015 film)"
+      ]
+    },
+    {
+      "number": 18,
+      "name": "Family",
+      "description": "Stories structured around family relationships and generational dynamics, often blending warmth, conflict, and reconciliation.",
+      "popularity_index": 0.74,
+      "examples": [
+        "Finding Nemo (2003 film)",
+        "Little Women (1868 novel)",
+        "Coco (2017 film)"
+      ]
+    },
+    {
+      "number": 19,
+      "name": "Young Adult",
+      "description": "Stories aimed at teen readers, typically centering identity formation, social belonging, first love, and boundary-testing choices.",
+      "popularity_index": 0.73,
+      "examples": [
+        "The Hunger Games (2008 novel)",
+        "The Fault in Our Stars (2012 novel)",
+        "The Perks of Being a Wallflower (1999 novel)"
+      ]
+    },
+    {
+      "number": 20,
+      "name": "Literary Fiction",
+      "description": "Character- and language-forward stories that prioritize psychological depth, thematic complexity, and stylistic craft over plot mechanics.",
+      "popularity_index": 0.60,
+      "examples": [
+        "Beloved (1987 novel)",
+        "The Great Gatsby (1925 novel)",
+        "Normal People (2018 novel)"
+      ]
+    },
+    {
+      "number": 21,
+      "name": "Children’s Literature",
+      "description": "Stories written primarily for children, emphasizing clarity, imaginative engagement, and moral or emotional learning at age-appropriate stakes.",
+      "popularity_index": 0.64,
+      "examples": [
+        "Alice's Adventures in Wonderland (1865 novel)",
+        "Charlotte’s Web (1952 novel)",
+        "The Cat in the Hat (1957 book)"
+      ]
+    },
+    {
+      "number": 22,
+      "name": "Satire",
+      "description": "Stories that use humor, exaggeration, or irony to critique social norms, institutions, or hypocrisy.",
+      "popularity_index": 0.55,
+      "examples": [
+        "Dr. Strangelove (1964 film)",
+        "Animal Farm (1945 novella)",
+        "Thank You for Smoking (2005 film)"
+      ]
+    },
+    {
+      "number": 23,
+      "name": "Psychological",
+      "description": "Stories emphasizing internal conflict, perception, and mental pressure, often exploring obsession, identity fracture, or unreliable reality.",
+      "popularity_index": 0.67,
+      "examples": [
+        "Black Swan (2010 film)",
+        "Fight Club (1996 novel)",
+        "Shutter Island (2003 novel)"
+      ]
+    },
+    {
+      "number": 24,
+      "name": "Western",
+      "description": "Stories set in frontier contexts, emphasizing lawlessness, moral codes, rugged individualism, and clashes over land and order.",
+      "popularity_index": 0.50,
+      "examples": [
+        "The Good, the Bad and the Ugly (1966 film)",
+        "True Grit (1968 novel)",
+        "Unforgiven (1992 film)"
+      ]
+    },
+    {
+      "number": 25,
+      "name": "Political",
+      "description": "Stories driven by governance, power struggles, ideology, and institutional pressure, often emphasizing strategy and moral tradeoffs.",
+      "popularity_index": 0.58,
+      "examples": [
+        "All the President’s Men (1976 film)",
+        "House of Cards (1990 novel)",
+        "The Ides of March (2011 film)"
+      ]
+    },
+    {
+      "number": 26,
+      "name": "Musical",
+      "description": "Stories in which songs and performance are central narrative devices, advancing plot, character, and emotional turning points.",
+      "popularity_index": 0.52,
+      "examples": [
+        "The Sound of Music (1965 film)",
+        "La La Land (2016 film)",
+        "West Side Story (1957 stage musical)"
+      ]
+    },
+    {
+      "number": 27,
+      "name": "Holiday",
+      "description": "Seasonal stories anchored to a holiday context, emphasizing tradition, reunion, redemption, and heightened emotional warmth or contrast.",
+      "popularity_index": 0.48,
+      "examples": [
+        "A Christmas Carol (1843 novella)",
+        "Home Alone (1990 film)",
+        "Elf (2003 film)"
+      ]
+    }
+  ]
+}

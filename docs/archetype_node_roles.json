@@ -1,0 +1,90 @@
+{
+  "title": "Controlled Vocabulary: Archetype Graph Node Roles",
+  "description": "Canonical set of node roles used across all 15 archetype graphs. Every node must be assigned exactly one role. Shared roles enable the cross-archetype index and support comparative analysis.",
+  "node_roles": [
+    {
+      "role": "Origin",
+      "definition": "The character's initial stable state before the story's central tension begins.",
+      "structural_function": "Establishes baseline for measuring change. Always a start node.",
+      "examples_across_archetypes": "Ordinary World (Hero's Journey), Disadvantaged State (Rags to Riches), Pre-Quest Life (The Quest)"
+    },
+    {
+      "role": "Disruption",
+      "definition": "An event or realization that breaks the existing equilibrium and creates the central problem.",
+      "structural_function": "Launches the story's engine. Typically follows Origin.",
+      "examples_across_archetypes": "Call to Adventure (Hero's Journey), Inciting Crime (The Revenge), Discovery of Confinement (The Escape)"
+    },
+    {
+      "role": "Threshold",
+      "definition": "A point of no return where the character commits to engaging with the central problem.",
+      "structural_function": "Separates setup from the story's main action. Marks irreversible entry.",
+      "examples_across_archetypes": "Crossing the Threshold (Hero's Journey), Accepting the Quest (The Quest), Entering the Unfamiliar World (Voyage and Return)"
+    },
+    {
+      "role": "Trial",
+      "definition": "A challenge that tests the character's abilities, resolve, or values.",
+      "structural_function": "Builds progressive difficulty. Often appears in sequences or loops.",
+      "examples_across_archetypes": "Road of Trials (Hero's Journey), Escalating Obstacles (The Quest), Confronting Social Barriers (Rags to Riches)"
+    },
+    {
+      "role": "Revelation",
+      "definition": "A moment where critical hidden information is exposed, changing understanding.",
+      "structural_function": "Recontextualizes prior events. Forces reassessment of strategy or identity.",
+      "examples_across_archetypes": "Clue Breakthrough (Mystery Unveiled), True Nature of Monster (Overcoming the Monster), Hidden Cost Revealed (The Sacrifice)"
+    },
+    {
+      "role": "Reversal",
+      "definition": "A turning point where fortune, power, or trajectory shifts dramatically.",
+      "structural_function": "Creates pivots in the story arc. Can be positive or negative.",
+      "examples_across_archetypes": "Fall from Grace (Rise and Fall), Reversal of Fortune (Tragedy), Tables Turned (The Revenge)"
+    },
+    {
+      "role": "Commitment",
+      "definition": "A deliberate choice where the character doubles down despite full knowledge of the cost.",
+      "structural_function": "Distinguishes passive experience from active agency. Raises moral weight.",
+      "examples_across_archetypes": "Ordeal Decision (Hero's Journey), Choosing Revenge over Peace (The Revenge), Accepting the Sacrifice (The Sacrifice)"
+    },
+    {
+      "role": "Crisis",
+      "definition": "The moment of maximum threat or tension where the central conflict reaches its peak.",
+      "structural_function": "The structural climax. All prior nodes converge here.",
+      "examples_across_archetypes": "Supreme Ordeal (Hero's Journey), Final Confrontation (Overcoming the Monster), Point of No Return (Tragedy)"
+    },
+    {
+      "role": "Transformation",
+      "definition": "A fundamental change in the character's identity, worldview, or capability.",
+      "structural_function": "Marks the story's core payoff — the character is no longer who they were.",
+      "examples_across_archetypes": "Apotheosis (Hero's Journey), Moral Renewal (Rebirth), Identity Shift (The Transformation)"
+    },
+    {
+      "role": "Irreversible Cost",
+      "definition": "A permanent loss that cannot be undone, giving weight to the story's outcome.",
+      "structural_function": "Prevents cheap resolution. Ensures consequences are real.",
+      "examples_across_archetypes": "Sacrifice Made (The Sacrifice), Tragic Death (Tragedy), Freedom's Price (The Escape)"
+    },
+    {
+      "role": "Resolution",
+      "definition": "The new stable state after the central conflict is resolved.",
+      "structural_function": "Terminal node. Shows the lasting impact of the journey.",
+      "examples_across_archetypes": "Return with Elixir (Hero's Journey), New Status (Rags to Riches), Order Restored (Comedy)"
+    },
+    {
+      "role": "Descent",
+      "definition": "A movement into a darker, more dangerous, or more constrained state.",
+      "structural_function": "Increases pressure and narrows options. Often precedes Crisis.",
+      "examples_across_archetypes": "Descent into the Underworld (Hero's Journey), Moral Corruption (Rise and Fall), Deepening Entrapment (The Escape)"
+    },
+    {
+      "role": "Catalyst",
+      "definition": "An external event or character that accelerates or redirects the story's trajectory.",
+      "structural_function": "Provides momentum at points where the story might stall.",
+      "examples_across_archetypes": "Mentor Appearance (Hero's Journey), Key Clue (Mystery Unveiled), Ally or Betrayer (The Quest)"
+    },
+    {
+      "role": "Reckoning",
+      "definition": "A moment of moral or practical accounting where the character faces the consequences of prior choices.",
+      "structural_function": "Links cause to effect. Often immediately precedes or follows Crisis.",
+      "examples_across_archetypes": "Tragic Downfall (Tragedy), Revenge Fulfilled (The Revenge), Judgment (Rise and Fall)"
+    }
+  ]
+}

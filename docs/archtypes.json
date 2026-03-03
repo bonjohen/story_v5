@@ -1,0 +1,275 @@
+{
+  "title": "Fundamental Story Archetypes (Plot Structures)",
+  "archetypes": [
+    {
+      "number": 1,
+      "name": "The Hero’s Journey",
+      "description": "A protagonist departs from the ordinary world, undergoes trials and transformation in a special world, and returns changed. The structure emphasizes initiation, crisis, and reintegration.",
+      "popularity_index": 0.95,
+      "common_genres": [
+        { "rank": 1, "genre": "Fantasy" },
+        { "rank": 2, "genre": "Science Fiction" },
+        { "rank": 3, "genre": "Adventure" },
+        { "rank": 4, "genre": "Action" },
+        { "rank": 5, "genre": "Superhero" }
+      ],
+      "examples": [
+        "Star Wars: Episode IV – A New Hope (1977 film)",
+        "The Hobbit (1937 novel)",
+        "The Matrix (1999 film)"
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Rags to Riches",
+      "description": "A disadvantaged protagonist rises to success, status, or fulfillment through perseverance, talent, luck, or moral worth.",
+      "popularity_index": 0.82,
+      "common_genres": [
+        { "rank": 1, "genre": "Drama" },
+        { "rank": 2, "genre": "Romance" },
+        { "rank": 3, "genre": "Family" },
+        { "rank": 4, "genre": "Biography" },
+        { "rank": 5, "genre": "Musical" }
+      ],
+      "examples": [
+        "Rocky (1976 film)",
+        "Slumdog Millionaire (2008 film)",
+        "Great Expectations (1861 novel)"
+      ]
+    },
+    {
+      "number": 3,
+      "name": "The Quest",
+      "description": "A protagonist or group pursues a defined objective, overcoming escalating obstacles that test commitment and cohesion.",
+      "popularity_index": 0.88,
+      "common_genres": [
+        { "rank": 1, "genre": "Fantasy" },
+        { "rank": 2, "genre": "Adventure" },
+        { "rank": 3, "genre": "Science Fiction" },
+        { "rank": 4, "genre": "Action" },
+        { "rank": 5, "genre": "Family" }
+      ],
+      "examples": [
+        "The Lord of the Rings (1954 novel)",
+        "Indiana Jones and the Last Crusade (1989 film)",
+        "Finding Nemo (2003 film)"
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Voyage and Return",
+      "description": "A protagonist enters an unfamiliar world, survives its rules and dangers, and returns home with insight or maturity.",
+      "popularity_index": 0.80,
+      "common_genres": [
+        { "rank": 1, "genre": "Fantasy" },
+        { "rank": 2, "genre": "Children’s Literature" },
+        { "rank": 3, "genre": "Adventure" },
+        { "rank": 4, "genre": "Family" },
+        { "rank": 5, "genre": "Science Fiction" }
+      ],
+      "examples": [
+        "Alice's Adventures in Wonderland (1865 novel)",
+        "The Wizard of Oz (1939 film)",
+        "The Lion, the Witch and the Wardrobe (1950 novel)"
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Overcoming the Monster",
+      "description": "A protagonist confronts and defeats a powerful antagonist or existential threat that endangers a community or world.",
+      "popularity_index": 0.90,
+      "common_genres": [
+        { "rank": 1, "genre": "Action" },
+        { "rank": 2, "genre": "Fantasy" },
+        { "rank": 3, "genre": "Horror" },
+        { "rank": 4, "genre": "Science Fiction" },
+        { "rank": 5, "genre": "Superhero" }
+      ],
+      "examples": [
+        "Jaws (1975 film)",
+        "Jurassic Park (1993 film)",
+        "Beowulf (Old English epic poem)"
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Rebirth",
+      "description": "A morally or emotionally diminished character undergoes renewal through crisis, restoring integrity or humanity.",
+      "popularity_index": 0.78,
+      "common_genres": [
+        { "rank": 1, "genre": "Drama" },
+        { "rank": 2, "genre": "Romance" },
+        { "rank": 3, "genre": "Fantasy" },
+        { "rank": 4, "genre": "Family" },
+        { "rank": 5, "genre": "Holiday" }
+      ],
+      "examples": [
+        "A Christmas Carol (1843 novella)",
+        "Groundhog Day (1993 film)",
+        "Beauty and the Beast (1991 animated film)"
+      ]
+    },
+    {
+      "number": 7,
+      "name": "Tragedy",
+      "description": "A protagonist’s flaw or irreversible choice leads to downfall, emphasizing inevitability and moral consequence.",
+      "popularity_index": 0.76,
+      "common_genres": [
+        { "rank": 1, "genre": "Drama" },
+        { "rank": 2, "genre": "Historical" },
+        { "rank": 3, "genre": "Romance" },
+        { "rank": 4, "genre": "Crime" },
+        { "rank": 5, "genre": "War" }
+      ],
+      "examples": [
+        "Macbeth (Shakespeare tragedy)",
+        "Titanic (1997 film)",
+        "Romeo and Juliet (Shakespeare tragedy)"
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Comedy (Restoration of Order)",
+      "description": "Social disorder, confusion, or misunderstanding is resolved through reconciliation, restoring harmony.",
+      "popularity_index": 0.84,
+      "common_genres": [
+        { "rank": 1, "genre": "Comedy" },
+        { "rank": 2, "genre": "Romantic Comedy" },
+        { "rank": 3, "genre": "Family" },
+        { "rank": 4, "genre": "Satire" },
+        { "rank": 5, "genre": "Drama" }
+      ],
+      "examples": [
+        "A Midsummer Night's Dream (Shakespeare comedy)",
+        "The Big Lebowski (1998 film)",
+        "Bridget Jones's Diary (2001 film)"
+      ]
+    },
+    {
+      "number": 9,
+      "name": "Coming of Age",
+      "description": "A young protagonist matures through formative experiences, achieving psychological or moral growth.",
+      "popularity_index": 0.83,
+      "common_genres": [
+        { "rank": 1, "genre": "Drama" },
+        { "rank": 2, "genre": "Young Adult" },
+        { "rank": 3, "genre": "Family" },
+        { "rank": 4, "genre": "Romance" },
+        { "rank": 5, "genre": "Literary Fiction" }
+      ],
+      "examples": [
+        "To Kill a Mockingbird (1960 novel)",
+        "The Breakfast Club (1985 film)",
+        "Lady Bird (2017 film)"
+      ]
+    },
+    {
+      "number": 10,
+      "name": "The Revenge",
+      "description": "A protagonist pursues retaliation for injustice, often sacrificing morality or peace in the process.",
+      "popularity_index": 0.79,
+      "common_genres": [
+        { "rank": 1, "genre": "Action" },
+        { "rank": 2, "genre": "Thriller" },
+        { "rank": 3, "genre": "Crime" },
+        { "rank": 4, "genre": "Drama" },
+        { "rank": 5, "genre": "Western" }
+      ],
+      "examples": [
+        "Kill Bill: Volume 1 (2003 film)",
+        "The Count of Monte Cristo (1844 novel)",
+        "Gladiator (2000 film)"
+      ]
+    },
+    {
+      "number": 11,
+      "name": "The Escape",
+      "description": "A protagonist trapped by physical, social, or psychological confinement engineers liberation.",
+      "popularity_index": 0.75,
+      "common_genres": [
+        { "rank": 1, "genre": "Thriller" },
+        { "rank": 2, "genre": "Drama" },
+        { "rank": 3, "genre": "Action" },
+        { "rank": 4, "genre": "Horror" },
+        { "rank": 5, "genre": "Science Fiction" }
+      ],
+      "examples": [
+        "The Shawshank Redemption (1994 film)",
+        "Escape from Alcatraz (1979 film)",
+        "Get Out (2017 film)"
+      ]
+    },
+    {
+      "number": 12,
+      "name": "The Sacrifice",
+      "description": "A protagonist relinquishes something of great value for a greater good, affirming moral commitment.",
+      "popularity_index": 0.81,
+      "common_genres": [
+        { "rank": 1, "genre": "Drama" },
+        { "rank": 2, "genre": "War" },
+        { "rank": 3, "genre": "Fantasy" },
+        { "rank": 4, "genre": "Science Fiction" },
+        { "rank": 5, "genre": "Superhero" }
+      ],
+      "examples": [
+        "Harry Potter and the Deathly Hallows – Part 2 (2011 film)",
+        "Armageddon (1998 film)",
+        "The Dark Knight Rises (2012 film)"
+      ]
+    },
+    {
+      "number": 13,
+      "name": "The Mystery Unveiled",
+      "description": "An investigation reveals hidden truths, progressively reshaping understanding of events and characters.",
+      "popularity_index": 0.86,
+      "common_genres": [
+        { "rank": 1, "genre": "Mystery" },
+        { "rank": 2, "genre": "Thriller" },
+        { "rank": 3, "genre": "Crime" },
+        { "rank": 4, "genre": "Drama" },
+        { "rank": 5, "genre": "Detective" }
+      ],
+      "examples": [
+        "The Sixth Sense (1999 film)",
+        "Gone Girl (2012 novel)",
+        "Knives Out (2019 film)"
+      ]
+    },
+    {
+      "number": 14,
+      "name": "The Transformation",
+      "description": "A character undergoes profound internal or external change that redefines identity or worldview.",
+      "popularity_index": 0.77,
+      "common_genres": [
+        { "rank": 1, "genre": "Drama" },
+        { "rank": 2, "genre": "Fantasy" },
+        { "rank": 3, "genre": "Psychological" },
+        { "rank": 4, "genre": "Science Fiction" },
+        { "rank": 5, "genre": "Superhero" }
+      ],
+      "examples": [
+        "The Metamorphosis (1915 novella)",
+        "Black Swan (2010 film)",
+        "Spider-Man (2002 film)"
+      ]
+    },
+    {
+      "number": 15,
+      "name": "The Rise and Fall",
+      "description": "A protagonist ascends to power or prominence and then declines due to flaw, corruption, or shifting circumstance.",
+      "popularity_index": 0.85,
+      "common_genres": [
+        { "rank": 1, "genre": "Drama" },
+        { "rank": 2, "genre": "Crime" },
+        { "rank": 3, "genre": "Biography" },
+        { "rank": 4, "genre": "Historical" },
+        { "rank": 5, "genre": "Political" }
+      ],
+      "examples": [
+        "The Wolf of Wall Street (2013 film)",
+        "Scarface (1983 film)",
+        "Citizen Kane (1941 film)"
+      ]
+    }
+  ]
+}

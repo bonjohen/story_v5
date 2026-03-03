@@ -1,0 +1,125 @@
+# Goal 1: Archetype Graphs (Story Over Time)
+
+Produce the complete set of archetype graph deliverables as defined in `v0_plan.md` §2.
+Each phase ends with a commit.
+
+---
+
+## Phase 1 — Controlled Vocabulary and ID Convention
+
+Establish the shared foundation that all 15 archetype graphs will depend on.
+
+- [X] Define the controlled vocabulary of edge meanings (e.g., "forces commitment", "reveals truth", "narrows options", "raises cost", "reframes goal") and document it in `docs/archetype_edge_vocabulary.json`
+- [X] Define the controlled vocabulary of node roles (e.g., "Commitment", "Reversal", "Revelation", "Irreversible Cost", "Threshold", "Trial") and document it in `docs/archetype_node_roles.json`
+- [X] Define the ID naming convention for nodes and edges (prefix per archetype, numbering scheme) and document it in `docs/archetype_id_convention.md`
+
+---
+
+## Phase 2 — Archetype Graph JSONs (Batch 1: Archetypes 1–5)
+
+Build the first five archetype graph JSON documents following the schema in `v0_plan.md` §1.2A.
+
+- [ ] 1 — The Hero's Journey graph JSON → `docs/archetypes/01_heros_journey_graph.json`
+- [ ] 2 — Rags to Riches graph JSON → `docs/archetypes/02_rags_to_riches_graph.json`
+- [ ] 3 — The Quest graph JSON → `docs/archetypes/03_the_quest_graph.json`
+- [ ] 4 — Voyage and Return graph JSON → `docs/archetypes/04_voyage_and_return_graph.json`
+- [ ] 5 — Overcoming the Monster graph JSON → `docs/archetypes/05_overcoming_the_monster_graph.json`
+
+---
+
+## Phase 3 — Archetype Graph JSONs (Batch 2: Archetypes 6–10)
+
+- [ ] 6 — Rebirth graph JSON → `docs/archetypes/06_rebirth_graph.json`
+- [ ] 7 — Tragedy graph JSON → `docs/archetypes/07_tragedy_graph.json`
+- [ ] 8 — Comedy (Restoration of Order) graph JSON → `docs/archetypes/08_comedy_graph.json`
+- [ ] 9 — Coming of Age graph JSON → `docs/archetypes/09_coming_of_age_graph.json`
+- [ ] 10 — The Revenge graph JSON → `docs/archetypes/10_the_revenge_graph.json`
+
+---
+
+## Phase 4 — Archetype Graph JSONs (Batch 3: Archetypes 11–15)
+
+- [ ] 11 — The Escape graph JSON → `docs/archetypes/11_the_escape_graph.json`
+- [ ] 12 — The Sacrifice graph JSON → `docs/archetypes/12_the_sacrifice_graph.json`
+- [ ] 13 — The Mystery Unveiled graph JSON → `docs/archetypes/13_the_mystery_unveiled_graph.json`
+- [ ] 14 — The Transformation graph JSON → `docs/archetypes/14_the_transformation_graph.json`
+- [ ] 15 — The Rise and Fall graph JSON → `docs/archetypes/15_the_rise_and_fall_graph.json`
+
+---
+
+## Phase 5 — Narrative Graph Explanations (Batch 1: Archetypes 1–5)
+
+For each archetype, produce the narrative spec defined in `v0_plan.md` §1.2B: overview, node explanations, edge explanations, canonical walkthrough, variant walkthroughs (2–4), and diagnostic checklist.
+
+- [ ] 1 — The Hero's Journey narrative spec → `docs/archetypes/01_heros_journey_narrative.md`
+- [ ] 2 — Rags to Riches narrative spec → `docs/archetypes/02_rags_to_riches_narrative.md`
+- [ ] 3 — The Quest narrative spec → `docs/archetypes/03_the_quest_narrative.md`
+- [ ] 4 — Voyage and Return narrative spec → `docs/archetypes/04_voyage_and_return_narrative.md`
+- [ ] 5 — Overcoming the Monster narrative spec → `docs/archetypes/05_overcoming_the_monster_narrative.md`
+
+---
+
+## Phase 6 — Narrative Graph Explanations (Batch 2: Archetypes 6–10)
+
+- [ ] 6 — Rebirth narrative spec → `docs/archetypes/06_rebirth_narrative.md`
+- [ ] 7 — Tragedy narrative spec → `docs/archetypes/07_tragedy_narrative.md`
+- [ ] 8 — Comedy (Restoration of Order) narrative spec → `docs/archetypes/08_comedy_narrative.md`
+- [ ] 9 — Coming of Age narrative spec → `docs/archetypes/09_coming_of_age_narrative.md`
+- [ ] 10 — The Revenge narrative spec → `docs/archetypes/10_the_revenge_narrative.md`
+
+---
+
+## Phase 7 — Narrative Graph Explanations (Batch 3: Archetypes 11–15)
+
+- [ ] 11 — The Escape narrative spec → `docs/archetypes/11_the_escape_narrative.md`
+- [ ] 12 — The Sacrifice narrative spec → `docs/archetypes/12_the_sacrifice_narrative.md`
+- [ ] 13 — The Mystery Unveiled narrative spec → `docs/archetypes/13_the_mystery_unveiled_narrative.md`
+- [ ] 14 — The Transformation narrative spec → `docs/archetypes/14_the_transformation_narrative.md`
+- [ ] 15 — The Rise and Fall narrative spec → `docs/archetypes/15_the_rise_and_fall_narrative.md`
+
+---
+
+## Phase 8 — Example Mappings (All 15 Archetypes)
+
+For each archetype, map each node and edge to one concrete moment in one of the three example works listed in `docs/archtypes.json`. Produce as a single consolidated document.
+
+- [ ] 1 — The Hero's Journey example mapping → `docs/archetypes/01_heros_journey_examples.md`
+- [ ] 2 — Rags to Riches example mapping → `docs/archetypes/02_rags_to_riches_examples.md`
+- [ ] 3 — The Quest example mapping → `docs/archetypes/03_the_quest_examples.md`
+- [ ] 4 — Voyage and Return example mapping → `docs/archetypes/04_voyage_and_return_examples.md`
+- [ ] 5 — Overcoming the Monster example mapping → `docs/archetypes/05_overcoming_the_monster_examples.md`
+- [ ] 6 — Rebirth example mapping → `docs/archetypes/06_rebirth_examples.md`
+- [ ] 7 — Tragedy example mapping → `docs/archetypes/07_tragedy_examples.md`
+- [ ] 8 — Comedy (Restoration of Order) example mapping → `docs/archetypes/08_comedy_examples.md`
+- [ ] 9 — Coming of Age example mapping → `docs/archetypes/09_coming_of_age_examples.md`
+- [ ] 10 — The Revenge example mapping → `docs/archetypes/10_the_revenge_examples.md`
+- [ ] 11 — The Escape example mapping → `docs/archetypes/11_the_escape_examples.md`
+- [ ] 12 — The Sacrifice example mapping → `docs/archetypes/12_the_sacrifice_examples.md`
+- [ ] 13 — The Mystery Unveiled example mapping → `docs/archetypes/13_the_mystery_unveiled_examples.md`
+- [ ] 14 — The Transformation example mapping → `docs/archetypes/14_the_transformation_examples.md`
+- [ ] 15 — The Rise and Fall example mapping → `docs/archetypes/15_the_rise_and_fall_examples.md`
+
+---
+
+## Phase 9 — Cross-Archetype Index
+
+Build the reuse map that identifies shared structural concepts across all 15 archetype graphs.
+
+- [ ] Identify common node roles that appear across multiple archetypes (e.g., "Commitment", "Reversal", "Revelation", "Irreversible Cost") and tabulate which archetypes use each
+- [ ] Identify common edge meanings that recur across archetypes and tabulate usage
+- [ ] Produce the cross-archetype index document → `docs/archetypes/cross_archetype_index.json`
+
+---
+
+## Phase 10 — Validation and Quality Review
+
+Apply acceptance criteria from `v0_plan.md` §2.5 across all deliverables.
+
+- [ ] Verify every graph is traversable from start to at least one terminal node without ambiguity
+- [ ] Verify every edge has a causal meaning (not "and then")
+- [ ] Verify node entry/exit conditions are explicit and testable
+- [ ] Verify at least 2 meaningful variants per archetype (where appropriate)
+- [ ] Verify failure modes are specific enough to guide revision
+- [ ] Verify example mappings are consistent with graph semantics
+- [ ] Verify all node/edge IDs follow the naming convention from Phase 1
+- [ ] Verify controlled vocabulary usage is consistent across all 15 graphs
