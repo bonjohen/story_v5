@@ -36,7 +36,7 @@ Currently, variant branches (Refusal of the Call, Recapture) are embedded in the
 8. [ ] **Graph visualization tooling**
 The JSON graph format is machine-readable but has no rendering pipeline. Consider adding a script or tool that generates visual diagrams (e.g., Mermaid, D3, Graphviz) from the graph JSONs.
 
-9. [ ] **CLAUDE.md update**
+9. [X] **CLAUDE.md update**
 CLAUDE.md was written before the folder restructure and before goal_1 completion. Update it to reflect the current project state, file locations, and completed deliverables.
 
 ---

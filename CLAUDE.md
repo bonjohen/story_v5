@@ -12,27 +12,65 @@ This is a **data and content project** (no source code, build system, or tests) 
 
 ## Repository Structure
 
-All project content lives in `docs/`:
+```
+docs/                              ← Planning, specs, and vocabulary
+  v0_plan.md                       ← Authoritative statement of work (read first)
+  goal_1.md                        ← Goal 1 task tracker (complete)
+  goal_2.md                        ← Goal 2 task tracker (in progress)
+  v-next.md                        ← Deferred tasks, known issues, suggestions
+  archtypes.json                   ← 15 archetypes: descriptions, examples, genres
+  genres.json                      ← 27 genres: descriptions, examples, popularity
+  archetype_edge_vocabulary.json   ← 15 controlled edge meanings for archetypes
+  archetype_node_roles.json        ← 14 controlled node roles for archetypes
+  archetype_id_convention.md       ← ID naming convention for archetype nodes/edges
 
-- `docs/v0_plan.md` — The authoritative statement of work defining deliverables, methodology, quality criteria, and acceptance standards for both workstreams. **Read this first** when working on the project.
-- `docs/archtypes.json` — Canonical list of 15 story archetypes with descriptions, popularity indices, genre associations, and example works.
-- `docs/genres.json` — Canonical list of 27 genres with descriptions, popularity indices, and example works.
-- `docs/v-next.md` — Deferred tasks for future iterations.
+data/                              ← Deliverable outputs
+  archetypes/                      ← Goal 1 deliverables (complete)
+    {nn_name}/                     ← Per-archetype folder (15 total)
+      graph.json                   ← Directed graph JSON
+      narrative.md                 ← Narrative spec (walkthroughs, failure modes)
+      examples.md                  ← Example mappings to real works
+    cross_archetype_index.json     ← Shared node roles/edge meanings across all 15
+  genres/                          ← Goal 2 deliverables (in progress)
+    {nn_name}/                     ← Per-genre folder (27 total, when built)
+      graph.json
+      narrative.md
+      examples.md
+```
+
+## Goal Status
+
+- **Goal 1 — Archetype Graphs**: Complete. All 15 graph JSONs, 15 narrative specs, 15 example mappings, cross-archetype index, and validation done.
+- **Goal 2 — Genre Depth Graphs**: In progress. Track via `docs/goal_2.md`.
 
 ## Key Conventions
 
 ### Graph JSON Format
 
-All graph deliverables must follow the schema defined in `docs/v0_plan.md` §1.1–1.2:
+All graph deliverables follow the schema in `docs/v0_plan.md` §1.1–1.2:
 
 - **Nodes**: `node_id`, `label`, `role`, `definition`, `entry_conditions`, `exit_conditions`, `typical_variants`, `failure_modes`, `signals_in_text`
 - **Edges**: `edge_id`, `from`, `to`, `label`, `meaning`, `preconditions`, `effects_on_stakes`, `effects_on_character`, `common_alternatives`, `anti_patterns`
-- Node/edge IDs must be unique and deterministic (e.g., `HJ_N03_THRESHOLD`, `HJ_E03_CROSSING`)
-- Each graph must have one start node and one or more terminal nodes
+- Node/edge IDs: `{PREFIX}_N{##}_{SHORT_NAME}` for nodes, `{PREFIX}_E{##}_{SHORT_NAME}` for edges; variant range 50-79
+- Each graph has one start node and one or more terminal nodes
 
-### Terminology
+### Controlled Vocabulary
 
-Use a consistent controlled vocabulary for edge meanings across all graphs: "forces commitment", "reveals truth", "narrows options", "raises cost", "reframes goal", etc. Terms must not overlap.
+Archetype edge meanings and node roles are defined in `docs/archetype_edge_vocabulary.json` and `docs/archetype_node_roles.json`. Genre equivalents will be in `docs/genre_edge_vocabulary.json` and `docs/genre_node_roles.json`.
+
+### Task Tracking
+
+Goal files (`docs/goal_1.md`, `docs/goal_2.md`) use checkbox syntax:
+- `[ ]` — pending
+- `[~]` — actively in progress (only ONE task at a time)
+- `[X]` — complete
+
+### Workflow Rules
+
+- Commit and push at each phase end
+- Echo banners for task/phase transitions
+- Don't stop between phases — continue to the next
+- Only mark the single active task as `[~]`
 
 ### Quality Standards
 
@@ -42,17 +80,3 @@ Use a consistent controlled vocabulary for edge meanings across all graphs: "for
 - Failure modes must be specific enough to guide revision
 - Genre depth graphs must have all 5 levels clearly distinguished
 - Constraints must be stated as enforceable rules, not vague descriptions
-
-## Deliverables Checklist
-
-### Archetype Workstream
-- 15 archetype graph JSONs
-- 15 narrative graph explanations (node/edge explanations, walkthroughs, failure modes)
-- 15 example mappings (nodes/edges mapped to moments in example works)
-- 1 cross-archetype index (shared node types like "Commitment", "Reversal", "Revelation")
-
-### Genre Workstream
-- 27+ genre depth graph JSONs
-- 27+ narrative graph explanations
-- 1 cross-genre constraint index
-- 1 genre x archetype compatibility matrix
