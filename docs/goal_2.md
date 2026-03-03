@@ -92,12 +92,12 @@ For each genre, produce the narrative spec defined in `v0_plan.md` §1.2B: overv
 
 ## Phase 8 — Narrative Graph Explanations (Batch 3: Genres 15–20)
 
-- [ ] 15 — Historical narrative spec → `data/genres/15_historical/narrative.md`
-- [ ] 16 — War narrative spec → `data/genres/16_war/narrative.md`
-- [ ] 17 — Biography narrative spec → `data/genres/17_biography/narrative.md`
-- [ ] 18 — Family narrative spec → `data/genres/18_family/narrative.md`
-- [ ] 19 — Young Adult narrative spec → `data/genres/19_young_adult/narrative.md`
-- [ ] 20 — Literary Fiction narrative spec → `data/genres/20_literary_fiction/narrative.md`
+- [X] 15 — Historical narrative spec → `data/genres/15_historical/narrative.md`
+- [X] 16 — War narrative spec → `data/genres/16_war/narrative.md`
+- [X] 17 — Biography narrative spec → `data/genres/17_biography/narrative.md`
+- [X] 18 — Family narrative spec → `data/genres/18_family/narrative.md`
+- [X] 19 — Young Adult narrative spec → `data/genres/19_young_adult/narrative.md`
+- [X] 20 — Literary Fiction narrative spec → `data/genres/20_literary_fiction/narrative.md`
 
 ---
 
