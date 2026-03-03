@@ -141,12 +141,12 @@ For each genre, map each node and edge to one concrete moment in one of the thre
 
 ## Phase 12 — Example Mappings (Batch 3: Genres 15–20)
 
-- [ ] 15 — Historical example mapping → `data/genres/15_historical/examples.md`
-- [ ] 16 — War example mapping → `data/genres/16_war/examples.md`
-- [ ] 17 — Biography example mapping → `data/genres/17_biography/examples.md`
-- [ ] 18 — Family example mapping → `data/genres/18_family/examples.md`
-- [ ] 19 — Young Adult example mapping → `data/genres/19_young_adult/examples.md`
-- [ ] 20 — Literary Fiction example mapping → `data/genres/20_literary_fiction/examples.md`
+- [X] 15 — Historical example mapping → `data/genres/15_historical/examples.md`
+- [X] 16 — War example mapping → `data/genres/16_war/examples.md`
+- [X] 17 — Biography example mapping → `data/genres/17_biography/examples.md`
+- [X] 18 — Family example mapping → `data/genres/18_family/examples.md`
+- [X] 19 — Young Adult example mapping → `data/genres/19_young_adult/examples.md`
+- [X] 20 — Literary Fiction example mapping → `data/genres/20_literary_fiction/examples.md`
 
 ---
 
