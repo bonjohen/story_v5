@@ -115,11 +115,11 @@ Build the reuse map that identifies shared structural concepts across all 15 arc
 
 Apply acceptance criteria from `v0_plan.md` §2.5 across all deliverables.
 
-- [ ] Verify every graph is traversable from start to at least one terminal node without ambiguity
-- [ ] Verify every edge has a causal meaning (not "and then")
-- [ ] Verify node entry/exit conditions are explicit and testable
-- [ ] Verify at least 2 meaningful variants per archetype (where appropriate)
-- [ ] Verify failure modes are specific enough to guide revision
-- [ ] Verify example mappings are consistent with graph semantics
-- [ ] Verify all node/edge IDs follow the naming convention from Phase 1
-- [ ] Verify controlled vocabulary usage is consistent across all 15 graphs
+- [X] Verify every graph is traversable from start to at least one terminal node without ambiguity
+- [X] Verify every edge has a causal meaning (not "and then")
+- [X] Verify node entry/exit conditions are explicit and testable
+- [X] Verify at least 2 meaningful variants per archetype (where appropriate)
+- [X] Verify failure modes are specific enough to guide revision
+- [X] Verify example mappings are consistent with graph semantics — fixed 1 defect (The Escape variant nodes/edges added)
+- [X] Verify all node/edge IDs follow the naming convention from Phase 1
+- [X] Verify controlled vocabulary usage is consistent across all 15 graphs
