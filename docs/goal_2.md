@@ -31,13 +31,13 @@ Build the first seven genre depth graph JSON documents following the schema in `
 
 ## Phase 3 — Genre Graph JSONs (Batch 2: Genres 8–14)
 
-- [ ] 8 — Romance graph JSON → `data/genres/08_romance/graph.json`
-- [ ] 9 — Romantic Comedy graph JSON → `data/genres/09_romantic_comedy/graph.json`
-- [ ] 10 — Horror graph JSON → `data/genres/10_horror/graph.json`
-- [ ] 11 — Mystery graph JSON → `data/genres/11_mystery/graph.json`
-- [ ] 12 — Crime graph JSON → `data/genres/12_crime/graph.json`
-- [ ] 13 — Detective graph JSON → `data/genres/13_detective/graph.json`
-- [ ] 14 — Superhero graph JSON → `data/genres/14_superhero/graph.json`
+- [X] 8 — Romance graph JSON → `data/genres/08_romance/graph.json`
+- [X] 9 — Romantic Comedy graph JSON → `data/genres/09_romantic_comedy/graph.json`
+- [X] 10 — Horror graph JSON → `data/genres/10_horror/graph.json`
+- [X] 11 — Mystery graph JSON → `data/genres/11_mystery/graph.json`
+- [X] 12 — Crime graph JSON → `data/genres/12_crime/graph.json`
+- [X] 13 — Detective graph JSON → `data/genres/13_detective/graph.json`
+- [X] 14 — Superhero graph JSON → `data/genres/14_superhero/graph.json`
 
 ---
 
