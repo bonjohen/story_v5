@@ -103,15 +103,17 @@ For each genre, produce the narrative spec defined in `v0_plan.md` §1.2B: overv
 
 ## Phase 9 — Narrative Graph Explanations (Batch 4: Genres 21–27)
 
-- [ ] 21 — Children's Literature narrative spec → `data/genres/21_childrens_literature/narrative.md`
-- [ ] 22 — Satire narrative spec → `data/genres/22_satire/narrative.md`
-- [ ] 23 — Psychological narrative spec → `data/genres/23_psychological/narrative.md`
-- [ ] 24 — Western narrative spec → `data/genres/24_western/narrative.md`
-- [ ] 25 — Political narrative spec → `data/genres/25_political/narrative.md`
-- [ ] 26 — Musical narrative spec → `data/genres/26_musical/narrative.md`
-- [ ] 27 — Holiday narrative spec → `data/genres/27_holiday/narrative.md`
+- [X] 21 — Children's Literature narrative spec → `data/genres/21_childrens_literature/narrative.md`
+- [X] 22 — Satire narrative spec → `data/genres/22_satire/narrative.md`
+- [X] 23 — Psychological narrative spec → `data/genres/23_psychological/narrative.md`
+- [X] 24 — Western narrative spec → `data/genres/24_western/narrative.md`
+- [X] 25 — Political narrative spec → `data/genres/25_political/narrative.md`
+- [X] 26 — Musical narrative spec → `data/genres/26_musical/narrative.md`
+- [X] 27 — Holiday narrative spec → `data/genres/27_holiday/narrative.md`
 
 ---
+
+Pause here, and allow me to evaluate the results before you proceed.
 
 ## Phase 10 — Example Mappings (Batch 1: Genres 1–7)
 
