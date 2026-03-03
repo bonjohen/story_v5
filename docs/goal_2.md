@@ -54,13 +54,13 @@ Build the first seven genre depth graph JSON documents following the schema in `
 
 ## Phase 5 — Genre Graph JSONs (Batch 4: Genres 21–27)
 
-- [ ] 21 — Children's Literature graph JSON → `data/genres/21_childrens_literature/graph.json`
-- [ ] 22 — Satire graph JSON → `data/genres/22_satire/graph.json`
-- [ ] 23 — Psychological graph JSON → `data/genres/23_psychological/graph.json`
-- [ ] 24 — Western graph JSON → `data/genres/24_western/graph.json`
-- [ ] 25 — Political graph JSON → `data/genres/25_political/graph.json`
-- [ ] 26 — Musical graph JSON → `data/genres/26_musical/graph.json`
-- [ ] 27 — Holiday graph JSON → `data/genres/27_holiday/graph.json`
+- [X] 21 — Children's Literature graph JSON → `data/genres/21_childrens_literature/graph.json`
+- [X] 22 — Satire graph JSON → `data/genres/22_satire/graph.json`
+- [X] 23 — Psychological graph JSON → `data/genres/23_psychological/graph.json`
+- [X] 24 — Western graph JSON → `data/genres/24_western/graph.json`
+- [X] 25 — Political graph JSON → `data/genres/25_political/graph.json`
+- [X] 26 — Musical graph JSON → `data/genres/26_musical/graph.json`
+- [X] 27 — Holiday graph JSON → `data/genres/27_holiday/graph.json`
 
 ---
 
