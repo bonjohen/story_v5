@@ -105,9 +105,9 @@ For each archetype, map each node and edge to one concrete moment in one of the 
 
 Build the reuse map that identifies shared structural concepts across all 15 archetype graphs.
 
-- [ ] Identify common node roles that appear across multiple archetypes (e.g., "Commitment", "Reversal", "Revelation", "Irreversible Cost") and tabulate which archetypes use each
-- [ ] Identify common edge meanings that recur across archetypes and tabulate usage
-- [ ] Produce the cross-archetype index document → `docs/archetypes/cross_archetype_index.json`
+- [X] Identify common node roles that appear across multiple archetypes (e.g., "Commitment", "Reversal", "Revelation", "Irreversible Cost") and tabulate which archetypes use each
+- [X] Identify common edge meanings that recur across archetypes and tabulate usage
+- [X] Produce the cross-archetype index document → `docs/archetypes/cross_archetype_index.json`
 
 ---
 

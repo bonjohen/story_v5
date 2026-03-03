@@ -1,0 +1,471 @@
+{
+  "title": "Cross-Archetype Index",
+  "description": "Reuse map identifying shared structural concepts (node roles and edge meanings) across all 15 archetype graphs. Generated from the controlled vocabulary in archetype_node_roles.json and archetype_edge_vocabulary.json.",
+  "node_role_index": {
+    "summary": "14 distinct node roles across 120 total node instances. Origin and Resolution are universal (all 15 archetypes). Crisis appears in all 15 but has two instances in The Hero's Journey.",
+    "roles": [
+      {
+        "role": "Origin",
+        "instance_count": 15,
+        "archetype_count": 15,
+        "note": "Every archetype has exactly one Origin node as its start node.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N01_ORDINARY_WORLD", "label": "Ordinary World" },
+          { "archetype": "Rags to Riches", "node_id": "RR_N01_LOWLY_STATE", "label": "Lowly State" },
+          { "archetype": "The Quest", "node_id": "QU_N01_HOME_GROUND", "label": "Home Ground" },
+          { "archetype": "Voyage and Return", "node_id": "VR_N01_FAMILIAR_WORLD", "label": "Familiar World" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N01_PEACEFUL_STATE", "label": "Peaceful State Under Threat" },
+          { "archetype": "Rebirth", "node_id": "RB_N01_FALLEN_STATE", "label": "Fallen State" },
+          { "archetype": "Tragedy", "node_id": "TR_N01_ELEVATED_STATE", "label": "Elevated State" },
+          { "archetype": "Comedy", "node_id": "CO_N01_CONSTRAINED_ORDER", "label": "Constrained Order" },
+          { "archetype": "Coming of Age", "node_id": "CA_N01_INNOCENCE", "label": "Innocence" },
+          { "archetype": "The Revenge", "node_id": "RV_N01_ORIGINAL_STATE", "label": "Original State" },
+          { "archetype": "The Escape", "node_id": "ES_N01_CONFINEMENT", "label": "Confinement" },
+          { "archetype": "The Sacrifice", "node_id": "SA_N01_VALUED_LIFE", "label": "Valued Life" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N01_SURFACE_ORDER", "label": "Surface Order" },
+          { "archetype": "The Transformation", "node_id": "TF_N01_FIXED_IDENTITY", "label": "Fixed Identity" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N01_HUMBLE_ORIGIN", "label": "Humble Origin" }
+        ]
+      },
+      {
+        "role": "Disruption",
+        "instance_count": 14,
+        "archetype_count": 14,
+        "note": "Present in all archetypes except Voyage and Return, which uses Threshold (Passage Into the Unknown) as its first transition.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N02_CALL_TO_ADVENTURE", "label": "Call to Adventure" },
+          { "archetype": "Rags to Riches", "node_id": "RR_N02_OPPORTUNITY", "label": "Opportunity Appears" },
+          { "archetype": "The Quest", "node_id": "QU_N02_OBJECTIVE_SET", "label": "Objective Defined" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N02_MONSTER_REVEALED", "label": "Monster Revealed" },
+          { "archetype": "Rebirth", "node_id": "RB_N02_WARNING", "label": "Warning or Catalyst" },
+          { "archetype": "Tragedy", "node_id": "TR_N02_TEMPTATION", "label": "Temptation or Pressure" },
+          { "archetype": "Comedy", "node_id": "CO_N02_DISRUPTION", "label": "Disruption of Order" },
+          { "archetype": "Coming of Age", "node_id": "CA_N02_FIRST_EXPOSURE", "label": "First Exposure" },
+          { "archetype": "The Revenge", "node_id": "RV_N02_INCITING_WRONG", "label": "Inciting Wrong" },
+          { "archetype": "The Escape", "node_id": "ES_N02_SPARK_OF_HOPE", "label": "Spark of Hope" },
+          { "archetype": "The Sacrifice", "node_id": "SA_N02_THREAT_EMERGES", "label": "Threat Emerges" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N02_QUESTION_POSED", "label": "Central Question Posed" },
+          { "archetype": "The Transformation", "node_id": "TF_N02_CATALYST_OF_CHANGE", "label": "Catalyst of Change" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N02_FIRST_OPPORTUNITY", "label": "First Opportunity" }
+        ]
+      },
+      {
+        "role": "Crisis",
+        "instance_count": 16,
+        "archetype_count": 15,
+        "note": "Present in all 15 archetypes. The Hero's Journey has two Crisis nodes (The Ordeal and Resurrection).",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N07_ORDEAL", "label": "The Ordeal" },
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N10_RESURRECTION", "label": "Resurrection" },
+          { "archetype": "Rags to Riches", "node_id": "RR_N06_CRISIS_OF_WORTH", "label": "Crisis of Worth" },
+          { "archetype": "The Quest", "node_id": "QU_N07_CLIMACTIC_ORDEAL", "label": "Climactic Ordeal" },
+          { "archetype": "Voyage and Return", "node_id": "VR_N06_ESCAPE", "label": "Thrilling Escape" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N07_FINAL_CONFRONT", "label": "Final Confrontation" },
+          { "archetype": "Rebirth", "node_id": "RB_N04_ORDEAL_OF_TRUTH", "label": "Ordeal of Truth" },
+          { "archetype": "Comedy", "node_id": "CO_N04_DARK_MOMENT", "label": "Dark Moment" },
+          { "archetype": "Coming of Age", "node_id": "CA_N05_CRISIS_OF_IDENTITY", "label": "Crisis of Identity" },
+          { "archetype": "The Revenge", "node_id": "RV_N07_FINAL_RECKONING", "label": "Final Reckoning" },
+          { "archetype": "The Escape", "node_id": "ES_N06_ESCAPE_ATTEMPT", "label": "The Escape Attempt" },
+          { "archetype": "The Sacrifice", "node_id": "SA_N06_SACRIFICIAL_ACT", "label": "The Sacrificial Act" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N07_CONFRONTATION", "label": "Confrontation with Truth" },
+          { "archetype": "The Transformation", "node_id": "TF_N05_CRUCIBLE", "label": "Crucible" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N06_DESPERATE_GRIP", "label": "Desperate Grip" }
+        ]
+      },
+      {
+        "role": "Resolution",
+        "instance_count": 15,
+        "archetype_count": 15,
+        "note": "Every archetype has exactly one Resolution node as its terminal node.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N11_RETURN_ELIXIR", "label": "Return with the Elixir" },
+          { "archetype": "Rags to Riches", "node_id": "RR_N08_TRUE_ELEVATION", "label": "True Elevation" },
+          { "archetype": "The Quest", "node_id": "QU_N09_HOMECOMING", "label": "Homecoming" },
+          { "archetype": "Voyage and Return", "node_id": "VR_N07_RETURN_CHANGED", "label": "Return Changed" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N08_WORLD_RESTORED", "label": "World Restored" },
+          { "archetype": "Rebirth", "node_id": "RB_N07_RENEWAL", "label": "Renewal" },
+          { "archetype": "Tragedy", "node_id": "TR_N08_AFTERMATH", "label": "Aftermath" },
+          { "archetype": "Comedy", "node_id": "CO_N07_NEW_HARMONY", "label": "New Harmony" },
+          { "archetype": "Coming of Age", "node_id": "CA_N07_NEW_MATURITY", "label": "New Maturity" },
+          { "archetype": "The Revenge", "node_id": "RV_N08_AFTERMATH", "label": "Aftermath" },
+          { "archetype": "The Escape", "node_id": "ES_N07_FREEDOM", "label": "Freedom" },
+          { "archetype": "The Sacrifice", "node_id": "SA_N07_WORLD_SAVED", "label": "World Saved" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N08_NEW_UNDERSTANDING", "label": "New Understanding" },
+          { "archetype": "The Transformation", "node_id": "TF_N07_NEW_IDENTITY", "label": "New Identity" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N08_LEGACY", "label": "Legacy" }
+        ]
+      },
+      {
+        "role": "Trial",
+        "instance_count": 14,
+        "archetype_count": 13,
+        "note": "The Hero's Journey has two Trial nodes (Road of Trials and The Road Back). Rags to Riches and Voyage and Return each have one Trial. The Sacrifice and The Mystery Unveiled use Trial for their resistance/false-trail nodes.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N05_TRIALS", "label": "Road of Trials" },
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N09_ROAD_BACK", "label": "The Road Back" },
+          { "archetype": "Rags to Riches", "node_id": "RR_N04_SOCIAL_TRIALS", "label": "Social Trials" },
+          { "archetype": "The Quest", "node_id": "QU_N04_JOURNEY_TRIALS", "label": "Journey Trials" },
+          { "archetype": "Voyage and Return", "node_id": "VR_N03_FASCINATION", "label": "Fascination Phase" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N05_INITIAL_ENCOUNTER", "label": "Initial Encounter" },
+          { "archetype": "Rebirth", "node_id": "RB_N03_RESISTANCE", "label": "Resistance and Denial" },
+          { "archetype": "Comedy", "node_id": "CO_N03_ESCALATING_CHAOS", "label": "Escalating Chaos" },
+          { "archetype": "Coming of Age", "node_id": "CA_N03_TESTING_GROUND", "label": "Testing Ground" },
+          { "archetype": "The Revenge", "node_id": "RV_N05_PURSUIT", "label": "Pursuit and Escalation" },
+          { "archetype": "The Escape", "node_id": "ES_N04_SETBACKS", "label": "Setbacks and Near-Discovery" },
+          { "archetype": "The Sacrifice", "node_id": "SA_N04_RESISTANCE", "label": "Resistance and Struggle" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N04_FALSE_TRAIL", "label": "False Trail" },
+          { "archetype": "The Transformation", "node_id": "TF_N03_DENIAL_AND_STRUGGLE", "label": "Denial and Struggle" }
+        ]
+      },
+      {
+        "role": "Descent",
+        "instance_count": 8,
+        "archetype_count": 8,
+        "note": "Used in archetypes where a sustained downward movement precedes the crisis.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N06_APPROACH", "label": "Approach to the Inmost Cave" },
+          { "archetype": "The Quest", "node_id": "QU_N06_FINAL_APPROACH", "label": "Final Approach" },
+          { "archetype": "Voyage and Return", "node_id": "VR_N05_FRUSTRATION", "label": "Frustration and Imprisonment" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N06_NIGHTMARE", "label": "Nightmare Phase" },
+          { "archetype": "Tragedy", "node_id": "TR_N05_UNRAVELING", "label": "Unraveling" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N05_DEEPENING", "label": "Deepening Complexity" },
+          { "archetype": "The Transformation", "node_id": "TF_N04_LIMINAL_STATE", "label": "Liminal State" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N05_CRACKS_FORM", "label": "Cracks Form" }
+        ]
+      },
+      {
+        "role": "Commitment",
+        "instance_count": 8,
+        "archetype_count": 8,
+        "note": "Represents a deliberate choice that commits the character despite full knowledge of cost.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N50_REFUSAL_OF_CALL", "label": "Refusal of the Call" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N03_CALL_TO_CONFRONT", "label": "Call to Confront" },
+          { "archetype": "Rebirth", "node_id": "RB_N05_TURNING_POINT", "label": "Turning Point" },
+          { "archetype": "Comedy", "node_id": "CO_N06_RECONCILIATION", "label": "Reconciliation" },
+          { "archetype": "The Revenge", "node_id": "RV_N03_VOW", "label": "Vow of Revenge" },
+          { "archetype": "The Escape", "node_id": "ES_N05_POINT_OF_NO_RETURN", "label": "Point of No Return" },
+          { "archetype": "The Sacrifice", "node_id": "SA_N05_DECISION", "label": "The Decision" },
+          { "archetype": "Rags to Riches", "node_id": "RR_N07_PROOF_OF_CHARACTER", "label": "Proof of Character" }
+        ]
+      },
+      {
+        "role": "Revelation",
+        "instance_count": 7,
+        "archetype_count": 7,
+        "note": "Moments where critical hidden information is exposed, changing understanding.",
+        "instances": [
+          { "archetype": "The Quest", "node_id": "QU_N05_COHESION_TEST", "label": "Cohesion Test" },
+          { "archetype": "Voyage and Return", "node_id": "VR_N04_SHADOW_EMERGES", "label": "Shadow Emerges" },
+          { "archetype": "Tragedy", "node_id": "TR_N06_RECOGNITION", "label": "Recognition (Anagnorisis)" },
+          { "archetype": "Comedy", "node_id": "CO_N05_UNMASKING", "label": "Unmasking and Recognition" },
+          { "archetype": "The Revenge", "node_id": "RV_N06_MORAL_CROSSROADS", "label": "Moral Crossroads" },
+          { "archetype": "The Sacrifice", "node_id": "SA_N03_REALIZATION", "label": "Realization of Cost" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N06_BREAKTHROUGH", "label": "Key Breakthrough" }
+        ]
+      },
+      {
+        "role": "Catalyst",
+        "instance_count": 7,
+        "archetype_count": 7,
+        "note": "External events or characters that accelerate or redirect the story's trajectory.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N03_MENTOR", "label": "Meeting the Mentor" },
+          { "archetype": "The Quest", "node_id": "QU_N03_COMPANIONS", "label": "Gathering Companions" },
+          { "archetype": "Overcoming the Monster", "node_id": "OM_N04_PREPARATION", "label": "Preparation and Reconnaissance" },
+          { "archetype": "Coming of Age", "node_id": "CA_N04_MENTOR_OR_MODEL", "label": "Mentor or Role Model" },
+          { "archetype": "The Revenge", "node_id": "RV_N04_PREPARATION", "label": "Preparation" },
+          { "archetype": "The Escape", "node_id": "ES_N03_PLANNING", "label": "Planning the Escape" },
+          { "archetype": "The Mystery Unveiled", "node_id": "MU_N03_INITIAL_CLUES", "label": "Initial Clues" }
+        ]
+      },
+      {
+        "role": "Threshold",
+        "instance_count": 5,
+        "archetype_count": 5,
+        "note": "Points of no return that separate setup from main action.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N04_THRESHOLD", "label": "Crossing the Threshold" },
+          { "archetype": "Rags to Riches", "node_id": "RR_N03_INITIAL_RISE", "label": "Initial Rise" },
+          { "archetype": "Voyage and Return", "node_id": "VR_N02_PASSAGE", "label": "Passage Into the Unknown" },
+          { "archetype": "Tragedy", "node_id": "TR_N03_FATAL_CHOICE", "label": "Fatal Choice" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N03_RAPID_ASCENT", "label": "Rapid Ascent" }
+        ]
+      },
+      {
+        "role": "Reversal",
+        "instance_count": 4,
+        "archetype_count": 4,
+        "note": "Dramatic shifts in fortune, power, or trajectory. Includes both positive peaks and negative reversals.",
+        "instances": [
+          { "archetype": "Rags to Riches", "node_id": "RR_N05_APPARENT_PEAK", "label": "Apparent Peak" },
+          { "archetype": "Tragedy", "node_id": "TR_N04_APPARENT_SUCCESS", "label": "Apparent Success" },
+          { "archetype": "The Escape", "node_id": "ES_N50_RECAPTURE", "label": "Recapture" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N04_PEAK_OF_POWER", "label": "Peak of Power" }
+        ]
+      },
+      {
+        "role": "Transformation",
+        "instance_count": 4,
+        "archetype_count": 4,
+        "note": "Fundamental changes in identity, worldview, or capability.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "node_id": "HJ_N08_REWARD", "label": "Reward (Seizing the Sword)" },
+          { "archetype": "The Quest", "node_id": "QU_N08_OBJECTIVE_WON", "label": "Objective Won" },
+          { "archetype": "Rebirth", "node_id": "RB_N06_ATONEMENT", "label": "Atonement" },
+          { "archetype": "The Transformation", "node_id": "TF_N06_INTEGRATION", "label": "Integration" }
+        ]
+      },
+      {
+        "role": "Irreversible Cost",
+        "instance_count": 3,
+        "archetype_count": 3,
+        "note": "Permanent losses that cannot be undone. Used only in archetypes where irreversible loss is a structural node rather than an edge effect.",
+        "instances": [
+          { "archetype": "Tragedy", "node_id": "TR_N07_DOWNFALL", "label": "Downfall (Catastrophe)" },
+          { "archetype": "Coming of Age", "node_id": "CA_N06_LOSS_OF_INNOCENCE", "label": "Loss of Innocence" },
+          { "archetype": "The Rise and Fall", "node_id": "RF_N07_FALL", "label": "The Fall" }
+        ]
+      }
+    ]
+  },
+  "edge_meaning_index": {
+    "summary": "15 edge meanings defined in the controlled vocabulary; 14 are used across 120 total edge instances. 'compels return' is defined but not used in any current graph. 'disrupts order' is universal (all 15 archetypes). 'restores equilibrium' appears in 14 of 15.",
+    "meanings": [
+      {
+        "meaning": "disrupts order",
+        "instance_count": 15,
+        "archetype_count": 15,
+        "note": "Universal opening edge. Present as the first transition in every archetype.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E01_CALL_RECEIVED", "label": "Call Received" },
+          { "archetype": "Rags to Riches", "edge_id": "RR_E01_CHANCE_ARRIVES", "label": "Chance Arrives" },
+          { "archetype": "The Quest", "edge_id": "QU_E01_NEED_EMERGES", "label": "Need Emerges" },
+          { "archetype": "Voyage and Return", "edge_id": "VR_E01_CROSSES_OVER", "label": "Crosses Over" },
+          { "archetype": "Overcoming the Monster", "edge_id": "OM_E01_THREAT_STRIKES", "label": "Threat Strikes" },
+          { "archetype": "Rebirth", "edge_id": "RB_E01_CRACK_APPEARS", "label": "First Crack Appears" },
+          { "archetype": "Tragedy", "edge_id": "TR_E01_FLAW_ACTIVATED", "label": "Flaw Activated" },
+          { "archetype": "Comedy", "edge_id": "CO_E01_ORDER_BROKEN", "label": "Order Broken" },
+          { "archetype": "Coming of Age", "edge_id": "CA_E01_WORLD_CRACKS", "label": "World Cracks Open" },
+          { "archetype": "The Revenge", "edge_id": "RV_E01_WRONG_COMMITTED", "label": "Wrong Committed" },
+          { "archetype": "The Escape", "edge_id": "ES_E01_HOPE_APPEARS", "label": "Hope Appears" },
+          { "archetype": "The Sacrifice", "edge_id": "SA_E01_DANGER_ARRIVES", "label": "Danger Arrives" },
+          { "archetype": "The Mystery Unveiled", "edge_id": "MU_E01_QUESTION_EMERGES", "label": "Question Emerges" },
+          { "archetype": "The Transformation", "edge_id": "TF_E01_CHANGE_BEGINS", "label": "Change Begins" },
+          { "archetype": "The Rise and Fall", "edge_id": "RF_E01_SEIZES_CHANCE", "label": "Seizes the Chance" }
+        ]
+      },
+      {
+        "meaning": "restores equilibrium",
+        "instance_count": 14,
+        "archetype_count": 14,
+        "note": "Near-universal closing edge. Present in 14 of 15 archetypes. Coming of Age uses 'enables transformation' as its final edge instead.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E10_RETURN", "label": "Returns Transformed" },
+          { "archetype": "Rags to Riches", "edge_id": "RR_E07_EARNED_PLACE", "label": "Earns True Place" },
+          { "archetype": "The Quest", "edge_id": "QU_E08_RETURNS_HOME", "label": "Returns Home" },
+          { "archetype": "Voyage and Return", "edge_id": "VR_E06_RETURNS", "label": "Returns Home" },
+          { "archetype": "Overcoming the Monster", "edge_id": "OM_E07_MONSTER_FALLS", "label": "Monster Falls" },
+          { "archetype": "Rebirth", "edge_id": "RB_E06_RENEWED", "label": "Renewal Achieved" },
+          { "archetype": "Tragedy", "edge_id": "TR_E07_WORLD_ENDURES", "label": "World Endures" },
+          { "archetype": "Comedy", "edge_id": "CO_E06_HARMONY_RESTORED", "label": "Harmony Restored" },
+          { "archetype": "The Revenge", "edge_id": "RV_E07_LIVES_WITH_IT", "label": "Lives With the Result" },
+          { "archetype": "The Escape", "edge_id": "ES_E06_BREAKS_FREE", "label": "Breaks Free" },
+          { "archetype": "The Sacrifice", "edge_id": "SA_E06_COST_FELT", "label": "The Cost Is Felt" },
+          { "archetype": "The Mystery Unveiled", "edge_id": "MU_E07_TRUTH_SETTLES", "label": "Truth Settles" },
+          { "archetype": "The Transformation", "edge_id": "TF_E06_SETTLES", "label": "Settles Into New Self" },
+          { "archetype": "The Rise and Fall", "edge_id": "RF_E07_WORLD_MOVES_ON", "label": "World Moves On" }
+        ]
+      },
+      {
+        "meaning": "forces commitment",
+        "instance_count": 13,
+        "archetype_count": 11,
+        "note": "The Hero's Journey and The Quest each have two instances. Appears in commitment, threshold, and vow moments.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E51_OVERRIDE", "label": "Refusal Overridden" },
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E03_CROSSING", "label": "Crosses into Special World" },
+          { "archetype": "Rags to Riches", "edge_id": "RR_E02_SEIZES_CHANCE", "label": "Seizes the Chance" },
+          { "archetype": "The Quest", "edge_id": "QU_E03_SETS_OUT", "label": "Sets Out" },
+          { "archetype": "The Quest", "edge_id": "QU_E05_RECOMMITS", "label": "Group Recommits" },
+          { "archetype": "Overcoming the Monster", "edge_id": "OM_E02_ACCEPTS_MISSION", "label": "Accepts the Mission" },
+          { "archetype": "Rebirth", "edge_id": "RB_E04_CHOOSES_CHANGE", "label": "Chooses Change" },
+          { "archetype": "Tragedy", "edge_id": "TR_E02_CROSSES_LINE", "label": "Crosses the Line" },
+          { "archetype": "Coming of Age", "edge_id": "CA_E02_ENTERS_ARENA", "label": "Enters the Arena" },
+          { "archetype": "The Revenge", "edge_id": "RV_E02_SWEARS_REVENGE", "label": "Swears Revenge" },
+          { "archetype": "The Escape", "edge_id": "ES_E04_NOW_OR_NEVER", "label": "Now or Never" },
+          { "archetype": "The Sacrifice", "edge_id": "SA_E04_CHOOSES", "label": "Chooses to Pay the Price" },
+          { "archetype": "The Rise and Fall", "edge_id": "RF_E03_REACHES_TOP", "label": "Reaches the Top" }
+        ]
+      },
+      {
+        "meaning": "reveals truth",
+        "instance_count": 11,
+        "archetype_count": 11,
+        "note": "Widely used across story types. Exposes hidden information that reshapes understanding.",
+        "instances": [
+          { "archetype": "Rags to Riches", "edge_id": "RR_E05_FALL_THREATENS", "label": "Foundation Cracks" },
+          { "archetype": "The Quest", "edge_id": "QU_E04_TENSIONS_SURFACE", "label": "Tensions Surface" },
+          { "archetype": "Voyage and Return", "edge_id": "VR_E03_DARKNESS_APPEARS", "label": "Darkness Appears" },
+          { "archetype": "Rebirth", "edge_id": "RB_E03_BREAKS_THROUGH", "label": "Truth Breaks Through" },
+          { "archetype": "Tragedy", "edge_id": "TR_E05_SEES_TRUTH", "label": "Sees the Truth" },
+          { "archetype": "Comedy", "edge_id": "CO_E04_TRUTH_EMERGES", "label": "Truth Emerges" },
+          { "archetype": "The Revenge", "edge_id": "RV_E05_CONFRONTS_SELF", "label": "Confronts What They've Become" },
+          { "archetype": "The Sacrifice", "edge_id": "SA_E02_COST_REVEALED", "label": "Cost Becomes Clear" },
+          { "archetype": "The Mystery Unveiled", "edge_id": "MU_E05_CONNECTS_DOTS", "label": "Connects the Dots" },
+          { "archetype": "The Transformation", "edge_id": "TF_E03_FALLS_BETWEEN", "label": "Falls Between Identities" },
+          { "archetype": "The Rise and Fall", "edge_id": "RF_E04_EROSION_BEGINS", "label": "Erosion Begins" }
+        ]
+      },
+      {
+        "meaning": "triggers crisis",
+        "instance_count": 10,
+        "archetype_count": 10,
+        "note": "Initiates climactic confrontations and moments of maximum threat.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E06_ORDEAL_BEGINS", "label": "Faces the Ordeal" },
+          { "archetype": "The Quest", "edge_id": "QU_E06_ENGAGES_FINAL", "label": "Engages Final Obstacle" },
+          { "archetype": "Voyage and Return", "edge_id": "VR_E05_BREAKS_FREE", "label": "Breaks Free" },
+          { "archetype": "Tragedy", "edge_id": "TR_E06_FALLS", "label": "Falls" },
+          { "archetype": "Coming of Age", "edge_id": "CA_E04_IDENTITY_TESTED", "label": "Identity Put to the Test" },
+          { "archetype": "The Revenge", "edge_id": "RV_E06_FACES_ENEMY", "label": "Faces the Enemy" },
+          { "archetype": "The Escape", "edge_id": "ES_E05_EXECUTES", "label": "Executes the Plan" },
+          { "archetype": "The Mystery Unveiled", "edge_id": "MU_E06_FORCES_TRUTH", "label": "Forces the Truth Into the Open" },
+          { "archetype": "The Transformation", "edge_id": "TF_E04_FORGED", "label": "Forged by Crisis" },
+          { "archetype": "The Rise and Fall", "edge_id": "RF_E06_COLLAPSES", "label": "Everything Collapses" }
+        ]
+      },
+      {
+        "meaning": "narrows options",
+        "instance_count": 9,
+        "archetype_count": 8,
+        "note": "The Hero's Journey has two instances (Hero Refuses and Approaches the Core).",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E50_REFUSAL", "label": "Hero Refuses" },
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E05_APPROACH", "label": "Approaches the Core" },
+          { "archetype": "Voyage and Return", "edge_id": "VR_E04_TRAPPED", "label": "Becomes Trapped" },
+          { "archetype": "Rebirth", "edge_id": "RB_E02_DIGS_IN", "label": "Digs In" },
+          { "archetype": "Tragedy", "edge_id": "TR_E04_CRACKS_APPEAR", "label": "Cracks Appear" },
+          { "archetype": "Comedy", "edge_id": "CO_E02_COMPOUNDS", "label": "Confusion Compounds" },
+          { "archetype": "The Revenge", "edge_id": "RV_E03_BUILDS_CAPABILITY", "label": "Builds Capability" },
+          { "archetype": "The Escape", "edge_id": "ES_E03_OBSTACLES_ARISE", "label": "Obstacles Arise" },
+          { "archetype": "The Transformation", "edge_id": "TF_E02_RESISTS", "label": "Resists the Change" }
+        ]
+      },
+      {
+        "meaning": "grants insight",
+        "instance_count": 7,
+        "archetype_count": 7,
+        "note": "Provides new knowledge, skill, or perspective needed for future action.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E02_MENTOR_FOUND", "label": "Seeks Guidance" },
+          { "archetype": "The Quest", "edge_id": "QU_E02_ASSEMBLES_TEAM", "label": "Assembles the Team" },
+          { "archetype": "Voyage and Return", "edge_id": "VR_E02_EXPLORES", "label": "Begins Exploring" },
+          { "archetype": "Overcoming the Monster", "edge_id": "OM_E03_GATHERS_TOOLS", "label": "Gathers Tools and Knowledge" },
+          { "archetype": "Coming of Age", "edge_id": "CA_E03_FINDS_MODEL", "label": "Finds a Model" },
+          { "archetype": "The Escape", "edge_id": "ES_E02_BEGINS_PLANNING", "label": "Begins Planning" },
+          { "archetype": "The Mystery Unveiled", "edge_id": "MU_E02_GATHERS_CLUES", "label": "Gathers First Clues" }
+        ]
+      },
+      {
+        "meaning": "raises cost",
+        "instance_count": 6,
+        "archetype_count": 6,
+        "note": "Increases what the character stands to lose.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E08_ROAD_BACK", "label": "Begins Return" },
+          { "archetype": "Rags to Riches", "edge_id": "RR_E04_REACHES_TOP", "label": "Reaches the Top" },
+          { "archetype": "Tragedy", "edge_id": "TR_E03_REAPS_REWARD", "label": "Reaps the Reward" },
+          { "archetype": "Comedy", "edge_id": "CO_E03_THREATENS_HARM", "label": "Threatens Real Harm" },
+          { "archetype": "The Escape", "edge_id": "ES_E51_TRIES_AGAIN", "label": "Tries Again" },
+          { "archetype": "The Rise and Fall", "edge_id": "RF_E02_CLIMBS_FAST", "label": "Climbs Fast" }
+        ]
+      },
+      {
+        "meaning": "demands sacrifice",
+        "instance_count": 6,
+        "archetype_count": 6,
+        "note": "Requires the character to give up something of genuine value to proceed.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E09_RESURRECTION", "label": "Final Test" },
+          { "archetype": "Rags to Riches", "edge_id": "RR_E06_PROVES_WORTH", "label": "Chooses Character Over Status" },
+          { "archetype": "The Quest", "edge_id": "QU_E07_CLAIMS_PRIZE", "label": "Claims the Prize" },
+          { "archetype": "Rebirth", "edge_id": "RB_E05_MAKES_AMENDS", "label": "Makes Amends" },
+          { "archetype": "Coming of Age", "edge_id": "CA_E05_PAYS_PRICE", "label": "Pays the Price of Knowing" },
+          { "archetype": "The Sacrifice", "edge_id": "SA_E05_ACTS", "label": "Executes the Sacrifice" }
+        ]
+      },
+      {
+        "meaning": "tests resolve",
+        "instance_count": 5,
+        "archetype_count": 5,
+        "note": "Measures commitment to the current path through challenge.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E04_TRIALS_BEGIN", "label": "Enters Trials" },
+          { "archetype": "Rags to Riches", "edge_id": "RR_E03_FRICTION_BEGINS", "label": "New World Pushes Back" },
+          { "archetype": "Overcoming the Monster", "edge_id": "OM_E04_ENGAGES_MONSTER", "label": "First Engagement" },
+          { "archetype": "The Sacrifice", "edge_id": "SA_E03_FIGHTS_IT", "label": "Fights the Necessity" },
+          { "archetype": "The Mystery Unveiled", "edge_id": "MU_E03_FOLLOWS_WRONG", "label": "Follows the Wrong Lead" }
+        ]
+      },
+      {
+        "meaning": "enables transformation",
+        "instance_count": 4,
+        "archetype_count": 4,
+        "note": "Creates conditions for fundamental character change.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E07_REWARD_CLAIMED", "label": "Claims the Reward" },
+          { "archetype": "Comedy", "edge_id": "CO_E05_FORGIVES", "label": "Chooses Forgiveness" },
+          { "archetype": "Coming of Age", "edge_id": "CA_E06_GROWS_UP", "label": "Grows Up" },
+          { "archetype": "The Transformation", "edge_id": "TF_E05_INTEGRATES", "label": "Integrates Old and New" }
+        ]
+      },
+      {
+        "meaning": "escalates conflict",
+        "instance_count": 3,
+        "archetype_count": 3,
+        "note": "Intensifies opposition. Used in confrontation-heavy archetypes.",
+        "instances": [
+          { "archetype": "Overcoming the Monster", "edge_id": "OM_E05_OVERWHELMED", "label": "Overwhelmed" },
+          { "archetype": "The Revenge", "edge_id": "RV_E04_BEGINS_HUNT", "label": "Begins the Hunt" },
+          { "archetype": "The Rise and Fall", "edge_id": "RF_E05_CLINGS_ON", "label": "Clings to Power" }
+        ]
+      },
+      {
+        "meaning": "reframes goal",
+        "instance_count": 2,
+        "archetype_count": 2,
+        "note": "Changes what the character is pursuing or why. Used in archetypes with midpoint redirection.",
+        "instances": [
+          { "archetype": "Overcoming the Monster", "edge_id": "OM_E06_KEY_INSIGHT", "label": "Key Insight Gained" },
+          { "archetype": "The Mystery Unveiled", "edge_id": "MU_E04_REORIENTS", "label": "Reorients the Investigation" }
+        ]
+      },
+      {
+        "meaning": "inverts expectation",
+        "instance_count": 1,
+        "archetype_count": 1,
+        "note": "Unique to The Escape's optional recapture branch.",
+        "instances": [
+          { "archetype": "The Escape", "edge_id": "ES_E50_CAUGHT", "label": "Caught" }
+        ]
+      },
+      {
+        "meaning": "compels return",
+        "instance_count": 0,
+        "archetype_count": 0,
+        "note": "Defined in the controlled vocabulary but not used in any current archetype graph. Reserved for future use or hybrid patterns."
+      }
+    ]
+  },
+  "structural_observations": [
+    "Origin and Resolution are universal bookends: every archetype begins with exactly one Origin node and ends with exactly one Resolution node.",
+    "Crisis is structurally universal: all 15 archetypes contain at least one Crisis node. The Hero's Journey is the only archetype with two (The Ordeal and Resurrection).",
+    "Disrupts order and restores equilibrium are the universal edge pair: 'disrupts order' opens all 15 archetypes; 'restores equilibrium' closes 14 of 15 (Coming of Age closes with 'enables transformation').",
+    "Forces commitment is the most common non-universal edge meaning (13 instances across 11 archetypes), reflecting that most story structures require an irreversible commitment point.",
+    "The Hero's Journey is the most structurally complex archetype with 12 nodes and 12 edges, including variant branches (Refusal of the Call) and doubled roles (two Crisis nodes, two Trial nodes).",
+    "Three archetypes share the Irreversible Cost role — Tragedy, Coming of Age, and The Rise and Fall — identifying them as the archetypes where permanent loss is a structural node rather than an edge effect.",
+    "The Reckoning role defined in the controlled vocabulary is not assigned to any node in the current 15 graphs. It may apply to hybrid or variant patterns.",
+    "Compels return is the only edge meaning defined in the vocabulary but unused in any current graph."
+  ]
+}
