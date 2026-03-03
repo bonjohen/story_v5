@@ -117,13 +117,13 @@ For each genre, produce the narrative spec defined in `v0_plan.md` §1.2B: overv
 
 For each genre, map each node and edge to one concrete moment in one of the three example works listed in `docs/genres.json`. Cross-reference the other two works.
 
-- [ ] 1 — Drama example mapping → `data/genres/01_drama/examples.md`
-- [ ] 2 — Action example mapping → `data/genres/02_action/examples.md`
-- [ ] 3 — Comedy example mapping → `data/genres/03_comedy/examples.md`
-- [ ] 4 — Thriller example mapping → `data/genres/04_thriller/examples.md`
-- [ ] 5 — Fantasy example mapping → `data/genres/05_fantasy/examples.md`
-- [ ] 6 — Science Fiction example mapping → `data/genres/06_science_fiction/examples.md`
-- [ ] 7 — Adventure example mapping → `data/genres/07_adventure/examples.md`
+- [X] 1 — Drama example mapping → `data/genres/01_drama/examples.md`
+- [X] 2 — Action example mapping → `data/genres/02_action/examples.md`
+- [X] 3 — Comedy example mapping → `data/genres/03_comedy/examples.md`
+- [X] 4 — Thriller example mapping → `data/genres/04_thriller/examples.md`
+- [X] 5 — Fantasy example mapping → `data/genres/05_fantasy/examples.md`
+- [X] 6 — Science Fiction example mapping → `data/genres/06_science_fiction/examples.md`
+- [X] 7 — Adventure example mapping → `data/genres/07_adventure/examples.md`
 
 ---
 
