@@ -43,12 +43,12 @@ Build the first seven genre depth graph JSON documents following the schema in `
 
 ## Phase 4 — Genre Graph JSONs (Batch 3: Genres 15–20)
 
-- [ ] 15 — Historical graph JSON → `data/genres/15_historical/graph.json`
-- [ ] 16 — War graph JSON → `data/genres/16_war/graph.json`
-- [ ] 17 — Biography graph JSON → `data/genres/17_biography/graph.json`
-- [ ] 18 — Family graph JSON → `data/genres/18_family/graph.json`
-- [ ] 19 — Young Adult graph JSON → `data/genres/19_young_adult/graph.json`
-- [ ] 20 — Literary Fiction graph JSON → `data/genres/20_literary_fiction/graph.json`
+- [X] 15 — Historical graph JSON → `data/genres/15_historical/graph.json`
+- [X] 16 — War graph JSON → `data/genres/16_war/graph.json`
+- [X] 17 — Biography graph JSON → `data/genres/17_biography/graph.json`
+- [X] 18 — Family graph JSON → `data/genres/18_family/graph.json`
+- [X] 19 — Young Adult graph JSON → `data/genres/19_young_adult/graph.json`
+- [X] 20 — Literary Fiction graph JSON → `data/genres/20_literary_fiction/graph.json`
 
 ---
 
