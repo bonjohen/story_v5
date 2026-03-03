@@ -51,11 +51,11 @@ Build the first five archetype graph JSON documents following the schema in `v0_
 
 For each archetype, produce the narrative spec defined in `v0_plan.md` §1.2B: overview, node explanations, edge explanations, canonical walkthrough, variant walkthroughs (2–4), and diagnostic checklist.
 
-- [~] 1 — The Hero's Journey narrative spec → `docs/archetypes/01_heros_journey_narrative.md`
-- [ ] 2 — Rags to Riches narrative spec → `docs/archetypes/02_rags_to_riches_narrative.md`
-- [ ] 3 — The Quest narrative spec → `docs/archetypes/03_the_quest_narrative.md`
-- [ ] 4 — Voyage and Return narrative spec → `docs/archetypes/04_voyage_and_return_narrative.md`
-- [ ] 5 — Overcoming the Monster narrative spec → `docs/archetypes/05_overcoming_the_monster_narrative.md`
+- [X] 1 — The Hero's Journey narrative spec → `docs/archetypes/01_heros_journey_narrative.md`
+- [X] 2 — Rags to Riches narrative spec → `docs/archetypes/02_rags_to_riches_narrative.md`
+- [X] 3 — The Quest narrative spec → `docs/archetypes/03_the_quest_narrative.md`
+- [X] 4 — Voyage and Return narrative spec → `docs/archetypes/04_voyage_and_return_narrative.md`
+- [X] 5 — Overcoming the Monster narrative spec → `docs/archetypes/05_overcoming_the_monster_narrative.md`
 
 ---
 
