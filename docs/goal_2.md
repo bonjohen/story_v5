@@ -80,13 +80,13 @@ For each genre, produce the narrative spec defined in `v0_plan.md` §1.2B: overv
 
 ## Phase 7 — Narrative Graph Explanations (Batch 2: Genres 8–14)
 
-- [ ] 8 — Romance narrative spec → `data/genres/08_romance/narrative.md`
-- [ ] 9 — Romantic Comedy narrative spec → `data/genres/09_romantic_comedy/narrative.md`
-- [ ] 10 — Horror narrative spec → `data/genres/10_horror/narrative.md`
-- [ ] 11 — Mystery narrative spec → `data/genres/11_mystery/narrative.md`
-- [ ] 12 — Crime narrative spec → `data/genres/12_crime/narrative.md`
-- [ ] 13 — Detective narrative spec → `data/genres/13_detective/narrative.md`
-- [ ] 14 — Superhero narrative spec → `data/genres/14_superhero/narrative.md`
+- [X] 8 — Romance narrative spec → `data/genres/08_romance/narrative.md`
+- [X] 9 — Romantic Comedy narrative spec → `data/genres/09_romantic_comedy/narrative.md`
+- [X] 10 — Horror narrative spec → `data/genres/10_horror/narrative.md`
+- [X] 11 — Mystery narrative spec → `data/genres/11_mystery/narrative.md`
+- [X] 12 — Crime narrative spec → `data/genres/12_crime/narrative.md`
+- [X] 13 — Detective narrative spec → `data/genres/13_detective/narrative.md`
+- [X] 14 — Superhero narrative spec → `data/genres/14_superhero/narrative.md`
 
 ---
 
