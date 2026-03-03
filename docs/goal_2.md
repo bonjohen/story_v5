@@ -68,13 +68,13 @@ Build the first seven genre depth graph JSON documents following the schema in `
 
 For each genre, produce the narrative spec defined in `v0_plan.md` §1.2B: overview, node explanations, edge explanations, canonical walkthrough, variant walkthroughs (2–4), and diagnostic checklist.
 
-- [ ] 1 — Drama narrative spec → `data/genres/01_drama/narrative.md`
-- [ ] 2 — Action narrative spec → `data/genres/02_action/narrative.md`
-- [ ] 3 — Comedy narrative spec → `data/genres/03_comedy/narrative.md`
-- [ ] 4 — Thriller narrative spec → `data/genres/04_thriller/narrative.md`
-- [ ] 5 — Fantasy narrative spec → `data/genres/05_fantasy/narrative.md`
-- [ ] 6 — Science Fiction narrative spec → `data/genres/06_science_fiction/narrative.md`
-- [ ] 7 — Adventure narrative spec → `data/genres/07_adventure/narrative.md`
+- [X] 1 — Drama narrative spec → `data/genres/01_drama/narrative.md`
+- [X] 2 — Action narrative spec → `data/genres/02_action/narrative.md`
+- [X] 3 — Comedy narrative spec → `data/genres/03_comedy/narrative.md`
+- [X] 4 — Thriller narrative spec → `data/genres/04_thriller/narrative.md`
+- [X] 5 — Fantasy narrative spec → `data/genres/05_fantasy/narrative.md`
+- [X] 6 — Science Fiction narrative spec → `data/genres/06_science_fiction/narrative.md`
+- [X] 7 — Adventure narrative spec → `data/genres/07_adventure/narrative.md`
 
 ---
 
