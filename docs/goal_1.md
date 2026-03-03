@@ -71,11 +71,11 @@ For each archetype, produce the narrative spec defined in `v0_plan.md` §1.2B: o
 
 ## Phase 7 — Narrative Graph Explanations (Batch 3: Archetypes 11–15)
 
-- [ ] 11 — The Escape narrative spec → `docs/archetypes/11_the_escape_narrative.md`
-- [ ] 12 — The Sacrifice narrative spec → `docs/archetypes/12_the_sacrifice_narrative.md`
-- [ ] 13 — The Mystery Unveiled narrative spec → `docs/archetypes/13_the_mystery_unveiled_narrative.md`
-- [ ] 14 — The Transformation narrative spec → `docs/archetypes/14_the_transformation_narrative.md`
-- [ ] 15 — The Rise and Fall narrative spec → `docs/archetypes/15_the_rise_and_fall_narrative.md`
+- [X] 11 — The Escape narrative spec → `docs/archetypes/11_the_escape_narrative.md`
+- [X] 12 — The Sacrifice narrative spec → `docs/archetypes/12_the_sacrifice_narrative.md`
+- [X] 13 — The Mystery Unveiled narrative spec → `docs/archetypes/13_the_mystery_unveiled_narrative.md`
+- [X] 14 — The Transformation narrative spec → `docs/archetypes/14_the_transformation_narrative.md`
+- [X] 15 — The Rise and Fall narrative spec → `docs/archetypes/15_the_rise_and_fall_narrative.md`
 
 ---
 
