@@ -61,11 +61,11 @@ For each archetype, produce the narrative spec defined in `v0_plan.md` §1.2B: o
 
 ## Phase 6 — Narrative Graph Explanations (Batch 2: Archetypes 6–10)
 
-- [ ] 6 — Rebirth narrative spec → `docs/archetypes/06_rebirth_narrative.md`
-- [ ] 7 — Tragedy narrative spec → `docs/archetypes/07_tragedy_narrative.md`
-- [ ] 8 — Comedy (Restoration of Order) narrative spec → `docs/archetypes/08_comedy_narrative.md`
-- [ ] 9 — Coming of Age narrative spec → `docs/archetypes/09_coming_of_age_narrative.md`
-- [ ] 10 — The Revenge narrative spec → `docs/archetypes/10_the_revenge_narrative.md`
+- [X] 6 — Rebirth narrative spec → `docs/archetypes/06_rebirth_narrative.md`
+- [X] 7 — Tragedy narrative spec → `docs/archetypes/07_tragedy_narrative.md`
+- [X] 8 — Comedy (Restoration of Order) narrative spec → `docs/archetypes/08_comedy_narrative.md`
+- [X] 9 — Coming of Age narrative spec → `docs/archetypes/09_coming_of_age_narrative.md`
+- [X] 10 — The Revenge narrative spec → `docs/archetypes/10_the_revenge_narrative.md`
 
 ---
 
