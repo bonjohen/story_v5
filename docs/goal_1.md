@@ -83,21 +83,21 @@ For each archetype, produce the narrative spec defined in `v0_plan.md` §1.2B: o
 
 For each archetype, map each node and edge to one concrete moment in one of the three example works listed in `docs/archtypes.json`. Produce as a single consolidated document.
 
-- [ ] 1 — The Hero's Journey example mapping → `docs/archetypes/01_heros_journey_examples.md`
-- [ ] 2 — Rags to Riches example mapping → `docs/archetypes/02_rags_to_riches_examples.md`
-- [ ] 3 — The Quest example mapping → `docs/archetypes/03_the_quest_examples.md`
-- [ ] 4 — Voyage and Return example mapping → `docs/archetypes/04_voyage_and_return_examples.md`
-- [ ] 5 — Overcoming the Monster example mapping → `docs/archetypes/05_overcoming_the_monster_examples.md`
-- [ ] 6 — Rebirth example mapping → `docs/archetypes/06_rebirth_examples.md`
-- [ ] 7 — Tragedy example mapping → `docs/archetypes/07_tragedy_examples.md`
-- [ ] 8 — Comedy (Restoration of Order) example mapping → `docs/archetypes/08_comedy_examples.md`
-- [ ] 9 — Coming of Age example mapping → `docs/archetypes/09_coming_of_age_examples.md`
-- [ ] 10 — The Revenge example mapping → `docs/archetypes/10_the_revenge_examples.md`
-- [ ] 11 — The Escape example mapping → `docs/archetypes/11_the_escape_examples.md`
-- [ ] 12 — The Sacrifice example mapping → `docs/archetypes/12_the_sacrifice_examples.md`
-- [ ] 13 — The Mystery Unveiled example mapping → `docs/archetypes/13_the_mystery_unveiled_examples.md`
-- [ ] 14 — The Transformation example mapping → `docs/archetypes/14_the_transformation_examples.md`
-- [ ] 15 — The Rise and Fall example mapping → `docs/archetypes/15_the_rise_and_fall_examples.md`
+- [X] 1 — The Hero's Journey example mapping → `docs/archetypes/01_heros_journey_examples.md`
+- [X] 2 — Rags to Riches example mapping → `docs/archetypes/02_rags_to_riches_examples.md`
+- [X] 3 — The Quest example mapping → `docs/archetypes/03_the_quest_examples.md`
+- [X] 4 — Voyage and Return example mapping → `docs/archetypes/04_voyage_and_return_examples.md`
+- [X] 5 — Overcoming the Monster example mapping → `docs/archetypes/05_overcoming_the_monster_examples.md`
+- [X] 6 — Rebirth example mapping → `docs/archetypes/06_rebirth_examples.md`
+- [X] 7 — Tragedy example mapping → `docs/archetypes/07_tragedy_examples.md`
+- [X] 8 — Comedy (Restoration of Order) example mapping → `docs/archetypes/08_comedy_examples.md`
+- [X] 9 — Coming of Age example mapping → `docs/archetypes/09_coming_of_age_examples.md`
+- [X] 10 — The Revenge example mapping → `docs/archetypes/10_the_revenge_examples.md`
+- [X] 11 — The Escape example mapping → `docs/archetypes/11_the_escape_examples.md`
+- [X] 12 — The Sacrifice example mapping → `docs/archetypes/12_the_sacrifice_examples.md`
+- [X] 13 — The Mystery Unveiled example mapping → `docs/archetypes/13_the_mystery_unveiled_examples.md`
+- [X] 14 — The Transformation example mapping → `docs/archetypes/14_the_transformation_examples.md`
+- [X] 15 — The Rise and Fall example mapping → `docs/archetypes/15_the_rise_and_fall_examples.md`
 
 ---
 
