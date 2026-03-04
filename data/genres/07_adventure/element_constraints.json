@@ -1,0 +1,46 @@
+{
+  "genre_id": "genre_07_adventure",
+  "genre_name": "Adventure",
+  "description": "Adventure requires element configurations that emphasize journey, exploration, and escalating physical challenges across varied and distinctive settings.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A resourceful, physically capable character who drives forward through obstacles and unknown territory.", "min_count": 1 },
+    { "role": "antagonist", "severity": "recommended", "description": "An opposing force — may be a villain, a hostile environment, or a rival pursuing the same goal." },
+    { "role": "ally", "severity": "recommended", "description": "A companion or team member who provides complementary skills and shared risk.", "min_count": 1 },
+    { "role": "mentor", "severity": "optional", "description": "A guide who provides knowledge of the terrain, history, or skills needed for the journey." }
+  ],
+  "relationship_constraints": [
+    { "type": "ally", "severity": "recommended", "description": "Bonds forged through shared danger — the journey tests and deepens alliances.", "between_roles": ["protagonist", "ally"] }
+  ],
+  "place_constraints": [
+    { "type": "special_world", "severity": "required", "description": "The adventure territory — unfamiliar, dangerous, and varied. Must include at least two distinct environments." },
+    { "type": "ordinary_world", "severity": "recommended", "description": "The safe starting point that the protagonist leaves behind, establishing what's at stake." },
+    { "type": "threshold", "severity": "recommended", "description": "A point of no return — geographic or situational — that commits the protagonist to the journey." }
+  ],
+  "object_constraints": [
+    { "type": "mcguffin", "severity": "recommended", "description": "The goal object — treasure, artifact, destination, or person that motivates the journey." },
+    { "type": "tool", "severity": "recommended", "description": "Equipment essential for survival — maps, weapons, vehicles, or specialized gear." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "ADV_R01",
+      "description": "The protagonist must traverse multiple distinct environments — the journey itself is the story.",
+      "severity": "required",
+      "applies_to": "places",
+      "testable_condition": "At least 2 places of type 'special_world' appear across different timeline moments."
+    },
+    {
+      "rule_id": "ADV_R02",
+      "description": "Physical challenges must escalate — each obstacle must be harder than the last.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'loses' transition occurs in the second half of the timeline, raising stakes beyond initial challenges."
+    },
+    {
+      "rule_id": "ADV_R03",
+      "description": "The protagonist must demonstrate resourcefulness — solving problems through skill and ingenuity, not luck.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The protagonist has at least 2 'gains' or 'learns' transitions that are preceded by challenge moments."
+    }
+  ]
+}

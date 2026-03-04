@@ -1,0 +1,54 @@
+{
+  "genre_id": "genre_10_horror",
+  "genre_name": "Horror",
+  "description": "Horror requires element configurations that sustain dread through the presence of a genuine threat, isolation or vulnerability of characters, and places that amplify fear.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character the audience identifies with whose survival is in genuine doubt.", "min_count": 1 },
+    { "role": "antagonist", "severity": "required", "description": "A threat entity — monster, killer, supernatural force, or systemic horror — that generates fear.", "min_count": 1 },
+    { "role": "ally", "severity": "recommended", "description": "Supporting characters whose vulnerability or death raises stakes for the protagonist.", "min_count": 1 },
+    { "role": "herald", "severity": "optional", "description": "A character or sign that warns of the coming threat — often ignored or misunderstood." }
+  ],
+  "relationship_constraints": [
+    { "type": "nemesis", "severity": "required", "description": "The protagonist must be in direct opposition to the threat entity.", "between_roles": ["protagonist", "antagonist"] },
+    { "type": "ally", "severity": "recommended", "description": "Bond between protagonist and supporting characters — makes their potential loss meaningful." }
+  ],
+  "place_constraints": [
+    { "type": "stronghold", "severity": "required", "description": "The threat's domain or hunting ground — a place where the antagonist has advantage." },
+    { "type": "ordinary_world", "severity": "recommended", "description": "A normal starting environment that contrasts with the horror, making violation more disturbing." },
+    { "type": "sanctuary", "severity": "optional", "description": "An apparent safe space that may be violated or revealed as false security." }
+  ],
+  "object_constraints": [
+    { "type": "weapon", "severity": "optional", "description": "A means of fighting the threat — often inadequate, emphasizing vulnerability." },
+    { "type": "relic", "severity": "optional", "description": "An object connected to the origin of the horror — may provide clues to defeating it." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "HOR_R01",
+      "description": "The threat must be present or implied from early in the story and must escalate.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The antagonist is referenced as participant or in transitions by the second timeline moment."
+    },
+    {
+      "rule_id": "HOR_R02",
+      "description": "At least one character must die or be irreversibly harmed to demonstrate the threat is real.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'dies' transition appears in the timeline for a non-antagonist character."
+    },
+    {
+      "rule_id": "HOR_R03",
+      "description": "The protagonist must be isolated or have their support systems stripped away progressively.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The number of ally participants decreases across timeline moments, or 'loses' transitions reduce the protagonist's support."
+    },
+    {
+      "rule_id": "HOR_R04",
+      "description": "At least one place must function as a trap — characters cannot easily leave.",
+      "severity": "recommended",
+      "applies_to": "places",
+      "testable_condition": "A place of type 'stronghold' appears in at least 3 consecutive timeline moments."
+    }
+  ]
+}

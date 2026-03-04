@@ -1,0 +1,40 @@
+{
+  "genre_id": "genre_06_science_fiction",
+  "genre_name": "Science Fiction",
+  "description": "Science fiction requires element configurations that explore the consequences of speculative technology, science, or societal change through internally consistent world-building.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character who engages with the speculative premise — either shaped by, investigating, or resisting it.", "min_count": 1 },
+    { "role": "antagonist", "severity": "recommended", "description": "A force representing the dangers of the speculative premise — may be a person, system, or the technology itself." }
+  ],
+  "relationship_constraints": [],
+  "place_constraints": [
+    { "type": "special_world", "severity": "required", "description": "An environment shaped by the speculative premise — must differ from present reality in specific, detailed ways." },
+    { "type": "ordinary_world", "severity": "optional", "description": "A baseline reality (past or present) that contrasts with the speculative setting." }
+  ],
+  "object_constraints": [
+    { "type": "tool", "severity": "required", "description": "At least one piece of speculative technology that embodies the central 'what if' premise and has defined capabilities and limitations." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "SF_R01",
+      "description": "The speculative premise must be grounded in extrapolation from real science, technology, or social trends — not arbitrary magic.",
+      "severity": "required",
+      "applies_to": "objects",
+      "testable_condition": "At least one object of type 'tool' has a description that references a scientific or technological basis."
+    },
+    {
+      "rule_id": "SF_R02",
+      "description": "The speculative technology must have consequences — social, ethical, or physical — that drive the plot.",
+      "severity": "required",
+      "applies_to": "objects",
+      "testable_condition": "At least one timeline transition involves a consequence directly caused by a speculative technology object."
+    },
+    {
+      "rule_id": "SF_R03",
+      "description": "World-building details must be internally consistent — established rules about how technology or society works cannot be contradicted.",
+      "severity": "required",
+      "applies_to": "places",
+      "testable_condition": "At least one place has a 'rules' array describing how the speculative premise shapes daily life or society."
+    }
+  ]
+}

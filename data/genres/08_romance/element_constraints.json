@@ -1,0 +1,52 @@
+{
+  "genre_id": "genre_08_romance",
+  "genre_name": "Romance",
+  "description": "Romance requires specific element configurations centered on a romantic relationship between at least two characters whose emotional journey is the story's primary engine.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "At least one protagonist whose emotional journey drives the story.", "min_count": 1 },
+    { "role": "love_interest", "severity": "required", "description": "A second central character who is the object/partner of the romantic connection. In dual-protagonist romance, both are protagonists.", "min_count": 1 },
+    { "role": "antagonist", "severity": "recommended", "description": "An external force opposing the relationship — a rival, family pressure, societal norm, or circumstance.", "min_count": 0 },
+    { "role": "confidant", "severity": "recommended", "description": "A trusted friend each lead can confide in about their feelings.", "min_count": 0 }
+  ],
+  "relationship_constraints": [
+    { "type": "romantic", "severity": "required", "description": "The central romantic relationship must exist between the two leads.", "between_roles": ["protagonist", "love_interest"] },
+    { "type": "rival", "severity": "optional", "description": "A competing romantic interest or obstacle to the central pairing.", "between_roles": ["protagonist", "antagonist"] }
+  ],
+  "place_constraints": [
+    { "type": "ordinary_world", "severity": "required", "description": "The leads' separate starting worlds that establish who they are before the relationship." },
+    { "type": "special_world", "severity": "recommended", "description": "A shared space where the relationship develops — a workplace, event, or journey." }
+  ],
+  "object_constraints": [
+    { "type": "symbol", "severity": "recommended", "description": "An object representing the state of the relationship — a ring, letter, shared memento." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "ROM_R01",
+      "description": "The romantic relationship must be the primary plot driver, not a subplot.",
+      "severity": "required",
+      "applies_to": "relationships",
+      "testable_condition": "The romantic relationship between the leads is referenced in at least 60% of timeline moments."
+    },
+    {
+      "rule_id": "ROM_R02",
+      "description": "Both leads must have independent agency and motivations beyond the romance.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "Each lead character has at least 2 motivations, and at least 1 is not directly about the other lead."
+    },
+    {
+      "rule_id": "ROM_R03",
+      "description": "The story must end with the leads together (HEA/HFN) or with a clear resolution of the romantic tension.",
+      "severity": "required",
+      "applies_to": "relationships",
+      "testable_condition": "The final timeline moment includes both leads as participants with a 'bonds' transition."
+    },
+    {
+      "rule_id": "ROM_R04",
+      "description": "There must be at least one significant obstacle to the relationship that creates genuine doubt.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one timeline moment contains a 'breaks' transition between the leads."
+    }
+  ]
+}

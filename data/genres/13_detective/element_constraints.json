@@ -1,0 +1,54 @@
+{
+  "genre_id": "genre_13_detective",
+  "genre_name": "Detective",
+  "description": "Detective fiction requires specific element configurations: an investigator, a solvable puzzle with fair clueing, and a revelation structure that rewards attentive reading.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A detective or investigator whose analytical skill drives the story's progression.", "min_count": 1 },
+    { "role": "antagonist", "severity": "required", "description": "The perpetrator — must be a character who can be logically identified from available evidence.", "min_count": 1 },
+    { "role": "ally", "severity": "recommended", "description": "A partner, assistant, or informant who aids the investigation." },
+    { "role": "shapeshifter", "severity": "recommended", "description": "At least one suspect whose true nature is concealed until the revelation." },
+    { "role": "confidant", "severity": "optional", "description": "A witness or informant who provides partial testimony that must be assembled." }
+  ],
+  "relationship_constraints": [
+    { "type": "nemesis", "severity": "required", "description": "The detective and perpetrator must be in intellectual opposition.", "between_roles": ["protagonist", "antagonist"] }
+  ],
+  "place_constraints": [
+    { "type": "special_world", "severity": "required", "description": "The investigation territory — crime scenes, interrogation rooms, archives." },
+    { "type": "ordinary_world", "severity": "recommended", "description": "The world before the crime that establishes the normal order disrupted." }
+  ],
+  "object_constraints": [
+    { "type": "mcguffin", "severity": "required", "description": "The central puzzle — a crime, disappearance, or anomaly that must be solved." },
+    { "type": "document", "severity": "required", "description": "Physical evidence or testimony that, when properly assembled, reveals the truth." },
+    { "type": "key", "severity": "recommended", "description": "The breakthrough clue — the final piece that unlocks the solution." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "DET_R01",
+      "description": "Fair clueing: all evidence needed to solve the mystery must be presented to the audience before the reveal.",
+      "severity": "required",
+      "applies_to": "objects",
+      "testable_condition": "All 'document' objects appear in timeline moments before the 'reveals' transition that solves the mystery."
+    },
+    {
+      "rule_id": "DET_R02",
+      "description": "The detective must solve the case through reasoning, not coincidence or supernatural means.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The protagonist's 'learns' transitions are preceded by investigation actions, not lucky breaks."
+    },
+    {
+      "rule_id": "DET_R03",
+      "description": "At least one false lead must misdirect before the true solution emerges.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'shapeshifter' character appears as a suspect in a timeline moment before being cleared."
+    },
+    {
+      "rule_id": "DET_R04",
+      "description": "The perpetrator must be a character who has appeared in the story, not someone introduced at the reveal.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The antagonist appears as a participant in at least one timeline moment before the final revelation."
+    }
+  ]
+}

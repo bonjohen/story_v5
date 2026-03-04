@@ -1,0 +1,46 @@
+{
+  "genre_id": "genre_24_western",
+  "genre_name": "Western",
+  "description": "Western requires element configurations that establish a frontier setting where law is absent or corrupt, individual agency is paramount, and moral codes are tested through physical confrontation.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A self-reliant individual whose personal moral code drives their actions — lawman, outlaw, drifter, or settler.", "min_count": 1 },
+    { "role": "antagonist", "severity": "required", "description": "A force of disorder or corrupt order — outlaw gang, corrupt authority, hostile land, or rival gunslinger.", "min_count": 1 },
+    { "role": "ally", "severity": "optional", "description": "A deputy, partner, or townsperson who supports the protagonist — often represents what's worth protecting." },
+    { "role": "shapeshifter", "severity": "optional", "description": "A character whose allegiance shifts between law and lawlessness — reflects the moral ambiguity of the frontier." }
+  ],
+  "relationship_constraints": [
+    { "type": "nemesis", "severity": "required", "description": "The protagonist and antagonist are in direct personal opposition — resolved through confrontation.", "between_roles": ["protagonist", "antagonist"] }
+  ],
+  "place_constraints": [
+    { "type": "special_world", "severity": "required", "description": "The frontier — open land, desert, mountains, or territory where civilization's reach is thin or absent." },
+    { "type": "stronghold", "severity": "recommended", "description": "The antagonist's territory — a town under their control, an outlaw hideout, or a fortified ranch." },
+    { "type": "sanctuary", "severity": "optional", "description": "A settlement, homestead, or community that represents the fragile order the protagonist defends or seeks." }
+  ],
+  "object_constraints": [
+    { "type": "weapon", "severity": "required", "description": "Firearms are the currency of power on the frontier — the protagonist's skill with weapons defines their agency." },
+    { "type": "symbol", "severity": "optional", "description": "A badge, deed, or token that represents law, ownership, or moral authority on the frontier." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "WES_R01",
+      "description": "The frontier setting must be established as a place where institutional law is absent, weak, or corrupt.",
+      "severity": "required",
+      "applies_to": "places",
+      "testable_condition": "At least one place has a 'rules' array entry describing the absence or failure of institutional authority."
+    },
+    {
+      "rule_id": "WES_R02",
+      "description": "The climax must involve a direct physical confrontation — the Western resolves through action, not bureaucracy.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The final timeline moment includes both protagonist and antagonist as participants with a decisive transition."
+    },
+    {
+      "rule_id": "WES_R03",
+      "description": "The protagonist's moral code must be tested — they must face a choice between self-interest and duty or justice.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'decides' transition appears for the protagonist in the second half of the timeline."
+    }
+  ]
+}

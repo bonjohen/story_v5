@@ -119,26 +119,26 @@ Each `examples_elements.json` contains: story ID, archetype ID, named characters
 
 Each `element_constraints.json` defines: required character role patterns, required relationship types, minimum/maximum element counts, and genre-specific element rules.
 
-- [ ] Author `data/genres/08_romance/element_constraints.json` — romantic relationship requirement, dual protagonist pattern
-- [ ] Author `data/genres/10_horror/element_constraints.json` — threat entity, victim pattern, isolation rules
-- [ ] Author `data/genres/04_thriller/element_constraints.json` — antagonist requirement, ticking clock, information asymmetry
-- [ ] Author `data/genres/05_fantasy/element_constraints.json` — magical system objects, special world requirements
-- [ ] Author `data/genres/06_science_fiction/element_constraints.json` — technology objects, world-building rules
-- [ ] Author `data/genres/13_mystery/element_constraints.json` — detective role, mcguffin/puzzle object, revelation structure
-- [ ] Author `data/genres/07_adventure/element_constraints.json` — protagonist, quest object, special world traversal
-- [ ] Author `data/genres/18_western/element_constraints.json` — frontier setting, lawman/outlaw roles
-- [ ] Author `data/genres/20_dystopian/element_constraints.json` — oppressive system, rebellion pattern
-- [ ] Author `data/genres/17_war/element_constraints.json` — faction requirements, battlefield settings
+- [X] Author `data/genres/08_romance/element_constraints.json` — romantic relationship requirement, dual protagonist pattern
+- [X] Author `data/genres/10_horror/element_constraints.json` — threat entity, victim pattern, isolation rules
+- [X] Author `data/genres/04_thriller/element_constraints.json` — antagonist requirement, ticking clock, information asymmetry
+- [X] Author `data/genres/05_fantasy/element_constraints.json` — magical system objects, special world requirements
+- [X] Author `data/genres/06_science_fiction/element_constraints.json` — technology objects, world-building rules
+- [X] Author `data/genres/13_detective/element_constraints.json` — detective role, mcguffin/puzzle object, revelation structure
+- [X] Author `data/genres/07_adventure/element_constraints.json` — protagonist, quest object, special world traversal
+- [X] Author `data/genres/24_western/element_constraints.json` — frontier setting, lawman/outlaw roles
+- [X] Author `data/genres/14_superhero/element_constraints.json` — superpowered protagonist, nemesis, dual identity
+- [X] Author `data/genres/16_war/element_constraints.json` — faction requirements, battlefield settings
 
 ### Genres Explicitly Skipped (tone/structure > element composition)
 
 The following genres constrain style and structure more than element composition and do not need `element_constraints.json`:
-- 01_drama, 03_comedy, 09_romantic_comedy, 11_dark_comedy, 12_satire, 14_crime, 15_historical_fiction, 16_biographical, 19_noir, 21_post_apocalyptic, 22_magical_realism, 23_gothic, 24_young_adult, 25_literary_thriller, 26_epic, 27_slice_of_life
+- 01_drama, 02_action, 03_comedy, 09_romantic_comedy, 11_mystery, 12_crime, 15_historical, 17_biography, 18_family, 19_young_adult, 20_literary_fiction, 21_childrens_literature, 22_satire, 23_psychological, 25_political, 26_musical, 27_holiday
 
 ### Validation
 
-- [ ] Validate: all character roles and relationship types in constraints use controlled vocabulary terms
-- [ ] Validate: constraints are testable — each rule can be checked against an element roster (not vague descriptions)
+- [X] Validate: all character roles and relationship types in constraints use controlled vocabulary terms
+- [X] Validate: constraints are testable — each rule can be checked against an element roster (not vague descriptions)
 
 **Deliverable**: 10 `element_constraints.json` files for element-prescriptive genres, validated against controlled vocabularies.
 

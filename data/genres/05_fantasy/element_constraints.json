@@ -1,0 +1,45 @@
+{
+  "genre_id": "genre_05_fantasy",
+  "genre_name": "Fantasy",
+  "description": "Fantasy requires element configurations that establish a world with internally consistent supernatural rules, meaningful magical objects, and distinct realms that differ from mundane reality.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character who navigates the fantasy world — may be native or a newcomer from the ordinary world.", "min_count": 1 },
+    { "role": "mentor", "severity": "recommended", "description": "A wise figure who understands the world's magical rules and provides guidance." },
+    { "role": "antagonist", "severity": "required", "description": "An opposing force that uses or represents the dark side of the world's supernatural system.", "min_count": 1 }
+  ],
+  "relationship_constraints": [
+    { "type": "mentor_student", "severity": "recommended", "description": "The protagonist needs someone to explain the rules of magic and the world." }
+  ],
+  "place_constraints": [
+    { "type": "special_world", "severity": "required", "description": "A world governed by supernatural rules — the primary arena of the story." },
+    { "type": "ordinary_world", "severity": "optional", "description": "A mundane starting world that contrasts with the fantasy realm (portal fantasy) or the pre-adventure state." },
+    { "type": "stronghold", "severity": "recommended", "description": "The seat of dark power that the protagonist must ultimately confront." }
+  ],
+  "object_constraints": [
+    { "type": "talisman", "severity": "required", "description": "At least one magical object that operates within the world's supernatural system — must have defined rules and costs." },
+    { "type": "weapon", "severity": "recommended", "description": "A weapon with magical properties — its power must have limitations." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "FAN_R01",
+      "description": "Magic must have rules and costs — no unlimited power without consequence.",
+      "severity": "required",
+      "applies_to": "objects",
+      "testable_condition": "Every magical object has a non-empty 'rules' array that includes at least one limitation or cost."
+    },
+    {
+      "rule_id": "FAN_R02",
+      "description": "The fantasy world must have at least one place with explicit supernatural rules that differ from mundane reality.",
+      "severity": "required",
+      "applies_to": "places",
+      "testable_condition": "At least one place has a non-empty 'rules' array describing supernatural mechanics."
+    },
+    {
+      "rule_id": "FAN_R03",
+      "description": "The supernatural system must be internally consistent — rules established early must hold throughout.",
+      "severity": "required",
+      "applies_to": "objects",
+      "testable_condition": "No timeline transition violates a rule established in an object or place's 'rules' array."
+    }
+  ]
+}

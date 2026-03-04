@@ -1,0 +1,47 @@
+{
+  "genre_id": "genre_04_thriller",
+  "genre_name": "Thriller",
+  "description": "Thriller requires element configurations that sustain tension through information asymmetry, capable antagonists, and escalating stakes with a ticking clock.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A resourceful character under pressure who must outthink or outmaneuver the threat.", "min_count": 1 },
+    { "role": "antagonist", "severity": "required", "description": "A formidable opposing force whose plan creates the central threat — must be competent and dangerous.", "min_count": 1 },
+    { "role": "ally", "severity": "recommended", "description": "A partner or informant who provides critical information or support under pressure." },
+    { "role": "shapeshifter", "severity": "optional", "description": "A character whose true allegiance is unclear — creates paranoia and suspense." }
+  ],
+  "relationship_constraints": [
+    { "type": "nemesis", "severity": "required", "description": "Direct opposition between protagonist and antagonist where the stakes are existential.", "between_roles": ["protagonist", "antagonist"] },
+    { "type": "betrayer", "severity": "optional", "description": "A trusted figure who turns out to be working against the protagonist." }
+  ],
+  "place_constraints": [
+    { "type": "stronghold", "severity": "recommended", "description": "The antagonist's base of operations or the location of the climactic confrontation." },
+    { "type": "special_world", "severity": "required", "description": "A world of danger and deception where normal rules don't apply." }
+  ],
+  "object_constraints": [
+    { "type": "mcguffin", "severity": "recommended", "description": "The thing everyone is pursuing — plans, codes, evidence, a person — that drives the chase." },
+    { "type": "document", "severity": "optional", "description": "Evidence or intelligence that shifts the power balance when obtained." },
+    { "type": "weapon", "severity": "optional", "description": "Tools of the trade — may be literal weapons or technological/informational assets." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "THR_R01",
+      "description": "The antagonist must be established as a credible, active threat — not passive or incompetent.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The antagonist appears as participant in at least 3 timeline moments and initiates at least 1 transition."
+    },
+    {
+      "rule_id": "THR_R02",
+      "description": "Information asymmetry must exist — the protagonist and antagonist must each know things the other doesn't.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least 2 'learns' or 'reveals' transitions appear in the timeline, changing the power dynamic."
+    },
+    {
+      "rule_id": "THR_R03",
+      "description": "Stakes must escalate — the consequences of failure must increase across the story.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'loses' transition occurs in the second half of the timeline that raises the stakes beyond the initial threat."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "genre_id": "genre_14_superhero",
+  "genre_name": "Superhero",
+  "description": "Superhero fiction requires element configurations that establish extraordinary abilities, a dual identity structure, a worthy nemesis, and a moral framework governing the use of power.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character with extraordinary abilities or resources who assumes a heroic identity to protect others.", "min_count": 1 },
+    { "role": "antagonist", "severity": "required", "description": "A supervillain or threat of comparable power — must pose a challenge that tests the hero's abilities and values.", "min_count": 1 },
+    { "role": "ally", "severity": "recommended", "description": "A sidekick, team member, or support figure who aids the hero — may know or be ignorant of the dual identity." },
+    { "role": "love_interest", "severity": "optional", "description": "A romantic connection that complicates the dual identity and raises personal stakes." },
+    { "role": "mentor", "severity": "optional", "description": "A figure who guides the hero in mastering their abilities or moral responsibility." }
+  ],
+  "relationship_constraints": [
+    { "type": "nemesis", "severity": "required", "description": "The hero and villain must be in direct opposition — ideologically opposed or personally connected.", "between_roles": ["protagonist", "antagonist"] }
+  ],
+  "place_constraints": [
+    { "type": "special_world", "severity": "required", "description": "The arena of superheroic action — a city, world, or dimension where extraordinary events occur." },
+    { "type": "sanctuary", "severity": "recommended", "description": "The hero's base of operations — Batcave, Fortress of Solitude, Avengers Tower — a place of preparation and recovery." },
+    { "type": "stronghold", "severity": "recommended", "description": "The villain's lair or territory where the climactic confrontation takes place." }
+  ],
+  "object_constraints": [
+    { "type": "talisman", "severity": "recommended", "description": "A source or symbol of the hero's power — costume, ring, shield, or artifact that defines their heroic identity." },
+    { "type": "weapon", "severity": "optional", "description": "A signature weapon or tool — must have defined capabilities and limitations." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "SUP_R01",
+      "description": "The hero's powers must have defined limitations — no unlimited power without vulnerability or cost.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The protagonist's description or a talisman object includes at least one stated limitation or weakness."
+    },
+    {
+      "rule_id": "SUP_R02",
+      "description": "The antagonist must pose a threat that the hero's powers alone cannot easily defeat — requiring growth, sacrifice, or ingenuity.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'loses' transition for the protagonist occurs before the climactic confrontation."
+    },
+    {
+      "rule_id": "SUP_R03",
+      "description": "The hero must face a moral dilemma about the use of their power — responsibility is a central theme.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'decides' transition appears for the protagonist involving a choice about how to use their abilities."
+    },
+    {
+      "rule_id": "SUP_R04",
+      "description": "The hero's extraordinary nature must create personal cost — isolation, danger to loved ones, or sacrifice.",
+      "severity": "recommended",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'loses' or 'breaks' transition involves a personal relationship or civilian aspect of the hero's life."
+    }
+  ]
+}

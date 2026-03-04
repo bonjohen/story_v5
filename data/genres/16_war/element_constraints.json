@@ -1,0 +1,46 @@
+{
+  "genre_id": "genre_16_war",
+  "genre_name": "War",
+  "description": "War fiction requires element configurations that place characters within armed conflict, emphasizing the human cost of violence, the tension between duty and survival, and the bonds formed under extreme pressure.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A soldier, officer, or civilian caught in armed conflict whose survival and moral choices drive the story.", "min_count": 1 },
+    { "role": "antagonist", "severity": "recommended", "description": "An enemy force, opposing commander, or systemic military machinery — may be personified or abstract." },
+    { "role": "ally", "severity": "required", "description": "Fellow soldiers or comrades-in-arms whose bonds with the protagonist create emotional stakes.", "min_count": 1 },
+    { "role": "mentor", "severity": "optional", "description": "A seasoned officer or veteran who provides guidance — may represent institutional authority for good or ill." }
+  ],
+  "relationship_constraints": [
+    { "type": "ally", "severity": "required", "description": "Bonds between comrades forged through shared danger — the unit relationship is central to war fiction.", "between_roles": ["protagonist", "ally"] }
+  ],
+  "place_constraints": [
+    { "type": "special_world", "severity": "required", "description": "The combat zone — battlefield, occupied territory, or theater of war where normal life is suspended." },
+    { "type": "stronghold", "severity": "recommended", "description": "A fortified position, base camp, or defensive line — represents temporary safety within the war zone." },
+    { "type": "ordinary_world", "severity": "optional", "description": "Home, peacetime, or pre-war life that contrasts with the combat reality and represents what's worth fighting for." }
+  ],
+  "object_constraints": [
+    { "type": "weapon", "severity": "required", "description": "Weapons and military equipment that define the nature of the conflict and the characters' capabilities." },
+    { "type": "symbol", "severity": "optional", "description": "A flag, letter from home, photograph, or token that represents what the characters are fighting for or what they've lost." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "WAR_R01",
+      "description": "The human cost of conflict must be depicted — at least one ally must die or be permanently harmed.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'dies' or 'loses' transition applies to an ally character during the timeline."
+    },
+    {
+      "rule_id": "WAR_R02",
+      "description": "The protagonist must face a moral dilemma created by the demands of war — duty vs. conscience, orders vs. compassion.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'decides' transition appears for the protagonist involving a conflict between duty and personal values."
+    },
+    {
+      "rule_id": "WAR_R03",
+      "description": "Combat must have consequences beyond the immediate battle — the war changes the characters permanently.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least one 'transforms' transition applies to the protagonist, reflecting how war has changed them."
+    }
+  ]
+}
