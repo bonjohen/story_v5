@@ -625,7 +625,7 @@ function main() {
     works: registry,
   }
 
-  const outPath = join(DATA_ROOT, 'example_works_registry.json')
+  const outPath = join(DATA_ROOT, 'cross_references', 'example_works_registry.json')
   writeFileSync(outPath, JSON.stringify(output, null, 2) + '\n', 'utf-8')
   console.log(`\nWrote ${registry.length} works to ${outPath}`)
   console.log(`  ${output._stats.works_with_multiple_refs} appear in multiple graphs`)

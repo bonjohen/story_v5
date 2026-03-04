@@ -114,7 +114,7 @@ export default function App() {
   useEffect(() => {
     if (manifestLoaded.current) return
     manifestLoaded.current = true
-    fetch('../data/manifest.json')
+    fetch('../data/cross_references/manifest.json')
       .then((res) => {
         if (!res.ok) throw new Error(`Manifest load failed: ${res.status}`)
         return res.json()

@@ -68,14 +68,14 @@ function makeMockProvider(): DataProvider {
   const vocabFile = { title: '', description: '' }
 
   const files: Record<string, unknown> = {
-    'manifest.json': manifest,
+    'cross_references/manifest.json': manifest,
     'archetypes/01_heros_journey/graph.json': archetypeGraph,
     'genres/06_science_fiction/graph.json': genreGraph,
-    'genre_archetype_matrix.json': matrix,
-    'tone_archetype_integration.json': toneIntegration,
-    'archetype_emotional_arcs.json': emotionalArcs,
-    'hybrid_archetype_patterns.json': hybridPatterns,
-    'genre_blending_model.json': blendingModel,
+    'cross_references/genre_archetype_matrix.json': matrix,
+    'cross_references/tone_archetype_integration.json': toneIntegration,
+    'cross_references/archetype_emotional_arcs.json': emotionalArcs,
+    'cross_references/hybrid_archetype_patterns.json': hybridPatterns,
+    'cross_references/genre_blending_model.json': blendingModel,
     'vocabulary/archetype_node_roles.json': vocabFile,
     'vocabulary/archetype_edge_vocabulary.json': vocabFile,
     'vocabulary/genre_node_roles.json': vocabFile,

@@ -45,18 +45,20 @@ data/                              ← Deliverable outputs
       graph.json
       narrative.md
       examples.md
-  cross_archetype_index.json       ← Shared node roles/edge meanings across all 15
-  cross_genre_constraint_index.json ← Shared constraint types across all 27
-  genre_archetype_matrix.json      ← 27 genres × 15 archetypes compatibility
-  archetype_emotional_arcs.json    ← Emotional arc analysis for archetypes
-  hybrid_archetype_patterns.json   ← Hybrid/combined archetype patterns
-  tone_archetype_integration.json  ← Tone-archetype integration model
-  genre_blending_model.json        ← Genre blending/mixing model
-  non_western_archetype_analysis.json ← Non-Western archetype analysis
-  cross_medium_adaptation.json     ← Cross-medium adaptation patterns
-  corpus_validation.json           ← Corpus-wide validation results
-  example_works_registry.json      ← Consolidated registry of all example works
-  manifest.json                    ← Data manifest (file listing and checksums)
+  cross_references/                  ← Cross-referencing datasets and corpus metadata
+    index.md                         ← Description of all files in this folder
+    manifest.json                    ← Data manifest (file listing and checksums)
+    genre_archetype_matrix.json      ← 27 genres × 15 archetypes compatibility
+    cross_archetype_index.json       ← Shared node roles/edge meanings across all 15
+    cross_genre_constraint_index.json ← Shared constraint types across all 27
+    archetype_emotional_arcs.json    ← Emotional arc analysis for archetypes
+    hybrid_archetype_patterns.json   ← Hybrid/combined archetype patterns
+    tone_archetype_integration.json  ← Tone-archetype integration model
+    genre_blending_model.json        ← Genre blending/mixing model
+    example_works_registry.json      ← Consolidated registry of all example works
+    non_western_archetype_analysis.json ← Non-Western archetype analysis
+    cross_medium_adaptation.json     ← Cross-medium adaptation patterns
+    corpus_validation.json           ← Corpus-wide validation results
 
 app/                               ← Interactive viewer (React + TypeScript + Vite)
   src/

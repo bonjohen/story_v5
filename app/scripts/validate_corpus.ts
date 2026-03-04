@@ -83,11 +83,11 @@ try {
   console.log(`  Loaded ${variantGraphs.size} variant files`)
 
   console.log('Loading cross-reference files...')
-  const matrix = loadJson('genre_archetype_matrix.json') as GenreArchetypeMatrix
-  const toneIntegration = loadJson('tone_archetype_integration.json') as ToneArchetypeIntegration
-  const emotionalArcs = loadJson('archetype_emotional_arcs.json') as ArchetypeEmotionalArcs
-  const hybridPatterns = loadJson('hybrid_archetype_patterns.json') as HybridArchetypePatterns
-  const blendingModel = loadJson('genre_blending_model.json') as GenreBlendingModel
+  const matrix = loadJson('cross_references/genre_archetype_matrix.json') as GenreArchetypeMatrix
+  const toneIntegration = loadJson('cross_references/tone_archetype_integration.json') as ToneArchetypeIntegration
+  const emotionalArcs = loadJson('cross_references/archetype_emotional_arcs.json') as ArchetypeEmotionalArcs
+  const hybridPatterns = loadJson('cross_references/hybrid_archetype_patterns.json') as HybridArchetypePatterns
+  const blendingModel = loadJson('cross_references/genre_blending_model.json') as GenreBlendingModel
   console.log('  Loaded 5 cross-reference files')
 
   console.log('Loading vocabularies...')
@@ -98,7 +98,7 @@ try {
   console.log('  Loaded 4 vocabulary files')
 
   console.log('Loading manifest...')
-  const manifest = loadJson('manifest.json') as DataManifest
+  const manifest = loadJson('cross_references/manifest.json') as DataManifest
   console.log('  Loaded manifest')
 
   const corpus: LoadedCorpus = {

@@ -219,6 +219,7 @@ data/                            All graph data and cross-references (see Data M
   vocabulary/                    Controlled vocabularies and ID conventions
   archetypes/{nn_name}/          15 archetype folders (graph.json, narrative.md, examples.md)
   genres/{nn_name}/              27 genre folders (graph.json, narrative.md, examples.md)
+  cross_references/              Cross-referencing datasets, manifest, and corpus metadata
 app/                             Interactive viewer (React + TypeScript + Vite)
   src/
     components/                  UI components (GraphSearch, SettingsPanel, VariantToggle)

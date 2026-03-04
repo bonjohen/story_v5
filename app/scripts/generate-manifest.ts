@@ -99,7 +99,7 @@ function main() {
 
   // Build and write manifest
   const manifest = buildManifest(archetypeMetas, genreMetas)
-  const manifestPath = join(DATA_ROOT, 'manifest.json')
+  const manifestPath = join(DATA_ROOT, 'cross_references', 'manifest.json')
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
   console.log(`\nManifest written to ${manifestPath}`)
   console.log(`  ${manifest.totals.archetypes} archetypes, ${manifest.totals.genres} genres`)

@@ -30,18 +30,20 @@ data/                              All graph data and cross-references
     graph.json                       Constraint hierarchy (5 levels + tone + anti-pattern)
     narrative.md                     Prose walkthrough of constraints
     examples.md                      2-4 real works mapped against constraints
-  genre_archetype_matrix.json      27x15 compatibility matrix
-  archetype_emotional_arcs.json    Quantitative emotional trajectories
-  hybrid_archetype_patterns.json   12 hybrid archetype combinations
-  genre_blending_model.json        18 genre blend patterns
-  tone_archetype_integration.json  405 tone-archetype pairings
-  cross_archetype_index.json       Shared roles/meanings across archetypes
-  cross_genre_constraint_index.json Shared constraints across genres
-  example_works_registry.json      107 works with cross-references
-  corpus_validation.json           Coverage validation against 50 works
-  non_western_archetype_analysis.json  10 non-Western narrative archetypes
-  cross_medium_adaptation.json     6 works analyzed across mediums
-  manifest.json                    Corpus inventory and statistics
+  cross_references/                 Cross-referencing datasets and corpus metadata
+    index.md                         Description of all files in this folder
+    manifest.json                    Corpus inventory and statistics
+    genre_archetype_matrix.json      27x15 compatibility matrix
+    cross_archetype_index.json       Shared roles/meanings across archetypes
+    cross_genre_constraint_index.json Shared constraints across genres
+    archetype_emotional_arcs.json    Quantitative emotional trajectories
+    hybrid_archetype_patterns.json   12 hybrid archetype combinations
+    tone_archetype_integration.json  405 tone-archetype pairings
+    genre_blending_model.json        18 genre blend patterns
+    example_works_registry.json      107 works with cross-references
+    non_western_archetype_analysis.json  10 non-Western narrative archetypes
+    cross_medium_adaptation.json     6 works analyzed across mediums
+    corpus_validation.json           Coverage validation against 50 works
 
 app/                               Interactive viewer (React + TypeScript + Vite)
   src/

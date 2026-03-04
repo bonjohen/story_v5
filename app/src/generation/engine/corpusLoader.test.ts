@@ -54,16 +54,16 @@ function createMockProvider(): DataProvider {
   }
 
   // Cross-refs
-  files.set('genre_archetype_matrix.json', MATRIX)
-  files.set('tone_archetype_integration.json', TONE)
-  files.set('archetype_emotional_arcs.json', ARCS)
-  files.set('hybrid_archetype_patterns.json', HYBRIDS)
-  files.set('genre_blending_model.json', BLENDS)
+  files.set('cross_references/genre_archetype_matrix.json', MATRIX)
+  files.set('cross_references/tone_archetype_integration.json', TONE)
+  files.set('cross_references/archetype_emotional_arcs.json', ARCS)
+  files.set('cross_references/hybrid_archetype_patterns.json', HYBRIDS)
+  files.set('cross_references/genre_blending_model.json', BLENDS)
   files.set('vocabulary/archetype_node_roles.json', VOCAB)
   files.set('vocabulary/archetype_edge_vocabulary.json', VOCAB)
   files.set('vocabulary/genre_node_roles.json', VOCAB)
   files.set('vocabulary/genre_edge_vocabulary.json', VOCAB)
-  files.set('manifest.json', MANIFEST)
+  files.set('cross_references/manifest.json', MANIFEST)
 
   return {
     loadJson: vi.fn((path: string) => {

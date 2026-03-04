@@ -97,11 +97,11 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
   // Load cross-reference files in parallel
   const [matrix, toneIntegration, emotionalArcs, hybridPatterns, blendingModel] =
     await Promise.all([
-      provider.loadJson('genre_archetype_matrix.json') as Promise<GenreArchetypeMatrix>,
-      provider.loadJson('tone_archetype_integration.json') as Promise<ToneArchetypeIntegration>,
-      provider.loadJson('archetype_emotional_arcs.json') as Promise<ArchetypeEmotionalArcs>,
-      provider.loadJson('hybrid_archetype_patterns.json') as Promise<HybridArchetypePatterns>,
-      provider.loadJson('genre_blending_model.json') as Promise<GenreBlendingModel>,
+      provider.loadJson('cross_references/genre_archetype_matrix.json') as Promise<GenreArchetypeMatrix>,
+      provider.loadJson('cross_references/tone_archetype_integration.json') as Promise<ToneArchetypeIntegration>,
+      provider.loadJson('cross_references/archetype_emotional_arcs.json') as Promise<ArchetypeEmotionalArcs>,
+      provider.loadJson('cross_references/hybrid_archetype_patterns.json') as Promise<HybridArchetypePatterns>,
+      provider.loadJson('cross_references/genre_blending_model.json') as Promise<GenreBlendingModel>,
     ])
 
   // Load vocabularies in parallel
@@ -114,7 +114,7 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
     ])
 
   // Load manifest
-  const manifest = (await provider.loadJson('manifest.json')) as DataManifest
+  const manifest = (await provider.loadJson('cross_references/manifest.json')) as DataManifest
 
   // Compute corpus hash from graph IDs + node counts (lightweight but deterministic)
   const hashComponents: string[] = []
