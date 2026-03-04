@@ -1,0 +1,196 @@
+{
+  "archetype_id": "archetype_10_the_revenge",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Avenger",
+        "definition": "A character driven to seek retribution for a wrong committed against them or someone they love.",
+        "appears_at_nodes": ["RV_N01_ORIGINAL_STATE", "RV_N02_INCITING_WRONG", "RV_N03_VOW", "RV_N04_PREPARATION", "RV_N05_PURSUIT", "RV_N06_MORAL_CROSSROADS", "RV_N07_FINAL_RECKONING", "RV_N08_AFTERMATH"],
+        "required": true
+      },
+      {
+        "role": "antagonist",
+        "label": "The Wrongdoer",
+        "definition": "The character who committed the original injustice — the target of vengeance.",
+        "appears_at_nodes": ["RV_N02_INCITING_WRONG", "RV_N05_PURSUIT", "RV_N07_FINAL_RECKONING"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Co-conspirator",
+        "definition": "A character who aids the avenger's pursuit — may share the grievance or serve their own agenda.",
+        "appears_at_nodes": ["RV_N04_PREPARATION", "RV_N05_PURSUIT", "RV_N07_FINAL_RECKONING"],
+        "required": false
+      },
+      {
+        "role": "love_interest",
+        "label": "The Victim / Loved One",
+        "definition": "The person harmed by the original wrong — their suffering is the avenger's motivation.",
+        "appears_at_nodes": ["RV_N01_ORIGINAL_STATE", "RV_N02_INCITING_WRONG", "RV_N08_AFTERMATH"],
+        "required": false
+      },
+      {
+        "role": "foil",
+        "label": "The Voice of Mercy",
+        "definition": "A character who counsels forgiveness or warns that revenge will destroy the avenger.",
+        "appears_at_nodes": ["RV_N03_VOW", "RV_N06_MORAL_CROSSROADS"],
+        "required": false
+      },
+      {
+        "role": "shadow",
+        "label": "The Dark Mirror",
+        "definition": "What the avenger is becoming — the monstrous reflection that revenge creates.",
+        "appears_at_nodes": ["RV_N05_PURSUIT", "RV_N06_MORAL_CROSSROADS", "RV_N07_FINAL_RECKONING"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The World Before",
+        "definition": "The protagonist's life before the inciting wrong — what was lost or destroyed.",
+        "appears_at_nodes": ["RV_N01_ORIGINAL_STATE"],
+        "required": true
+      },
+      {
+        "type": "wasteland",
+        "label": "The Scene of the Crime",
+        "definition": "The place where the original wrong was committed — ground zero of the grievance.",
+        "appears_at_nodes": ["RV_N02_INCITING_WRONG"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Pursuit Ground",
+        "definition": "The territory through which the avenger hunts the wrongdoer — may be physical or social.",
+        "appears_at_nodes": ["RV_N04_PREPARATION", "RV_N05_PURSUIT"],
+        "required": true
+      },
+      {
+        "type": "crossroads",
+        "label": "The Moral Crossroads",
+        "definition": "The place where the avenger must choose between completing revenge or finding another way.",
+        "appears_at_nodes": ["RV_N06_MORAL_CROSSROADS"],
+        "required": true
+      },
+      {
+        "type": "stronghold",
+        "label": "The Reckoning Ground",
+        "definition": "The place where avenger and wrongdoer face each other for the final confrontation.",
+        "appears_at_nodes": ["RV_N07_FINAL_RECKONING"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "weapon",
+        "label": "The Instrument of Vengeance",
+        "definition": "The specific means of retribution — a weapon, plan, or piece of damning evidence.",
+        "appears_at_nodes": ["RV_N04_PREPARATION", "RV_N05_PURSUIT", "RV_N07_FINAL_RECKONING"],
+        "required": true
+      },
+      {
+        "type": "relic",
+        "label": "The Token of the Wrong",
+        "definition": "An object tied to the original crime — evidence, a memento of the victim, or a scar.",
+        "appears_at_nodes": ["RV_N02_INCITING_WRONG", "RV_N03_VOW", "RV_N06_MORAL_CROSSROADS"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "RV_N01_ORIGINAL_STATE",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "RV_N02_INCITING_WRONG",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "love_interest"],
+        "places": ["wasteland"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses", "target_role": "love_interest" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "RV_N03_VOW",
+      "expected_participants": {
+        "characters": ["protagonist", "foil"],
+        "places": ["wasteland"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "RV_N04_PREPARATION",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["special_world"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "weapon" },
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" }
+      ]
+    },
+    {
+      "archetype_node": "RV_N05_PURSUIT",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "shadow"],
+        "places": ["special_world"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    },
+    {
+      "archetype_node": "RV_N06_MORAL_CROSSROADS",
+      "expected_participants": {
+        "characters": ["protagonist", "foil", "shadow"],
+        "places": ["crossroads"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "RV_N07_FINAL_RECKONING",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "shadow"],
+        "places": ["stronghold"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "antagonist", "change": "dies" }
+      ]
+    },
+    {
+      "archetype_node": "RV_N08_AFTERMATH",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "ordinary_world" }
+      ]
+    }
+  ]
+}

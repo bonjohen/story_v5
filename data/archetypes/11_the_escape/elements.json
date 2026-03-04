@@ -1,0 +1,178 @@
+{
+  "archetype_id": "archetype_11_the_escape",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Prisoner",
+        "definition": "A character confined against their will who must plan and execute an escape to reclaim freedom.",
+        "appears_at_nodes": ["ES_N01_CONFINEMENT", "ES_N02_SPARK_OF_HOPE", "ES_N03_PLANNING", "ES_N04_SETBACKS", "ES_N05_POINT_OF_NO_RETURN", "ES_N06_ESCAPE_ATTEMPT", "ES_N07_FREEDOM"],
+        "required": true
+      },
+      {
+        "role": "antagonist",
+        "label": "The Captor / System",
+        "definition": "The force that maintains confinement — a person, institution, or oppressive system.",
+        "appears_at_nodes": ["ES_N01_CONFINEMENT", "ES_N04_SETBACKS", "ES_N06_ESCAPE_ATTEMPT"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Fellow Prisoner",
+        "definition": "A companion in confinement who joins the escape plan — shared risk creates deep bonds.",
+        "appears_at_nodes": ["ES_N02_SPARK_OF_HOPE", "ES_N03_PLANNING", "ES_N04_SETBACKS", "ES_N05_POINT_OF_NO_RETURN", "ES_N06_ESCAPE_ATTEMPT"],
+        "required": false
+      },
+      {
+        "role": "trickster",
+        "label": "The Inside Operator",
+        "definition": "A character who uses cunning, connections, or deception to acquire resources for the escape.",
+        "appears_at_nodes": ["ES_N03_PLANNING", "ES_N04_SETBACKS"],
+        "required": false
+      },
+      {
+        "role": "threshold_guardian",
+        "label": "The Guard / Warden",
+        "definition": "The direct enforcer of confinement — must be evaded, outwitted, or overcome.",
+        "appears_at_nodes": ["ES_N04_SETBACKS", "ES_N06_ESCAPE_ATTEMPT"],
+        "required": false
+      },
+      {
+        "role": "shapeshifter",
+        "label": "The Informant",
+        "definition": "A character whose loyalty is uncertain — may be an ally or a spy for the captors.",
+        "appears_at_nodes": ["ES_N03_PLANNING", "ES_N04_SETBACKS"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "stronghold",
+        "label": "The Prison",
+        "definition": "The place of confinement — a prison, fortress, oppressive household, or trapped situation.",
+        "appears_at_nodes": ["ES_N01_CONFINEMENT", "ES_N02_SPARK_OF_HOPE", "ES_N03_PLANNING", "ES_N04_SETBACKS", "ES_N05_POINT_OF_NO_RETURN"],
+        "required": true
+      },
+      {
+        "type": "threshold",
+        "label": "The Exit Point",
+        "definition": "The barrier that must be crossed to achieve freedom — a wall, gate, border, or checkpoint.",
+        "appears_at_nodes": ["ES_N06_ESCAPE_ATTEMPT"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Free World",
+        "definition": "The world beyond confinement — what the prisoner has been fighting to reach.",
+        "appears_at_nodes": ["ES_N07_FREEDOM"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "tool",
+        "label": "The Escape Tool",
+        "definition": "The practical instrument of escape — a lockpick, tunnel, rope, forged papers, or vehicle.",
+        "appears_at_nodes": ["ES_N03_PLANNING", "ES_N04_SETBACKS", "ES_N06_ESCAPE_ATTEMPT"],
+        "required": true
+      },
+      {
+        "type": "key",
+        "label": "The Access",
+        "definition": "Whatever grants passage through the barrier — a literal key, code, bribe, or timing knowledge.",
+        "appears_at_nodes": ["ES_N03_PLANNING", "ES_N06_ESCAPE_ATTEMPT"],
+        "required": false
+      },
+      {
+        "type": "document",
+        "label": "The Plan",
+        "definition": "The scheme itself — a map, schedule, or step-by-step blueprint for escape.",
+        "appears_at_nodes": ["ES_N03_PLANNING", "ES_N04_SETBACKS"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "ES_N01_CONFINEMENT",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist"],
+        "places": ["stronghold"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "ES_N02_SPARK_OF_HOPE",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["stronghold"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "ES_N03_PLANNING",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "trickster", "shapeshifter"],
+        "places": ["stronghold"],
+        "objects": ["tool", "key", "document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "tool" },
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" }
+      ]
+    },
+    {
+      "archetype_node": "ES_N04_SETBACKS",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "trickster", "threshold_guardian", "shapeshifter"],
+        "places": ["stronghold"],
+        "objects": ["tool", "document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "ES_N05_POINT_OF_NO_RETURN",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["stronghold"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "ES_N06_ESCAPE_ATTEMPT",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "threshold_guardian"],
+        "places": ["threshold"],
+        "objects": ["tool", "key"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "departs", "target_role": "stronghold" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    },
+    {
+      "archetype_node": "ES_N07_FREEDOM",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["home"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "home" }
+      ]
+    }
+  ]
+}

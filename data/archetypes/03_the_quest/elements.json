@@ -1,0 +1,223 @@
+{
+  "archetype_id": "archetype_03_the_quest",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Seeker",
+        "definition": "The leader or primary driver of the quest whose determination holds the group together.",
+        "appears_at_nodes": ["QU_N01_HOME_GROUND", "QU_N02_OBJECTIVE_SET", "QU_N03_COMPANIONS", "QU_N04_JOURNEY_TRIALS", "QU_N05_COHESION_TEST", "QU_N06_FINAL_APPROACH", "QU_N07_CLIMACTIC_ORDEAL", "QU_N08_OBJECTIVE_WON", "QU_N09_HOMECOMING"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Faithful Companion",
+        "definition": "A loyal member of the quest party whose bond with the protagonist is tested and proven.",
+        "appears_at_nodes": ["QU_N03_COMPANIONS", "QU_N04_JOURNEY_TRIALS", "QU_N05_COHESION_TEST", "QU_N06_FINAL_APPROACH", "QU_N07_CLIMACTIC_ORDEAL", "QU_N09_HOMECOMING"],
+        "required": true
+      },
+      {
+        "role": "mentor",
+        "label": "The Guide",
+        "definition": "A wise or experienced figure who provides direction, lore, or strategic counsel for the quest.",
+        "appears_at_nodes": ["QU_N02_OBJECTIVE_SET", "QU_N03_COMPANIONS", "QU_N04_JOURNEY_TRIALS"],
+        "required": false
+      },
+      {
+        "role": "antagonist",
+        "label": "The Opposing Force",
+        "definition": "Whatever stands between the quest party and the objective — may be a person, creature, or system.",
+        "appears_at_nodes": ["QU_N04_JOURNEY_TRIALS", "QU_N06_FINAL_APPROACH", "QU_N07_CLIMACTIC_ORDEAL"],
+        "required": true
+      },
+      {
+        "role": "herald",
+        "label": "The Summoner",
+        "definition": "The character or event that defines the objective and sets the quest in motion.",
+        "appears_at_nodes": ["QU_N02_OBJECTIVE_SET"],
+        "required": false
+      },
+      {
+        "role": "trickster",
+        "label": "The Clever Companion",
+        "definition": "A party member who solves problems through wit rather than force, providing unconventional solutions.",
+        "appears_at_nodes": ["QU_N03_COMPANIONS", "QU_N04_JOURNEY_TRIALS", "QU_N07_CLIMACTIC_ORDEAL"],
+        "required": false
+      },
+      {
+        "role": "shapeshifter",
+        "label": "The Ambiguous Ally",
+        "definition": "A quest member or encountered figure whose loyalty is uncertain until tested.",
+        "appears_at_nodes": ["QU_N04_JOURNEY_TRIALS", "QU_N05_COHESION_TEST"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "Home Ground",
+        "definition": "The safe starting place from which the quest party departs and to which they hope to return.",
+        "appears_at_nodes": ["QU_N01_HOME_GROUND"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Journey Lands",
+        "definition": "The varied terrain and territories traversed during the quest — each with its own trials.",
+        "appears_at_nodes": ["QU_N04_JOURNEY_TRIALS", "QU_N05_COHESION_TEST"],
+        "required": true
+      },
+      {
+        "type": "stronghold",
+        "label": "The Final Destination",
+        "definition": "The place where the objective resides — heavily guarded, remote, or dangerous.",
+        "appears_at_nodes": ["QU_N06_FINAL_APPROACH", "QU_N07_CLIMACTIC_ORDEAL", "QU_N08_OBJECTIVE_WON"],
+        "required": true
+      },
+      {
+        "type": "sanctuary",
+        "label": "The Rest Point",
+        "definition": "A temporary safe haven along the journey where the party regroups and plans.",
+        "appears_at_nodes": ["QU_N04_JOURNEY_TRIALS", "QU_N05_COHESION_TEST"],
+        "required": false
+      },
+      {
+        "type": "home",
+        "label": "Home (Return)",
+        "definition": "The starting world revisited after the quest — changed by the journey's impact.",
+        "appears_at_nodes": ["QU_N09_HOMECOMING"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "treasure",
+        "label": "The Objective",
+        "definition": "The specific item, person, or knowledge that the quest seeks — the story's driving goal.",
+        "appears_at_nodes": ["QU_N02_OBJECTIVE_SET", "QU_N07_CLIMACTIC_ORDEAL", "QU_N08_OBJECTIVE_WON"],
+        "required": true
+      },
+      {
+        "type": "document",
+        "label": "The Map / Guide",
+        "definition": "Information that provides direction toward the objective — a map, prophecy, or set of instructions.",
+        "appears_at_nodes": ["QU_N02_OBJECTIVE_SET", "QU_N04_JOURNEY_TRIALS"],
+        "required": false
+      },
+      {
+        "type": "talisman",
+        "label": "The Quest Token",
+        "definition": "An object that marks the quest party's purpose or grants passage — may be given by a mentor.",
+        "appears_at_nodes": ["QU_N03_COMPANIONS", "QU_N06_FINAL_APPROACH"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "QU_N01_HOME_GROUND",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N02_OBJECTIVE_SET",
+      "expected_participants": {
+        "characters": ["protagonist", "herald", "mentor"],
+        "places": ["ordinary_world"],
+        "objects": ["treasure", "document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N03_COMPANIONS",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "mentor", "trickster"],
+        "places": ["ordinary_world"],
+        "objects": ["talisman"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" },
+        { "role": "protagonist", "change": "gains", "target_role": "talisman" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N04_JOURNEY_TRIALS",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "antagonist", "trickster", "shapeshifter"],
+        "places": ["special_world"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "arrives", "target_role": "special_world" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N05_COHESION_TEST",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "shapeshifter"],
+        "places": ["special_world", "sanctuary"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N06_FINAL_APPROACH",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "antagonist"],
+        "places": ["stronghold"],
+        "objects": ["talisman"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "stronghold" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N07_CLIMACTIC_ORDEAL",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "antagonist", "trickster"],
+        "places": ["stronghold"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "protagonist", "change": "gains", "target_role": "treasure" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N08_OBJECTIVE_WON",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["stronghold"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "treasure" }
+      ]
+    },
+    {
+      "archetype_node": "QU_N09_HOMECOMING",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["home"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "home" },
+        { "role": "protagonist", "change": "reveals" }
+      ]
+    }
+  ]
+}

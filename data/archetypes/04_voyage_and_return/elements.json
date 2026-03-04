@@ -1,0 +1,180 @@
+{
+  "archetype_id": "archetype_04_voyage_and_return",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Traveler",
+        "definition": "A character displaced from their familiar world into an alien environment, who must find their way back transformed.",
+        "appears_at_nodes": ["VR_N01_FAMILIAR_WORLD", "VR_N02_PASSAGE", "VR_N03_FASCINATION", "VR_N04_SHADOW_EMERGES", "VR_N05_FRUSTRATION", "VR_N06_ESCAPE", "VR_N07_RETURN_CHANGED"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Fellow Traveler",
+        "definition": "A companion encountered in the strange world who helps the protagonist navigate its rules.",
+        "appears_at_nodes": ["VR_N03_FASCINATION", "VR_N04_SHADOW_EMERGES", "VR_N05_FRUSTRATION", "VR_N06_ESCAPE"],
+        "required": false
+      },
+      {
+        "role": "antagonist",
+        "label": "The Ruler of the Strange World",
+        "definition": "The power that controls the unfamiliar domain and ultimately threatens or imprisons the traveler.",
+        "appears_at_nodes": ["VR_N04_SHADOW_EMERGES", "VR_N05_FRUSTRATION", "VR_N06_ESCAPE"],
+        "required": true
+      },
+      {
+        "role": "trickster",
+        "label": "The Strange World Native",
+        "definition": "A colorful inhabitant who embodies the alien logic of the new world — entertaining but unreliable.",
+        "appears_at_nodes": ["VR_N03_FASCINATION", "VR_N04_SHADOW_EMERGES"],
+        "required": false
+      },
+      {
+        "role": "threshold_guardian",
+        "label": "The Gatekeeper",
+        "definition": "A figure who controls passage between the familiar and strange worlds.",
+        "appears_at_nodes": ["VR_N02_PASSAGE", "VR_N06_ESCAPE"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Familiar World",
+        "definition": "The traveler's known, comfortable starting environment that they are pulled away from.",
+        "appears_at_nodes": ["VR_N01_FAMILIAR_WORLD"],
+        "required": true
+      },
+      {
+        "type": "threshold",
+        "label": "The Passage",
+        "definition": "The portal, transition, or boundary that separates the familiar world from the strange one.",
+        "appears_at_nodes": ["VR_N02_PASSAGE", "VR_N06_ESCAPE"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Strange World",
+        "definition": "An alien environment governed by unfamiliar rules — initially fascinating, eventually threatening.",
+        "appears_at_nodes": ["VR_N03_FASCINATION", "VR_N04_SHADOW_EMERGES", "VR_N05_FRUSTRATION"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Familiar World (Return)",
+        "definition": "The starting world revisited — unchanged itself, but the traveler sees it differently.",
+        "appears_at_nodes": ["VR_N07_RETURN_CHANGED"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "key",
+        "label": "The Way Back",
+        "definition": "Whatever enables return to the familiar world — a portal key, knowledge, or escape route.",
+        "appears_at_nodes": ["VR_N05_FRUSTRATION", "VR_N06_ESCAPE"],
+        "required": true
+      },
+      {
+        "type": "symbol",
+        "label": "The Souvenir",
+        "definition": "An object brought back from the strange world — proof of the journey and symbol of transformation.",
+        "appears_at_nodes": ["VR_N06_ESCAPE", "VR_N07_RETURN_CHANGED"],
+        "required": false
+      },
+      {
+        "type": "vessel",
+        "label": "The Transport",
+        "definition": "The vehicle or mechanism of passage between worlds — ship, portal, dream device.",
+        "appears_at_nodes": ["VR_N02_PASSAGE", "VR_N06_ESCAPE"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "VR_N01_FAMILIAR_WORLD",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "VR_N02_PASSAGE",
+      "expected_participants": {
+        "characters": ["protagonist", "threshold_guardian"],
+        "places": ["threshold"],
+        "objects": ["vessel"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "departs", "target_role": "ordinary_world" },
+        { "role": "protagonist", "change": "arrives", "target_role": "special_world" }
+      ]
+    },
+    {
+      "archetype_node": "VR_N03_FASCINATION",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "trickster"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "VR_N04_SHADOW_EMERGES",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "trickster"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "VR_N05_FRUSTRATION",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally"],
+        "places": ["special_world"],
+        "objects": ["key"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "VR_N06_ESCAPE",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "antagonist", "threshold_guardian"],
+        "places": ["threshold"],
+        "objects": ["key", "symbol", "vessel"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" },
+        { "role": "protagonist", "change": "departs", "target_role": "special_world" },
+        { "role": "protagonist", "change": "gains", "target_role": "symbol" }
+      ]
+    },
+    {
+      "archetype_node": "VR_N07_RETURN_CHANGED",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["home"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "home" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    }
+  ]
+}

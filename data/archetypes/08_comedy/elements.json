@@ -1,0 +1,169 @@
+{
+  "archetype_id": "archetype_08_comedy",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Constrained One",
+        "definition": "A character trapped by rigid social order, misunderstanding, or their own pretensions — liberated through chaos.",
+        "appears_at_nodes": ["CO_N01_CONSTRAINED_ORDER", "CO_N02_DISRUPTION", "CO_N03_ESCALATING_CHAOS", "CO_N04_DARK_MOMENT", "CO_N05_UNMASKING", "CO_N06_RECONCILIATION", "CO_N07_NEW_HARMONY"],
+        "required": true
+      },
+      {
+        "role": "love_interest",
+        "label": "The Beloved",
+        "definition": "The romantic partner whose union with the protagonist represents the story's resolution and new harmony.",
+        "appears_at_nodes": ["CO_N01_CONSTRAINED_ORDER", "CO_N03_ESCALATING_CHAOS", "CO_N06_RECONCILIATION", "CO_N07_NEW_HARMONY"],
+        "required": false
+      },
+      {
+        "role": "antagonist",
+        "label": "The Blocking Figure",
+        "definition": "A character who enforces the constraining order — a parent, authority, rival, or societal norm.",
+        "appears_at_nodes": ["CO_N01_CONSTRAINED_ORDER", "CO_N03_ESCALATING_CHAOS", "CO_N05_UNMASKING", "CO_N06_RECONCILIATION"],
+        "required": true
+      },
+      {
+        "role": "trickster",
+        "label": "The Agent of Chaos",
+        "definition": "A character who deliberately or accidentally disrupts the established order, catalyzing the comic chain reaction.",
+        "appears_at_nodes": ["CO_N02_DISRUPTION", "CO_N03_ESCALATING_CHAOS", "CO_N05_UNMASKING"],
+        "required": false
+      },
+      {
+        "role": "comic_relief",
+        "label": "The Fool",
+        "definition": "A character whose literal-mindedness, naivety, or absurd behavior generates humor and inadvertently reveals truth.",
+        "appears_at_nodes": ["CO_N03_ESCALATING_CHAOS", "CO_N04_DARK_MOMENT", "CO_N05_UNMASKING"],
+        "required": false
+      },
+      {
+        "role": "confidant",
+        "label": "The Sidekick / Confidant",
+        "definition": "A character who knows the protagonist's true feelings and helps navigate the chaos.",
+        "appears_at_nodes": ["CO_N01_CONSTRAINED_ORDER", "CO_N03_ESCALATING_CHAOS", "CO_N04_DARK_MOMENT"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Constrained Setting",
+        "definition": "The rigid social environment where the comedy begins — rules are stifling and identities are fixed.",
+        "appears_at_nodes": ["CO_N01_CONSTRAINED_ORDER"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Chaos Zone",
+        "definition": "The social space where normal rules break down — a party, journey, mistaken-identity situation.",
+        "appears_at_nodes": ["CO_N02_DISRUPTION", "CO_N03_ESCALATING_CHAOS", "CO_N04_DARK_MOMENT"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Renewed Community",
+        "definition": "The social world reordered on better terms — old rigidities dissolved, new bonds celebrated.",
+        "appears_at_nodes": ["CO_N06_RECONCILIATION", "CO_N07_NEW_HARMONY"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "mcguffin",
+        "label": "The Misunderstanding Object",
+        "definition": "An object at the center of confusion — a letter, ring, or item that is misidentified or misdelivered.",
+        "appears_at_nodes": ["CO_N02_DISRUPTION", "CO_N03_ESCALATING_CHAOS", "CO_N05_UNMASKING"],
+        "required": false
+      },
+      {
+        "type": "symbol",
+        "label": "The Wedding / Feast Token",
+        "definition": "An object representing the final union and harmony — a ring, invitation, or shared meal.",
+        "appears_at_nodes": ["CO_N06_RECONCILIATION", "CO_N07_NEW_HARMONY"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "CO_N01_CONSTRAINED_ORDER",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest", "antagonist", "confidant"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "CO_N02_DISRUPTION",
+      "expected_participants": {
+        "characters": ["protagonist", "trickster"],
+        "places": ["special_world"],
+        "objects": ["mcguffin"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "CO_N03_ESCALATING_CHAOS",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest", "antagonist", "trickster", "comic_relief", "confidant"],
+        "places": ["special_world"],
+        "objects": ["mcguffin"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" }
+      ]
+    },
+    {
+      "archetype_node": "CO_N04_DARK_MOMENT",
+      "expected_participants": {
+        "characters": ["protagonist", "comic_relief", "confidant"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "breaks", "target_role": "love_interest" }
+      ]
+    },
+    {
+      "archetype_node": "CO_N05_UNMASKING",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "trickster", "comic_relief"],
+        "places": ["special_world"],
+        "objects": ["mcguffin"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "antagonist", "change": "reveals" }
+      ]
+    },
+    {
+      "archetype_node": "CO_N06_RECONCILIATION",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest", "antagonist"],
+        "places": ["home"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "bonds", "target_role": "love_interest" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "CO_N07_NEW_HARMONY",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["home"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    }
+  ]
+}

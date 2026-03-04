@@ -1,0 +1,177 @@
+{
+  "archetype_id": "archetype_06_rebirth",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Fallen One",
+        "definition": "A character trapped in a state of moral, emotional, or spiritual decay who must find their way to renewal.",
+        "appears_at_nodes": ["RB_N01_FALLEN_STATE", "RB_N02_WARNING", "RB_N03_RESISTANCE", "RB_N04_ORDEAL_OF_TRUTH", "RB_N05_TURNING_POINT", "RB_N06_ATONEMENT", "RB_N07_RENEWAL"],
+        "required": true
+      },
+      {
+        "role": "herald",
+        "label": "The Warning Voice",
+        "definition": "A character or event that signals to the protagonist that their current path leads to destruction.",
+        "appears_at_nodes": ["RB_N02_WARNING"],
+        "required": true
+      },
+      {
+        "role": "shadow",
+        "label": "The Former Self",
+        "definition": "The protagonist's own destructive patterns, habits, or identity that they must overcome.",
+        "appears_at_nodes": ["RB_N01_FALLEN_STATE", "RB_N03_RESISTANCE", "RB_N04_ORDEAL_OF_TRUTH"],
+        "required": true
+      },
+      {
+        "role": "mentor",
+        "label": "The Redeemer Figure",
+        "definition": "A character who models or enables the possibility of change — may be active guide or passive example.",
+        "appears_at_nodes": ["RB_N04_ORDEAL_OF_TRUTH", "RB_N05_TURNING_POINT"],
+        "required": false
+      },
+      {
+        "role": "love_interest",
+        "label": "The Beloved / Innocent",
+        "definition": "A character whose goodness or need provides motivation for the protagonist's transformation.",
+        "appears_at_nodes": ["RB_N02_WARNING", "RB_N05_TURNING_POINT", "RB_N07_RENEWAL"],
+        "required": false
+      },
+      {
+        "role": "confidant",
+        "label": "The Witness",
+        "definition": "A character who has seen the protagonist at their worst and can testify to the reality of their change.",
+        "appears_at_nodes": ["RB_N01_FALLEN_STATE", "RB_N06_ATONEMENT", "RB_N07_RENEWAL"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "wasteland",
+        "label": "The Fallen State Setting",
+        "definition": "The environment reflecting the protagonist's decay — oppressive, stagnant, or self-destructive.",
+        "appears_at_nodes": ["RB_N01_FALLEN_STATE", "RB_N02_WARNING", "RB_N03_RESISTANCE"],
+        "required": true
+      },
+      {
+        "type": "underworld",
+        "label": "The Ordeal Ground",
+        "definition": "The place where the protagonist confronts the full truth of their fallen state — the darkest night.",
+        "appears_at_nodes": ["RB_N04_ORDEAL_OF_TRUTH"],
+        "required": true
+      },
+      {
+        "type": "crossroads",
+        "label": "The Turning Point",
+        "definition": "The place or moment where the protagonist chooses renewal over continued decay.",
+        "appears_at_nodes": ["RB_N05_TURNING_POINT"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Renewed World",
+        "definition": "The protagonist's world transformed by their inner change — the same place seen with new eyes.",
+        "appears_at_nodes": ["RB_N07_RENEWAL"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "symbol",
+        "label": "The Symbol of Decay",
+        "definition": "An object that represents the protagonist's fallen state — its destruction or transformation marks renewal.",
+        "appears_at_nodes": ["RB_N01_FALLEN_STATE", "RB_N04_ORDEAL_OF_TRUTH", "RB_N06_ATONEMENT"],
+        "required": false
+      },
+      {
+        "type": "relic",
+        "label": "The Memory of Goodness",
+        "definition": "An object from the protagonist's better past that reminds them of who they could be.",
+        "appears_at_nodes": ["RB_N04_ORDEAL_OF_TRUTH", "RB_N05_TURNING_POINT"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "RB_N01_FALLEN_STATE",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow", "confidant"],
+        "places": ["wasteland"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "RB_N02_WARNING",
+      "expected_participants": {
+        "characters": ["protagonist", "herald", "love_interest"],
+        "places": ["wasteland"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "RB_N03_RESISTANCE",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow"],
+        "places": ["wasteland"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "RB_N04_ORDEAL_OF_TRUTH",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow", "mentor"],
+        "places": ["underworld"],
+        "objects": ["symbol", "relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "RB_N05_TURNING_POINT",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor", "love_interest"],
+        "places": ["crossroads"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "RB_N06_ATONEMENT",
+      "expected_participants": {
+        "characters": ["protagonist", "confidant"],
+        "places": ["wasteland"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "protagonist", "change": "loses", "target_role": "symbol" }
+      ]
+    },
+    {
+      "archetype_node": "RB_N07_RENEWAL",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest", "confidant"],
+        "places": ["home"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "home" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    }
+  ]
+}

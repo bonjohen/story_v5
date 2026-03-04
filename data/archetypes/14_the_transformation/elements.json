@@ -1,0 +1,179 @@
+{
+  "archetype_id": "archetype_14_the_transformation",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The One Who Changes",
+        "definition": "A character with a fixed identity who undergoes fundamental transformation through crisis and integration.",
+        "appears_at_nodes": ["TF_N01_FIXED_IDENTITY", "TF_N02_CATALYST_OF_CHANGE", "TF_N03_DENIAL_AND_STRUGGLE", "TF_N04_LIMINAL_STATE", "TF_N05_CRUCIBLE", "TF_N06_INTEGRATION", "TF_N07_NEW_IDENTITY"],
+        "required": true
+      },
+      {
+        "role": "shadow",
+        "label": "The Inner Demon / Old Self",
+        "definition": "The protagonist's own resistance to change — their attachment to the fixed identity.",
+        "appears_at_nodes": ["TF_N03_DENIAL_AND_STRUGGLE", "TF_N04_LIMINAL_STATE", "TF_N05_CRUCIBLE"],
+        "required": true
+      },
+      {
+        "role": "herald",
+        "label": "The Catalyst Agent",
+        "definition": "The person, event, or force that initiates the transformation by disrupting the fixed identity.",
+        "appears_at_nodes": ["TF_N02_CATALYST_OF_CHANGE"],
+        "required": true
+      },
+      {
+        "role": "mentor",
+        "label": "The Guide Through Change",
+        "definition": "A character who has undergone a similar transformation and can model what lies on the other side.",
+        "appears_at_nodes": ["TF_N04_LIMINAL_STATE", "TF_N06_INTEGRATION"],
+        "required": false
+      },
+      {
+        "role": "ally",
+        "label": "The Anchor",
+        "definition": "A character who accepts the protagonist through the transformation — providing continuity of relationship.",
+        "appears_at_nodes": ["TF_N01_FIXED_IDENTITY", "TF_N03_DENIAL_AND_STRUGGLE", "TF_N06_INTEGRATION", "TF_N07_NEW_IDENTITY"],
+        "required": false
+      },
+      {
+        "role": "foil",
+        "label": "The Unchanged One",
+        "definition": "A character who resists or refuses the same transformative pressure — highlighting the protagonist's choice.",
+        "appears_at_nodes": ["TF_N03_DENIAL_AND_STRUGGLE", "TF_N07_NEW_IDENTITY"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Fixed World",
+        "definition": "The environment that supports and reinforces the protagonist's fixed identity.",
+        "appears_at_nodes": ["TF_N01_FIXED_IDENTITY"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Liminal Space",
+        "definition": "The between-state — neither the old identity nor the new — where transformation occurs.",
+        "appears_at_nodes": ["TF_N03_DENIAL_AND_STRUGGLE", "TF_N04_LIMINAL_STATE"],
+        "required": true
+      },
+      {
+        "type": "underworld",
+        "label": "The Crucible",
+        "definition": "The extreme environment that forces transformation — the darkest point of the liminal journey.",
+        "appears_at_nodes": ["TF_N05_CRUCIBLE"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The New World",
+        "definition": "The environment as experienced by the transformed protagonist — same place, different person.",
+        "appears_at_nodes": ["TF_N07_NEW_IDENTITY"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "symbol",
+        "label": "The Identity Marker",
+        "definition": "An object that represents the protagonist's fixed identity — its change or destruction marks transformation.",
+        "appears_at_nodes": ["TF_N01_FIXED_IDENTITY", "TF_N05_CRUCIBLE", "TF_N07_NEW_IDENTITY"],
+        "required": false
+      },
+      {
+        "type": "vessel",
+        "label": "The Container of Change",
+        "definition": "An object that holds or catalyzes the transformation — a potion, mirror, machine, or ritual tool.",
+        "appears_at_nodes": ["TF_N02_CATALYST_OF_CHANGE", "TF_N05_CRUCIBLE"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "TF_N01_FIXED_IDENTITY",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["ordinary_world"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "TF_N02_CATALYST_OF_CHANGE",
+      "expected_participants": {
+        "characters": ["protagonist", "herald"],
+        "places": ["ordinary_world"],
+        "objects": ["vessel"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "TF_N03_DENIAL_AND_STRUGGLE",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow", "ally", "foil"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" },
+        { "role": "protagonist", "change": "breaks", "target_role": "ally" }
+      ]
+    },
+    {
+      "archetype_node": "TF_N04_LIMINAL_STATE",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow", "mentor"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "TF_N05_CRUCIBLE",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow"],
+        "places": ["underworld"],
+        "objects": ["symbol", "vessel"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "protagonist", "change": "loses", "target_role": "symbol" }
+      ]
+    },
+    {
+      "archetype_node": "TF_N06_INTEGRATION",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor", "ally"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    },
+    {
+      "archetype_node": "TF_N07_NEW_IDENTITY",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "foil"],
+        "places": ["home"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "home" },
+        { "role": "protagonist", "change": "gains", "target_role": "symbol" }
+      ]
+    }
+  ]
+}

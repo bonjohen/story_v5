@@ -1,0 +1,176 @@
+{
+  "archetype_id": "archetype_12_the_sacrifice",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Sacrificer",
+        "definition": "A character who discovers that saving what matters most requires giving up something irreplaceable — and chooses to pay the cost.",
+        "appears_at_nodes": ["SA_N01_VALUED_LIFE", "SA_N02_THREAT_EMERGES", "SA_N03_REALIZATION", "SA_N04_RESISTANCE", "SA_N05_DECISION", "SA_N06_SACRIFICIAL_ACT", "SA_N07_WORLD_SAVED"],
+        "required": true
+      },
+      {
+        "role": "love_interest",
+        "label": "The Beloved / Protected One",
+        "definition": "The person or community the protagonist sacrifices for — what makes the cost meaningful.",
+        "appears_at_nodes": ["SA_N01_VALUED_LIFE", "SA_N02_THREAT_EMERGES", "SA_N05_DECISION", "SA_N07_WORLD_SAVED"],
+        "required": true
+      },
+      {
+        "role": "antagonist",
+        "label": "The Threat",
+        "definition": "The force that creates the dilemma — may be a villain, disease, fate, or systemic crisis.",
+        "appears_at_nodes": ["SA_N02_THREAT_EMERGES", "SA_N04_RESISTANCE", "SA_N06_SACRIFICIAL_ACT"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Supporter",
+        "definition": "A character who tries to help the protagonist find an alternative or who bears witness to the sacrifice.",
+        "appears_at_nodes": ["SA_N03_REALIZATION", "SA_N04_RESISTANCE", "SA_N07_WORLD_SAVED"],
+        "required": false
+      },
+      {
+        "role": "mentor",
+        "label": "The Prior Sacrificer",
+        "definition": "A character who has already paid a similar cost — their example informs the protagonist's choice.",
+        "appears_at_nodes": ["SA_N03_REALIZATION"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Valued Life",
+        "definition": "The protagonist's world of love, purpose, and meaning — what makes the sacrifice costly.",
+        "appears_at_nodes": ["SA_N01_VALUED_LIFE"],
+        "required": true
+      },
+      {
+        "type": "crossroads",
+        "label": "The Decision Point",
+        "definition": "The place where the protagonist makes the irrevocable choice to sacrifice.",
+        "appears_at_nodes": ["SA_N05_DECISION"],
+        "required": true
+      },
+      {
+        "type": "stronghold",
+        "label": "The Sacrifice Ground",
+        "definition": "The place where the sacrificial act occurs — the altar, battlefield, or point of exchange.",
+        "appears_at_nodes": ["SA_N06_SACRIFICIAL_ACT"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Saved World",
+        "definition": "The world preserved by the sacrifice — carrying the mark of what was paid.",
+        "appears_at_nodes": ["SA_N07_WORLD_SAVED"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "symbol",
+        "label": "The Bond Token",
+        "definition": "An object representing what the protagonist values most — what makes the sacrifice meaningful.",
+        "appears_at_nodes": ["SA_N01_VALUED_LIFE", "SA_N05_DECISION"],
+        "required": false
+      },
+      {
+        "type": "weapon",
+        "label": "The Means of Sacrifice",
+        "definition": "The instrument or mechanism through which the sacrifice is enacted.",
+        "appears_at_nodes": ["SA_N06_SACRIFICIAL_ACT"],
+        "required": false
+      },
+      {
+        "type": "relic",
+        "label": "The Memorial",
+        "definition": "An object left behind after the sacrifice — evidence that it happened and what it cost.",
+        "appears_at_nodes": ["SA_N07_WORLD_SAVED"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "SA_N01_VALUED_LIFE",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["ordinary_world"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "SA_N02_THREAT_EMERGES",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest", "antagonist"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "SA_N03_REALIZATION",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "mentor"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "reveals" }
+      ]
+    },
+    {
+      "archetype_node": "SA_N04_RESISTANCE",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" }
+      ]
+    },
+    {
+      "archetype_node": "SA_N05_DECISION",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["crossroads"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "SA_N06_SACRIFICIAL_ACT",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist"],
+        "places": ["stronghold"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "dies" },
+        { "role": "antagonist", "change": "dies" }
+      ]
+    },
+    {
+      "archetype_node": "SA_N07_WORLD_SAVED",
+      "expected_participants": {
+        "characters": ["love_interest", "ally"],
+        "places": ["home"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "love_interest", "change": "arrives", "target_role": "home" }
+      ]
+    }
+  ]
+}

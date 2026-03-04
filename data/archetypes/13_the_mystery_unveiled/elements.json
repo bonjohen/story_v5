@@ -1,0 +1,197 @@
+{
+  "archetype_id": "archetype_13_the_mystery_unveiled",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Investigator",
+        "definition": "A character driven to uncover hidden truth — a detective, journalist, researcher, or curious person.",
+        "appears_at_nodes": ["MU_N01_SURFACE_ORDER", "MU_N02_QUESTION_POSED", "MU_N03_INITIAL_CLUES", "MU_N04_FALSE_TRAIL", "MU_N05_DEEPENING", "MU_N06_BREAKTHROUGH", "MU_N07_CONFRONTATION", "MU_N08_NEW_UNDERSTANDING"],
+        "required": true
+      },
+      {
+        "role": "antagonist",
+        "label": "The Concealer",
+        "definition": "The character or force hiding the truth — may be a criminal, conspirator, or systemic cover-up.",
+        "appears_at_nodes": ["MU_N04_FALSE_TRAIL", "MU_N05_DEEPENING", "MU_N07_CONFRONTATION"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Partner",
+        "definition": "A trusted collaborator who assists the investigation and provides a sounding board.",
+        "appears_at_nodes": ["MU_N03_INITIAL_CLUES", "MU_N04_FALSE_TRAIL", "MU_N06_BREAKTHROUGH"],
+        "required": false
+      },
+      {
+        "role": "herald",
+        "label": "The Question-Poser",
+        "definition": "The character or event that first surfaces the anomaly — a victim, witness, or strange occurrence.",
+        "appears_at_nodes": ["MU_N02_QUESTION_POSED"],
+        "required": true
+      },
+      {
+        "role": "shapeshifter",
+        "label": "The Suspect",
+        "definition": "A character who seems like the answer to the mystery but is ultimately a misdirection.",
+        "appears_at_nodes": ["MU_N03_INITIAL_CLUES", "MU_N04_FALSE_TRAIL", "MU_N05_DEEPENING"],
+        "required": false
+      },
+      {
+        "role": "confidant",
+        "label": "The Witness",
+        "definition": "A character who holds a piece of the truth — their testimony is partial and must be assembled with others.",
+        "appears_at_nodes": ["MU_N03_INITIAL_CLUES", "MU_N05_DEEPENING", "MU_N06_BREAKTHROUGH"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Surface Order",
+        "definition": "The world as it appears before investigation — orderly, normal, hiding what lies beneath.",
+        "appears_at_nodes": ["MU_N01_SURFACE_ORDER"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Investigation Territory",
+        "definition": "The domain opened up by inquiry — crime scenes, archives, interview rooms, hidden spaces.",
+        "appears_at_nodes": ["MU_N03_INITIAL_CLUES", "MU_N04_FALSE_TRAIL", "MU_N05_DEEPENING"],
+        "required": true
+      },
+      {
+        "type": "underworld",
+        "label": "The Hidden Truth",
+        "definition": "The concealed reality beneath the surface — the place or state where truth resides.",
+        "appears_at_nodes": ["MU_N06_BREAKTHROUGH", "MU_N07_CONFRONTATION"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The New Understanding",
+        "definition": "The world recontextualized by truth — the same place seen with complete knowledge.",
+        "appears_at_nodes": ["MU_N08_NEW_UNDERSTANDING"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "mcguffin",
+        "label": "The Central Puzzle",
+        "definition": "The mystery itself — a crime, disappearance, anomaly, or question that drives investigation.",
+        "appears_at_nodes": ["MU_N02_QUESTION_POSED", "MU_N06_BREAKTHROUGH", "MU_N07_CONFRONTATION"],
+        "required": true
+      },
+      {
+        "type": "document",
+        "label": "The Clues",
+        "definition": "Physical or testimonial evidence that, when assembled, reveals the truth.",
+        "appears_at_nodes": ["MU_N03_INITIAL_CLUES", "MU_N04_FALSE_TRAIL", "MU_N05_DEEPENING", "MU_N06_BREAKTHROUGH"],
+        "required": true
+      },
+      {
+        "type": "key",
+        "label": "The Breakthrough Key",
+        "definition": "The final piece of evidence or insight that unlocks the solution.",
+        "appears_at_nodes": ["MU_N06_BREAKTHROUGH"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "MU_N01_SURFACE_ORDER",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "MU_N02_QUESTION_POSED",
+      "expected_participants": {
+        "characters": ["protagonist", "herald"],
+        "places": ["ordinary_world"],
+        "objects": ["mcguffin"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "MU_N03_INITIAL_CLUES",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "shapeshifter", "confidant"],
+        "places": ["special_world"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "gains", "target_role": "document" }
+      ]
+    },
+    {
+      "archetype_node": "MU_N04_FALSE_TRAIL",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "shapeshifter"],
+        "places": ["special_world"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "MU_N05_DEEPENING",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "shapeshifter", "confidant"],
+        "places": ["special_world"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "reveals" }
+      ]
+    },
+    {
+      "archetype_node": "MU_N06_BREAKTHROUGH",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "confidant"],
+        "places": ["underworld"],
+        "objects": ["document", "key", "mcguffin"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "gains", "target_role": "key" }
+      ]
+    },
+    {
+      "archetype_node": "MU_N07_CONFRONTATION",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist"],
+        "places": ["underworld"],
+        "objects": ["mcguffin"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "antagonist", "change": "reveals" }
+      ]
+    },
+    {
+      "archetype_node": "MU_N08_NEW_UNDERSTANDING",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["home"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    }
+  ]
+}

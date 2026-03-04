@@ -53,32 +53,32 @@ This plan breaks the Story Elements & Timelines specification into 6 implementat
 
 Each `elements.json` contains: archetype ID, element templates (characters, places, objects with roles/types, labels, definitions, `appears_at_nodes`, required flag), and a template timeline (expected participants and transitions per archetype node).
 
-- [ ] Author `data/archetypes/01_heros_journey/elements.json`
-- [ ] Author `data/archetypes/02_rags_to_riches/elements.json`
-- [ ] Author `data/archetypes/03_the_quest/elements.json`
-- [ ] Author `data/archetypes/04_voyage_and_return/elements.json`
-- [ ] Author `data/archetypes/05_overcoming_the_monster/elements.json`
-- [ ] Author `data/archetypes/06_rebirth/elements.json`
-- [ ] Author `data/archetypes/07_tragedy/elements.json`
-- [ ] Author `data/archetypes/08_comedy/elements.json`
-- [ ] Author `data/archetypes/09_coming_of_age/elements.json`
-- [ ] Author `data/archetypes/10_the_revenge/elements.json`
-- [ ] Author `data/archetypes/11_the_escape/elements.json`
-- [ ] Author `data/archetypes/12_the_sacrifice/elements.json`
-- [ ] Author `data/archetypes/13_the_mystery_unveiled/elements.json`
-- [ ] Author `data/archetypes/14_the_transformation/elements.json`
-- [ ] Author `data/archetypes/15_the_rise_and_fall/elements.json`
+- [X] Author `data/archetypes/01_heros_journey/elements.json`
+- [X] Author `data/archetypes/02_rags_to_riches/elements.json`
+- [X] Author `data/archetypes/03_the_quest/elements.json`
+- [X] Author `data/archetypes/04_voyage_and_return/elements.json`
+- [X] Author `data/archetypes/05_overcoming_the_monster/elements.json`
+- [X] Author `data/archetypes/06_rebirth/elements.json`
+- [X] Author `data/archetypes/07_tragedy/elements.json`
+- [X] Author `data/archetypes/08_comedy/elements.json`
+- [X] Author `data/archetypes/09_coming_of_age/elements.json`
+- [X] Author `data/archetypes/10_the_revenge/elements.json`
+- [X] Author `data/archetypes/11_the_escape/elements.json`
+- [X] Author `data/archetypes/12_the_sacrifice/elements.json`
+- [X] Author `data/archetypes/13_the_mystery_unveiled/elements.json`
+- [X] Author `data/archetypes/14_the_transformation/elements.json`
+- [X] Author `data/archetypes/15_the_rise_and_fall/elements.json`
 
 ### Cross-Reference
 
-- [ ] Build `data/cross_references/element_role_index.json` — which character roles, place types, and object types appear across all 15 archetypes (analogous to `cross_archetype_index.json`)
+- [X] Build `data/cross_references/element_role_index.json` — which character roles, place types, and object types appear across all 15 archetypes (analogous to `cross_archetype_index.json`)
 
 ### Validation
 
-- [ ] Validate: every archetype node is referenced by at least one element template's `appears_at_nodes`
-- [ ] Validate: all character roles, place types, and object types used in templates exist in the controlled vocabularies
-- [ ] Validate: all node IDs referenced in `appears_at_nodes` and template timelines exist in the corresponding `graph.json`
-- [ ] Validate: every template timeline entry references a valid archetype node
+- [X] Validate: every archetype node is referenced by at least one element template's `appears_at_nodes`
+- [X] Validate: all character roles, place types, and object types used in templates exist in the controlled vocabularies
+- [X] Validate: all node IDs referenced in `appears_at_nodes` and template timelines exist in the corresponding `graph.json`
+- [X] Validate: every template timeline entry references a valid archetype node
 
 **Deliverable**: 15 `elements.json` files (one per archetype), 1 `element_role_index.json` cross-reference, all validated against graph data and controlled vocabularies.
 

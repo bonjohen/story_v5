@@ -1,0 +1,196 @@
+{
+  "archetype_id": "archetype_02_rags_to_riches",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Underdog",
+        "definition": "A person of low status whose inherent worth is unrecognized — will rise through character rather than circumstance alone.",
+        "appears_at_nodes": ["RR_N01_LOWLY_STATE", "RR_N02_OPPORTUNITY", "RR_N03_INITIAL_RISE", "RR_N04_SOCIAL_TRIALS", "RR_N05_APPARENT_PEAK", "RR_N06_CRISIS_OF_WORTH", "RR_N07_PROOF_OF_CHARACTER", "RR_N08_TRUE_ELEVATION"],
+        "required": true
+      },
+      {
+        "role": "mentor",
+        "label": "The Benefactor",
+        "definition": "A figure who provides the initial opportunity or resources that enable the protagonist's rise.",
+        "appears_at_nodes": ["RR_N02_OPPORTUNITY", "RR_N03_INITIAL_RISE"],
+        "required": false
+      },
+      {
+        "role": "antagonist",
+        "label": "The Rival / Gatekeeper",
+        "definition": "A figure of established status who resists or tests the protagonist's claim to elevation.",
+        "appears_at_nodes": ["RR_N04_SOCIAL_TRIALS", "RR_N05_APPARENT_PEAK", "RR_N06_CRISIS_OF_WORTH"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Loyal Friend",
+        "definition": "A companion who knew the protagonist in their lowly state and provides grounding during the rise.",
+        "appears_at_nodes": ["RR_N01_LOWLY_STATE", "RR_N04_SOCIAL_TRIALS", "RR_N06_CRISIS_OF_WORTH", "RR_N07_PROOF_OF_CHARACTER"],
+        "required": false
+      },
+      {
+        "role": "love_interest",
+        "label": "The Prize / Partner",
+        "definition": "A romantic figure whose acceptance represents the protagonist's full integration into the new world.",
+        "appears_at_nodes": ["RR_N03_INITIAL_RISE", "RR_N05_APPARENT_PEAK", "RR_N08_TRUE_ELEVATION"],
+        "required": false
+      },
+      {
+        "role": "foil",
+        "label": "The Undeserving Rival",
+        "definition": "A character who holds high status without merit, contrasting with the protagonist's earned worth.",
+        "appears_at_nodes": ["RR_N04_SOCIAL_TRIALS", "RR_N06_CRISIS_OF_WORTH"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Lowly Setting",
+        "definition": "The protagonist's starting environment of poverty, obscurity, or oppression.",
+        "appears_at_nodes": ["RR_N01_LOWLY_STATE"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Elevated World",
+        "definition": "The world of wealth, status, or privilege that the protagonist enters.",
+        "appears_at_nodes": ["RR_N03_INITIAL_RISE", "RR_N04_SOCIAL_TRIALS", "RR_N05_APPARENT_PEAK"],
+        "required": true
+      },
+      {
+        "type": "summit",
+        "label": "The Pinnacle",
+        "definition": "The place representing peak status — where the protagonist appears to have arrived.",
+        "appears_at_nodes": ["RR_N05_APPARENT_PEAK"],
+        "required": false
+      },
+      {
+        "type": "crossroads",
+        "label": "The Testing Ground",
+        "definition": "The place where the protagonist's true character is tested and worth is proven.",
+        "appears_at_nodes": ["RR_N06_CRISIS_OF_WORTH", "RR_N07_PROOF_OF_CHARACTER"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "key",
+        "label": "The Opportunity Token",
+        "definition": "Whatever provides initial access to the elevated world — an invitation, inheritance, discovery, or talent.",
+        "appears_at_nodes": ["RR_N02_OPPORTUNITY", "RR_N03_INITIAL_RISE"],
+        "required": true
+      },
+      {
+        "type": "symbol",
+        "label": "The Status Symbol",
+        "definition": "An object representing the protagonist's new status — may be given, earned, or seized.",
+        "appears_at_nodes": ["RR_N05_APPARENT_PEAK", "RR_N06_CRISIS_OF_WORTH", "RR_N08_TRUE_ELEVATION"],
+        "required": false
+      },
+      {
+        "type": "relic",
+        "label": "The Humble Origin Token",
+        "definition": "An object from the protagonist's former life that grounds them — a reminder of who they truly are.",
+        "appears_at_nodes": ["RR_N01_LOWLY_STATE", "RR_N06_CRISIS_OF_WORTH", "RR_N07_PROOF_OF_CHARACTER"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "RR_N01_LOWLY_STATE",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["ordinary_world"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "RR_N02_OPPORTUNITY",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor"],
+        "places": ["ordinary_world"],
+        "objects": ["key"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "key" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "RR_N03_INITIAL_RISE",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor", "love_interest"],
+        "places": ["special_world"],
+        "objects": ["key"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "special_world" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    },
+    {
+      "archetype_node": "RR_N04_SOCIAL_TRIALS",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "foil"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "RR_N05_APPARENT_PEAK",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "love_interest"],
+        "places": ["summit"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "symbol" }
+      ]
+    },
+    {
+      "archetype_node": "RR_N06_CRISIS_OF_WORTH",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "foil"],
+        "places": ["crossroads"],
+        "objects": ["symbol", "relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses", "target_role": "symbol" },
+        { "role": "protagonist", "change": "reveals" }
+      ]
+    },
+    {
+      "archetype_node": "RR_N07_PROOF_OF_CHARACTER",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["crossroads"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    },
+    {
+      "archetype_node": "RR_N08_TRUE_ELEVATION",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["special_world"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "symbol" }
+      ]
+    }
+  ]
+}

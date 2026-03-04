@@ -1,0 +1,180 @@
+{
+  "archetype_id": "archetype_09_coming_of_age",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Youth",
+        "definition": "A young or naïve character whose worldview is challenged and reshaped through experience.",
+        "appears_at_nodes": ["CA_N01_INNOCENCE", "CA_N02_FIRST_EXPOSURE", "CA_N03_TESTING_GROUND", "CA_N04_MENTOR_OR_MODEL", "CA_N05_CRISIS_OF_IDENTITY", "CA_N06_LOSS_OF_INNOCENCE", "CA_N07_NEW_MATURITY"],
+        "required": true
+      },
+      {
+        "role": "mentor",
+        "label": "The Mentor / Role Model",
+        "definition": "An older or more experienced figure who models adult behavior — may be admirable or flawed.",
+        "appears_at_nodes": ["CA_N04_MENTOR_OR_MODEL", "CA_N05_CRISIS_OF_IDENTITY"],
+        "required": true
+      },
+      {
+        "role": "ally",
+        "label": "The Peer",
+        "definition": "A friend of similar age who shares the journey of growing up — a mirror for the protagonist's development.",
+        "appears_at_nodes": ["CA_N01_INNOCENCE", "CA_N03_TESTING_GROUND", "CA_N05_CRISIS_OF_IDENTITY", "CA_N07_NEW_MATURITY"],
+        "required": false
+      },
+      {
+        "role": "foil",
+        "label": "The Alternative Path",
+        "definition": "A peer who responds to the same pressures differently, showing what the protagonist could become.",
+        "appears_at_nodes": ["CA_N03_TESTING_GROUND", "CA_N05_CRISIS_OF_IDENTITY"],
+        "required": false
+      },
+      {
+        "role": "antagonist",
+        "label": "The Adult World",
+        "definition": "The force that imposes adult expectations, cruelty, or complexity on the protagonist — may be a person or system.",
+        "appears_at_nodes": ["CA_N02_FIRST_EXPOSURE", "CA_N03_TESTING_GROUND", "CA_N06_LOSS_OF_INNOCENCE"],
+        "required": true
+      },
+      {
+        "role": "love_interest",
+        "label": "The First Love",
+        "definition": "A character who awakens romantic feeling, creating new vulnerability and new understanding.",
+        "appears_at_nodes": ["CA_N03_TESTING_GROUND", "CA_N05_CRISIS_OF_IDENTITY"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Sheltered World",
+        "definition": "The protected environment of childhood — home, school, or community that shields from adult complexity.",
+        "appears_at_nodes": ["CA_N01_INNOCENCE"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Testing Ground",
+        "definition": "The wider world where the protagonist encounters adult reality — school, first job, new community.",
+        "appears_at_nodes": ["CA_N02_FIRST_EXPOSURE", "CA_N03_TESTING_GROUND"],
+        "required": true
+      },
+      {
+        "type": "crossroads",
+        "label": "The Identity Crossroads",
+        "definition": "The moment/place where the protagonist must choose who they are becoming.",
+        "appears_at_nodes": ["CA_N05_CRISIS_OF_IDENTITY"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Mature World",
+        "definition": "The same world seen with adult eyes — familiar but fundamentally different in meaning.",
+        "appears_at_nodes": ["CA_N07_NEW_MATURITY"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "symbol",
+        "label": "The Childhood Token",
+        "definition": "An object from childhood whose loss or setting aside marks the transition to maturity.",
+        "appears_at_nodes": ["CA_N01_INNOCENCE", "CA_N06_LOSS_OF_INNOCENCE"],
+        "required": false
+      },
+      {
+        "type": "relic",
+        "label": "The Adult Marker",
+        "definition": "An object that signifies entry into the adult world — a key, diploma, uniform, or tool of trade.",
+        "appears_at_nodes": ["CA_N07_NEW_MATURITY"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "CA_N01_INNOCENCE",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["ordinary_world"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "CA_N02_FIRST_EXPOSURE",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "arrives", "target_role": "special_world" }
+      ]
+    },
+    {
+      "archetype_node": "CA_N03_TESTING_GROUND",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "foil", "antagonist", "love_interest"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" }
+      ]
+    },
+    {
+      "archetype_node": "CA_N04_MENTOR_OR_MODEL",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor"],
+        "places": ["special_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "bonds", "target_role": "mentor" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "CA_N05_CRISIS_OF_IDENTITY",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor", "ally", "foil", "love_interest"],
+        "places": ["crossroads"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "CA_N06_LOSS_OF_INNOCENCE",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist"],
+        "places": ["special_world"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses", "target_role": "symbol" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    },
+    {
+      "archetype_node": "CA_N07_NEW_MATURITY",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["home"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "relic" },
+        { "role": "protagonist", "change": "transforms" }
+      ]
+    }
+  ]
+}

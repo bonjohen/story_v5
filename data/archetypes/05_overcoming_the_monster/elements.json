@@ -1,0 +1,197 @@
+{
+  "archetype_id": "archetype_05_overcoming_the_monster",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Monster Slayer",
+        "definition": "The hero who steps forward to confront a threat that endangers the community.",
+        "appears_at_nodes": ["OM_N01_PEACEFUL_STATE", "OM_N02_MONSTER_REVEALED", "OM_N03_CALL_TO_CONFRONT", "OM_N04_PREPARATION", "OM_N05_INITIAL_ENCOUNTER", "OM_N06_NIGHTMARE", "OM_N07_FINAL_CONFRONT", "OM_N08_WORLD_RESTORED"],
+        "required": true
+      },
+      {
+        "role": "antagonist",
+        "label": "The Monster",
+        "definition": "The overwhelming threat — a creature, tyrant, or destructive force that imperils the world.",
+        "appears_at_nodes": ["OM_N02_MONSTER_REVEALED", "OM_N05_INITIAL_ENCOUNTER", "OM_N06_NIGHTMARE", "OM_N07_FINAL_CONFRONT"],
+        "required": true
+      },
+      {
+        "role": "mentor",
+        "label": "The Wise Counselor",
+        "definition": "A figure who provides knowledge about the monster's weakness or the strategy to defeat it.",
+        "appears_at_nodes": ["OM_N03_CALL_TO_CONFRONT", "OM_N04_PREPARATION"],
+        "required": false
+      },
+      {
+        "role": "ally",
+        "label": "The War Band",
+        "definition": "Companions who join the fight against the monster, providing support and shared risk.",
+        "appears_at_nodes": ["OM_N04_PREPARATION", "OM_N05_INITIAL_ENCOUNTER", "OM_N06_NIGHTMARE", "OM_N07_FINAL_CONFRONT"],
+        "required": false
+      },
+      {
+        "role": "herald",
+        "label": "The Warning Voice",
+        "definition": "Whoever first reveals the monster's existence or the scale of the threat.",
+        "appears_at_nodes": ["OM_N02_MONSTER_REVEALED"],
+        "required": false
+      },
+      {
+        "role": "love_interest",
+        "label": "The Protected One",
+        "definition": "A person the hero is particularly motivated to protect from the monster.",
+        "appears_at_nodes": ["OM_N01_PEACEFUL_STATE", "OM_N03_CALL_TO_CONFRONT", "OM_N08_WORLD_RESTORED"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Peaceful Community",
+        "definition": "The settled world under threat — what the hero fights to protect.",
+        "appears_at_nodes": ["OM_N01_PEACEFUL_STATE", "OM_N02_MONSTER_REVEALED"],
+        "required": true
+      },
+      {
+        "type": "sanctuary",
+        "label": "The Preparation Ground",
+        "definition": "The safe space where the hero trains, gathers intelligence, and builds the war band.",
+        "appears_at_nodes": ["OM_N04_PREPARATION"],
+        "required": false
+      },
+      {
+        "type": "stronghold",
+        "label": "The Monster's Domain",
+        "definition": "The lair, territory, or seat of power where the monster is strongest.",
+        "appears_at_nodes": ["OM_N05_INITIAL_ENCOUNTER", "OM_N06_NIGHTMARE", "OM_N07_FINAL_CONFRONT"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Restored World",
+        "definition": "The community freed from the monster's shadow — peace reclaimed.",
+        "appears_at_nodes": ["OM_N08_WORLD_RESTORED"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "weapon",
+        "label": "The Monster-Slaying Weapon",
+        "definition": "The specific weapon or tool that can defeat the monster — often the only thing that can.",
+        "appears_at_nodes": ["OM_N04_PREPARATION", "OM_N07_FINAL_CONFRONT"],
+        "required": true
+      },
+      {
+        "type": "document",
+        "label": "The Monster's Secret",
+        "definition": "Knowledge of the monster's weakness — a vulnerability, pattern, or limitation that can be exploited.",
+        "appears_at_nodes": ["OM_N04_PREPARATION", "OM_N06_NIGHTMARE"],
+        "required": false
+      },
+      {
+        "type": "talisman",
+        "label": "The Protective Ward",
+        "definition": "An item that provides defense or courage against the monster's power.",
+        "appears_at_nodes": ["OM_N04_PREPARATION", "OM_N05_INITIAL_ENCOUNTER"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "OM_N01_PEACEFUL_STATE",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "OM_N02_MONSTER_REVEALED",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "herald"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "OM_N03_CALL_TO_CONFRONT",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor", "love_interest"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "OM_N04_PREPARATION",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor", "ally"],
+        "places": ["sanctuary"],
+        "objects": ["weapon", "document", "talisman"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "weapon" },
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" }
+      ]
+    },
+    {
+      "archetype_node": "OM_N05_INITIAL_ENCOUNTER",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally"],
+        "places": ["stronghold"],
+        "objects": ["weapon", "talisman"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "stronghold" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "OM_N06_NIGHTMARE",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally"],
+        "places": ["stronghold"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "OM_N07_FINAL_CONFRONT",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally"],
+        "places": ["stronghold"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "antagonist", "change": "dies" }
+      ]
+    },
+    {
+      "archetype_node": "OM_N08_WORLD_RESTORED",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest", "ally"],
+        "places": ["home"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "home" }
+      ]
+    }
+  ]
+}

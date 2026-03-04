@@ -1,0 +1,212 @@
+{
+  "archetype_id": "archetype_15_the_rise_and_fall",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Ascender",
+        "definition": "A character who rises from humble origins to great power, then falls through the consequences of their rise.",
+        "appears_at_nodes": ["RF_N01_HUMBLE_ORIGIN", "RF_N02_FIRST_OPPORTUNITY", "RF_N03_RAPID_ASCENT", "RF_N04_PEAK_OF_POWER", "RF_N05_CRACKS_FORM", "RF_N06_DESPERATE_GRIP", "RF_N07_FALL", "RF_N08_LEGACY"],
+        "required": true
+      },
+      {
+        "role": "antagonist",
+        "label": "The Rival / Nemesis",
+        "definition": "A competing force that either facilitates the fall or represents what the protagonist becomes.",
+        "appears_at_nodes": ["RF_N03_RAPID_ASCENT", "RF_N05_CRACKS_FORM", "RF_N06_DESPERATE_GRIP", "RF_N07_FALL"],
+        "required": false
+      },
+      {
+        "role": "ally",
+        "label": "The Early Ally",
+        "definition": "A loyal supporter from the protagonist's humble origins who is often abandoned during the ascent.",
+        "appears_at_nodes": ["RF_N01_HUMBLE_ORIGIN", "RF_N02_FIRST_OPPORTUNITY", "RF_N03_RAPID_ASCENT", "RF_N05_CRACKS_FORM"],
+        "required": false
+      },
+      {
+        "role": "confidant",
+        "label": "The Inner Circle",
+        "definition": "A trusted advisor who sees the cracks forming and may try to warn the protagonist.",
+        "appears_at_nodes": ["RF_N04_PEAK_OF_POWER", "RF_N05_CRACKS_FORM", "RF_N06_DESPERATE_GRIP"],
+        "required": false
+      },
+      {
+        "role": "love_interest",
+        "label": "The Lost Connection",
+        "definition": "A romantic figure whose relationship with the protagonist is strained or destroyed by the rise.",
+        "appears_at_nodes": ["RF_N01_HUMBLE_ORIGIN", "RF_N04_PEAK_OF_POWER", "RF_N05_CRACKS_FORM", "RF_N08_LEGACY"],
+        "required": false
+      },
+      {
+        "role": "shadow",
+        "label": "The Corrupted Self",
+        "definition": "What the protagonist becomes at the height of power — the version of themselves they wouldn't recognize from the start.",
+        "appears_at_nodes": ["RF_N04_PEAK_OF_POWER", "RF_N05_CRACKS_FORM", "RF_N06_DESPERATE_GRIP"],
+        "required": true
+      },
+      {
+        "role": "foil",
+        "label": "The Humble Counterpart",
+        "definition": "A character who chose a different path — stayed humble, stayed honest — and survives the protagonist's fall.",
+        "appears_at_nodes": ["RF_N01_HUMBLE_ORIGIN", "RF_N08_LEGACY"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Humble Origin",
+        "definition": "The modest starting environment — poverty, obscurity, or insignificance.",
+        "appears_at_nodes": ["RF_N01_HUMBLE_ORIGIN"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Arena of Power",
+        "definition": "The competitive world where the protagonist rises — business, politics, crime, fame.",
+        "appears_at_nodes": ["RF_N02_FIRST_OPPORTUNITY", "RF_N03_RAPID_ASCENT"],
+        "required": true
+      },
+      {
+        "type": "summit",
+        "label": "The Peak",
+        "definition": "The pinnacle of the protagonist's power and influence — the highest point before the fall.",
+        "appears_at_nodes": ["RF_N04_PEAK_OF_POWER"],
+        "required": true
+      },
+      {
+        "type": "stronghold",
+        "label": "The Fortress",
+        "definition": "The defensive position the protagonist clings to as power erodes.",
+        "appears_at_nodes": ["RF_N05_CRACKS_FORM", "RF_N06_DESPERATE_GRIP"],
+        "required": false
+      },
+      {
+        "type": "wasteland",
+        "label": "The Ruins",
+        "definition": "What remains after the fall — the destroyed empire, the empty throne.",
+        "appears_at_nodes": ["RF_N07_FALL", "RF_N08_LEGACY"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "treasure",
+        "label": "The Prize of Power",
+        "definition": "Whatever the protagonist gains through their rise — wealth, title, territory, fame.",
+        "appears_at_nodes": ["RF_N02_FIRST_OPPORTUNITY", "RF_N03_RAPID_ASCENT", "RF_N04_PEAK_OF_POWER", "RF_N07_FALL"],
+        "required": true
+      },
+      {
+        "type": "symbol",
+        "label": "The Crown",
+        "definition": "The emblem of the protagonist's power — its seizure, wearing, and loss track the arc.",
+        "appears_at_nodes": ["RF_N04_PEAK_OF_POWER", "RF_N06_DESPERATE_GRIP", "RF_N07_FALL"],
+        "required": false
+      },
+      {
+        "type": "relic",
+        "label": "The Humble Origin Token",
+        "definition": "An object from the protagonist's modest beginnings — forgotten during the rise, rediscovered in the fall.",
+        "appears_at_nodes": ["RF_N01_HUMBLE_ORIGIN", "RF_N08_LEGACY"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "RF_N01_HUMBLE_ORIGIN",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "love_interest", "foil"],
+        "places": ["ordinary_world"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "RF_N02_FIRST_OPPORTUNITY",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["special_world"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "special_world" },
+        { "role": "protagonist", "change": "gains", "target_role": "treasure" }
+      ]
+    },
+    {
+      "archetype_node": "RF_N03_RAPID_ASCENT",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally"],
+        "places": ["special_world"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "protagonist", "change": "gains" }
+      ]
+    },
+    {
+      "archetype_node": "RF_N04_PEAK_OF_POWER",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow", "confidant", "love_interest"],
+        "places": ["summit"],
+        "objects": ["treasure", "symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "symbol" }
+      ]
+    },
+    {
+      "archetype_node": "RF_N05_CRACKS_FORM",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "ally", "shadow", "confidant", "love_interest"],
+        "places": ["stronghold"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" },
+        { "role": "protagonist", "change": "breaks", "target_role": "ally" },
+        { "role": "protagonist", "change": "breaks", "target_role": "love_interest" }
+      ]
+    },
+    {
+      "archetype_node": "RF_N06_DESPERATE_GRIP",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "shadow", "confidant"],
+        "places": ["stronghold"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" },
+        { "role": "protagonist", "change": "loses" }
+      ]
+    },
+    {
+      "archetype_node": "RF_N07_FALL",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist"],
+        "places": ["wasteland"],
+        "objects": ["treasure", "symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses", "target_role": "treasure" },
+        { "role": "protagonist", "change": "loses", "target_role": "symbol" }
+      ]
+    },
+    {
+      "archetype_node": "RF_N08_LEGACY",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest", "foil"],
+        "places": ["wasteland"],
+        "objects": ["relic"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "reveals" }
+      ]
+    }
+  ]
+}

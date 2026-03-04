@@ -1,0 +1,1412 @@
+{
+  "title": "Cross-Archetype Element Role Index",
+  "description": "Tracks which character roles, place types, and object types appear across all 15 archetype element templates. Analogous to cross_archetype_index.json for node roles and edge meanings.",
+  "_metadata": {
+    "generated": "2026-03-04",
+    "archetype_count": 15,
+    "character_roles_used": 13,
+    "place_types_used": 10,
+    "object_types_used": 10
+  },
+  "character_roles": [
+    {
+      "role": "protagonist",
+      "usage_count": 15,
+      "required_count": 15,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Hero",
+          "required": true,
+          "appears_at_node_count": 11
+        },
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Underdog",
+          "required": true,
+          "appears_at_node_count": 8
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Seeker",
+          "required": true,
+          "appears_at_node_count": 9
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Traveler",
+          "required": true,
+          "appears_at_node_count": 7
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Monster Slayer",
+          "required": true,
+          "appears_at_node_count": 8
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Fallen One",
+          "required": true,
+          "appears_at_node_count": 7
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Tragic Figure",
+          "required": true,
+          "appears_at_node_count": 8
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Constrained One",
+          "required": true,
+          "appears_at_node_count": 7
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Youth",
+          "required": true,
+          "appears_at_node_count": 7
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Avenger",
+          "required": true,
+          "appears_at_node_count": 8
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Prisoner",
+          "required": true,
+          "appears_at_node_count": 7
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Sacrificer",
+          "required": true,
+          "appears_at_node_count": 7
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Investigator",
+          "required": true,
+          "appears_at_node_count": 8
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The One Who Changes",
+          "required": true,
+          "appears_at_node_count": 7
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Ascender",
+          "required": true,
+          "appears_at_node_count": 8
+        }
+      ]
+    },
+    {
+      "role": "ally",
+      "usage_count": 12,
+      "required_count": 1,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Companion",
+          "required": false,
+          "appears_at_node_count": 5
+        },
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Loyal Friend",
+          "required": false,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Faithful Companion",
+          "required": true,
+          "appears_at_node_count": 6
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Fellow Traveler",
+          "required": false,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The War Band",
+          "required": false,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Peer",
+          "required": false,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Co-conspirator",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Fellow Prisoner",
+          "required": false,
+          "appears_at_node_count": 5
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Supporter",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Partner",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Anchor",
+          "required": false,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Early Ally",
+          "required": false,
+          "appears_at_node_count": 4
+        }
+      ]
+    },
+    {
+      "role": "antagonist",
+      "usage_count": 12,
+      "required_count": 10,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Rival / Gatekeeper",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Opposing Force",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Ruler of the Strange World",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Monster",
+          "required": true,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Tempter / Corrupting Force",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Blocking Figure",
+          "required": true,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Adult World",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Wrongdoer",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Captor / System",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Threat",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Concealer",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Rival / Nemesis",
+          "required": false,
+          "appears_at_node_count": 4
+        }
+      ]
+    },
+    {
+      "role": "love_interest",
+      "usage_count": 9,
+      "required_count": 1,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Prize / Partner",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Protected One",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Beloved / Innocent",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Collateral Victim",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Beloved",
+          "required": false,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The First Love",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Victim / Loved One",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Beloved / Protected One",
+          "required": true,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Lost Connection",
+          "required": false,
+          "appears_at_node_count": 4
+        }
+      ]
+    },
+    {
+      "role": "mentor",
+      "usage_count": 8,
+      "required_count": 2,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Mentor",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Benefactor",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Guide",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Wise Counselor",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Redeemer Figure",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Mentor / Role Model",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Prior Sacrificer",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Guide Through Change",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "role": "herald",
+      "usage_count": 7,
+      "required_count": 3,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Herald",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Summoner",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Warning Voice",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Warning Voice",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Omen / Prophecy",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Question-Poser",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Catalyst Agent",
+          "required": true,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "role": "foil",
+      "usage_count": 6,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Undeserving Rival",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Counter-Example",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Alternative Path",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Voice of Mercy",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Unchanged One",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Humble Counterpart",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "role": "shadow",
+      "usage_count": 5,
+      "required_count": 4,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Shadow / Antagonist",
+          "required": true,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Former Self",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Dark Mirror",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Inner Demon / Old Self",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Corrupted Self",
+          "required": true,
+          "appears_at_node_count": 3
+        }
+      ]
+    },
+    {
+      "role": "trickster",
+      "usage_count": 5,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Trickster",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Clever Companion",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Strange World Native",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Agent of Chaos",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Inside Operator",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "role": "confidant",
+      "usage_count": 5,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Witness",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Trusted Advisor",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Sidekick / Confidant",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Witness",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Inner Circle",
+          "required": false,
+          "appears_at_node_count": 3
+        }
+      ]
+    },
+    {
+      "role": "shapeshifter",
+      "usage_count": 4,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Shapeshifter",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Ambiguous Ally",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Informant",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Suspect",
+          "required": false,
+          "appears_at_node_count": 3
+        }
+      ]
+    },
+    {
+      "role": "threshold_guardian",
+      "usage_count": 3,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Threshold Guardian",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Gatekeeper",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Guard / Warden",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "role": "comic_relief",
+      "usage_count": 1,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Fool",
+          "required": false,
+          "appears_at_node_count": 3
+        }
+      ]
+    }
+  ],
+  "place_types": [
+    {
+      "type": "ordinary_world",
+      "usage_count": 12,
+      "required_count": 12,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Ordinary World",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Lowly Setting",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "Home Ground",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Familiar World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Peaceful Community",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Constrained Setting",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Sheltered World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The World Before",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Valued Life",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Surface Order",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Fixed World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Humble Origin",
+          "required": true,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "home",
+      "usage_count": 11,
+      "required_count": 11,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Ordinary World (Return)",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "Home (Return)",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Familiar World (Return)",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Restored World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Renewed World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Renewed Community",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Mature World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Free World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Saved World",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The New Understanding",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The New World",
+          "required": true,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "special_world",
+      "usage_count": 10,
+      "required_count": 10,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Special World",
+          "required": true,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Elevated World",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Journey Lands",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Strange World",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Chaos Zone",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Testing Ground",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Pursuit Ground",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Investigation Territory",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Liminal Space",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Arena of Power",
+          "required": true,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "type": "stronghold",
+      "usage_count": 7,
+      "required_count": 5,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Final Destination",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Monster's Domain",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Throne / Arena",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Reckoning Ground",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Prison",
+          "required": true,
+          "appears_at_node_count": 5
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Sacrifice Ground",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Fortress",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "type": "crossroads",
+      "usage_count": 6,
+      "required_count": 6,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Testing Ground",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Turning Point",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Decision Point",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Identity Crossroads",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Moral Crossroads",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Decision Point",
+          "required": true,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "underworld",
+      "usage_count": 4,
+      "required_count": 4,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Inmost Cave",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Ordeal Ground",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Hidden Truth",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Crucible",
+          "required": true,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "wasteland",
+      "usage_count": 4,
+      "required_count": 4,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Fallen State Setting",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Ruins",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Scene of the Crime",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Ruins",
+          "required": true,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "type": "threshold",
+      "usage_count": 3,
+      "required_count": 3,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Threshold",
+          "required": true,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Passage",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Exit Point",
+          "required": true,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "summit",
+      "usage_count": 3,
+      "required_count": 2,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Pinnacle",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Seat of Power",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Peak",
+          "required": true,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "sanctuary",
+      "usage_count": 2,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Rest Point",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Preparation Ground",
+          "required": false,
+          "appears_at_node_count": 1
+        }
+      ]
+    }
+  ],
+  "object_types": [
+    {
+      "type": "symbol",
+      "usage_count": 9,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Status Symbol",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Souvenir",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Symbol of Decay",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Crown / Emblem of Power",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Wedding / Feast Token",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Childhood Token",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Bond Token",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Identity Marker",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Crown",
+          "required": false,
+          "appears_at_node_count": 3
+        }
+      ]
+    },
+    {
+      "type": "relic",
+      "usage_count": 6,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Humble Origin Token",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_06_rebirth",
+          "label": "The Memory of Goodness",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_09_coming_of_age",
+          "label": "The Adult Marker",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Token of the Wrong",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Memorial",
+          "required": false,
+          "appears_at_node_count": 1
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Humble Origin Token",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "type": "weapon",
+      "usage_count": 5,
+      "required_count": 2,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Hero's Weapon",
+          "required": false,
+          "appears_at_node_count": 4
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Monster-Slaying Weapon",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Instrument of Destruction",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_10_the_revenge",
+          "label": "The Instrument of Vengeance",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_12_the_sacrifice",
+          "label": "The Means of Sacrifice",
+          "required": false,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "document",
+      "usage_count": 5,
+      "required_count": 1,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Map / Guide",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Monster's Secret",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_07_tragedy",
+          "label": "The Evidence / Prophecy",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Plan",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Clues",
+          "required": true,
+          "appears_at_node_count": 4
+        }
+      ]
+    },
+    {
+      "type": "key",
+      "usage_count": 4,
+      "required_count": 2,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_02_rags_to_riches",
+          "label": "The Opportunity Token",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Way Back",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Access",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Breakthrough Key",
+          "required": false,
+          "appears_at_node_count": 1
+        }
+      ]
+    },
+    {
+      "type": "talisman",
+      "usage_count": 3,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Mentor's Gift",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Quest Token",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_05_overcoming_the_monster",
+          "label": "The Protective Ward",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "type": "treasure",
+      "usage_count": 3,
+      "required_count": 3,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_01_heros_journey",
+          "label": "The Elixir / Reward",
+          "required": true,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_03_the_quest",
+          "label": "The Objective",
+          "required": true,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_15_the_rise_and_fall",
+          "label": "The Prize of Power",
+          "required": true,
+          "appears_at_node_count": 4
+        }
+      ]
+    },
+    {
+      "type": "vessel",
+      "usage_count": 2,
+      "required_count": 0,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_04_voyage_and_return",
+          "label": "The Transport",
+          "required": false,
+          "appears_at_node_count": 2
+        },
+        {
+          "archetype_id": "archetype_14_the_transformation",
+          "label": "The Container of Change",
+          "required": false,
+          "appears_at_node_count": 2
+        }
+      ]
+    },
+    {
+      "type": "mcguffin",
+      "usage_count": 2,
+      "required_count": 1,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_08_comedy",
+          "label": "The Misunderstanding Object",
+          "required": false,
+          "appears_at_node_count": 3
+        },
+        {
+          "archetype_id": "archetype_13_the_mystery_unveiled",
+          "label": "The Central Puzzle",
+          "required": true,
+          "appears_at_node_count": 3
+        }
+      ]
+    },
+    {
+      "type": "tool",
+      "usage_count": 1,
+      "required_count": 1,
+      "archetypes": [
+        {
+          "archetype_id": "archetype_11_the_escape",
+          "label": "The Escape Tool",
+          "required": true,
+          "appears_at_node_count": 3
+        }
+      ]
+    }
+  ]
+}

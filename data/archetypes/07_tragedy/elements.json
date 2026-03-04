@@ -1,0 +1,195 @@
+{
+  "archetype_id": "archetype_07_tragedy",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Tragic Figure",
+        "definition": "A character of stature and capability whose fatal flaw or fatal choice drives them toward destruction.",
+        "appears_at_nodes": ["TR_N01_ELEVATED_STATE", "TR_N02_TEMPTATION", "TR_N03_FATAL_CHOICE", "TR_N04_APPARENT_SUCCESS", "TR_N05_UNRAVELING", "TR_N06_RECOGNITION", "TR_N07_DOWNFALL", "TR_N08_AFTERMATH"],
+        "required": true
+      },
+      {
+        "role": "antagonist",
+        "label": "The Tempter / Corrupting Force",
+        "definition": "The external pressure, opportunity, or character that activates the protagonist's fatal flaw.",
+        "appears_at_nodes": ["TR_N02_TEMPTATION", "TR_N03_FATAL_CHOICE", "TR_N04_APPARENT_SUCCESS"],
+        "required": false
+      },
+      {
+        "role": "confidant",
+        "label": "The Trusted Advisor",
+        "definition": "A character the protagonist confides in — may give good counsel that is ignored, or treacherous counsel that is followed.",
+        "appears_at_nodes": ["TR_N02_TEMPTATION", "TR_N03_FATAL_CHOICE", "TR_N05_UNRAVELING"],
+        "required": false
+      },
+      {
+        "role": "love_interest",
+        "label": "The Collateral Victim",
+        "definition": "A character whose bond with the protagonist makes the tragedy personal — often destroyed by the protagonist's choices.",
+        "appears_at_nodes": ["TR_N01_ELEVATED_STATE", "TR_N05_UNRAVELING", "TR_N07_DOWNFALL"],
+        "required": false
+      },
+      {
+        "role": "foil",
+        "label": "The Counter-Example",
+        "definition": "A character who faces similar pressures but makes different choices, highlighting the protagonist's fatal error.",
+        "appears_at_nodes": ["TR_N02_TEMPTATION", "TR_N04_APPARENT_SUCCESS", "TR_N08_AFTERMATH"],
+        "required": false
+      },
+      {
+        "role": "herald",
+        "label": "The Omen / Prophecy",
+        "definition": "A character or sign that warns of the consequences to come — ignored or misunderstood by the protagonist.",
+        "appears_at_nodes": ["TR_N02_TEMPTATION", "TR_N05_UNRAVELING"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "summit",
+        "label": "The Seat of Power",
+        "definition": "The position of authority, wealth, or achievement that the protagonist holds at the start.",
+        "appears_at_nodes": ["TR_N01_ELEVATED_STATE", "TR_N04_APPARENT_SUCCESS"],
+        "required": true
+      },
+      {
+        "type": "crossroads",
+        "label": "The Decision Point",
+        "definition": "The place or moment where the fatal choice is made — the last opportunity to turn back.",
+        "appears_at_nodes": ["TR_N03_FATAL_CHOICE"],
+        "required": true
+      },
+      {
+        "type": "wasteland",
+        "label": "The Ruins",
+        "definition": "What remains after the downfall — the destroyed world that the protagonist's choices created.",
+        "appears_at_nodes": ["TR_N07_DOWNFALL", "TR_N08_AFTERMATH"],
+        "required": true
+      },
+      {
+        "type": "stronghold",
+        "label": "The Throne / Arena",
+        "definition": "The place where the protagonist exercises power and where the unraveling becomes visible.",
+        "appears_at_nodes": ["TR_N04_APPARENT_SUCCESS", "TR_N05_UNRAVELING", "TR_N06_RECOGNITION"],
+        "required": false
+      }
+    ],
+    "objects": [
+      {
+        "type": "symbol",
+        "label": "The Crown / Emblem of Power",
+        "definition": "An object representing the protagonist's elevated status — its loss or corruption tracks the tragedy.",
+        "appears_at_nodes": ["TR_N01_ELEVATED_STATE", "TR_N04_APPARENT_SUCCESS", "TR_N07_DOWNFALL"],
+        "required": false
+      },
+      {
+        "type": "weapon",
+        "label": "The Instrument of Destruction",
+        "definition": "The means by which the protagonist enacts the fatal choice — may be literal or figurative.",
+        "appears_at_nodes": ["TR_N03_FATAL_CHOICE", "TR_N07_DOWNFALL"],
+        "required": false
+      },
+      {
+        "type": "document",
+        "label": "The Evidence / Prophecy",
+        "definition": "Information that foretells or reveals the consequences of the fatal choice.",
+        "appears_at_nodes": ["TR_N02_TEMPTATION", "TR_N05_UNRAVELING", "TR_N06_RECOGNITION"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "TR_N01_ELEVATED_STATE",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["summit"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "TR_N02_TEMPTATION",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "confidant", "herald", "foil"],
+        "places": ["summit"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "TR_N03_FATAL_CHOICE",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "confidant"],
+        "places": ["crossroads"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "TR_N04_APPARENT_SUCCESS",
+      "expected_participants": {
+        "characters": ["protagonist", "antagonist", "foil"],
+        "places": ["summit", "stronghold"],
+        "objects": ["symbol"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains" }
+      ]
+    },
+    {
+      "archetype_node": "TR_N05_UNRAVELING",
+      "expected_participants": {
+        "characters": ["protagonist", "confidant", "love_interest", "herald"],
+        "places": ["stronghold"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses" },
+        { "role": "protagonist", "change": "breaks", "target_role": "love_interest" }
+      ]
+    },
+    {
+      "archetype_node": "TR_N06_RECOGNITION",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["stronghold"],
+        "objects": ["document"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "reveals" }
+      ]
+    },
+    {
+      "archetype_node": "TR_N07_DOWNFALL",
+      "expected_participants": {
+        "characters": ["protagonist", "love_interest"],
+        "places": ["wasteland"],
+        "objects": ["symbol", "weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "loses", "target_role": "symbol" },
+        { "role": "protagonist", "change": "dies" }
+      ]
+    },
+    {
+      "archetype_node": "TR_N08_AFTERMATH",
+      "expected_participants": {
+        "characters": ["foil"],
+        "places": ["wasteland"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "foil", "change": "arrives", "target_role": "wasteland" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "archetype_id": "archetype_01_heros_journey",
+  "element_templates": {
+    "characters": [
+      {
+        "role": "protagonist",
+        "label": "The Hero",
+        "definition": "An ordinary person called to extraordinary action who undergoes transformation through trials and ordeal.",
+        "appears_at_nodes": ["HJ_N01_ORDINARY_WORLD", "HJ_N02_CALL_TO_ADVENTURE", "HJ_N03_MENTOR", "HJ_N04_THRESHOLD", "HJ_N05_TRIALS", "HJ_N06_APPROACH", "HJ_N07_ORDEAL", "HJ_N08_REWARD", "HJ_N09_ROAD_BACK", "HJ_N10_RESURRECTION", "HJ_N11_RETURN_ELIXIR"],
+        "required": true
+      },
+      {
+        "role": "mentor",
+        "label": "The Mentor",
+        "definition": "A wise figure who provides guidance, tools, or training before the hero faces the supreme ordeal.",
+        "appears_at_nodes": ["HJ_N03_MENTOR", "HJ_N05_TRIALS", "HJ_N07_ORDEAL"],
+        "required": true
+      },
+      {
+        "role": "shadow",
+        "label": "The Shadow / Antagonist",
+        "definition": "The primary opposing force — may be a person, system, or the hero's own dark potential.",
+        "appears_at_nodes": ["HJ_N05_TRIALS", "HJ_N06_APPROACH", "HJ_N07_ORDEAL", "HJ_N10_RESURRECTION"],
+        "required": true
+      },
+      {
+        "role": "herald",
+        "label": "The Herald",
+        "definition": "The force or character that delivers the call to adventure, shattering the ordinary world's complacency.",
+        "appears_at_nodes": ["HJ_N02_CALL_TO_ADVENTURE"],
+        "required": false
+      },
+      {
+        "role": "threshold_guardian",
+        "label": "The Threshold Guardian",
+        "definition": "A figure who tests the hero's readiness to enter the special world.",
+        "appears_at_nodes": ["HJ_N04_THRESHOLD"],
+        "required": false
+      },
+      {
+        "role": "ally",
+        "label": "The Companion",
+        "definition": "A loyal supporter who aids the hero through trials and provides emotional grounding.",
+        "appears_at_nodes": ["HJ_N04_THRESHOLD", "HJ_N05_TRIALS", "HJ_N06_APPROACH", "HJ_N07_ORDEAL", "HJ_N09_ROAD_BACK"],
+        "required": false
+      },
+      {
+        "role": "shapeshifter",
+        "label": "The Shapeshifter",
+        "definition": "A character whose loyalty or nature is ambiguous, creating uncertainty for the hero.",
+        "appears_at_nodes": ["HJ_N05_TRIALS", "HJ_N06_APPROACH", "HJ_N07_ORDEAL"],
+        "required": false
+      },
+      {
+        "role": "trickster",
+        "label": "The Trickster",
+        "definition": "A character who disrupts the status quo through wit or mischief, often catalyzing change indirectly.",
+        "appears_at_nodes": ["HJ_N05_TRIALS", "HJ_N09_ROAD_BACK"],
+        "required": false
+      }
+    ],
+    "places": [
+      {
+        "type": "ordinary_world",
+        "label": "The Ordinary World",
+        "definition": "The hero's starting environment — safe, known, and ultimately insufficient.",
+        "appears_at_nodes": ["HJ_N01_ORDINARY_WORLD", "HJ_N02_CALL_TO_ADVENTURE"],
+        "required": true
+      },
+      {
+        "type": "threshold",
+        "label": "The Threshold",
+        "definition": "The boundary between the known world and the special world — crossing it is irreversible.",
+        "appears_at_nodes": ["HJ_N04_THRESHOLD"],
+        "required": true
+      },
+      {
+        "type": "special_world",
+        "label": "The Special World",
+        "definition": "The unfamiliar domain where trials and transformation occur, governed by different rules.",
+        "appears_at_nodes": ["HJ_N05_TRIALS", "HJ_N06_APPROACH", "HJ_N08_REWARD", "HJ_N09_ROAD_BACK"],
+        "required": true
+      },
+      {
+        "type": "underworld",
+        "label": "The Inmost Cave",
+        "definition": "The deepest, most dangerous layer of the special world — site of the supreme ordeal.",
+        "appears_at_nodes": ["HJ_N06_APPROACH", "HJ_N07_ORDEAL"],
+        "required": true
+      },
+      {
+        "type": "home",
+        "label": "The Ordinary World (Return)",
+        "definition": "The starting world revisited — now seen through transformed eyes.",
+        "appears_at_nodes": ["HJ_N11_RETURN_ELIXIR"],
+        "required": true
+      }
+    ],
+    "objects": [
+      {
+        "type": "talisman",
+        "label": "The Mentor's Gift",
+        "definition": "An item given by the mentor that aids the hero in trials — carries symbolic and practical power.",
+        "appears_at_nodes": ["HJ_N03_MENTOR", "HJ_N07_ORDEAL"],
+        "required": false
+      },
+      {
+        "type": "treasure",
+        "label": "The Elixir / Reward",
+        "definition": "The prize seized after the ordeal — may be physical, knowledge, or inner transformation.",
+        "appears_at_nodes": ["HJ_N08_REWARD", "HJ_N11_RETURN_ELIXIR"],
+        "required": true
+      },
+      {
+        "type": "weapon",
+        "label": "The Hero's Weapon",
+        "definition": "A weapon earned or bestowed that enables the hero to confront the shadow.",
+        "appears_at_nodes": ["HJ_N03_MENTOR", "HJ_N05_TRIALS", "HJ_N07_ORDEAL", "HJ_N10_RESURRECTION"],
+        "required": false
+      }
+    ]
+  },
+  "template_timeline": [
+    {
+      "archetype_node": "HJ_N01_ORDINARY_WORLD",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "establishes_baseline" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N02_CALL_TO_ADVENTURE",
+      "expected_participants": {
+        "characters": ["protagonist", "herald"],
+        "places": ["ordinary_world"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N03_MENTOR",
+      "expected_participants": {
+        "characters": ["protagonist", "mentor"],
+        "places": ["ordinary_world"],
+        "objects": ["talisman", "weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "talisman" },
+        { "role": "protagonist", "change": "bonds", "target_role": "mentor" },
+        { "role": "protagonist", "change": "learns" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N04_THRESHOLD",
+      "expected_participants": {
+        "characters": ["protagonist", "threshold_guardian", "ally"],
+        "places": ["threshold"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "departs", "target_role": "ordinary_world" },
+        { "role": "protagonist", "change": "arrives", "target_role": "special_world" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N05_TRIALS",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "shadow"],
+        "places": ["special_world"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "learns" },
+        { "role": "protagonist", "change": "bonds", "target_role": "ally" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N06_APPROACH",
+      "expected_participants": {
+        "characters": ["protagonist", "ally", "shadow"],
+        "places": ["underworld"],
+        "objects": []
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "underworld" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N07_ORDEAL",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow", "mentor"],
+        "places": ["underworld"],
+        "objects": ["weapon", "talisman"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "protagonist", "change": "loses", "target_role": "mentor" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N08_REWARD",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["special_world"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "gains", "target_role": "treasure" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N09_ROAD_BACK",
+      "expected_participants": {
+        "characters": ["protagonist", "ally"],
+        "places": ["special_world"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "departs", "target_role": "special_world" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N10_RESURRECTION",
+      "expected_participants": {
+        "characters": ["protagonist", "shadow"],
+        "places": ["threshold"],
+        "objects": ["weapon"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "transforms" },
+        { "role": "protagonist", "change": "decides" }
+      ]
+    },
+    {
+      "archetype_node": "HJ_N11_RETURN_ELIXIR",
+      "expected_participants": {
+        "characters": ["protagonist"],
+        "places": ["home"],
+        "objects": ["treasure"]
+      },
+      "expected_transitions": [
+        { "role": "protagonist", "change": "arrives", "target_role": "home" },
+        { "role": "protagonist", "change": "reveals" }
+      ]
+    }
+  ]
+}
