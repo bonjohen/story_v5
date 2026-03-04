@@ -240,7 +240,7 @@ npm run build        # Production build
 npm run preview      # Preview production build
 npm run lint         # ESLint with type-aware rules
 npm run format       # Prettier formatting
-npm run test         # Run Vitest test suite (146 tests)
+npm run test         # Run Vitest test suite (161 tests)
 ```
 
 ## Story Generation System
