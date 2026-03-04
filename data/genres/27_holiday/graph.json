@@ -371,7 +371,7 @@
       "from": "HL_N23_THANKSGIVING_GRATITUDE",
       "to": "HL_N41_GATHERING_REQUIRED",
       "label": "Thanksgiving requires the enforced family gathering",
-      "meaning": "mandates element",
+      "meaning": "introduces setting rule",
       "preconditions": ["Thanksgiving subgenre selected"],
       "effects_on_stakes": "The dinner table becomes the arena — avoidance is socially impossible and departure before dessert is a statement",
       "effects_on_character": "Characters must endure proximity to those they have been successfully avoiding for months or years",

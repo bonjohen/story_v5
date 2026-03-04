@@ -186,11 +186,11 @@ Map how the 15 archetype time-graphs commonly pair with the 27 genre constraint-
 
 Apply acceptance criteria from `v0_plan.md` §3.6 across all deliverables.
 
-- [ ] Verify Levels 1–5 are present and clearly distinguished in every genre graph
-- [ ] Verify constraints are stated as enforceable rules, not vibes
-- [ ] Verify subgenres meaningfully change constraints, not just labels
-- [ ] Verify setting rules specify what must remain consistent
-- [ ] Verify scene obligations are concrete and testable in a draft
-- [ ] Verify examples reflect the stated promise and constraints
-- [ ] Verify all node/edge IDs follow the naming convention from Phase 1
-- [ ] Verify controlled vocabulary usage is consistent across all 27 graphs
+- [X] Verify Levels 1–5 are present and clearly distinguished in every genre graph
+- [X] Verify constraints are stated as enforceable rules, not vibes
+- [X] Verify subgenres meaningfully change constraints, not just labels
+- [X] Verify setting rules specify what must remain consistent
+- [X] Verify scene obligations are concrete and testable in a draft
+- [X] Verify examples reflect the stated promise and constraints
+- [X] Verify all node/edge IDs follow the naming convention from Phase 1
+- [X] Verify controlled vocabulary usage is consistent across all 27 graphs

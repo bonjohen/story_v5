@@ -251,7 +251,7 @@
       "from": "FN_N01_PROMISE",
       "to": "FN_N13_WONDER",
       "label": "Promise requires sense of wonder",
-      "meaning": "sets tone",
+      "meaning": "specifies constraint",
       "preconditions": ["Genre promise established"],
       "effects_on_stakes": "Wonder makes the world worth fighting for",
       "effects_on_character": "Characters' encounters with the magical are emotionally charged",

@@ -44,12 +44,17 @@ Format: `{PREFIX}_E{##}_{SHORT_NAME}`
 
 | Range  | Typical Transition |
 |--------|--------------------|
-| 01–09  | Level 1 → Level 2  |
+| 01–09  | Level 1 → Level 2 (also L1 → Tone Marker) |
 | 10–29  | Level 2 → Level 3  |
 | 30–49  | Level 3 → Level 4  |
-| 50–69  | Level 4 → Level 5  |
+| 50–69  | Level 4 → Level 5 (also L5 → L5 sequential scene chains) |
 | 70–89  | Cross-level or supplementary |
 | 90–99  | Anti-pattern edges  |
+
+**Clarifications:**
+- L1 → Tone Marker edges (e.g., `XX_E05_PROMISE_TO_TONE`) conventionally use the 01–09 range alongside L1 → L2 edges, since the Tone Marker supports the Genre Promise directly.
+- Sequential L5 → L5 edges (scene obligation chains like `XX_E53_SCENE_A_TO_SCENE_B`) conventionally use the 50–69 range as extensions of the L4 → L5 flow.
+- True cross-level edges that skip levels (e.g., L2 → L5) should use the 70–89 range when possible, though some graphs number these sequentially within the destination level's range.
 
 ### Examples
 

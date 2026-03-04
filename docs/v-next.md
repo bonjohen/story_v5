@@ -38,6 +38,12 @@ Most genres have 15–18 nodes and 18–22 edges, but some variation exists (e.g
 10. [ ] **No automated validation for graph-narrative correspondence**
 Narrative specs reference node/edge IDs from their graph.json, but there is no script to verify these references are correct. The Musical issue (#6) was caught by manual audit. A validation script would catch such mismatches automatically across all 27 genres.
 
+25. [ ] **Systematic edge numbering shift in 6–8 genre graphs**
+Several genre graphs number edges sequentially rather than by level-transition range. In these graphs, L3→L4 edges use the 10–29 range (instead of 30–49), L4→L5 edges use the 30–49 range (instead of 50–69), and cross-level edges use whatever range follows sequentially. Affected genres: Horror (10), Detective (13), Romantic Comedy (09), Literary Fiction (20), Children's Literature (21), Family (18), Biography (17), and Crime (12). The edge numbering convention has been clarified to accommodate the universal L1→Tone and L5→L5 patterns, but the full-range shifts in these genres remain inconsistent with the majority pattern. A future pass could renumber these edges to match the convention, updating graph.json, narrative.md, and examples.md for each affected genre.
+
+26. [ ] **Cross-level edges (L2→L5, L2→L4) not in 70–89 range**
+Several genres have edges that skip levels (e.g., Core Constraint directly to Scene Obligation) but number them in the destination level's range rather than the 70–89 cross-level range. Affected genres include Young Adult, Western, War, Crime, Detective, and Mystery. These are individually correct per the clarified convention ("when possible" language) but could be renumbered for stricter consistency.
+
 ---
 
 ## Suggestions
