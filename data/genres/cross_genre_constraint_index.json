@@ -1,0 +1,430 @@
+{
+  "title": "Cross-Genre Constraint Index",
+  "description": "Reuse map identifying shared constraint types, recurring scene obligations, and edge meaning usage across all 27 genre depth graphs. Generated from analysis of all genre graph.json deliverables and the controlled vocabulary in genre_edge_vocabulary.json and genre_node_roles.json.",
+
+  "constraint_type_index": {
+    "summary": "16 recurring constraint types identified across 27 genre graphs. These are thematic patterns that appear as Core Constraint (Level 2) or Setting Rule (Level 4) nodes in multiple genres. Stakes Escalation is the most common, appearing in 8 genres. Every constraint type listed appears in at least 3 genres.",
+    "types": [
+      {
+        "type": "Stakes Escalation",
+        "definition": "Tension, danger, emotional pressure, or obstacles must increase through the narrative — the audience must feel that the situation is getting worse, harder, or more urgent before it can get better.",
+        "genre_count": 8,
+        "instances": [
+          { "genre": "Drama", "node_id": "DR_N10_EMOTIONAL_STAKES", "label": "Emotional Stakes Must Be Real", "level": "Core Constraint" },
+          { "genre": "Action", "node_id": "AC_N11_ESCALATING_STAKES", "label": "Stakes Must Escalate Through Action", "level": "Core Constraint" },
+          { "genre": "Thriller", "node_id": "TH_N12_ESCALATING_DANGER", "label": "Danger Must Escalate", "level": "Core Constraint" },
+          { "genre": "Horror", "node_id": "HR_N10_THREAT_ESCALATES", "label": "Threat Must Be Present, Escalating, and Genuinely Dangerous", "level": "Core Constraint" },
+          { "genre": "Adventure", "node_id": "AV_N12_ESCALATING_OBSTACLES", "label": "Obstacles Must Escalate", "level": "Core Constraint" },
+          { "genre": "Superhero", "node_id": "SH_N12_PROPORTIONAL_THREAT", "label": "Threats Must Escalate to Match Heroic Capacity", "level": "Core Constraint" },
+          { "genre": "Psychological", "node_id": "PS_N12_PRESSURE_ESCALATION", "label": "Mental and Emotional Pressure Must Escalate", "level": "Core Constraint" },
+          { "genre": "Musical", "node_id": "MU_N11_EMOTIONAL_ESCALATION", "label": "Emotional Escalation Justifies the Musical Break", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Internal Consistency / Rules",
+        "definition": "Speculative, magical, investigative, or threatening elements must operate according to consistent internal rules — they may be mysterious but they cannot be arbitrary or contradictory.",
+        "genre_count": 7,
+        "instances": [
+          { "genre": "Fantasy", "node_id": "FN_N10_MAGIC_SYSTEM", "label": "Magic/Supernatural Must Have Rules", "level": "Core Constraint" },
+          { "genre": "Science Fiction", "node_id": "SF_N11_INTERNAL_CONSISTENCY", "label": "Speculative Elements Must Be Internally Consistent", "level": "Core Constraint" },
+          { "genre": "Horror", "node_id": "HR_N13_THREAT_LOGIC", "label": "The Threat Must Have a Logic", "level": "Core Constraint" },
+          { "genre": "Mystery", "node_id": "MY_N12_FAIR_PLAY_CONTRACT", "label": "Red Herrings Allowed, Cheating Is Not", "level": "Core Constraint" },
+          { "genre": "Detective", "node_id": "DT_N11_VISIBLE_METHOD", "label": "Investigator's Method Must Be Visible and Consistent", "level": "Core Constraint" },
+          { "genre": "Action", "node_id": "AC_N41_PHYSICAL_RULES", "label": "Physical Rules Are Consistent", "level": "Setting Rule" },
+          { "genre": "Superhero", "node_id": "SH_N41_POWER_LIMITS", "label": "Power Has Rules and Defined Limits", "level": "Setting Rule" }
+        ]
+      },
+      {
+        "type": "Moral Reckoning / Ethical Tension",
+        "definition": "Characters must face genuine moral choices, ethical dilemmas, or tests of their values arising from the genre's specific pressures — the story cannot avoid the moral dimension of its conflicts.",
+        "genre_count": 7,
+        "instances": [
+          { "genre": "Drama", "node_id": "DR_N11_CONSEQUENTIAL_CHOICE", "label": "Characters Must Make Consequential Choices", "level": "Core Constraint" },
+          { "genre": "Crime", "node_id": "CR_N12_MORAL_AMBIGUITY", "label": "Moral Ambiguity — The Line Is Blurred", "level": "Core Constraint" },
+          { "genre": "War", "node_id": "WR_N12_DUTY_VS_SURVIVAL", "label": "Duty vs. Survival Tension", "level": "Core Constraint" },
+          { "genre": "Superhero", "node_id": "SH_N13_MORAL_RESPONSIBILITY", "label": "Power Creates Moral Obligation That Must Be Tested", "level": "Core Constraint" },
+          { "genre": "Western", "node_id": "WE_N11_MORAL_CODE", "label": "Personal Moral Code Substitutes for Law", "level": "Core Constraint" },
+          { "genre": "Political", "node_id": "PL_N12_COMPROMISE_AND_STRATEGY", "label": "Compromise and Strategy Are the Primary Means of Action", "level": "Core Constraint" },
+          { "genre": "Literary Fiction", "node_id": "LF_N12_THEMATIC_COMPLEXITY", "label": "Thematic Complexity Without Easy Answers", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Protagonist Vulnerability vs. Capability",
+        "definition": "The genre specifies the protagonist's relationship to the story's threats — either explicitly vulnerable (outmatched, isolated) or explicitly capable (skilled, resourceful) — establishing the genre's particular kind of tension.",
+        "genre_count": 6,
+        "instances": [
+          { "genre": "Thriller", "node_id": "TH_N13_PROTAGONIST_VULNERABLE", "label": "Protagonist Is Vulnerable", "level": "Core Constraint" },
+          { "genre": "Horror", "node_id": "HR_N11_PROTAGONIST_VULNERABLE", "label": "Protagonist Must Be Vulnerable", "level": "Core Constraint" },
+          { "genre": "Action", "node_id": "AC_N13_PROTAGONIST_CAPABILITY", "label": "Protagonist Has Demonstrated Physical Capability", "level": "Core Constraint" },
+          { "genre": "Superhero", "node_id": "SH_N10_EXTRAORDINARY_CAPACITY", "label": "Protagonist Must Possess Extraordinary Capacity", "level": "Core Constraint" },
+          { "genre": "Western", "node_id": "WE_N12_PHYSICAL_COMPETENCE", "label": "Physical Competence Determines Outcomes", "level": "Core Constraint" },
+          { "genre": "Detective", "node_id": "DT_N10_CENTRAL_INVESTIGATOR", "label": "Dedicated Investigator as Central Character", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Genuine Obstacles / Resistance",
+        "definition": "The forces opposing the protagonist or the central goal must be real, consequential, and not easily dissolved — creating the friction that makes resolution meaningful.",
+        "genre_count": 6,
+        "instances": [
+          { "genre": "Romance", "node_id": "RO_N12_GENUINE_OBSTACLES", "label": "Obstacles to the Relationship Must Be Genuine and Consequential", "level": "Core Constraint" },
+          { "genre": "Romantic Comedy", "node_id": "RC_N11_MISMATCH_BEFORE_UNION", "label": "Couple Must Be Mismatched or in Conflict Before Coming Together", "level": "Core Constraint" },
+          { "genre": "Comedy", "node_id": "CM_N12_STAKES_RECOVERABLE", "label": "Stakes Are Real but Recoverable", "level": "Core Constraint" },
+          { "genre": "Mystery", "node_id": "MY_N10_CENTRAL_QUESTION", "label": "A Central Question Must Drive the Narrative", "level": "Core Constraint" },
+          { "genre": "Detective", "node_id": "DT_N12_WORTHY_CASE", "label": "The Case Must Be Genuinely Challenging", "level": "Core Constraint" },
+          { "genre": "Adventure", "node_id": "AV_N13_CLEAR_GOAL", "label": "Clear External Goal Drives the Journey", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Resolution Constraint",
+        "definition": "The genre imposes specific requirements on how stories can acceptably end — restricting the range of valid outcomes to those that fulfill the genre contract.",
+        "genre_count": 6,
+        "instances": [
+          { "genre": "Comedy", "node_id": "CM_N13_RESOLUTION_POSITIVE", "label": "Resolution Trends Toward Reconciliation", "level": "Core Constraint" },
+          { "genre": "Romance", "node_id": "RO_N13_EARNED_OUTCOME", "label": "The Relationship Outcome Must Feel Earned", "level": "Core Constraint" },
+          { "genre": "Romantic Comedy", "node_id": "RC_N13_DUAL_PAYOFF_RESOLUTION", "label": "Resolution Must Deliver Both Romantic and Comic Satisfaction", "level": "Core Constraint" },
+          { "genre": "Family", "node_id": "FA_N13_RESOLUTION_CONNECTION", "label": "Resolution Trends Toward Connection or Understanding", "level": "Core Constraint" },
+          { "genre": "Mystery", "node_id": "MY_N13_SATISFYING_RESOLUTION", "label": "Resolution Must Explain, Not Just Reveal", "level": "Core Constraint" },
+          { "genre": "Children's Literature", "node_id": "CL_N13_MORAL_EMOTIONAL_TAKEAWAY", "label": "Clear Moral or Emotional Takeaway Without Preachiness", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Social Rules / Hierarchy",
+        "definition": "Visible social structures, norms, or hierarchies constrain character behavior and generate conflict — characters must navigate, resist, or break these rules at personal cost.",
+        "genre_count": 6,
+        "instances": [
+          { "genre": "Drama", "node_id": "DR_N42_SOCIAL_RULES", "label": "Social Rules Constrain Behavior", "level": "Setting Rule" },
+          { "genre": "Comedy", "node_id": "CM_N41_RULES_TO_BREAK", "label": "Social Rules Exist to Be Subverted", "level": "Setting Rule" },
+          { "genre": "Historical", "node_id": "HI_N41_SOCIAL_HIERARCHY", "label": "Social Hierarchy of the Period Constrains Characters", "level": "Setting Rule" },
+          { "genre": "Mystery", "node_id": "MY_N42_SOCIAL_DYNAMICS", "label": "Social Dynamics Conceal and Reveal", "level": "Setting Rule" },
+          { "genre": "Young Adult", "node_id": "YA_N40_SCHOOL_SOCIAL_HIERARCHY", "label": "School / Social Hierarchy as Primary Arena", "level": "Setting Rule" },
+          { "genre": "Family", "node_id": "FA_N41_RITUALS_TRADITIONS", "label": "Family Rituals and Traditions Structure the Narrative", "level": "Setting Rule" }
+        ]
+      },
+      {
+        "type": "Isolation / Confinement",
+        "definition": "Characters are cut off from external help — physically, socially, or institutionally — so that they must face the story's central challenge without a safety net.",
+        "genre_count": 6,
+        "instances": [
+          { "genre": "Thriller", "node_id": "TH_N41_ISOLATION", "label": "Protagonist Is Isolated from Help", "level": "Setting Rule" },
+          { "genre": "Horror", "node_id": "HR_N40_ISOLATION", "label": "Isolation Amplifies Threat", "level": "Setting Rule" },
+          { "genre": "Drama", "node_id": "DR_N40_CONFINED_SETTING", "label": "Confined or Intimate Setting", "level": "Setting Rule" },
+          { "genre": "Western", "node_id": "WE_N41_LIMITED_RESOURCES_ISOLATION", "label": "Limited Resources and Isolation Shape All Choices", "level": "Setting Rule" },
+          { "genre": "Psychological", "node_id": "PS_N41_CONFINED_SPACES", "label": "Confined or Claustrophobic Spaces Reflect Internal State", "level": "Setting Rule" },
+          { "genre": "War", "node_id": "WR_N42_SCARCITY_AND_DANGER", "label": "Scarcity and Danger Are Constant", "level": "Setting Rule" }
+        ]
+      },
+      {
+        "type": "Consequential Choice / Character Agency",
+        "definition": "Characters must make meaningful, often irreversible choices that determine outcomes — the story cannot rely on things merely happening to passive characters.",
+        "genre_count": 5,
+        "instances": [
+          { "genre": "Drama", "node_id": "DR_N11_CONSEQUENTIAL_CHOICE", "label": "Characters Must Make Consequential Choices", "level": "Core Constraint" },
+          { "genre": "Young Adult", "node_id": "YA_N13_WORLD_DEFINING_CHOICES", "label": "Choices Must Feel World-Defining from the Protagonist's Perspective", "level": "Core Constraint" },
+          { "genre": "Holiday", "node_id": "HL_N12_TRANSFORMATION", "label": "Emotional Transformation Must Occur", "level": "Core Constraint" },
+          { "genre": "Romance", "node_id": "RO_N13_EARNED_OUTCOME", "label": "The Relationship Outcome Must Feel Earned", "level": "Core Constraint" },
+          { "genre": "Literary Fiction", "node_id": "LF_N10_INTERIORITY", "label": "Character Interiority Is the Primary Engine", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Plausibility / Grounding",
+        "definition": "Characters, events, and worlds must feel psychologically, historically, or scientifically plausible within the story's own framework — the audience must be able to believe in the world as presented.",
+        "genre_count": 5,
+        "instances": [
+          { "genre": "Drama", "node_id": "DR_N12_PLAUSIBLE_HUMAN", "label": "Grounded in Plausible Human Experience", "level": "Core Constraint" },
+          { "genre": "Science Fiction", "node_id": "SF_N13_PLAUSIBILITY", "label": "Speculative Premise Must Feel Plausible", "level": "Core Constraint" },
+          { "genre": "Historical", "node_id": "HI_N13_PERIOD_WORLDVIEW", "label": "Characters Must Exist Within Their Time's Worldview", "level": "Core Constraint" },
+          { "genre": "Biography", "node_id": "BI_N10_REAL_PERSON", "label": "Based on a Real Person — Accuracy Matters", "level": "Core Constraint" },
+          { "genre": "Fantasy", "node_id": "FN_N11_WORLDBUILDING_COHERENT", "label": "World Must Be Internally Coherent", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Institutional Mechanics",
+        "definition": "Institutions — legal, military, political, professional — function as structural forces that shape what characters can do, constraining and enabling action through their specific rules and procedures.",
+        "genre_count": 5,
+        "instances": [
+          { "genre": "Political", "node_id": "PL_N13_INSTITUTIONAL_MECHANICS", "label": "Institutional Mechanics Drive Plot", "level": "Core Constraint" },
+          { "genre": "Detective", "node_id": "DT_N42_INSTITUTIONAL_CONTEXT", "label": "Institutional Context", "level": "Setting Rule" },
+          { "genre": "Crime", "node_id": "CR_N41_LAW_ENFORCEMENT", "label": "Law Enforcement Presence", "level": "Setting Rule" },
+          { "genre": "War", "node_id": "WR_N41_CHAIN_OF_COMMAND", "label": "Chain of Command Constrains Individual Action", "level": "Setting Rule" },
+          { "genre": "Historical", "node_id": "HI_N42_HISTORICAL_EVENTS_STRUCTURE", "label": "Historical Events Provide Structure and Stakes", "level": "Setting Rule" }
+        ]
+      },
+      {
+        "type": "Public vs. Private Self",
+        "definition": "Characters maintain a gap between their public performance and private reality — the tension between these two faces is a structural source of drama, comedy, or revelation.",
+        "genre_count": 5,
+        "instances": [
+          { "genre": "Romance", "node_id": "RO_N42_PRIVATE_VS_PUBLIC", "label": "Private Spaces vs. Public Performance Contrast", "level": "Setting Rule" },
+          { "genre": "Romantic Comedy", "node_id": "RC_N42_PUBLIC_PRIVATE_DIVERGENCE", "label": "Public vs. Private Behavior Diverges", "level": "Setting Rule" },
+          { "genre": "Biography", "node_id": "BI_N42_PUBLIC_VS_PRIVATE", "label": "Public vs. Private Self Divergence", "level": "Setting Rule" },
+          { "genre": "Political", "node_id": "PL_N42_PUBLIC_PRIVATE_FACE", "label": "Public Versus Private Face of Power", "level": "Setting Rule" },
+          { "genre": "Satire", "node_id": "SA_N42_LOGICAL_ABSURDITY", "label": "Logical Absurdity — the Satirical World Follows Its Own Ridiculous Rules Consistently", "level": "Setting Rule" }
+        ]
+      },
+      {
+        "type": "Real Consequences / Visible Cost",
+        "definition": "Actions — especially violent, criminal, or transgressive ones — must carry genuine, visible costs that the narrative registers rather than elides.",
+        "genre_count": 4,
+        "instances": [
+          { "genre": "Crime", "node_id": "CR_N11_REAL_CONSEQUENCES", "label": "Consequences Must Be Real and Proportional", "level": "Core Constraint" },
+          { "genre": "War", "node_id": "WR_N11_HUMAN_COST_VISIBLE", "label": "Human Cost of Violence Must Be Visible", "level": "Core Constraint" },
+          { "genre": "Historical", "node_id": "HI_N12_PERIOD_CONSTRAINTS_ENFORCED", "label": "Period-Accurate Social Constraints Must Be Enforced", "level": "Core Constraint" },
+          { "genre": "Science Fiction", "node_id": "SF_N12_CONSEQUENCES", "label": "Consequences Must Be Explored", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Wonder / Discovery",
+        "definition": "The story must generate genuine wonder, awe, or the excitement of encountering the new — the audience's sense of possibility and delight is a core genre reward.",
+        "genre_count": 4,
+        "instances": [
+          { "genre": "Fantasy", "node_id": "FN_N13_WONDER", "label": "Sense of Wonder Must Be Present", "level": "Core Constraint" },
+          { "genre": "Adventure", "node_id": "AV_N11_DISCOVERY", "label": "Discovery and Novelty Must Be Present", "level": "Core Constraint" },
+          { "genre": "Children's Literature", "node_id": "CL_N12_WONDER_CENTRAL", "label": "Imagination and Wonder Must Be Central", "level": "Core Constraint" },
+          { "genre": "Science Fiction", "node_id": "SF_N10_SPECULATIVE_PREMISE", "label": "Story Must Be Driven by a Speculative Premise", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Relationship as Engine",
+        "definition": "The central relationship(s) — romantic, familial, or interpersonal — must drive the plot as the primary story engine, not merely accompany external events.",
+        "genre_count": 4,
+        "instances": [
+          { "genre": "Romance", "node_id": "RO_N10_CENTRAL_ENGINE", "label": "Central Relationship Must Be the Primary Story Engine", "level": "Core Constraint" },
+          { "genre": "Romantic Comedy", "node_id": "RC_N10_CO_EQUAL_ENGINES", "label": "Romance and Humor Must Be Co-Equal Engines", "level": "Core Constraint" },
+          { "genre": "Family", "node_id": "FA_N10_FAMILY_ENGINE", "label": "Family Relationships Must Be the Primary Story Engine", "level": "Core Constraint" },
+          { "genre": "Drama", "node_id": "DR_N13_CONFLICT_INTERPERSONAL", "label": "Conflict Is Primarily Interpersonal", "level": "Core Constraint" }
+        ]
+      },
+      {
+        "type": "Environment as Active Force",
+        "definition": "The physical environment is not mere backdrop but an active participant — a source of danger, opportunity, constraint, or narrative complication with its own agency.",
+        "genre_count": 4,
+        "instances": [
+          { "genre": "Action", "node_id": "AC_N40_DANGEROUS_ENVIRONMENT", "label": "Environment Is Actively Dangerous", "level": "Setting Rule" },
+          { "genre": "Adventure", "node_id": "AV_N41_ENVIRONMENT_AS_CHARACTER", "label": "Environment Acts as Active Force", "level": "Setting Rule" },
+          { "genre": "Western", "node_id": "WE_N40_LANDSCAPE_AS_CHARACTER", "label": "Landscape Functions as Character", "level": "Setting Rule" },
+          { "genre": "War", "node_id": "WR_N40_BATTLEFIELD_GEOGRAPHY", "label": "Battlefield Geography Shapes Action", "level": "Setting Rule" }
+        ]
+      }
+    ]
+  },
+
+  "scene_obligation_index": {
+    "summary": "8 recurring scene obligation patterns identified across 27 genre graphs. These represent Level 5 (Scene Obligation) nodes that serve structurally similar functions in multiple genres. The Climactic Confrontation is the most common, appearing in 10 genres.",
+    "obligations": [
+      {
+        "obligation": "Climactic Confrontation / Showdown",
+        "definition": "The final scene where the story's central conflict is resolved through direct engagement — physical confrontation, psychological revelation, institutional reckoning, or decisive action under maximum pressure.",
+        "genre_count": 10,
+        "instances": [
+          { "genre": "Action", "node_id": "AC_N62_CLIMACTIC_CONFRONTATION", "label": "Climactic Physical Confrontation" },
+          { "genre": "Thriller", "node_id": "TH_N62_CLIMACTIC_CONFRONTATION", "label": "Climactic Confrontation Under Maximum Pressure" },
+          { "genre": "Horror", "node_id": "HR_N62_FINAL_CONFRONTATION", "label": "Final Confrontation / Survival Scene" },
+          { "genre": "Superhero", "node_id": "SH_N62_CLIMACTIC_BATTLE", "label": "Climactic Battle Scene" },
+          { "genre": "Western", "node_id": "WE_N60_SHOWDOWN", "label": "Showdown / Confrontation Scene" },
+          { "genre": "War", "node_id": "WR_N62_MISSION_CLIMAX", "label": "Mission Climax / Final Stand" },
+          { "genre": "Detective", "node_id": "DT_N62_SOLUTION_PRESENTATION", "label": "Confrontation / Solution Presentation Scene" },
+          { "genre": "Mystery", "node_id": "MY_N62_REVEAL_SCENE", "label": "Reveal/Confrontation Scene" },
+          { "genre": "Psychological", "node_id": "PS_N62_REVELATION_CONFRONTATION", "label": "Revelation or Confrontation-with-Self Scene" },
+          { "genre": "Adventure", "node_id": "AV_N62_FINAL_APPROACH", "label": "Final Approach / Ultimate Challenge Scene" }
+        ]
+      },
+      {
+        "obligation": "Escalation / Complication Sequence",
+        "definition": "A mid-story scene or sequence where the central tension significantly intensifies — the situation gets demonstrably worse, harder, or more urgent before resolution is possible.",
+        "genre_count": 8,
+        "instances": [
+          { "genre": "Action", "node_id": "AC_N61_ESCALATION_SEQUENCE", "label": "Escalation Set Piece" },
+          { "genre": "Comedy", "node_id": "CM_N61_ESCALATION_SCENE", "label": "Comic Escalation / Complication Scene" },
+          { "genre": "Horror", "node_id": "HR_N61_ESCALATION", "label": "Escalation Sequence" },
+          { "genre": "Romantic Comedy", "node_id": "RC_N61_MISUNDERSTANDING_ESCALATION", "label": "Misunderstanding Escalation Scene" },
+          { "genre": "Satire", "node_id": "SA_N61_ESCALATION_TO_BREAKING", "label": "Escalation of Absurdity to Breaking Point" },
+          { "genre": "Psychological", "node_id": "PS_N61_OBSESSION_BREAKDOWN", "label": "Obsession and Breakdown Escalation Scene" },
+          { "genre": "Musical", "node_id": "MU_N61_SHOWSTOPPER", "label": "Showstopper / Act-Break Number" },
+          { "genre": "Adventure", "node_id": "AV_N61_DISCOVERY_SCENE", "label": "Major Discovery / Setback Scene" }
+        ]
+      },
+      {
+        "obligation": "Inciting Discovery / World Establishment",
+        "definition": "An early scene that establishes the genre's central challenge, question, or distinctive world — the moment the audience enters the genre's specific territory.",
+        "genre_count": 8,
+        "instances": [
+          { "genre": "Mystery", "node_id": "MY_N60_DISCOVERY_SCENE", "label": "Discovery of the Crime/Mystery Scene" },
+          { "genre": "Detective", "node_id": "DT_N60_CASE_ASSIGNMENT", "label": "Case Assignment / Discovery Scene" },
+          { "genre": "Thriller", "node_id": "TH_N60_INCITING_THREAT", "label": "Inciting Threat Scene" },
+          { "genre": "Horror", "node_id": "HR_N60_FIRST_ANOMALY", "label": "First Anomaly / Scare Scene" },
+          { "genre": "Fantasy", "node_id": "FN_N60_WORLD_ENTRY", "label": "World Entry / Wonder Establishment Scene" },
+          { "genre": "Science Fiction", "node_id": "SF_N60_PREMISE_REVEAL", "label": "Premise Establishment / World Difference Scene" },
+          { "genre": "Historical", "node_id": "HI_N60_PERIOD_ESTABLISHMENT", "label": "Period Establishment Scene" },
+          { "genre": "Satire", "node_id": "SA_N60_ESTABLISH_ABSURD_NORM", "label": "Establishment of the Absurd Norm" }
+        ]
+      },
+      {
+        "obligation": "Resolution / Aftermath / Restored Order",
+        "definition": "A post-climax scene showing the world after the central conflict has resolved — demonstrating that choices had lasting consequences and revealing the new normal.",
+        "genre_count": 6,
+        "instances": [
+          { "genre": "Drama", "node_id": "DR_N62_AFTERMATH", "label": "Aftermath / New Normal Scene" },
+          { "genre": "Family", "node_id": "FA_N62_RECONCILIATION_REUNION", "label": "Reconciliation / Reunion Scene" },
+          { "genre": "Holiday", "node_id": "HL_N62_CELEBRATION_RESTORED", "label": "Celebration-Restored Scene" },
+          { "genre": "Children's Literature", "node_id": "CL_N62_EARNED_RESOLUTION", "label": "Resolution with Earned Understanding" },
+          { "genre": "Biography", "node_id": "BI_N62_LEGACY_SUMMATION", "label": "Legacy / Summation Scene" },
+          { "genre": "Literary Fiction", "node_id": "LF_N62_AMBIGUOUS_ENDING", "label": "Ambiguous or Resonant Ending Scene" }
+        ]
+      },
+      {
+        "obligation": "Irreversible Choice / Moral Compromise",
+        "definition": "A scene where a character makes a decision that cannot be undone — crossing a moral line, choosing one path over another, or committing to a course with permanent consequences.",
+        "genre_count": 5,
+        "instances": [
+          { "genre": "Drama", "node_id": "DR_N61_CHOICE_SCENE", "label": "Irreversible Choice Scene" },
+          { "genre": "Crime", "node_id": "CR_N61_MORAL_COMPROMISE", "label": "The Moral Compromise Scene" },
+          { "genre": "Young Adult", "node_id": "YA_N60_IDENTITY_CHOICE_SCENE", "label": "Identity-Defining Choice Scene" },
+          { "genre": "War", "node_id": "WR_N61_LOSS_COST_OF_WAR", "label": "Loss/Cost-of-War Scene" },
+          { "genre": "Historical", "node_id": "HI_N61_DESIRE_VS_CONSTRAINT", "label": "Clash Between Personal Desire and Period Constraint" }
+        ]
+      },
+      {
+        "obligation": "Reversal / Trust Betrayal / Realignment",
+        "definition": "A scene where a major assumption is overturned — an ally revealed as enemy, a coalition fractured, or the protagonist's understanding fundamentally rewritten.",
+        "genre_count": 4,
+        "instances": [
+          { "genre": "Thriller", "node_id": "TH_N61_REVERSAL", "label": "Major Reversal / Trust Betrayal Scene" },
+          { "genre": "Political", "node_id": "PL_N61_BETRAYAL_REALIGNMENT", "label": "Betrayal and Political Realignment Scene" },
+          { "genre": "Satire", "node_id": "SA_N62_MOMENT_OF_CLARITY", "label": "Moment of Clarity / Exposure" },
+          { "genre": "Literary Fiction", "node_id": "LF_N61_EPIPHANY_SCENE", "label": "Epiphany or Shift-in-Understanding Scene" }
+        ]
+      },
+      {
+        "obligation": "Grand Gesture / Public Declaration",
+        "definition": "A climactic scene in which a character makes a public, costly, or irrevocable declaration — choosing love, truth, or principle in a way that cannot be unsaid.",
+        "genre_count": 3,
+        "instances": [
+          { "genre": "Romance", "node_id": "RO_N62_GRAND_GESTURE", "label": "Grand Gesture / Declaration / Commitment Scene" },
+          { "genre": "Romantic Comedy", "node_id": "RC_N62_GRAND_GESTURE", "label": "Grand Romantic Gesture / Truth-Telling Scene" },
+          { "genre": "Political", "node_id": "PL_N62_PUBLIC_SPEECH_PERSUASION", "label": "Public Speech and Political Persuasion Scene" }
+        ]
+      },
+      {
+        "obligation": "Meeting / First Encounter",
+        "definition": "An early scene establishing both attraction and obstacle between the central characters — the first impression that will shape the entire narrative.",
+        "genre_count": 3,
+        "instances": [
+          { "genre": "Romance", "node_id": "RO_N60_MEET_SCENE", "label": "Meeting / Attraction Scene" },
+          { "genre": "Romantic Comedy", "node_id": "RC_N60_MEET_CUTE", "label": "Meet-Cute or Charged First Encounter Scene" },
+          { "genre": "Children's Literature", "node_id": "CL_N60_WONDER_DISCOVERY", "label": "Wonder / Discovery Scene" }
+        ]
+      }
+    ]
+  },
+
+  "edge_meaning_index": {
+    "summary": "12 edge meanings defined in the controlled vocabulary; 7 are universal (all 27 genres), 5 have limited usage. 'specifies constraint', 'sets tone', 'branches into subtype', 'introduces setting rule', 'mandates element', 'requires payoff', and 'prohibits element' are the universal backbone of every genre graph.",
+    "meanings": [
+      {
+        "meaning": "specifies constraint",
+        "genre_count": 27,
+        "note": "Universal. Every genre graph uses this meaning for Level 1→2 transitions where the Genre Promise generates Core Constraints. Typically 4 instances per graph.",
+        "total_instances": 108
+      },
+      {
+        "meaning": "sets tone",
+        "genre_count": 27,
+        "note": "Universal. Every genre graph uses this meaning for the edge from Genre Promise to Tone Marker. Fantasy uses it twice (wonder as both constraint and tone). Typically 1 instance per graph.",
+        "total_instances": 28
+      },
+      {
+        "meaning": "branches into subtype",
+        "genre_count": 27,
+        "note": "Universal. Every genre graph uses this meaning for Level 2→3 transitions where Core Constraints generate Subgenre Patterns. Typically 4 instances per graph.",
+        "total_instances": 108
+      },
+      {
+        "meaning": "introduces setting rule",
+        "genre_count": 27,
+        "note": "Universal. Every genre graph uses this meaning for Level 3→4 transitions where Subgenre Patterns generate Setting Rules. Typically 4 instances per graph, though some genres have more (War has 6, Young Adult has 6, Romance has 5).",
+        "total_instances": 118
+      },
+      {
+        "meaning": "mandates element",
+        "genre_count": 27,
+        "note": "Universal. Every genre graph uses this meaning for Level 4→5 transitions where Setting Rules generate Scene Obligations. Typically 3 instances per graph.",
+        "total_instances": 81
+      },
+      {
+        "meaning": "requires payoff",
+        "genre_count": 27,
+        "note": "Universal. Every genre graph uses this meaning for connections between Scene Obligations and for edges that demand narrative delivery on established promises. Typically 2-3 instances per graph.",
+        "total_instances": 76
+      },
+      {
+        "meaning": "prohibits element",
+        "genre_count": 27,
+        "note": "Universal. Every genre graph uses this meaning for edges leading to Anti-Pattern nodes. Typically 1-2 instances per graph.",
+        "total_instances": 35
+      },
+      {
+        "meaning": "restricts resolution",
+        "genre_count": 5,
+        "note": "Used in genres where the acceptable ending is constrained by the genre contract. Appears in Comedy, Romantic Comedy, Mystery, Family, and Children's Literature.",
+        "instances": [
+          { "genre": "Comedy", "edge_id": "CM_E04_PROMISE_TO_RESOLUTION", "label": "Promise requires positive resolution" },
+          { "genre": "Romantic Comedy", "edge_id": "RC_E04_PROMISE_TO_DUAL_PAYOFF", "label": "Promise requires resolution delivering both romantic and comic satisfaction" },
+          { "genre": "Mystery", "edge_id": "MY_E55_REVEAL_RESTRICTS_RESOLUTION", "label": "Reveal scene must meet the standard of satisfying resolution" },
+          { "genre": "Family", "edge_id": "FA_E04_PROMISE_TO_RESOLUTION", "label": "Promise requires resolution trending toward connection" },
+          { "genre": "Children's Literature", "edge_id": "CL_E04_PROMISE_TO_TAKEAWAY", "label": "Promise requires genuine moral or emotional insight without preachiness" }
+        ]
+      },
+      {
+        "meaning": "specializes threat",
+        "genre_count": 2,
+        "note": "Used in genres where the threat model must be calibrated to genre-specific requirements. Appears in Horror (2 instances) and Superhero (1 instance).",
+        "instances": [
+          { "genre": "Horror", "edge_id": "HR_E21_SUPERNATURAL_TO_UNCANNY", "label": "Supernatural horror works through the uncanny" },
+          { "genre": "Horror", "edge_id": "HR_E24_COSMIC_TO_CONCEALMENT", "label": "Cosmic threat is concealed by its incomprehensibility" },
+          { "genre": "Superhero", "edge_id": "SH_E91_SPECIALIZES_THREAT", "label": "Villain ecosystem calibrates and specializes the threat" }
+        ]
+      },
+      {
+        "meaning": "differentiates from",
+        "genre_count": 1,
+        "note": "Used only in Detective, where subgenre distinctions are drawn explicitly against sibling patterns. 3 instances.",
+        "instances": [
+          { "genre": "Detective", "edge_id": "DT_E42_WORTHY_CASE_TO_BREAKTHROUGH", "label": "Case difficulty makes breakthrough meaningful" },
+          { "genre": "Detective", "edge_id": "DT_E51_CLASSIC_DIFFERENTIATES_HARDBOILED", "label": "Classic puzzle focus differs from hardboiled moral danger" },
+          { "genre": "Detective", "edge_id": "DT_E52_POLICE_DIFFERENTIATES_AMATEUR", "label": "Institutional authority differs from outsider perspective" }
+        ]
+      },
+      {
+        "meaning": "narrows scope",
+        "genre_count": 1,
+        "note": "Used only in Crime, where the moral compromise is linked back to the crime scene through scope narrowing. 1 instance.",
+        "instances": [
+          { "genre": "Crime", "edge_id": "CR_E52_MORAL_COMPROMISE_TO_CRIME_SCENE", "label": "Moral compromise often occurs at or because of the crime scene" }
+        ]
+      },
+      {
+        "meaning": "inherits constraint",
+        "genre_count": 1,
+        "note": "Used only in Holiday, where the transformation constraint carries forward unchanged into the reconnection scene. 1 instance.",
+        "instances": [
+          { "genre": "Holiday", "edge_id": "HL_E70_TRANSFORMATION_TO_RECONNECTION", "label": "Internal transformation enables the choice to reconnect" }
+        ]
+      }
+    ]
+  },
+
+  "structural_observations": [
+    "All 27 genre graphs share a consistent five-level spine: 1 Genre Promise (Level 1), 4 Core Constraints (Level 2), 4 Subgenre Patterns (Level 3), 3 Setting Rules (Level 4), and 3 Scene Obligations (Level 5), plus 1 Tone Marker and 1-2 Anti-Pattern nodes.",
+    "The standard graph size is 17 nodes and 16 edges. Drama, Romance, Romantic Comedy, and Young Adult have 18 nodes or 22 edges due to additional setting rule routing or extra anti-pattern nodes. Children's Literature, Satire, and Psychological have 15 nodes (fewer anti-patterns).",
+    "Seven edge meanings are universal across all 27 genres, forming the structural backbone: 'specifies constraint', 'sets tone', 'branches into subtype', 'introduces setting rule', 'mandates element', 'requires payoff', and 'prohibits element'. These map directly to the five-level spine plus tone and anti-pattern connections.",
+    "Five edge meanings have limited usage: 'restricts resolution' (5 genres), 'specializes threat' (2 genres), 'differentiates from' (1 genre), 'narrows scope' (1 genre), and 'inherits constraint' (1 genre). These represent genre-specific refinements beyond the universal backbone.",
+    "Stakes Escalation is the most pervasive constraint type (8 genres), reflecting that most story genres require a sense of increasing pressure — whether through physical danger, emotional intensity, or psychological deterioration.",
+    "Internal Consistency / Rules (7 genres) is the second most common constraint type, underscoring that audiences across genres demand predictable systems — whether those are magic rules, scientific premises, investigative methods, or threat logic.",
+    "The Climactic Confrontation scene obligation appears in 10 of 27 genres, making it the single most reused scene type. Even genres without an explicit confrontation node (Romance, Comedy, Family) have equivalent climactic scenes (Grand Gesture, Comic Climax, Reconciliation).",
+    "Genres cluster into natural families based on shared constraint profiles: (1) Danger genres (Action, Thriller, Horror, War, Western) share Stakes Escalation + Isolation + Environment as Active Force. (2) Investigation genres (Mystery, Detective, Crime) share Internal Consistency + Fair Clueing + Institutional Mechanics. (3) Relationship genres (Romance, Romantic Comedy, Family, Drama) share Relationship as Engine + Resolution Constraint + Public vs. Private Self. (4) World-building genres (Fantasy, Science Fiction, Historical, Adventure) share Plausibility + Wonder/Discovery + World Establishment scenes.",
+    "Six genres impose explicit Resolution Constraints — Comedy, Romantic Comedy, Family, Mystery, Romance, and Children's Literature — meaning these genres have specific, audience-enforced requirements for how stories must end. Other genres are more flexible about endings.",
+    "The Public vs. Private Self constraint appears across five genres spanning relationship stories (Romance, Romantic Comedy), institutional stories (Political, Biography), and structural comedy (Satire). This makes it a cross-family constraint that bridges otherwise distant genre clusters.",
+    "Every genre has at least one Anti-Pattern node. Six genres have two: Drama (Melodrama + Passive Protagonist), Biography (Wikipedia Page + Hagiographic Distortion), Young Adult (Condescension + Static Identity), Literary Fiction (Style Without Substance + Plotted Interiority), Musical (Narrative Halt + Inconsistent Song Logic), and Holiday (Cynicism Punished + Holiday as Backdrop).",
+    "Four of the 12 controlled edge vocabulary terms are used in only 1 genre each ('differentiates from', 'narrows scope', 'inherits constraint') or 2 genres ('specializes threat'). These may warrant future audit for expansion or retirement, paralleling the unused vocabulary terms noted in the archetype index."
+  ]
+}
