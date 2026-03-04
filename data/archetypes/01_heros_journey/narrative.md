@@ -4,7 +4,7 @@
 
 This graph models the temporal structure of the Hero's Journey archetype — the most widely recognized story pattern in Western narrative. The graph captures the protagonist's departure from the ordinary world, initiation through trials and crisis in a special world, and return as a changed person. It is designed as both an educational tool (understanding what the archetype does and why) and a practical planning tool (diagnosing whether a draft is structurally complete).
 
-The graph contains 12 nodes (11 canonical + 1 variant) and 12 edges (10 canonical + 2 variant). It has one start node (Ordinary World) and one terminal node (Return with the Elixir).
+The graph contains 11 core nodes and 10 core edges (plus 1 variant node and 2 variant edges in variants.json). It has one start node (Ordinary World) and one terminal node (Return with the Elixir).
 
 ---
 

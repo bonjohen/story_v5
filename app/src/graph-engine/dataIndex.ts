@@ -4,7 +4,6 @@
  */
 
 import type { GraphMetadata, DataManifest, StoryGraph } from '../types/graph.ts'
-import { parseGraphJson } from './normalizer.ts'
 
 /** Known archetype folders (must match data/archetypes/ directory) */
 const ARCHETYPE_DIRS = [
@@ -79,7 +78,7 @@ export function buildGraphMetadata(
   return {
     id: graph.id,
     name: graph.name,
-    type: graph.type as 'archetype' | 'genre',
+    type: graph.type,
     prefix: extractPrefix(graph),
     nodeCount: graph.nodes.length,
     edgeCount: graph.edges.length,
@@ -87,48 +86,6 @@ export function buildGraphMetadata(
     hasNarrative,
     hasExamples,
   }
-}
-
-/**
- * Load all graphs via fetch (browser context).
- * dataRoot should point to the directory containing archetypes/ and genres/.
- */
-export async function buildDataIndex(dataRoot: string): Promise<{
-  archetypes: { meta: GraphMetadata; graph: StoryGraph }[]
-  genres: { meta: GraphMetadata; graph: StoryGraph }[]
-}> {
-  const archetypes: { meta: GraphMetadata; graph: StoryGraph }[] = []
-  const genres: { meta: GraphMetadata; graph: StoryGraph }[] = []
-
-  for (const dir of ARCHETYPE_DIRS) {
-    const graphPath = `${dataRoot}/archetypes/${dir}/graph.json`
-    try {
-      const res = await fetch(graphPath)
-      if (!res.ok) continue
-      const raw = await res.json()
-      const graph = parseGraphJson(raw)
-      const meta = buildGraphMetadata(graph, `archetypes/${dir}`, true, true)
-      archetypes.push({ meta, graph })
-    } catch {
-      console.warn(`Failed to load archetype: ${dir}`)
-    }
-  }
-
-  for (const dir of GENRE_DIRS) {
-    const graphPath = `${dataRoot}/genres/${dir}/graph.json`
-    try {
-      const res = await fetch(graphPath)
-      if (!res.ok) continue
-      const raw = await res.json()
-      const graph = parseGraphJson(raw)
-      const meta = buildGraphMetadata(graph, `genres/${dir}`, true, true)
-      genres.push({ meta, graph })
-    } catch {
-      console.warn(`Failed to load genre: ${dir}`)
-    }
-  }
-
-  return { archetypes, genres }
 }
 
 /**

@@ -8,9 +8,8 @@
 
 import { useMemo, useCallback } from 'react'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
+import { toArray } from '../utils/arrays.ts'
 import type { GraphNode } from '../types/graph.ts'
-
-const toArr = (v: string | string[]) => (Array.isArray(v) ? v : [v])
 
 interface ConstraintChecklistProps {
   graph: NormalizedGraph
@@ -43,8 +42,8 @@ function extractConstraints(
   const visited = new Set<string>()
   const queue = [startNodeId]
   while (queue.length > 0) {
-    const id = queue.shift()!
-    if (visited.has(id)) continue
+    const id = queue.shift()
+    if (!id || visited.has(id)) continue
     visited.add(id)
     backwardPath.push(id)
     const predecessors = graph.reverseAdjacency.get(id) ?? []
@@ -57,8 +56,8 @@ function extractConstraints(
   const forwardVisited = new Set<string>()
   const forwardQueue = [startNodeId]
   while (forwardQueue.length > 0) {
-    const id = forwardQueue.shift()!
-    if (forwardVisited.has(id)) continue
+    const id = forwardQueue.shift()
+    if (!id || forwardVisited.has(id)) continue
     forwardVisited.add(id)
     const neighbors = graph.adjacency.get(id) ?? []
     for (const n of neighbors) {
@@ -81,8 +80,8 @@ function extractConstraints(
     })
 
   for (const node of sortedNodes) {
-    const entryConditions = toArr(node.entry_conditions).filter((s) => s.trim())
-    const exitConditions = toArr(node.exit_conditions).filter((s) => s.trim())
+    const entryConditions = toArray(node.entry_conditions).filter((s) => s.trim())
+    const exitConditions = toArray(node.exit_conditions).filter((s) => s.trim())
     const constraints = [...entryConditions, ...exitConditions]
 
     if (constraints.length > 0) {
@@ -109,7 +108,7 @@ export function ConstraintChecklist({ graph, selectedNodeId }: ConstraintCheckli
   const handleCopy = useCallback(() => {
     const text = formatChecklistText(graph.graph.name, items)
     navigator.clipboard.writeText(text).catch(() => {
-      // Fallback: select text
+      window.prompt('Copy this text:', text)
     })
   }, [graph.graph.name, items])
 

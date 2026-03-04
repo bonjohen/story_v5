@@ -38,6 +38,8 @@ data/                              ← Deliverable outputs
       graph.json                   ← Directed graph JSON
       narrative.md                 ← Narrative spec (walkthroughs, failure modes)
       examples.md                  ← Example mappings to real works
+      variants.json                ← Variant nodes/edges (optional, some archetypes)
+      beat_sheet_*.json            ← Beat-sheet mappings (optional, some archetypes)
   genres/                          ← Goal 2 deliverables (complete)
     {nn_name}/                     ← Per-genre folder (27 total)
       graph.json
@@ -46,6 +48,15 @@ data/                              ← Deliverable outputs
   cross_archetype_index.json       ← Shared node roles/edge meanings across all 15
   cross_genre_constraint_index.json ← Shared constraint types across all 27
   genre_archetype_matrix.json      ← 27 genres × 15 archetypes compatibility
+  archetype_emotional_arcs.json    ← Emotional arc analysis for archetypes
+  hybrid_archetype_patterns.json   ← Hybrid/combined archetype patterns
+  tone_archetype_integration.json  ← Tone-archetype integration model
+  genre_blending_model.json        ← Genre blending/mixing model
+  non_western_archetype_analysis.json ← Non-Western archetype analysis
+  cross_medium_adaptation.json     ← Cross-medium adaptation patterns
+  corpus_validation.json           ← Corpus-wide validation results
+  example_works_registry.json      ← Consolidated registry of all example works
+  manifest.json                    ← Data manifest (file listing and checksums)
 
 app/                               ← Interactive viewer (React + TypeScript + Vite)
   src/
@@ -72,7 +83,12 @@ app/                               ← Interactive viewer (React + TypeScript + 
 All graph deliverables follow the schema in `docs/v0_plan.md` §1.1–1.2:
 
 - **Nodes**: `node_id`, `label`, `role`, `definition`, `entry_conditions`, `exit_conditions`, `typical_variants`, `failure_modes`, `signals_in_text`
+  - Genre nodes add: `severity` ("hard" or "soft"), `level` (1-5 for spine nodes, null for Tone Marker/Anti-Pattern)
 - **Edges**: `edge_id`, `from`, `to`, `label`, `meaning`, `preconditions`, `effects_on_stakes`, `effects_on_character`, `common_alternatives`, `anti_patterns`
+  - Genre edges add: `severity` ("hard" or "soft")
+- **Top-level fields**: `id`, `name`, `type` ("archetype" or "genre"), `description`
+  - Archetype graphs add: `variant_file` (string filename pointing to variants.json, or null)
+  - `_metadata` block: `nodeCount`, `edgeCount`, `nodesPerRole`, `edgesPerMeaning`; genre graphs also include `severityCounts` (hard/soft/total)
 - Node/edge IDs: `{PREFIX}_N{##}_{SHORT_NAME}` for nodes, `{PREFIX}_E{##}_{SHORT_NAME}` for edges; variant range 50-79
 - Each graph has one start node and one or more terminal nodes
 
@@ -88,7 +104,7 @@ Goal files (`docs/goal_1.md`, `docs/goal_2.md`) use checkbox syntax:
 - `[~]` — actively in progress (only ONE task at a time)
 - `[X]` — complete
 
-Deferred work is tracked in `docs/v-next.md` (42 items across issues, suggestions, and enhancements).
+Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 
 ### Workflow Rules
 
@@ -105,8 +121,3 @@ Deferred work is tracked in `docs/v-next.md` (42 items across issues, suggestion
 - Failure modes must be specific enough to guide revision
 - Genre depth graphs must have all 5 levels clearly distinguished
 - Constraints must be stated as enforceable rules, not vague descriptions
-
-### Known Issues (see v-next.md for full list)
-
-- `archetypes.json` filename is misspelled (#13) — renaming requires updating all references
-- No automated validation script for graph-narrative ID correspondence (#10)

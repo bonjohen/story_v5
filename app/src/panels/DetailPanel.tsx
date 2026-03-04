@@ -3,12 +3,38 @@
  * Enhanced with role badges, collapsible sections, and trace controls.
  */
 
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { useGraphStore } from '../store/graphStore.ts'
 import { ConstraintChecklist } from './ConstraintChecklist.tsx'
+import { toArray } from '../utils/arrays.ts'
 import type { GraphNode, GraphEdge } from '../types/graph.ts'
+import type { NormalizedGraph } from '../graph-engine/index.ts'
 
-const toArr = (v: string | string[]) => (Array.isArray(v) ? v : [v])
+/** Symbol indicators for roles (colorblind-accessible secondary signal) */
+const ROLE_SYMBOLS: Record<string, string> = {
+  'Origin': '\u25B6',        // play
+  'Disruption': '\u26A1',    // lightning
+  'Commitment': '\u2717',    // crossmark
+  'Catalyst': '\u2605',      // star
+  'Threshold': '\u2192',     // arrow
+  'Trial': '\u2694',         // swords
+  'Escalation': '\u25B2',    // triangle up
+  'Crisis': '\u26A0',        // warning
+  'Descent': '\u25BC',       // triangle down
+  'Transformation': '\u21BB',// cycle
+  'Revelation': '\u25C9',    // fisheye
+  'Irreversible Cost': '\u2718',// heavy X
+  'Resolution': '\u2714',    // checkmark
+  'Reckoning': '\u2696',     // scales
+  // Genre roles
+  'Genre Promise': '\u25B6',
+  'Core Constraint': '\u2717',
+  'Subgenre Pattern': '\u25CB',// circle
+  'World/Setting Rules': '\u2302',// house
+  'Scene Obligations': '\u25A0',// square
+  'Tone Marker': '\u266A',   // music note
+  'Anti-Pattern': '\u2298',  // circled slash
+}
 
 /** Color map for archetype node roles */
 const ROLE_COLORS: Record<string, string> = {
@@ -59,7 +85,7 @@ interface DetailPanelProps {
   onTraceBackward?: () => void
   onClearTrace?: () => void
   traceActive?: 'forward' | 'backward' | null
-  graph?: import('../graph-engine/index.ts').NormalizedGraph | null
+  graph?: NormalizedGraph | null
 }
 
 export function DetailPanel({
@@ -141,7 +167,7 @@ function NodeDetail({ node, onTraceForward, onTraceBackward, onClearTrace, trace
           textTransform: 'uppercase',
           letterSpacing: '0.04em',
         }}>
-          {node.role}
+          {ROLE_SYMBOLS[node.role] ?? '\u25CF'} {node.role}
         </span>
         <span style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace' }}>
           {node.node_id}
@@ -177,11 +203,11 @@ function NodeDetail({ node, onTraceForward, onTraceBackward, onClearTrace, trace
       )}
 
       {/* Collapsible sections */}
-      <CollapsibleSection title="Entry Conditions" items={toArr(node.entry_conditions)} />
-      <CollapsibleSection title="Exit Conditions" items={toArr(node.exit_conditions)} />
-      <CollapsibleSection title="Failure Modes" items={toArr(node.failure_modes)} warn />
-      <CollapsibleSection title="Signals in Text" items={toArr(node.signals_in_text)} />
-      <CollapsibleSection title="Typical Variants" items={toArr(node.typical_variants)} />
+      <CollapsibleSection title="Entry Conditions" items={toArray(node.entry_conditions)} />
+      <CollapsibleSection title="Exit Conditions" items={toArray(node.exit_conditions)} />
+      <CollapsibleSection title="Failure Modes" items={toArray(node.failure_modes)} warn />
+      <CollapsibleSection title="Signals in Text" items={toArray(node.signals_in_text)} />
+      <CollapsibleSection title="Typical Variants" items={toArray(node.typical_variants)} />
     </>
   )
 }
@@ -220,11 +246,11 @@ function EdgeDetail({ edge }: { edge: GraphEdge }) {
         {edge.from} {'\u2192'} {edge.to}
       </div>
 
-      <CollapsibleSection title="Preconditions" items={toArr(edge.preconditions)} />
-      <CollapsibleSection title="Effects on Stakes" items={toArr(edge.effects_on_stakes)} />
-      <CollapsibleSection title="Effects on Character" items={toArr(edge.effects_on_character)} />
-      <CollapsibleSection title="Common Alternatives" items={toArr(edge.common_alternatives)} />
-      <CollapsibleSection title="Anti-Patterns" items={toArr(edge.anti_patterns)} warn />
+      <CollapsibleSection title="Preconditions" items={toArray(edge.preconditions)} />
+      <CollapsibleSection title="Effects on Stakes" items={toArray(edge.effects_on_stakes)} />
+      <CollapsibleSection title="Effects on Character" items={toArray(edge.effects_on_character)} />
+      <CollapsibleSection title="Common Alternatives" items={toArray(edge.common_alternatives)} />
+      <CollapsibleSection title="Anti-Patterns" items={toArray(edge.anti_patterns)} warn />
     </>
   )
 }
@@ -310,27 +336,31 @@ function CollapsibleSection({ title, items, warn }: {
 /**
  * Edge Tooltip — shown on edge hover in the canvas.
  */
-export function EdgeTooltip({ edge, position }: {
+export const EdgeTooltip = memo(function EdgeTooltip({ edge, position }: {
   edge: GraphEdge
   position: { x: number; y: number }
 }) {
   const meaningColor = MEANING_COLORS[edge.meaning] ?? 'var(--text-muted)'
 
   return (
-    <div style={{
-      position: 'fixed',
-      left: position.x + 12,
-      top: position.y - 8,
-      background: 'var(--bg-elevated)',
-      border: '1px solid var(--border)',
-      borderRadius: 6,
-      padding: '10px 12px',
-      maxWidth: 320,
-      zIndex: 100,
-      boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
-      animation: 'fadeIn 0.15s ease',
-      pointerEvents: 'none',
-    }}>
+    <div
+      role="tooltip"
+      aria-label={`Edge: ${edge.label}, meaning: ${edge.meaning}`}
+      style={{
+        position: 'fixed',
+        left: position.x + 12,
+        top: position.y - 8,
+        background: 'var(--bg-elevated)',
+        border: '1px solid var(--border)',
+        borderRadius: 6,
+        padding: '10px 12px',
+        maxWidth: 320,
+        zIndex: 100,
+        boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+        animation: 'fadeIn 0.15s ease',
+        pointerEvents: 'none',
+      }}
+    >
       <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>{edge.label}</div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
         <span style={{
@@ -348,14 +378,14 @@ export function EdgeTooltip({ edge, position }: {
           {edge.from} {'\u2192'} {edge.to}
         </span>
       </div>
-      <TooltipList title="Preconditions" items={toArr(edge.preconditions)} />
-      <TooltipList title="Effects on Stakes" items={toArr(edge.effects_on_stakes)} />
-      <TooltipList title="Effects on Character" items={toArr(edge.effects_on_character)} />
-      <TooltipList title="Alternatives" items={toArr(edge.common_alternatives)} />
-      <TooltipList title="Anti-Patterns" items={toArr(edge.anti_patterns)} warn />
+      <TooltipList title="Preconditions" items={toArray(edge.preconditions)} />
+      <TooltipList title="Effects on Stakes" items={toArray(edge.effects_on_stakes)} />
+      <TooltipList title="Effects on Character" items={toArray(edge.effects_on_character)} />
+      <TooltipList title="Alternatives" items={toArray(edge.common_alternatives)} />
+      <TooltipList title="Anti-Patterns" items={toArray(edge.anti_patterns)} warn />
     </div>
   )
-}
+})
 
 function TooltipList({ title, items, warn }: { title: string; items: string[]; warn?: boolean }) {
   const filtered = items.filter((s) => s && s.trim())

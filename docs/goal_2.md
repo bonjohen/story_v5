@@ -168,7 +168,7 @@ Build the reuse map that identifies shared constraint types across all 27 genre 
 
 - [X] Identify common constraint types that appear across multiple genres (e.g., "stakes escalation", "fairness", "plausibility", "threat logic", "relationship proof", "institutional realism") and tabulate which genres use each
 - [X] Identify common scene obligations that recur across genres and tabulate usage
-- [X] Produce the cross-genre constraint index document → `data/genres/cross_genre_constraint_index.json`
+- [X] Produce the cross-genre constraint index document → `data/cross_genre_constraint_index.json`
 
 ---
 

@@ -33,13 +33,13 @@ interface GraphJson {
   [key: string]: unknown
 }
 
-/** Extract the numeric ID from a node_id like HJ_N50_REFUSAL_OF_CALL → 50 */
+/** Extract the numeric ID from a node_id like HJ_N50_REFUSAL_OF_CALL ->50 */
 function getNodeNum(nodeId: string): number {
   const match = nodeId.match(/_N(\d+)_/)
   return match ? parseInt(match[1], 10) : -1
 }
 
-/** Extract the numeric ID from an edge_id like HJ_E50_REFUSAL → 50 */
+/** Extract the numeric ID from an edge_id like HJ_E50_REFUSAL ->50 */
 function getEdgeNum(edgeId: string): number {
   const match = edgeId.match(/_E(\d+)_/)
   return match ? parseInt(match[1], 10) : -1
@@ -65,7 +65,12 @@ function processArchetype(folder: string): { hasVariants: boolean; variantNodes:
   const graphPath = join(folder, 'graph.json')
   const variantPath = join(folder, 'variants.json')
   const raw = readFileSync(graphPath, 'utf-8')
-  const graph: GraphJson = JSON.parse(raw)
+  let graph: GraphJson
+  try {
+    graph = JSON.parse(raw)
+  } catch (e) {
+    throw new Error(`Failed to parse ${graphPath}: ${e instanceof Error ? e.message : e}`)
+  }
 
   const variantNodeIds = new Set<string>()
   const coreNodes: GraphNode[] = []
@@ -154,7 +159,7 @@ function main() {
       totalVariantFiles++
       totalVariantNodes += result.variantNodes
       totalVariantEdges += result.variantEdges
-      console.log(`  ✓ ${folder}: split ${result.variantNodes} nodes, ${result.variantEdges} edges → variants.json`)
+      console.log(`  OK${folder}: split ${result.variantNodes} nodes, ${result.variantEdges} edges ->variants.json`)
     } else {
       console.log(`  · ${folder}: no variant nodes (variant_file: null)`)
     }

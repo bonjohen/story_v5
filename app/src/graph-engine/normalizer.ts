@@ -16,20 +16,62 @@ export interface NormalizedGraph {
 }
 
 /**
- * Parse raw JSON into a typed StoryGraph, adding default values for missing optional fields.
+ * Parse raw JSON into a typed StoryGraph, validating structure before returning.
  */
 export function parseGraphJson(raw: unknown): StoryGraph {
-  const data = raw as Record<string, unknown>
-
-  if (!data || typeof data !== 'object') {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
     throw new Error('Graph JSON must be an object')
   }
+
+  const data = raw as Record<string, unknown>
 
   if (!data.id || !data.name || !data.type || !data.nodes || !data.edges) {
     throw new Error('Graph JSON missing required fields: id, name, type, nodes, edges')
   }
 
-  return data as unknown as StoryGraph
+  if (data.type !== 'archetype' && data.type !== 'genre') {
+    throw new Error(`Graph type must be "archetype" or "genre", got ${JSON.stringify(data.type)}`)
+  }
+
+  if (!Array.isArray(data.nodes)) {
+    throw new Error('Graph "nodes" must be an array')
+  }
+
+  if (!Array.isArray(data.edges)) {
+    throw new Error('Graph "edges" must be an array')
+  }
+
+  for (const node of data.nodes) {
+    if (!node || typeof node !== 'object') {
+      throw new Error('Each node must be an object')
+    }
+    const n = node as Record<string, unknown>
+    if (!n.node_id || !n.label || !n.role) {
+      throw new Error(`Node missing required fields (node_id, label, role): ${JSON.stringify(n)}`)
+    }
+  }
+
+  for (const edge of data.edges) {
+    if (!edge || typeof edge !== 'object') {
+      throw new Error('Each edge must be an object')
+    }
+    const e = edge as Record<string, unknown>
+    if (!e.edge_id || !e.from || !e.to || !e.label || !e.meaning) {
+      throw new Error(`Edge missing required fields (edge_id, from, to, label, meaning): ${JSON.stringify(e)}`)
+    }
+  }
+
+  // At this point structure is validated; build a typed result
+  const graph: StoryGraph = {
+    id: data.id as string,
+    name: data.name as string,
+    type: data.type,
+    description: (data.description as string) ?? '',
+    nodes: data.nodes as StoryGraph['nodes'],
+    edges: data.edges as StoryGraph['edges'],
+  } as StoryGraph
+
+  return graph
 }
 
 /**
@@ -71,19 +113,6 @@ export function normalizeGraph(graph: StoryGraph): NormalizedGraph {
     validation,
     ...indices,
   }
-}
-
-/**
- * Load a graph from a URL (browser fetch), validate, and normalize.
- */
-export async function loadGraph(url: string): Promise<NormalizedGraph> {
-  const response = await fetch(url)
-  if (!response.ok) {
-    throw new Error(`Failed to load graph from ${url}: ${response.status}`)
-  }
-  const raw = await response.json()
-  const graph = parseGraphJson(raw)
-  return normalizeGraph(graph)
 }
 
 /**

@@ -170,19 +170,6 @@ export function getNodeIdsForWork(examples: ParsedExamples, workName: string): S
 }
 
 /**
- * Get all edge IDs that have example mappings for a given work.
- */
-export function getEdgeIdsForWork(examples: ParsedExamples, workName: string): Set<string> {
-  const ids = new Set<string>()
-  for (const m of examples.edgeMappings) {
-    if (m.workName === workName || m.workName.includes(workName)) {
-      ids.add(m.edgeId)
-    }
-  }
-  return ids
-}
-
-/**
  * Get the example description for a specific node and work.
  */
 export function getNodeExample(

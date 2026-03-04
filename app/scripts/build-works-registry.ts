@@ -135,7 +135,7 @@ const KNOWN_WORKS: Record<string, Partial<WorkRecord>> = {
   'mad max: fury road': { creator: 'George Miller', year: 2015, medium: 'film' },
   'die hard': { creator: 'John McTiernan', year: 1988, medium: 'film' },
   'john wick': { creator: 'Chad Stahelski', year: 2014, medium: 'film' },
-  'gone girl': { creator: 'David Fincher', year: 2014, medium: 'film' },
+  'gone girl (film)': { creator: 'David Fincher', year: 2014, medium: 'film' },
   "se7en": { creator: 'David Fincher', year: 1995, medium: 'film' },
   'the silence of the lambs': { creator: 'Jonathan Demme', year: 1991, medium: 'film' },
   'dune': { creator: 'Denis Villeneuve', year: 2021, medium: 'film' },

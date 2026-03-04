@@ -35,7 +35,7 @@ All node and edge IDs across the 15 archetype graphs must follow this convention
 
 **Examples:**
 - `HJ_N01_ORDINARY_WORLD`
-- `HJ_N03_THRESHOLD`
+- `HJ_N03_MENTOR`
 - `TR_N06_DOWNFALL`
 
 **Numbering rules:**
@@ -57,7 +57,7 @@ All node and edge IDs across the 15 archetype graphs must follow this convention
 **Examples:**
 - `HJ_E01_CALL_RECEIVED`
 - `HJ_E03_CROSSING`
-- `TR_E07_FINAL_RECKONING`
+- `TR_E07_WORLD_ENDURES`
 
 **Numbering rules:**
 - Edge numbers correspond to the order in which transitions occur along the canonical path

@@ -76,7 +76,7 @@ export function GraphSearch({ graph, onSelect }: GraphSearchProps) {
 
   // Reset active index when results change
   useEffect(() => {
-    setActiveIndex(0)
+    setActiveIndex(0) // eslint-disable-line react-hooks/set-state-in-effect -- reset on results change
   }, [results])
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -125,6 +125,7 @@ export function GraphSearch({ graph, onSelect }: GraphSearchProps) {
         <input
           ref={inputRef}
           type="text"
+          role="combobox"
           placeholder="Search nodes & edges... (/ or Ctrl+K)"
           value={query}
           onChange={(e) => {
@@ -134,6 +135,10 @@ export function GraphSearch({ graph, onSelect }: GraphSearchProps) {
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
           aria-label="Search graph"
+          aria-expanded={open && results.length > 0}
+          aria-controls="graph-search-results"
+          aria-autocomplete="list"
+          aria-activedescendant={open && results.length > 0 ? `search-result-${activeIndex}` : undefined}
           style={{
             width: 220,
             padding: '4px 8px',
@@ -149,23 +154,30 @@ export function GraphSearch({ graph, onSelect }: GraphSearchProps) {
 
       {/* Dropdown results */}
       {open && results.length > 0 && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          right: 0,
-          marginTop: 4,
-          width: 320,
-          maxHeight: 400,
-          overflowY: 'auto',
-          background: 'var(--bg-elevated)',
-          border: '1px solid var(--border)',
-          borderRadius: 6,
-          boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
-          zIndex: 100,
-        }}>
+        <div
+          id="graph-search-results"
+          role="listbox"
+          aria-label="Search results"
+          style={{
+            position: 'absolute',
+            top: '100%',
+            right: 0,
+            marginTop: 4,
+            width: 320,
+            maxHeight: 400,
+            overflowY: 'auto',
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--border)',
+            borderRadius: 6,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+            zIndex: 100,
+          }}>
           {results.map((result, i) => (
             <button
               key={`${result.type}-${result.id}-${i}`}
+              id={`search-result-${i}`}
+              role="option"
+              aria-selected={i === activeIndex}
               onClick={() => handleSelect(result)}
               style={{
                 display: 'flex',

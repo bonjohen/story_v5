@@ -111,15 +111,18 @@ const B2_GENRES: GenreConfig[] = [
 
 function processGenre(config: GenreConfig): Map<string, string> {
   const graphPath = resolve(DATA_ROOT, config.folder, 'graph.json')
-  const graph: GraphJson = JSON.parse(readFileSync(graphPath, 'utf-8'))
+  let graph: GraphJson
+  try {
+    graph = JSON.parse(readFileSync(graphPath, 'utf-8'))
+  } catch (e) {
+    throw new Error(`Failed to parse ${graphPath}: ${e instanceof Error ? e.message : e}`)
+  }
 
   const nodesById = new Map<string, GraphNode>()
   for (const node of graph.nodes) {
     nodesById.set(node.node_id, node)
   }
 
-  // Group edges by their correct range
-  const rangeCounters = new Map<string, number>()
   const renameMap = new Map<string, string>() // old edge_id -> new edge_id
 
   // First pass: identify which edges need renumbering
@@ -196,10 +199,11 @@ function processGenre(config: GenreConfig): Map<string, string> {
   }
   const edgesPerMeaning: Record<string, number> = {}
   for (const edge of graph.edges) {
-    const meaning = (edge as any).meaning as string
+    const meaning = edge.meaning as string | undefined
     if (meaning) edgesPerMeaning[meaning] = (edgesPerMeaning[meaning] || 0) + 1
   }
-  ;(graph as any)._metadata = {
+  const graphWithMeta = graph as GraphJson & { _metadata: unknown }
+  graphWithMeta._metadata = {
     nodeCount: graph.nodes.length,
     edgeCount: graph.edges.length,
     nodesPerRole,

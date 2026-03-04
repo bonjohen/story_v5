@@ -3,6 +3,7 @@
  */
 
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 export type ColorScheme = 'dark' | 'light' | 'high-contrast'
 export type MotionPreference = 'full' | 'reduced'
@@ -17,24 +18,41 @@ export interface SettingsState {
   toggleSettings: () => void
 }
 
-export const useSettingsStore = create<SettingsState>((set) => ({
-  colorScheme: 'dark',
-  motionPreference:
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      ? 'reduced'
-      : 'full',
-  settingsOpen: false,
+export const useSettingsStore = create<SettingsState>()(
+  persist(
+    (set) => ({
+      colorScheme: 'dark',
+      motionPreference:
+        typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'reduced'
+          : 'full',
+      settingsOpen: false,
 
-  setColorScheme: (colorScheme) => {
-    set({ colorScheme })
-    applyColorScheme(colorScheme)
-  },
-  setMotionPreference: (motionPreference) => {
-    set({ motionPreference })
-    applyMotionPreference(motionPreference)
-  },
-  toggleSettings: () => set((s) => ({ settingsOpen: !s.settingsOpen })),
-}))
+      setColorScheme: (colorScheme) => {
+        set({ colorScheme })
+        applyColorScheme(colorScheme)
+      },
+      setMotionPreference: (motionPreference) => {
+        set({ motionPreference })
+        applyMotionPreference(motionPreference)
+      },
+      toggleSettings: () => set((s) => ({ settingsOpen: !s.settingsOpen })),
+    }),
+    {
+      name: 'story-v5-settings',
+      partialize: (state) => ({
+        colorScheme: state.colorScheme,
+        motionPreference: state.motionPreference,
+      }),
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          applyColorScheme(state.colorScheme)
+          applyMotionPreference(state.motionPreference)
+        }
+      },
+    },
+  ),
+)
 
 function applyColorScheme(scheme: ColorScheme) {
   const root = document.documentElement

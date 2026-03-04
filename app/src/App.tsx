@@ -1,22 +1,29 @@
-import { useEffect, useCallback, useRef, useState } from 'react'
+import { useEffect, useCallback, useRef, useState, memo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
 import { GraphSelectorPanel } from './components/GraphSelectorPanel.tsx'
-import { VariantToggle, computeFailureModeNodes } from './components/VariantToggle.tsx'
+import { VariantToggle } from './components/VariantToggle.tsx'
+import { computeFailureModeNodes } from './graph-engine/index.ts'
 import { DetailPanel, EdgeTooltip } from './panels/DetailPanel.tsx'
 import { SimulationPanel } from './panels/SimulationPanel.tsx'
 import { ExampleOverlay } from './panels/ExampleOverlay.tsx'
 import { GraphStats } from './panels/GraphStats.tsx'
 import { CrossIndexPanel } from './panels/CrossIndex.tsx'
 import { GraphSearch } from './components/GraphSearch.tsx'
+import { useKeyboardNav } from './hooks/useKeyboardNav.ts'
+import { useTraceNavigation } from './hooks/useTraceNavigation.ts'
 import { SettingsPanel } from './components/SettingsPanel.tsx'
 import { ExportPanel } from './panels/ExportPanel.tsx'
 import type { CyCore } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSimulationStore } from './store/simulationStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
-import type { GraphEdge } from './types/graph.ts'
-import type { DataManifest } from './types/graph.ts'
+import type { GraphEdge, DataManifest } from './types/graph.ts'
+
+// Layout constants
+const TOOLBAR_HEIGHT = 42
+const SIDEBAR_WIDTH = 260
+const DETAIL_PANEL_WIDTH = 320
 
 /** Parse the URL pathname into a graph type and directory slug. */
 function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: string } | null {
@@ -25,7 +32,7 @@ function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: strin
   return { type: match[1] as 'archetype' | 'genre', dir: match[2] }
 }
 
-function App() {
+export default function App() {
   const location = useLocation()
   const navigate = useNavigate()
   const manifestLoaded = useRef(false)
@@ -58,8 +65,6 @@ function App() {
 
   // Edge hover tooltip state
   const [hoveredEdge, setHoveredEdge] = useState<{ edge: GraphEdge; x: number; y: number } | null>(null)
-  // Trace direction state
-  const [traceDirection, setTraceDirection] = useState<'forward' | 'backward' | null>(null)
   // Variant toggle state
   const [activeVariant, setActiveVariant] = useState<string | null>(null)
   const [showFailureModes, setShowFailureModes] = useState(false)
@@ -71,6 +76,8 @@ function App() {
   const [rightPanel, setRightPanel] = useState<'detail' | 'stats' | 'crossindex' | null>(null)
   // Export panel
   const [showExport, setShowExport] = useState(false)
+  // Manifest error
+  const [manifestError, setManifestError] = useState<string | null>(null)
   const cyInstanceRef = useRef<CyCore | null>(null)
 
   const handleCyReady = useCallback((cy: CyCore) => {
@@ -90,30 +97,36 @@ function App() {
     if (manifestLoaded.current) return
     manifestLoaded.current = true
     fetch('../data/manifest.json')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`Manifest load failed: ${res.status}`)
+        return res.json()
+      })
       .then((data: DataManifest) => setManifest(data))
-      .catch((err) => console.warn('Failed to load manifest:', err))
+      .catch((err) => {
+        console.warn('Failed to load manifest:', err)
+        setManifestError(err instanceof Error ? err.message : 'Failed to load manifest')
+      })
   }, [setManifest])
 
   // Sync URL -> graph loading
   useEffect(() => {
     const parsed = parseRoute(location.pathname)
     if (parsed) {
-      loadGraph(parsed.type, parsed.dir)
+      void loadGraph(parsed.type, parsed.dir)
     }
   }, [location.pathname, loadGraph])
 
   // Reset simulation and variant state when graph changes
   useEffect(() => {
     resetSimulation()
-    setActiveVariant(null)
+    setActiveVariant(null) // eslint-disable-line react-hooks/set-state-in-effect -- reset on graph change
     setShowFailureModes(false)
   }, [graphId, resetSimulation])
 
   // Navigate when selecting a graph from the sidebar
   const handleSelectGraph = useCallback(
     (type: 'archetype' | 'genre', dir: string) => {
-      navigate(`/${type}/${dir}`)
+      void navigate(`/${type}/${dir}`)
     },
     [navigate],
   )
@@ -132,81 +145,12 @@ function App() {
     setHoveredEdge(null)
   }, [])
 
-  // Trace forward: BFS from selected node following edges forward
-  const handleTraceForward = useCallback(() => {
-    if (!currentGraph || !selectedNodeId) return
-    const visited = new Set<string>()
-    const queue = [selectedNodeId]
-    while (queue.length > 0) {
-      const nodeId = queue.shift()!
-      if (visited.has(nodeId)) continue
-      visited.add(nodeId)
-      const neighbors = currentGraph.adjacency.get(nodeId) ?? []
-      for (const n of neighbors) {
-        if (!visited.has(n)) queue.push(n)
-      }
-    }
-    setHighlightedPath(Array.from(visited))
-    setTraceDirection('forward')
-  }, [currentGraph, selectedNodeId, setHighlightedPath])
-
-  // Trace backward: BFS from selected node following edges backward
-  const handleTraceBackward = useCallback(() => {
-    if (!currentGraph || !selectedNodeId) return
-    const visited = new Set<string>()
-    const queue = [selectedNodeId]
-    while (queue.length > 0) {
-      const nodeId = queue.shift()!
-      if (visited.has(nodeId)) continue
-      visited.add(nodeId)
-      const predecessors = currentGraph.reverseAdjacency.get(nodeId) ?? []
-      for (const n of predecessors) {
-        if (!visited.has(n)) queue.push(n)
-      }
-    }
-    setHighlightedPath(Array.from(visited))
-    setTraceDirection('backward')
-  }, [currentGraph, selectedNodeId, setHighlightedPath])
-
-  const handleClearTrace = useCallback(() => {
-    setHighlightedPath([])
-    setTraceDirection(null)
-  }, [setHighlightedPath])
-
-  // Clear trace when selection changes
-  useEffect(() => {
-    setTraceDirection(null)
-  }, [selectedNodeId])
+  // Trace navigation (BFS forward/backward)
+  const { traceDirection, handleTraceForward, handleTraceBackward, handleClearTrace } =
+    useTraceNavigation(currentGraph, selectedNodeId, setHighlightedPath)
 
   // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!currentGraph) return
-      const tag = (e.target as HTMLElement).tagName
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
-
-      if (e.key === 'Escape') {
-        clearSelection()
-        handleClearTrace()
-        return
-      }
-
-      if (!selectedNodeId) return
-
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        e.preventDefault()
-        const neighbors = currentGraph.adjacency.get(selectedNodeId) ?? []
-        if (neighbors.length > 0) selectNode(neighbors[0])
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault()
-        const predecessors = currentGraph.reverseAdjacency.get(selectedNodeId) ?? []
-        if (predecessors.length > 0) selectNode(predecessors[0])
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentGraph, selectedNodeId, selectNode, clearSelection, handleClearTrace])
+  useKeyboardNav(currentGraph, selectedNodeId, selectNode, clearSelection, handleClearTrace)
 
   // Navigate to a node from search
   const handleSearchSelect = useCallback((nodeId: string) => {
@@ -248,7 +192,7 @@ function App() {
         borderBottom: '1px solid var(--border)',
         flexShrink: 0,
         zIndex: 10,
-        height: 42,
+        height: TOOLBAR_HEIGHT,
       }}>
         {/* Sidebar toggle */}
         <button
@@ -316,6 +260,8 @@ function App() {
           <>
             <button
               onClick={() => setRightPanel(rightPanel === 'stats' ? null : 'stats')}
+              aria-label="Toggle graph statistics panel"
+              aria-pressed={rightPanel === 'stats'}
               style={{
                 fontSize: 11,
                 padding: '3px 8px',
@@ -332,6 +278,8 @@ function App() {
             </button>
             <button
               onClick={() => setRightPanel(rightPanel === 'crossindex' ? null : 'crossindex')}
+              aria-label="Toggle cross-index panel"
+              aria-pressed={rightPanel === 'crossindex'}
               style={{
                 fontSize: 11,
                 padding: '3px 8px',
@@ -353,6 +301,8 @@ function App() {
         {currentGraph && (
           <button
             onClick={() => setShowSimulation((v) => !v)}
+            aria-label="Toggle simulation panel"
+            aria-pressed={showSimulation || simActive}
             style={{
               fontSize: 11,
               padding: '3px 10px',
@@ -420,8 +370,8 @@ function App() {
             Loading...
           </span>
         )}
-        {error && (
-          <span style={{ fontSize: 11, color: '#ef4444' }}>{error}</span>
+        {(error || manifestError) && (
+          <span style={{ fontSize: 11, color: '#ef4444' }}>{error || manifestError}</span>
         )}
       </header>
 
@@ -432,7 +382,7 @@ function App() {
       {showExport && currentGraph && (
         <ExportPanel
           graph={currentGraph}
-          cyInstance={cyInstanceRef.current}
+          cyRef={cyInstanceRef}
           onClose={() => setShowExport(false)}
         />
       )}
@@ -441,8 +391,8 @@ function App() {
       <div style={{ flex: 1, display: 'flex', position: 'relative', overflow: 'hidden' }}>
         {/* Left sidebar */}
         <aside aria-label="Graph selector sidebar" style={{
-          width: sidebarOpen ? 260 : 0,
-          minWidth: sidebarOpen ? 260 : 0,
+          width: sidebarOpen ? SIDEBAR_WIDTH : 0,
+          minWidth: sidebarOpen ? SIDEBAR_WIDTH : 0,
           background: 'var(--bg-surface)',
           borderRight: sidebarOpen ? '1px solid var(--border)' : 'none',
           transition: 'width 0.2s ease, min-width 0.2s ease',
@@ -535,7 +485,7 @@ function App() {
         {/* Right panel (tabbed: Detail / Stats / Cross-Index) */}
         {(hasDetailPanel || rightPanel) && currentGraph && (
           <aside aria-label="Detail and analysis panel" style={{
-            width: 320,
+            width: DETAIL_PANEL_WIDTH,
             background: 'var(--bg-surface)',
             borderLeft: '1px solid var(--border)',
             flexShrink: 0,
@@ -603,12 +553,13 @@ function App() {
       }}>
         {selectedNode && `Selected node: ${selectedNode.label}, role: ${selectedNode.role}, ${(currentGraph?.adjacency.get(selectedNode.node_id) ?? []).length} outgoing connections`}
         {selectedEdge && `Selected edge: ${selectedEdge.label}, meaning: ${selectedEdge.meaning}, from ${selectedEdge.from} to ${selectedEdge.to}`}
+        {hoveredEdge && !selectedEdge && `Edge: ${hoveredEdge.edge.label}, meaning: ${hoveredEdge.edge.meaning}`}
       </div>
     </div>
   )
 }
 
-function PanelTab({ label, active, onClick, badge }: {
+const PanelTab = memo(function PanelTab({ label, active, onClick, badge }: {
   label: string
   active: boolean
   onClick: () => void
@@ -642,6 +593,4 @@ function PanelTab({ label, active, onClick, badge }: {
       )}
     </button>
   )
-}
-
-export default App
+})

@@ -2,6 +2,7 @@
  * Settings Panel — user preferences for color scheme, motion, and accessibility.
  */
 
+import { useEffect, useRef, useCallback } from 'react'
 import { useSettingsStore, type ColorScheme, type MotionPreference } from '../store/settingsStore.ts'
 
 export function SettingsPanel() {
@@ -10,11 +11,37 @@ export function SettingsPanel() {
   const setColorScheme = useSettingsStore((s) => s.setColorScheme)
   const setMotionPreference = useSettingsStore((s) => s.setMotionPreference)
   const toggleSettings = useSettingsStore((s) => s.toggleSettings)
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  // Escape key to close
+  useEffect(() => {
+    const handle = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') toggleSettings()
+    }
+    window.addEventListener('keydown', handle)
+    return () => window.removeEventListener('keydown', handle)
+  }, [toggleSettings])
+
+  // Focus trap
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key !== 'Tab' || !panelRef.current) return
+    const focusable = panelRef.current.querySelectorAll<HTMLElement>('button, [tabindex]')
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
+  }, [])
 
   return (
-    <div style={{
+    <div ref={panelRef} role="dialog" aria-label="Settings" onKeyDown={handleKeyDown} style={{
       position: 'fixed',
-      top: 42,
+      top: 42, // matches TOOLBAR_HEIGHT in App.tsx
       right: 0,
       width: 280,
       background: 'var(--bg-surface)',

@@ -27,6 +27,7 @@
       ],
       "western_cognates": {
         "closest": "The Hero's Journey",
+        "match_type": "full",
         "key_differences": [
           "Training is central and extended, not a brief mentor encounter",
           "The martial world (jianghu) is morally ambiguous, not clearly divided into ordinary/special worlds",
@@ -61,6 +62,7 @@
       ],
       "western_cognates": {
         "closest": "Tragedy",
+        "match_type": "full",
         "key_differences": [
           "The protagonist's choice is not a flaw — both options are genuinely righteous",
           "There is no hamartia (fatal flaw) — the tragedy arises from the world's moral structure, not the character's weakness",
@@ -96,6 +98,7 @@
       ],
       "western_cognates": {
         "closest": "Voyage and Return",
+        "match_type": "full",
         "key_differences": [
           "The departure is involuntary exile, not voluntary voyage",
           "The protagonist is already complete — exile tests rather than builds virtue",
@@ -130,7 +133,8 @@
         "World-change is accidental, not intentional"
       ],
       "western_cognates": {
-        "closest": "Comedy (Restoration of Order)",
+        "closest": "Comedy",
+        "match_type": "full",
         "key_differences": [
           "No moral lesson — the trickster doesn't learn or improve",
           "The world is changed permanently, not restored to order",
@@ -166,7 +170,8 @@
         "Restoration includes spiritual/ancestral reconnection, not just practical resolution"
       ],
       "western_cognates": {
-        "closest": "No direct equivalent",
+        "closest": null,
+        "match_type": "none",
         "key_differences": [
           "Protagonist is the community, not an individual — fundamentally different from all 15 Western archetypes",
           "Wisdom comes from ancestors and tradition, not mentors or personal discovery",
@@ -200,7 +205,8 @@
         "Time operates differently — the frame's urgency is suspended by the story-within-story structure"
       ],
       "western_cognates": {
-        "closest": "No direct equivalent",
+        "closest": null,
+        "match_type": "none",
         "key_differences": [
           "No single linear arc — the structure is recursive and nested",
           "The protagonist's primary action is storytelling/listening, not physical or moral action",
@@ -235,6 +241,7 @@
       ],
       "western_cognates": {
         "closest": "Rebirth",
+        "match_type": "full",
         "key_differences": [
           "No moral flaw — the protagonist's attachment is universal human nature, not a character deficiency",
           "Resolution is release/liberation, not renewed engagement with the world",
@@ -269,6 +276,7 @@
       ],
       "western_cognates": {
         "closest": "The Hero's Journey",
+        "match_type": "full",
         "key_differences": [
           "The quest is for identity/purpose, not for an external goal or treasure",
           "The vision is received through waiting, not achieved through action",
@@ -304,7 +312,9 @@
         "Resolution is in legend, not in life — the story outlasts the hero"
       ],
       "western_cognates": {
-        "closest": "Tragedy (with elements of Hero's Journey)",
+        "closest": "Tragedy",
+        "secondary": "The Hero's Journey",
+        "match_type": "partial",
         "key_differences": [
           "The hero's flaw is excessive loyalty, not pride or ambition",
           "Betrayal comes from the institution the hero serves, not from personal relationships",
@@ -339,7 +349,8 @@
         "Resolution requires synthesis, not victory of one mode over another"
       ],
       "western_cognates": {
-        "closest": "Rebirth (partial cognate)",
+        "closest": "Rebirth",
+        "match_type": "partial",
         "key_differences": [
           "The 'fallen state' is disconnection from tradition, not personal moral failure",
           "Wisdom comes from ancestors, not from personal suffering or insight",

@@ -63,11 +63,11 @@ export function CrossIndexPanel({ graph }: CrossIndexProps) {
 
   // Load indices on mount
   useEffect(() => {
-    setLoading(true)
-    Promise.all([
-      fetch('../data/cross_archetype_index.json').then((r) => r.ok ? r.json() : null).catch(() => null),
-      fetch('../data/cross_genre_constraint_index.json').then((r) => r.ok ? r.json() : null).catch(() => null),
-      fetch('../data/genre_archetype_matrix.json').then((r) => r.ok ? r.json() : null).catch(() => null),
+    setLoading(true) // eslint-disable-line react-hooks/set-state-in-effect -- data fetch init
+    void Promise.all([
+      fetch('../data/cross_archetype_index.json').then((r) => r.ok ? r.json() as Promise<CrossIndex> : null).catch(() => null),
+      fetch('../data/cross_genre_constraint_index.json').then((r) => r.ok ? r.json() as Promise<CrossIndex> : null).catch(() => null),
+      fetch('../data/genre_archetype_matrix.json').then((r) => r.ok ? r.json() as Promise<CompatibilityMatrix> : null).catch(() => null),
     ]).then(([arch, genre, mat]) => {
       setArchetypeIndex(arch)
       setGenreIndex(genre)

@@ -7,7 +7,7 @@ Format: `{PREFIX}_N{##}_{SHORT_NAME}`
 - **PREFIX**: 2-letter genre abbreviation (see table below)
 - **N**: literal character indicating a node
 - **##**: two-digit number, assigned by level range (see below)
-- **SHORT_NAME**: UPPER_SNAKE_CASE descriptive label
+- **SHORT_NAME**: UPPER_SNAKE_CASE descriptive label (max 50 characters; conciseness is preferred but functional clarity takes priority over brevity)
 
 ### Node Number Ranges by Level
 
@@ -24,12 +24,12 @@ Format: `{PREFIX}_N{##}_{SHORT_NAME}`
 ### Examples
 
 - `HR_N01_PROMISE` — Horror genre promise (Level 1)
-- `HR_N10_THREAT_PRESENT` — Horror core constraint (Level 2)
-- `HR_N20_SLASHER` — Horror subgenre (Level 3)
+- `HR_N10_THREAT_ESCALATES` — Horror core constraint (Level 2)
+- `HR_N20_SUPERNATURAL` — Horror subgenre (Level 3)
 - `HR_N40_ISOLATION` — Horror setting rule (Level 4)
-- `HR_N60_FIRST_SCARE` — Horror scene obligation (Level 5)
+- `HR_N60_FIRST_ANOMALY` — Horror scene obligation (Level 5)
 - `HR_N80_DREAD_ATMOSPHERE` — Horror tone marker
-- `HR_N90_CONSEQUENCE_FREE` — Horror anti-pattern
+- `HR_N90_CONSEQUENCE_FREE_SCARES` — Horror anti-pattern
 
 ## Edge IDs
 
@@ -38,7 +38,7 @@ Format: `{PREFIX}_E{##}_{SHORT_NAME}`
 - **PREFIX**: same 2-letter genre abbreviation
 - **E**: literal character indicating an edge
 - **##**: two-digit number, assigned by transition range (see below)
-- **SHORT_NAME**: UPPER_SNAKE_CASE descriptive label
+- **SHORT_NAME**: UPPER_SNAKE_CASE descriptive label (max 50 characters; conciseness is preferred but functional clarity takes priority over brevity)
 
 ### Edge Number Ranges by Transition
 
@@ -58,10 +58,10 @@ Format: `{PREFIX}_E{##}_{SHORT_NAME}`
 
 ### Examples
 
-- `HR_E01_FEAR_REQUIRES_THREAT` — Promise → Core Constraint
-- `HR_E10_THREAT_BRANCHES_SLASHER` — Core Constraint → Subgenre
-- `HR_E30_SLASHER_ISOLATION` — Subgenre → Setting Rule
-- `HR_E50_ISOLATION_FIRST_SCARE` — Setting Rule → Scene Obligation
+- `HR_E01_PROMISE_TO_THREAT` — Promise → Core Constraint
+- `HR_E10_THREAT_TO_SUPERNATURAL` — Core Constraint → Subgenre
+- `HR_E30_SUPERNATURAL_TO_ISOLATION` — Subgenre → Setting Rule
+- `HR_E50_ISOLATION_TO_ANOMALY` — Setting Rule → Scene Obligation
 
 ## Genre Prefix Table
 
@@ -94,6 +94,8 @@ Format: `{PREFIX}_E{##}_{SHORT_NAME}`
 | 25| Political            | PL     |
 | 26| Musical              | MU     |
 | 27| Holiday              | HL     |
+
+**Note on prefix collisions:** The prefixes SA (Satire) and MU (Musical) are also used by archetypes The Sacrifice (SA) and The Mystery Unveiled (MU) respectively. The `type` field in each graph.json (`"archetype"` vs `"genre"`) disambiguates which corpus an ID belongs to. Within each corpus, all prefixes are unique.
 
 ## Controlled Vocabulary Reference
 

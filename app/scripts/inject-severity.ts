@@ -202,7 +202,12 @@ function assignEdgeSeverity(edge: GraphEdge, nodeMap: Map<string, GraphNode>): '
 
 function processGenreGraph(filePath: string): { nodes: number; edges: number; hard: number; soft: number } {
   const raw = readFileSync(filePath, 'utf-8')
-  const graph: GraphJson = JSON.parse(raw)
+  let graph: GraphJson
+  try {
+    graph = JSON.parse(raw)
+  } catch (e) {
+    throw new Error(`Failed to parse ${filePath}: ${e instanceof Error ? e.message : e}`)
+  }
 
   const nodeMap = new Map<string, GraphNode>()
   let hard = 0
@@ -260,7 +265,7 @@ function main() {
     totalEdges += result.edges
     totalHard += result.hard
     totalSoft += result.soft
-    console.log(`  ✓ ${folder}: ${result.hard} hard, ${result.soft} soft (${result.nodes} nodes, ${result.edges} edges)`)
+    console.log(`  OK${folder}: ${result.hard} hard, ${result.soft} soft (${result.nodes} nodes, ${result.edges} edges)`)
   }
 
   console.log(`\nInjected severity into ${folders.length} genre graphs.`)

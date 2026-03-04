@@ -7,25 +7,22 @@
 import { useCallback, useMemo } from 'react'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 import { useSimulationStore } from '../store/simulationStore.ts'
+import { toArray } from '../utils/arrays.ts'
 import type { GraphNode } from '../types/graph.ts'
-
-const toArr = (v: string | string[]) => (Array.isArray(v) ? v : [v])
 
 interface SimulationPanelProps {
   graph: NormalizedGraph
 }
 
 export function SimulationPanel({ graph }: SimulationPanelProps) {
-  const {
-    active,
-    currentNodeId,
-    visitedNodes,
-    availableEdges,
-    totalNodes,
-    startSimulation,
-    advanceToNode,
-    resetSimulation,
-  } = useSimulationStore()
+  const active = useSimulationStore((s) => s.active)
+  const currentNodeId = useSimulationStore((s) => s.currentNodeId)
+  const visitedNodes = useSimulationStore((s) => s.visitedNodes)
+  const availableEdges = useSimulationStore((s) => s.availableEdges)
+  const totalNodes = useSimulationStore((s) => s.totalNodes)
+  const startSimulation = useSimulationStore((s) => s.startSimulation)
+  const advanceToNode = useSimulationStore((s) => s.advanceToNode)
+  const resetSimulation = useSimulationStore((s) => s.resetSimulation)
 
   const isArchetype = graph.graph.type === 'archetype'
 
@@ -66,8 +63,8 @@ export function SimulationPanel({ graph }: SimulationPanelProps) {
       let visited = 0
       for (const node of graph.graph.nodes) {
         const constraints = [
-          ...toArr(node.entry_conditions).filter((s) => s.trim()),
-          ...toArr(node.exit_conditions).filter((s) => s.trim()),
+          ...toArray(node.entry_conditions).filter((s) => s.trim()),
+          ...toArray(node.exit_conditions).filter((s) => s.trim()),
         ]
         total += constraints.length
         if (visitedNodes.includes(node.node_id)) {
@@ -150,6 +147,7 @@ export function SimulationPanel({ graph }: SimulationPanelProps) {
         </span>
         <button
           onClick={resetSimulation}
+          aria-label="Reset simulation"
           style={{
             fontSize: 10,
             padding: '2px 8px',
@@ -433,10 +431,10 @@ function ConstraintSheetExport({ graph, visitedNodes }: {
         lines.push(`> ${node.definition}`)
         lines.push('')
 
-        const entry = toArr(node.entry_conditions).filter((s) => s.trim())
-        const exit = toArr(node.exit_conditions).filter((s) => s.trim())
-        const failures = toArr(node.failure_modes).filter((s) => s.trim())
-        const signals = toArr(node.signals_in_text).filter((s) => s.trim())
+        const entry = toArray(node.entry_conditions).filter((s) => s.trim())
+        const exit = toArray(node.exit_conditions).filter((s) => s.trim())
+        const failures = toArray(node.failure_modes).filter((s) => s.trim())
+        const signals = toArray(node.signals_in_text).filter((s) => s.trim())
 
         if (entry.length > 0) {
           lines.push('**Must establish:**')
@@ -469,7 +467,7 @@ function ConstraintSheetExport({ graph, visitedNodes }: {
       lines.push('## Transition Requirements')
       lines.push('')
       for (const edge of visitedEdges) {
-        const pre = toArr(edge.preconditions).filter((s) => s.trim())
+        const pre = toArray(edge.preconditions).filter((s) => s.trim())
         if (pre.length > 0) {
           lines.push(`**${edge.label}** (${edge.from} \u2192 ${edge.to}):`)
           for (const p of pre) lines.push(`- [ ] ${p}`)

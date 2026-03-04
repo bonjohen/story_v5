@@ -1,46 +1,54 @@
 type Stylesheet = cytoscape.StylesheetStyle
 
-// --- Color palette (dark-first, design spec §7.1) ---
+// --- Color palette (reads CSS custom properties with hex fallbacks) ---
 
-const COLORS = {
-  bg: '#0f1117',
-  surface: '#1a1d27',
-  border: '#2a2d3a',
-  text: '#e0e0e6',
-  textMuted: '#8888a0',
+function css(varName: string, fallback: string): string {
+  if (typeof document === 'undefined') return fallback
+  const val = getComputedStyle(document.documentElement).getPropertyValue(varName).trim()
+  return val || fallback
+}
 
-  // Node categories (design spec §7.2)
-  start: '#22c55e',
-  terminal: '#eab308',
-  escalation: '#f97316',
-  revelation: '#3b82f6',
-  irreversible: '#ef4444',
-  crisis: '#dc2626',
-  transformation: '#a855f7',
-  catalyst: '#06b6d4',
-  descent: '#6366f1',
-  commitment: '#14b8a6',
-  neutral: '#64748b',
+function getColors() {
+  return {
+    bg: css('--bg-primary', '#0f1117'),
+    surface: css('--bg-surface', '#1a1d27'),
+    border: css('--border', '#2a2d3a'),
+    text: css('--text-primary', '#e0e0e6'),
+    textMuted: css('--text-muted', '#8888a0'),
 
-  // Genre levels
-  level1: '#22c55e',
-  level2: '#3b82f6',
-  level3: '#a855f7',
-  level4: '#f97316',
-  level5: '#ef4444',
-  tone: '#06b6d4',
-  antiPattern: '#ef4444',
+    // Node categories (design spec §7.2)
+    start: '#22c55e',
+    terminal: '#eab308',
+    escalation: '#f97316',
+    revelation: css('--accent', '#3b82f6'),
+    irreversible: '#ef4444',
+    crisis: '#dc2626',
+    transformation: '#a855f7',
+    catalyst: '#06b6d4',
+    descent: '#6366f1',
+    commitment: '#14b8a6',
+    neutral: '#64748b',
 
-  // Edge categories (design spec §7.3)
-  edgeDefault: '#4a4d5a',
-  edgeEscalation: '#f97316',
-  edgeConstraint: '#3b82f6',
-  edgeRevelation: '#60a5fa',
-  edgeDisruption: '#ef4444',
+    // Genre levels
+    level1: '#22c55e',
+    level2: css('--accent', '#3b82f6'),
+    level3: '#a855f7',
+    level4: '#f97316',
+    level5: '#ef4444',
+    tone: '#06b6d4',
+    antiPattern: '#ef4444',
 
-  // Selection
-  selected: '#fbbf24',
-  neighbor: '#fbbf2466',
+    // Edge categories (design spec §7.3)
+    edgeDefault: '#4a4d5a',
+    edgeEscalation: '#f97316',
+    edgeConstraint: css('--accent', '#3b82f6'),
+    edgeRevelation: '#60a5fa',
+    edgeDisruption: '#ef4444',
+
+    // Selection
+    selected: '#fbbf24',
+    neighbor: '#fbbf2466',
+  }
 }
 
 // --- Node category mapping ---
@@ -117,6 +125,7 @@ export function getEdgeCategory(meaning: string): string {
 // --- Cytoscape stylesheet ---
 
 export function getCoreStyle(graphType: 'archetype' | 'genre'): Stylesheet[] {
+  const COLORS = getColors()
   return [
     // Base node style
     {
@@ -509,4 +518,4 @@ export function getCoreStyle(graphType: 'archetype' | 'genre'): Stylesheet[] {
   ]
 }
 
-export { COLORS }
+export { getColors }

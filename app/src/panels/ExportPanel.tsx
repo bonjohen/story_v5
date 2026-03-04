@@ -3,18 +3,48 @@
  * Also provides shareable URL copy.
  */
 
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback, type RefObject } from 'react'
+import cytoscape from 'cytoscape'
+import cytoscapeSvg from 'cytoscape-svg'
 import type { CyCore } from '../render/GraphCanvas.tsx'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 
+cytoscape.use(cytoscapeSvg)
+
 interface ExportPanelProps {
   graph: NormalizedGraph
-  cyInstance: CyCore | null
+  cyRef: RefObject<CyCore | null>
   onClose: () => void
 }
 
-export function ExportPanel({ graph, cyInstance, onClose }: ExportPanelProps) {
+export function ExportPanel({ graph, cyRef, onClose }: ExportPanelProps) {
   const [copied, setCopied] = useState<string | null>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  // Escape key to close
+  useEffect(() => {
+    const handle = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handle)
+    return () => window.removeEventListener('keydown', handle)
+  }, [onClose])
+
+  // Focus trap
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key !== 'Tab' || !panelRef.current) return
+    const focusable = panelRef.current.querySelectorAll<HTMLElement>('button:not([disabled]), [tabindex]')
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
+  }, [])
 
   const flash = (label: string) => {
     setCopied(label)
@@ -41,17 +71,17 @@ export function ExportPanel({ graph, cyInstance, onClose }: ExportPanelProps) {
   const prefix = graph.graph.id || 'graph'
 
   const handleExportPNG = () => {
-    if (!cyInstance) return
+    if (!cyRef.current) return
     const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim() || '#0f1117'
-    const png = cyInstance.png({ full: true, scale: 2, bg })
+    const png = cyRef.current.png({ full: true, scale: 2, bg })
     downloadDataUrl(png, `${prefix}.png`)
     flash('PNG')
   }
 
   const handleExportSVG = () => {
-    if (!cyInstance) return
+    if (!cyRef.current) return
     const svgBg = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim() || '#0f1117'
-    const svg = cyInstance.svg({ full: true, bg: svgBg })
+    const svg = cyRef.current.svg({ full: true, bg: svgBg })
     downloadBlob(svg, `${prefix}.svg`, 'image/svg+xml')
     flash('SVG')
   }
@@ -75,14 +105,14 @@ export function ExportPanel({ graph, cyInstance, onClose }: ExportPanelProps) {
   }
 
   const handleCopyURL = () => {
-    navigator.clipboard.writeText(window.location.href)
+    void navigator.clipboard.writeText(window.location.href)
     flash('URL')
   }
 
   return (
-    <div style={{
+    <div ref={panelRef} role="dialog" aria-label="Export" onKeyDown={handleKeyDown} style={{
       position: 'fixed',
-      top: 42,
+      top: 42, // matches TOOLBAR_HEIGHT in App.tsx
       right: 0,
       width: 260,
       background: 'var(--bg-surface)',
@@ -117,8 +147,8 @@ export function ExportPanel({ graph, cyInstance, onClose }: ExportPanelProps) {
       </div>
 
       <ExportGroup label="Image">
-        <ExportButton label="PNG" desc="High-res raster" onClick={handleExportPNG} disabled={!cyInstance} copied={copied === 'PNG'} />
-        <ExportButton label="SVG" desc="Vector graphic" onClick={handleExportSVG} disabled={!cyInstance} copied={copied === 'SVG'} />
+        <ExportButton label="PNG" desc="High-res raster" onClick={handleExportPNG} copied={copied === 'PNG'} />
+        <ExportButton label="SVG" desc="Vector graphic" onClick={handleExportSVG} copied={copied === 'SVG'} />
       </ExportGroup>
 
       <ExportGroup label="Graph Format">

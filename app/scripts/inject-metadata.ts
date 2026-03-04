@@ -51,7 +51,12 @@ function computeMetadata(graph: GraphJson) {
 
 function processGraphFile(filePath: string) {
   const raw = readFileSync(filePath, 'utf-8')
-  const graph: GraphJson = JSON.parse(raw)
+  let graph: GraphJson
+  try {
+    graph = JSON.parse(raw)
+  } catch (e) {
+    throw new Error(`Failed to parse ${filePath}: ${e instanceof Error ? e.message : e}`)
+  }
   graph._metadata = computeMetadata(graph)
 
   // Place _metadata right after top-level fields, before nodes/edges
@@ -75,7 +80,7 @@ function main() {
       const graphPath = join(base, folder, 'graph.json')
       processGraphFile(graphPath)
       count++
-      console.log(`  ✓ ${subdir}/${folder}`)
+      console.log(`  OK${subdir}/${folder}`)
     }
   }
 

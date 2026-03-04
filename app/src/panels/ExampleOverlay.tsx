@@ -33,7 +33,7 @@ export function ExampleOverlay({ graph, onHighlightNodes, onClearHighlight }: Ex
   // Load examples.md when enabled
   useEffect(() => {
     if (!enabled || examples) return
-    setExampleLoading(true)
+    setExampleLoading(true) // eslint-disable-line react-hooks/set-state-in-effect -- data fetch init
 
     const basePath = graph.graph.type === 'archetype'
       ? `archetypes/${graph.graph.id.replace('archetype_', '')}`
@@ -58,7 +58,7 @@ export function ExampleOverlay({ graph, onHighlightNodes, onClearHighlight }: Ex
 
   // Reset when graph changes
   useEffect(() => {
-    setExamples(null)
+    setExamples(null) // eslint-disable-line react-hooks/set-state-in-effect -- reset on graph change
     setEnabled(false)
     setSelectedWork(null)
     setCompareWork(null)

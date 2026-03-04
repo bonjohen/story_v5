@@ -5,7 +5,7 @@
  * Also includes failure mode overlay.
  */
 
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 
 interface VariantPath {
@@ -186,7 +186,8 @@ function extractGenreVariants(graph: NormalizedGraph): VariantPath[] {
     const queue = [node.node_id]
     const visited = new Set([node.node_id])
     while (queue.length > 0) {
-      const id = queue.shift()!
+      const id = queue.shift()
+      if (!id) continue
       const neighbors = graph.adjacency.get(id) ?? []
       for (const n of neighbors) {
         if (!visited.has(n)) {
@@ -205,39 +206,4 @@ function extractGenreVariants(graph: NormalizedGraph): VariantPath[] {
   })
 }
 
-/**
- * Compute which nodes/edges to highlight or dim based on variant selection.
- */
-export function computeVariantHighlight(
-  graph: NormalizedGraph,
-  activeVariant: string | null,
-  variants: VariantPath[],
-): { highlighted: Set<string>; dimmed: Set<string> } | null {
-  if (!activeVariant) return null
-
-  const variant = variants.find((v) => v.id === activeVariant)
-  if (!variant) return null
-
-  const highlighted = new Set(variant.nodeIds)
-  const dimmed = new Set<string>()
-
-  // All variant nodes not in the active variant are dimmed
-  for (const v of variants) {
-    if (v.id !== activeVariant) {
-      for (const id of v.nodeIds) {
-        if (!highlighted.has(id)) dimmed.add(id)
-      }
-    }
-  }
-
-  return { highlighted, dimmed }
-}
-
-/**
- * Compute anti-pattern nodes for failure mode overlay.
- */
-export function computeFailureModeNodes(graph: NormalizedGraph): string[] {
-  return graph.graph.nodes
-    .filter((n) => n.role === 'Anti-Pattern')
-    .map((n) => n.node_id)
-}
+// computeFailureModeNodes moved to ../graph-engine/index.ts

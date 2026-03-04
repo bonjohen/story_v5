@@ -1,4 +1,4 @@
-export { parseGraphJson, normalizeGraph, loadGraph, isArchetypeGraph, isGenreGraph } from './normalizer.ts'
+export { parseGraphJson, normalizeGraph, isArchetypeGraph, isGenreGraph } from './normalizer.ts'
 export type { NormalizedGraph } from './normalizer.ts'
 
 export { validateGraph, auditVocabulary } from './validator.ts'
@@ -10,4 +10,6 @@ export {
   GENRE_NODE_ROLES,
 } from './validator.ts'
 
-export { buildDataIndex, buildManifest, buildGraphMetadata, ARCHETYPE_DIRS, GENRE_DIRS } from './dataIndex.ts'
+export { buildManifest, buildGraphMetadata, ARCHETYPE_DIRS, GENRE_DIRS } from './dataIndex.ts'
+
+export { computeFailureModeNodes } from './helpers.ts'

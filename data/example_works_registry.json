@@ -20,7 +20,7 @@
           "role": "primary"
         },
         {
-          "graph_id": "genre_27_holiday",
+          "graph_id": "27_holiday",
           "role": "primary"
         }
       ]
@@ -33,7 +33,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_05_fantasy",
+          "graph_id": "05_fantasy",
           "role": "cross-reference",
           "short_name": "Game of Thrones"
         }
@@ -64,7 +64,7 @@
           "role": "primary"
         },
         {
-          "graph_id": "genre_21_childrens_literature",
+          "graph_id": "21_childrens_literature",
           "role": "primary"
         }
       ]
@@ -77,7 +77,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_16_war",
+          "graph_id": "16_war",
           "role": "cross-reference",
           "short_name": "All Quiet on the Western Front"
         }
@@ -91,7 +91,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_25_political",
+          "graph_id": "25_political",
           "role": "primary"
         }
       ]
@@ -104,7 +104,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_22_satire",
+          "graph_id": "22_satire",
           "role": "cross-reference",
           "short_name": "Animal Farm"
         }
@@ -118,7 +118,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_16_war",
+          "graph_id": "16_war",
           "role": "cross-reference",
           "short_name": "Apocalypse Now"
         }
@@ -145,7 +145,7 @@
       "medium": "novel series",
       "references": [
         {
-          "graph_id": "genre_13_detective",
+          "graph_id": "13_detective",
           "role": "primary"
         }
       ]
@@ -171,7 +171,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_20_literary_fiction",
+          "graph_id": "20_literary_fiction",
           "role": "primary"
         }
       ]
@@ -197,7 +197,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_14_superhero",
+          "graph_id": "14_superhero",
           "role": "cross-reference"
         }
       ]
@@ -214,7 +214,7 @@
           "role": "primary"
         },
         {
-          "graph_id": "genre_23_psychological",
+          "graph_id": "23_psychological",
           "role": "primary"
         }
       ]
@@ -227,7 +227,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_06_science_fiction",
+          "graph_id": "06_science_fiction",
           "role": "cross-reference",
           "short_name": "Blade Runner"
         }
@@ -245,7 +245,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_09_romantic_comedy",
+          "graph_id": "09_romantic_comedy",
           "role": "cross-reference"
         }
       ]
@@ -258,7 +258,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_21_childrens_literature",
+          "graph_id": "21_childrens_literature",
           "role": "cross-reference",
           "short_name": "Charlotte's Web"
         }
@@ -272,7 +272,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_13_detective",
+          "graph_id": "13_detective",
           "role": "cross-reference"
         }
       ]
@@ -298,7 +298,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_18_family",
+          "graph_id": "18_family",
           "role": "cross-reference",
           "short_name": "Coco"
         }
@@ -312,7 +312,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_09_romantic_comedy",
+          "graph_id": "09_romantic_comedy",
           "role": "cross-reference"
         }
       ]
@@ -325,7 +325,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_02_action",
+          "graph_id": "02_action",
           "role": "cross-reference",
           "short_name": "Die Hard"
         }
@@ -339,7 +339,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_22_satire",
+          "graph_id": "22_satire",
           "role": "primary"
         }
       ]
@@ -352,7 +352,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_06_science_fiction",
+          "graph_id": "06_science_fiction",
           "role": "cross-reference",
           "short_name": "Dune"
         }
@@ -366,7 +366,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_27_holiday",
+          "graph_id": "27_holiday",
           "role": "cross-reference",
           "short_name": "Elf"
         }
@@ -393,7 +393,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_23_psychological",
+          "graph_id": "23_psychological",
           "role": "cross-reference",
           "short_name": "Fight Club"
         }
@@ -411,7 +411,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_18_family",
+          "graph_id": "18_family",
           "role": "primary"
         }
       ]
@@ -428,7 +428,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_10_horror",
+          "graph_id": "10_horror",
           "role": "primary"
         }
       ]
@@ -445,7 +445,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_15_historical",
+          "graph_id": "15_historical",
           "role": "cross-reference",
           "short_name": "Gladiator"
         }
@@ -463,7 +463,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_04_thriller",
+          "graph_id": "04_thriller",
           "role": "primary"
         }
       ]
@@ -493,7 +493,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_03_comedy",
+          "graph_id": "03_comedy",
           "role": "primary"
         }
       ]
@@ -519,7 +519,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_05_fantasy",
+          "graph_id": "05_fantasy",
           "role": "cross-reference",
           "short_name": "Sorcerer's Stone"
         }
@@ -533,7 +533,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_27_holiday",
+          "graph_id": "27_holiday",
           "role": "cross-reference",
           "short_name": "Home Alone"
         }
@@ -547,7 +547,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_25_political",
+          "graph_id": "25_political",
           "role": "cross-reference",
           "short_name": "House of Cards (1990 novel)"
         }
@@ -565,7 +565,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_07_adventure",
+          "graph_id": "07_adventure",
           "role": "primary"
         }
       ]
@@ -591,7 +591,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_02_action",
+          "graph_id": "02_action",
           "role": "cross-reference",
           "short_name": "John Wick"
         }
@@ -635,7 +635,7 @@
           "role": "primary"
         },
         {
-          "graph_id": "genre_11_mystery",
+          "graph_id": "11_mystery",
           "role": "primary"
         }
       ]
@@ -648,7 +648,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_26_musical",
+          "graph_id": "26_musical",
           "role": "cross-reference",
           "short_name": "La La Land"
         }
@@ -675,7 +675,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_18_family",
+          "graph_id": "18_family",
           "role": "cross-reference",
           "short_name": "Little Women"
         }
@@ -702,7 +702,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_02_action",
+          "graph_id": "02_action",
           "role": "primary"
         }
       ]
@@ -715,7 +715,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_11_mystery",
+          "graph_id": "11_mystery",
           "role": "cross-reference"
         }
       ]
@@ -728,7 +728,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_20_literary_fiction",
+          "graph_id": "20_literary_fiction",
           "role": "cross-reference",
           "short_name": "Normal People"
         }
@@ -742,7 +742,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_17_biography",
+          "graph_id": "17_biography",
           "role": "cross-reference",
           "short_name": "Oppenheimer"
         }
@@ -756,7 +756,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_01_drama",
+          "graph_id": "01_drama",
           "role": "cross-reference",
           "short_name": "Parasite"
         }
@@ -770,7 +770,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_07_adventure",
+          "graph_id": "07_adventure",
           "role": "cross-reference",
           "short_name": "Pirates of the Caribbean"
         }
@@ -784,7 +784,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_08_romance",
+          "graph_id": "08_romance",
           "role": "primary"
         }
       ]
@@ -823,7 +823,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_16_war",
+          "graph_id": "16_war",
           "role": "primary"
         }
       ]
@@ -840,7 +840,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_12_crime",
+          "graph_id": "12_crime",
           "role": "cross-reference"
         }
       ]
@@ -853,7 +853,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_15_historical",
+          "graph_id": "15_historical",
           "role": "primary"
         }
       ]
@@ -866,7 +866,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_04_thriller",
+          "graph_id": "04_thriller",
           "role": "cross-reference",
           "short_name": "Se7en"
         }
@@ -880,7 +880,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_23_psychological",
+          "graph_id": "23_psychological",
           "role": "cross-reference",
           "short_name": "Shutter Island"
         }
@@ -907,7 +907,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_03_comedy",
+          "graph_id": "03_comedy",
           "role": "cross-reference",
           "short_name": "Some Like It Hot"
         }
@@ -925,7 +925,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_14_superhero",
+          "graph_id": "14_superhero",
           "role": "cross-reference"
         }
       ]
@@ -951,7 +951,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_17_biography",
+          "graph_id": "17_biography",
           "role": "cross-reference",
           "short_name": "Steve Jobs"
         }
@@ -965,7 +965,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_03_comedy",
+          "graph_id": "03_comedy",
           "role": "cross-reference",
           "short_name": "Superbad"
         }
@@ -979,7 +979,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_22_satire",
+          "graph_id": "22_satire",
           "role": "cross-reference",
           "short_name": "Thank You for Smoking"
         }
@@ -1019,7 +1019,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_21_childrens_literature",
+          "graph_id": "21_childrens_literature",
           "role": "cross-reference",
           "short_name": "The Cat in the Hat"
         }
@@ -1046,7 +1046,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_14_superhero",
+          "graph_id": "14_superhero",
           "role": "primary"
         }
       ]
@@ -1072,7 +1072,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_10_horror",
+          "graph_id": "10_horror",
           "role": "cross-reference"
         }
       ]
@@ -1085,7 +1085,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_19_young_adult",
+          "graph_id": "19_young_adult",
           "role": "cross-reference",
           "short_name": "The Fault in Our Stars"
         }
@@ -1099,12 +1099,12 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_01_drama",
+          "graph_id": "01_drama",
           "role": "cross-reference",
           "short_name": "The Godfather"
         },
         {
-          "graph_id": "genre_12_crime",
+          "graph_id": "12_crime",
           "role": "primary"
         }
       ]
@@ -1117,7 +1117,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_24_western",
+          "graph_id": "24_western",
           "role": "primary"
         }
       ]
@@ -1130,7 +1130,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_20_literary_fiction",
+          "graph_id": "20_literary_fiction",
           "role": "cross-reference",
           "short_name": "The Great Gatsby"
         }
@@ -1148,7 +1148,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_07_adventure",
+          "graph_id": "07_adventure",
           "role": "cross-reference",
           "short_name": "The Hobbit"
         }
@@ -1162,7 +1162,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_11_mystery",
+          "graph_id": "11_mystery",
           "role": "cross-reference"
         }
       ]
@@ -1175,7 +1175,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_19_young_adult",
+          "graph_id": "19_young_adult",
           "role": "primary"
         }
       ]
@@ -1188,7 +1188,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_25_political",
+          "graph_id": "25_political",
           "role": "cross-reference",
           "short_name": "The Ides of March"
         }
@@ -1228,7 +1228,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_05_fantasy",
+          "graph_id": "05_fantasy",
           "role": "primary"
         }
       ]
@@ -1245,7 +1245,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_06_science_fiction",
+          "graph_id": "06_science_fiction",
           "role": "primary"
         }
       ]
@@ -1271,7 +1271,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_08_romance",
+          "graph_id": "08_romance",
           "role": "cross-reference"
         }
       ]
@@ -1284,7 +1284,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_19_young_adult",
+          "graph_id": "19_young_adult",
           "role": "cross-reference",
           "short_name": "The Perks of Being a Wallflower"
         }
@@ -1302,7 +1302,7 @@
           "role": "primary"
         },
         {
-          "graph_id": "genre_01_drama",
+          "graph_id": "01_drama",
           "role": "primary"
         }
       ]
@@ -1315,7 +1315,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_10_horror",
+          "graph_id": "10_horror",
           "role": "cross-reference"
         }
       ]
@@ -1328,7 +1328,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_04_thriller",
+          "graph_id": "04_thriller",
           "role": "cross-reference",
           "short_name": "Silence of the Lambs"
         }
@@ -1355,7 +1355,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_26_musical",
+          "graph_id": "26_musical",
           "role": "primary"
         }
       ]
@@ -1368,7 +1368,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_12_crime",
+          "graph_id": "12_crime",
           "role": "cross-reference"
         }
       ]
@@ -1398,7 +1398,7 @@
           "role": "primary"
         },
         {
-          "graph_id": "genre_17_biography",
+          "graph_id": "17_biography",
           "role": "primary"
         }
       ]
@@ -1415,7 +1415,7 @@
           "role": "cross-reference"
         },
         {
-          "graph_id": "genre_08_romance",
+          "graph_id": "08_romance",
           "role": "cross-reference"
         }
       ]
@@ -1441,7 +1441,7 @@
       "medium": "television",
       "references": [
         {
-          "graph_id": "genre_13_detective",
+          "graph_id": "13_detective",
           "role": "cross-reference"
         }
       ]
@@ -1454,7 +1454,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_24_western",
+          "graph_id": "24_western",
           "role": "cross-reference",
           "short_name": "True Grit"
         }
@@ -1468,7 +1468,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_24_western",
+          "graph_id": "24_western",
           "role": "cross-reference",
           "short_name": "Unforgiven"
         }
@@ -1482,7 +1482,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_26_musical",
+          "graph_id": "26_musical",
           "role": "cross-reference",
           "short_name": "West Side Story"
         }
@@ -1496,7 +1496,7 @@
       "medium": "film",
       "references": [
         {
-          "graph_id": "genre_09_romantic_comedy",
+          "graph_id": "09_romantic_comedy",
           "role": "primary"
         }
       ]
@@ -1509,7 +1509,7 @@
       "medium": "novel",
       "references": [
         {
-          "graph_id": "genre_15_historical",
+          "graph_id": "15_historical",
           "role": "cross-reference",
           "short_name": "Wolf Hall"
         }

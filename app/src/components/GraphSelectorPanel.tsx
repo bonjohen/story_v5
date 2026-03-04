@@ -135,8 +135,6 @@ function GraphEntry({ meta, active, onClick }: {
   active: boolean
   onClick: () => void
 }) {
-  const variantCount = countVariants(meta)
-
   return (
     <button
       onClick={onClick}
@@ -178,7 +176,6 @@ function GraphEntry({ meta, active, onClick }: {
           marginTop: 1,
         }}>
           {meta.prefix} | {meta.nodeCount}N / {meta.edgeCount}E
-          {variantCount > 0 && ` | ${variantCount} var`}
         </div>
       </div>
     </button>
@@ -189,12 +186,4 @@ function GraphEntry({ meta, active, onClick }: {
 function dirFromPath(filePath: string): string {
   const parts = filePath.split('/')
   return parts[parts.length - 1]
-}
-
-/** Estimate variant count from node count (variant nodes are in 50-79 ID range) */
-function countVariants(meta: GraphMetadata): number {
-  // We don't have per-node data in the manifest, so return 0
-  // Actual variant count will be available when the graph is loaded
-  void meta
-  return 0
 }

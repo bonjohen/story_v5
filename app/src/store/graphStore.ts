@@ -8,13 +8,10 @@ import type { NormalizedGraph } from '../graph-engine/index.ts'
 import type { DataManifest } from '../types/graph.ts'
 import { parseGraphJson, normalizeGraph } from '../graph-engine/index.ts'
 
-export type ViewMode = 'archetype' | 'genre'
-export type PanelId = 'detail' | 'examples' | 'narrative' | 'comparison'
-
 export interface GraphStoreState {
   // Current graph
   currentGraph: NormalizedGraph | null
-  viewMode: ViewMode
+  viewMode: 'archetype' | 'genre'
   graphId: string | null // "archetype/01_heros_journey" format
 
   // Loading
@@ -29,24 +26,16 @@ export interface GraphStoreState {
   selectedEdgeId: string | null
   highlightedPath: string[]
 
-  // Variant toggle
-  showVariants: boolean
-
   // UI panels
   sidebarOpen: boolean
-  openPanels: Set<PanelId>
 
   // Actions
   setCurrentGraph: (graph: NormalizedGraph) => void
-  setViewMode: (mode: ViewMode) => void
   selectNode: (nodeId: string | null) => void
   selectEdge: (edgeId: string | null) => void
   setHighlightedPath: (path: string[]) => void
-  toggleVariants: () => void
-  togglePanel: (panel: PanelId) => void
   clearSelection: () => void
   toggleSidebar: () => void
-  setSidebarOpen: (open: boolean) => void
   setManifest: (manifest: DataManifest) => void
   loadGraph: (type: 'archetype' | 'genre', dir: string) => Promise<void>
 }
@@ -61,9 +50,7 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
   selectedNodeId: null,
   selectedEdgeId: null,
   highlightedPath: [],
-  showVariants: true,
   sidebarOpen: true,
-  openPanels: new Set<PanelId>(['detail']),
 
   setCurrentGraph: (graph) =>
     set({
@@ -72,8 +59,6 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
       selectedEdgeId: null,
       highlightedPath: [],
     }),
-
-  setViewMode: (mode) => set({ viewMode: mode }),
 
   selectNode: (nodeId) =>
     set({
@@ -89,19 +74,6 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
 
   setHighlightedPath: (path) => set({ highlightedPath: path }),
 
-  toggleVariants: () => set((state) => ({ showVariants: !state.showVariants })),
-
-  togglePanel: (panel) =>
-    set((state) => {
-      const next = new Set(state.openPanels)
-      if (next.has(panel)) {
-        next.delete(panel)
-      } else {
-        next.add(panel)
-      }
-      return { openPanels: next }
-    }),
-
   clearSelection: () =>
     set({
       selectedNodeId: null,
@@ -110,7 +82,6 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
     }),
 
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
-  setSidebarOpen: (open) => set({ sidebarOpen: open }),
   setManifest: (manifest) => set({ manifest }),
 
   loadGraph: async (type, dir) => {
@@ -131,7 +102,9 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
       const url = `../data/${basePath}/graph.json`
       const response = await fetch(url)
       if (!response.ok) throw new Error(`Failed to load: ${response.status}`)
-      const raw = await response.json()
+      const contentType = response.headers.get('content-type') ?? ''
+      if (!contentType.includes('json')) throw new Error(`Expected JSON but got ${contentType}`)
+      const raw: unknown = await response.json()
       const graph = parseGraphJson(raw)
       const normalized = normalizeGraph(graph)
       set({

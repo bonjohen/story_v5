@@ -3,33 +3,6 @@
  * Matches the schema defined in v0_plan.md §1.1–1.2.
  */
 
-// --- Node role controlled vocabularies ---
-
-export type ArchetypeNodeRole =
-  | 'Origin'
-  | 'Disruption'
-  | 'Commitment'
-  | 'Catalyst'
-  | 'Threshold'
-  | 'Trial'
-  | 'Escalation'
-  | 'Crisis'
-  | 'Descent'
-  | 'Transformation'
-  | 'Revelation'
-  | 'Irreversible Cost'
-  | 'Resolution'
-  | 'Reckoning'
-
-export type GenreNodeRole =
-  | 'Genre Promise'
-  | 'Core Constraint'
-  | 'Subgenre Pattern'
-  | 'World/Setting Rules'
-  | 'Scene Obligations'
-  | 'Tone Marker'
-  | 'Anti-Pattern'
-
 // --- Flexible field type (some graphs use strings, others use string arrays) ---
 
 export type StringOrArray = string | string[]
@@ -63,11 +36,7 @@ export interface GraphEdge {
 
 // --- Archetype-specific types ---
 
-export interface ArchetypeNode extends GraphNode {
-  role: ArchetypeNodeRole | string
-}
-
-export interface ArchetypeEdge extends GraphEdge {}
+export type ArchetypeNode = GraphNode
 
 export interface ArchetypeGraph {
   id: string
@@ -75,17 +44,14 @@ export interface ArchetypeGraph {
   type: 'archetype'
   description: string
   nodes: ArchetypeNode[]
-  edges: ArchetypeEdge[]
+  edges: GraphEdge[]
 }
 
 // --- Genre-specific types ---
 
 export interface GenreNode extends GraphNode {
-  role: GenreNodeRole | string
   level: number | null
 }
-
-export interface GenreEdge extends GraphEdge {}
 
 export interface GenreGraph {
   id: string
@@ -93,14 +59,12 @@ export interface GenreGraph {
   type: 'genre'
   description: string
   nodes: GenreNode[]
-  edges: GenreEdge[]
+  edges: GraphEdge[]
 }
 
 // --- Unified graph type ---
 
 export type StoryGraph = ArchetypeGraph | GenreGraph
-export type StoryNode = ArchetypeNode | GenreNode
-export type StoryEdge = ArchetypeEdge | GenreEdge
 
 // --- Graph metadata (for data index/manifest) ---
 

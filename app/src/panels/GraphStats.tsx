@@ -207,8 +207,10 @@ function computeStats(graph: NormalizedGraph) {
     const depths = new Map<string, number>()
     const queue = [{ id: start.node_id, depth: 0 }]
     while (queue.length > 0) {
-      const { id, depth } = queue.shift()!
-      if (depths.has(id) && depths.get(id)! >= depth) continue
+      const item = queue.shift()
+      if (!item) continue
+      const { id, depth } = item
+      if (depths.has(id) && (depths.get(id) ?? 0) >= depth) continue
       depths.set(id, depth)
       if (depth > maxDepth) maxDepth = depth
       const neighbors = graph.adjacency.get(id) ?? []

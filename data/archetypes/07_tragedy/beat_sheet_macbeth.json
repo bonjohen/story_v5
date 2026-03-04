@@ -4,6 +4,7 @@
   "creator": "William Shakespeare",
   "year": 1606,
   "medium": "stage play",
+  "runtime_minutes": null,
   "structure": "5 acts, 28 scenes",
   "archetype": "07_tragedy",
   "archetype_name": "Tragedy",

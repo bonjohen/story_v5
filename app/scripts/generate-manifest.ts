@@ -20,7 +20,13 @@ function loadGraphFromDisk(graphPath: string): StoryGraph | null {
     console.warn(`  SKIP: ${graphPath} not found`)
     return null
   }
-  const raw = JSON.parse(readFileSync(graphPath, 'utf-8'))
+  let raw
+  try {
+    raw = JSON.parse(readFileSync(graphPath, 'utf-8'))
+  } catch (e) {
+    console.warn(`  SKIP: ${graphPath} invalid JSON: ${e instanceof Error ? e.message : e}`)
+    return null
+  }
   return parseGraphJson(raw)
 }
 

@@ -5,6 +5,7 @@
   "year": 1977,
   "medium": "film",
   "runtime_minutes": 121,
+  "structure": null,
   "archetype": "01_heros_journey",
   "archetype_name": "The Hero's Journey",
   "description": "Maps every node of the Hero's Journey archetype to specific scenes in Star Wars: Episode IV, with timestamps and duration percentages. The film is one of the purest Hero's Journey adaptations in cinema.",
@@ -233,6 +234,7 @@
       "duration_pct": 4.1
     }
   ],
+  "_notes": null,
   "_stats": {
     "total_scenes": 19,
     "total_duration_pct": 94.6,

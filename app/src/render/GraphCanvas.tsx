@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useState } from 'react'
+import { useEffect, useRef, useCallback, useState, memo } from 'react'
 import cytoscape, { type Core, type EventObject } from 'cytoscape'
 export type { Core as CyCore } from 'cytoscape'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
@@ -25,7 +25,7 @@ interface GraphCanvasProps {
   onCyReady?: (cy: Core) => void
 }
 
-export function GraphCanvas({
+export const GraphCanvas = memo(function GraphCanvas({
   graph,
   highlightedPath,
   onEdgeHover,
@@ -47,14 +47,14 @@ export function GraphCanvas({
 
   const handleNodeTap = useCallback(
     (evt: EventObject) => {
-      selectNode(evt.target.id())
+      selectNode((evt.target as cytoscape.NodeSingular).id())
     },
     [selectNode],
   )
 
   const handleEdgeTap = useCallback(
     (evt: EventObject) => {
-      selectEdge(evt.target.id())
+      selectEdge((evt.target as cytoscape.EdgeSingular).id())
     },
     [selectEdge],
   )
@@ -72,7 +72,7 @@ export function GraphCanvas({
         const container = containerRef.current
         if (container) {
           const rect = container.getBoundingClientRect()
-          onEdgeHover(evt.target.id(), rect.left + pos.x, rect.top + pos.y)
+          onEdgeHover((evt.target as cytoscape.EdgeSingular).id(), rect.left + pos.x, rect.top + pos.y)
         }
       }
     },
@@ -121,8 +121,8 @@ export function GraphCanvas({
         w: Math.min(ext.w * scale, renderedW),
         h: Math.min(ext.h * scale, renderedH),
       })
-    } catch {
-      // png() can fail during transitions
+    } catch (e) {
+      console.debug('Minimap update skipped:', e)
     }
   }, [])
 
@@ -373,10 +373,33 @@ export function GraphCanvas({
     const graphX = bb.x1 + (clickX - offsetX) / scale
     const graphY = bb.y1 + (clickY - offsetY) / scale
 
+    const zoom = cy.zoom()
     cy.animate({
-      center: { x: graphX, y: graphY },
+      pan: {
+        x: cy.width() / 2 - graphX * zoom,
+        y: cy.height() / 2 - graphY * zoom,
+      },
       duration: 200,
     })
+  }, [])
+
+  // Keyboard navigation on minimap (arrow keys to pan)
+  const handleMinimapKeyDown = useCallback((e: React.KeyboardEvent) => {
+    const cy = cyRef.current
+    if (!cy) return
+    const PAN_STEP = 50
+    let dx = 0
+    let dy = 0
+    switch (e.key) {
+      case 'ArrowLeft': dx = PAN_STEP; break
+      case 'ArrowRight': dx = -PAN_STEP; break
+      case 'ArrowUp': dy = PAN_STEP; break
+      case 'ArrowDown': dy = -PAN_STEP; break
+      default: return
+    }
+    e.preventDefault()
+    const pan = cy.pan()
+    cy.animate({ pan: { x: pan.x + dx, y: pan.y + dy }, duration: 100 })
   }, [])
 
   return (
@@ -391,7 +414,11 @@ export function GraphCanvas({
       {minimapSrc && (
         <div
           ref={minimapRef}
+          role="img"
+          aria-label="Graph minimap — click or use arrow keys to pan"
+          tabIndex={0}
           onClick={handleMinimapClick}
+          onKeyDown={handleMinimapKeyDown}
           style={{
             position: 'absolute',
             bottom: 12,
@@ -434,4 +461,4 @@ export function GraphCanvas({
       )}
     </div>
   )
-}
+})
