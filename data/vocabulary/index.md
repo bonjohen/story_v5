@@ -1,6 +1,6 @@
 # Controlled Vocabularies
 
-This folder contains the controlled vocabularies and ID naming conventions that govern all 42 graph deliverables (15 archetypes + 27 genres). Every node role, edge meaning, and identifier in the corpus must conform to one of these vocabularies. This ensures consistency across graphs and enables cross-referencing.
+This folder contains the controlled vocabularies and ID naming conventions that govern all 42 graph deliverables (15 archetypes + 27 genres) and the Story Elements & Timelines system. Every node role, edge meaning, character role, place type, object type, relationship type, and transition change type in the corpus must conform to one of these vocabularies. This ensures consistency across graphs and enables cross-referencing.
 
 ## Files
 
@@ -59,6 +59,46 @@ Documents the ID naming convention for genre nodes and edges:
 - **Prefix:** 2-letter code per genre (DR = Drama, HR = Horror, SF = Science Fiction, etc.)
 - **Number ranges by level:** 01-09 (L1 Genre Promise), 10-19 (L2 Core Constraint), 20-39 (L3 Subgenre Pattern), 40-59 (L4 Setting Rule), 60-79 (L5 Scene Obligation), 80-89 (Tone Marker), 90-99 (Anti-Pattern)
 - Includes the full prefix table for all 27 genres.
+
+### element_roles.json
+
+Defines the **13 canonical character roles** used across archetype element templates. Every character in an element template or instance must be assigned exactly one role. These roles describe narrative function — how a character serves the story's structure.
+
+The 13 roles: protagonist, antagonist, mentor, ally, herald, threshold_guardian, shadow, trickster, shapeshifter, love_interest, foil, confidant, comic_relief.
+
+Each entry includes a `definition`, `structural_function`, and `examples_across_archetypes`.
+
+### place_types.json
+
+Defines the **10 canonical place types** used across archetype element templates. Every place in an element template or instance must be assigned exactly one type. These types describe the narrative function of a location.
+
+The 10 types: ordinary_world, threshold, special_world, sanctuary, stronghold, wasteland, crossroads, underworld, summit, home.
+
+Each entry includes a `definition`, `structural_function`, and `examples_across_archetypes`.
+
+### object_types.json
+
+Defines the **10 canonical object types** used across archetype element templates. Every object in an element template or instance must be assigned exactly one type. These types describe why an object matters to the story.
+
+The 10 types: weapon, talisman, document, treasure, mcguffin, symbol, tool, key, vessel, relic.
+
+Each entry includes a `definition`, `structural_function`, and `examples_across_archetypes`.
+
+### relationship_types.json
+
+Defines the **10 canonical inter-character relationship types** used across element templates and instances. Every relationship between characters must be assigned exactly one type. Relationships are directional.
+
+The 10 types: ally, rival, mentor_student, parent_child, romantic, nemesis, servant_master, sibling, betrayer, guardian.
+
+Each entry includes a `definition`, `structural_function`, `typical_context`, and `directionality`.
+
+### element_change_types.json
+
+Defines the **11 canonical state change types** used in timeline transitions. Every transition in a timeline moment must use exactly one change type. These describe what happens to a story element at a particular narrative beat.
+
+The 11 types: learns, gains, loses, transforms, arrives, departs, bonds, breaks, dies, reveals, decides.
+
+Each entry includes a `definition`, `structural_function`, `typical_context`, and `applies_to` (which entity types the change can target).
 
 ## Usage
 

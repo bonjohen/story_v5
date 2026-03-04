@@ -2,6 +2,7 @@
 
 *Phased plan derived from `docs/story_elements_and_timelines.md`*
 
+This file is maintained by the coding agent so that [ ] means not started, [~] means started, and [X] means completed. All tasks must be started, meaning assign [~]. The direct transition from [ ] to [X] is not a valid transition. Use as fine a grain as practical, up to and including one item at a time. As you select a task for work, set it to [~], and as you complete it, set it to [X].
 ---
 
 ## Overview
@@ -22,23 +23,23 @@ This plan breaks the Story Elements & Timelines specification into 6 implementat
 
 ### Controlled Vocabularies
 
-- [ ] Create `data/vocabulary/element_roles.json` — 13 character roles: protagonist, antagonist, mentor, ally, herald, threshold_guardian, shadow, trickster, shapeshifter, love_interest, foil, confidant, comic_relief
-- [ ] Create `data/vocabulary/place_types.json` — 10 place types: ordinary_world, threshold, special_world, sanctuary, stronghold, wasteland, crossroads, underworld, summit, home
-- [ ] Create `data/vocabulary/object_types.json` — 10 object types: weapon, talisman, document, treasure, mcguffin, symbol, tool, key, vessel, relic
-- [ ] Create `data/vocabulary/relationship_types.json` — 10 relationship types: ally, rival, mentor_student, parent_child, romantic, nemesis, servant_master, sibling, betrayer, guardian
-- [ ] Create `data/vocabulary/element_change_types.json` — 11 transition change types: learns, gains, loses, transforms, arrives, departs, bonds, breaks, dies, reveals, decides
-- [ ] Update `data/vocabulary/index.md` to document all new vocabulary files
+- [X] Create `data/vocabulary/element_roles.json` — 13 character roles: protagonist, antagonist, mentor, ally, herald, threshold_guardian, shadow, trickster, shapeshifter, love_interest, foil, confidant, comic_relief
+- [X] Create `data/vocabulary/place_types.json` — 10 place types: ordinary_world, threshold, special_world, sanctuary, stronghold, wasteland, crossroads, underworld, summit, home
+- [X] Create `data/vocabulary/object_types.json` — 10 object types: weapon, talisman, document, treasure, mcguffin, symbol, tool, key, vessel, relic
+- [X] Create `data/vocabulary/relationship_types.json` — 10 relationship types: ally, rival, mentor_student, parent_child, romantic, nemesis, servant_master, sibling, betrayer, guardian
+- [X] Create `data/vocabulary/element_change_types.json` — 11 transition change types: learns, gains, loses, transforms, arrives, departs, bonds, breaks, dies, reveals, decides
+- [X] Update `data/vocabulary/index.md` to document all new vocabulary files
 
 ### TypeScript Interfaces
 
-- [ ] Create `app/src/types/elements.ts` — interfaces for Character, Place, Object, Event, Faction (both template and instance levels)
-- [ ] Create `app/src/types/timeline.ts` — interfaces for Moment, Transition, Timeline, TemplateTimeline, CharacterState
-- [ ] Create `app/src/types/element-constraints.ts` — interfaces for genre element constraints
+- [X] Create `app/src/types/elements.ts` — interfaces for Character, Place, Object, Event, Faction (both template and instance levels)
+- [X] Create `app/src/types/timeline.ts` — interfaces for Moment, Transition, Timeline, TemplateTimeline, CharacterState
+- [X] Create `app/src/types/element-constraints.ts` — interfaces for genre element constraints
 
 ### Validation
 
-- [ ] Write validation script to verify vocabulary files follow the established format (matching `archetype_node_roles.json` pattern)
-- [ ] Ensure all TypeScript interfaces compile cleanly with existing codebase
+- [X] Write validation script to verify vocabulary files follow the established format (matching `archetype_node_roles.json` pattern)
+- [X] Ensure all TypeScript interfaces compile cleanly with existing codebase
 
 **Deliverable**: 5 new vocabulary JSON files in `data/vocabulary/`, 3 new TypeScript interface files in `app/src/types/`, all compiling and internally consistent.
 

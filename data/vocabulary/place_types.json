@@ -1,0 +1,66 @@
+{
+  "title": "Controlled Vocabulary: Story Element Place Types",
+  "description": "Canonical set of place types used across archetype element templates. Every place in an element template or instance must be assigned exactly one type. These types describe narrative function of a location — how it serves the story's structure — not its physical characteristics.",
+  "place_types": [
+    {
+      "type": "ordinary_world",
+      "definition": "The protagonist's baseline environment — the known, stable, everyday reality before the story's central conflict begins.",
+      "structural_function": "Establishes the starting state against which all change is measured. Appears at Origin nodes and often at Resolution.",
+      "examples_across_archetypes": "The Shire (The Quest), Tatooine (Hero's Journey), The Family Home (Coming of Age), The Pre-Transformation Life (Rebirth)"
+    },
+    {
+      "type": "threshold",
+      "definition": "A boundary space marking the transition between the known world and the unknown — a literal or figurative doorway.",
+      "structural_function": "Marks the point of no return. Appears at Threshold nodes. Crossing it signals commitment to the journey.",
+      "examples_across_archetypes": "The Edge of the Forest (The Quest), The Airport Departure Gate (Voyage and Return), The Prison Wall (The Escape)"
+    },
+    {
+      "type": "special_world",
+      "definition": "The unfamiliar domain where the story's central action unfolds — governed by different rules than the ordinary world.",
+      "structural_function": "Primary arena for trials, revelations, and transformation. Most archetype nodes from Threshold through Crisis occur here.",
+      "examples_across_archetypes": "Oz (Voyage and Return), The Underworld (Hero's Journey), The Royal Court (Rags to Riches), The Monster's Domain (Overcoming the Monster)"
+    },
+    {
+      "type": "sanctuary",
+      "definition": "A temporary place of safety, rest, or preparation within the special world — a reprieve from the central conflict.",
+      "structural_function": "Provides breathing room for planning, healing, or reflection. Often where mentor encounters or ally-bonding occurs.",
+      "examples_across_archetypes": "Rivendell (The Quest), The Rebel Base (Hero's Journey), The Safe House (The Escape), The Hidden Camp (Overcoming the Monster)"
+    },
+    {
+      "type": "stronghold",
+      "definition": "The antagonist's seat of power — the place where opposing forces are concentrated and the protagonist is most vulnerable.",
+      "structural_function": "Site of Crisis and climactic confrontation. Entering it represents maximum risk. Often the final obstacle.",
+      "examples_across_archetypes": "The Death Star (Hero's Journey), The Dragon's Lair (Overcoming the Monster), The Tyrant's Castle (The Escape), Dunsinane (Tragedy)"
+    },
+    {
+      "type": "wasteland",
+      "definition": "A place of desolation, exhaustion, or spiritual emptiness — reflecting the protagonist's lowest point.",
+      "structural_function": "Externalizes internal despair. Appears at Descent or low-point nodes. The environment mirrors the character's state.",
+      "examples_across_archetypes": "The Desert Crossing (The Quest), The Aftermath of Battle (Overcoming the Monster), The Ruined Kingdom (Rise and Fall)"
+    },
+    {
+      "type": "crossroads",
+      "definition": "A place where paths diverge and the protagonist must choose a direction — literally or figuratively.",
+      "structural_function": "Site of Commitment or key decision nodes. The physical branching mirrors narrative branching.",
+      "examples_across_archetypes": "The Fork in the Road (The Quest), The Marketplace of Options (Comedy), The Moral Dilemma Setting (The Sacrifice)"
+    },
+    {
+      "type": "underworld",
+      "definition": "The deepest, most dangerous layer of the story's world — a place of death, darkness, or fundamental truth.",
+      "structural_function": "Site of the supreme ordeal or ultimate revelation. Going here and returning is the story's deepest transformation.",
+      "examples_across_archetypes": "The Cave (Hero's Journey), The Mines of Moria (The Quest), The Psychological Abyss (The Transformation)"
+    },
+    {
+      "type": "summit",
+      "definition": "The highest point of achievement, clarity, or power — where the protagonist's arc reaches its peak before resolution.",
+      "structural_function": "Site of triumph or tragic height before fall. May represent both physical elevation and maximum agency.",
+      "examples_across_archetypes": "The Throne Room (Rags to Riches), The Peak of Power (Rise and Fall), The Moment of Victory (Overcoming the Monster)"
+    },
+    {
+      "type": "home",
+      "definition": "The place of return — the ordinary world revisited, now seen through changed eyes. May be the same location as ordinary_world but transformed in meaning.",
+      "structural_function": "Site of Resolution. Shows what has changed by returning to what was known. The contrast measures the journey's impact.",
+      "examples_across_archetypes": "The Shire (Return) (The Quest), Home After War (Voyage and Return), The New Life (Rebirth), Scrooge's Chambers (Rebirth)"
+    }
+  ]
+}

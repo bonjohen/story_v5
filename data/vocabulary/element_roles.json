@@ -1,0 +1,84 @@
+{
+  "title": "Controlled Vocabulary: Story Element Character Roles",
+  "description": "Canonical set of character roles used across archetype element templates. Every character in an element template or instance must be assigned exactly one role. These roles describe narrative function, not personality — a character's role determines how they serve the story's structure.",
+  "character_roles": [
+    {
+      "role": "protagonist",
+      "definition": "The central character whose journey defines the story's arc. Undergoes the primary transformation or drives the primary action.",
+      "structural_function": "Anchor for the archetype progression. Present at most or all archetype nodes. The audience's primary point of identification.",
+      "examples_across_archetypes": "The Hero (Hero's Journey), The Tragic Figure (Tragedy), The Seeker (The Quest), The Prisoner (The Escape)"
+    },
+    {
+      "role": "antagonist",
+      "definition": "The primary opposing force — a character whose goals directly conflict with the protagonist's.",
+      "structural_function": "Provides the central obstacle. Drives conflict escalation and crisis. May be sympathetic or purely oppositional.",
+      "examples_across_archetypes": "The Villain (Overcoming the Monster), The Rival (Rags to Riches), The Oppressor (The Escape), The Corrupting Influence (Rise and Fall)"
+    },
+    {
+      "role": "mentor",
+      "definition": "A wise or experienced figure who provides guidance, training, tools, or perspective to the protagonist.",
+      "structural_function": "Accelerates the protagonist's readiness. Often appears at catalyst/threshold phases and may exit before crisis.",
+      "examples_across_archetypes": "The Wise Elder (Hero's Journey), The Teacher (Coming of Age), The Voice of Conscience (Tragedy), The Guide (The Quest)"
+    },
+    {
+      "role": "ally",
+      "definition": "A character who supports the protagonist's goals through companionship, skill, or resources.",
+      "structural_function": "Provides practical aid and emotional support. May test loyalty or be lost to raise stakes.",
+      "examples_across_archetypes": "The Faithful Companion (The Quest), The Fellow Traveler (Voyage and Return), The Co-conspirator (The Escape), The Friend (Comedy)"
+    },
+    {
+      "role": "herald",
+      "definition": "A character or force that announces change, delivers the call to action, or signals that the status quo is ending.",
+      "structural_function": "Triggers the disruption phase. May appear only briefly. Can be a person, message, or event personified.",
+      "examples_across_archetypes": "The Messenger (Hero's Journey), The Victim Who Asks for Help (The Revenge), The Stranger Arriving (Voyage and Return)"
+    },
+    {
+      "role": "threshold_guardian",
+      "definition": "A character who tests the protagonist's worthiness or readiness to proceed past a point of no return.",
+      "structural_function": "Marks transitions between story phases. Forces the protagonist to prove commitment before advancing.",
+      "examples_across_archetypes": "The Gatekeeper (Hero's Journey), The Skeptic (The Quest), The Authority Figure (The Escape), The Test-Giver (Coming of Age)"
+    },
+    {
+      "role": "shadow",
+      "definition": "A character representing the protagonist's dark potential, suppressed qualities, or the path not taken.",
+      "structural_function": "Externalizes the protagonist's internal conflict. Shows what the protagonist could become through failure or corruption.",
+      "examples_across_archetypes": "The Dark Mirror (Hero's Journey), The Former Self (Rebirth), The Fallen Predecessor (Rise and Fall), The Inner Demon (The Transformation)"
+    },
+    {
+      "role": "trickster",
+      "definition": "A character who disrupts order through wit, deception, or rule-breaking, often catalyzing change indirectly.",
+      "structural_function": "Provides comic relief, subverts expectations, or forces unconventional solutions. May be ally or neutral.",
+      "examples_across_archetypes": "The Fool (Comedy), The Con Artist (Rags to Riches), The Clever Companion (The Quest), The Wild Card (The Revenge)"
+    },
+    {
+      "role": "shapeshifter",
+      "definition": "A character whose loyalty, nature, or true identity is ambiguous or changes over the course of the story.",
+      "structural_function": "Creates uncertainty and suspicion. Forces the protagonist (and audience) to question appearances.",
+      "examples_across_archetypes": "The Ambiguous Ally (Mystery Unveiled), The Betrayer (The Revenge), The Double Agent (Overcoming the Monster)"
+    },
+    {
+      "role": "love_interest",
+      "definition": "A character who is the object or partner of romantic connection, driving emotional stakes and personal vulnerability.",
+      "structural_function": "Raises personal stakes beyond the external plot. May serve as motivation, reward, or source of conflict.",
+      "examples_across_archetypes": "The Beloved (Comedy), The Lost Love (Tragedy), The Prize (Rags to Riches), The Partner (The Sacrifice)"
+    },
+    {
+      "role": "foil",
+      "definition": "A character who contrasts with the protagonist to highlight specific qualities through difference.",
+      "structural_function": "Illuminates the protagonist's traits by comparison. May share the same situation but respond differently.",
+      "examples_across_archetypes": "The Alternative Path (Coming of Age), The Unrepentant Version (Rebirth), The Rival Heir (Rags to Riches)"
+    },
+    {
+      "role": "confidant",
+      "definition": "A trusted character to whom the protagonist reveals inner thoughts, plans, and vulnerabilities.",
+      "structural_function": "Enables externalization of internal conflict. Provides a vehicle for exposition without breaking naturalism.",
+      "examples_across_archetypes": "The Trusted Friend (Tragedy), The Diary/Journal (The Escape), The Sidekick (Comedy)"
+    },
+    {
+      "role": "comic_relief",
+      "definition": "A character whose primary function is to release tension through humor, often at structurally intense moments.",
+      "structural_function": "Modulates story pacing. Prevents exhaustion during sustained tension. May also deliver truth through jest.",
+      "examples_across_archetypes": "The Fool (Comedy), The Bumbling Sidekick (The Quest), The Irreverent Voice (Overcoming the Monster)"
+    }
+  ]
+}

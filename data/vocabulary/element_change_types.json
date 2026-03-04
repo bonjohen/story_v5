@@ -1,0 +1,83 @@
+{
+  "title": "Controlled Vocabulary: Timeline Transition Change Types",
+  "description": "Canonical set of state change types used in timeline transitions. Every transition in a timeline moment must use exactly one change type. These describe what happens to a story element at a particular narrative beat — the 'so what' of each moment.",
+  "change_types": [
+    {
+      "type": "learns",
+      "definition": "The entity gains knowledge, understanding, or awareness that they did not previously possess.",
+      "structural_function": "Drives Revelation nodes. Creates information asymmetry shifts. What the character knows determines what actions they can take.",
+      "typical_context": "Discovering a secret, understanding a truth, receiving instruction, realizing a mistake",
+      "applies_to": ["characters"]
+    },
+    {
+      "type": "gains",
+      "definition": "The entity acquires something — an object, ability, ally, status, or resource.",
+      "structural_function": "Empowers the entity for future challenges. Often occurs at Catalyst or post-Trial nodes. Marks power increases.",
+      "typical_context": "Receiving a gift, winning a prize, earning a title, finding a tool, gaining an ally",
+      "applies_to": ["characters"]
+    },
+    {
+      "type": "loses",
+      "definition": "The entity is deprived of something they previously had — an object, person, status, ability, or safety.",
+      "structural_function": "Raises stakes and creates vulnerability. Often occurs at Reversal or Descent nodes. Makes subsequent challenges harder.",
+      "typical_context": "Theft, death of ally, loss of status, destruction of a tool, exile",
+      "applies_to": ["characters", "places", "objects"]
+    },
+    {
+      "type": "transforms",
+      "definition": "The entity undergoes a fundamental change in nature, identity, appearance, or capability — becoming something different.",
+      "structural_function": "Marks the story's core payoff at Transformation nodes. The entity before and after are meaningfully different.",
+      "typical_context": "Metamorphosis, moral conversion, identity shift, physical transformation, corruption or purification",
+      "applies_to": ["characters", "places", "objects"]
+    },
+    {
+      "type": "arrives",
+      "definition": "The entity enters a new location, appearing where they were not before.",
+      "structural_function": "Marks spatial transitions. Arrival at a new place often triggers new story phases (Threshold, special world entry).",
+      "typical_context": "Entering a new realm, arriving at the stronghold, reaching the destination, being transported",
+      "applies_to": ["characters"]
+    },
+    {
+      "type": "departs",
+      "definition": "The entity leaves a location, removing their presence from where they were.",
+      "structural_function": "Marks departure from a story phase. Leaving the ordinary world, fleeing danger, or being exiled.",
+      "typical_context": "Setting out on the journey, fleeing, being banished, choosing to leave",
+      "applies_to": ["characters"]
+    },
+    {
+      "type": "bonds",
+      "definition": "The entity forms or deepens a relationship with another entity — creating a new connection or strengthening an existing one.",
+      "structural_function": "Builds the relationship network. Bonding raises the emotional stakes of future threats to that relationship.",
+      "typical_context": "Forming an alliance, falling in love, swearing an oath, earning trust, accepting a mentor",
+      "applies_to": ["characters"]
+    },
+    {
+      "type": "breaks",
+      "definition": "The entity severs, damages, or fundamentally strains a relationship with another entity.",
+      "structural_function": "Drives Reversal and conflict escalation. Broken bonds create isolation and raise the cost of the protagonist's path.",
+      "typical_context": "Betrayal, abandonment, disillusionment, choosing one loyalty over another, exile",
+      "applies_to": ["characters"]
+    },
+    {
+      "type": "dies",
+      "definition": "The entity ceases to exist — character death, destruction of a place, or irreversible breaking of an object.",
+      "structural_function": "The ultimate Irreversible Cost. Death creates permanent stakes and forces surviving characters to continue without the lost entity.",
+      "typical_context": "Character killed, place destroyed, object shattered beyond repair, final sacrifice",
+      "applies_to": ["characters", "places", "objects"]
+    },
+    {
+      "type": "reveals",
+      "definition": "A hidden truth about the entity is exposed — to other characters, to the audience, or to the entity itself.",
+      "structural_function": "Drives Revelation nodes from the target's perspective. What was hidden becomes known, recontextualizing prior events.",
+      "typical_context": "True identity exposed, secret plan discovered, hidden nature made visible, confession",
+      "applies_to": ["characters", "places", "objects"]
+    },
+    {
+      "type": "decides",
+      "definition": "The entity makes a consequential choice that determines the story's direction — a moment of agency that cannot be undone.",
+      "structural_function": "Drives Commitment and Threshold nodes. The decision itself is the transition, not its consequences (which follow as separate transitions).",
+      "typical_context": "Accepting the call, choosing sacrifice over safety, selecting a path at a crossroads, committing to a plan",
+      "applies_to": ["characters"]
+    }
+  ]
+}

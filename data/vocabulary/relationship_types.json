@@ -1,0 +1,76 @@
+{
+  "title": "Controlled Vocabulary: Story Element Relationship Types",
+  "description": "Canonical set of inter-character relationship types used across element templates and instances. Every relationship between characters must be assigned exactly one type. Relationships are directional — 'mentor_student' from A to B means A mentors B. These types describe the narrative function of the bond, not its emotional quality.",
+  "relationship_types": [
+    {
+      "type": "ally",
+      "definition": "Characters who actively support each other's goals through cooperation, loyalty, or shared purpose.",
+      "structural_function": "Provides mutual aid during Trial and Crisis phases. Ally loss raises stakes; ally gain provides resources.",
+      "typical_context": "Companions on a quest, fellow rebels, friends working toward a common goal",
+      "directionality": "Typically symmetric — if A is ally to B, B is ally to A"
+    },
+    {
+      "type": "rival",
+      "definition": "Characters competing for the same goal, status, or resource — opposition driven by ambition rather than malice.",
+      "structural_function": "Drives conflict through competition rather than existential threat. May evolve into ally or escalate to nemesis.",
+      "typical_context": "Two suitors, competing heirs, professional rivals, opposing champions",
+      "directionality": "Typically symmetric"
+    },
+    {
+      "type": "mentor_student",
+      "definition": "A relationship where one character guides, teaches, or trains the other — transferring knowledge, skill, or wisdom.",
+      "structural_function": "Accelerates protagonist development. Mentor often appears at Catalyst phase and may exit before Crisis, forcing independence.",
+      "typical_context": "Master and apprentice, teacher and pupil, experienced guide and newcomer",
+      "directionality": "Asymmetric — the mentor teaches, the student learns"
+    },
+    {
+      "type": "parent_child",
+      "definition": "A familial bond (biological or adopted) carrying inherent obligation, expectation, and emotional weight.",
+      "structural_function": "Creates deep stakes through primal bonds. Parental loss or failure is among the most potent story catalysts.",
+      "typical_context": "Mother/father and son/daughter, adoptive parent, surrogate family figure",
+      "directionality": "Asymmetric — parent protects/guides, child depends/rebels"
+    },
+    {
+      "type": "romantic",
+      "definition": "Characters bound by romantic love, desire, or intimate partnership — creating vulnerability through emotional exposure.",
+      "structural_function": "Raises personal stakes beyond plot-level conflict. Romantic bonds can motivate sacrifice, create liability, or provide resolution.",
+      "typical_context": "Lovers, partners, unrequited love, forbidden romance, star-crossed pairs",
+      "directionality": "May be symmetric (mutual) or asymmetric (unrequited)"
+    },
+    {
+      "type": "nemesis",
+      "definition": "Characters locked in fundamental opposition — the relationship defines both characters and cannot be resolved without one prevailing.",
+      "structural_function": "Drives the central conflict to Crisis. The nemesis relationship is the story's engine. Resolution requires confrontation.",
+      "typical_context": "Hero and villain, detective and criminal mastermind, protagonist and their dark mirror",
+      "directionality": "Typically symmetric — each defines the other"
+    },
+    {
+      "type": "servant_master",
+      "definition": "A relationship of authority and obedience — one character commands, the other serves (willingly or under coercion).",
+      "structural_function": "Creates power dynamics that can invert at reversal points. Servant rebellion or master vulnerability are potent story moments.",
+      "typical_context": "Lord and vassal, employer and employee, enslaver and enslaved, commander and soldier",
+      "directionality": "Asymmetric — one serves, one commands"
+    },
+    {
+      "type": "sibling",
+      "definition": "Characters who share a familial bond as equals — brothers, sisters, or equivalent kinship carrying shared history and loyalty.",
+      "structural_function": "Creates bonds with inherent equality and rivalry. Sibling conflict carries unique emotional weight due to shared origin.",
+      "typical_context": "Brothers, sisters, twins, sworn siblings, characters raised together",
+      "directionality": "Symmetric"
+    },
+    {
+      "type": "betrayer",
+      "definition": "A character who violates an existing bond of trust — breaking an alliance, revealing a secret, or switching sides.",
+      "structural_function": "Drives Reversal and Revelation nodes. Betrayal recontextualizes prior events and destroys established trust.",
+      "typical_context": "The trusted ally who was a spy, the friend who sells out, the partner who defects",
+      "directionality": "Asymmetric — one betrays, one is betrayed"
+    },
+    {
+      "type": "guardian",
+      "definition": "A character charged with protecting another — through duty, love, or oath — often at personal cost.",
+      "structural_function": "Creates stakes through protective bonds. Guardian failure or sacrifice is a powerful catalyst for protagonist action.",
+      "typical_context": "Bodyguard, protector, watcher, keeper, parent in protective role",
+      "directionality": "Asymmetric — one protects, one is protected"
+    }
+  ]
+}

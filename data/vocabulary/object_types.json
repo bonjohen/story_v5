@@ -1,0 +1,66 @@
+{
+  "title": "Controlled Vocabulary: Story Element Object Types",
+  "description": "Canonical set of object types used across archetype element templates. Every object in an element template or instance must be assigned exactly one type. These types describe narrative function — why an object matters to the story — not its physical form.",
+  "object_types": [
+    {
+      "type": "weapon",
+      "definition": "An object that enables the protagonist or antagonist to exert force, confront threats, or overcome physical obstacles.",
+      "structural_function": "Enables action at Crisis and Trial nodes. Its acquisition or loss marks power shifts. May carry symbolic weight beyond utility.",
+      "examples_across_archetypes": "The Lightsaber (Hero's Journey), Sting (The Quest), The Murder Weapon (The Revenge), The Enchanted Sword (Overcoming the Monster)"
+    },
+    {
+      "type": "talisman",
+      "definition": "A protective or empowering object given by a mentor or earned through trial — carries personal or magical significance.",
+      "structural_function": "Connects protagonist to mentor or source of power. Often received at Catalyst phase and critical at Crisis. Loss may signal vulnerability.",
+      "examples_across_archetypes": "The Ring of Power (The Quest), The Mentor's Gift (Hero's Journey), The Lucky Charm (Comedy), The Family Heirloom (Coming of Age)"
+    },
+    {
+      "type": "document",
+      "definition": "A text, letter, map, or recorded information that reveals truth, provides direction, or serves as evidence.",
+      "structural_function": "Drives Revelation nodes. Its discovery or interpretation changes understanding. May be a map, letter, prophecy, or record.",
+      "examples_across_archetypes": "The Treasure Map (The Quest), The Confession Letter (Mystery Unveiled), The Prophecy (Overcoming the Monster), The Will (Rags to Riches)"
+    },
+    {
+      "type": "treasure",
+      "definition": "An object of great value — monetary, strategic, or symbolic — that motivates action or represents the story's prize.",
+      "structural_function": "Serves as the explicit goal or reward. Its acquisition represents Resolution; its loss represents failure. Drives plot momentum.",
+      "examples_across_archetypes": "The Holy Grail (The Quest), The Fortune (Rags to Riches), The Crown (Rise and Fall), The Stolen Goods (The Revenge)"
+    },
+    {
+      "type": "mcguffin",
+      "definition": "An object whose specific nature matters less than the fact that everyone wants it — drives the plot through pursuit rather than inherent properties.",
+      "structural_function": "Motivates character movement and conflict without requiring detailed explanation. The chase matters more than the thing.",
+      "examples_across_archetypes": "The Death Star Plans (Hero's Journey), The Briefcase (Thriller archetype patterns), The Secret Formula (Overcoming the Monster)"
+    },
+    {
+      "type": "symbol",
+      "definition": "An object that carries thematic weight — it represents an idea, value, or state of being rather than serving a practical function.",
+      "structural_function": "Externalizes theme. Its state tracks the story's thematic arc (intact = hope, broken = loss, restored = redemption).",
+      "examples_across_archetypes": "The Rose (Rebirth), The Mirror (The Transformation), The Wedding Ring (Comedy), The Crown (Tragedy)"
+    },
+    {
+      "type": "tool",
+      "definition": "A practical object that solves specific problems — its value is utilitarian rather than symbolic or magical.",
+      "structural_function": "Enables specific actions at Trial nodes. Unlike talismans, tools derive power from the user's skill, not inherent magic.",
+      "examples_across_archetypes": "The Lockpick (The Escape), The Disguise (The Transformation), The Climbing Rope (The Quest), The Vehicle (Voyage and Return)"
+    },
+    {
+      "type": "key",
+      "definition": "An object that unlocks access — to a place, a truth, a power, or a next phase of the story. Literal or figurative.",
+      "structural_function": "Gates progression. Its possession determines whether the protagonist can advance past a threshold or into a stronghold.",
+      "examples_across_archetypes": "The Literal Key (The Escape), The Password (Mystery Unveiled), The Invitation (Rags to Riches), The Access Code (Overcoming the Monster)"
+    },
+    {
+      "type": "vessel",
+      "definition": "An object that contains, carries, or transports something of importance — may hold power, knowledge, or another entity.",
+      "structural_function": "Controls access to a resource or truth. Opening, filling, or breaking the vessel is often a pivotal moment.",
+      "examples_across_archetypes": "The Ark of the Covenant (Hero's Journey), Pandora's Box (Tragedy), The Potion Bottle (Rebirth), The Ship (Voyage and Return)"
+    },
+    {
+      "type": "relic",
+      "definition": "An object from a previous era or predecessor whose significance lies in its connection to history, legacy, or inherited power.",
+      "structural_function": "Links the current story to a larger continuity. Carries the weight of prior events. Its discovery often triggers Revelation.",
+      "examples_across_archetypes": "The Ancient Artifact (The Quest), The Ancestral Blade (Hero's Journey), The Old Photograph (Coming of Age), The Predecessor's Journal (Mystery Unveiled)"
+    }
+  ]
+}
