@@ -149,25 +149,25 @@ Stage, commit, and push, then continue working.
 
 **Goal**: Add step-by-step traversal and variant path visualization.
 
-- [ ] Implement **Path Simulation Mode** (design spec §5.3):
+- [X] Implement **Path Simulation Mode** (design spec §5.3):
   - User clicks "Simulate" on a start node
   - System highlights the current node and available next edges
   - User clicks an edge to advance; previous nodes trail with faded color
   - Track which nodes have been visited (structural completeness meter)
-- [ ] For archetypes: show **transformation curve overlay**
+- [X] For archetypes: show **transformation curve overlay**
   - Simple line chart overlaid on graph showing escalation/tension over the traversal
-- [ ] For genres: show **constraint narrowing meter**
+- [X] For genres: show **constraint narrowing meter**
   - Visual indicator of how many constraints have been specified vs. total available
-- [ ] Implement **Variant Toggle Mode** (design spec §5.4):
+- [X] Implement **Variant Toggle Mode** (design spec §5.4):
   - Toggle control listing available paths: Canonical, Variant A, Variant B, etc.
   - For archetypes: variants are defined by nodes in the 50–79 ID range
   - For genres: variants correspond to different subgenre paths (Level 3 branches)
   - Graph animates structural differences when toggling
   - Non-active variant nodes/edges dim; active path highlights
-- [ ] Add **failure mode path** visualization:
+- [X] Add **failure mode path** visualization:
   - Highlight anti-pattern nodes and the edges that lead to them
   - Show as a "what not to do" overlay
-- [ ] Add **constraint sheet export** for genre depth selector (v-next #30 — after walking a genre path through simulation, export the accumulated constraints as a tailored writing guide; the constraint narrowing meter already tracks this state)
+- [X] Add **constraint sheet export** for genre depth selector (v-next #30 — after walking a genre path through simulation, export the accumulated constraints as a tailored writing guide; the constraint narrowing meter already tracks this state)
 
 **Deliverable**: Walk through any graph step by step; toggle between canonical and variant paths; see which structural elements have been covered; export a constraint sheet for any genre path.
 

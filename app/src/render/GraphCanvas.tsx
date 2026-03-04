@@ -6,14 +6,31 @@ import { buildCytoscapeElements } from './elements.ts'
 import { applyLayout } from '../layout/applyLayout.ts'
 import { getCoreStyle } from './styles.ts'
 
+interface SimulationVisuals {
+  currentNodeId: string | null
+  visitedNodes: string[]
+  availableEdges: string[]
+}
+
 interface GraphCanvasProps {
   graph: NormalizedGraph
   highlightedPath?: string[]
   onEdgeHover?: (edgeId: string, x: number, y: number) => void
   onEdgeHoverOut?: () => void
+  simulationState?: SimulationVisuals
+  failureModeNodes?: string[]
+  activeVariant?: string | null
 }
 
-export function GraphCanvas({ graph, highlightedPath, onEdgeHover, onEdgeHoverOut }: GraphCanvasProps) {
+export function GraphCanvas({
+  graph,
+  highlightedPath,
+  onEdgeHover,
+  onEdgeHoverOut,
+  simulationState,
+  failureModeNodes,
+  activeVariant,
+}: GraphCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cyRef = useRef<Core | null>(null)
 
@@ -188,6 +205,100 @@ export function GraphCanvas({ graph, highlightedPath, onEdgeHover, onEdgeHoverOu
       })
     }
   }, [highlightedPath])
+
+  // Simulation visualization
+  useEffect(() => {
+    const cy = cyRef.current
+    if (!cy) return
+
+    cy.elements().removeClass('sim-current sim-visited sim-available sim-dimmed')
+
+    if (!simulationState) return
+
+    const { currentNodeId: simCurrent, visitedNodes, availableEdges: simEdges } = simulationState
+    const visitedSet = new Set(visitedNodes)
+    const availSet = new Set(simEdges)
+
+    cy.nodes().forEach((node) => {
+      const id = node.id()
+      if (id === simCurrent) {
+        node.addClass('sim-current')
+      } else if (visitedSet.has(id)) {
+        node.addClass('sim-visited')
+      } else {
+        node.addClass('sim-dimmed')
+      }
+    })
+
+    cy.edges().forEach((edge) => {
+      if (availSet.has(edge.id())) {
+        edge.addClass('sim-available')
+      } else {
+        const src = edge.source().id()
+        const tgt = edge.target().id()
+        if (visitedSet.has(src) && visitedSet.has(tgt)) {
+          edge.addClass('sim-visited')
+        } else {
+          edge.addClass('sim-dimmed')
+        }
+      }
+    })
+  }, [simulationState])
+
+  // Failure mode overlay
+  useEffect(() => {
+    const cy = cyRef.current
+    if (!cy) return
+
+    cy.elements().removeClass('failure-mode failure-path')
+
+    if (!failureModeNodes || failureModeNodes.length === 0) return
+
+    const failSet = new Set(failureModeNodes)
+
+    cy.nodes().forEach((node) => {
+      if (failSet.has(node.id())) {
+        node.addClass('failure-mode')
+      }
+    })
+
+    // Highlight edges that lead TO failure mode nodes
+    cy.edges().forEach((edge) => {
+      if (failSet.has(edge.target().id())) {
+        edge.addClass('failure-path')
+      }
+    })
+  }, [failureModeNodes])
+
+  // Variant highlighting
+  useEffect(() => {
+    const cy = cyRef.current
+    if (!cy) return
+
+    cy.elements().removeClass('variant-active variant-dimmed')
+
+    if (!activeVariant) return
+
+    // Find variant nodes (50-79 range)
+    const isVariantNode = (id: string) => {
+      const match = id.match(/_N(\d{2})_/)
+      if (!match) return false
+      const num = parseInt(match[1], 10)
+      return num >= 50 && num <= 79
+    }
+
+    cy.nodes().forEach((node) => {
+      if (isVariantNode(node.id())) {
+        node.addClass('variant-dimmed')
+      }
+    })
+
+    cy.edges().forEach((edge) => {
+      if (isVariantNode(edge.source().id()) || isVariantNode(edge.target().id())) {
+        edge.addClass('variant-dimmed')
+      }
+    })
+  }, [activeVariant])
 
   // Center on selected node (triggered by search or keyboard nav)
   useEffect(() => {

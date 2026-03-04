@@ -404,6 +404,86 @@ export function getCoreStyle(graphType: 'archetype' | 'genre'): Stylesheet[] {
         opacity: 0.1,
       },
     },
+
+    // --- Simulation styles ---
+    {
+      selector: 'node.sim-current',
+      style: {
+        'border-color': '#3b82f6',
+        'border-width': 4,
+        'z-index': 20,
+      },
+    },
+    {
+      selector: 'node.sim-visited',
+      style: {
+        opacity: 0.5,
+      },
+    },
+    {
+      selector: 'edge.sim-available',
+      style: {
+        'line-color': '#3b82f6',
+        'target-arrow-color': '#3b82f6',
+        width: 3,
+        'z-index': 15,
+      },
+    },
+    {
+      selector: 'node.sim-dimmed',
+      style: {
+        opacity: 0.15,
+      },
+    },
+    {
+      selector: 'edge.sim-dimmed',
+      style: {
+        opacity: 0.08,
+      },
+    },
+
+    // --- Failure mode overlay ---
+    {
+      selector: 'node.failure-mode',
+      style: {
+        'border-color': '#ef4444',
+        'border-width': 4,
+        'border-style': 'dashed',
+        'z-index': 15,
+      },
+    },
+    {
+      selector: 'edge.failure-path',
+      style: {
+        'line-color': '#ef4444',
+        'target-arrow-color': '#ef4444',
+        width: 3,
+        'line-style': 'dashed',
+        'z-index': 15,
+      },
+    },
+
+    // --- Variant highlight/dim ---
+    {
+      selector: 'node.variant-active',
+      style: {
+        'border-color': '#8b5cf6',
+        'border-width': 3,
+        'z-index': 10,
+      },
+    },
+    {
+      selector: 'node.variant-dimmed',
+      style: {
+        opacity: 0.2,
+      },
+    },
+    {
+      selector: 'edge.variant-dimmed',
+      style: {
+        opacity: 0.1,
+      },
+    },
   ]
 }
 

@@ -2,9 +2,12 @@ import { useEffect, useCallback, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
 import { GraphSelectorPanel } from './components/GraphSelectorPanel.tsx'
+import { VariantToggle, computeFailureModeNodes } from './components/VariantToggle.tsx'
 import { DetailPanel, EdgeTooltip } from './panels/DetailPanel.tsx'
+import { SimulationPanel } from './panels/SimulationPanel.tsx'
 import { GraphSearch } from './components/GraphSearch.tsx'
 import { useGraphStore } from './store/graphStore.ts'
+import { useSimulationStore } from './store/simulationStore.ts'
 import type { GraphEdge } from './types/graph.ts'
 import type { DataManifest } from './types/graph.ts'
 
@@ -35,10 +38,22 @@ function App() {
   const setHighlightedPath = useGraphStore((s) => s.setHighlightedPath)
   const clearSelection = useGraphStore((s) => s.clearSelection)
 
+  // Simulation state
+  const simActive = useSimulationStore((s) => s.active)
+  const simCurrentNodeId = useSimulationStore((s) => s.currentNodeId)
+  const simVisitedNodes = useSimulationStore((s) => s.visitedNodes)
+  const simAvailableEdges = useSimulationStore((s) => s.availableEdges)
+  const resetSimulation = useSimulationStore((s) => s.resetSimulation)
+
   // Edge hover tooltip state
   const [hoveredEdge, setHoveredEdge] = useState<{ edge: GraphEdge; x: number; y: number } | null>(null)
   // Trace direction state
   const [traceDirection, setTraceDirection] = useState<'forward' | 'backward' | null>(null)
+  // Variant toggle state
+  const [activeVariant, setActiveVariant] = useState<string | null>(null)
+  const [showFailureModes, setShowFailureModes] = useState(false)
+  // Bottom panel toggle (simulation)
+  const [showSimulation, setShowSimulation] = useState(false)
 
   // Load manifest once at startup
   useEffect(() => {
@@ -57,6 +72,13 @@ function App() {
       loadGraph(parsed.type, parsed.dir)
     }
   }, [location.pathname, loadGraph])
+
+  // Reset simulation and variant state when graph changes
+  useEffect(() => {
+    resetSimulation()
+    setActiveVariant(null)
+    setShowFailureModes(false)
+  }, [graphId, resetSimulation])
 
   // Navigate when selecting a graph from the sidebar
   const handleSelectGraph = useCallback(
@@ -130,7 +152,6 @@ function App() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!currentGraph) return
-      // Ignore if focused on an input
       const tag = (e.target as HTMLElement).tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
 
@@ -169,6 +190,11 @@ function App() {
     ? currentGraph.graph.edges.find((e) => e.edge_id === selectedEdgeId)
     : null
   const hasDetailPanel = !!(selectedNode || selectedEdge)
+
+  // Failure mode nodes
+  const failureModeNodes = currentGraph && showFailureModes
+    ? computeFailureModeNodes(currentGraph)
+    : []
 
   // Mode indicator info
   const graphType = currentGraph?.graph.type
@@ -222,7 +248,6 @@ function App() {
           Story Structure Explorer
         </span>
 
-        {/* Divider */}
         <div style={{ width: 1, height: 20, background: 'var(--border)', flexShrink: 0 }} />
 
         {/* Mode indicator */}
@@ -248,15 +273,33 @@ function App() {
           </div>
         )}
 
-        {/* Graph stats */}
         {currentGraph && (
           <span style={{ color: 'var(--text-muted)', fontSize: 11 }}>
             {currentGraph.graph.name} | {currentGraph.graph.nodes.length}N / {currentGraph.graph.edges.length}E
           </span>
         )}
 
-        {/* Spacer */}
         <div style={{ flex: 1 }} />
+
+        {/* Simulation toggle */}
+        {currentGraph && (
+          <button
+            onClick={() => setShowSimulation((v) => !v)}
+            style={{
+              fontSize: 11,
+              padding: '3px 10px',
+              borderRadius: 4,
+              border: '1px solid',
+              borderColor: showSimulation || simActive ? 'var(--accent)' : 'var(--border)',
+              background: showSimulation || simActive ? 'rgba(59,130,246,0.15)' : 'transparent',
+              color: showSimulation || simActive ? 'var(--accent)' : 'var(--text-muted)',
+              cursor: 'pointer',
+              transition: 'all 0.15s',
+            }}
+          >
+            {simActive ? 'Simulating...' : 'Simulate'}
+          </button>
+        )}
 
         {/* Global search */}
         {currentGraph && (
@@ -289,37 +332,72 @@ function App() {
           flexDirection: 'column',
         }}>
           {sidebarOpen && (
-            <GraphSelectorPanel onSelect={handleSelectGraph} />
+            <>
+              <div style={{ flex: 1, overflow: 'hidden' }}>
+                <GraphSelectorPanel onSelect={handleSelectGraph} />
+              </div>
+              {/* Variant toggle (below graph selector) */}
+              {currentGraph && (
+                <VariantToggle
+                  graph={currentGraph}
+                  activeVariant={activeVariant}
+                  onToggle={setActiveVariant}
+                  showFailureModes={showFailureModes}
+                  onToggleFailureModes={() => setShowFailureModes((v) => !v)}
+                />
+              )}
+            </>
           )}
         </aside>
 
-        {/* Center: graph canvas */}
-        <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-          {currentGraph ? (
-            <div
-              key={graphId}
-              style={{ width: '100%', height: '100%', animation: 'fadeIn 0.25s ease' }}
-            >
-              <GraphCanvas
-                graph={currentGraph}
-                highlightedPath={highlightedPath}
-                onEdgeHover={handleEdgeHover}
-                onEdgeHoverOut={handleEdgeHoverOut}
-              />
-            </div>
-          ) : (
+        {/* Center: graph canvas + simulation panel */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+            {currentGraph ? (
+              <div
+                key={graphId}
+                style={{ width: '100%', height: '100%', animation: 'fadeIn 0.25s ease' }}
+              >
+                <GraphCanvas
+                  graph={currentGraph}
+                  highlightedPath={highlightedPath}
+                  onEdgeHover={handleEdgeHover}
+                  onEdgeHoverOut={handleEdgeHoverOut}
+                  simulationState={simActive ? {
+                    currentNodeId: simCurrentNodeId,
+                    visitedNodes: simVisitedNodes,
+                    availableEdges: simAvailableEdges,
+                  } : undefined}
+                  failureModeNodes={failureModeNodes}
+                  activeVariant={activeVariant}
+                />
+              </div>
+            ) : (
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+                gap: 12,
+                color: 'var(--text-muted)',
+              }}>
+                <div style={{ fontSize: 32, opacity: 0.3 }}>{'\u29BB'}</div>
+                <div style={{ fontSize: 14 }}>Select a graph from the sidebar to begin.</div>
+                <div style={{ fontSize: 11 }}>15 archetypes and 27 genres available.</div>
+              </div>
+            )}
+          </div>
+
+          {/* Simulation panel (bottom of canvas area) */}
+          {currentGraph && (showSimulation || simActive) && (
             <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100%',
-              gap: 12,
-              color: 'var(--text-muted)',
+              maxHeight: 280,
+              overflowY: 'auto',
+              borderTop: '1px solid var(--border)',
+              flexShrink: 0,
             }}>
-              <div style={{ fontSize: 32, opacity: 0.3 }}>{'\u29BB'}</div>
-              <div style={{ fontSize: 14 }}>Select a graph from the sidebar to begin.</div>
-              <div style={{ fontSize: 11 }}>15 archetypes and 27 genres available.</div>
+              <SimulationPanel graph={currentGraph} />
             </div>
           )}
         </div>
