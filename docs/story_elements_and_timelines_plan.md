@@ -185,34 +185,34 @@ The following genres constrain style and structure more than element composition
 
 ### Element Detail Panel
 
-- [ ] Add "Elements" tab to node detail panel — when viewing an archetype node, show which template element roles appear at that phase
-- [ ] Display character roles, place types, and objects expected at the selected node
-- [ ] If `examples_elements.json` exists, show instance-level names alongside template roles (e.g., "Mentor → Obi-Wan Kenobi")
-- [ ] Add element role badges with color-coding matching the controlled vocabulary
+- [X] Add "Elements" tab to node detail panel — when viewing an archetype node, show which template element roles appear at that phase
+- [X] Display character roles, place types, and objects expected at the selected node
+- [X] If `examples_elements.json` exists, show instance-level names alongside template roles (e.g., "Mentor → Obi-Wan Kenobi")
+- [X] Add element role badges with color-coding matching the controlled vocabulary
 
 ### Timeline Visualization
 
-- [ ] Build timeline swimlane view — horizontal tracks (one per character role) showing participation across archetype nodes
-- [ ] Render moments as cards on the swimlane, positioned at the corresponding archetype node's x-coordinate
-- [ ] Show transitions as icons/badges on moment cards (learns, gains, loses, etc.)
-- [ ] Support toggling between template view (roles) and instance view (named characters) when example data is available
+- [X] Build timeline swimlane view — horizontal tracks (one per character role) showing participation across archetype nodes
+- [X] Render moments as cards on the swimlane, positioned at the corresponding archetype node's x-coordinate
+- [X] Show transitions as icons/badges on moment cards (learns, gains, loses, etc.)
+- [X] Support toggling between template view (roles) and instance view (named characters) when example data is available
 
 ### Character Arc Overlay
 
-- [ ] Add character arc line overlay on the archetype graph — trace a single character's emotional/state trajectory across nodes
-- [ ] Integrate with existing emotional arc data from `data/cross_references/archetype_emotional_arcs.json`
-- [ ] Allow selecting which character to track via a dropdown
+- [X] Add character arc line overlay on the archetype graph — trace a single character's emotional/state trajectory across nodes
+- [X] Integrate with existing emotional arc data from `data/cross_references/archetype_emotional_arcs.json`
+- [X] Allow selecting which character to track via a dropdown
 
 ### Element Constraints in Genre View
 
-- [ ] When viewing a genre graph, show element constraints (if `element_constraints.json` exists) in a sidebar panel
-- [ ] Highlight constraint requirements as checklist items
+- [X] When viewing a genre graph, show element constraints (if `element_constraints.json` exists) in a sidebar panel
+- [X] Highlight constraint requirements as checklist items
 
 ### Store & Data Layer
 
-- [ ] Extend Zustand store with element data state (loaded templates, loaded instances)
-- [ ] Build element data loader — parse `elements.json` and `examples_elements.json` files
-- [ ] Add element constraint loader for genre views
+- [X] Extend Zustand store with element data state (loaded templates, loaded instances)
+- [X] Build element data loader — parse `elements.json` and `examples_elements.json` files
+- [X] Add element constraint loader for genre views
 
 **Deliverable**: Interactive viewer shows element participation at each node, swimlane timeline visualization, character arc overlays, and genre element constraint display.
 

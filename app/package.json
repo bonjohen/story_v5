@@ -19,6 +19,7 @@
     "ajv-formats": "^3.0.1",
     "cytoscape": "^3.33.1",
     "cytoscape-svg": "^0.4.0",
+    "marked": "^17.0.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.1",

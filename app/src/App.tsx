@@ -9,6 +9,9 @@ import { SimulationPanel } from './panels/SimulationPanel.tsx'
 import { ExampleOverlay } from './panels/ExampleOverlay.tsx'
 import { GraphStats } from './panels/GraphStats.tsx'
 import { CrossIndexPanel } from './panels/CrossIndex.tsx'
+import { ElementsPanel } from './panels/ElementsPanel.tsx'
+import { TimelinePanel } from './panels/TimelinePanel.tsx'
+import { CharacterArcPanel } from './panels/CharacterArcPanel.tsx'
 import { GraphSearch } from './components/GraphSearch.tsx'
 import { useKeyboardNav } from './hooks/useKeyboardNav.ts'
 import { useTraceNavigation } from './hooks/useTraceNavigation.ts'
@@ -86,7 +89,7 @@ export default function App() {
   // Example mode
   const [exampleMappedNodes, setExampleMappedNodes] = useState<string[]>([])
   // Right panel mode
-  const [rightPanel, setRightPanel] = useState<'detail' | 'stats' | 'crossindex' | null>(null)
+  const [rightPanel, setRightPanel] = useState<'detail' | 'stats' | 'crossindex' | 'elements' | 'timeline' | 'arcs' | null>(null)
   // Export panel
   const [showExport, setShowExport] = useState(false)
   // Generation panel
@@ -384,6 +387,31 @@ export default function App() {
           {genRunning ? 'Generating...' : 'Generate'}
         </button>
 
+        {/* Scripts link */}
+        <button
+          onClick={() => void navigate('/scripts')}
+          aria-label="Browse audio scripts"
+          style={{
+            fontSize: 11,
+            padding: '3px 10px',
+            borderRadius: 4,
+            border: '1px solid var(--border)',
+            color: 'var(--text-muted)',
+            cursor: 'pointer',
+            transition: 'all 0.15s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--accent)'
+            e.currentTarget.style.color = 'var(--accent)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--border)'
+            e.currentTarget.style.color = 'var(--text-muted)'
+          }}
+        >
+          Scripts
+        </button>
+
         {/* Global search */}
         {currentGraph && (
           <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
@@ -628,6 +656,21 @@ export default function App() {
                 active={rightPanel === 'crossindex'}
                 onClick={() => setRightPanel(rightPanel === 'crossindex' ? null : 'crossindex')}
               />
+              <PanelTab
+                label="Elements"
+                active={rightPanel === 'elements'}
+                onClick={() => setRightPanel(rightPanel === 'elements' ? null : 'elements')}
+              />
+              <PanelTab
+                label="Timeline"
+                active={rightPanel === 'timeline'}
+                onClick={() => setRightPanel(rightPanel === 'timeline' ? null : 'timeline')}
+              />
+              <PanelTab
+                label="Arcs"
+                active={rightPanel === 'arcs'}
+                onClick={() => setRightPanel(rightPanel === 'arcs' ? null : 'arcs')}
+              />
             </div>
 
             {/* Panel content */}
@@ -645,6 +688,15 @@ export default function App() {
               )}
               {rightPanel === 'stats' && <GraphStats graph={currentGraph} />}
               {rightPanel === 'crossindex' && <CrossIndexPanel graph={currentGraph} />}
+              {rightPanel === 'elements' && (
+                <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
+              )}
+              {rightPanel === 'timeline' && (
+                <TimelinePanel graph={currentGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+              )}
+              {rightPanel === 'arcs' && (
+                <CharacterArcPanel graph={currentGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+              )}
             </div>
           </aside>
         )}
