@@ -49,32 +49,32 @@ Expand and index the example mappings across all graphs.
 
 New analytical models that extend the graph framework's expressive power.
 
-- [ ] **#19 — Hybrid archetype modeling**
+- [X] **#19 — Hybrid archetype modeling**
   Document common hybrid patterns (e.g., Hero's Journey + Coming of Age, Revenge + Tragedy) and describe how graphs can be composed or layered. Prerequisite for #33.
 
-- [ ] **#33 — Genre blending/hybridization model**
+- [X] **#33 — Genre blending/hybridization model**
   Model how genre constraint graphs compose when a story operates in multiple genres. Define which constraints dominate in conflicts and which combinations are structurally stable vs. unstable.
 
-- [ ] **#35 — Genre constraint severity weighting**
+- [X] **#35 — Genre constraint severity weighting**
   Add a severity field to genre nodes/edges distinguishing hard requirements (violating breaks the genre) from soft expectations (uncommon but valid deviations).
 
-- [ ] **#36 — Tone marker integration with archetype graphs**
+- [X] **#36 — Tone marker integration with archetype graphs**
   Model the interaction between genre tone markers (e.g., sustained dread for Horror) and archetype emotional arcs. Extend the compatibility matrix with tone compatibility notes.
 
-- [ ] **#41 — Archetype emotional arc profiles**
+- [X] **#41 — Archetype emotional arc profiles**
   Map the emotional trajectory (tension, hope, fear, resolution) for each archetype as a quantitative curve. Supports matching arcs to genre tone requirements (#36).
 
 ### Phase E — Advanced Analysis & Research (high effort, external data)
 
 Research-intensive items requiring new data collection or external corpus work.
 
-- [ ] **#29 — Non-Western archetype analysis**
+- [X] **#29 — Non-Western archetype analysis**
   Research and potentially add archetypes from East Asian, South Asian, African, Indigenous, and Middle Eastern narrative traditions. The current 15 archetypes draw primarily from Western storytelling.
 
-- [ ] **#31 — Cross-medium adaptation mapping**
+- [X] **#31 — Cross-medium adaptation mapping**
   Analyze how archetype graphs shift between mediums (novel → film → TV → game). Document which nodes compress, expand, or change role.
 
-- [ ] **#32 — Quantitative validation against a story corpus**
+- [X] **#32 — Quantitative validation against a story corpus**
   Test archetype and genre graphs against a corpus (e.g., 100 films, 100 novels) to measure coverage, identify missing patterns, and validate vocabularies empirically.
 
 ### Phase F — Architecture Evolution (medium effort, structural changes)
