@@ -1,0 +1,1519 @@
+{
+  "_description": "Consolidated registry of all works referenced across archetype and genre example files.",
+  "_generated": "2026-03-04",
+  "_stats": {
+    "total_works": 107,
+    "works_with_multiple_refs": 19,
+    "archetypes_covered": 15,
+    "genres_covered": 27
+  },
+  "works": [
+    {
+      "work_id": "christmas_carol_1843",
+      "title": "A Christmas Carol",
+      "creator": "Charles Dickens",
+      "year": 1843,
+      "medium": "novella",
+      "references": [
+        {
+          "graph_id": "archetype_06_rebirth",
+          "role": "primary"
+        },
+        {
+          "graph_id": "genre_27_holiday",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "game_of_thrones_1996",
+      "title": "A Game of Thrones",
+      "creator": "George R.R. Martin",
+      "year": 1996,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_05_fantasy",
+          "role": "cross-reference",
+          "short_name": "Game of Thrones"
+        }
+      ]
+    },
+    {
+      "work_id": "midsummer_nights_dream",
+      "title": "A Midsummer Night's Dream",
+      "creator": "William Shakespeare",
+      "year": null,
+      "medium": "Shakespeare comedy",
+      "references": [
+        {
+          "graph_id": "archetype_08_comedy",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "alices_adventures_in_wonderland_1865",
+      "title": "Alice's Adventures in Wonderland",
+      "creator": "Lewis Carroll",
+      "year": 1865,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_04_voyage_and_return",
+          "role": "primary"
+        },
+        {
+          "graph_id": "genre_21_childrens_literature",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "all_quiet_on_the_western_front_1929",
+      "title": "All Quiet on the Western Front",
+      "creator": "Erich Maria Remarque",
+      "year": 1929,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_16_war",
+          "role": "cross-reference",
+          "short_name": "All Quiet on the Western Front"
+        }
+      ]
+    },
+    {
+      "work_id": "all_the_presidents_men_1976",
+      "title": "All the President's Men",
+      "creator": "Alan J. Pakula",
+      "year": 1976,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_25_political",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "animal_farm_1945",
+      "title": "Animal Farm",
+      "creator": "George Orwell",
+      "year": 1945,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_22_satire",
+          "role": "cross-reference",
+          "short_name": "Animal Farm"
+        }
+      ]
+    },
+    {
+      "work_id": "apocalypse_now_1979",
+      "title": "Apocalypse Now",
+      "creator": "Francis Ford Coppola",
+      "year": 1979,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_16_war",
+          "role": "cross-reference",
+          "short_name": "Apocalypse Now"
+        }
+      ]
+    },
+    {
+      "work_id": "armageddon_1998",
+      "title": "Armageddon",
+      "creator": "Michael Bay",
+      "year": 1998,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_12_the_sacrifice",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "arthur_conan_doyle_sherlock_holmes_1887",
+      "title": "Arthur Conan Doyle — Sherlock Holmes",
+      "creator": "",
+      "year": 1887,
+      "medium": "",
+      "references": [
+        {
+          "graph_id": "genre_13_detective",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "beauty_and_the_beast_1991",
+      "title": "Beauty and the Beast",
+      "creator": "Gary Trousdale & Kirk Wise",
+      "year": 1991,
+      "medium": "animated film",
+      "references": [
+        {
+          "graph_id": "archetype_06_rebirth",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "beloved_1987",
+      "title": "Beloved",
+      "creator": "Toni Morrison",
+      "year": 1987,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_20_literary_fiction",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "beowulf",
+      "title": "Beowulf",
+      "creator": "Anonymous",
+      "year": null,
+      "medium": "Old English epic poem",
+      "references": [
+        {
+          "graph_id": "archetype_05_overcoming_the_monster",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "black_panther_2018",
+      "title": "Black Panther",
+      "creator": "Ryan Coogler",
+      "year": 2018,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_14_superhero",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "black_swan_2010",
+      "title": "Black Swan",
+      "creator": "Darren Aronofsky",
+      "year": 2010,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_14_the_transformation",
+          "role": "primary"
+        },
+        {
+          "graph_id": "genre_23_psychological",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "blade_runner_1982",
+      "title": "Blade Runner",
+      "creator": "Ridley Scott",
+      "year": 1982,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_06_science_fiction",
+          "role": "cross-reference",
+          "short_name": "Blade Runner"
+        }
+      ]
+    },
+    {
+      "work_id": "bridget_joness_diary_2001",
+      "title": "Bridget Jones's Diary",
+      "creator": "Sharon Maguire",
+      "year": 2001,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_08_comedy",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_09_romantic_comedy",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "charlottes_web_1952",
+      "title": "Charlotte's Web",
+      "creator": "E.B. White",
+      "year": 1952,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_21_childrens_literature",
+          "role": "cross-reference",
+          "short_name": "Charlotte's Web"
+        }
+      ]
+    },
+    {
+      "work_id": "chinatown_1974",
+      "title": "Chinatown",
+      "creator": "Roman Polanski",
+      "year": 1974,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_13_detective",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "citizen_kane_1941",
+      "title": "Citizen Kane",
+      "creator": "Orson Welles",
+      "year": 1941,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_15_the_rise_and_fall",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "coco_2017",
+      "title": "Coco",
+      "creator": "Lee Unkrich",
+      "year": 2017,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_18_family",
+          "role": "cross-reference",
+          "short_name": "Coco"
+        }
+      ]
+    },
+    {
+      "work_id": "crazy_rich_asians_2018",
+      "title": "Crazy Rich Asians",
+      "creator": "Jon M. Chu",
+      "year": 2018,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_09_romantic_comedy",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "die_hard_1988",
+      "title": "Die Hard",
+      "creator": "John McTiernan",
+      "year": 1988,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_02_action",
+          "role": "cross-reference",
+          "short_name": "Die Hard"
+        }
+      ]
+    },
+    {
+      "work_id": "dr_strangelove_1964",
+      "title": "Dr. Strangelove",
+      "creator": "Stanley Kubrick",
+      "year": 1964,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_22_satire",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "dune_2021",
+      "title": "Dune",
+      "creator": "Denis Villeneuve",
+      "year": 2021,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_06_science_fiction",
+          "role": "cross-reference",
+          "short_name": "Dune"
+        }
+      ]
+    },
+    {
+      "work_id": "elf_2003",
+      "title": "Elf",
+      "creator": "Jon Favreau",
+      "year": 2003,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_27_holiday",
+          "role": "cross-reference",
+          "short_name": "Elf"
+        }
+      ]
+    },
+    {
+      "work_id": "escape_from_alcatraz_1979",
+      "title": "Escape from Alcatraz",
+      "creator": "Don Siegel",
+      "year": 1979,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_11_the_escape",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "fight_club_1999",
+      "title": "Fight Club",
+      "creator": "David Fincher",
+      "year": 1999,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_23_psychological",
+          "role": "cross-reference",
+          "short_name": "Fight Club"
+        }
+      ]
+    },
+    {
+      "work_id": "finding_nemo_2003",
+      "title": "Finding Nemo",
+      "creator": "Andrew Stanton",
+      "year": 2003,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_03_the_quest",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_18_family",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "get_out_2017",
+      "title": "Get Out",
+      "creator": "Jordan Peele",
+      "year": 2017,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_11_the_escape",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_10_horror",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "gladiator_2000",
+      "title": "Gladiator",
+      "creator": "Ridley Scott",
+      "year": 2000,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_10_the_revenge",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_15_historical",
+          "role": "cross-reference",
+          "short_name": "Gladiator"
+        }
+      ]
+    },
+    {
+      "work_id": "gone_girl_2012",
+      "title": "Gone Girl",
+      "creator": "David Fincher",
+      "year": 2012,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_13_the_mystery_unveiled",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_04_thriller",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "great_expectations_1861",
+      "title": "Great Expectations",
+      "creator": "Charles Dickens",
+      "year": 1861,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_02_rags_to_riches",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "groundhog_day_1993",
+      "title": "Groundhog Day",
+      "creator": "Harold Ramis",
+      "year": 1993,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_06_rebirth",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_03_comedy",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "harry_potter_and_the_deathly_hallows_part_2_2011",
+      "title": "Harry Potter and the Deathly Hallows – Part 2",
+      "creator": "David Yates",
+      "year": 2011,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_12_the_sacrifice",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "harry_potter_and_the_sorcerers_stone_2001",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "creator": "Chris Columbus",
+      "year": 2001,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_05_fantasy",
+          "role": "cross-reference",
+          "short_name": "Sorcerer's Stone"
+        }
+      ]
+    },
+    {
+      "work_id": "home_alone_1990",
+      "title": "Home Alone",
+      "creator": "Chris Columbus",
+      "year": 1990,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_27_holiday",
+          "role": "cross-reference",
+          "short_name": "Home Alone"
+        }
+      ]
+    },
+    {
+      "work_id": "house_of_cards_1990",
+      "title": "House of Cards",
+      "creator": "Michael Dobbs",
+      "year": 1990,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_25_political",
+          "role": "cross-reference",
+          "short_name": "House of Cards (1990 novel)"
+        }
+      ]
+    },
+    {
+      "work_id": "indiana_jones_and_the_last_crusade_1989",
+      "title": "Indiana Jones and the Last Crusade",
+      "creator": "Steven Spielberg",
+      "year": 1989,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_03_the_quest",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_07_adventure",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "jaws_1975",
+      "title": "Jaws",
+      "creator": "Steven Spielberg",
+      "year": 1975,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_05_overcoming_the_monster",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "john_wick_2014",
+      "title": "John Wick",
+      "creator": "Chad Stahelski",
+      "year": 2014,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_02_action",
+          "role": "cross-reference",
+          "short_name": "John Wick"
+        }
+      ]
+    },
+    {
+      "work_id": "jurassic_park_1993",
+      "title": "Jurassic Park",
+      "creator": "Steven Spielberg",
+      "year": 1993,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_05_overcoming_the_monster",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "kill_bill_volume_1_2003",
+      "title": "Kill Bill: Volume 1",
+      "creator": "Quentin Tarantino",
+      "year": 2003,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_10_the_revenge",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "knives_out_2019",
+      "title": "Knives Out",
+      "creator": "Rian Johnson",
+      "year": 2019,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_13_the_mystery_unveiled",
+          "role": "primary"
+        },
+        {
+          "graph_id": "genre_11_mystery",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "la_la_land_2016",
+      "title": "La La Land",
+      "creator": "Damien Chazelle",
+      "year": 2016,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_26_musical",
+          "role": "cross-reference",
+          "short_name": "La La Land"
+        }
+      ]
+    },
+    {
+      "work_id": "lady_bird_2017",
+      "title": "Lady Bird",
+      "creator": "Greta Gerwig",
+      "year": 2017,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_09_coming_of_age",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "little_women_1868",
+      "title": "Little Women",
+      "creator": "Louisa May Alcott",
+      "year": 1868,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_18_family",
+          "role": "cross-reference",
+          "short_name": "Little Women"
+        }
+      ]
+    },
+    {
+      "work_id": "macbeth",
+      "title": "Macbeth",
+      "creator": "William Shakespeare",
+      "year": null,
+      "medium": "Shakespeare tragedy",
+      "references": [
+        {
+          "graph_id": "archetype_07_tragedy",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "mad_max_fury_road_2015",
+      "title": "Mad Max: Fury Road",
+      "creator": "George Miller",
+      "year": 2015,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_02_action",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "murder_on_the_orient_express_1934",
+      "title": "Murder on the Orient Express",
+      "creator": "Agatha Christie",
+      "year": 1934,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_11_mystery",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "normal_people_2018",
+      "title": "Normal People",
+      "creator": "Sally Rooney",
+      "year": 2018,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_20_literary_fiction",
+          "role": "cross-reference",
+          "short_name": "Normal People"
+        }
+      ]
+    },
+    {
+      "work_id": "oppenheimer_2023",
+      "title": "Oppenheimer",
+      "creator": "Christopher Nolan",
+      "year": 2023,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_17_biography",
+          "role": "cross-reference",
+          "short_name": "Oppenheimer"
+        }
+      ]
+    },
+    {
+      "work_id": "parasite_2019",
+      "title": "Parasite",
+      "creator": "Bong Joon-ho",
+      "year": 2019,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_01_drama",
+          "role": "cross-reference",
+          "short_name": "Parasite"
+        }
+      ]
+    },
+    {
+      "work_id": "pirates_of_the_caribbean_2003",
+      "title": "Pirates of the Caribbean",
+      "creator": "Gore Verbinski",
+      "year": 2003,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_07_adventure",
+          "role": "cross-reference",
+          "short_name": "Pirates of the Caribbean"
+        }
+      ]
+    },
+    {
+      "work_id": "pride_and_prejudice_1813",
+      "title": "Pride and Prejudice",
+      "creator": "Jane Austen",
+      "year": 1813,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_08_romance",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "rocky_1976",
+      "title": "Rocky",
+      "creator": "John G. Avildsen",
+      "year": 1976,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_02_rags_to_riches",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "romeo_and_juliet",
+      "title": "Romeo and Juliet",
+      "creator": "William Shakespeare",
+      "year": null,
+      "medium": "Shakespeare tragedy",
+      "references": [
+        {
+          "graph_id": "archetype_07_tragedy",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "saving_private_ryan_1998",
+      "title": "Saving Private Ryan",
+      "creator": "Steven Spielberg",
+      "year": 1998,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_16_war",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "scarface_1983",
+      "title": "Scarface",
+      "creator": "Brian De Palma",
+      "year": 1983,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_15_the_rise_and_fall",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_12_crime",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "schindlers_list_1993",
+      "title": "Schindler's List",
+      "creator": "Steven Spielberg",
+      "year": 1993,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_15_historical",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "se7en_1995",
+      "title": "Se7en",
+      "creator": "David Fincher",
+      "year": 1995,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_04_thriller",
+          "role": "cross-reference",
+          "short_name": "Se7en"
+        }
+      ]
+    },
+    {
+      "work_id": "shutter_island_2010",
+      "title": "Shutter Island",
+      "creator": "Martin Scorsese",
+      "year": 2010,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_23_psychological",
+          "role": "cross-reference",
+          "short_name": "Shutter Island"
+        }
+      ]
+    },
+    {
+      "work_id": "slumdog_millionaire_2008",
+      "title": "Slumdog Millionaire",
+      "creator": "Danny Boyle",
+      "year": 2008,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_02_rags_to_riches",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "some_like_it_hot_1959",
+      "title": "Some Like It Hot",
+      "creator": "Billy Wilder",
+      "year": 1959,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_03_comedy",
+          "role": "cross-reference",
+          "short_name": "Some Like It Hot"
+        }
+      ]
+    },
+    {
+      "work_id": "spider-man_2002",
+      "title": "Spider-Man",
+      "creator": "Sam Raimi",
+      "year": 2002,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_14_the_transformation",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_14_superhero",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "star_wars_episode_iv_a_new_hope_1977",
+      "title": "Star Wars: Episode IV – A New Hope",
+      "creator": "George Lucas",
+      "year": 1977,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_01_heros_journey",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "steve_jobs_2015",
+      "title": "Steve Jobs",
+      "creator": "Danny Boyle",
+      "year": 2015,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_17_biography",
+          "role": "cross-reference",
+          "short_name": "Steve Jobs"
+        }
+      ]
+    },
+    {
+      "work_id": "superbad_2007",
+      "title": "Superbad",
+      "creator": "Greg Mottola",
+      "year": 2007,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_03_comedy",
+          "role": "cross-reference",
+          "short_name": "Superbad"
+        }
+      ]
+    },
+    {
+      "work_id": "thank_you_for_smoking_2005",
+      "title": "Thank You for Smoking",
+      "creator": "Jason Reitman",
+      "year": 2005,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_22_satire",
+          "role": "cross-reference",
+          "short_name": "Thank You for Smoking"
+        }
+      ]
+    },
+    {
+      "work_id": "big_lebowski_1998",
+      "title": "The Big Lebowski",
+      "creator": "Joel & Ethan Coen",
+      "year": 1998,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_08_comedy",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "breakfast_club_1985",
+      "title": "The Breakfast Club",
+      "creator": "John Hughes",
+      "year": 1985,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_09_coming_of_age",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "cat_in_the_hat_1957",
+      "title": "The Cat in the Hat",
+      "creator": "Dr. Seuss",
+      "year": 1957,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_21_childrens_literature",
+          "role": "cross-reference",
+          "short_name": "The Cat in the Hat"
+        }
+      ]
+    },
+    {
+      "work_id": "count_of_monte_cristo_1844",
+      "title": "The Count of Monte Cristo",
+      "creator": "Alexandre Dumas",
+      "year": 1844,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_10_the_revenge",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "dark_knight_2008",
+      "title": "The Dark Knight",
+      "creator": "Christopher Nolan",
+      "year": 2008,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_14_superhero",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "dark_knight_rises_2012",
+      "title": "The Dark Knight Rises",
+      "creator": "Christopher Nolan",
+      "year": 2012,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_12_the_sacrifice",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "exorcist_1971",
+      "title": "The Exorcist",
+      "creator": "William Peter Blatty",
+      "year": 1971,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_10_horror",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "fault_in_our_stars_2012",
+      "title": "The Fault in Our Stars",
+      "creator": "John Green",
+      "year": 2012,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_19_young_adult",
+          "role": "cross-reference",
+          "short_name": "The Fault in Our Stars"
+        }
+      ]
+    },
+    {
+      "work_id": "godfather_1972",
+      "title": "The Godfather",
+      "creator": "Francis Ford Coppola",
+      "year": 1972,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_01_drama",
+          "role": "cross-reference",
+          "short_name": "The Godfather"
+        },
+        {
+          "graph_id": "genre_12_crime",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "good_the_bad_and_the_ugly_1966",
+      "title": "The Good, the Bad and the Ugly",
+      "creator": "Sergio Leone",
+      "year": 1966,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_24_western",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "great_gatsby_1925",
+      "title": "The Great Gatsby",
+      "creator": "F. Scott Fitzgerald",
+      "year": 1925,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_20_literary_fiction",
+          "role": "cross-reference",
+          "short_name": "The Great Gatsby"
+        }
+      ]
+    },
+    {
+      "work_id": "hobbit_1937",
+      "title": "The Hobbit",
+      "creator": "J.R.R. Tolkien",
+      "year": 1937,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_01_heros_journey",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_07_adventure",
+          "role": "cross-reference",
+          "short_name": "The Hobbit"
+        }
+      ]
+    },
+    {
+      "work_id": "hound_of_the_baskervilles_1902",
+      "title": "The Hound of the Baskervilles",
+      "creator": "Arthur Conan Doyle",
+      "year": 1902,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_11_mystery",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "hunger_games_2008",
+      "title": "The Hunger Games",
+      "creator": "Suzanne Collins",
+      "year": 2008,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_19_young_adult",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "ides_of_march_2011",
+      "title": "The Ides of March",
+      "creator": "George Clooney",
+      "year": 2011,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_25_political",
+          "role": "cross-reference",
+          "short_name": "The Ides of March"
+        }
+      ]
+    },
+    {
+      "work_id": "lion_the_witch_and_the_wardrobe_1950",
+      "title": "The Lion, the Witch and the Wardrobe",
+      "creator": "C.S. Lewis",
+      "year": 1950,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_04_voyage_and_return",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "lord_of_the_rings_1954",
+      "title": "The Lord of the Rings",
+      "creator": "J.R.R. Tolkien",
+      "year": 1954,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_03_the_quest",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "lord_of_the_rings_the_fellowship_of_the_ring_2001",
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "creator": "Peter Jackson",
+      "year": 2001,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_05_fantasy",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "matrix_1999",
+      "title": "The Matrix",
+      "creator": "The Wachowskis",
+      "year": 1999,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_01_heros_journey",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_06_science_fiction",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "metamorphosis_1915",
+      "title": "The Metamorphosis",
+      "creator": "Franz Kafka",
+      "year": 1915,
+      "medium": "novella",
+      "references": [
+        {
+          "graph_id": "archetype_14_the_transformation",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "notebook_1996",
+      "title": "The Notebook",
+      "creator": "Nicholas Sparks",
+      "year": 1996,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_08_romance",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "perks_of_being_a_wallflower_1999",
+      "title": "The Perks of Being a Wallflower",
+      "creator": "Stephen Chbosky",
+      "year": 1999,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_19_young_adult",
+          "role": "cross-reference",
+          "short_name": "The Perks of Being a Wallflower"
+        }
+      ]
+    },
+    {
+      "work_id": "shawshank_redemption_1994",
+      "title": "The Shawshank Redemption",
+      "creator": "Frank Darabont",
+      "year": 1994,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_11_the_escape",
+          "role": "primary"
+        },
+        {
+          "graph_id": "genre_01_drama",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "shining_1977",
+      "title": "The Shining",
+      "creator": "Stephen King",
+      "year": 1977,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_10_horror",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "silence_of_the_lambs_1991",
+      "title": "The Silence of the Lambs",
+      "creator": "Jonathan Demme",
+      "year": 1991,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_04_thriller",
+          "role": "cross-reference",
+          "short_name": "Silence of the Lambs"
+        }
+      ]
+    },
+    {
+      "work_id": "sixth_sense_1999",
+      "title": "The Sixth Sense",
+      "creator": "M. Night Shyamalan",
+      "year": 1999,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_13_the_mystery_unveiled",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "sound_of_music_1965",
+      "title": "The Sound of Music",
+      "creator": "Robert Wise",
+      "year": 1965,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_26_musical",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "wire_2002",
+      "title": "The Wire",
+      "creator": "David Simon",
+      "year": 2002,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_12_crime",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "wizard_of_oz_1939",
+      "title": "The Wizard of Oz",
+      "creator": "Victor Fleming",
+      "year": 1939,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_04_voyage_and_return",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "wolf_of_wall_street_2013",
+      "title": "The Wolf of Wall Street",
+      "creator": "Martin Scorsese",
+      "year": 2013,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_15_the_rise_and_fall",
+          "role": "primary"
+        },
+        {
+          "graph_id": "genre_17_biography",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "titanic_1997",
+      "title": "Titanic",
+      "creator": "James Cameron",
+      "year": 1997,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "archetype_07_tragedy",
+          "role": "cross-reference"
+        },
+        {
+          "graph_id": "genre_08_romance",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "to_kill_a_mockingbird_1960",
+      "title": "To Kill a Mockingbird",
+      "creator": "Harper Lee",
+      "year": 1960,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "archetype_09_coming_of_age",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "true_detective_season_1_2014",
+      "title": "True Detective Season 1",
+      "creator": "Pizzolatto",
+      "year": 2014,
+      "medium": "",
+      "references": [
+        {
+          "graph_id": "genre_13_detective",
+          "role": "cross-reference"
+        }
+      ]
+    },
+    {
+      "work_id": "true_grit_1968",
+      "title": "True Grit",
+      "creator": "Charles Portis",
+      "year": 1968,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_24_western",
+          "role": "cross-reference",
+          "short_name": "True Grit"
+        }
+      ]
+    },
+    {
+      "work_id": "unforgiven_1992",
+      "title": "Unforgiven",
+      "creator": "Clint Eastwood",
+      "year": 1992,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_24_western",
+          "role": "cross-reference",
+          "short_name": "Unforgiven"
+        }
+      ]
+    },
+    {
+      "work_id": "west_side_story_1961",
+      "title": "West Side Story",
+      "creator": "Jerome Robbins & Robert Wise",
+      "year": 1961,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_26_musical",
+          "role": "cross-reference",
+          "short_name": "West Side Story"
+        }
+      ]
+    },
+    {
+      "work_id": "when_harry_met_sally_1989",
+      "title": "When Harry Met Sally...",
+      "creator": "Rob Reiner, written by Nora Ephron",
+      "year": 1989,
+      "medium": "film",
+      "references": [
+        {
+          "graph_id": "genre_09_romantic_comedy",
+          "role": "primary"
+        }
+      ]
+    },
+    {
+      "work_id": "wolf_hall_2009",
+      "title": "Wolf Hall",
+      "creator": "Hilary Mantel",
+      "year": 2009,
+      "medium": "novel",
+      "references": [
+        {
+          "graph_id": "genre_15_historical",
+          "role": "cross-reference",
+          "short_name": "Wolf Hall"
+        }
+      ]
+    }
+  ]
+}

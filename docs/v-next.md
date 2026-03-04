@@ -36,8 +36,8 @@ Renumber edges in affected genre graphs to match the documented convention. Each
 
 Expand and index the example mappings across all graphs.
 
-- [ ] **#17 — Consolidated example works registry**
-  Build a single index of all ~120+ works referenced across 15 archetype and 27 genre example files. Include metadata (author, year, medium, origin). Enables cross-referencing and gap analysis.
+- [X] **#17 — Consolidated example works registry**
+  Built `data/example_works_registry.json` — 107 unique works across all 42 example files. Includes metadata (creator, year, medium) and cross-references (19 works appear in multiple graphs). Extraction script at `app/scripts/build-works-registry.ts`.
 
 - [ ] **#1 — Example expansion and data enrichment**
   Expand example works per archetype/genre, increase node-to-example mapping density, enrich metadata, and enable deeper comparative cross-referencing. Depends on #17 (registry) for gap analysis.
