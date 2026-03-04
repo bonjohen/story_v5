@@ -515,6 +515,53 @@ export function getCoreStyle(graphType: 'archetype' | 'genre'): Stylesheet[] {
         opacity: 0.15,
       },
     },
+
+    // --- Generation overlay styles ---
+    {
+      selector: 'node.gen-covered',
+      style: {
+        'border-color': '#22c55e',
+        'border-width': 2,
+      },
+    },
+    {
+      selector: 'node.gen-anti-pattern',
+      style: {
+        'border-color': '#ef4444',
+        'border-width': 3,
+        'background-color': 'rgba(239,68,68,0.15)',
+        'z-index': 10,
+      },
+    },
+    {
+      selector: 'node.gen-active-scene',
+      style: {
+        'border-color': '#3b82f6',
+        'border-width': 3,
+        'z-index': 15,
+      },
+    },
+    {
+      selector: 'edge.gen-active-scene',
+      style: {
+        'line-color': '#3b82f6',
+        'target-arrow-color': '#3b82f6',
+        width: 3,
+        'z-index': 15,
+      },
+    },
+    {
+      selector: 'node.gen-uncovered',
+      style: {
+        opacity: 0.3,
+      },
+    },
+    {
+      selector: 'edge.gen-uncovered',
+      style: {
+        opacity: 0.15,
+      },
+    },
   ]
 }
 

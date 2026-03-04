@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef, useState, memo } from 'react'
+import { useEffect, useCallback, useRef, useState, useMemo, memo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
 import { GraphSelectorPanel } from './components/GraphSelectorPanel.tsx'
@@ -14,10 +14,16 @@ import { useKeyboardNav } from './hooks/useKeyboardNav.ts'
 import { useTraceNavigation } from './hooks/useTraceNavigation.ts'
 import { SettingsPanel } from './components/SettingsPanel.tsx'
 import { ExportPanel } from './panels/ExportPanel.tsx'
-import type { CyCore } from './render/GraphCanvas.tsx'
+import { GenerationPanel } from './generation/panels/GenerationPanel.tsx'
+import { ContractPanel } from './generation/panels/ContractPanel.tsx'
+import { PlanPanel } from './generation/panels/PlanPanel.tsx'
+import { TracePanel } from './generation/panels/TracePanel.tsx'
+import { CompliancePanel } from './generation/panels/CompliancePanel.tsx'
+import type { CyCore, GenerationOverlay } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSimulationStore } from './store/simulationStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
+import { useGenerationStore } from './generation/store/generationStore.ts'
 import type { GraphEdge, DataManifest } from './types/graph.ts'
 
 // Layout constants
@@ -63,6 +69,13 @@ export default function App() {
   const settingsOpen = useSettingsStore((s) => s.settingsOpen)
   const toggleSettings = useSettingsStore((s) => s.toggleSettings)
 
+  // Generation state
+  const genStatus = useGenerationStore((s) => s.status)
+  const genRunning = useGenerationStore((s) => s.running)
+  const genContract = useGenerationStore((s) => s.contract)
+  const genPlan = useGenerationStore((s) => s.plan)
+  const genTrace = useGenerationStore((s) => s.trace)
+  const genValidation = useGenerationStore((s) => s.validation)
   // Edge hover tooltip state
   const [hoveredEdge, setHoveredEdge] = useState<{ edge: GraphEdge; x: number; y: number } | null>(null)
   // Variant toggle state
@@ -76,6 +89,11 @@ export default function App() {
   const [rightPanel, setRightPanel] = useState<'detail' | 'stats' | 'crossindex' | null>(null)
   // Export panel
   const [showExport, setShowExport] = useState(false)
+  // Generation panel
+  const [showGeneration, setShowGeneration] = useState(false)
+  const [genTab, setGenTab] = useState<'run' | 'contract' | 'plan' | 'trace' | 'compliance'>('run')
+  // Generation overlay nodes for highlighting
+  const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
   // Manifest error
   const [manifestError, setManifestError] = useState<string | null>(null)
   const cyInstanceRef = useRef<CyCore | null>(null)
@@ -173,6 +191,33 @@ export default function App() {
   // Mode indicator info
   const graphType = currentGraph?.graph.type
   const axisLabel = graphType === 'archetype' ? 'Time' : graphType === 'genre' ? 'Depth' : null
+
+  // Generation overlay
+  const generationOverlay = useMemo<GenerationOverlay | undefined>(() => {
+    if (!showGeneration || genStatus === 'IDLE') return undefined
+    if (!genPlan && !genTrace) return undefined
+
+    const coveredNodes: string[] = []
+    const antiPatternNodes: string[] = []
+    const activeSceneNodes: string[] = genHighlightNodes
+
+    // Collect covered nodes from plan scenes
+    if (genPlan) {
+      for (const scene of genPlan.scenes) {
+        coveredNodes.push(scene.archetype_trace.node_id)
+        for (const ob of scene.genre_obligations) {
+          coveredNodes.push(ob.node_id)
+        }
+      }
+    }
+
+    // Collect anti-pattern nodes from contract
+    if (genContract) {
+      antiPatternNodes.push(...genContract.genre.anti_patterns)
+    }
+
+    return { coveredNodes, antiPatternNodes, activeSceneNodes }
+  }, [showGeneration, genStatus, genPlan, genTrace, genContract, genHighlightNodes])
 
   return (
     <div style={{
@@ -319,6 +364,26 @@ export default function App() {
           </button>
         )}
 
+        {/* Generation toggle */}
+        <button
+          onClick={() => setShowGeneration((v) => !v)}
+          aria-label="Toggle generation panel"
+          aria-pressed={showGeneration}
+          style={{
+            fontSize: 11,
+            padding: '3px 10px',
+            borderRadius: 4,
+            border: '1px solid',
+            borderColor: showGeneration || genRunning ? '#22c55e' : 'var(--border)',
+            background: showGeneration ? 'rgba(34,197,94,0.15)' : 'transparent',
+            color: showGeneration || genRunning ? '#22c55e' : 'var(--text-muted)',
+            cursor: 'pointer',
+            transition: 'all 0.15s',
+          }}
+        >
+          {genRunning ? 'Generating...' : 'Generate'}
+        </button>
+
         {/* Global search */}
         {currentGraph && (
           <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
@@ -387,6 +452,53 @@ export default function App() {
         />
       )}
 
+      {/* Generation panel (left overlay when active) */}
+      {showGeneration && (
+        <div style={{
+          position: 'fixed',
+          top: TOOLBAR_HEIGHT,
+          left: 0,
+          bottom: 0,
+          width: 340,
+          zIndex: 20,
+          background: 'var(--bg-surface)',
+          borderRight: '1px solid var(--border)',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: '4px 0 16px rgba(0,0,0,0.2)',
+        }}>
+          {/* Generation sub-tabs */}
+          <div style={{
+            display: 'flex',
+            borderBottom: '1px solid var(--border)',
+            flexShrink: 0,
+          }}>
+            <GenTab label="Run" active={genTab === 'run'} onClick={() => setGenTab('run')} />
+            <GenTab label="Contract" active={genTab === 'contract'} onClick={() => setGenTab('contract')} badge={!!genContract} />
+            <GenTab label="Plan" active={genTab === 'plan'} onClick={() => setGenTab('plan')} badge={!!genPlan} />
+            <GenTab label="Trace" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge={!!genTrace} />
+            <GenTab label="Valid" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge={!!genValidation} />
+          </div>
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            {genTab === 'run' && (
+              <GenerationPanel onClose={() => setShowGeneration(false)} />
+            )}
+            {genTab === 'contract' && (
+              <ContractPanel onHighlightNodes={setGenHighlightNodes} />
+            )}
+            {genTab === 'plan' && (
+              <PlanPanel onHighlightNodes={setGenHighlightNodes} />
+            )}
+            {genTab === 'trace' && (
+              <TracePanel onHighlightNodes={setGenHighlightNodes} />
+            )}
+            {genTab === 'compliance' && (
+              <CompliancePanel />
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Main content area */}
       <div style={{ flex: 1, display: 'flex', position: 'relative', overflow: 'hidden' }}>
         {/* Left sidebar */}
@@ -449,6 +561,7 @@ export default function App() {
                   failureModeNodes={failureModeNodes}
                   activeVariant={activeVariant}
                   exampleMappedNodes={exampleMappedNodes.length > 0 ? exampleMappedNodes : undefined}
+                  generationOverlay={generationOverlay}
                   onCyReady={handleCyReady}
                 />
               </div>
@@ -589,6 +702,42 @@ const PanelTab = memo(function PanelTab({ label, active, onClick, badge }: {
           height: 5,
           borderRadius: '50%',
           background: 'var(--accent)',
+        }} />
+      )}
+    </button>
+  )
+})
+
+const GenTab = memo(function GenTab({ label, active, onClick, badge }: {
+  label: string
+  active: boolean
+  onClick: () => void
+  badge?: boolean
+}) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        flex: 1,
+        padding: '6px 4px',
+        fontSize: 9,
+        fontWeight: active ? 600 : 400,
+        color: active ? '#22c55e' : 'var(--text-muted)',
+        borderBottom: active ? '2px solid #22c55e' : '2px solid transparent',
+        transition: 'color 0.15s, border-color 0.15s',
+        position: 'relative',
+      }}
+    >
+      {label}
+      {badge && !active && (
+        <span style={{
+          position: 'absolute',
+          top: 4,
+          right: 4,
+          width: 4,
+          height: 4,
+          borderRadius: '50%',
+          background: '#22c55e',
         }} />
       )}
     </button>

@@ -13,6 +13,15 @@ interface SimulationVisuals {
   availableEdges: string[]
 }
 
+export interface GenerationOverlay {
+  /** Node IDs covered by at least one scene */
+  coveredNodes: string[]
+  /** Node IDs with anti-pattern violations */
+  antiPatternNodes: string[]
+  /** Currently selected scene's archetype node and genre obligation nodes */
+  activeSceneNodes: string[]
+}
+
 interface GraphCanvasProps {
   graph: NormalizedGraph
   highlightedPath?: string[]
@@ -22,6 +31,7 @@ interface GraphCanvasProps {
   failureModeNodes?: string[]
   activeVariant?: string | null
   exampleMappedNodes?: string[]
+  generationOverlay?: GenerationOverlay
   onCyReady?: (cy: Core) => void
 }
 
@@ -34,6 +44,7 @@ export const GraphCanvas = memo(function GraphCanvas({
   failureModeNodes,
   activeVariant,
   exampleMappedNodes,
+  generationOverlay,
   onCyReady,
 }: GraphCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -334,6 +345,44 @@ export const GraphCanvas = memo(function GraphCanvas({
       }
     })
   }, [exampleMappedNodes])
+
+  // Generation overlay
+  useEffect(() => {
+    const cy = cyRef.current
+    if (!cy) return
+
+    cy.elements().removeClass('gen-covered gen-anti-pattern gen-active-scene gen-uncovered')
+
+    if (!generationOverlay) return
+
+    const { coveredNodes, antiPatternNodes, activeSceneNodes } = generationOverlay
+    const coveredSet = new Set(coveredNodes)
+    const antiSet = new Set(antiPatternNodes)
+    const activeSet = new Set(activeSceneNodes)
+
+    cy.nodes().forEach((node) => {
+      const id = node.id()
+      if (activeSet.has(id)) {
+        node.addClass('gen-active-scene')
+      } else if (antiSet.has(id)) {
+        node.addClass('gen-anti-pattern')
+      } else if (coveredSet.has(id)) {
+        node.addClass('gen-covered')
+      } else {
+        node.addClass('gen-uncovered')
+      }
+    })
+
+    cy.edges().forEach((edge) => {
+      const src = edge.source().id()
+      const tgt = edge.target().id()
+      if (activeSet.has(src) && activeSet.has(tgt)) {
+        edge.addClass('gen-active-scene')
+      } else if (!coveredSet.has(src) && !coveredSet.has(tgt)) {
+        edge.addClass('gen-uncovered')
+      }
+    })
+  }, [generationOverlay])
 
   // Center on selected node (triggered by search or keyboard nav)
   useEffect(() => {

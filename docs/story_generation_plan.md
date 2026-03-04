@@ -253,46 +253,46 @@ This file is maintained by the coding agent so that [ ] means not started, [~] m
 **Goal:** Integrate the generation pipeline into the existing React app as an "operator console."
 
 ### 7.1 Generation store
-- [ ] Create `app/src/generation/store/generationStore.ts` (Zustand)
-- [ ] State: currentRunId, artifacts, status (state machine), logs, selectedSceneId, coverageMap
-- [ ] Actions: startRun, loadArtifacts, selectScene, clearRun
-- [ ] Optional persistence for run history
+- [X] Create `app/src/generation/store/generationStore.ts` (Zustand)
+- [X] State: currentRunId, artifacts, status (state machine), logs, selectedSceneId, coverageMap
+- [X] Actions: startRun, loadArtifacts, selectScene, clearRun
+- [X] Optional persistence for run history
 
 ### 7.2 Generation panel
-- [ ] Create `app/src/generation/panels/GenerationPanel.tsx`
-- [ ] Run controls: select archetype/genre, configure options, start/stop
-- [ ] Progress indicator with state machine status
-- [ ] Log stream showing engine events
+- [X] Create `app/src/generation/panels/GenerationPanel.tsx`
+- [X] Run controls: select archetype/genre, configure options, start/stop
+- [X] Progress indicator with state machine status
+- [X] Log stream showing engine events
 
 ### 7.3 Contract panel
-- [ ] Create `app/src/generation/panels/ContractPanel.tsx`
-- [ ] Display boundaries, guidelines, exclusions
-- [ ] Click constraint → highlight linked nodes on Cytoscape canvas
+- [X] Create `app/src/generation/panels/ContractPanel.tsx`
+- [X] Display boundaries, guidelines, exclusions
+- [X] Click constraint → highlight linked nodes on Cytoscape canvas
 
 ### 7.4 Plan panel
-- [ ] Create `app/src/generation/panels/PlanPanel.tsx`
-- [ ] Beat list with scenes nested under each beat
-- [ ] Coverage visualization (hard: must reach 1.0, soft: progress bar)
+- [X] Create `app/src/generation/panels/PlanPanel.tsx`
+- [X] Beat list with scenes nested under each beat
+- [X] Coverage visualization (hard: must reach 1.0, soft: progress bar)
 
 ### 7.5 Trace panel
-- [ ] Create `app/src/generation/panels/TracePanel.tsx`
-- [ ] Scene-to-node mapping table
-- [ ] Click scene → highlight archetype node and genre obligations on canvas
+- [X] Create `app/src/generation/panels/TracePanel.tsx`
+- [X] Scene-to-node mapping table
+- [X] Click scene → highlight archetype node and genre obligations on canvas
 
 ### 7.6 Compliance panel
-- [ ] Create `app/src/generation/panels/CompliancePanel.tsx`
-- [ ] Pass/warn/fail summary dashboard
-- [ ] Per-scene drilldown with check details
+- [X] Create `app/src/generation/panels/CompliancePanel.tsx`
+- [X] Pass/warn/fail summary dashboard
+- [X] Per-scene drilldown with check details
 
 ### 7.7 Cytoscape integration
-- [ ] "Generation overlay mode" on graph canvas
-- [ ] When scene selected: highlight archetype_trace.node_id, relevant edges, genre obligation nodes
-- [ ] Node badges: "covered in N scenes"
-- [ ] Anti-pattern nodes visually emphasized (red border/glow)
+- [X] "Generation overlay mode" on graph canvas
+- [X] When scene selected: highlight archetype_trace.node_id, relevant edges, genre obligation nodes
+- [X] Node badges: "covered in N scenes"
+- [X] Anti-pattern nodes visually emphasized (red border/glow)
 
 ### 7.8 Tests
-- [ ] Component tests for each panel (renders with mock data)
-- [ ] Store tests (state transitions, artifact loading)
+- [X] Component tests for each panel (renders with mock data)
+- [X] Store tests (state transitions, artifact loading)
 
 **Verification:** All panels render with real generation output. Scene selection highlights correct nodes on canvas. Coverage visualization updates in real time.
 
