@@ -1,0 +1,225 @@
+{
+  "story_id": "big_lebowski",
+  "story_title": "The Big Lebowski",
+  "archetype_id": "archetype_08_comedy",
+  "characters": [
+    {
+      "id": "char_dude",
+      "name": "Jeffrey 'The Dude' Lebowski",
+      "role": "protagonist",
+      "traits": ["lazy", "easy-going", "confused", "principled in his own way", "resilient"],
+      "motivations": ["get his rug replaced", "bowl in the tournament", "be left alone"],
+      "arc_type": "steadfast",
+      "relationships": [
+        { "target_id": "char_walter", "type": "ally", "description": "Best friend and bowling partner — volatile, loyal, and disruptive" },
+        { "target_id": "char_maude", "type": "romantic", "description": "Feminist artist who uses the Dude for her own purposes" },
+        { "target_id": "char_big_lebowski", "type": "rival", "description": "The millionaire whose identity the Dude is confused for" }
+      ]
+    },
+    {
+      "id": "char_walter",
+      "name": "Walter Sobchak",
+      "role": "trickster",
+      "traits": ["aggressive", "paranoid", "loyal", "stuck in Vietnam", "absurdly principled"],
+      "motivations": ["protect the Dude", "enforce rules", "relive his military glory"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_dude", "type": "ally", "description": "Best friend who makes everything worse by trying to help" },
+        { "target_id": "char_donny", "type": "ally", "description": "Bowling teammate whom Walter constantly berates" }
+      ]
+    },
+    {
+      "id": "char_big_lebowski",
+      "name": "Jeffrey 'The Big' Lebowski",
+      "role": "antagonist",
+      "traits": ["pompous", "fraudulent", "manipulative", "secretly broke"],
+      "motivations": ["embezzle from the foundation", "frame the Dude", "maintain his image of wealth"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_dude", "type": "rival", "description": "Uses the Dude as a patsy in his embezzlement scheme" },
+        { "target_id": "char_bunny", "type": "romantic", "description": "Young trophy wife whose 'kidnapping' drives the plot" }
+      ]
+    },
+    {
+      "id": "char_maude",
+      "name": "Maude Lebowski",
+      "role": "love_interest",
+      "traits": ["intellectual", "artistic", "direct", "calculating"],
+      "motivations": ["recover the ransom money", "conceive a child with no father figure obligations"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_dude", "type": "romantic", "description": "Uses the Dude as means to an end, but with mutual respect" },
+        { "target_id": "char_big_lebowski", "type": "parent_child", "description": "Daughter who sees through her father's pretensions" }
+      ]
+    },
+    {
+      "id": "char_donny",
+      "name": "Theodore Donald 'Donny' Kerabatsos",
+      "role": "comic_relief",
+      "traits": ["gentle", "confused", "out of the loop", "simple"],
+      "motivations": ["understand what's happening", "bowl well"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_dude", "type": "ally", "description": "Quiet bowling teammate" },
+        { "target_id": "char_walter", "type": "ally", "description": "Constantly told to shut up by Walter" }
+      ]
+    },
+    {
+      "id": "char_bunny",
+      "name": "Bunny Lebowski",
+      "role": "shapeshifter",
+      "traits": ["carefree", "irresponsible", "hedonistic"],
+      "motivations": ["have fun", "spend money"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_big_lebowski", "type": "romantic", "description": "Trophy wife who wasn't actually kidnapped" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_bungalow",
+      "name": "The Dude's Bungalow",
+      "type": "ordinary_world",
+      "description": "A shabby Venice Beach bungalow with a rug that really ties the room together.",
+      "atmosphere": "slovenly, comfortable, vulnerable"
+    },
+    {
+      "id": "place_bowling_alley",
+      "name": "The Bowling Alley",
+      "type": "sanctuary",
+      "description": "Hollywood Star Lanes — the Dude's true home, where the league competes and White Russians flow.",
+      "atmosphere": "fluorescent, familiar, communal"
+    },
+    {
+      "id": "place_lebowski_mansion",
+      "name": "The Lebowski Mansion",
+      "type": "special_world",
+      "description": "The Big Lebowski's ostentatious Pasadena estate — all surface grandeur hiding fraud.",
+      "atmosphere": "opulent, hollow, deceitful"
+    },
+    {
+      "id": "place_malibu",
+      "name": "Malibu Beach / Jackie Treehorn's",
+      "type": "special_world",
+      "description": "The decadent Malibu party world where the Dude is drugged and the plot spirals further.",
+      "atmosphere": "surreal, threatening, disorienting"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_rug",
+      "name": "The Rug",
+      "type": "mcguffin",
+      "description": "A rug urinated on by nihilist thugs who mistook the Dude for the Big Lebowski.",
+      "significance": "The inciting object — 'it really tied the room together.' Its loss sets everything in motion.",
+      "rules": ["Irreplaceable in the Dude's eyes", "Its ruination is a case of mistaken identity"]
+    },
+    {
+      "id": "obj_briefcase",
+      "name": "The Ransom Briefcase",
+      "type": "mcguffin",
+      "description": "A briefcase supposedly containing $1 million for Bunny's ransom — actually stuffed with dirty underwear by Walter.",
+      "significance": "Everyone chases this briefcase, but it never contains what anyone thinks it does.",
+      "rules": ["Walter substituted dirty laundry for the money", "The real money was embezzled by the Big Lebowski"]
+    },
+    {
+      "id": "obj_bowling_ball",
+      "name": "Bowling Ball",
+      "type": "symbol",
+      "description": "The bowling ball — constant through all the chaos, representing the Dude's one stable passion.",
+      "significance": "Bowling is the one thing that remains constant. The tournament matters more to the Dude than the mystery.",
+      "rules": ["The bowling subplot continues regardless of the crime plot"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "big_lebowski_main",
+    "story_id": "big_lebowski",
+    "archetype_id": "archetype_08_comedy",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "CO_N01_CONSTRAINED_ORDER",
+        "label": "The Dude Abides",
+        "description": "The Dude lives his contented, slovenly life — bowling, White Russians, and his beloved rug.",
+        "position": 0.0,
+        "participants": { "characters": ["char_dude", "char_walter", "char_donny"], "places": ["place_bungalow", "place_bowling_alley"], "objects": ["obj_rug", "obj_bowling_ball"] },
+        "character_states": {
+          "char_dude": { "emotional_state": "content, lazy", "wants": "to be left alone and bowl", "knows": ["nothing about the Big Lebowski or kidnapping plots"], "has": ["obj_rug"], "status": "alive" }
+        },
+        "transitions": []
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "CO_N02_DISRUPTION",
+        "label": "The Rug Incident",
+        "description": "Nihilist thugs urinate on the Dude's rug, mistaking him for the millionaire Lebowski. Walter convinces the Dude to seek compensation.",
+        "position": 0.1,
+        "participants": { "characters": ["char_dude", "char_walter"], "places": ["place_bungalow"], "objects": ["obj_rug"] },
+        "transitions": [
+          { "entity_id": "char_dude", "change": "loses", "target": "obj_rug", "description": "His rug — which really tied the room together — is ruined" },
+          { "entity_id": "char_dude", "change": "decides", "description": "Goes to the Big Lebowski to demand compensation" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "CO_N03_ESCALATING_CHAOS",
+        "label": "The Kidnapping Caper",
+        "description": "The Dude is pulled into a fake kidnapping, a botched ransom drop, nihilists, Maude's schemes, and increasingly absurd encounters.",
+        "position": 0.4,
+        "participants": { "characters": ["char_dude", "char_walter", "char_big_lebowski", "char_maude", "char_donny"], "places": ["place_lebowski_mansion", "place_malibu"], "objects": ["obj_briefcase"] },
+        "transitions": [
+          { "entity_id": "char_dude", "change": "learns", "detail": "Bunny has been 'kidnapped' and the Big Lebowski wants the Dude to deliver ransom" },
+          { "entity_id": "char_dude", "change": "loses", "detail": "The briefcase money vanishes — Walter substituted dirty underwear" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "CO_N04_DARK_MOMENT",
+        "label": "Donny's Heart Attack",
+        "description": "After a confrontation with the nihilists, Donny suffers a heart attack and dies. The senseless loss grounds the comedy in real grief.",
+        "position": 0.7,
+        "participants": { "characters": ["char_dude", "char_walter", "char_donny"], "places": ["place_bowling_alley"], "objects": [] },
+        "transitions": [
+          { "entity_id": "char_donny", "change": "dies", "description": "Heart attack during the nihilist confrontation" },
+          { "entity_id": "char_dude", "change": "loses", "target": "char_donny", "description": "Loses his quiet, gentle bowling companion" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "CO_N05_UNMASKING",
+        "label": "The Truth Revealed",
+        "description": "Bunny was never kidnapped — she was on vacation. The Big Lebowski embezzled the ransom. The whole thing was a scam.",
+        "position": 0.8,
+        "participants": { "characters": ["char_dude", "char_big_lebowski", "char_maude", "char_bunny"], "places": ["place_lebowski_mansion"], "objects": ["obj_briefcase"] },
+        "transitions": [
+          { "entity_id": "char_dude", "change": "reveals", "description": "Realizes the entire kidnapping was a fraud" },
+          { "entity_id": "char_big_lebowski", "change": "reveals", "description": "Exposed as a fraud who embezzled from his own charity" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "CO_N06_RECONCILIATION",
+        "label": "Scattering Donny's Ashes",
+        "description": "The Dude and Walter scatter Donny's ashes at the beach. Walter's eulogy goes wrong, but they reconcile through shared grief.",
+        "position": 0.9,
+        "participants": { "characters": ["char_dude", "char_walter"], "places": ["place_bungalow"], "objects": [] },
+        "transitions": [
+          { "entity_id": "char_dude", "change": "bonds", "target": "char_walter", "description": "Reconnects with Walter through shared loss and absurdity" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "CO_N07_NEW_HARMONY",
+        "label": "The Dude Abides (Again)",
+        "description": "The Dude returns to bowling. Nothing has changed and everything has changed. The Dude abides.",
+        "position": 1.0,
+        "participants": { "characters": ["char_dude", "char_walter"], "places": ["place_bowling_alley"], "objects": ["obj_bowling_ball"] },
+        "transitions": [
+          { "entity_id": "char_dude", "change": "transforms", "description": "Returns to his life with the same easy-going nature, having survived the chaos" }
+        ]
+      }
+    ]
+  }
+}

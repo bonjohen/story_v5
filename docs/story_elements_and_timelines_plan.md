@@ -92,20 +92,20 @@ Each `elements.json` contains: archetype ID, element templates (characters, plac
 
 Each `examples_elements.json` contains: story ID, archetype ID, named characters (with traits, motivations, arc types, relationships), named places (with descriptions and atmospheres), named objects (with significance and rules), and a full timeline of moments with participant lists, character states, and transitions.
 
-- [ ] Author `data/archetypes/01_heros_journey/examples_elements.json` — Star Wars: A New Hope
-- [ ] Author `data/archetypes/03_the_quest/examples_elements.json` — The Lord of the Rings: The Fellowship of the Ring
-- [ ] Author `data/archetypes/07_tragedy/examples_elements.json` — Macbeth
-- [ ] Author `data/archetypes/06_rebirth/examples_elements.json` — A Christmas Carol
-- [ ] Author `data/archetypes/08_comedy/examples_elements.json` — The Big Lebowski
+- [X] Author `data/archetypes/01_heros_journey/examples_elements.json` — Star Wars: A New Hope
+- [X] Author `data/archetypes/03_the_quest/examples_elements.json` — The Lord of the Rings: The Fellowship of the Ring
+- [X] Author `data/archetypes/07_tragedy/examples_elements.json` — Macbeth
+- [X] Author `data/archetypes/06_rebirth/examples_elements.json` — A Christmas Carol
+- [X] Author `data/archetypes/08_comedy/examples_elements.json` — The Big Lebowski
 
 ### Validation
 
-- [ ] Validate: all character roles in instances match template roles from `elements.json`
-- [ ] Validate: all place types in instances match template types from `elements.json`
-- [ ] Validate: all transition change types use vocabulary from `element_change_types.json`
-- [ ] Validate: timeline moments reference valid archetype nodes from `graph.json`
-- [ ] Validate: relationship targets reference valid character/place/object IDs within the same instance
-- [ ] Validate: element continuity — no character in two places simultaneously, dead characters don't reappear, object custody is traceable
+- [X] Validate: all character roles in instances match template roles from `elements.json`
+- [X] Validate: all place types in instances match template types from `elements.json`
+- [X] Validate: all transition change types use vocabulary from `element_change_types.json`
+- [X] Validate: timeline moments reference valid archetype nodes from `graph.json`
+- [X] Validate: relationship targets reference valid character/place/object IDs within the same instance
+- [X] Validate: element continuity — no character in two places simultaneously, dead characters don't reappear, object custody is traceable
 
 **Deliverable**: 5 `examples_elements.json` files with complete element instances and timelines, all validated for internal consistency and vocabulary compliance.
 

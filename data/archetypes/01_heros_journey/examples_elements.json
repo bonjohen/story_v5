@@ -1,0 +1,385 @@
+{
+  "story_id": "star_wars_iv",
+  "story_title": "Star Wars: Episode IV — A New Hope",
+  "archetype_id": "archetype_01_heros_journey",
+  "characters": [
+    {
+      "id": "char_luke",
+      "name": "Luke Skywalker",
+      "role": "protagonist",
+      "traits": ["farm boy", "Force-sensitive", "impulsive", "idealistic", "loyal"],
+      "motivations": ["escape Tatooine", "avenge aunt and uncle", "learn the Force", "become a Jedi"],
+      "arc_type": "transformative",
+      "relationships": [
+        { "target_id": "char_obiwan", "type": "mentor_student", "description": "Obi-Wan trains Luke in the Force and reveals his heritage" },
+        { "target_id": "char_vader", "type": "nemesis", "description": "Vader killed Luke's father (or so Luke believes)" },
+        { "target_id": "char_leia", "type": "ally", "description": "Princess in need of rescue; they become comrades" },
+        { "target_id": "char_han", "type": "ally", "description": "Reluctant partner who becomes a trusted friend" }
+      ]
+    },
+    {
+      "id": "char_obiwan",
+      "name": "Obi-Wan Kenobi",
+      "role": "mentor",
+      "traits": ["wise", "patient", "self-sacrificing", "mysterious"],
+      "motivations": ["protect Luke", "honor his promise to Anakin", "restore the Jedi"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_luke", "type": "mentor_student", "description": "Guides Luke toward his destiny" },
+        { "target_id": "char_vader", "type": "nemesis", "description": "Former student turned to the dark side" }
+      ]
+    },
+    {
+      "id": "char_vader",
+      "name": "Darth Vader",
+      "role": "shadow",
+      "traits": ["imposing", "ruthless", "methodical", "haunted"],
+      "motivations": ["serve the Emperor", "crush the Rebellion", "dominate through the dark side"],
+      "arc_type": "steadfast",
+      "relationships": [
+        { "target_id": "char_luke", "type": "nemesis", "description": "Unknown to Luke, Vader is his father" },
+        { "target_id": "char_obiwan", "type": "nemesis", "description": "Former master he betrayed" }
+      ]
+    },
+    {
+      "id": "char_han",
+      "name": "Han Solo",
+      "role": "ally",
+      "traits": ["cynical", "resourceful", "cocky", "secretly honorable"],
+      "motivations": ["pay off Jabba's debt", "profit from the mission", "protect his friends (reluctantly)"],
+      "arc_type": "transformative",
+      "relationships": [
+        { "target_id": "char_luke", "type": "ally", "description": "Initially skeptical, grows to respect Luke" },
+        { "target_id": "char_leia", "type": "romantic", "description": "Antagonistic attraction that deepens into love" },
+        { "target_id": "char_chewie", "type": "ally", "description": "Life-debt partner and co-pilot" }
+      ]
+    },
+    {
+      "id": "char_leia",
+      "name": "Princess Leia Organa",
+      "role": "ally",
+      "traits": ["brave", "commanding", "sharp-tongued", "compassionate"],
+      "motivations": ["destroy the Death Star", "lead the Rebellion", "avenge Alderaan"],
+      "arc_type": "steadfast",
+      "relationships": [
+        { "target_id": "char_luke", "type": "ally", "description": "Rescued by Luke; becomes comrade-in-arms" },
+        { "target_id": "char_han", "type": "romantic", "description": "Mutual antagonism masks deepening connection" }
+      ]
+    },
+    {
+      "id": "char_chewie",
+      "name": "Chewbacca",
+      "role": "ally",
+      "traits": ["loyal", "powerful", "expressive", "protective"],
+      "motivations": ["honor life-debt to Han", "protect friends"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_han", "type": "ally", "description": "Inseparable partner and co-pilot" }
+      ]
+    },
+    {
+      "id": "char_tarkin",
+      "name": "Grand Moff Tarkin",
+      "role": "antagonist",
+      "traits": ["cold", "calculating", "authoritarian", "overconfident"],
+      "motivations": ["demonstrate the Death Star's power", "crush the Rebellion"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_vader", "type": "ally", "description": "Imperial partner; Tarkin commands, Vader enforces" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_tatooine",
+      "name": "Tatooine",
+      "type": "ordinary_world",
+      "description": "Twin-sunned desert planet, remote and provincial. Moisture farms dot the barren landscape.",
+      "atmosphere": "dusty, isolated, restless"
+    },
+    {
+      "id": "place_mos_eisley",
+      "name": "Mos Eisley Cantina",
+      "type": "threshold",
+      "description": "A seedy spaceport bar filled with smugglers, bounty hunters, and criminals — the gateway to the larger galaxy.",
+      "atmosphere": "dangerous, exotic, lawless"
+    },
+    {
+      "id": "place_death_star",
+      "name": "Death Star",
+      "type": "stronghold",
+      "description": "Imperial battle station the size of a moon. Labyrinthine corridors, oppressive architecture, and overwhelming firepower.",
+      "atmosphere": "sterile, menacing, vast"
+    },
+    {
+      "id": "place_yavin",
+      "name": "Yavin IV Rebel Base",
+      "type": "sanctuary",
+      "description": "Hidden jungle moon housing the Rebel Alliance's main base. Ancient temples repurposed as hangars and command centers.",
+      "atmosphere": "green, desperate, hopeful"
+    },
+    {
+      "id": "place_trench",
+      "name": "Death Star Trench",
+      "type": "underworld",
+      "description": "The narrow trench leading to the thermal exhaust port — the final approach run where everything depends on one shot.",
+      "atmosphere": "claustrophobic, lethal, decisive"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_lightsaber",
+      "name": "Anakin's Lightsaber",
+      "type": "talisman",
+      "description": "Blue-bladed lightsaber, inherited from Luke's father via Obi-Wan.",
+      "significance": "Gift from mentor; symbol of Jedi heritage and the father Luke never knew.",
+      "rules": ["Requires Force sensitivity to wield effectively", "Deflects blaster bolts"]
+    },
+    {
+      "id": "obj_plans",
+      "name": "Death Star Plans",
+      "type": "mcguffin",
+      "description": "Technical readouts of the Death Star hidden in R2-D2's memory banks.",
+      "significance": "The entire mission hinges on delivering these plans to the Rebellion.",
+      "rules": ["Carried by R2-D2", "Reveal the thermal exhaust port vulnerability"]
+    },
+    {
+      "id": "obj_death_star",
+      "name": "Death Star (as weapon)",
+      "type": "weapon",
+      "description": "Planet-destroying superlaser — the Empire's ultimate weapon of terror.",
+      "significance": "Represents the overwhelming power the heroes must overcome.",
+      "rules": ["Destroys entire planets", "Has one hidden vulnerability"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "star_wars_iv_main",
+    "story_id": "star_wars_iv",
+    "archetype_id": "archetype_01_heros_journey",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "HJ_N01_ORDINARY_WORLD",
+        "label": "Life on the Farm",
+        "description": "Luke lives a restless existence on Uncle Owen's moisture farm, yearning for something more.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_luke"],
+          "places": ["place_tatooine"],
+          "objects": []
+        },
+        "character_states": {
+          "char_luke": {
+            "emotional_state": "restless",
+            "wants": "to leave Tatooine and join the Academy",
+            "knows": ["nothing about his father's true identity", "nothing about the Force"],
+            "has": [],
+            "status": "alive"
+          }
+        },
+        "transitions": []
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "HJ_N02_CALL_TO_ADVENTURE",
+        "label": "Leia's Message",
+        "description": "R2-D2 plays Princess Leia's holographic plea for help. Luke's aunt and uncle are killed by stormtroopers.",
+        "position": 0.1,
+        "participants": {
+          "characters": ["char_luke", "char_leia"],
+          "places": ["place_tatooine"],
+          "objects": ["obj_plans"]
+        },
+        "character_states": {
+          "char_luke": {
+            "emotional_state": "shocked, grieving, determined",
+            "wants": "to help the Rebellion and avenge his family",
+            "knows": ["Leia needs help", "the Empire killed his family"],
+            "has": [],
+            "status": "alive"
+          }
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "learns", "detail": "Princess Leia needs help; the droids carry vital information" },
+          { "entity_id": "char_luke", "change": "loses", "detail": "Uncle Owen and Aunt Beru killed by stormtroopers" },
+          { "entity_id": "char_luke", "change": "decides", "description": "Commits to going with Obi-Wan to Alderaan" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "HJ_N03_MENTOR",
+        "label": "Meeting Obi-Wan",
+        "description": "Obi-Wan reveals the truth about Luke's father, gives him the lightsaber, and begins his training.",
+        "position": 0.2,
+        "participants": {
+          "characters": ["char_luke", "char_obiwan"],
+          "places": ["place_tatooine"],
+          "objects": ["obj_lightsaber"]
+        },
+        "character_states": {
+          "char_luke": {
+            "emotional_state": "awed, eager",
+            "wants": "to learn the ways of the Force",
+            "knows": ["his father was a Jedi Knight", "Vader betrayed the Jedi"],
+            "has": ["obj_lightsaber"],
+            "status": "alive"
+          }
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "gains", "target": "obj_lightsaber", "description": "Obi-Wan gives Luke his father's lightsaber" },
+          { "entity_id": "char_luke", "change": "learns", "detail": "His father was a Jedi Knight killed by Darth Vader" },
+          { "entity_id": "char_luke", "change": "bonds", "target": "char_obiwan", "description": "Accepts Obi-Wan as mentor" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "HJ_N04_THRESHOLD",
+        "label": "Mos Eisley and the Millennium Falcon",
+        "description": "Luke and Obi-Wan enter the dangerous Mos Eisley cantina, hire Han Solo, and blast off from Tatooine.",
+        "position": 0.3,
+        "participants": {
+          "characters": ["char_luke", "char_obiwan", "char_han", "char_chewie"],
+          "places": ["place_mos_eisley"],
+          "objects": ["obj_lightsaber"]
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "departs", "target": "place_tatooine", "description": "Leaves Tatooine for the first time" },
+          { "entity_id": "char_luke", "change": "bonds", "target": "char_han", "description": "Hires Han Solo as pilot" },
+          { "entity_id": "char_luke", "change": "decides", "description": "Steps into the larger galaxy" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "HJ_N05_TRIALS",
+        "label": "Aboard the Millennium Falcon",
+        "description": "Luke trains with the lightsaber, learns about the Force, and the group is captured by the Death Star's tractor beam.",
+        "position": 0.4,
+        "participants": {
+          "characters": ["char_luke", "char_obiwan", "char_han"],
+          "places": ["place_death_star"],
+          "objects": ["obj_lightsaber"]
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "learns", "detail": "Begins training in the Force with the lightsaber" },
+          { "entity_id": "char_luke", "change": "arrives", "target": "place_death_star", "description": "Captured and brought aboard the Death Star" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "HJ_N06_APPROACH",
+        "label": "Infiltrating the Death Star",
+        "description": "The group disguises themselves and infiltrates the station. Luke discovers Leia is imprisoned and decides to rescue her.",
+        "position": 0.5,
+        "participants": {
+          "characters": ["char_luke", "char_han", "char_chewie", "char_leia"],
+          "places": ["place_death_star"],
+          "objects": ["obj_plans"]
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "learns", "detail": "Princess Leia is a prisoner on this station" },
+          { "entity_id": "char_luke", "change": "decides", "description": "Chooses to rescue Leia despite the danger" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "HJ_N07_ORDEAL",
+        "label": "Obi-Wan's Sacrifice",
+        "description": "Obi-Wan confronts Vader and allows himself to be struck down, becoming one with the Force.",
+        "position": 0.6,
+        "participants": {
+          "characters": ["char_luke", "char_obiwan", "char_vader"],
+          "places": ["place_death_star"],
+          "objects": ["obj_lightsaber"]
+        },
+        "character_states": {
+          "char_luke": {
+            "emotional_state": "devastated, enraged",
+            "wants": "to destroy the Empire and honor Obi-Wan's sacrifice",
+            "knows": ["Obi-Wan is gone", "the Force is real"],
+            "has": ["obj_lightsaber"],
+            "status": "alive"
+          }
+        },
+        "transitions": [
+          { "entity_id": "char_obiwan", "change": "dies", "description": "Lets Vader strike him down, becoming one with the Force" },
+          { "entity_id": "char_luke", "change": "loses", "target": "char_obiwan", "description": "Watches his mentor die" },
+          { "entity_id": "char_luke", "change": "transforms", "description": "Loss of mentor forces Luke to rely on himself and the Force" }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "HJ_N08_REWARD",
+        "label": "Escape with the Princess",
+        "description": "The group escapes the Death Star with Leia and the plans, regrouping at the Rebel base.",
+        "position": 0.7,
+        "participants": {
+          "characters": ["char_luke", "char_han", "char_leia", "char_chewie"],
+          "places": ["place_yavin"],
+          "objects": ["obj_plans"]
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "arrives", "target": "place_yavin", "description": "Reaches the Rebel base on Yavin IV" },
+          { "entity_id": "char_luke", "change": "gains", "target": "obj_plans", "description": "Delivers the Death Star plans to the Rebellion" }
+        ]
+      },
+      {
+        "moment_id": "M09",
+        "archetype_node": "HJ_N09_ROAD_BACK",
+        "label": "Battle Briefing",
+        "description": "The Rebels analyze the plans and discover the thermal exhaust port weakness. Luke volunteers for the attack run.",
+        "position": 0.8,
+        "participants": {
+          "characters": ["char_luke", "char_leia"],
+          "places": ["place_yavin"],
+          "objects": ["obj_plans"]
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "learns", "detail": "The Death Star has a thermal exhaust port vulnerability" },
+          { "entity_id": "char_luke", "change": "decides", "description": "Volunteers to fly the attack mission" }
+        ]
+      },
+      {
+        "moment_id": "M10",
+        "archetype_node": "HJ_N10_RESURRECTION",
+        "label": "The Trench Run",
+        "description": "Luke flies the trench run, hears Obi-Wan's voice, trusts the Force, and fires the shot that destroys the Death Star.",
+        "position": 0.9,
+        "participants": {
+          "characters": ["char_luke", "char_vader", "char_han"],
+          "places": ["place_trench"],
+          "objects": ["obj_lightsaber"]
+        },
+        "character_states": {
+          "char_luke": {
+            "emotional_state": "focused, trusting the Force",
+            "wants": "to destroy the Death Star",
+            "knows": ["the Force guides him", "Obi-Wan is still with him in spirit"],
+            "has": ["obj_lightsaber"],
+            "status": "alive"
+          }
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "decides", "description": "Turns off the targeting computer and trusts the Force" },
+          { "entity_id": "char_luke", "change": "transforms", "description": "Becomes a true hero by trusting in something beyond himself" },
+          { "entity_id": "char_han", "change": "arrives", "target": "place_trench", "description": "Returns at the last moment to save Luke from Vader" }
+        ]
+      },
+      {
+        "moment_id": "M11",
+        "archetype_node": "HJ_N11_RETURN_ELIXIR",
+        "label": "Medal Ceremony",
+        "description": "Luke, Han, and Chewbacca are honored at the Rebel base. Luke has become a hero of the Rebellion.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_luke", "char_han", "char_leia", "char_chewie"],
+          "places": ["place_yavin"],
+          "objects": []
+        },
+        "transitions": [
+          { "entity_id": "char_luke", "change": "reveals", "description": "Revealed as a hero to the Rebellion and to himself" }
+        ]
+      }
+    ]
+  }
+}

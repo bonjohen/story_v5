@@ -1,0 +1,258 @@
+{
+  "story_id": "lotr_fellowship",
+  "story_title": "The Lord of the Rings: The Fellowship of the Ring",
+  "archetype_id": "archetype_03_the_quest",
+  "characters": [
+    {
+      "id": "char_frodo",
+      "name": "Frodo Baggins",
+      "role": "protagonist",
+      "traits": ["humble", "resilient", "compassionate", "burdened"],
+      "motivations": ["destroy the One Ring", "save the Shire", "honor Gandalf's trust"],
+      "arc_type": "tragic",
+      "relationships": [
+        { "target_id": "char_sam", "type": "ally", "description": "Devoted gardener and most faithful companion" },
+        { "target_id": "char_gandalf", "type": "mentor_student", "description": "Gandalf guides Frodo and entrusts him with the Ring" },
+        { "target_id": "char_aragorn", "type": "ally", "description": "Ranger who becomes Frodo's protector" },
+        { "target_id": "char_boromir", "type": "rival", "description": "Fellow member tempted by the Ring's power" }
+      ]
+    },
+    {
+      "id": "char_sam",
+      "name": "Samwise Gamgee",
+      "role": "ally",
+      "traits": ["loyal", "practical", "brave despite fear", "simple", "steadfast"],
+      "motivations": ["protect Frodo", "see the Elves", "return home to the Shire"],
+      "arc_type": "transformative",
+      "relationships": [
+        { "target_id": "char_frodo", "type": "ally", "description": "Sworn to follow Frodo to the end" }
+      ]
+    },
+    {
+      "id": "char_gandalf",
+      "name": "Gandalf the Grey",
+      "role": "mentor",
+      "traits": ["wise", "mysterious", "irascible", "self-sacrificing"],
+      "motivations": ["guide the Free Peoples", "oppose Sauron", "protect the Ring-bearer"],
+      "arc_type": "transformative",
+      "relationships": [
+        { "target_id": "char_frodo", "type": "mentor_student", "description": "Entrusts Frodo with the Ring and guides his early journey" },
+        { "target_id": "char_aragorn", "type": "ally", "description": "Long-standing ally in the fight against Sauron" }
+      ]
+    },
+    {
+      "id": "char_aragorn",
+      "name": "Aragorn (Strider)",
+      "role": "ally",
+      "traits": ["noble", "reluctant", "skilled warrior", "self-doubting"],
+      "motivations": ["protect Frodo", "reclaim his heritage", "unite the Free Peoples"],
+      "arc_type": "transformative",
+      "relationships": [
+        { "target_id": "char_frodo", "type": "guardian", "description": "Pledges to protect the Ring-bearer" },
+        { "target_id": "char_boromir", "type": "rival", "description": "Competing visions of leadership and duty" }
+      ]
+    },
+    {
+      "id": "char_boromir",
+      "name": "Boromir",
+      "role": "shapeshifter",
+      "traits": ["proud", "valiant", "conflicted", "ultimately honorable"],
+      "motivations": ["save Gondor", "use the Ring for good (mistakenly)", "prove his worth"],
+      "arc_type": "redemptive",
+      "relationships": [
+        { "target_id": "char_frodo", "type": "rival", "description": "Wants the Ring, threatening the quest" },
+        { "target_id": "char_aragorn", "type": "rival", "description": "Doubts Aragorn's right to lead" }
+      ]
+    },
+    {
+      "id": "char_sauron",
+      "name": "Sauron",
+      "role": "antagonist",
+      "traits": ["omnipresent", "corrupting", "patient", "overwhelming"],
+      "motivations": ["recover the One Ring", "dominate all of Middle-earth"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_frodo", "type": "nemesis", "description": "The Ring connects Frodo to Sauron's will" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_shire",
+      "name": "The Shire",
+      "type": "ordinary_world",
+      "description": "Gentle rolling hills, hobbit-holes, and pastoral farmland — a place of comfort and innocence.",
+      "atmosphere": "idyllic, insular, green"
+    },
+    {
+      "id": "place_rivendell",
+      "name": "Rivendell",
+      "type": "sanctuary",
+      "description": "Elven refuge hidden in a valley — a place of healing, council, and respite.",
+      "atmosphere": "serene, ancient, wise"
+    },
+    {
+      "id": "place_moria",
+      "name": "Mines of Moria",
+      "type": "underworld",
+      "description": "Abandoned dwarven kingdom beneath the mountains — dark, echoing with ancient evil.",
+      "atmosphere": "oppressive, dark, haunted"
+    },
+    {
+      "id": "place_amon_hen",
+      "name": "Amon Hen",
+      "type": "crossroads",
+      "description": "The Seat of Seeing above the Falls of Rauros — where the Fellowship breaks and paths diverge.",
+      "atmosphere": "exposed, decisive, fractured"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_ring",
+      "name": "The One Ring",
+      "type": "mcguffin",
+      "description": "A plain gold band of immense power that corrupts all who bear it.",
+      "significance": "The quest's central burden — must be destroyed, not wielded. Its destruction is the objective.",
+      "rules": ["Corrupts the bearer over time", "Grants invisibility but alerts Sauron", "Can only be destroyed in Mount Doom"]
+    },
+    {
+      "id": "obj_sting",
+      "name": "Sting",
+      "type": "weapon",
+      "description": "An Elven short sword that glows blue in the presence of orcs.",
+      "significance": "Gift from Bilbo — connects Frodo to his uncle's adventure and serves as warning system.",
+      "rules": ["Glows blue when orcs are near"]
+    },
+    {
+      "id": "obj_mithril",
+      "name": "Mithril Coat",
+      "type": "talisman",
+      "description": "A shirt of mithril rings, light as silk and hard as dragon scales.",
+      "significance": "Gift from Bilbo, saves Frodo's life in Moria — symbol of hidden protection.",
+      "rules": ["Nearly impervious to blades", "Extremely valuable"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "lotr_fellowship_main",
+    "story_id": "lotr_fellowship",
+    "archetype_id": "archetype_03_the_quest",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "QU_N01_HOME_GROUND",
+        "label": "Bag End and Bilbo's Party",
+        "description": "Frodo lives peacefully in the Shire. Bilbo departs, leaving the Ring behind.",
+        "position": 0.0,
+        "participants": { "characters": ["char_frodo", "char_sam"], "places": ["place_shire"], "objects": ["obj_ring"] },
+        "character_states": {
+          "char_frodo": { "emotional_state": "content but curious", "wants": "a quiet life in the Shire", "knows": ["nothing about the Ring's true nature"], "has": ["obj_ring"], "status": "alive" }
+        },
+        "transitions": [
+          { "entity_id": "char_frodo", "change": "gains", "target": "obj_ring", "description": "Inherits the Ring from Bilbo" }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "QU_N02_OBJECTIVE_SET",
+        "label": "Gandalf's Revelation",
+        "description": "Gandalf reveals the Ring's true identity and the threat of Sauron. Frodo must leave the Shire.",
+        "position": 0.1,
+        "participants": { "characters": ["char_frodo", "char_gandalf"], "places": ["place_shire"], "objects": ["obj_ring"] },
+        "transitions": [
+          { "entity_id": "char_frodo", "change": "learns", "detail": "The Ring is the One Ring of Sauron and must be destroyed" },
+          { "entity_id": "char_frodo", "change": "decides", "description": "Accepts the burden of carrying the Ring away from the Shire" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "QU_N03_COMPANIONS",
+        "label": "The Council of Elrond",
+        "description": "At Rivendell, the Fellowship of nine is formed. Frodo volunteers to bear the Ring to Mordor.",
+        "position": 0.25,
+        "participants": { "characters": ["char_frodo", "char_sam", "char_gandalf", "char_aragorn", "char_boromir"], "places": ["place_rivendell"], "objects": ["obj_ring", "obj_sting", "obj_mithril"] },
+        "transitions": [
+          { "entity_id": "char_frodo", "change": "bonds", "target": "char_aragorn", "description": "Aragorn pledges to protect Frodo" },
+          { "entity_id": "char_frodo", "change": "bonds", "target": "char_sam", "description": "Sam insists on going with Frodo" },
+          { "entity_id": "char_frodo", "change": "gains", "target": "obj_sting", "description": "Bilbo gives Frodo Sting" },
+          { "entity_id": "char_frodo", "change": "gains", "target": "obj_mithril", "description": "Bilbo gives Frodo the mithril coat" },
+          { "entity_id": "char_frodo", "change": "decides", "description": "Volunteers to take the Ring to Mordor" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "QU_N04_JOURNEY_TRIALS",
+        "label": "Journey Through Moria",
+        "description": "The Fellowship enters the Mines of Moria. They face orcs, a cave troll, and the ancient terror of the Balrog.",
+        "position": 0.5,
+        "participants": { "characters": ["char_frodo", "char_sam", "char_gandalf", "char_aragorn", "char_boromir"], "places": ["place_moria"], "objects": ["obj_ring", "obj_sting", "obj_mithril"] },
+        "transitions": [
+          { "entity_id": "char_frodo", "change": "arrives", "target": "place_moria", "description": "Fellowship enters the Mines of Moria" },
+          { "entity_id": "char_frodo", "change": "learns", "detail": "The mithril coat saves his life from a cave troll's spear" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "QU_N05_COHESION_TEST",
+        "label": "The Bridge of Khazad-dum",
+        "description": "Gandalf confronts the Balrog on the bridge, falls into the abyss, and the Fellowship is shattered by grief.",
+        "position": 0.6,
+        "participants": { "characters": ["char_frodo", "char_sam", "char_gandalf", "char_aragorn"], "places": ["place_moria"], "objects": [] },
+        "transitions": [
+          { "entity_id": "char_gandalf", "change": "dies", "description": "Falls with the Balrog into the depths of Moria" },
+          { "entity_id": "char_frodo", "change": "loses", "target": "char_gandalf", "description": "Loses his mentor and guide" },
+          { "entity_id": "char_frodo", "change": "reveals", "description": "The Ring's burden becomes visible as grief and isolation grow" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "QU_N06_FINAL_APPROACH",
+        "label": "Boromir's Temptation",
+        "description": "At Amon Hen, Boromir tries to take the Ring from Frodo. The quest's unity breaks down completely.",
+        "position": 0.8,
+        "participants": { "characters": ["char_frodo", "char_boromir", "char_aragorn"], "places": ["place_amon_hen"], "objects": ["obj_ring"] },
+        "transitions": [
+          { "entity_id": "char_frodo", "change": "arrives", "target": "place_amon_hen", "description": "Fellowship reaches Amon Hen" },
+          { "entity_id": "char_boromir", "change": "breaks", "target": "char_frodo", "description": "Attempts to take the Ring by force" },
+          { "entity_id": "char_frodo", "change": "learns", "detail": "The Ring will corrupt even the most honorable companions" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "QU_N07_CLIMACTIC_ORDEAL",
+        "label": "The Breaking of the Fellowship",
+        "description": "Frodo decides to go to Mordor alone. Boromir redeems himself defending Merry and Pippin, dying in the attempt.",
+        "position": 0.9,
+        "participants": { "characters": ["char_frodo", "char_sam", "char_boromir", "char_aragorn"], "places": ["place_amon_hen"], "objects": ["obj_ring"] },
+        "transitions": [
+          { "entity_id": "char_frodo", "change": "decides", "description": "Chooses to continue the quest alone to protect his friends" },
+          { "entity_id": "char_boromir", "change": "dies", "description": "Redeems himself defending the hobbits, killed by orc arrows" },
+          { "entity_id": "char_frodo", "change": "transforms", "description": "Accepts the full weight of the quest as a solitary burden" }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "QU_N08_OBJECTIVE_WON",
+        "label": "Sam Joins Frodo",
+        "description": "Sam catches up with Frodo crossing the river. The quest continues with only two: Frodo and Sam heading for Mordor.",
+        "position": 0.95,
+        "participants": { "characters": ["char_frodo", "char_sam"], "places": ["place_amon_hen"], "objects": ["obj_ring"] },
+        "transitions": [
+          { "entity_id": "char_sam", "change": "bonds", "target": "char_frodo", "description": "Refuses to let Frodo go alone — 'I made a promise'" },
+          { "entity_id": "char_frodo", "change": "bonds", "target": "char_sam", "description": "Accepts Sam's companionship for the final road" }
+        ]
+      },
+      {
+        "moment_id": "M09",
+        "archetype_node": "QU_N09_HOMECOMING",
+        "label": "The Road Goes Ever On",
+        "description": "Frodo and Sam set off toward Mordor. The quest is not over, but the Fellowship's part of the journey is complete.",
+        "position": 1.0,
+        "participants": { "characters": ["char_frodo", "char_sam"], "places": ["place_amon_hen"], "objects": ["obj_ring"] },
+        "transitions": [
+          { "entity_id": "char_frodo", "change": "departs", "target": "place_amon_hen", "description": "Leaves the Fellowship behind and heads for Mordor" }
+        ]
+      }
+    ]
+  }
+}

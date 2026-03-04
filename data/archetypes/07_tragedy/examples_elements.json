@@ -1,0 +1,237 @@
+{
+  "story_id": "macbeth",
+  "story_title": "Macbeth",
+  "archetype_id": "archetype_07_tragedy",
+  "characters": [
+    {
+      "id": "char_macbeth",
+      "name": "Macbeth",
+      "role": "protagonist",
+      "traits": ["ambitious", "valiant", "imaginative", "guilt-ridden", "decisive when pushed"],
+      "motivations": ["achieve the crown", "fulfill the prophecy", "secure his legacy"],
+      "arc_type": "corrupted",
+      "relationships": [
+        { "target_id": "char_lady_macbeth", "type": "romantic", "description": "Wife and co-conspirator who drives and then suffers from the murder" },
+        { "target_id": "char_duncan", "type": "servant_master", "description": "King whom Macbeth serves and then murders" },
+        { "target_id": "char_banquo", "type": "ally", "description": "Fellow general and friend — whose prophecy threatens Macbeth" },
+        { "target_id": "char_macduff", "type": "nemesis", "description": "Noble who becomes the instrument of Macbeth's destruction" }
+      ]
+    },
+    {
+      "id": "char_lady_macbeth",
+      "name": "Lady Macbeth",
+      "role": "antagonist",
+      "traits": ["ruthless", "persuasive", "ambitious", "ultimately fragile"],
+      "motivations": ["make Macbeth king", "seize power", "suppress conscience"],
+      "arc_type": "tragic",
+      "relationships": [
+        { "target_id": "char_macbeth", "type": "romantic", "description": "Partner in ambition and crime" }
+      ]
+    },
+    {
+      "id": "char_duncan",
+      "name": "King Duncan",
+      "role": "love_interest",
+      "traits": ["trusting", "generous", "dignified", "naive"],
+      "motivations": ["reward loyalty", "maintain peace"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_macbeth", "type": "servant_master", "description": "Trusts Macbeth as his loyal thane" }
+      ]
+    },
+    {
+      "id": "char_banquo",
+      "name": "Banquo",
+      "role": "foil",
+      "traits": ["honorable", "cautious", "principled", "paternal"],
+      "motivations": ["serve honestly", "protect his son Fleance", "resist temptation"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_macbeth", "type": "ally", "description": "Fellow general who chooses honor where Macbeth chooses ambition" }
+      ]
+    },
+    {
+      "id": "char_macduff",
+      "name": "Macduff",
+      "role": "foil",
+      "traits": ["loyal", "grief-stricken", "righteous", "relentless"],
+      "motivations": ["avenge his family", "restore Scotland", "destroy the tyrant"],
+      "arc_type": "steadfast",
+      "relationships": [
+        { "target_id": "char_macbeth", "type": "nemesis", "description": "The one man the prophecy cannot protect Macbeth against" }
+      ]
+    },
+    {
+      "id": "char_witches",
+      "name": "The Three Witches",
+      "role": "herald",
+      "traits": ["ambiguous", "prophetic", "manipulative", "supernatural"],
+      "motivations": ["sow chaos", "fulfill fate"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_macbeth", "type": "betrayer", "description": "Their prophecies are true but designed to destroy" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_battlefield",
+      "name": "The Battlefield (Opening)",
+      "type": "summit",
+      "description": "The field of Macbeth's military triumph — where his valor earns Duncan's praise.",
+      "atmosphere": "bloody, triumphant, portentous"
+    },
+    {
+      "id": "place_inverness",
+      "name": "Inverness Castle",
+      "type": "stronghold",
+      "description": "Macbeth's castle where Duncan is murdered — the crucible of ambition and guilt.",
+      "atmosphere": "dark, intimate, suffocating"
+    },
+    {
+      "id": "place_dunsinane",
+      "name": "Dunsinane Castle",
+      "type": "stronghold",
+      "description": "Macbeth's royal stronghold where he makes his last stand — the fortress of tyranny.",
+      "atmosphere": "isolated, paranoid, doomed"
+    },
+    {
+      "id": "place_heath",
+      "name": "The Blasted Heath",
+      "type": "crossroads",
+      "description": "The barren moorland where Macbeth meets the witches — the fork between honor and ambition.",
+      "atmosphere": "otherworldly, fog-shrouded, ominous"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_dagger",
+      "name": "The Dagger",
+      "type": "weapon",
+      "description": "Both the imagined floating dagger and the real murder weapon. Symbol of the fatal choice.",
+      "significance": "Externalizes Macbeth's conscience — 'Is this a dagger which I see before me?'",
+      "rules": ["The hallucinated dagger appears only to Macbeth", "The real dagger is used to kill Duncan"]
+    },
+    {
+      "id": "obj_crown",
+      "name": "The Crown of Scotland",
+      "type": "symbol",
+      "description": "The crown that Macbeth seizes and that is eventually taken from him.",
+      "significance": "Tracks the entire arc — desired, seized, worn, lost. Its passage marks the tragedy.",
+      "rules": ["Legitimate succession requires moral authority, not just physical possession"]
+    },
+    {
+      "id": "obj_prophecy",
+      "name": "The Witches' Prophecy",
+      "type": "document",
+      "description": "Three predictions: Thane of Cawdor, King, and 'none of woman born shall harm Macbeth.'",
+      "significance": "Drives every major decision. True in letter but treacherous in spirit.",
+      "rules": ["Each prophecy comes true but not as Macbeth expects", "The prophecy about Banquo's line threatens Macbeth's security"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "macbeth_main",
+    "story_id": "macbeth",
+    "archetype_id": "archetype_07_tragedy",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "TR_N01_ELEVATED_STATE",
+        "label": "Macbeth the Honored Warrior",
+        "description": "Macbeth returns from battle as a celebrated hero. Duncan names him Thane of Cawdor.",
+        "position": 0.0,
+        "participants": { "characters": ["char_macbeth", "char_duncan", "char_banquo"], "places": ["place_battlefield"], "objects": ["obj_crown"] },
+        "character_states": {
+          "char_macbeth": { "emotional_state": "proud, honored", "wants": "recognition and glory", "knows": ["he is a valued thane and warrior"], "has": [], "status": "alive" }
+        },
+        "transitions": []
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "TR_N02_TEMPTATION",
+        "label": "The Witches' Prophecy",
+        "description": "On the heath, the witches prophesy Macbeth will be king. The seed of ambition is planted.",
+        "position": 0.15,
+        "participants": { "characters": ["char_macbeth", "char_banquo", "char_witches"], "places": ["place_heath"], "objects": ["obj_prophecy"] },
+        "transitions": [
+          { "entity_id": "char_macbeth", "change": "learns", "detail": "The witches prophesy he will be Thane of Cawdor and then King" },
+          { "entity_id": "char_macbeth", "change": "gains", "target": "obj_prophecy", "description": "Receives the prophecy that drives all subsequent action" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "TR_N03_FATAL_CHOICE",
+        "label": "The Murder of Duncan",
+        "description": "Lady Macbeth persuades Macbeth. He murders King Duncan in his sleep at Inverness Castle.",
+        "position": 0.3,
+        "participants": { "characters": ["char_macbeth", "char_lady_macbeth", "char_duncan"], "places": ["place_inverness"], "objects": ["obj_dagger"] },
+        "transitions": [
+          { "entity_id": "char_macbeth", "change": "decides", "description": "Chooses to murder Duncan — the fatal, irreversible choice" },
+          { "entity_id": "char_duncan", "change": "dies", "description": "Murdered in his sleep by his trusted thane" },
+          { "entity_id": "char_macbeth", "change": "transforms", "description": "Crosses the moral threshold from honorable warrior to murderer" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "TR_N04_APPARENT_SUCCESS",
+        "label": "King Macbeth",
+        "description": "Macbeth is crowned King of Scotland. The prophecy appears fulfilled.",
+        "position": 0.45,
+        "participants": { "characters": ["char_macbeth", "char_lady_macbeth"], "places": ["place_dunsinane"], "objects": ["obj_crown"] },
+        "transitions": [
+          { "entity_id": "char_macbeth", "change": "gains", "target": "obj_crown", "description": "Takes the crown of Scotland" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "TR_N05_UNRAVELING",
+        "label": "Banquo's Murder and the Ghost",
+        "description": "Macbeth has Banquo killed but Fleance escapes. Banquo's ghost haunts Macbeth at the feast, unraveling his composure.",
+        "position": 0.6,
+        "participants": { "characters": ["char_macbeth", "char_lady_macbeth", "char_banquo"], "places": ["place_dunsinane"], "objects": [] },
+        "transitions": [
+          { "entity_id": "char_banquo", "change": "dies", "description": "Murdered on Macbeth's orders" },
+          { "entity_id": "char_macbeth", "change": "breaks", "target": "char_banquo", "description": "Destroys his closest friendship through murder" },
+          { "entity_id": "char_macbeth", "change": "loses", "detail": "Loses his sanity and composure at the feast" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "TR_N06_RECOGNITION",
+        "label": "Lady Macbeth's Madness",
+        "description": "Lady Macbeth sleepwalks, obsessively washing imaginary blood. Macbeth realizes the crown has cost everything.",
+        "position": 0.75,
+        "participants": { "characters": ["char_macbeth", "char_lady_macbeth"], "places": ["place_dunsinane"], "objects": ["obj_prophecy"] },
+        "transitions": [
+          { "entity_id": "char_macbeth", "change": "learns", "detail": "Recognizes that ambition has destroyed everything he valued" },
+          { "entity_id": "char_lady_macbeth", "change": "transforms", "description": "Consumed by guilt, descends into madness" },
+          { "entity_id": "char_macbeth", "change": "reveals", "description": "His true despair becomes visible — 'Tomorrow and tomorrow and tomorrow'" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "TR_N07_DOWNFALL",
+        "label": "The Battle of Dunsinane",
+        "description": "Macduff's army attacks. Macbeth learns the prophecy's loopholes. Macduff kills Macbeth in single combat.",
+        "position": 0.9,
+        "participants": { "characters": ["char_macbeth", "char_macduff"], "places": ["place_dunsinane"], "objects": ["obj_crown", "obj_dagger"] },
+        "transitions": [
+          { "entity_id": "char_macbeth", "change": "loses", "target": "obj_crown", "description": "The crown is stripped from the tyrant" },
+          { "entity_id": "char_macbeth", "change": "dies", "description": "Killed by Macduff — 'none of woman born' fulfilled through C-section" }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "TR_N08_AFTERMATH",
+        "label": "Malcolm Crowned",
+        "description": "Malcolm, Duncan's son, takes the throne. Scotland's legitimate order is restored at terrible cost.",
+        "position": 1.0,
+        "participants": { "characters": ["char_macduff"], "places": ["place_dunsinane"], "objects": ["obj_crown"] },
+        "transitions": [
+          { "entity_id": "char_macduff", "change": "reveals", "description": "Justice is served; the tyrant's reign is over" }
+        ]
+      }
+    ]
+  }
+}

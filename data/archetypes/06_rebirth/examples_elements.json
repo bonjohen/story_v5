@@ -1,0 +1,252 @@
+{
+  "story_id": "christmas_carol",
+  "story_title": "A Christmas Carol",
+  "archetype_id": "archetype_06_rebirth",
+  "characters": [
+    {
+      "id": "char_scrooge",
+      "name": "Ebenezer Scrooge",
+      "role": "protagonist",
+      "traits": ["miserly", "cold", "bitter", "lonely", "ultimately compassionate"],
+      "motivations": ["protect his wealth", "avoid human connection", "later: redeem himself and help others"],
+      "arc_type": "redemptive",
+      "relationships": [
+        { "target_id": "char_marley", "type": "ally", "description": "Dead business partner who warns Scrooge from beyond the grave" },
+        { "target_id": "char_cratchit", "type": "servant_master", "description": "Underpaid clerk whom Scrooge exploits" },
+        { "target_id": "char_tiny_tim", "type": "guardian", "description": "Cratchit's sick son whose fate becomes Scrooge's catalyst for change" },
+        { "target_id": "char_fred", "type": "sibling", "description": "Nephew who persistently offers love despite Scrooge's rejection" }
+      ]
+    },
+    {
+      "id": "char_marley",
+      "name": "Jacob Marley's Ghost",
+      "role": "herald",
+      "traits": ["tormented", "regretful", "bound by chains", "desperate to warn"],
+      "motivations": ["save Scrooge from his own fate", "find some redemption through warning"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_scrooge", "type": "ally", "description": "Former partner, now warning from beyond death" }
+      ]
+    },
+    {
+      "id": "char_past",
+      "name": "Ghost of Christmas Past",
+      "role": "mentor",
+      "traits": ["gentle", "luminous", "truthful", "relentless"],
+      "motivations": ["show Scrooge what he has lost"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_scrooge", "type": "mentor_student", "description": "Forces Scrooge to confront his own history" }
+      ]
+    },
+    {
+      "id": "char_present",
+      "name": "Ghost of Christmas Present",
+      "role": "mentor",
+      "traits": ["jovial", "generous", "warm", "fading"],
+      "motivations": ["show Scrooge the joy and suffering happening now"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_scrooge", "type": "mentor_student", "description": "Shows Scrooge the world he has shut out" }
+      ]
+    },
+    {
+      "id": "char_future",
+      "name": "Ghost of Christmas Yet to Come",
+      "role": "shadow",
+      "traits": ["silent", "hooded", "terrifying", "implacable"],
+      "motivations": ["show Scrooge his death and legacy if unchanged"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_scrooge", "type": "nemesis", "description": "Embodies the fate Scrooge must choose to avoid" }
+      ]
+    },
+    {
+      "id": "char_cratchit",
+      "name": "Bob Cratchit",
+      "role": "confidant",
+      "traits": ["patient", "loving", "humble", "dignified in poverty"],
+      "motivations": ["provide for his family", "keep his job"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_scrooge", "type": "servant_master", "description": "Loyal employee despite cruel treatment" }
+      ]
+    },
+    {
+      "id": "char_tiny_tim",
+      "name": "Tiny Tim",
+      "role": "love_interest",
+      "traits": ["innocent", "cheerful", "frail", "hopeful"],
+      "motivations": ["survive", "bring joy to his family"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_cratchit", "type": "parent_child", "description": "Beloved son whose life hangs in the balance" }
+      ]
+    },
+    {
+      "id": "char_fred",
+      "name": "Fred (Scrooge's Nephew)",
+      "role": "love_interest",
+      "traits": ["warm", "persistent", "forgiving", "joyful"],
+      "motivations": ["include Scrooge in his family", "honor his late mother"],
+      "arc_type": null,
+      "relationships": [
+        { "target_id": "char_scrooge", "type": "sibling", "description": "Keeps inviting Scrooge to Christmas dinner despite years of rejection" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_counting_house",
+      "name": "Scrooge & Marley's Counting House",
+      "type": "wasteland",
+      "description": "A cold, dark office where Scrooge hoards money and denies warmth to his clerk.",
+      "atmosphere": "frigid, dim, oppressive"
+    },
+    {
+      "id": "place_bedroom",
+      "name": "Scrooge's Bedroom",
+      "type": "underworld",
+      "description": "The sparse, cold chamber where Scrooge is visited by spirits — the stage of his ordeal.",
+      "atmosphere": "dark, haunted, transformative"
+    },
+    {
+      "id": "place_cratchit_home",
+      "name": "The Cratchit Home",
+      "type": "sanctuary",
+      "description": "A humble but warm home full of love, meager food, and Tiny Tim's infectious spirit.",
+      "atmosphere": "warm, modest, loving"
+    },
+    {
+      "id": "place_graveyard",
+      "name": "The Graveyard",
+      "type": "crossroads",
+      "description": "Where Scrooge sees his own neglected grave — the ultimate crossroads between death and redemption.",
+      "atmosphere": "bleak, silent, terrifying"
+    },
+    {
+      "id": "place_london_morning",
+      "name": "London on Christmas Morning",
+      "type": "home",
+      "description": "The same city Scrooge has lived in for decades, now radiant with the warmth he finally allows himself to feel.",
+      "atmosphere": "bright, festive, joyful"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_chains",
+      "name": "Marley's Chains",
+      "type": "symbol",
+      "description": "Heavy chains forged from Marley's lifetime of greed — each link a selfish act.",
+      "significance": "Shows Scrooge the price of his current path. Scrooge's own chains are longer.",
+      "rules": ["Only visible to Scrooge", "Represent accumulated moral debt"]
+    },
+    {
+      "id": "obj_crutch",
+      "name": "Tiny Tim's Crutch",
+      "type": "symbol",
+      "description": "The small crutch propped by an empty chair — signaling Tim's death in the unchanged future.",
+      "significance": "The most emotionally devastating symbol. Its presence or absence marks the future Scrooge chooses.",
+      "rules": ["Present in the future vision = Tim has died", "Absent in the redeemed timeline = Tim lives"]
+    },
+    {
+      "id": "obj_gravestone",
+      "name": "Scrooge's Gravestone",
+      "type": "relic",
+      "description": "A neglected headstone bearing Scrooge's name — unmourned, uncelebrated.",
+      "significance": "The catalyst for Scrooge's final transformation. Seeing his own forgotten death breaks him.",
+      "rules": ["Appears only in the Ghost of Christmas Yet to Come's vision"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "christmas_carol_main",
+    "story_id": "christmas_carol",
+    "archetype_id": "archetype_06_rebirth",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "RB_N01_FALLEN_STATE",
+        "label": "Bah, Humbug",
+        "description": "Scrooge is a cold, miserly man who dismisses Christmas, charity, and human connection.",
+        "position": 0.0,
+        "participants": { "characters": ["char_scrooge", "char_cratchit", "char_fred"], "places": ["place_counting_house"], "objects": [] },
+        "character_states": {
+          "char_scrooge": { "emotional_state": "bitter, isolated", "wants": "to be left alone with his money", "knows": ["nothing about his own spiritual poverty"], "has": [], "status": "alive" }
+        },
+        "transitions": []
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "RB_N02_WARNING",
+        "label": "Marley's Ghost",
+        "description": "Jacob Marley's ghost appears in chains, warning Scrooge that three spirits will visit him.",
+        "position": 0.15,
+        "participants": { "characters": ["char_scrooge", "char_marley"], "places": ["place_bedroom"], "objects": ["obj_chains"] },
+        "transitions": [
+          { "entity_id": "char_scrooge", "change": "learns", "detail": "Marley is damned by his greed, and Scrooge's chain is even longer" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "RB_N03_RESISTANCE",
+        "label": "Ghost of Christmas Past",
+        "description": "The first spirit shows Scrooge his lonely boyhood, his lost love Belle, and the warmth he once had.",
+        "position": 0.3,
+        "participants": { "characters": ["char_scrooge", "char_past"], "places": ["place_bedroom"], "objects": [] },
+        "transitions": [
+          { "entity_id": "char_scrooge", "change": "learns", "detail": "He was once capable of love and was loved in return" },
+          { "entity_id": "char_scrooge", "change": "reveals", "description": "His vulnerability breaks through — he weeps for what he lost" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "RB_N04_ORDEAL_OF_TRUTH",
+        "label": "Christmas Present and Future",
+        "description": "The second spirit shows the Cratchits' humble joy and Tiny Tim's fragility. The third shows Scrooge's unlamented death and Tim's empty chair.",
+        "position": 0.55,
+        "participants": { "characters": ["char_scrooge", "char_present", "char_future", "char_tiny_tim"], "places": ["place_cratchit_home", "place_graveyard"], "objects": ["obj_crutch", "obj_gravestone"] },
+        "transitions": [
+          { "entity_id": "char_scrooge", "change": "learns", "detail": "Tiny Tim will die without help. Scrooge himself will die unmourned." },
+          { "entity_id": "char_scrooge", "change": "reveals", "description": "Confronts the full truth of his wasted life at his own gravestone" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "RB_N05_TURNING_POINT",
+        "label": "The Gravestone Promise",
+        "description": "Kneeling at his own grave, Scrooge begs for the chance to change. He swears he will honor Christmas.",
+        "position": 0.7,
+        "participants": { "characters": ["char_scrooge", "char_future"], "places": ["place_graveyard"], "objects": ["obj_gravestone"] },
+        "transitions": [
+          { "entity_id": "char_scrooge", "change": "decides", "description": "Swears to change his life — 'I will honor Christmas in my heart'" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "RB_N06_ATONEMENT",
+        "label": "Christmas Morning Transformation",
+        "description": "Scrooge wakes transformed. He sends a giant turkey to the Cratchits, gives money to charity, and raises Bob's salary.",
+        "position": 0.85,
+        "participants": { "characters": ["char_scrooge", "char_cratchit"], "places": ["place_london_morning"], "objects": ["obj_chains"] },
+        "transitions": [
+          { "entity_id": "char_scrooge", "change": "transforms", "description": "Becomes generous, warm, and joyful — the opposite of his former self" },
+          { "entity_id": "char_scrooge", "change": "loses", "target": "obj_chains", "description": "Symbolically breaks the chains of greed through acts of generosity" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "RB_N07_RENEWAL",
+        "label": "A New Scrooge",
+        "description": "Scrooge becomes a second father to Tiny Tim, who does not die. He keeps Christmas well forever after.",
+        "position": 1.0,
+        "participants": { "characters": ["char_scrooge", "char_tiny_tim", "char_fred", "char_cratchit"], "places": ["place_london_morning"], "objects": ["obj_crutch"] },
+        "transitions": [
+          { "entity_id": "char_scrooge", "change": "bonds", "target": "char_tiny_tim", "description": "Becomes a second father to Tiny Tim" },
+          { "entity_id": "char_scrooge", "change": "bonds", "target": "char_fred", "description": "Accepts his nephew's love and joins his family" },
+          { "entity_id": "char_scrooge", "change": "transforms", "description": "Permanent renewal — 'he knew how to keep Christmas well, if any man alive possessed the knowledge'" }
+        ]
+      }
+    ]
+  }
+}
