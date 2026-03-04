@@ -1,0 +1,365 @@
+{
+  "title": "Non-Western Archetype Analysis",
+  "description": "Documents 10 narrative archetypes from non-Western storytelling traditions. Each archetype includes structural nodes, edge patterns, cultural context, how it differs from Western equivalents, and example works. The current 15 archetypes draw primarily from Western storytelling (Campbell, Booker, Propp); this analysis identifies patterns that are absent, only partially represented, or structurally distinct.",
+  "_stats": {
+    "archetypes_documented": 10,
+    "traditions_represented": ["East Asian", "South Asian", "African", "Indigenous American", "Middle Eastern"],
+    "relationship_to_existing": { "distinct": 5, "cognate_with_differences": 3, "extension": 2 }
+  },
+  "archetypes": [
+    {
+      "archetype_id": "nw_01_wuxia_journey",
+      "name": "The Wuxia Hero's Path (武侠)",
+      "tradition": "East Asian (Chinese)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Humble/Orphaned Beginning", "description": "The hero begins in poverty, often orphaned or displaced. Unlike the Western Hero's Journey, the origin emphasizes social injustice rather than comfortable normalcy." },
+        { "role": "Catalyst", "label": "Encounter with a Master", "description": "The hero meets a martial master who transmits both technique and moral philosophy. The mentor relationship is hierarchical and lifelong, unlike the Western mentor who gives gifts and departs." },
+        { "role": "Trial", "label": "Cultivation and Training", "description": "Extended period of skill development that is simultaneously physical and spiritual. The training IS the transformation, not just preparation for it." },
+        { "role": "Disruption", "label": "Jianghu Conflict", "description": "The hero enters the jianghu (martial world) and encounters its complex politics, rivalries, and codes of honor." },
+        { "role": "Revelation", "label": "Discovery of Hidden Truth", "description": "A secret about the hero's past, their master, or the martial world is revealed — often involving betrayal or hidden lineage." },
+        { "role": "Crisis", "label": "Confrontation with the Corrupt", "description": "The hero faces a powerful antagonist who represents corruption of martial principles — power without righteousness." },
+        { "role": "Resolution", "label": "Withdrawal or Seclusion", "description": "Unlike Western triumph, the wuxia hero often withdraws from the martial world, having proven their righteousness but recognizing the world's corruption cannot be fully defeated." }
+      ],
+      "edge_patterns": [
+        "Training precedes conflict (skill before challenge, reversing the Western pattern of challenge revealing skill)",
+        "Betrayal is structural, not incidental — the martial world's politics require it",
+        "Resolution is withdrawal rather than triumph — the hero chooses not to rule"
+      ],
+      "western_cognates": {
+        "closest": "The Hero's Journey",
+        "key_differences": [
+          "Training is central and extended, not a brief mentor encounter",
+          "The martial world (jianghu) is morally ambiguous, not clearly divided into ordinary/special worlds",
+          "Resolution is often withdrawal or exile, not triumphant return",
+          "The hero's moral code (义 — righteousness) is a constraint, not just a motivation",
+          "Power acquisition IS character development, not separate from it"
+        ]
+      },
+      "example_works": [
+        { "title": "The Legend of the Condor Heroes", "creator": "Jin Yong", "medium": "novel series" },
+        { "title": "Crouching Tiger, Hidden Dragon", "creator": "Ang Lee / Wang Dulu", "medium": "film/novel" },
+        { "title": "Hero (2002)", "creator": "Zhang Yimou", "medium": "film" }
+      ]
+    },
+    {
+      "archetype_id": "nw_02_dharma_conflict",
+      "name": "The Dharma Conflict (धर्मसंकट)",
+      "tradition": "South Asian (Hindu/Indian)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Established Duty", "description": "The protagonist occupies a defined social and moral position with clear duties (dharma). Unlike the Western 'ordinary world,' the origin is not boring — it is meaningful and ordered." },
+        { "role": "Disruption", "label": "Conflicting Duties", "description": "Two equally valid moral obligations come into irreconcilable conflict. This is NOT a temptation (as in Tragedy) but a genuine dilemma where both options are righteous." },
+        { "role": "Descent", "label": "Counsel and Deliberation", "description": "The protagonist seeks counsel — from elders, gods, or scripture — but the conflict cannot be resolved by wisdom alone because both duties are valid." },
+        { "role": "Crisis", "label": "The Impossible Choice", "description": "The protagonist must act despite the irresolvability. Any action violates one duty to fulfill another." },
+        { "role": "Irreversible Cost", "label": "Consequence of Action", "description": "The chosen action succeeds but at devastating moral cost. The violated duty exacts its price." },
+        { "role": "Resolution", "label": "Acceptance and Karma", "description": "The protagonist accepts the karmic consequence of their choice. Resolution is not triumph or defeat but acceptance of moral complexity." }
+      ],
+      "edge_patterns": [
+        "The conflict is between duties, not between good and evil",
+        "Counsel deepens the dilemma rather than resolving it",
+        "Action does not resolve the moral tension — it transforms it into consequence",
+        "Resolution is acceptance, not restoration"
+      ],
+      "western_cognates": {
+        "closest": "Tragedy",
+        "key_differences": [
+          "The protagonist's choice is not a flaw — both options are genuinely righteous",
+          "There is no hamartia (fatal flaw) — the tragedy arises from the world's moral structure, not the character's weakness",
+          "Resolution is acceptance and karmic understanding, not catharsis through suffering",
+          "The cosmos has a moral order (dharma/karma) that the Western tragic universe lacks",
+          "No anagnorisis (recognition of error) because no error was committed — only an impossible choice"
+        ]
+      },
+      "example_works": [
+        { "title": "The Mahabharata (Arjuna's Dilemma)", "creator": "Traditional/Vyasa", "medium": "epic poem" },
+        { "title": "Shakuntala", "creator": "Kalidasa", "medium": "Sanskrit drama" },
+        { "title": "Lagaan", "creator": "Ashutosh Gowariker", "medium": "film" }
+      ]
+    },
+    {
+      "archetype_id": "nw_03_exile_and_return",
+      "name": "The Divine Exile and Return (वनवास)",
+      "tradition": "South Asian (Hindu/Indian)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Rightful Position", "description": "The protagonist occupies their rightful place — often a throne, home, or social role. The origin is not ordinary but elevated." },
+        { "role": "Disruption", "label": "Unjust Exile", "description": "The protagonist is exiled through injustice — a curse, political treachery, or divine test. The exile is NOT chosen (unlike the Hero's Journey's voluntary departure)." },
+        { "role": "Trial", "label": "Wandering in Wilderness", "description": "Extended period of wandering that tests virtue through deprivation. The trials are about maintaining dharma under duress, not gaining new powers." },
+        { "role": "Catalyst", "label": "Gathering of Allies", "description": "The exile attracts allies who recognize the protagonist's righteousness — not recruited but drawn by moral gravity." },
+        { "role": "Crisis", "label": "Great Battle or Test", "description": "A climactic confrontation with the force that caused the exile. The battle is cosmic in scale, not personal." },
+        { "role": "Transformation", "label": "Restoration of Order", "description": "The protagonist returns to their rightful position, restoring cosmic and social order." },
+        { "role": "Resolution", "label": "Righteous Rule", "description": "The returned protagonist rules with the wisdom gained in exile. The resolution establishes a golden age or moral exemplar." }
+      ],
+      "edge_patterns": [
+        "Exile is imposed, not chosen — the departure is involuntary",
+        "Trials maintain rather than build character — the protagonist is already righteous",
+        "Allies come to the protagonist rather than being sought",
+        "Return restores cosmic order, not just personal satisfaction"
+      ],
+      "western_cognates": {
+        "closest": "Voyage and Return",
+        "key_differences": [
+          "The departure is involuntary exile, not voluntary voyage",
+          "The protagonist is already complete — exile tests rather than builds virtue",
+          "The return has cosmic significance — dharmic order restored — not just personal change",
+          "The 'other world' is the wilderness of deprivation, not a land of wonder",
+          "The resolution establishes a new order, not a return to the status quo"
+        ]
+      },
+      "example_works": [
+        { "title": "Ramayana (Rama's Exile)", "creator": "Valmiki", "medium": "epic poem" },
+        { "title": "The Odyssey (structural parallels)", "creator": "Homer", "medium": "epic poem" },
+        { "title": "Baahubali", "creator": "S.S. Rajamouli", "medium": "film" }
+      ]
+    },
+    {
+      "archetype_id": "nw_04_trickster_cycle",
+      "name": "The Trickster Cycle",
+      "tradition": "African (West African) / Indigenous American",
+      "structural_nodes": [
+        { "role": "Origin", "label": "The World as Given", "description": "The world has an established order — often unjust or rigid. The trickster exists within this order but is not constrained by it." },
+        { "role": "Disruption", "label": "The Trickster's Need", "description": "The trickster wants something — food, status, knowledge, entertainment — and the conventional path is blocked." },
+        { "role": "Catalyst", "label": "The Trick Conceived", "description": "The trickster devises a plan that exploits the rules of the established order. The trick uses the system against itself." },
+        { "role": "Trial", "label": "The Trick in Action", "description": "The trickster executes the plan, which initially works but generates unexpected consequences. Each success creates a new problem." },
+        { "role": "Reversal", "label": "The Trick Backfires", "description": "The trickster's cleverness overreaches and the trick collapses, often hilariously. The trickster suffers the consequences of their own cleverness." },
+        { "role": "Resolution", "label": "The World Changed (Accidentally)", "description": "Despite the trickster's personal failure, the world is permanently changed by the trick. A new feature of reality exists (why the sun moves, why spiders have thin waists, why stories belong to everyone)." }
+      ],
+      "edge_patterns": [
+        "The trick is amoral — neither good nor evil, just clever",
+        "Consequences are disproportionate to intentions — small tricks produce large changes",
+        "The trickster fails personally but succeeds cosmically",
+        "The cycle is episodic, not cumulative — the trickster doesn't learn",
+        "World-change is accidental, not intentional"
+      ],
+      "western_cognates": {
+        "closest": "Comedy (Restoration of Order)",
+        "key_differences": [
+          "No moral lesson — the trickster doesn't learn or improve",
+          "The world is changed permanently, not restored to order",
+          "The protagonist is amoral, not sympathetic — we admire cleverness, not virtue",
+          "Episodic structure with no cumulative character arc",
+          "Cosmogonic function — explains why the world is the way it is",
+          "The trickster IS the disruption, not the victim of it"
+        ]
+      },
+      "example_works": [
+        { "title": "Anansi Stories (Ashanti)", "creator": "Traditional (West African oral)", "medium": "oral tradition" },
+        { "title": "Coyote Stories (Various Nations)", "creator": "Traditional (Indigenous American oral)", "medium": "oral tradition" },
+        { "title": "Raven Steals the Sun (Haida/Tlingit)", "creator": "Traditional (Pacific Northwest)", "medium": "oral tradition" }
+      ]
+    },
+    {
+      "archetype_id": "nw_05_community_restoration",
+      "name": "The Community Restoration",
+      "tradition": "African (Pan-African)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Community in Balance", "description": "The community exists in functional harmony — not perfect, but working. The emphasis is on the collective, not an individual protagonist." },
+        { "role": "Disruption", "label": "Threat to the Community", "description": "An external or internal threat disrupts community harmony — drought, invasion, betrayal, or curse." },
+        { "role": "Catalyst", "label": "Community Deliberation", "description": "The community gathers to discuss the threat. Leadership emerges through consensus, not individual heroism. Elders, spirit-mediums, or council members guide discussion." },
+        { "role": "Trial", "label": "Collective Action", "description": "The response is collective — each member contributes their unique skill or knowledge. The trials test the community's bonds, not an individual's strength." },
+        { "role": "Revelation", "label": "Ancestor/Spirit Guidance", "description": "Ancestral spirits or natural forces provide guidance that reconnects the community to deeper truth. The revelation comes through ritual, dream, or divination." },
+        { "role": "Crisis", "label": "The Community's Sacrifice", "description": "The community must collectively sacrifice something — comfort, tradition, or pride — to overcome the threat." },
+        { "role": "Resolution", "label": "Restored and Renewed Community", "description": "The community is restored to harmony, often at a deeper level than before. The resolution strengthens communal bonds." }
+      ],
+      "edge_patterns": [
+        "Agency is collective, not individual — no single hero drives the action",
+        "Wisdom comes from ancestors and tradition, not personal discovery",
+        "Sacrifice is communal, not individual heroism",
+        "Restoration includes spiritual/ancestral reconnection, not just practical resolution"
+      ],
+      "western_cognates": {
+        "closest": "No direct equivalent",
+        "key_differences": [
+          "Protagonist is the community, not an individual — fundamentally different from all 15 Western archetypes",
+          "Wisdom comes from ancestors and tradition, not mentors or personal discovery",
+          "Resolution strengthens communal bonds rather than celebrating individual transformation",
+          "Spiritual/ancestral dimension is structural, not optional — the spirit world is part of the story's mechanism",
+          "The closest Western parallel is the ensemble drama, but even that has individual focal characters"
+        ]
+      },
+      "example_works": [
+        { "title": "Things Fall Apart", "creator": "Chinua Achebe", "medium": "novel" },
+        { "title": "The River Between", "creator": "Ngũgĩ wa Thiong'o", "medium": "novel" },
+        { "title": "Black Panther (Wakanda council scenes)", "creator": "Ryan Coogler", "medium": "film" }
+      ]
+    },
+    {
+      "archetype_id": "nw_06_frame_tale",
+      "name": "The Frame-Tale Labyrinth",
+      "tradition": "Middle Eastern / South Asian",
+      "structural_nodes": [
+        { "role": "Origin", "label": "The Frame Situation", "description": "A life-or-death frame situation (Scheherazade must tell stories to survive; a king must hear wisdom to rule). The frame provides existential urgency." },
+        { "role": "Disruption", "label": "Story Begins Within Story", "description": "The first nested story opens, which itself may contain another story. Each level of nesting creates a new world with its own logic." },
+        { "role": "Trial", "label": "Nested Complications", "description": "Stories within stories create moral parallels, contradictions, and resonances with the frame story. The characters in nested stories face versions of the frame character's dilemma." },
+        { "role": "Revelation", "label": "Cross-Level Insight", "description": "A pattern emerges across story levels — the nested stories collectively reveal a truth invisible at any single level." },
+        { "role": "Crisis", "label": "Frame Resolution Threatened", "description": "The frame situation reaches its crisis — the storyteller may run out of stories, the listener may reject the wisdom." },
+        { "role": "Resolution", "label": "Frame Transformed by Stories", "description": "The accumulated stories have changed the frame situation. The king is transformed, the death sentence lifted, the question answered — not by a single story but by the cumulative pattern." }
+      ],
+      "edge_patterns": [
+        "Stories are nested, not sequential — each story contains others",
+        "Meaning emerges from the pattern across stories, not from any single narrative",
+        "The frame protagonist is transformed by listening/telling, not by acting",
+        "Time operates differently — the frame's urgency is suspended by the story-within-story structure"
+      ],
+      "western_cognates": {
+        "closest": "No direct equivalent",
+        "key_differences": [
+          "No single linear arc — the structure is recursive and nested",
+          "The protagonist's primary action is storytelling/listening, not physical or moral action",
+          "Meaning is distributed across levels, not concentrated at a climax",
+          "Transformation happens to the audience (the frame character) through accumulated narrative wisdom",
+          "The Western frame story (Canterbury Tales, Decameron) is similar but typically sequential rather than truly nested"
+        ]
+      },
+      "example_works": [
+        { "title": "One Thousand and One Nights", "creator": "Traditional (Middle Eastern)", "medium": "story collection" },
+        { "title": "Panchatantra", "creator": "Vishnu Sharma", "medium": "Sanskrit fable collection" },
+        { "title": "Kathasaritsagara (Ocean of Streams of Story)", "creator": "Somadeva", "medium": "Sanskrit story collection" }
+      ]
+    },
+    {
+      "archetype_id": "nw_07_cyclical_attachment",
+      "name": "The Cycle of Attachment and Release",
+      "tradition": "East Asian (Buddhist / Chinese / Japanese)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Worldly Attachment", "description": "The protagonist is deeply attached to worldly things — power, love, beauty, knowledge. Unlike Western origins, the attachment is not presented as 'ordinary' — it is the problem." },
+        { "role": "Disruption", "label": "Suffering Manifests", "description": "The attachment produces suffering — loss, disappointment, or the realization that the desired thing cannot satisfy. This is not an external disruption but an inherent consequence of attachment." },
+        { "role": "Trial", "label": "Attempts to Satisfy Desire", "description": "The protagonist tries harder to fulfill the attachment — acquiring more, holding tighter, seeking deeper — but each attempt deepens the suffering." },
+        { "role": "Descent", "label": "Maximum Suffering", "description": "The protagonist reaches the nadir — total loss, complete disillusionment, or the recognition that desire itself is the source of pain." },
+        { "role": "Revelation", "label": "Insight into Impermanence", "description": "The protagonist perceives the impermanence of all things. This is not intellectual knowledge but experiential wisdom — feeling the truth of transience." },
+        { "role": "Resolution", "label": "Release (Liberation)", "description": "The protagonist releases attachment and achieves a form of liberation — not triumph or achievement but freedom from the cycle of desire and suffering." }
+      ],
+      "edge_patterns": [
+        "The disruption is internal, not external — suffering arises from attachment itself",
+        "Escalation is paradoxical — trying harder makes things worse",
+        "The revelation is not new information but a shift in perception",
+        "Resolution is subtraction (letting go), not addition (gaining something)"
+      ],
+      "western_cognates": {
+        "closest": "Rebirth",
+        "key_differences": [
+          "No moral flaw — the protagonist's attachment is universal human nature, not a character deficiency",
+          "Resolution is release/liberation, not renewed engagement with the world",
+          "The 'transformation' is subtraction (letting go) not addition (gaining virtue)",
+          "The world doesn't change — only the protagonist's relationship to it changes",
+          "There is no atonement — nothing was done wrong; attachment is the human condition"
+        ]
+      },
+      "example_works": [
+        { "title": "Journey to the West", "creator": "Wu Cheng'en", "medium": "novel" },
+        { "title": "The Tale of Genji", "creator": "Murasaki Shikibu", "medium": "novel" },
+        { "title": "Spring, Summer, Fall, Winter... and Spring", "creator": "Kim Ki-duk", "medium": "film" }
+      ]
+    },
+    {
+      "archetype_id": "nw_08_vision_quest",
+      "name": "The Vision Quest / Spirit Journey",
+      "tradition": "Indigenous American (various nations)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Community Membership", "description": "The protagonist is part of a community but has not yet found their specific role or purpose. The origin is belonging without yet knowing what you belong as." },
+        { "role": "Catalyst", "label": "Preparation and Fasting", "description": "The community prepares the seeker through ritual — fasting, purification, instruction from elders. The preparation is communal, not individual." },
+        { "role": "Threshold", "label": "Departure into Wilderness", "description": "The seeker departs alone into wilderness — mountains, desert, or forest. The isolation is deliberate and structured, not accidental." },
+        { "role": "Trial", "label": "Solitude and Deprivation", "description": "The seeker endures hunger, cold, fear, and solitude. The trial is not a battle but an endurance of absence — waiting for what comes." },
+        { "role": "Revelation", "label": "The Vision", "description": "A vision comes — an animal spirit, ancestor, or natural force reveals the seeker's purpose, name, or medicine. The vision is received, not achieved." },
+        { "role": "Resolution", "label": "Return to Community with Purpose", "description": "The seeker returns to the community and shares the vision with elders. The community helps interpret the vision and the seeker assumes their role." }
+      ],
+      "edge_patterns": [
+        "Preparation is communal; the quest is solitary; interpretation is communal",
+        "The revelation is received (passive), not achieved (active)",
+        "Power/purpose comes from the spirit world, not from the self",
+        "The return is to a specific social role, not to general 'changed person' status"
+      ],
+      "western_cognates": {
+        "closest": "The Hero's Journey",
+        "key_differences": [
+          "The quest is for identity/purpose, not for an external goal or treasure",
+          "The vision is received through waiting, not achieved through action",
+          "The community frames both departure and return — the quest is a communal process with an individual phase",
+          "There is no antagonist — the trial is endurance, not combat",
+          "The 'reward' is a specific social role and relationship to the spirit world, not a general transformation"
+        ]
+      },
+      "example_works": [
+        { "title": "Black Elk Speaks", "creator": "Black Elk / John G. Neihardt", "medium": "oral narrative / book" },
+        { "title": "Ceremony", "creator": "Leslie Marmon Silko", "medium": "novel" },
+        { "title": "The Education of Little Tree", "creator": "Forrest Carter", "medium": "novel" }
+      ]
+    },
+    {
+      "archetype_id": "nw_09_shahnameh_heroic",
+      "name": "The Shahnameh Heroic Cycle",
+      "tradition": "Middle Eastern (Persian / Iranian)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Noble Birth with Omen", "description": "The hero is born with extraordinary signs — supernatural strength, prophetic destiny, or divine parentage. The origin signals that this life is fated." },
+        { "role": "Trial", "label": "Seven Labors / Tests", "description": "The hero undergoes a structured series of trials — often seven — that prove their worthiness. Each labor tests a different virtue: strength, cunning, piety, endurance." },
+        { "role": "Commitment", "label": "Service to the Throne", "description": "The hero commits to serve the kingdom — but the throne may not deserve the hero's loyalty. The tension between heroic virtue and royal corruption is central." },
+        { "role": "Revelation", "label": "Betrayal by the Throne", "description": "The king or court betrays the hero through jealousy, manipulation, or political expedience. The hero's greatest threat comes from those they serve." },
+        { "role": "Crisis", "label": "Tragic Confrontation", "description": "The hero is forced into a confrontation they cannot win morally — often unknowingly fighting their own kin, or choosing between loyalty and justice." },
+        { "role": "Irreversible Cost", "label": "The Hero's Lament", "description": "The hero suffers irreversible loss — killing a son unknowingly, losing a homeland, or being exiled. The lament is public, ritualized, and cosmic in significance." },
+        { "role": "Resolution", "label": "Enduring Legend", "description": "The hero's story becomes a legend that outlasts the corrupt kingdom. The individual is mortal; the story is immortal." }
+      ],
+      "edge_patterns": [
+        "Destiny is announced at birth, not discovered through journey",
+        "Trials are structured and numbered (seven labors), not open-ended",
+        "The betrayal comes from within (the court), not from without (a monster)",
+        "The hero's tragedy is caused by loyalty to an unworthy throne",
+        "Resolution is in legend, not in life — the story outlasts the hero"
+      ],
+      "western_cognates": {
+        "closest": "Tragedy (with elements of Hero's Journey)",
+        "key_differences": [
+          "The hero's flaw is excessive loyalty, not pride or ambition",
+          "Betrayal comes from the institution the hero serves, not from personal relationships",
+          "The trials are formal and structured (seven labors), not organic journey-trials",
+          "Resolution is in cultural memory — the story itself is the redemption",
+          "The hero is tragic but not diminished — they remain noble throughout, unlike Western tragic heroes who fall morally"
+        ]
+      },
+      "example_works": [
+        { "title": "Shahnameh (Book of Kings) — Rostam cycle", "creator": "Ferdowsi", "medium": "epic poem" },
+        { "title": "Shahnameh — Sohrab and Rostam", "creator": "Ferdowsi", "medium": "epic poem" },
+        { "title": "The Color of Paradise", "creator": "Majid Majidi", "medium": "film" }
+      ]
+    },
+    {
+      "archetype_id": "nw_10_ancestor_guidance",
+      "name": "The Ancestor-Guided Journey",
+      "tradition": "African (Pan-African) / East Asian (Confucian/Shinto)",
+      "structural_nodes": [
+        { "role": "Origin", "label": "Living in the Present", "description": "The protagonist lives in the present but is disconnected from ancestral wisdom — through modernity, exile, or ignorance." },
+        { "role": "Disruption", "label": "Crisis That Present Knowledge Cannot Solve", "description": "A crisis arises that modern/present knowledge and skills cannot resolve. The living world's resources are insufficient." },
+        { "role": "Catalyst", "label": "Ancestral Contact", "description": "The protagonist makes contact with ancestors — through dream, ritual, shrine, or a living elder who carries ancestral knowledge. The ancestors speak." },
+        { "role": "Trial", "label": "Learning the Old Ways", "description": "The protagonist must learn or re-learn traditional practices, values, or knowledge that have been forgotten or abandoned." },
+        { "role": "Crisis", "label": "Conflict Between Old and New", "description": "The ancestral wisdom conflicts with modern circumstances. The protagonist must find a way to honor the ancestors while living in the present." },
+        { "role": "Transformation", "label": "Synthesis of Past and Present", "description": "The protagonist integrates ancestral wisdom with present reality, creating something that honors both." },
+        { "role": "Resolution", "label": "Reconnected Community", "description": "The protagonist's synthesis reconnects their community to its ancestral roots while remaining viable in the present." }
+      ],
+      "edge_patterns": [
+        "Wisdom flows backward in time — from ancestors to descendants",
+        "The protagonist's task is reconnection, not discovery",
+        "The crisis is a clash between temporal modes (past vs. present), not between good and evil",
+        "Resolution requires synthesis, not victory of one mode over another"
+      ],
+      "western_cognates": {
+        "closest": "Rebirth (partial cognate)",
+        "key_differences": [
+          "The 'fallen state' is disconnection from tradition, not personal moral failure",
+          "Wisdom comes from ancestors, not from personal suffering or insight",
+          "The resolution is communal reconnection, not individual renewal",
+          "The past is a resource, not a burden — ancestral wisdom is correct, not outdated",
+          "The protagonist's task is to bridge temporalities, not to transform personally"
+        ]
+      },
+      "example_works": [
+        { "title": "Coco", "creator": "Pixar / Lee Unkrich", "medium": "animated film" },
+        { "title": "Whale Rider", "creator": "Niki Caro / Witi Ihimaera", "medium": "film/novel" },
+        { "title": "Spirited Away (ancestral/spirit world dimensions)", "creator": "Hayao Miyazaki", "medium": "animated film" }
+      ]
+    }
+  ],
+  "structural_observations": [
+    "The most significant structural difference is the role of the community: Western archetypes center individual protagonists, while African and Indigenous archetypes often center the community as protagonist.",
+    "Resolution types diverge sharply: Western archetypes resolve in triumph, restoration, or catharsis; non-Western archetypes more commonly resolve in acceptance (Buddhist), withdrawal (wuxia), communal reconnection (African), or legendary persistence (Persian).",
+    "The mentor relationship differs: Western mentors give gifts and depart; South Asian gurus transmit lifelong discipline; East Asian masters embed moral philosophy in physical training; African elders carry ancestral wisdom.",
+    "Moral structure varies: Western archetypes typically use good-vs-evil or flaw-vs-virtue; South Asian archetypes use duty-vs-duty; Buddhist archetypes use attachment-vs-release; the trickster cycle is amoral entirely.",
+    "Time structure varies: the Frame-Tale Labyrinth and the Trickster Cycle are episodic or recursive, unlike the Western assumption of linear progression through discrete phases."
+  ]
+}
