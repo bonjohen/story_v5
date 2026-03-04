@@ -110,7 +110,7 @@ Stage, commit, and push, then continue working.
 
 **Goal**: Build the interaction layer that surfaces graph metadata — node detail panels and edge tooltips.
 
-- [ ] Implement **Node Detail Panel** (design spec §5.1):
+- [X] Implement **Node Detail Panel** (design spec §5.1):
   - On node click, expand right panel with:
     - Label and role badge
     - Definition (full text)
@@ -120,7 +120,7 @@ Stage, commit, and push, then continue working.
     - Failure modes (highlighted as warnings)
     - Signals in text
   - Panel is dockable, collapsible, and scrollable
-- [ ] Implement **Edge Detail Tooltip** (design spec §5.2):
+- [X] Implement **Edge Detail Tooltip** (design spec §5.2):
   - On edge hover, show popover with:
     - Label and meaning badge
     - Preconditions
@@ -128,18 +128,18 @@ Stage, commit, and push, then continue working.
     - Effects on character
     - Common alternatives
     - Anti-patterns
-- [ ] Add **"Trace Forward" / "Trace Backward"** from any node:
+- [X] Add **"Trace Forward" / "Trace Backward"** from any node:
   - Highlight all nodes reachable from the selected node (forward)
   - Highlight all nodes that lead to the selected node (backward)
   - Dim unrelated nodes/edges
-- [ ] Implement **global search**:
+- [X] Implement **global search**:
   - Search across node labels, definitions, and edge labels
   - Jump to matching node/edge in the graph canvas
-- [ ] Add **keyboard navigation**:
+- [X] Add **keyboard navigation**:
   - Arrow keys to move between connected nodes
   - Enter to open detail panel
   - Escape to close panel
-- [ ] Add **constraint checklist generator** (v-next #26 — given the current genre + selected subgenre path, extract all applicable constraints and produce a printable/exportable checklist; the detail panel already surfaces this data, so adding a "Generate Checklist" button is incremental)
+- [X] Add **constraint checklist generator** (v-next #26 — given the current genre + selected subgenre path, extract all applicable constraints and produce a printable/exportable checklist; the detail panel already surfaces this data, so adding a "Generate Checklist" button is incremental)
 
 **Deliverable**: Click any node to see full details; hover any edge for metadata; trace causality chains; search the graph; generate a constraint checklist for any genre path. The app is now a functional, useful graph explorer.
 

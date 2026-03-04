@@ -373,6 +373,37 @@ export function getCoreStyle(graphType: 'archetype' | 'genre'): Stylesheet[] {
         width: 3,
       },
     },
+
+    // --- Trace (path highlighting) styles ---
+    {
+      selector: 'node.traced',
+      style: {
+        'border-color': '#3b82f6',
+        'border-width': 3,
+        'z-index': 10,
+      },
+    },
+    {
+      selector: 'edge.traced',
+      style: {
+        'line-color': '#3b82f6',
+        'target-arrow-color': '#3b82f6',
+        width: 3,
+        'z-index': 10,
+      },
+    },
+    {
+      selector: 'node.dimmed',
+      style: {
+        opacity: 0.2,
+      },
+    },
+    {
+      selector: 'edge.dimmed',
+      style: {
+        opacity: 0.1,
+      },
+    },
   ]
 }
 

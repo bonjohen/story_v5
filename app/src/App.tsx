@@ -1,9 +1,11 @@
-import { useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
 import { GraphSelectorPanel } from './components/GraphSelectorPanel.tsx'
+import { DetailPanel, EdgeTooltip } from './panels/DetailPanel.tsx'
+import { GraphSearch } from './components/GraphSearch.tsx'
 import { useGraphStore } from './store/graphStore.ts'
-import type { GraphNode, GraphEdge } from './types/graph.ts'
+import type { GraphEdge } from './types/graph.ts'
 import type { DataManifest } from './types/graph.ts'
 
 /** Parse the URL pathname into a graph type and directory slug. */
@@ -28,6 +30,15 @@ function App() {
   const setManifest = useGraphStore((s) => s.setManifest)
   const selectedNodeId = useGraphStore((s) => s.selectedNodeId)
   const selectedEdgeId = useGraphStore((s) => s.selectedEdgeId)
+  const selectNode = useGraphStore((s) => s.selectNode)
+  const highlightedPath = useGraphStore((s) => s.highlightedPath)
+  const setHighlightedPath = useGraphStore((s) => s.setHighlightedPath)
+  const clearSelection = useGraphStore((s) => s.clearSelection)
+
+  // Edge hover tooltip state
+  const [hoveredEdge, setHoveredEdge] = useState<{ edge: GraphEdge; x: number; y: number } | null>(null)
+  // Trace direction state
+  const [traceDirection, setTraceDirection] = useState<'forward' | 'backward' | null>(null)
 
   // Load manifest once at startup
   useEffect(() => {
@@ -39,7 +50,7 @@ function App() {
       .catch((err) => console.warn('Failed to load manifest:', err))
   }, [setManifest])
 
-  // Sync URL → graph loading
+  // Sync URL -> graph loading
   useEffect(() => {
     const parsed = parseRoute(location.pathname)
     if (parsed) {
@@ -54,6 +65,102 @@ function App() {
     },
     [navigate],
   )
+
+  // Edge hover handlers (called from GraphCanvas)
+  const handleEdgeHover = useCallback(
+    (edgeId: string, x: number, y: number) => {
+      if (!currentGraph) return
+      const edge = currentGraph.graph.edges.find((e) => e.edge_id === edgeId)
+      if (edge) setHoveredEdge({ edge, x, y })
+    },
+    [currentGraph],
+  )
+
+  const handleEdgeHoverOut = useCallback(() => {
+    setHoveredEdge(null)
+  }, [])
+
+  // Trace forward: BFS from selected node following edges forward
+  const handleTraceForward = useCallback(() => {
+    if (!currentGraph || !selectedNodeId) return
+    const visited = new Set<string>()
+    const queue = [selectedNodeId]
+    while (queue.length > 0) {
+      const nodeId = queue.shift()!
+      if (visited.has(nodeId)) continue
+      visited.add(nodeId)
+      const neighbors = currentGraph.adjacency.get(nodeId) ?? []
+      for (const n of neighbors) {
+        if (!visited.has(n)) queue.push(n)
+      }
+    }
+    setHighlightedPath(Array.from(visited))
+    setTraceDirection('forward')
+  }, [currentGraph, selectedNodeId, setHighlightedPath])
+
+  // Trace backward: BFS from selected node following edges backward
+  const handleTraceBackward = useCallback(() => {
+    if (!currentGraph || !selectedNodeId) return
+    const visited = new Set<string>()
+    const queue = [selectedNodeId]
+    while (queue.length > 0) {
+      const nodeId = queue.shift()!
+      if (visited.has(nodeId)) continue
+      visited.add(nodeId)
+      const predecessors = currentGraph.reverseAdjacency.get(nodeId) ?? []
+      for (const n of predecessors) {
+        if (!visited.has(n)) queue.push(n)
+      }
+    }
+    setHighlightedPath(Array.from(visited))
+    setTraceDirection('backward')
+  }, [currentGraph, selectedNodeId, setHighlightedPath])
+
+  const handleClearTrace = useCallback(() => {
+    setHighlightedPath([])
+    setTraceDirection(null)
+  }, [setHighlightedPath])
+
+  // Clear trace when selection changes
+  useEffect(() => {
+    setTraceDirection(null)
+  }, [selectedNodeId])
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!currentGraph) return
+      // Ignore if focused on an input
+      const tag = (e.target as HTMLElement).tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
+
+      if (e.key === 'Escape') {
+        clearSelection()
+        handleClearTrace()
+        return
+      }
+
+      if (!selectedNodeId) return
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault()
+        const neighbors = currentGraph.adjacency.get(selectedNodeId) ?? []
+        if (neighbors.length > 0) selectNode(neighbors[0])
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault()
+        const predecessors = currentGraph.reverseAdjacency.get(selectedNodeId) ?? []
+        if (predecessors.length > 0) selectNode(predecessors[0])
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [currentGraph, selectedNodeId, selectNode, clearSelection, handleClearTrace])
+
+  // Navigate to a node from search
+  const handleSearchSelect = useCallback((nodeId: string) => {
+    selectNode(nodeId)
+  }, [selectNode])
 
   const selectedNode = currentGraph
     ? currentGraph.graph.nodes.find((n) => n.node_id === selectedNodeId)
@@ -102,7 +209,7 @@ function App() {
           onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
           onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
         >
-          {sidebarOpen ? '\u2630' : '\u2630'}
+          {'\u2630'}
         </button>
 
         {/* App title */}
@@ -116,20 +223,11 @@ function App() {
         </span>
 
         {/* Divider */}
-        <div style={{
-          width: 1,
-          height: 20,
-          background: 'var(--border)',
-          flexShrink: 0,
-        }} />
+        <div style={{ width: 1, height: 20, background: 'var(--border)', flexShrink: 0 }} />
 
         {/* Mode indicator */}
         {graphType && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{
               fontSize: 11,
               fontWeight: 600,
@@ -143,10 +241,7 @@ function App() {
               {graphType === 'archetype' ? 'Archetype' : 'Genre'}
             </span>
             {axisLabel && (
-              <span style={{
-                fontSize: 11,
-                color: 'var(--text-muted)',
-              }}>
+              <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>
                 Axis: {axisLabel} {graphType === 'archetype' ? '\u2192' : '\u2193'}
               </span>
             )}
@@ -163,13 +258,14 @@ function App() {
         {/* Spacer */}
         <div style={{ flex: 1 }} />
 
+        {/* Global search */}
+        {currentGraph && (
+          <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
+        )}
+
         {/* Loading / error indicators */}
         {loading && (
-          <span style={{
-            fontSize: 11,
-            color: 'var(--accent)',
-            animation: 'pulse 1.5s infinite',
-          }}>
+          <span style={{ fontSize: 11, color: 'var(--accent)', animation: 'pulse 1.5s infinite' }}>
             Loading...
           </span>
         )}
@@ -179,26 +275,19 @@ function App() {
       </header>
 
       {/* Main content area */}
-      <div style={{
-        flex: 1,
-        display: 'flex',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <div style={{ flex: 1, display: 'flex', position: 'relative', overflow: 'hidden' }}>
         {/* Left sidebar */}
-        <aside
-          style={{
-            width: sidebarOpen ? 260 : 0,
-            minWidth: sidebarOpen ? 260 : 0,
-            background: 'var(--bg-surface)',
-            borderRight: sidebarOpen ? '1px solid var(--border)' : 'none',
-            transition: 'width 0.2s ease, min-width 0.2s ease',
-            overflow: 'hidden',
-            flexShrink: 0,
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
+        <aside style={{
+          width: sidebarOpen ? 260 : 0,
+          minWidth: sidebarOpen ? 260 : 0,
+          background: 'var(--bg-surface)',
+          borderRight: sidebarOpen ? '1px solid var(--border)' : 'none',
+          transition: 'width 0.2s ease, min-width 0.2s ease',
+          overflow: 'hidden',
+          flexShrink: 0,
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
           {sidebarOpen && (
             <GraphSelectorPanel onSelect={handleSelectGraph} />
           )}
@@ -209,13 +298,14 @@ function App() {
           {currentGraph ? (
             <div
               key={graphId}
-              style={{
-                width: '100%',
-                height: '100%',
-                animation: 'fadeIn 0.25s ease',
-              }}
+              style={{ width: '100%', height: '100%', animation: 'fadeIn 0.25s ease' }}
             >
-              <GraphCanvas graph={currentGraph} />
+              <GraphCanvas
+                graph={currentGraph}
+                highlightedPath={highlightedPath}
+                onEdgeHover={handleEdgeHover}
+                onEdgeHoverOut={handleEdgeHoverOut}
+              />
             </div>
           ) : (
             <div style={{
@@ -236,105 +326,22 @@ function App() {
 
         {/* Right: detail panel */}
         {hasDetailPanel && (
-          <DetailPanel node={selectedNode} edge={selectedEdge} />
+          <DetailPanel
+            node={selectedNode}
+            edge={selectedEdge}
+            onTraceForward={handleTraceForward}
+            onTraceBackward={handleTraceBackward}
+            onClearTrace={handleClearTrace}
+            traceActive={traceDirection}
+            graph={currentGraph}
+          />
         )}
       </div>
-    </div>
-  )
-}
 
-function DetailPanel({
-  node,
-  edge,
-}: {
-  node?: GraphNode | null
-  edge?: GraphEdge | null
-}) {
-  const clearSelection = useGraphStore((s) => s.clearSelection)
-  const toArr = (v: string | string[]) => (Array.isArray(v) ? v : [v])
-
-  const content = node ? (
-    <>
-      <h3 style={{ fontSize: 14, marginBottom: 4 }}>{node.label}</h3>
-      <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 12 }}>
-        {node.role} | {node.node_id}
-      </div>
-      <p style={{ fontSize: 12, marginBottom: 12, lineHeight: 1.6 }}>{node.definition}</p>
-      <Section title="Entry Conditions" items={toArr(node.entry_conditions)} />
-      <Section title="Exit Conditions" items={toArr(node.exit_conditions)} />
-      <Section title="Failure Modes" items={toArr(node.failure_modes)} warn />
-      <Section title="Signals in Text" items={toArr(node.signals_in_text)} />
-      <Section title="Variants" items={toArr(node.typical_variants)} />
-    </>
-  ) : edge ? (
-    <>
-      <h3 style={{ fontSize: 14, marginBottom: 4 }}>{edge.label}</h3>
-      <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 12 }}>
-        {edge.meaning} | {edge.edge_id}
-      </div>
-      <Section title="Preconditions" items={toArr(edge.preconditions)} />
-      <Section title="Effects on Stakes" items={toArr(edge.effects_on_stakes)} />
-      <Section title="Effects on Character" items={toArr(edge.effects_on_character)} />
-      <Section title="Alternatives" items={toArr(edge.common_alternatives)} />
-      <Section title="Anti-Patterns" items={toArr(edge.anti_patterns)} warn />
-    </>
-  ) : null
-
-  if (!content) return null
-
-  return (
-    <aside style={{
-      width: 320,
-      background: 'var(--bg-surface)',
-      borderLeft: '1px solid var(--border)',
-      padding: 16,
-      overflowY: 'auto',
-      flexShrink: 0,
-      animation: 'slideInRight 0.2s ease',
-    }}>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        marginBottom: 8,
-      }}>
-        <div style={{ flex: 1 }}>{content}</div>
-        <button
-          onClick={clearSelection}
-          aria-label="Close detail panel"
-          style={{
-            fontSize: 16,
-            color: 'var(--text-muted)',
-            padding: '0 4px',
-            marginLeft: 8,
-            flexShrink: 0,
-          }}
-        >
-          {'\u00D7'}
-        </button>
-      </div>
-    </aside>
-  )
-}
-
-function Section({ title, items, warn }: { title: string; items: string[]; warn?: boolean }) {
-  if (!items.length || (items.length === 1 && !items[0])) return null
-  return (
-    <div style={{ marginBottom: 10 }}>
-      <div style={{
-        fontSize: 10,
-        textTransform: 'uppercase',
-        letterSpacing: '0.05em',
-        color: warn ? '#f59e0b' : 'var(--text-muted)',
-        marginBottom: 4,
-      }}>
-        {title}
-      </div>
-      <ul style={{ paddingLeft: 16, margin: 0, fontSize: 12, lineHeight: 1.6 }}>
-        {items.map((item, i) => (
-          <li key={i}>{item}</li>
-        ))}
-      </ul>
+      {/* Edge hover tooltip (rendered at fixed position) */}
+      {hoveredEdge && (
+        <EdgeTooltip edge={hoveredEdge.edge} position={{ x: hoveredEdge.x, y: hoveredEdge.y }} />
+      )}
     </div>
   )
 }

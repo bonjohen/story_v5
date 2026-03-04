@@ -8,9 +8,12 @@ import { getCoreStyle } from './styles.ts'
 
 interface GraphCanvasProps {
   graph: NormalizedGraph
+  highlightedPath?: string[]
+  onEdgeHover?: (edgeId: string, x: number, y: number) => void
+  onEdgeHoverOut?: () => void
 }
 
-export function GraphCanvas({ graph }: GraphCanvasProps) {
+export function GraphCanvas({ graph, highlightedPath, onEdgeHover, onEdgeHoverOut }: GraphCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cyRef = useRef<Core | null>(null)
 
@@ -38,6 +41,26 @@ export function GraphCanvas({ graph }: GraphCanvasProps) {
     clearSelection()
   }, [clearSelection])
 
+  // Edge hover handlers
+  const handleEdgeMouseOver = useCallback(
+    (evt: EventObject) => {
+      if (!onEdgeHover) return
+      const pos = evt.renderedPosition || evt.position
+      if (pos) {
+        const container = containerRef.current
+        if (container) {
+          const rect = container.getBoundingClientRect()
+          onEdgeHover(evt.target.id(), rect.left + pos.x, rect.top + pos.y)
+        }
+      }
+    },
+    [onEdgeHover],
+  )
+
+  const handleEdgeMouseOut = useCallback(() => {
+    onEdgeHoverOut?.()
+  }, [onEdgeHoverOut])
+
   // Minimap state
   const [minimapSrc, setMinimapSrc] = useState<string | null>(null)
   const [viewportRect, setViewportRect] = useState<{
@@ -56,18 +79,14 @@ export function GraphCanvas({ graph }: GraphCanvasProps) {
       const png = cy.png({ full: true, maxWidth: MINIMAP_W, maxHeight: MINIMAP_H, bg: '#0f1117' })
       setMinimapSrc(png)
 
-      // Compute viewport rectangle relative to full graph bounding box
       const bb = cy.elements().boundingBox()
       const ext = cy.extent()
-
       if (bb.w <= 0 || bb.h <= 0) return
 
-      // Scale factor from graph coords to minimap pixels
       const scaleX = MINIMAP_W / bb.w
       const scaleY = MINIMAP_H / bb.h
       const scale = Math.min(scaleX, scaleY)
 
-      // Offset to center the graph in the minimap
       const renderedW = bb.w * scale
       const renderedH = bb.h * scale
       const offsetX = (MINIMAP_W - renderedW) / 2
@@ -104,22 +123,21 @@ export function GraphCanvas({ graph }: GraphCanvasProps) {
     cy.on('tap', 'node', handleNodeTap)
     cy.on('tap', 'edge', handleEdgeTap)
     cy.on('tap', handleBgTap)
-
-    // Update minimap on viewport changes
+    cy.on('mouseover', 'edge', handleEdgeMouseOver)
+    cy.on('mouseout', 'edge', handleEdgeMouseOut)
     cy.on('viewport', updateMinimap)
 
     applyLayout(cy, graph)
 
     cyRef.current = cy
 
-    // Initial minimap render after layout
     requestAnimationFrame(() => updateMinimap())
 
     return () => {
       cy.destroy()
       cyRef.current = null
     }
-  }, [graph, handleNodeTap, handleEdgeTap, handleBgTap, updateMinimap])
+  }, [graph, handleNodeTap, handleEdgeTap, handleBgTap, handleEdgeMouseOver, handleEdgeMouseOut, updateMinimap])
 
   // Sync selection highlighting
   useEffect(() => {
@@ -140,6 +158,50 @@ export function GraphCanvas({ graph }: GraphCanvasProps) {
       edge.connectedNodes().addClass('neighbor')
     }
   }, [selectedNodeId, selectedEdgeId])
+
+  // Path highlighting (trace forward/backward)
+  useEffect(() => {
+    const cy = cyRef.current
+    if (!cy) return
+
+    cy.elements().removeClass('traced dimmed')
+
+    if (highlightedPath && highlightedPath.length > 0) {
+      const pathSet = new Set(highlightedPath)
+
+      cy.nodes().forEach((node) => {
+        if (pathSet.has(node.id())) {
+          node.addClass('traced')
+        } else {
+          node.addClass('dimmed')
+        }
+      })
+
+      cy.edges().forEach((edge) => {
+        const src = edge.source().id()
+        const tgt = edge.target().id()
+        if (pathSet.has(src) && pathSet.has(tgt)) {
+          edge.addClass('traced')
+        } else {
+          edge.addClass('dimmed')
+        }
+      })
+    }
+  }, [highlightedPath])
+
+  // Center on selected node (triggered by search or keyboard nav)
+  useEffect(() => {
+    const cy = cyRef.current
+    if (!cy || !selectedNodeId) return
+
+    const node = cy.getElementById(selectedNodeId)
+    if (node.length > 0) {
+      cy.animate({
+        center: { eles: node },
+        duration: 200,
+      })
+    }
+  }, [selectedNodeId])
 
   // Click on minimap to pan
   const handleMinimapClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -162,7 +224,6 @@ export function GraphCanvas({ graph }: GraphCanvasProps) {
     const offsetX = (MINIMAP_W - renderedW) / 2
     const offsetY = (MINIMAP_H - renderedH) / 2
 
-    // Convert minimap click to graph coordinates
     const graphX = bb.x1 + (clickX - offsetX) / scale
     const graphY = bb.y1 + (clickY - offsetY) / scale
 
@@ -208,7 +269,6 @@ export function GraphCanvas({ graph }: GraphCanvasProps) {
               pointerEvents: 'none',
             }}
           />
-          {/* Viewport rectangle */}
           {viewportRect && (
             <div style={{
               position: 'absolute',
