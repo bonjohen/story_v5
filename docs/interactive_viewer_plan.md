@@ -52,34 +52,35 @@ This plan breaks the interactive viewer specification into 8 implementation phas
 
 **Goal**: Render archetype and genre graphs with role-based node styling, labeled edges, and zoom/pan interaction.
 
-- [ ] Integrate Cytoscape.js as the rendering engine
-- [ ] Implement **Archetype Layout** (design spec §4.1):
+- [X] Integrate Cytoscape.js as the rendering engine
+- [X] Implement **Archetype Layout** (design spec §4.1):
   - Horizontal left-to-right primary axis (time)
   - Nodes positioned by narrative sequence
   - Progressive color gradient across time
   - Terminal nodes styled distinctly (gold)
   - Start nodes styled distinctly (green)
-- [ ] Implement **Genre Layout** (design spec §4.1):
+- [X] Implement **Genre Layout** (design spec §4.1):
   - Vertical top-to-bottom primary axis (depth)
   - Nodes grouped by level (1–5 rows, plus Tone/Anti-Pattern)
   - Progressive narrowing width to represent constraint reduction
   - Subgenre branching at Level 3 clearly shown
   - Scene obligations grouped at bottom tier
-- [ ] Apply **Node Styling** by role (design spec §7.2):
+- [X] Apply **Node Styling** by role (design spec §7.2):
   - Map archetype node roles (Origin, Catalyst, Escalation, etc.) to visual treatments
   - Map genre node roles (Genre Promise, Core Constraint, Subgenre Pattern, Setting Rule, Scene Obligation, Tone Marker, Anti-Pattern) to visual treatments
   - Color, border, and shape distinguish role at a glance
-- [ ] Apply **Edge Styling** by meaning (design spec §7.3):
+- [X] Apply **Edge Styling** by meaning (design spec §7.3):
   - Directed edges with arrowheads
   - Edge labels (inline or on hover)
   - Visual cues by meaning category (escalation → thicker, constraint → dashed, revelation → glow)
   - Loop edges rendered as curved arcs
-- [ ] Implement **zoom, pan, and fit-to-viewport** controls
-- [ ] Apply dark-first UI theme (design spec §7.1)
-- [ ] Ensure deterministic layout (same JSON → same visual, design spec §8)
+- [X] Implement **zoom, pan, and fit-to-viewport** controls
+- [X] Apply dark-first UI theme (design spec §7.1)
+- [X] Ensure deterministic layout (same JSON → same visual, design spec §8)
 
 **Deliverable**: Select any archetype or genre from a dropdown; graph renders with correct layout mode, styled nodes/edges, and smooth zoom/pan.
 
+Stage, commit, and push, then continue working.
 ---
 
 ## Phase 3 — Graph Selector and Navigation Shell
@@ -102,6 +103,7 @@ This plan breaks the interactive viewer specification into 8 implementation phas
 
 **Deliverable**: Full navigation between all 42 graphs with smooth transitions and deep-linkable URLs.
 
+Stage, commit, and push, then continue working.
 ---
 
 ## Phase 4 — Node and Edge Detail Panels
