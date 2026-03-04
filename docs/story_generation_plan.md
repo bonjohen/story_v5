@@ -154,42 +154,42 @@ This file is maintained by the coding agent so that [ ] means not started, [~] m
 **Goal:** Generate scene prose, validate against constraints, and repair failures.
 
 ### 4.1 Writer agent
-- [ ] Create `app/src/generation/agents/writerAgent.ts`
-- [ ] Build prompt from: contract excerpt + scene spec + global boundaries
-- [ ] Prompt includes: "must satisfy" (hard obligations), "must not" (anti-patterns), "maintain tone" (tone marker)
-- [ ] Output: markdown scene text with optional footer metadata block
-- [ ] Write to `outputs/runs/{run_id}/scene_drafts/{scene_id}.md`
+- [X] Create `app/src/generation/agents/writerAgent.ts`
+- [X] Build prompt from: contract excerpt + scene spec + global boundaries
+- [X] Prompt includes: "must satisfy" (hard obligations), "must not" (anti-patterns), "maintain tone" (tone marker)
+- [X] Output: markdown scene text with optional footer metadata block
+- [X] Write to `outputs/runs/{run_id}/scene_drafts/{scene_id}.md`
 
 ### 4.2 Validation engine
-- [ ] Create `app/src/generation/validators/validationEngine.ts`
-- [ ] **Hard constraint compliance:** For each hard constraint assigned to the scene, verify evidence exists (heuristic + optional LLM)
-- [ ] **Anti-pattern detection (blocking):** Detect via keyword heuristics + optional LLM classification
-- [ ] **Tone compliance (global):** Detect tonal drift via sentiment proxy + optional LLM check
-- [ ] **Entry/exit conditions:** Verify entry conditions hold at first scene of beat, exit conditions at last
-- [ ] **Signals in text:** Verify configurable fraction of archetype signals appear (default: warn only)
+- [X] Create `app/src/generation/validators/validationEngine.ts`
+- [X] **Hard constraint compliance:** For each hard constraint assigned to the scene, verify evidence exists (heuristic + optional LLM)
+- [X] **Anti-pattern detection (blocking):** Detect via keyword heuristics + optional LLM classification
+- [X] **Tone compliance (global):** Detect tonal drift via sentiment proxy + optional LLM check
+- [X] **Entry/exit conditions:** Verify entry conditions hold at first scene of beat, exit conditions at last
+- [X] **Signals in text:** Verify configurable fraction of archetype signals appear (default: warn only)
 
 ### 4.3 Validator agent (optional LLM checks)
-- [ ] Create `app/src/generation/agents/validatorAgent.ts`
-- [ ] LLM classifies each check: pass / warn / fail with minimal evidence notes
-- [ ] Falls back to heuristic-only mode if LLM unavailable
+- [X] Create `app/src/generation/agents/validatorAgent.ts`
+- [X] LLM classifies each check: pass / warn / fail with minimal evidence notes
+- [X] Falls back to heuristic-only mode if LLM unavailable
 
 ### 4.4 Repair engine
-- [ ] Create `app/src/generation/engine/repairEngine.ts`
-- [ ] Accept: failing scene draft + validation failures + contract excerpts
-- [ ] Strategy: targeted edits (insert missing evidence, remove anti-pattern sections, adjust tone)
-- [ ] Full rewrite only if blocking errors exceed configurable threshold (default: 3)
-- [ ] Max repair attempts per scene from generation config (default: 2)
+- [X] Create `app/src/generation/engine/repairEngine.ts`
+- [X] Accept: failing scene draft + validation failures + contract excerpts
+- [X] Strategy: targeted edits (insert missing evidence, remove anti-pattern sections, adjust tone)
+- [X] Full rewrite only if blocking errors exceed configurable threshold (default: 3)
+- [X] Max repair attempts per scene from generation config (default: 2)
 
 ### 4.5 Repair agent
-- [ ] Create `app/src/generation/agents/repairAgent.ts`
-- [ ] Prompt includes: original scene text + specific failure directives + contract constraints
-- [ ] Output: revised scene text only (no new characters/plot unless plan allows)
+- [X] Create `app/src/generation/agents/repairAgent.ts`
+- [X] Prompt includes: original scene text + specific failure directives + contract constraints
+- [X] Output: revised scene text only (no new characters/plot unless plan allows)
 
 ### 4.6 Tests
-- [ ] Unit tests for each validation check type (pass, warn, fail cases)
-- [ ] Anti-pattern injection tests (insert known violations, verify detection)
-- [ ] Integration test: write → validate → repair cycle with mock LLM
-- [ ] Golden-run test: fixed seed produces schema-valid artifacts with full hard constraint coverage
+- [X] Unit tests for each validation check type (pass, warn, fail cases)
+- [X] Anti-pattern injection tests (insert known violations, verify detection)
+- [X] Integration test: write → validate → repair cycle with mock LLM
+- [X] Golden-run test: fixed seed produces schema-valid artifacts with full hard constraint coverage
 
 **Verification:** Scenes validate against contract. Anti-patterns are detected and repaired. Validation results conform to JSON schema. Repair loop terminates within configured max attempts.
 
