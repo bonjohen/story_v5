@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoryContract",
+  "description": "Boundaries, guidelines, and exclusions compiled from corpus",
+  "type": "object",
+  "required": [
+    "schema_version", "run_id", "generated_at", "source_corpus_hash",
+    "archetype", "genre", "global_boundaries", "phase_guidelines", "validation_policy"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "run_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "source_corpus_hash": { "type": "string" },
+    "archetype": {
+      "type": "object",
+      "required": ["id_prefix", "name", "archetype_id", "spine_nodes", "required_roles", "allowed_variants", "required_edges"],
+      "properties": {
+        "id_prefix": { "type": "string", "minLength": 2, "maxLength": 3 },
+        "name": { "type": "string" },
+        "archetype_id": { "type": "string" },
+        "spine_nodes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "required_roles": { "type": "array", "items": { "type": "string" } },
+        "allowed_variants": { "type": "array", "items": { "type": "string" } },
+        "required_edges": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "genre": {
+      "type": "object",
+      "required": ["id_prefix", "name", "genre_id", "levels", "tone_marker", "anti_patterns", "hard_constraints", "soft_constraints"],
+      "properties": {
+        "id_prefix": { "type": "string", "minLength": 2, "maxLength": 3 },
+        "name": { "type": "string" },
+        "genre_id": { "type": "string" },
+        "levels": {
+          "type": "object",
+          "patternProperties": {
+            "^[1-5]$": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "tone_marker": { "type": "array", "items": { "type": "string" } },
+        "anti_patterns": { "type": "array", "items": { "type": "string" } },
+        "hard_constraints": { "type": "array", "items": { "type": "string" } },
+        "soft_constraints": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "global_boundaries": {
+      "type": "object",
+      "required": ["musts", "must_nots", "content_limits", "style_limits"],
+      "properties": {
+        "musts": { "type": "array", "items": { "type": "string" } },
+        "must_nots": { "type": "array", "items": { "type": "string" } },
+        "content_limits": { "type": "array", "items": { "type": "string" } },
+        "style_limits": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "phase_guidelines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["node_id", "role", "definition", "entry_conditions", "exit_conditions", "failure_modes", "signals_in_text", "genre_obligation_links"],
+        "properties": {
+          "node_id": { "type": "string" },
+          "role": { "type": "string" },
+          "definition": { "type": "string" },
+          "entry_conditions": { "type": "array", "items": { "type": "string" } },
+          "exit_conditions": { "type": "array", "items": { "type": "string" } },
+          "failure_modes": { "type": "array", "items": { "type": "string" } },
+          "signals_in_text": { "type": "array", "items": { "type": "string" } },
+          "genre_obligation_links": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "validation_policy": {
+      "type": "object",
+      "required": ["hard_constraints_required", "anti_patterns_blocking", "tone_global", "entry_exit_required", "signals_required"],
+      "properties": {
+        "hard_constraints_required": { "type": "boolean" },
+        "anti_patterns_blocking": { "type": "boolean" },
+        "tone_global": { "type": "boolean" },
+        "entry_exit_required": { "type": "boolean" },
+        "signals_required": { "enum": ["hard", "soft", "off"] }
+      }
+    }
+  },
+  "additionalProperties": false
+}

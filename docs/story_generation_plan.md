@@ -2,6 +2,7 @@
 
 Phased implementation plan for the agentic story generation system described in `docs/story_design.md`. The system consumes the existing Story Structure Explorer corpus (42 graphs, 12 cross-reference datasets, controlled vocabularies) and produces traceable, constraint-correct story artifacts.
 
+This file is maintained by the coding agent so that [ ] means not started, [~] means started, and [X] means completed. Fine grain - as you select a task for work, set it to [~], and as you complete it, set it to [X].
 ---
 
 ## Phase 1: Foundation — Types, Schemas, and Corpus Loader
@@ -9,52 +10,52 @@ Phased implementation plan for the agentic story generation system described in 
 **Goal:** Establish the type system, JSON schemas, and corpus loading infrastructure that every subsequent phase depends on.
 
 ### 1.1 Artifact TypeScript types
-- [ ] Create `app/src/generation/artifacts/types.ts`
-- [ ] Define `StoryRequest`, `SelectionResult`, `StoryContract`, `StoryPlan`, `ValidationResults`, `StoryTrace`
-- [ ] Define discriminated unions for check statuses (`pass` | `warn` | `fail`) and severity (`hard` | `soft`)
-- [ ] Define `GenerationConfig` type matching `generation_config.json` schema
-- [ ] Define `RunMetadata` type (schema_version, run_id, generated_at, source_corpus_hash)
+- [X] Create `app/src/generation/artifacts/types.ts`
+- [X] Define `StoryRequest`, `SelectionResult`, `StoryContract`, `StoryPlan`, `ValidationResults`, `StoryTrace`
+- [X] Define discriminated unions for check statuses (`pass` | `warn` | `fail`) and severity (`hard` | `soft`)
+- [X] Define `GenerationConfig` type matching `generation_config.json` schema
+- [X] Define `RunMetadata` type (schema_version, run_id, generated_at, source_corpus_hash)
 
 ### 1.2 JSON schemas for runtime validation
-- [ ] Create `app/src/generation/artifacts/schema/story_request.schema.json`
-- [ ] Create `app/src/generation/artifacts/schema/selection_result.schema.json`
-- [ ] Create `app/src/generation/artifacts/schema/story_contract.schema.json`
-- [ ] Create `app/src/generation/artifacts/schema/story_plan.schema.json`
-- [ ] Create `app/src/generation/artifacts/schema/validation_results.schema.json`
-- [ ] Create `app/src/generation/artifacts/schema/story_trace.schema.json`
+- [X] Create `app/src/generation/artifacts/schema/story_request.schema.json`
+- [X] Create `app/src/generation/artifacts/schema/selection_result.schema.json`
+- [X] Create `app/src/generation/artifacts/schema/story_contract.schema.json`
+- [X] Create `app/src/generation/artifacts/schema/story_plan.schema.json`
+- [X] Create `app/src/generation/artifacts/schema/validation_results.schema.json`
+- [X] Create `app/src/generation/artifacts/schema/story_trace.schema.json`
 
 ### 1.3 Corpus loader
-- [ ] Create `app/src/generation/engine/corpusLoader.ts`
-- [ ] Load archetype graphs (15) + variant files (where present)
-- [ ] Load genre graphs (27)
-- [ ] Load cross-reference files (matrix, emotional arcs, hybrid patterns, blending model, tone integration)
-- [ ] Load controlled vocabularies (node roles, edge meanings, ID conventions)
-- [ ] Load manifest.json for corpus inventory
-- [ ] Compute stable `source_corpus_hash` from loaded file content
+- [X] Create `app/src/generation/engine/corpusLoader.ts`
+- [X] Load archetype graphs (15) + variant files (where present)
+- [X] Load genre graphs (27)
+- [X] Load cross-reference files (matrix, emotional arcs, hybrid patterns, blending model, tone integration)
+- [X] Load controlled vocabularies (node roles, edge meanings, ID conventions)
+- [X] Load manifest.json for corpus inventory
+- [X] Compute stable `source_corpus_hash` from loaded file content
 
 ### 1.4 Normalizer and validator
-- [ ] Create `app/src/generation/engine/normalizer.ts`
-- [ ] Validate node/edge schema conformance
-- [ ] Validate vocabulary membership (roles, meanings)
-- [ ] Validate ID conventions (prefix, type, number range)
-- [ ] Validate genre severity propagation (edge severity inherits from target node)
-- [ ] Validate variant node ID ranges (50–79)
-- [ ] Validate graph connectivity (archetype spine path exists, genre tree rooted at Level 1)
+- [X] Create `app/src/generation/engine/normalizer.ts`
+- [X] Validate node/edge schema conformance
+- [X] Validate vocabulary membership (roles, meanings)
+- [X] Validate ID conventions (prefix, type, number range)
+- [X] Validate genre severity propagation (edge severity inherits from target node)
+- [X] Validate variant node ID ranges (50–79)
+- [X] Validate graph connectivity (archetype spine path exists, genre tree rooted at Level 1)
 
 ### 1.5 Corpus validation script
-- [ ] Create `app/scripts/validate_corpus.ts`
-- [ ] Run all normalizer checks across the full corpus
-- [ ] Report pass/fail per graph with detailed error messages
-- [ ] Exit with nonzero code on any failure (CI-friendly)
+- [X] Create `app/scripts/validate_corpus.ts`
+- [X] Run all normalizer checks across the full corpus
+- [X] Report pass/fail per graph with detailed error messages
+- [X] Exit with nonzero code on any failure (CI-friendly)
 
 ### 1.6 Generation config
-- [ ] Create `generation_config.json` at project root
-- [ ] Define defaults: signals_policy, tone_policy, repair_policy, coverage_targets, composition_defaults
+- [X] Create `generation_config.json` at project root
+- [X] Define defaults: signals_policy, tone_policy, repair_policy, coverage_targets, composition_defaults
 
 ### 1.7 Tests
-- [ ] Unit tests for corpus loader (loads and indexes all 42 graphs)
-- [ ] Unit tests for normalizer (validates schema, vocab, IDs, severity)
-- [ ] Unit tests for JSON schema validation (valid and invalid artifact samples)
+- [X] Unit tests for corpus loader (loads and indexes all 42 graphs)
+- [X] Unit tests for normalizer (validates schema, vocab, IDs, severity)
+- [X] Unit tests for JSON schema validation (valid and invalid artifact samples)
 
 **Verification:** All 42 graphs load and validate. Corpus hash is stable across repeated loads. All artifact schemas validate against known-good samples.
 

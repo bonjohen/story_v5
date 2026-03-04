@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ValidationResults",
+  "description": "Per-scene and global validation results",
+  "type": "object",
+  "required": [
+    "schema_version", "run_id", "generated_at", "source_corpus_hash",
+    "scenes", "global"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "run_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "source_corpus_hash": { "type": "string" },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scene_id", "status", "checks"],
+        "properties": {
+          "scene_id": { "type": "string" },
+          "status": { "enum": ["pass", "warn", "fail"] },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "status", "details"],
+              "properties": {
+                "type": { "enum": ["hard_constraints", "anti_patterns", "tone", "entry_exit", "signals_in_text"] },
+                "status": { "enum": ["pass", "warn", "fail"] },
+                "details": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "global": {
+      "type": "object",
+      "required": ["hard_constraints_coverage", "soft_constraints_coverage", "anti_pattern_violations", "tone_warnings"],
+      "properties": {
+        "hard_constraints_coverage": { "type": "number", "minimum": 0, "maximum": 1 },
+        "soft_constraints_coverage": { "type": "number", "minimum": 0, "maximum": 1 },
+        "anti_pattern_violations": { "type": "integer", "minimum": 0 },
+        "tone_warnings": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "additionalProperties": false
+}

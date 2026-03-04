@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoryPlan",
+  "description": "Beat outline + scene specifications for generation",
+  "type": "object",
+  "required": [
+    "schema_version", "run_id", "generated_at", "source_corpus_hash",
+    "beats", "scenes", "coverage_targets"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "run_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "source_corpus_hash": { "type": "string" },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["beat_id", "archetype_node_id", "summary", "required_exit_conditions", "target_emotional_scores"],
+        "properties": {
+          "beat_id": { "type": "string", "pattern": "^B\\d{2}$" },
+          "archetype_node_id": { "type": "string" },
+          "summary": { "type": "string" },
+          "required_exit_conditions": { "type": "array", "items": { "type": "string" } },
+          "target_emotional_scores": {
+            "type": "object",
+            "required": ["tension", "hope", "fear", "resolution"],
+            "properties": {
+              "tension": { "type": "number", "minimum": 0, "maximum": 1 },
+              "hope": { "type": "number", "minimum": 0, "maximum": 1 },
+              "fear": { "type": "number", "minimum": 0, "maximum": 1 },
+              "resolution": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scene_id", "beat_id", "setting", "characters", "scene_goal", "archetype_trace", "genre_obligations", "constraints_checklist"],
+        "properties": {
+          "scene_id": { "type": "string", "pattern": "^S\\d{2}$" },
+          "beat_id": { "type": "string" },
+          "setting": { "type": "string" },
+          "characters": { "type": "array", "items": { "type": "string" } },
+          "scene_goal": { "type": "string" },
+          "archetype_trace": {
+            "type": "object",
+            "required": ["node_id", "edge_in", "edge_out"],
+            "properties": {
+              "node_id": { "type": "string" },
+              "edge_in": { "type": ["string", "null"] },
+              "edge_out": { "type": ["string", "null"] }
+            }
+          },
+          "genre_obligations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["node_id", "severity"],
+              "properties": {
+                "node_id": { "type": "string" },
+                "severity": { "enum": ["hard", "soft"] }
+              }
+            }
+          },
+          "constraints_checklist": {
+            "type": "object",
+            "required": ["hard", "soft", "must_not"],
+            "properties": {
+              "hard": { "type": "array", "items": { "type": "string" } },
+              "soft": { "type": "array", "items": { "type": "string" } },
+              "must_not": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "coverage_targets": {
+      "type": "object",
+      "required": ["hard_constraints_min_coverage", "soft_constraints_min_coverage"],
+      "properties": {
+        "hard_constraints_min_coverage": { "type": "number", "minimum": 0, "maximum": 1 },
+        "soft_constraints_min_coverage": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  },
+  "additionalProperties": false
+}

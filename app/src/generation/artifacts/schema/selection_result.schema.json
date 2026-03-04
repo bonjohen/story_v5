@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SelectionResult",
+  "description": "Output of the SelectionEngine — chosen archetype, genre, blend, hybrid, tone",
+  "type": "object",
+  "required": [
+    "schema_version", "run_id", "generated_at", "source_corpus_hash",
+    "primary_archetype", "primary_genre",
+    "genre_blend", "hybrid_archetype", "compatibility", "tone_marker"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "run_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "source_corpus_hash": { "type": "string" },
+    "primary_archetype": { "type": "string" },
+    "primary_genre": { "type": "string" },
+    "genre_blend": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "secondary_genre": { "type": "string" },
+        "pattern_id": { "type": "string" },
+        "stability": { "enum": ["stable", "conditionally_stable", "unstable"] },
+        "dominance": { "type": "string" },
+        "rationale": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "hybrid_archetype": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "secondary_archetype": { "type": "string" },
+        "pattern_id": { "type": "string" },
+        "frequency": { "enum": ["very_common", "common", "occasional"] },
+        "shared_roles": { "type": "array", "items": { "type": "string" } },
+        "divergence_point": {
+          "type": "object",
+          "properties": {
+            "role": { "type": "string" },
+            "description": { "type": "string" }
+          }
+        },
+        "composition_method": {
+          "enum": ["parallel_track", "sequential_override", "nested", "alternating_dominance"]
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "required": ["matrix_classification", "rationale"],
+      "properties": {
+        "matrix_classification": {
+          "enum": ["naturally compatible", "occasionally compatible", "rarely compatible"]
+        },
+        "rationale": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "tone_marker": {
+      "type": "object",
+      "required": ["selected", "genre_tone_node_id", "integration_classification"],
+      "properties": {
+        "selected": { "type": "string" },
+        "genre_tone_node_id": { "type": "string" },
+        "integration_classification": { "enum": ["reinforcing", "contrasting", "neutral"] }
+      }
+    }
+  },
+  "additionalProperties": false
+}
