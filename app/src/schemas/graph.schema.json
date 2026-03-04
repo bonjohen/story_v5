@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "story_v5_graph",
+  "title": "Story Graph",
+  "description": "Schema for archetype and genre graph JSON files (v0_plan.md §1.1–1.2)",
+  "type": "object",
+  "required": ["id", "name", "type", "description", "nodes", "edges"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique graph identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable graph name"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["archetype", "genre"],
+      "description": "Graph category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the archetype or genre"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "edges": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/edge" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "stringOrArray": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "node_id", "label", "role", "definition",
+        "entry_conditions", "exit_conditions",
+        "typical_variants", "failure_modes", "signals_in_text"
+      ],
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}_N[0-9]{2}_[A-Z0-9_]+$",
+          "description": "Node ID: {PREFIX}_N{##}_{SHORT_NAME}"
+        },
+        "label": { "type": "string" },
+        "role": { "type": "string" },
+        "level": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Genre-specific: constraint depth level (1–5), null for Tone/Anti-Pattern"
+        },
+        "definition": { "type": "string" },
+        "entry_conditions": { "$ref": "#/$defs/stringOrArray" },
+        "exit_conditions": { "$ref": "#/$defs/stringOrArray" },
+        "typical_variants": { "$ref": "#/$defs/stringOrArray" },
+        "failure_modes": { "$ref": "#/$defs/stringOrArray" },
+        "signals_in_text": { "$ref": "#/$defs/stringOrArray" }
+      },
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "required": [
+        "edge_id", "from", "to", "label", "meaning",
+        "preconditions", "effects_on_stakes", "effects_on_character",
+        "common_alternatives", "anti_patterns"
+      ],
+      "properties": {
+        "edge_id": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}_E[0-9]{2}_[A-Z0-9_]+$",
+          "description": "Edge ID: {PREFIX}_E{##}_{SHORT_NAME}"
+        },
+        "from": {
+          "type": "string",
+          "description": "Source node_id"
+        },
+        "to": {
+          "type": "string",
+          "description": "Target node_id"
+        },
+        "label": { "type": "string" },
+        "meaning": { "type": "string" },
+        "preconditions": { "$ref": "#/$defs/stringOrArray" },
+        "effects_on_stakes": { "$ref": "#/$defs/stringOrArray" },
+        "effects_on_character": { "$ref": "#/$defs/stringOrArray" },
+        "common_alternatives": { "$ref": "#/$defs/stringOrArray" },
+        "anti_patterns": { "$ref": "#/$defs/stringOrArray" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

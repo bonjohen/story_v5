@@ -53,8 +53,8 @@ CLAUDE.md updated to reflect Goal 2 completion, interactive viewer docs, and cur
 15. [X] **genre_archetype_matrix.json placement inconsistent with cross-genre index**
 Moved `cross_genre_constraint_index.json` and `cross_archetype_index.json` to `data/` root alongside `genre_archetype_matrix.json`. All cross-cutting indices now co-located. Fixed.
 
-16. [ ] **No JSON schema for graph.json validation**
-All 42 graph files (15 archetype + 27 genre) follow the same node/edge schema defined in `v0_plan.md` §1.1–1.2, but there is no formal JSON Schema file. Adding one would enable programmatic validation, IDE autocompletion, and CI integration.
+16. [X] **No JSON schema for graph.json validation**
+JSON Schema created at `app/src/schemas/graph.schema.json`. Validates all 42 graphs via AJV. Build-time validation script at `app/scripts/generate-manifest.ts`. Fixed.
 
 17. [ ] **No consolidated example works registry**
 The 15 archetype and 27 genre example mappings reference approximately 120+ distinct films, novels, and plays, but there is no single index of all works used. A consolidated registry would support cross-referencing (which works appear in multiple archetypes/genres), enrichment with metadata, and gap analysis.
@@ -81,8 +81,8 @@ CLAUDE.md was written before the folder restructure and before goal_1 completion
 23. [ ] **Unified vocabulary directory**
 Consolidate archetype and genre vocabulary files (#4, #7) into a single `data/vocabulary/` directory. This would co-locate edge vocabularies, node roles, and ID conventions for both workstreams, making the relationship between vocabulary definitions and deliverables clearer.
 
-24. [ ] **Data manifest file**
-Create a machine-readable manifest listing every deliverable file with its type, status, and key metrics (node count, edge count, example works count). Would support tooling, dashboards, and automated completeness checks.
+24. [X] **Data manifest file**
+Generated at `data/manifest.json` by `app/scripts/generate-manifest.ts`. Lists all 42 graphs with node/edge counts, file paths, and totals. Fixed.
 
 25. [ ] **Export to standard graph formats**
 Add scripts to convert graph.json files to standard formats (GraphML, DOT/Graphviz, GEXF, Mermaid) for use with external visualization and analysis tools. Prerequisite for or alternative to custom visualization (#21).

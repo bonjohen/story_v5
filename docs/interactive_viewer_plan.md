@@ -22,27 +22,27 @@ This plan breaks the interactive viewer specification into 8 implementation phas
 
 **Goal**: Initialize the application, define types, and build the data pipeline from JSON files to an in-memory graph model. Also resolve data-layer housekeeping items from v-next.md that are nearly free to do while building the normalizer and data index.
 
-- [ ] Initialize React + TypeScript project with Vite
-- [ ] Configure ESLint, Prettier, and project structure per design spec §10
-- [ ] Define TypeScript interfaces for archetype graph nodes and edges (matching `v0_plan.md` §1.1–1.2 schema)
-- [ ] Define TypeScript interfaces for genre graph nodes and edges (same schema, genre-specific roles)
-- [ ] Create a **JSON Schema** file for graph.json validation (v-next #16 — the schema is the same shape as the TS interfaces, so producing both is trivial)
-- [ ] Build the Graph Normalizer: load archetype or genre `graph.json`, validate structure, produce a unified internal graph model
-- [ ] Add **graph-narrative ID validation** to the normalizer (v-next #10 — check that all node/edge IDs referenced in narrative.md and examples.md exist in graph.json; report mismatches)
-- [ ] Add **vocabulary usage audit** to the normalizer (v-next #2, #8 — count usage of each controlled vocabulary term across all graphs; flag unused terms)
-- [ ] Set up Zustand store for application state (current graph, selected node, active mode, UI panel state)
-- [ ] Create a graph data index: enumerate all 15 archetypes and 27 genres with metadata (name, type, node count, edge count) from the JSON files
-- [ ] Persist the data index as a **data manifest file** (v-next #24 — write the computed index to a JSON file for use by dashboards and automated checks)
-- [ ] Write unit tests for the normalizer, validator, and data index
-- [ ] Copy `data/archetypes/` and `data/genres/` graph.json files into the app's public data directory (or configure path aliasing)
+- [X] Initialize React + TypeScript project with Vite
+- [X] Configure ESLint, Prettier, and project structure per design spec §10
+- [X] Define TypeScript interfaces for archetype graph nodes and edges (matching `v0_plan.md` §1.1–1.2 schema)
+- [X] Define TypeScript interfaces for genre graph nodes and edges (same schema, genre-specific roles)
+- [X] Create a **JSON Schema** file for graph.json validation (v-next #16 — the schema is the same shape as the TS interfaces, so producing both is trivial)
+- [X] Build the Graph Normalizer: load archetype or genre `graph.json`, validate structure, produce a unified internal graph model
+- [X] Add **graph-narrative ID validation** to the normalizer (v-next #10 — check that all node/edge IDs referenced in narrative.md and examples.md exist in graph.json; report mismatches)
+- [X] Add **vocabulary usage audit** to the normalizer (v-next #2, #8 — count usage of each controlled vocabulary term across all graphs; flag unused terms)
+- [X] Set up Zustand store for application state (current graph, selected node, active mode, UI panel state)
+- [X] Create a graph data index: enumerate all 15 archetypes and 27 genres with metadata (name, type, node count, edge count) from the JSON files
+- [X] Persist the data index as a **data manifest file** (v-next #24 — write the computed index to a JSON file for use by dashboards and automated checks)
+- [X] Write unit tests for the normalizer, validator, and data index
+- [X] Copy `data/archetypes/` and `data/genres/` graph.json files into the app's public data directory (or configure path aliasing)
 
 ### Data housekeeping (v-next items, done as part of Phase 1 setup):
 
-- [ ] **Fix `archetypes.json` filename** (v-next #13 — rename to `archetypes.json` and update all references in CLAUDE.md, cross-indices, and matrix; must be done before the normalizer references it)
-- [ ] **Fix stale paths in goal_1.md** (v-next #3 — find-replace `docs/archetypes/` → `data/archetypes/`, or mark as historical)
-- [ ] **Standardize cross_archetype_index.json naming** (v-next #5 — match archetype names to `archetypes.json` exactly while building the parser)
-- [ ] **Co-locate cross-cutting index files** (v-next #15 — move `genre_archetype_matrix.json` and `cross_genre_constraint_index.json` to a consistent location, either both at `data/` root or both in `data/indices/`)
-- [ ] **Mark v-next #14 as done** (CLAUDE.md has been updated)
+- [X] **Fix `archetypes.json` filename** (v-next #13 — rename to `archetypes.json` and update all references in CLAUDE.md, cross-indices, and matrix; must be done before the normalizer references it)
+- [X] **Fix stale paths in goal_1.md** (v-next #3 — find-replace `docs/archetypes/` → `data/archetypes/`, or mark as historical)
+- [X] **Standardize cross_archetype_index.json naming** (v-next #5 — match archetype names to `archetypes.json` exactly while building the parser)
+- [X] **Co-locate cross-cutting index files** (v-next #15 — move `genre_archetype_matrix.json` and `cross_genre_constraint_index.json` to a consistent location, either both at `data/` root or both in `data/indices/`)
+- [X] **Mark v-next #14 as done** (CLAUDE.md has been updated)
 
 **Deliverable**: App loads, parses any graph.json, and logs a validated graph model to the console. JSON Schema, validation script, and data manifest are produced as artifacts. Data housekeeping items resolved.
 
