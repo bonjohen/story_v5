@@ -4,7 +4,7 @@ This folder contains 27 genre graph deliverables. Each genre models a **constrai
 
 ## Folder Structure
 
-Each of the 27 subfolders (`01_drama/` through `27_holiday/`) contains three files:
+Each of the 27 subfolders (`01_drama/` through `27_holiday/`) contains three core files, plus an optional element constraints file:
 
 ### graph.json
 
@@ -38,6 +38,14 @@ A prose walkthrough of the constraint graph. Explains how the genre promise tran
 ### examples.md
 
 Mapping of 2-4 real works against the constraint graph. Each work is traced node-by-node, showing how specific scenes, settings, and narrative choices satisfy (or deliberately subvert) each constraint. Includes a primary example with detailed mappings and cross-reference examples with briefer coverage.
+
+### element_constraints.json (optional)
+
+Genre-level story element requirements. Defines required, recommended, and optional character roles, relationship types, place types, object types, and testable element rules. Each constraint uses terms from the controlled vocabularies (`element_roles.json`, `place_types.json`, `object_types.json`, `relationship_types.json`) and carries a `severity` level (required, recommended, optional). Element rules include a `rule_id`, description, and `testable_condition`.
+
+Present in 10 genres: Romance (`08_romance`), Horror (`10_horror`), Thriller (`04_thriller`), Fantasy (`05_fantasy`), Science Fiction (`06_science_fiction`), Detective (`13_detective`), Adventure (`07_adventure`), Western (`24_western`), Superhero (`14_superhero`), War (`16_war`).
+
+The remaining 17 genres constrain tone and structure rather than element composition and do not require element constraint files.
 
 ## The 27 Genres
 

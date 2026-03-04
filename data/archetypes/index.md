@@ -31,6 +31,21 @@ Variant branches — optional or alternative paths that branch from and rejoin t
 
 Present in: `01_heros_journey`, `11_the_escape`.
 
+### elements.json
+
+Story element template for this archetype. Defines the character roles, place types, and object types the archetype typically involves, each with a controlled vocabulary term, label, definition, `appears_at_nodes` references, and `required` flag. Also includes a `template_timeline` section describing expected element participation and transitions at each archetype node. Present in all 15 archetypes.
+
+### examples_elements.json (optional)
+
+Instance-level element mappings for a well-known work. Maps specific named characters to template roles with traits, motivations, arc types, and relationships. Includes named places with descriptions and atmospheres, named objects with significance and rules, and a timeline of moments with per-character states and transitions.
+
+Present in:
+- `01_heros_journey` — Star Wars: A New Hope
+- `03_the_quest` — The Lord of the Rings: The Fellowship of the Ring
+- `06_rebirth` — A Christmas Carol
+- `07_tragedy` — Macbeth
+- `08_comedy` — The Big Lebowski
+
 ### beat_sheet_*.json (optional)
 
 Scene-level mappings with timestamps for a single well-known work. Each beat maps an archetype node to specific scenes with timestamps (or page numbers) and duration percentages. Provides concrete scene-resolution evidence of how the archetype structure manifests in a real work.
@@ -65,4 +80,9 @@ Present in:
 All archetype graphs draw from shared controlled vocabularies in `data/vocabulary/`:
 - **Node roles** (14): defined in `archetype_node_roles.json`
 - **Edge meanings** (15): defined in `archetype_edge_vocabulary.json`
+- **Character roles** (13): defined in `element_roles.json`
+- **Place types** (10): defined in `place_types.json`
+- **Object types** (10): defined in `object_types.json`
+- **Relationship types** (10): defined in `relationship_types.json`
+- **Transition change types** (11): defined in `element_change_types.json`
 - **ID conventions**: documented in `archetype_id_convention.md`

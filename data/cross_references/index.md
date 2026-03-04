@@ -17,6 +17,7 @@ This folder contains the cross-referencing datasets and corpus-level metadata th
 | `example_works_registry.json` | Registry of 107 real works (novels, films, plays, games) referenced across archetype and genre examples. Each work lists which graphs reference it and in what role. |
 | `non_western_archetype_analysis.json` | 10 non-Western narrative archetypes from East Asian, South Asian, African, Indigenous American, and Middle Eastern traditions. Maps cognates and divergences from the Western 15. |
 | `cross_medium_adaptation.json` | Analysis of 6 works adapted between mediums (novel to film, film to game, etc.). Documents which nodes compress, expand, or change role in each medium transition. |
+| `element_role_index.json` | Cross-archetype analysis of story element usage. Maps which character roles, place types, and object types appear across all 15 archetypes, showing that protagonist/antagonist are nearly universal while herald and comic relief are archetype-specific. |
 | `corpus_validation.json` | Quantitative validation of graph coverage against a 50-work corpus. Mean archetype coverage: 87%, mean genre coverage: 82%. |
 
 ## Usage
