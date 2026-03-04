@@ -110,40 +110,40 @@ This file is maintained by the coding agent so that [ ] means not started, [~] m
 **Goal:** Build beat outlines and scene specifications from the story contract. Start with deterministic scaffolding, then enhance summaries with LLM.
 
 ### 3.1 LLM adapter interface
-- [ ] Create `app/src/generation/agents/llmAdapter.ts`
-- [ ] Define `LLMAdapter` interface: `complete(prompt, schema?) → string | object`
-- [ ] Implement `AnthropicAdapter` (Claude API via Anthropic SDK)
-- [ ] Implement `MockAdapter` for testing (returns canned responses)
-- [ ] Model selection via `--model` flag or generation config
+- [X] Create `app/src/generation/agents/llmAdapter.ts`
+- [X] Define `LLMAdapter` interface: `complete(prompt, schema?) → string | object`
+- [X] Implement `AnthropicAdapter` (Claude API via Anthropic SDK)
+- [X] Implement `MockAdapter` for testing (returns canned responses)
+- [X] Model selection via `--model` flag or generation config
 
 ### 3.2 Deterministic beat scaffolding
-- [ ] Create `app/src/generation/engine/planner.ts`
-- [ ] Map each archetype spine node to one beat (1:1 minimum)
-- [ ] Assign emotional arc targets from `archetype_emotional_arcs.json` (if available)
-- [ ] For hybrid archetypes: create parallel beat segments + merge plan using divergence points
+- [X] Create `app/src/generation/engine/planner.ts`
+- [X] Map each archetype spine node to one beat (1:1 minimum)
+- [X] Assign emotional arc targets from `archetype_emotional_arcs.json` (if available)
+- [X] For hybrid archetypes: create parallel beat segments + merge plan using divergence points
 
 ### 3.3 Scene assignment
-- [ ] Assign each hard genre obligation (Level 5, severity: hard) to at least one scene
-- [ ] Distribute soft obligations across beats where narratively appropriate
-- [ ] Build per-scene `constraints_checklist` (hard, soft, must_not)
-- [ ] Build per-scene `archetype_trace` (node, edge_in, edge_out)
+- [X] Assign each hard genre obligation (Level 5, severity: hard) to at least one scene
+- [X] Distribute soft obligations across beats where narratively appropriate
+- [X] Build per-scene `constraints_checklist` (hard, soft, must_not)
+- [X] Build per-scene `archetype_trace` (node, edge_in, edge_out)
 
 ### 3.4 LLM-enhanced summaries
-- [ ] Create planner agent prompt in `app/src/generation/agents/plannerAgent.ts`
-- [ ] LLM generates beat summaries, scene goals, setting, and character assignments
-- [ ] LLM output is constrained by contract boundaries — validate before accepting
-- [ ] Fallback: deterministic summaries from node definitions if LLM unavailable
+- [X] Create planner agent prompt in `app/src/generation/agents/plannerAgent.ts`
+- [X] LLM generates beat summaries, scene goals, setting, and character assignments
+- [X] LLM output is constrained by contract boundaries — validate before accepting
+- [X] Fallback: deterministic summaries from node definitions if LLM unavailable
 
 ### 3.5 Coverage tracking
-- [ ] Build coverage map: constraint → assigned scenes, anti-patterns → monitored checks, roles → beats
-- [ ] Emit `coverage_targets` in plan (hard: 1.0, soft: configurable minimum)
-- [ ] Fail planning if any hard constraint is unassigned
+- [X] Build coverage map: constraint → assigned scenes, anti-patterns → monitored checks, roles → beats
+- [X] Emit `coverage_targets` in plan (hard: 1.0, soft: configurable minimum)
+- [X] Fail planning if any hard constraint is unassigned
 
 ### 3.6 Tests
-- [ ] Unit tests for beat scaffolding (every spine node mapped)
-- [ ] Unit tests for scene assignment (every hard obligation assigned)
-- [ ] Unit tests for coverage tracking (coverage map complete)
-- [ ] Integration test with mock LLM adapter
+- [X] Unit tests for beat scaffolding (every spine node mapped)
+- [X] Unit tests for scene assignment (every hard obligation assigned)
+- [X] Unit tests for coverage tracking (coverage map complete)
+- [X] Integration test with mock LLM adapter
 
 **Verification:** Every archetype spine node has at least one beat. Every hard constraint appears in at least one scene checklist. Coverage targets are met. Plan validates against JSON schema.
 

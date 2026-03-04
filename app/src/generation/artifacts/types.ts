@@ -201,12 +201,20 @@ export interface EmotionalScores {
   resolution: number
 }
 
+export interface BeatHybridInfo {
+  secondary_archetype_id: string
+  shared: boolean                    // true if this beat's role exists in both archetypes
+  divergence_beat: boolean           // true if this is where the arcs split
+  composition_method: CompositionMethod
+}
+
 export interface Beat {
   beat_id: string
   archetype_node_id: string
   summary: string
   required_exit_conditions: string[]
   target_emotional_scores: EmotionalScores
+  hybrid_info?: BeatHybridInfo
 }
 
 export interface SceneArchetypeTrace {
