@@ -40,10 +40,10 @@
       ]
     },
     {
-      "work_id": "midsummer_nights_dream",
+      "work_id": "midsummer_nights_dream_1596",
       "title": "A Midsummer Night's Dream",
       "creator": "William Shakespeare",
-      "year": null,
+      "year": 1596,
       "medium": "Shakespeare comedy",
       "references": [
         {
@@ -140,9 +140,9 @@
     {
       "work_id": "arthur_conan_doyle_sherlock_holmes_1887",
       "title": "Arthur Conan Doyle — Sherlock Holmes",
-      "creator": "",
+      "creator": "Arthur Conan Doyle",
       "year": 1887,
-      "medium": "",
+      "medium": "novel series",
       "references": [
         {
           "graph_id": "genre_13_detective",
@@ -177,10 +177,10 @@
       ]
     },
     {
-      "work_id": "beowulf",
+      "work_id": "beowulf_1000",
       "title": "Beowulf",
       "creator": "Anonymous",
-      "year": null,
+      "year": 1000,
       "medium": "Old English epic poem",
       "references": [
         {
@@ -682,10 +682,10 @@
       ]
     },
     {
-      "work_id": "macbeth",
+      "work_id": "macbeth_1606",
       "title": "Macbeth",
       "creator": "William Shakespeare",
-      "year": null,
+      "year": 1606,
       "medium": "Shakespeare tragedy",
       "references": [
         {
@@ -803,10 +803,10 @@
       ]
     },
     {
-      "work_id": "romeo_and_juliet",
+      "work_id": "romeo_and_juliet_1597",
       "title": "Romeo and Juliet",
       "creator": "William Shakespeare",
-      "year": null,
+      "year": 1597,
       "medium": "Shakespeare tragedy",
       "references": [
         {
@@ -1438,7 +1438,7 @@
       "title": "True Detective Season 1",
       "creator": "Pizzolatto",
       "year": 2014,
-      "medium": "",
+      "medium": "television",
       "references": [
         {
           "graph_id": "genre_13_detective",

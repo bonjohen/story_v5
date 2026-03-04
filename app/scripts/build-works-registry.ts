@@ -97,14 +97,14 @@ const KNOWN_WORKS: Record<string, Partial<WorkRecord>> = {
   'the lion, the witch and the wardrobe': { creator: 'C.S. Lewis', year: 1950, medium: 'novel' },
   'jaws': { creator: 'Steven Spielberg', year: 1975, medium: 'film' },
   'jurassic park': { creator: 'Steven Spielberg', year: 1993, medium: 'film' },
-  'beowulf': { creator: 'Anonymous', year: null, medium: 'epic poem' },
+  'beowulf': { creator: 'Anonymous', year: 1000, medium: 'epic poem' },
   'a christmas carol': { creator: 'Charles Dickens', year: 1843, medium: 'novella' },
   'groundhog day': { creator: 'Harold Ramis', year: 1993, medium: 'film' },
   'beauty and the beast': { creator: 'Gary Trousdale & Kirk Wise', year: 1991, medium: 'animated film' },
-  'macbeth': { creator: 'William Shakespeare', year: null, medium: 'play' },
+  'macbeth': { creator: 'William Shakespeare', year: 1606, medium: 'play' },
   'titanic': { creator: 'James Cameron', year: 1997, medium: 'film' },
-  'romeo and juliet': { creator: 'William Shakespeare', year: null, medium: 'play' },
-  "a midsummer night's dream": { creator: 'William Shakespeare', year: null, medium: 'play' },
+  'romeo and juliet': { creator: 'William Shakespeare', year: 1597, medium: 'play' },
+  "a midsummer night's dream": { creator: 'William Shakespeare', year: 1596, medium: 'play' },
   'the big lebowski': { creator: 'Joel & Ethan Coen', year: 1998, medium: 'film' },
   "bridget jones's diary": { creator: 'Sharon Maguire', year: 2001, medium: 'film' },
   'to kill a mockingbird': { creator: 'Harper Lee', year: 1960, medium: 'novel' },
@@ -194,6 +194,8 @@ const KNOWN_WORKS: Record<string, Partial<WorkRecord>> = {
   'parasite': { creator: 'Bong Joon-ho', year: 2019, medium: 'film' },
   'silence of the lambs': { creator: 'Jonathan Demme', year: 1991, medium: 'film' },
   "sherlock holmes": { creator: 'Arthur Conan Doyle', year: 1887, medium: 'novel series' },
+  'arthur conan doyle - sherlock holmes': { creator: 'Arthur Conan Doyle', year: 1887, medium: 'novel series' },
+  'true detective season 1': { creator: 'Nic Pizzolatto', year: 2014, medium: 'television' },
 }
 
 // Map short names used in genre Format B to full titles

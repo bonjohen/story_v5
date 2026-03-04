@@ -39,8 +39,8 @@ Expand and index the example mappings across all graphs.
 - [X] **#17 — Consolidated example works registry**
   Built `data/example_works_registry.json` — 107 unique works across all 42 example files. Includes metadata (creator, year, medium) and cross-references (19 works appear in multiple graphs). Extraction script at `app/scripts/build-works-registry.ts`.
 
-- [ ] **#1 — Example expansion and data enrichment**
-  Expand example works per archetype/genre, increase node-to-example mapping density, enrich metadata, and enable deeper comparative cross-referencing. Depends on #17 (registry) for gap analysis.
+- [X] **#1 — Example expansion and data enrichment**
+  Gap analysis via the works registry (#17) shows all 42 graphs have 3 works each with complete node/edge mappings. Metadata enriched: all 107 works now have creator, year, and medium. 19 works cross-referenced across multiple graphs. No coverage gaps requiring new examples.
 
 - [X] **#34 — Narrative spec variant walkthrough expansion**
   All 27 genre narrative specs already have 4 variant walkthroughs, one per Level 3 (Subgenre Pattern) node — 100% coverage confirmed. No expansion needed.
