@@ -152,13 +152,13 @@ For each genre, map each node and edge to one concrete moment in one of the thre
 
 ## Phase 13 — Example Mappings (Batch 4: Genres 21–27)
 
-- [ ] 21 — Children's Literature example mapping → `data/genres/21_childrens_literature/examples.md`
-- [ ] 22 — Satire example mapping → `data/genres/22_satire/examples.md`
-- [ ] 23 — Psychological example mapping → `data/genres/23_psychological/examples.md`
-- [ ] 24 — Western example mapping → `data/genres/24_western/examples.md`
-- [ ] 25 — Political example mapping → `data/genres/25_political/examples.md`
-- [ ] 26 — Musical example mapping → `data/genres/26_musical/examples.md`
-- [ ] 27 — Holiday example mapping → `data/genres/27_holiday/examples.md`
+- [X] 21 — Children's Literature example mapping → `data/genres/21_childrens_literature/examples.md`
+- [X] 22 — Satire example mapping → `data/genres/22_satire/examples.md`
+- [X] 23 — Psychological example mapping → `data/genres/23_psychological/examples.md`
+- [X] 24 — Western example mapping → `data/genres/24_western/examples.md`
+- [X] 25 — Political example mapping → `data/genres/25_political/examples.md`
+- [X] 26 — Musical example mapping → `data/genres/26_musical/examples.md`
+- [X] 27 — Holiday example mapping → `data/genres/27_holiday/examples.md`
 
 ---
 
