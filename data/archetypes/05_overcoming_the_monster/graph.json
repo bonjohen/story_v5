@@ -26,6 +26,7 @@
       "restores equilibrium": 1
     }
   },
+  "variant_file": null,
   "nodes": [
     {
       "node_id": "OM_N01_PEACEFUL_STATE",

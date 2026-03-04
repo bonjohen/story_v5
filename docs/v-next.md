@@ -81,7 +81,7 @@ Research-intensive items requiring new data collection or external corpus work.
 
 Structural refactors to the graph data model.
 
-- [ ] **#20 — Archetype variant graphs as separate JSON files**
+- [X] **#20 — Archetype variant graphs as separate JSON files**
   Split variant branches (currently embedded via 50–79 ID range) into separate graph files for cleaner tooling and independent analysis.
 
 - [ ] **#27 — Scene-level beat sheets**

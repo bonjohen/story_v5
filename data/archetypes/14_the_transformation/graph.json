@@ -24,6 +24,7 @@
       "restores equilibrium": 1
     }
   },
+  "variant_file": null,
   "nodes": [
     {
       "node_id": "TF_N01_FIXED_IDENTITY",

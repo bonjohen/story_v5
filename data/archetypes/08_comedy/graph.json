@@ -24,6 +24,7 @@
       "restores equilibrium": 1
     }
   },
+  "variant_file": null,
   "nodes": [
     {
       "node_id": "CO_N01_CONSTRAINED_ORDER",

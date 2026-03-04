@@ -4,12 +4,11 @@
   "type": "archetype",
   "description": "A protagonist departs from the ordinary world, undergoes trials and transformation in a special world, and returns changed. The structure emphasizes initiation, crisis, and reintegration.",
   "_metadata": {
-    "nodeCount": 12,
-    "edgeCount": 12,
+    "nodeCount": 11,
+    "edgeCount": 10,
     "nodesPerRole": {
       "Origin": 1,
       "Disruption": 1,
-      "Commitment": 1,
       "Catalyst": 1,
       "Threshold": 1,
       "Trial": 2,
@@ -20,10 +19,10 @@
     },
     "edgesPerMeaning": {
       "disrupts order": 1,
-      "narrows options": 2,
-      "forces commitment": 2,
       "grants insight": 1,
+      "forces commitment": 1,
       "tests resolve": 1,
+      "narrows options": 1,
       "triggers crisis": 1,
       "enables transformation": 1,
       "raises cost": 1,
@@ -31,6 +30,7 @@
       "restores equilibrium": 1
     }
   },
+  "variant_file": "variants.json",
   "nodes": [
     {
       "node_id": "HJ_N01_ORDINARY_WORLD",
@@ -84,33 +84,6 @@
         "Arrival of a stranger",
         "News of a threat",
         "An invitation or challenge"
-      ]
-    },
-    {
-      "node_id": "HJ_N50_REFUSAL_OF_CALL",
-      "label": "Refusal of the Call",
-      "role": "Commitment",
-      "definition": "The protagonist hesitates or declines the call, revealing fear, obligation, or attachment to the ordinary world.",
-      "entry_conditions": [
-        "Call has been received",
-        "Character has reason to resist"
-      ],
-      "exit_conditions": [
-        "An escalation or new event overrides the refusal"
-      ],
-      "typical_variants": [
-        "Fear-based refusal",
-        "Duty to family or community",
-        "Disbelief that the call is real"
-      ],
-      "failure_modes": [
-        "Refusal lasts so long it stalls momentum",
-        "Refusal has no credible basis"
-      ],
-      "signals_in_text": [
-        "Excuses",
-        "Turning away",
-        "Rationalization of inaction"
       ]
     },
     {
@@ -376,30 +349,6 @@
       "effects_on_character": "Forces the protagonist to acknowledge a world beyond the familiar",
       "common_alternatives": "Call arrives through loss rather than opportunity",
       "anti_patterns": "Call is so gentle it creates no urgency"
-    },
-    {
-      "edge_id": "HJ_E50_REFUSAL",
-      "from": "HJ_N02_CALL_TO_ADVENTURE",
-      "to": "HJ_N50_REFUSAL_OF_CALL",
-      "label": "Hero Refuses",
-      "meaning": "narrows options",
-      "preconditions": "Call has been received; character has reason to resist",
-      "effects_on_stakes": "Delays engagement, often causing the threat to worsen",
-      "effects_on_character": "Reveals fear, attachment, or self-doubt",
-      "common_alternatives": "Immediate acceptance (skip this edge entirely)",
-      "anti_patterns": "Refusal has no consequences; nothing changes while the hero hesitates"
-    },
-    {
-      "edge_id": "HJ_E51_OVERRIDE",
-      "from": "HJ_N50_REFUSAL_OF_CALL",
-      "to": "HJ_N03_MENTOR",
-      "label": "Refusal Overridden",
-      "meaning": "forces commitment",
-      "preconditions": "Refusal is in place; an escalation occurs",
-      "effects_on_stakes": "Stakes increase because delay has worsened the problem",
-      "effects_on_character": "Character is compelled past their resistance",
-      "common_alternatives": "External force removes the option to refuse (e.g., home is destroyed)",
-      "anti_patterns": "Override is trivial; no cost to having refused"
     },
     {
       "edge_id": "HJ_E02_MENTOR_FOUND",

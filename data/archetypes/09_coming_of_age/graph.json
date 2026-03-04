@@ -24,6 +24,7 @@
       "enables transformation": 1
     }
   },
+  "variant_file": null,
   "nodes": [
     {
       "node_id": "CA_N01_INNOCENCE",
