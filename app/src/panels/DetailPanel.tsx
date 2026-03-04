@@ -76,18 +76,7 @@ export function DetailPanel({
   if (!node && !edge) return null
 
   return (
-    <aside
-      style={{
-        width: 320,
-        background: 'var(--bg-surface)',
-        borderLeft: '1px solid var(--border)',
-        overflowY: 'auto',
-        flexShrink: 0,
-        animation: 'slideInRight 0.2s ease',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Header with close button */}
       <div style={{
         display: 'flex',
@@ -122,7 +111,7 @@ export function DetailPanel({
           <ConstraintChecklist graph={graph} selectedNodeId={node.node_id} />
         )}
       </div>
-    </aside>
+    </div>
   )
 }
 

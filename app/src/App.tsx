@@ -6,6 +6,8 @@ import { VariantToggle, computeFailureModeNodes } from './components/VariantTogg
 import { DetailPanel, EdgeTooltip } from './panels/DetailPanel.tsx'
 import { SimulationPanel } from './panels/SimulationPanel.tsx'
 import { ExampleOverlay } from './panels/ExampleOverlay.tsx'
+import { GraphStats } from './panels/GraphStats.tsx'
+import { CrossIndexPanel } from './panels/CrossIndex.tsx'
 import { GraphSearch } from './components/GraphSearch.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSimulationStore } from './store/simulationStore.ts'
@@ -57,6 +59,8 @@ function App() {
   const [showSimulation, setShowSimulation] = useState(false)
   // Example mode
   const [exampleMappedNodes, setExampleMappedNodes] = useState<string[]>([])
+  // Right panel mode
+  const [rightPanel, setRightPanel] = useState<'detail' | 'stats' | 'crossindex' | null>(null)
 
   const handleExampleHighlight = useCallback((nodeIds: string[]) => {
     setExampleMappedNodes(nodeIds)
@@ -292,6 +296,44 @@ function App() {
 
         <div style={{ flex: 1 }} />
 
+        {/* Analytical tools */}
+        {currentGraph && (
+          <>
+            <button
+              onClick={() => setRightPanel(rightPanel === 'stats' ? null : 'stats')}
+              style={{
+                fontSize: 11,
+                padding: '3px 8px',
+                borderRadius: 4,
+                border: '1px solid',
+                borderColor: rightPanel === 'stats' ? 'var(--accent)' : 'var(--border)',
+                background: rightPanel === 'stats' ? 'rgba(59,130,246,0.15)' : 'transparent',
+                color: rightPanel === 'stats' ? 'var(--accent)' : 'var(--text-muted)',
+                cursor: 'pointer',
+                transition: 'all 0.15s',
+              }}
+            >
+              Stats
+            </button>
+            <button
+              onClick={() => setRightPanel(rightPanel === 'crossindex' ? null : 'crossindex')}
+              style={{
+                fontSize: 11,
+                padding: '3px 8px',
+                borderRadius: 4,
+                border: '1px solid',
+                borderColor: rightPanel === 'crossindex' ? 'var(--accent)' : 'var(--border)',
+                background: rightPanel === 'crossindex' ? 'rgba(59,130,246,0.15)' : 'transparent',
+                color: rightPanel === 'crossindex' ? 'var(--accent)' : 'var(--text-muted)',
+                cursor: 'pointer',
+                transition: 'all 0.15s',
+              }}
+            >
+              X-Index
+            </button>
+          </>
+        )}
+
         {/* Simulation toggle */}
         {currentGraph && (
           <button
@@ -422,17 +464,58 @@ function App() {
           )}
         </div>
 
-        {/* Right: detail panel */}
-        {hasDetailPanel && (
-          <DetailPanel
-            node={selectedNode}
-            edge={selectedEdge}
-            onTraceForward={handleTraceForward}
-            onTraceBackward={handleTraceBackward}
-            onClearTrace={handleClearTrace}
-            traceActive={traceDirection}
-            graph={currentGraph}
-          />
+        {/* Right panel (tabbed: Detail / Stats / Cross-Index) */}
+        {(hasDetailPanel || rightPanel) && currentGraph && (
+          <aside style={{
+            width: 320,
+            background: 'var(--bg-surface)',
+            borderLeft: '1px solid var(--border)',
+            flexShrink: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+          }}>
+            {/* Tab bar */}
+            <div style={{
+              display: 'flex',
+              borderBottom: '1px solid var(--border)',
+              flexShrink: 0,
+            }}>
+              <PanelTab
+                label="Detail"
+                active={!rightPanel || rightPanel === 'detail'}
+                onClick={() => setRightPanel(hasDetailPanel ? 'detail' : null)}
+                badge={hasDetailPanel}
+              />
+              <PanelTab
+                label="Stats"
+                active={rightPanel === 'stats'}
+                onClick={() => setRightPanel(rightPanel === 'stats' ? null : 'stats')}
+              />
+              <PanelTab
+                label="X-Index"
+                active={rightPanel === 'crossindex'}
+                onClick={() => setRightPanel(rightPanel === 'crossindex' ? null : 'crossindex')}
+              />
+            </div>
+
+            {/* Panel content */}
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              {(!rightPanel || rightPanel === 'detail') && hasDetailPanel && (
+                <DetailPanel
+                  node={selectedNode}
+                  edge={selectedEdge}
+                  onTraceForward={handleTraceForward}
+                  onTraceBackward={handleTraceBackward}
+                  onClearTrace={handleClearTrace}
+                  traceActive={traceDirection}
+                  graph={currentGraph}
+                />
+              )}
+              {rightPanel === 'stats' && <GraphStats graph={currentGraph} />}
+              {rightPanel === 'crossindex' && <CrossIndexPanel graph={currentGraph} />}
+            </div>
+          </aside>
         )}
       </div>
 
@@ -441,6 +524,42 @@ function App() {
         <EdgeTooltip edge={hoveredEdge.edge} position={{ x: hoveredEdge.x, y: hoveredEdge.y }} />
       )}
     </div>
+  )
+}
+
+function PanelTab({ label, active, onClick, badge }: {
+  label: string
+  active: boolean
+  onClick: () => void
+  badge?: boolean
+}) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        flex: 1,
+        padding: '6px 4px',
+        fontSize: 10,
+        fontWeight: active ? 600 : 400,
+        color: active ? 'var(--accent)' : 'var(--text-muted)',
+        borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
+        transition: 'color 0.15s, border-color 0.15s',
+        position: 'relative',
+      }}
+    >
+      {label}
+      {badge && !active && (
+        <span style={{
+          position: 'absolute',
+          top: 4,
+          right: 8,
+          width: 5,
+          height: 5,
+          borderRadius: '50%',
+          background: 'var(--accent)',
+        }} />
+      )}
+    </button>
   )
 }
 

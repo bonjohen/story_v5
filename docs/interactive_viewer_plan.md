@@ -204,13 +204,13 @@ Stage, commit, and push, then continue working.
 
 **Goal**: Build the comparative and overlay features that make this a "narrative debugger."
 
-- [ ] Implement **Archetype-Genre Overlay** (design spec §6.2):
+- [X] Implement **Archetype-Genre Overlay** (design spec §6.2):
   - Load one archetype and one genre simultaneously
   - Use the genre × archetype compatibility matrix (`data/genre_archetype_matrix.json`) to inform the overlay
   - Display archetype temporal progression alongside genre constraint depth
   - Highlight tension points where archetype demands conflict with genre constraints
   - Show compatibility rating from the matrix
-- [ ] Implement **Comparative Mode** (design spec §6.3):
+- [X] Implement **Comparative Mode** (design spec §6.3):
   - Split-screen layout: two graphs side by side
   - Support comparisons:
     - Archetype A vs. Archetype B
@@ -218,18 +218,18 @@ Stage, commit, and push, then continue working.
     - Same archetype, two different example works
   - Show metrics: node count, edge density, branching complexity
   - Synchronized zoom/pan option
-- [ ] Build **cross-index integration**:
+- [X] Build **cross-index integration**:
   - Use `cross_archetype_index.json` and `cross_genre_constraint_index.json` to show shared patterns
   - When viewing a node, show which other archetypes/genres have the same role or constraint type
   - Enable "find similar constraints across genres" search
-- [ ] Add **graph statistics dashboard**:
+- [X] Add **graph statistics dashboard**:
   - Node count by role/level
   - Edge count by meaning
   - Branching factor analysis
   - Depth/length metrics
-- [ ] Add **multi-archetype overlay** (v-next #37 — comparative mode already renders two graphs side by side; extend to support two archetypes aligned by narrative time, showing overlap and divergence)
-- [ ] Add **genre-archetype tension analysis** (v-next #38 — overlay mode already identifies tension points; formalize into a panel showing specific constraint conflicts, e.g., Comedy's "recoverable stakes" vs. Tragedy's "irreversible consequences")
-- [ ] Add **failure mode cross-reference** to cross-index integration (v-next #42 — the cross-index queries already surface shared patterns; add failure modes as a searchable category, showing which anti-patterns recur across archetypes/genres)
+- [X] Add **multi-archetype overlay** (v-next #37 — comparative mode already renders two graphs side by side; extend to support two archetypes aligned by narrative time, showing overlap and divergence)
+- [X] Add **genre-archetype tension analysis** (v-next #38 — overlay mode already identifies tension points; formalize into a panel showing specific constraint conflicts, e.g., Comedy's "recoverable stakes" vs. Tragedy's "irreversible consequences")
+- [X] Add **failure mode cross-reference** to cross-index integration (v-next #42 — the cross-index queries already surface shared patterns; add failure modes as a searchable category, showing which anti-patterns recur across archetypes/genres)
 
 **Deliverable**: Overlay archetype and genre graphs to see structural tension; compare any two graphs (including two archetypes) side by side; explore cross-cutting patterns including shared failure modes; see formalized tension analysis for archetype-genre pairs.
 
