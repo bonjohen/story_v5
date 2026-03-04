@@ -1,0 +1,711 @@
+{
+  "title": "Genre × Archetype Compatibility Matrix",
+  "description": "Maps how the 15 archetype time-graphs commonly pair with the 27 genre constraint-graphs. For each genre, archetypes are classified as naturally compatible (the pairing is common and structurally reinforcing), occasionally compatible (the pairing works but requires deliberate adaptation), or rarely compatible (the pairing is unusual and structurally challenging). Each pairing includes a brief rationale.",
+
+  "archetypes_reference": [
+    "The Hero's Journey",
+    "Rags to Riches",
+    "The Quest",
+    "Voyage and Return",
+    "Overcoming the Monster",
+    "Rebirth",
+    "Tragedy",
+    "Comedy (Restoration of Order)",
+    "Coming of Age",
+    "The Revenge",
+    "The Escape",
+    "The Sacrifice",
+    "The Mystery Unveiled",
+    "The Transformation",
+    "The Rise and Fall"
+  ],
+
+  "genres": [
+    {
+      "genre": "Drama",
+      "genre_id": 1,
+      "naturally_compatible": [
+        { "archetype": "Tragedy", "rationale": "Drama's emphasis on consequential choices and emotional stakes aligns perfectly with Tragedy's arc of flawed decisions leading to downfall." },
+        { "archetype": "Coming of Age", "rationale": "Identity formation and first experiences are inherently dramatic when grounded in plausible human experience and interpersonal conflict." },
+        { "archetype": "Rebirth", "rationale": "A character's moral renewal through crisis is pure drama — emotional stakes are real and the transformation requires consequential choice." },
+        { "archetype": "The Rise and Fall", "rationale": "The trajectory from elevation to decline generates sustained interpersonal conflict and demands the irreversible choices Drama requires." },
+        { "archetype": "The Sacrifice", "rationale": "Choosing to give up something of genuine value for a greater good is among the most dramatically potent of consequential choices." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "Works when the journey is internalized — the trials are emotional rather than physical, and the special world is a social or psychological one." },
+        { "archetype": "Rags to Riches", "rationale": "The rise from disadvantage generates strong emotional stakes, though Drama may focus more on the social friction of the ascent than on the success itself." },
+        { "archetype": "The Revenge", "rationale": "Revenge generates intense interpersonal conflict, but Drama tends to interrogate the moral cost rather than celebrate the pursuit." },
+        { "archetype": "The Escape", "rationale": "Confinement — social, domestic, or institutional — is a natural dramatic setting, though the escape itself may be psychological rather than physical." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Hidden truths within families or relationships can drive dramatic revelation, though the investigative structure must yield to character focus." },
+        { "archetype": "The Transformation", "rationale": "Profound identity change generates drama when the focus remains on the human cost and relational consequences of that change." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Dramatic comedy (tragicomedy) works when social disorder carries real emotional weight and reconciliation is hard-won." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's external goal orientation and journey structure pull focus away from Drama's interpersonal and interiority requirements." },
+        { "archetype": "Voyage and Return", "rationale": "The departure-to-unfamiliar-world structure tends toward wonder or adventure rather than Drama's grounded interpersonal conflict." },
+        { "archetype": "Overcoming the Monster", "rationale": "The externalized antagonist and physical confrontation structure sit uncomfortably with Drama's requirement for primarily interpersonal conflict." }
+      ]
+    },
+    {
+      "genre": "Action",
+      "genre_id": 2,
+      "naturally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "The Hero's Journey provides a complete dramatic arc — departure, trials, ordeal, return — that maps directly onto Action's escalating physical set pieces." },
+        { "archetype": "The Quest", "rationale": "A defined objective pursued through escalating physical obstacles is the structural backbone of both the Quest archetype and the Action genre." },
+        { "archetype": "Overcoming the Monster", "rationale": "Action's requirement for a clear antagonist and climactic physical confrontation is the Overcoming the Monster archetype in its purest form." },
+        { "archetype": "The Revenge", "rationale": "The Revenge archetype's pursuit-and-escalation structure generates the continuous physical confrontation and rising stakes that Action demands." },
+        { "archetype": "The Escape", "rationale": "Planning and executing an escape generates naturally escalating action sequences, physical obstacles, and the kinetic energy the genre requires." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Rise and Fall", "rationale": "An action protagonist's ascent to peak capability followed by a fall creates compelling set pieces, though the decline phase challenges the genre's momentum." },
+        { "archetype": "The Sacrifice", "rationale": "The climactic sacrifice scene delivers powerful action climaxes, but the preceding moral deliberation may slow the genre's required pacing." },
+        { "archetype": "Rags to Riches", "rationale": "A fighter or soldier's rise through increasingly demanding physical challenges maps onto Action, though the archetype's social dimensions are often compressed." },
+        { "archetype": "Voyage and Return", "rationale": "Works when the unfamiliar world is physically dangerous and the return requires fighting through accumulated threats." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Coming of Age", "rationale": "Action's kinetic pacing and physical resolution requirements leave little room for the gradual psychological maturation Coming of Age demands." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal requires interior transformation that Action's externalized, physical-confrontation focus struggles to accommodate." },
+        { "archetype": "Tragedy", "rationale": "Tragedy's emphasis on inevitable downfall through flawed choices conflicts with Action's requirement for protagonists who can physically triumph." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Action's requirement for genuine danger and escalating physical stakes is structurally opposed to Comedy's promise that harm is recoverable." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation and clue-following require pacing and cognitive focus that disrupt Action's kinetic momentum." },
+        { "archetype": "The Transformation", "rationale": "Internal identity transformation requires stillness and reflection that Action's kinetic energy actively resists." }
+      ]
+    },
+    {
+      "genre": "Comedy",
+      "genre_id": 3,
+      "naturally_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "The archetype and the genre are structurally identical — social disorder escalates through confusion and misunderstanding before harmony is restored." },
+        { "archetype": "Coming of Age", "rationale": "Adolescent awkwardness, social miscalibration, and first experiences are natural comedy engines when the stakes remain recoverable." },
+        { "archetype": "Voyage and Return", "rationale": "A character displaced into an unfamiliar world generates fish-out-of-water comedy — the gap between the character's norms and the new world's rules produces sustained incongruity." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Rags to Riches", "rationale": "The rise from disadvantage generates comic incongruity when the protagonist is comically ill-suited to their new status." },
+        { "archetype": "Rebirth", "rationale": "A morally diminished character's renewal can be comic when the crisis that triggers change is absurd or socially embarrassing rather than tragic." },
+        { "archetype": "The Quest", "rationale": "A comic quest works when the objective is absurd, the companions are dysfunctional, and the obstacles are ridiculous rather than genuinely dangerous." },
+        { "archetype": "The Hero's Journey", "rationale": "Comic heroes can follow the journey structure when every stage is undercut by the hero's inadequacy, cowardice, or social incompetence." },
+        { "archetype": "The Escape", "rationale": "Escape comedies work when confinement is social rather than lethal and the escape plan is elaborate, fragile, and prone to farcical complication." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragedy's requirement for irreversible downfall contradicts Comedy's genre promise that stakes are recoverable and resolution trends positive." },
+        { "archetype": "The Revenge", "rationale": "Revenge's escalating moral cost and potential for genuine harm conflict with Comedy's contract that no lasting damage occurs." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline phase of Rise and Fall violates Comedy's promise of reconciliation and restored harmony." },
+        { "archetype": "The Sacrifice", "rationale": "Genuine self-sacrifice requires a tonal gravity that Comedy's playful register actively undermines." },
+        { "archetype": "Overcoming the Monster", "rationale": "The existential threat of a genuine monster sits uneasily with Comedy's assurance that the world is fundamentally safe." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Mystery's investigative rigor and revelation of hidden truths require sustained seriousness that disrupts comic tone." },
+        { "archetype": "The Transformation", "rationale": "Profound identity crisis requires the kind of psychological gravity that Comedy's playful register cannot easily sustain." }
+      ]
+    },
+    {
+      "genre": "Thriller",
+      "genre_id": 4,
+      "naturally_compatible": [
+        { "archetype": "The Mystery Unveiled", "rationale": "Incomplete information and progressive revelation are structural requirements of both — the investigative arc generates the sustained suspense Thriller demands." },
+        { "archetype": "The Escape", "rationale": "Confinement, isolation, and the desperate need to break free generate the sustained danger and vulnerability that define the Thriller genre." },
+        { "archetype": "The Revenge", "rationale": "The pursuit dynamic — hunter and hunted, predator and prey — generates the escalating danger and cat-and-mouse tension Thriller requires." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "Works when the journey takes the protagonist into increasingly dangerous territory with diminishing resources and unreliable allies." },
+        { "archetype": "Overcoming the Monster", "rationale": "The monster-as-threat generates Thriller tension when the protagonist is genuinely outmatched and the confrontation requires strategy rather than force." },
+        { "archetype": "The Quest", "rationale": "A quest under time pressure with hidden dangers generates Thriller tension, though the journey structure may diffuse the sustained suspense." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline phase — paranoia, closing walls, accumulating enemies — is inherently suspenseful, though the rise phase may lack Thriller urgency." },
+        { "archetype": "The Transformation", "rationale": "Psychological transformation under external threat generates the contested-reality tension that defines Psychological Thriller." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's promise of recoverable stakes and playful tone directly contradicts Thriller's requirement for genuine, escalating danger." },
+        { "archetype": "Coming of Age", "rationale": "Gradual maturation requires the kind of developmental pacing that Thriller's relentless escalation cannot accommodate." },
+        { "archetype": "Rags to Riches", "rationale": "The upward trajectory of social ascent lacks the descending pressure and mounting danger that Thriller demands." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal requires hopeful transformation that conflicts with Thriller's atmosphere of dread and uncertain survival." },
+        { "archetype": "Voyage and Return", "rationale": "The fascination-phase wonder of Voyage and Return disrupts Thriller's requirement for sustained dread." },
+        { "archetype": "The Sacrifice", "rationale": "While sacrifice can be a Thriller climax, the archetype's moral clarity conflicts with Thriller's emphasis on ambiguity and uncertainty." },
+        { "archetype": "Tragedy", "rationale": "Tragedy's inevitability undercuts Thriller's dependence on uncertainty — if the outcome feels fated, suspense collapses." }
+      ]
+    },
+    {
+      "genre": "Fantasy",
+      "genre_id": 5,
+      "naturally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "Fantasy's mythic stakes and threshold-crossing structure are the natural home of the Hero's Journey — departure from the ordinary world into the magical one and return transformed." },
+        { "archetype": "The Quest", "rationale": "A defined objective pursued through a magical world with escalating obstacles is the foundational Fantasy plot structure." },
+        { "archetype": "Overcoming the Monster", "rationale": "Fantasy provides the mythic scale — dragons, dark lords, cosmic threats — that the Overcoming the Monster archetype requires to achieve full grandeur." },
+        { "archetype": "Voyage and Return", "rationale": "Portal fantasy and secondary-world entry are structural expressions of Voyage and Return — the protagonist crosses into a world of wonder and must find their way back." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Rebirth", "rationale": "Magical curses, enchantments, and transformative crises provide literalized versions of the Rebirth archetype's moral renewal." },
+        { "archetype": "The Transformation", "rationale": "Fantasy's metamorphosis — werewolves, magical awakening, identity-altering enchantment — provides literal mechanisms for the Transformation arc." },
+        { "archetype": "The Sacrifice", "rationale": "Mythic stakes make sacrifice resonate with archetypal power — the hero gives their life or magic to save the world." },
+        { "archetype": "Rags to Riches", "rationale": "The farm boy who becomes king is a classic Fantasy variant of Rags to Riches, powered by hidden heritage or latent magical ability." },
+        { "archetype": "Coming of Age", "rationale": "A young wizard or chosen one discovering their powers maps Coming of Age onto Fantasy's wonder-and-stakes framework." },
+        { "archetype": "The Escape", "rationale": "Magical imprisonment — enchanted towers, cursed realms, supernatural bondage — provides Fantasy-specific versions of the Escape archetype." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Fantasy's mythic register and high stakes sit uneasily with Comedy's requirement for recoverable consequences and playful tone." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline narrative conflicts with Fantasy's typical trajectory toward restoration or triumph, though dark fantasy can accommodate it." },
+        { "archetype": "Tragedy", "rationale": "Fantasy's sense of wonder and mythic hope resist Tragedy's requirement for inevitable downfall, though tragic fantasy subgenres exist." },
+        { "archetype": "The Revenge", "rationale": "Revenge's moral ambiguity and personal scale sit uneasily with Fantasy's typical mythic stakes and clear moral frameworks." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Fantasy's magical explanations can undercut the fair-clueing requirement that Mystery Unveiled demands." }
+      ]
+    },
+    {
+      "genre": "Science Fiction",
+      "genre_id": 6,
+      "naturally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "The journey from ordinary world to speculative world and back provides SF's classic structure — Luke Skywalker, Neo, and countless protagonists follow this arc." },
+        { "archetype": "The Quest", "rationale": "A mission through speculative space — crossing the galaxy, navigating a post-apocalyptic landscape — maps Quest structure onto SF's world-building strengths." },
+        { "archetype": "Overcoming the Monster", "rationale": "SF provides unique monsters — alien invaders, rogue AI, engineered plagues — that the archetype can engage at civilizational scale." },
+        { "archetype": "The Transformation", "rationale": "SF's speculative premises — genetic modification, AI consciousness, transcendence — literalize transformation in ways no other genre can." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Escape", "rationale": "Escape from dystopian control, alien captivity, or malfunctioning systems generates plot that exercises SF's worldbuilding." },
+        { "archetype": "The Sacrifice", "rationale": "SF's civilizational stakes make sacrifice resonate — the scientist who gives their life to stop the catastrophe is a genre staple." },
+        { "archetype": "Voyage and Return", "rationale": "The astronaut who enters an alien world and returns changed is a direct SF application of this archetype." },
+        { "archetype": "The Rise and Fall", "rationale": "The scientist or visionary whose creation destroys them maps Rise and Fall onto SF's consequence-exploration requirement." },
+        { "archetype": "The Mystery Unveiled", "rationale": "SF mystery — uncovering the truth about the speculative premise — works when the investigation follows the premise's internal logic." },
+        { "archetype": "Tragedy", "rationale": "SF tragedy — where the speculative premise creates the conditions for inevitable downfall — works when consequences are rigorously explored." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Coming of Age", "rationale": "SF can include coming-of-age elements but the genre's focus on speculative consequences typically overshadows the gradual maturation arc." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "SF's intellectual seriousness and speculative rigor resist Comedy's playful tone, though satirical SF exists as a hybrid form." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal through crisis requires interior focus that SF's premise-driven, consequence-exploring engine tends to subordinate." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent is rarely the engine of SF — the genre's interest lies in speculative consequences rather than personal advancement." },
+        { "archetype": "The Revenge", "rationale": "Revenge's personal-scale obsession conflicts with SF's interest in systemic, civilizational consequences of speculative premises." }
+      ]
+    },
+    {
+      "genre": "Adventure",
+      "genre_id": 7,
+      "naturally_compatible": [
+        { "archetype": "The Quest", "rationale": "Adventure is the Quest archetype's natural home — a defined goal pursued through varied, vivid environments with escalating obstacles." },
+        { "archetype": "The Hero's Journey", "rationale": "The departure-trials-return structure provides Adventure with a complete narrative arc that exercises every environment and obstacle in the journey." },
+        { "archetype": "Voyage and Return", "rationale": "Entering an unknown world, being fascinated and then threatened by it, and escaping back is Adventure's core rhythm." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Overcoming the Monster", "rationale": "Adventure accommodates a monster-at-the-end structure when the journey builds toward a climactic confrontation with a specific threat." },
+        { "archetype": "The Escape", "rationale": "Escape through hostile territory is a natural Adventure variant — the journey itself is the escape route." },
+        { "archetype": "Rags to Riches", "rationale": "Treasure-hunt Adventure maps onto Rags to Riches when the protagonist starts with nothing and the journey yields fortune." },
+        { "archetype": "Coming of Age", "rationale": "A young protagonist's first real journey provides the formative experiences that Coming of Age requires." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragedy's inevitable downfall conflicts with Adventure's tone of excitement and possibility." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's social focus and recoverable stakes are structurally mismatched with Adventure's physical journey and genuine danger." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal requires interior stillness that Adventure's continuous forward movement resists." },
+        { "archetype": "The Revenge", "rationale": "Revenge's obsessive personal focus narrows the exploratory breadth that Adventure requires." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline phase of Rise and Fall conflicts with Adventure's forward-momentum and discovery-driven structure." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation requires the kind of static, evidence-gathering patience that Adventure's journey structure cannot sustain." },
+        { "archetype": "The Transformation", "rationale": "Deep identity transformation requires psychological depth that Adventure's externalized, journey-focused structure typically subordinates." },
+        { "archetype": "The Sacrifice", "rationale": "Sacrifice can provide an Adventure climax but the archetype's moral deliberation conflicts with the genre's momentum." }
+      ]
+    },
+    {
+      "genre": "Romance",
+      "genre_id": 8,
+      "naturally_compatible": [
+        { "archetype": "Rebirth", "rationale": "A character healed by love — renewed through the relationship's power to break through emotional defenses — is one of Romance's foundational structures." },
+        { "archetype": "Coming of Age", "rationale": "First love as the arena for identity formation and emotional growth maps directly onto Romance's requirement for mutual vulnerability." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Social disruption resolved through romantic union is the structural engine of romantic comedy and many classic Romance plots." },
+        { "archetype": "Rags to Riches", "rationale": "The Cinderella structure — rising from disadvantage through love — is among Romance's oldest and most enduring forms." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragic Romance — love that cannot survive its circumstances — works when the genre's earned-outcome requirement is met through devastating sacrifice rather than union." },
+        { "archetype": "The Sacrifice", "rationale": "Sacrificing personal happiness for the beloved's welfare creates intense romantic stakes, though it risks undermining the genre's hopeful contract." },
+        { "archetype": "The Hero's Journey", "rationale": "Works when the journey is the protagonist's emotional odyssey toward the capacity for love, with the relationship as both trial and reward." },
+        { "archetype": "The Transformation", "rationale": "A character fundamentally transformed by love — or whose transformation makes love possible — maps onto Romance's requirement for earned growth." },
+        { "archetype": "The Escape", "rationale": "Escaping a loveless marriage, an oppressive family, or social constraints to pursue genuine love provides a Romance-compatible Escape arc." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's external goal and team dynamics pull focus from the central relationship that Romance demands as its primary engine." },
+        { "archetype": "Overcoming the Monster", "rationale": "Physical monster confrontation requires an externalized threat structure that displaces the interpersonal focus Romance requires." },
+        { "archetype": "The Revenge", "rationale": "Revenge's moral corrosion and obsessive pursuit are structurally hostile to the mutual vulnerability and earned connection Romance demands." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline narrative undermines Romance's fundamental contract of emotional hope and earned positive resolution." },
+        { "archetype": "Voyage and Return", "rationale": "The departure-to-alien-world structure lacks Romance's requirement for sustained intimate proximity between leads." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation displaces the relational focus that must remain Romance's primary engine." }
+      ]
+    },
+    {
+      "genre": "Romantic Comedy",
+      "genre_id": 9,
+      "naturally_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Social disorder driven by romantic misunderstanding, resolved through recognition and union, is the structural definition of Romantic Comedy." },
+        { "archetype": "Coming of Age", "rationale": "A protagonist who matures through the comic complications of first love or romantic self-discovery maps perfectly onto rom-com's dual engines." },
+        { "archetype": "Rebirth", "rationale": "A cynical or emotionally closed character renewed by love — played for both laughs and genuine feeling — is a core rom-com template." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Rags to Riches", "rationale": "Class-crossing romance with comic complications — the ordinary person in the wealthy world — is a reliable rom-com variant." },
+        { "archetype": "Voyage and Return", "rationale": "Fish-out-of-water comedy with romantic stakes works when the unfamiliar world is the love interest's social context." },
+        { "archetype": "The Transformation", "rationale": "Identity transformation played for comedy and romance — a character becoming someone new through love — can power lighter rom-coms." },
+        { "archetype": "The Quest", "rationale": "A comic quest for love — pursuing a specific person through escalating obstacles — works when the journey generates both laughter and feeling." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragedy's inevitability and irreversible loss directly violate Romantic Comedy's contract of dual satisfaction in comedy and romance." },
+        { "archetype": "The Revenge", "rationale": "Revenge's moral darkness and escalating violence are tonally incompatible with Romantic Comedy's warmth and playfulness." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline and fall arc is structurally opposed to Romantic Comedy's requirement for a satisfying union." },
+        { "archetype": "Overcoming the Monster", "rationale": "Physical monster confrontation requires genuine danger that undermines Romantic Comedy's promise of recoverable stakes." },
+        { "archetype": "The Sacrifice", "rationale": "Self-sacrifice's gravity conflicts with the wit, warmth, and playful energy Romantic Comedy demands." },
+        { "archetype": "The Escape", "rationale": "Escape's confinement and desperation create a tonal register too dark for Romantic Comedy's playful warmth." },
+        { "archetype": "The Hero's Journey", "rationale": "The Hero's Journey's mythic register and transformative ordeal sit uncomfortably with rom-com's lighter, social-friction-driven structure." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation requires sustained seriousness that disrupts the comedic-romantic rhythm." }
+      ]
+    },
+    {
+      "genre": "Horror",
+      "genre_id": 10,
+      "naturally_compatible": [
+        { "archetype": "Overcoming the Monster", "rationale": "Horror's core structure — a threatening force that must be confronted and survived — is the Overcoming the Monster archetype operating under conditions of maximum dread." },
+        { "archetype": "The Escape", "rationale": "Escape from a haunted house, a stalker, or a nightmare is Horror's survival-oriented structural spine — confinement plus threat plus desperate flight." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Horror investigation — uncovering the truth about the threat — generates escalating dread as each revelation makes the danger more real and more personal." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Transformation", "rationale": "Body horror, possession, and psychological disintegration are Horror-specific transformations that terrify by making the self the source of threat." },
+        { "archetype": "Tragedy", "rationale": "Horror tragedy — where the protagonist's flaw or choice creates the conditions for the horror — works when the downfall generates dread rather than pity." },
+        { "archetype": "Voyage and Return", "rationale": "Entering a haunted world and desperately trying to return is a Horror variant of Voyage and Return — the fascination phase becomes the trap." },
+        { "archetype": "The Sacrifice", "rationale": "Horror sacrifice — giving one's life to stop the threat — provides a climactic resolution when the threat cannot be overcome by force." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's forward momentum and clear goal conflict with Horror's requirement for disorientation, vulnerability, and atmospheric dread." },
+        { "archetype": "The Hero's Journey", "rationale": "The Hero's Journey implies mastery and return-with-the-elixir — Horror's protagonists rarely achieve mastery over the threat." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's recoverable stakes and playful tone directly contradict Horror's requirement for genuine dread and real consequence." },
+        { "archetype": "Coming of Age", "rationale": "Gradual maturation requires developmental safety that Horror's atmosphere of sustained danger actively destroys." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent is structurally irrelevant to Horror's threat-driven, survival-focused engine." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal implies hope and healing — states that Horror's sustained dread atmosphere resists." },
+        { "archetype": "The Rise and Fall", "rationale": "Rise and Fall's social trajectory is displaced by Horror's threat-centric structure." },
+        { "archetype": "The Revenge", "rationale": "While revenge-horror exists, the archetype's protagonist agency conflicts with Horror's requirement for vulnerability." }
+      ]
+    },
+    {
+      "genre": "Mystery",
+      "genre_id": 11,
+      "naturally_compatible": [
+        { "archetype": "The Mystery Unveiled", "rationale": "The archetype and the genre are structurally identical — a central question is posed, clues are gathered, and the truth is revealed through logical deduction." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Revenge", "rationale": "A revenge-motivated investigation works when the sleuth's personal stake in the case drives the investigation without compromising fair clueing." },
+        { "archetype": "The Escape", "rationale": "A protagonist who must solve a mystery to escape a dangerous situation combines Mystery's puzzle with Escape's urgency." },
+        { "archetype": "The Hero's Journey", "rationale": "An investigator's journey from ignorance to understanding can follow the Hero's Journey when the mystery represents a threshold into a hidden world." },
+        { "archetype": "The Transformation", "rationale": "An investigator transformed by what they discover works when the revelation changes not just knowledge but identity." },
+        { "archetype": "The Rise and Fall", "rationale": "A protagonist whose investigation uncovers their own complicity creates a Mystery that doubles as Rise and Fall." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's physical journey through varied environments conflicts with Mystery's concentrated investigative focus." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent has no structural relationship to Mystery's puzzle-solving engine." },
+        { "archetype": "Voyage and Return", "rationale": "The departure to an unfamiliar world lacks the investigative rigor and fair-clueing requirements Mystery demands." },
+        { "archetype": "Overcoming the Monster", "rationale": "Physical confrontation as resolution violates Mystery's requirement that the solution come through deduction, not force." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal is tangential to Mystery's puzzle-solving contract with the audience." },
+        { "archetype": "Tragedy", "rationale": "Tragedy's inevitability undercuts Mystery's requirement for uncertainty and the audience's active engagement in solving the puzzle." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's playful tone risks trivializing the stakes that make a mystery's resolution satisfying." },
+        { "archetype": "Coming of Age", "rationale": "Gradual maturation requires developmental focus that displaces Mystery's puzzle-driven engine." },
+        { "archetype": "The Sacrifice", "rationale": "Self-sacrifice as resolution bypasses Mystery's requirement that the solution be logically derived." }
+      ]
+    },
+    {
+      "genre": "Crime",
+      "genre_id": 12,
+      "naturally_compatible": [
+        { "archetype": "The Rise and Fall", "rationale": "The criminal's ascent through ambition and ruthlessness followed by inevitable collapse is Crime fiction's signature arc." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Crime investigation — uncovering the truth about criminal acts — generates the moral ambiguity and consequence-tracking that Crime demands." },
+        { "archetype": "The Revenge", "rationale": "Criminal revenge — pursuing justice outside the law — generates the moral compromise and escalating violence that define Crime's ethical terrain." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Tragedy", "rationale": "The criminal whose fatal flaw drives their destruction maps Tragedy onto Crime's world of moral consequence." },
+        { "archetype": "The Escape", "rationale": "Escaping the criminal world — or escaping from law enforcement — generates Crime-specific tension around loyalty and betrayal." },
+        { "archetype": "The Hero's Journey", "rationale": "A law enforcement protagonist's journey into the criminal underworld and back can follow the Hero's Journey when the experience transforms them." },
+        { "archetype": "Overcoming the Monster", "rationale": "A criminal organization as the monster to be defeated works when institutional corruption makes the fight systemic rather than merely physical." },
+        { "archetype": "The Transformation", "rationale": "A character corrupted or reformed by their encounter with the criminal world undergoes transformation that Crime's moral-ambiguity constraint supports." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's clear goal and team cohesion conflict with Crime's emphasis on betrayal, moral compromise, and shifting allegiances." },
+        { "archetype": "Rags to Riches", "rationale": "While criminal ascent superficially resembles Rags to Riches, Crime's requirement for real consequences means the 'riches' phase must be morally poisoned." },
+        { "archetype": "Voyage and Return", "rationale": "Voyage and Return's wonder and fascination phases are tonally incompatible with Crime's gritty realism and moral weight." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal is rare in Crime fiction, where the genre's constraint is that consequences are real and compromise is permanent." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Crime's requirement for moral weight and real consequences is fundamentally opposed to Comedy's playful register." },
+        { "archetype": "Coming of Age", "rationale": "Coming of Age's gradual maturation conflicts with Crime's world of adult moral compromise and irreversible choices." },
+        { "archetype": "The Sacrifice", "rationale": "Noble sacrifice implies a moral clarity that Crime's ambiguity constraint actively resists." }
+      ]
+    },
+    {
+      "genre": "Detective",
+      "genre_id": 13,
+      "naturally_compatible": [
+        { "archetype": "The Mystery Unveiled", "rationale": "The archetype and genre share a structural spine — a question posed, evidence gathered, truth revealed through the investigator's work." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "A detective's journey into the criminal underworld — crossing thresholds, facing ordeals, returning with truth — can follow the Hero's Journey structure." },
+        { "archetype": "The Transformation", "rationale": "A detective transformed by the case they investigate — hardened, disillusioned, or enlightened — adds depth to the investigative arc." },
+        { "archetype": "The Revenge", "rationale": "A detective driven by personal vendetta adds emotional stakes to the investigation, though it risks compromising the genre's required methodological rigor." },
+        { "archetype": "The Escape", "rationale": "A detective who must solve a case to escape personal danger combines investigation with survival urgency." },
+        { "archetype": "Overcoming the Monster", "rationale": "Serial-killer narratives cast the detective against a monstrous antagonist, combining investigative method with the confrontation archetype." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's journey structure pulls the detective away from the concentrated, evidence-based investigation the genre requires." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent has no structural relationship to the detective's investigative mission." },
+        { "archetype": "Voyage and Return", "rationale": "The departure to an unfamiliar world disrupts the detective's grounded, methodical investigative approach." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal is tangential to the detective's primary obligation to solve the case through method and rigor." },
+        { "archetype": "Tragedy", "rationale": "Tragic inevitability undercuts the detective genre's implicit promise that truth is discoverable through effort." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's playful register conflicts with the intellectual rigor and moral seriousness the detective genre demands." },
+        { "archetype": "Coming of Age", "rationale": "The detective genre presupposes a formed investigative persona — the character's method must be established, not developing." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline arc conflicts with the detective genre's implicit promise that the investigator will crack the case." },
+        { "archetype": "The Sacrifice", "rationale": "Noble sacrifice bypasses the detective's obligation to solve the case through intellectual work rather than heroic self-destruction." }
+      ]
+    },
+    {
+      "genre": "Superhero",
+      "genre_id": 14,
+      "naturally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "The superhero's origin, training, crisis, and triumph follows the Hero's Journey with extraordinary capacity replacing the ordinary hero's growth." },
+        { "archetype": "Overcoming the Monster", "rationale": "Superhero stories are defined by confronting threats that ordinary people cannot — the villain ecosystem is a genre-specific monster." },
+        { "archetype": "The Sacrifice", "rationale": "The hero who gives their life or their happiness to save others is among the most resonant Superhero climaxes — power creating moral obligation fulfilled." },
+        { "archetype": "The Transformation", "rationale": "Origin stories are literal transformations — ordinary person to extraordinary hero — and the genre's dual identity creates ongoing identity crisis." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Rise and Fall", "rationale": "A hero corrupted by power or a villain's origin story maps Rise and Fall onto Superhero's moral-obligation framework." },
+        { "archetype": "The Revenge", "rationale": "Vigilante superheroes pursue revenge against the criminals who wronged them, testing the limits of heroic moral obligation." },
+        { "archetype": "The Quest", "rationale": "A superhero quest — assembling a team, gathering resources, pursuing a cosmic objective — works at the epic scale the genre supports." },
+        { "archetype": "The Escape", "rationale": "A hero captured and stripped of powers must escape using resourcefulness — testing identity without extraordinary capacity." },
+        { "archetype": "Coming of Age", "rationale": "Young superhero stories combine power discovery with identity formation — the teen hero must learn who they are alongside what they can do." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Rags to Riches", "rationale": "Superhero stories grant extraordinary capacity rather than social status — the ascent is in power and responsibility, not wealth or position." },
+        { "archetype": "Voyage and Return", "rationale": "Voyage and Return's departure-to-alien-world structure lacks the community-defense obligation that defines Superhero stories." },
+        { "archetype": "Rebirth", "rationale": "While fallen heroes can be reborn, the archetype's inward focus conflicts with Superhero's requirement for externalized, proportional-threat confrontation." },
+        { "archetype": "Tragedy", "rationale": "Tragedy's inevitable downfall conflicts with Superhero's implicit promise that extraordinary power can make a difference." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's recoverable stakes and playful tone undercut the genuine danger and heroic grandeur Superhero stories require." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation is a subordinate mode for most superheroes — they solve problems through action and moral commitment, not deduction." }
+      ]
+    },
+    {
+      "genre": "Historical",
+      "genre_id": 15,
+      "naturally_compatible": [
+        { "archetype": "Tragedy", "rationale": "Historical periods provide the specific social constraints and irreversible consequences that make Tragedy's downfall arc historically grounded and inevitable." },
+        { "archetype": "The Rise and Fall", "rationale": "Historical figures' ascent to power and subsequent decline is among the most common and compelling forms of Historical fiction." },
+        { "archetype": "Coming of Age", "rationale": "A young person navigating the constraints of their historical period provides both the personal drama and the period-specific friction Historical fiction requires." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "Historical heroes — soldiers, explorers, reformers — can follow the Journey structure when the period provides the trials and the threshold." },
+        { "archetype": "The Quest", "rationale": "Historical quests — crusades, expeditions, pilgrimages — work when the period's material culture and social constraints shape the journey." },
+        { "archetype": "The Sacrifice", "rationale": "Historical sacrifice — a figure who gives their life for a cause — gains weight from the period's specific stakes and constraints." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal set in a specific historical period works when the crisis is historically grounded and the renewal is period-plausible." },
+        { "archetype": "The Revenge", "rationale": "Historical revenge — blood feuds, political vendettas, honor killings — gains specificity from the period's codes and consequences." },
+        { "archetype": "The Escape", "rationale": "Escape from historical bondage — slavery, imprisonment, siege — gains weight from the period's real material constraints." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent in a rigidly stratified historical period generates the friction between desire and constraint that Historical fiction demands." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Historical mystery works when the investigation is constrained by the period's available methods, knowledge, and social rules." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's playful register sits uneasily with Historical fiction's requirement for period-authentic gravity and enforced constraints." },
+        { "archetype": "Overcoming the Monster", "rationale": "The externalized monster structure works only when the 'monster' is historically specific — a tyrant, a plague, an invasion — not a fantasy creature." },
+        { "archetype": "Voyage and Return", "rationale": "The portal-to-alien-world structure lacks Historical fiction's requirement for period grounding, though time-travel variants exist." },
+        { "archetype": "The Transformation", "rationale": "Profound identity transformation requires psychological interiority that Historical fiction's period-constraint focus may subordinate." }
+      ]
+    },
+    {
+      "genre": "War",
+      "genre_id": 16,
+      "naturally_compatible": [
+        { "archetype": "The Sacrifice", "rationale": "War's structural tension between duty and survival makes the Sacrifice archetype its most natural climax — a soldier gives their life for comrades or mission." },
+        { "archetype": "The Hero's Journey", "rationale": "A soldier's journey from civilian to combatant to survivor follows the Hero's Journey through a world of organized violence." },
+        { "archetype": "Overcoming the Monster", "rationale": "The enemy as existential threat to be confronted and defeated maps Overcoming the Monster onto War's large-scale combat." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Tragedy", "rationale": "War tragedy — where duty, loyalty, or circumstance leads to inevitable destruction — uses the genre's visible human cost to power the downfall." },
+        { "archetype": "The Escape", "rationale": "Prisoner-of-war escape stories exercise War's scarcity and danger constraints while following the Escape archetype's planning-and-execution structure." },
+        { "archetype": "The Quest", "rationale": "A military mission through enemy territory maps the Quest's escalating-obstacles structure onto War's battlefield geography." },
+        { "archetype": "Coming of Age", "rationale": "A young soldier's forced maturation through combat provides Coming of Age's formative experiences at maximum intensity." },
+        { "archetype": "The Rise and Fall", "rationale": "A military commander's ascent and eventual fall maps Rise and Fall onto War's chain-of-command structure." },
+        { "archetype": "The Revenge", "rationale": "Vengeance for fallen comrades can drive a War narrative, though the genre demands that the cost of revenge be made visible." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "War's requirement for visible human cost and gravity of violence is fundamentally incompatible with Comedy's playful, recoverable register." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent through military success conflicts with War's emphasis on the destructive cost of violence rather than its rewards." },
+        { "archetype": "Voyage and Return", "rationale": "Voyage and Return's fascination phase and wonder are tonally incompatible with War's sustained gravity and visceral intensity." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal is rare in War fiction, where the genre's constraint is that violence leaves lasting damage rather than enabling redemption." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation is a subordinate mode in War — the genre's engine is armed conflict, not puzzle-solving." },
+        { "archetype": "The Transformation", "rationale": "While war transforms people, the archetype's focus on identity change is typically subordinate to War's emphasis on survival, duty, and cost." }
+      ]
+    },
+    {
+      "genre": "Biography",
+      "genre_id": 17,
+      "naturally_compatible": [
+        { "archetype": "The Rise and Fall", "rationale": "The biographical subject's ascent to prominence and subsequent decline is the most common and structurally natural biographical arc." },
+        { "archetype": "Coming of Age", "rationale": "A biography organized around formative experiences that shaped the subject's identity maps Coming of Age onto real events." },
+        { "archetype": "Rags to Riches", "rationale": "A subject's rise from obscurity to greatness — Cinderella stories grounded in documented fact — is among biography's most popular forms." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Tragedy", "rationale": "A biographical subject whose fatal flaw drives their destruction creates a compelling tragic biography when the downfall is documented." },
+        { "archetype": "The Hero's Journey", "rationale": "A subject's life-defining odyssey — departure, trial, transformation, return — can organize a biography when the journey is the interpretive lens." },
+        { "archetype": "The Transformation", "rationale": "A subject who underwent profound identity change provides the dramatic arc Biography requires to avoid the Wikipedia anti-pattern." },
+        { "archetype": "Rebirth", "rationale": "A subject's moral renewal or second act provides a redemptive biographical arc when documented events support it." },
+        { "archetype": "The Sacrifice", "rationale": "A subject who gave their life or career for a cause provides biographical drama with clear moral stakes." },
+        { "archetype": "The Revenge", "rationale": "A biographical subject driven by vendetta or score-settling creates compelling narrative when the real events support the revenge structure." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's defined external objective rarely organizes a biographical life, which tends toward internal arcs rather than goal-pursuit." },
+        { "archetype": "Voyage and Return", "rationale": "Biographies rarely follow the departure-to-alien-world structure, as real lives are typically rooted in specific, continuous contexts." },
+        { "archetype": "Overcoming the Monster", "rationale": "The externalized monster structure oversimplifies the complex, morally ambiguous obstacles that real subjects face." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Biography's requirement for historical gravity and intimate revelation sits uneasily with Comedy's playful register." },
+        { "archetype": "The Escape", "rationale": "Escape is rarely the organizing structure of a biographical life, though specific episodes of escape can be dramatized within a larger arc." },
+        { "archetype": "The Mystery Unveiled", "rationale": "While biographies uncover truths, the investigative structure rarely serves as the primary organizational principle of a life story." }
+      ]
+    },
+    {
+      "genre": "Family",
+      "genre_id": 18,
+      "naturally_compatible": [
+        { "archetype": "Coming of Age", "rationale": "A child's maturation within the family unit is the Family genre's most natural arc — growth, generational friction, and ultimately deeper understanding." },
+        { "archetype": "Rebirth", "rationale": "A family member's emotional or moral renewal — the estranged parent who reconnects, the bitter grandparent who softens — is a core Family genre arc." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Family comedy — chaos, misunderstanding, and friction resolved through reconciliation — exercises every one of the Family genre's constraints." },
+        { "archetype": "Voyage and Return", "rationale": "A family member's departure and return — or a family's collective journey to an unfamiliar context — is a natural Family genre structure." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Quest", "rationale": "A family quest — a journey taken together — tests family bonds through shared obstacles and generates the multigenerational interaction the genre requires." },
+        { "archetype": "The Hero's Journey", "rationale": "Works when the hero's journey is contextualized within family relationships — the departure from family, the trials, and the return home transformed." },
+        { "archetype": "Rags to Riches", "rationale": "A family's collective rise from hardship provides the belonging-and-love stakes the genre demands." },
+        { "archetype": "The Sacrifice", "rationale": "A parent's sacrifice for their children or a child's sacrifice for their family generates the intense belonging stakes Family stories require." },
+        { "archetype": "The Escape", "rationale": "A family escaping danger together — or a family member escaping a dysfunctional family — exercises the genre's belonging-vs-freedom tension." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragedy's irreversible downfall conflicts with the Family genre's strong orientation toward reconnection and restored belonging." },
+        { "archetype": "The Revenge", "rationale": "Revenge's moral corrosion and escalating violence are tonally incompatible with Family's warmth and cross-generational accessibility." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline phase violates Family's resolution constraint toward connection and understanding." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation displaces the relational focus that must remain Family's primary engine." },
+        { "archetype": "Overcoming the Monster", "rationale": "Externalized monster confrontation pulls focus from the interpersonal family dynamics that define the genre." },
+        { "archetype": "The Transformation", "rationale": "Profound identity transformation is too individually focused for a genre that requires multigenerational interaction and collective stakes." }
+      ]
+    },
+    {
+      "genre": "Young Adult",
+      "genre_id": 19,
+      "naturally_compatible": [
+        { "archetype": "Coming of Age", "rationale": "The archetype and the genre are structurally aligned — identity formation, first experiences, and world-defining choices are the shared engine." },
+        { "archetype": "The Hero's Journey", "rationale": "A young protagonist's departure from the familiar world, trials in the new one, and return transformed maps the Hero's Journey onto YA's identity-formation arc." },
+        { "archetype": "Voyage and Return", "rationale": "Entering an unfamiliar world (school, dystopia, fantasy realm) and returning changed exercises YA's first-experience and authority-testing constraints." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Quest", "rationale": "A young protagonist's goal-driven journey through dangerous territory externalizes the internal quest for identity that YA demands." },
+        { "archetype": "The Transformation", "rationale": "A protagonist undergoing profound change — discovering powers, shifting identity, or being fundamentally altered — maps onto YA's identity-formation requirement." },
+        { "archetype": "The Escape", "rationale": "Escaping oppressive authority — dystopian systems, abusive families, rigid institutions — exercises YA's authority-confrontation constraint." },
+        { "archetype": "Rebirth", "rationale": "A young protagonist's moral or emotional renewal works when the crisis is age-appropriate and the renewal is earned through the protagonist's own experience." },
+        { "archetype": "Overcoming the Monster", "rationale": "A young protagonist confronting a powerful threat provides the world-defining stakes and identity-testing challenges YA requires." },
+        { "archetype": "Rags to Riches", "rationale": "A disadvantaged young protagonist's rise provides first experiences and identity formation within a framework of hope and agency." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragedy's inevitable downfall conflicts with YA's requirement that choices feel world-defining and that identity formation reaches meaningful resolution." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline phase is structurally challenging for YA, which generally requires forward momentum in identity formation." },
+        { "archetype": "The Revenge", "rationale": "Revenge's moral corrosion and obsessive focus conflict with YA's requirement for identity formation and growth." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy can appear in YA but the archetype's social-reconciliation focus may subordinate identity formation." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation requires the kind of established competence and methodological rigor that YA's still-forming protagonist typically lacks." },
+        { "archetype": "The Sacrifice", "rationale": "Noble self-sacrifice requires a moral certainty that conflicts with YA's emphasis on identity still in formation." }
+      ]
+    },
+    {
+      "genre": "Literary Fiction",
+      "genre_id": 20,
+      "naturally_compatible": [
+        { "archetype": "Coming of Age", "rationale": "Literary Fiction's emphasis on interiority and psychological depth makes it the ideal medium for the gradual, nuanced maturation Coming of Age requires." },
+        { "archetype": "The Transformation", "rationale": "Profound internal change explored through precise language and sustained interiority is Literary Fiction's version of the Transformation archetype." },
+        { "archetype": "Tragedy", "rationale": "Literary Fiction's tolerance for ambiguity and thematic complexity makes it the natural home for Tragedy's exploration of inevitable downfall and moral consequence." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Rebirth", "rationale": "Moral renewal explored through interiority and ambiguous resolution works in Literary Fiction when the rebirth is psychologically complex rather than simply redemptive." },
+        { "archetype": "The Rise and Fall", "rationale": "Literary Fiction can power Rise and Fall through character interiority — the subjective experience of ascent and decline rendered with psychological precision." },
+        { "archetype": "The Sacrifice", "rationale": "Literary sacrifice gains depth when the interior cost of giving something up is rendered with the precision Literary Fiction demands." },
+        { "archetype": "Voyage and Return", "rationale": "The interior version of Voyage and Return — entering a psychological unfamiliar world and returning changed — aligns with Literary Fiction's interiority focus." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Literary mystery — where what is uncovered is psychological truth rather than criminal fact — exercises Literary Fiction's ambiguity constraint." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's externalized goal and forward momentum conflict with Literary Fiction's requirement that interiority, not plot, drive the narrative." },
+        { "archetype": "The Hero's Journey", "rationale": "The Hero's Journey's mythic register and clear transformation arc sit uneasily with Literary Fiction's ambiguity and resistance to easy resolution." },
+        { "archetype": "Overcoming the Monster", "rationale": "Physical monster confrontation requires plot-driven externalization that Literary Fiction's interiority-first constraint resists." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's restored harmony conflicts with Literary Fiction's requirement for ambiguous endings and unresolved complexity." },
+        { "archetype": "The Revenge", "rationale": "Revenge's plot-driven escalation tends to subordinate the interiority and thematic complexity Literary Fiction prioritizes." },
+        { "archetype": "The Escape", "rationale": "Escape's action-oriented structure conflicts with Literary Fiction's requirement that interiority rather than events drive the narrative." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent's conventional satisfaction conflicts with Literary Fiction's resistance to easy resolution and its demand for thematic complexity." }
+      ]
+    },
+    {
+      "genre": "Children's Literature",
+      "genre_id": 21,
+      "naturally_compatible": [
+        { "archetype": "Voyage and Return", "rationale": "A child entering a wondrous world and returning with new understanding is the foundational Children's Literature structure — Alice, Dorothy, the Pevensies." },
+        { "archetype": "The Quest", "rationale": "A child's journey toward a clear goal through wondrous environments provides the adventure, wonder, and earned resolution Children's Literature requires." },
+        { "archetype": "Coming of Age", "rationale": "A child's growth through formative experiences — calibrated to age-appropriate stakes — is Children's Literature's natural arc." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "Works when the heroic arc is scaled to a child's capacity — the trials are age-appropriate and the transformation respects the child's developmental stage." },
+        { "archetype": "Overcoming the Monster", "rationale": "A child confronting a manageable but genuinely frightening threat works within Children's Literature's safe-enough-frame constraint." },
+        { "archetype": "Rebirth", "rationale": "A selfish or unkind child's renewal through magical intervention (like Scrooge for children) works when the lesson is earned, not imposed." },
+        { "archetype": "Rags to Riches", "rationale": "A disadvantaged child finding belonging and recognition maps Rags to Riches onto Children's Literature's belonging-focused emotional stakes." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comic chaos resolved through warmth and understanding exercises Children's Literature's tone of clarity, warmth, and imaginative energy." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragedy's irreversible downfall and moral devastation violate Children's Literature's safe-enough-frame constraint and resolution requirement." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline and fall arc is too dark and morally complex for Children's Literature's age-appropriate stakes and earned-resolution requirements." },
+        { "archetype": "The Revenge", "rationale": "Revenge's moral corrosion and escalating violence are incompatible with Children's Literature's warmth and age-appropriate constraints." },
+        { "archetype": "The Escape", "rationale": "Escape's confinement, desperation, and potential for trauma exceed Children's Literature's safe-enough-frame constraint." },
+        { "archetype": "The Sacrifice", "rationale": "Genuine self-sacrifice — the hero dies to save others — challenges Children's Literature's safe-enough-frame beyond what the genre can typically sustain." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Mystery's investigative rigor and fair-clueing requirements demand cognitive sophistication beyond Children's Literature's youngest audiences." },
+        { "archetype": "The Transformation", "rationale": "Profound identity crisis is developmentally inappropriate for Children's Literature's age-appropriate emotional calibration." }
+      ]
+    },
+    {
+      "genre": "Satire",
+      "genre_id": 22,
+      "naturally_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Satire operates through comic mechanisms — incongruity, exaggeration, exposure — and the Comedy archetype's social-disorder-to-recognition structure serves the satirical critique." },
+        { "archetype": "The Rise and Fall", "rationale": "A satirical subject's ascent through the very system being critiqued, followed by collapse that exposes the system's absurdity, is Satire's sharpest structural tool." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Tragedy", "rationale": "Satirical tragedy — where the system's logic leads inevitably to destruction, and the destruction is simultaneously horrifying and absurd — is Satire at its darkest." },
+        { "archetype": "Voyage and Return", "rationale": "A satirical visitor to an absurd world — Gulliver's Travels — uses Voyage and Return to externalize the critique through displacement." },
+        { "archetype": "The Transformation", "rationale": "A character transformed by the satirical system — absorbed into its logic, made unrecognizable by its rules — exposes the system's power to corrupt." },
+        { "archetype": "The Quest", "rationale": "A satirical quest — pursuing a goal within an absurd system — exposes the system's dysfunction through the escalating obstacles it generates." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Satirical investigation — uncovering the absurd truth behind institutional facades — serves the critique through progressive exposure." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "The Hero's Journey's earnest transformation and mythic register conflict with Satire's ironic, critical stance." },
+        { "archetype": "Overcoming the Monster", "rationale": "Overcoming the Monster implies that the threat can be defeated — Satire typically argues that the system persists beyond any individual confrontation." },
+        { "archetype": "Coming of Age", "rationale": "Coming of Age's earnest identity formation sits uneasily with Satire's ironic distance and critical purpose." },
+        { "archetype": "Rags to Riches", "rationale": "Satire would typically subvert the Rags to Riches arc — exposing the system that makes the rise possible as corrupt or absurd." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal implies a sincerity that Satire's ironic register actively resists." },
+        { "archetype": "The Revenge", "rationale": "Revenge implies personal stakes and earnest emotion — Satire's critique requires a cooler, more distanced engagement." },
+        { "archetype": "The Escape", "rationale": "Escape implies that the satirical system can be left behind — Satire typically argues that the system's reach is pervasive." },
+        { "archetype": "The Sacrifice", "rationale": "Noble sacrifice's moral gravity conflicts with Satire's requirement that humor serve the critique." }
+      ]
+    },
+    {
+      "genre": "Psychological",
+      "genre_id": 23,
+      "naturally_compatible": [
+        { "archetype": "The Transformation", "rationale": "Psychological fiction's focus on internal conflict and contested perception makes it the natural home for transformations that are mental, perceptual, or identity-altering." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Psychological investigation — uncovering truths about one's own mind — generates the escalating pressure and reality-questioning that the genre demands." },
+        { "archetype": "The Escape", "rationale": "Escape from psychological confinement — obsession, delusion, manipulation — is the Psychological genre's version of the Escape archetype." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Tragedy", "rationale": "A protagonist whose psychological flaw drives their destruction maps Tragedy onto the Psychological genre's internal-conflict engine." },
+        { "archetype": "Rebirth", "rationale": "Psychological renewal — emerging from mental illness, breaking free of manipulation, or recovering from trauma — provides a Rebirth arc driven entirely by internal conflict." },
+        { "archetype": "Coming of Age", "rationale": "Psychological coming-of-age works when the identity formation is rendered through the genre's contested-perception and internal-conflict constraints." },
+        { "archetype": "The Hero's Journey", "rationale": "An entirely internal Hero's Journey — the protagonist's odyssey through their own psyche — works when the trials and threshold are psychological." },
+        { "archetype": "The Revenge", "rationale": "Psychological revenge — through manipulation, gaslighting, or mental warfare — exercises the genre's relational-mirror and subjective-dominance constraints." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's externalized goal and physical journey conflict with the Psychological genre's requirement that internal conflict be the primary engine." },
+        { "archetype": "Overcoming the Monster", "rationale": "Externalized monster confrontation pulls focus from the internal psychological conflict the genre demands as its primary engine." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's playful register and recoverable stakes conflict with the Psychological genre's claustrophobic interiority and escalating pressure." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent requires external validation that the Psychological genre's internal-conflict focus resists." },
+        { "archetype": "Voyage and Return", "rationale": "The externalized unfamiliar world of Voyage and Return conflicts with the Psychological genre's requirement for subjective dominance." },
+        { "archetype": "The Rise and Fall", "rationale": "Rise and Fall's social trajectory is displaced by the Psychological genre's requirement that internal conflict be the primary engine." },
+        { "archetype": "The Sacrifice", "rationale": "Noble sacrifice's externalized moral choice conflicts with the Psychological genre's emphasis on internal conflict and contested perception." }
+      ]
+    },
+    {
+      "genre": "Western",
+      "genre_id": 24,
+      "naturally_compatible": [
+        { "archetype": "The Revenge", "rationale": "The Western's absent law and personal moral code make it the natural setting for revenge — justice must be pursued individually because no institution will provide it." },
+        { "archetype": "The Hero's Journey", "rationale": "The stranger who rides into a threatened community, confronts the threat, and departs is the Western's version of the Hero's Journey." },
+        { "archetype": "Overcoming the Monster", "rationale": "The outlaw, the corrupt land baron, the hostile wilderness — the Western's threats are overcome through the physical competence and moral code the genre requires." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Quest", "rationale": "A Western quest — pursuing someone across frontier territory — exercises the genre's landscape-as-character and isolation constraints." },
+        { "archetype": "The Escape", "rationale": "Escape from frontier captivity or lawless pursuit generates the Western's required showdown through accumulated tension." },
+        { "archetype": "The Sacrifice", "rationale": "A Western hero's sacrifice for the community they've defended carries the genre's full moral weight." },
+        { "archetype": "Tragedy", "rationale": "Western tragedy — the gunfighter who cannot escape violence, the frontier that destroys what it promised — works in revisionist Westerns." },
+        { "archetype": "The Rise and Fall", "rationale": "An outlaw's rise to power and subsequent fall exercises the Western's moral-code and consequence-of-violence constraints." },
+        { "archetype": "Coming of Age", "rationale": "A young person learning the frontier's code — physical competence, moral reckoning, landscape survival — provides a Western-specific Coming of Age." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's playful register conflicts with the Western's stoic, spare tone and its requirement that violence carry real weight." },
+        { "archetype": "Rags to Riches", "rationale": "Social ascent is structurally irrelevant to the Western's frontier-survival and moral-code focus." },
+        { "archetype": "Voyage and Return", "rationale": "Voyage and Return's wonder and fascination phases conflict with the Western's spare, elemental register." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal requires interior transformation that the Western's stoic, action-oriented register struggles to accommodate." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation requires institutional support and methodological rigor that the Western's law-absent setting cannot provide." },
+        { "archetype": "The Transformation", "rationale": "Interior identity transformation requires psychological depth that the Western's stoic, spare tone typically resists." }
+      ]
+    },
+    {
+      "genre": "Political",
+      "genre_id": 25,
+      "naturally_compatible": [
+        { "archetype": "The Rise and Fall", "rationale": "A political figure's ascent through institutional mechanics and subsequent fall through hubris or exposure is the Political genre's signature arc." },
+        { "archetype": "Tragedy", "rationale": "Political tragedy — where a leader's flaw or the system's corruption leads to inevitable destruction — exercises the genre's institutional-mechanics and moral-ambiguity constraints." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Political investigation — uncovering corruption, conspiracy, or hidden machinations — generates the information control and trust dynamics the Political genre requires." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "A political protagonist's journey from idealism through institutional resistance to hard-won change can follow the Hero's Journey through political rather than physical trials." },
+        { "archetype": "The Revenge", "rationale": "Political revenge — through legislative, institutional, or strategic means — exercises the genre's compromise-and-strategy constraints." },
+        { "archetype": "The Sacrifice", "rationale": "Political sacrifice — a leader who gives up power, career, or reputation for principle — exercises the genre's moral-obligation dimension." },
+        { "archetype": "The Escape", "rationale": "Escape from political persecution, authoritarian control, or institutional capture exercises the genre's power-dynamics constraints." },
+        { "archetype": "The Transformation", "rationale": "A political figure transformed by power — corrupted, disillusioned, or radicalized — exercises the genre's institutional-mechanics constraints." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Quest", "rationale": "The Quest's physical journey and defined external objective conflict with the Political genre's institutional, negotiation-driven engine." },
+        { "archetype": "Rags to Riches", "rationale": "Simple social ascent lacks the institutional complexity and moral ambiguity the Political genre demands." },
+        { "archetype": "Voyage and Return", "rationale": "The departure-to-alien-world structure is structurally irrelevant to the Political genre's institutional focus." },
+        { "archetype": "Overcoming the Monster", "rationale": "Physical monster confrontation oversimplifies the complex institutional opposition the Political genre requires." },
+        { "archetype": "Rebirth", "rationale": "Moral renewal implies a personal trajectory that the Political genre's collective-stakes requirement subordinates." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Comedy's playful register conflicts with the Political genre's calculated intelligence and moral ambiguity." },
+        { "archetype": "Coming of Age", "rationale": "The Political genre presupposes formed political actors — identity formation is typically subordinate to institutional engagement." }
+      ]
+    },
+    {
+      "genre": "Musical",
+      "genre_id": 26,
+      "naturally_compatible": [
+        { "archetype": "Rags to Riches", "rationale": "The Musical's heightened emotional reality makes the rise from obscurity to triumph feel inevitable when expressed through song — the I Want number launches the ascent." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Musical comedy — social disorder resolved through comic escalation and romantic union, punctuated by show-stopping numbers — is among the genre's most established forms." },
+        { "archetype": "Coming of Age", "rationale": "A young protagonist's emotional growth expressed through increasingly mature musical expression exercises the Musical's emotional-escalation constraint." },
+        { "archetype": "Rebirth", "rationale": "Musical rebirth — a character's emotional or moral renewal expressed through transformative reprises — is the genre's most powerful tool for demonstrating internal change." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "The Hero's Journey", "rationale": "A musical hero's journey works when each stage of the journey gets its own number, building from the I Want song to the climactic act-break." },
+        { "archetype": "Tragedy", "rationale": "Musical tragedy — where the emotional escalation leads to devastating rather than joyful climax — exercises the genre's full emotional range through its darkest register." },
+        { "archetype": "The Transformation", "rationale": "Musical transformation — where identity change is expressed through evolving musical style, reprises, and the showstopper — literalizes the archetype through the genre's specific tools." },
+        { "archetype": "The Quest", "rationale": "A musical quest — a journey with escalating musical numbers at each stage — works when the numbers advance both the journey and the character." },
+        { "archetype": "Voyage and Return", "rationale": "Musical departure to a strange world — The Wizard of Oz, Into the Woods — works when the new world has its own musical identity that contrasts with the protagonist's." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "The Revenge", "rationale": "Revenge's escalating moral darkness conflicts with the Musical's heightened, emotionally expansive register." },
+        { "archetype": "The Rise and Fall", "rationale": "While musical biopics attempt this, the fall phase challenges the Musical's need for numbers that advance rather than halt narrative momentum." },
+        { "archetype": "Overcoming the Monster", "rationale": "Physical monster confrontation sits uneasily with the Musical's requirement that emotion justify song — fight choreography replaces what the genre needs." },
+        { "archetype": "The Escape", "rationale": "Escape's desperation and confinement resist the Musical's heightened emotional expressiveness." },
+        { "archetype": "The Sacrifice", "rationale": "The gravity of genuine sacrifice challenges the Musical's heightened, performative register — the earnestness risks becoming ponderous." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation requires intellectual rigor that the Musical's emotional expressiveness displaces." }
+      ]
+    },
+    {
+      "genre": "Holiday",
+      "genre_id": 27,
+      "naturally_compatible": [
+        { "archetype": "Rebirth", "rationale": "Holiday's requirement for emotional transformation is structurally identical to Rebirth — A Christmas Carol is both the genre's and the archetype's foundational text." },
+        { "archetype": "Comedy (Restoration of Order)", "rationale": "Holiday comedy — family chaos, disrupted celebrations, and ultimate reconciliation — exercises every one of Holiday's constraints through a comic lens." },
+        { "archetype": "Coming of Age", "rationale": "A holiday that becomes a young protagonist's moment of emotional growth — understanding family, accepting loss, or choosing generosity — maps Coming of Age onto Holiday's seasonal frame." }
+      ],
+      "occasionally_compatible": [
+        { "archetype": "Rags to Riches", "rationale": "Holiday stories where a disadvantaged character finds belonging and warmth exercise the genre's reconnection requirement through social elevation." },
+        { "archetype": "The Sacrifice", "rationale": "Holiday sacrifice — giving up something valued so others can celebrate — exercises the genre's transformation and reconnection constraints." },
+        { "archetype": "The Transformation", "rationale": "Holiday transformation — a character fundamentally changed by the season's demands — works when the transformation enables the genre-required reconnection." },
+        { "archetype": "Voyage and Return", "rationale": "A character sent to an unfamiliar holiday context — It's a Wonderful Life — and returning with new appreciation exercises Holiday's transformation-through-seasonal-pressure constraint." },
+        { "archetype": "The Quest", "rationale": "A holiday quest — finding the perfect gift, reaching home for Christmas, rescuing a holiday celebration — works when the goal serves the genre's reconnection requirement." }
+      ],
+      "rarely_compatible": [
+        { "archetype": "Tragedy", "rationale": "Tragedy's irreversible downfall violates Holiday's fundamental contract of transformation, reconnection, and restored celebration." },
+        { "archetype": "The Revenge", "rationale": "Revenge's moral darkness and escalating violence are incompatible with Holiday's warm, nostalgic tone and reconnection requirements." },
+        { "archetype": "The Rise and Fall", "rationale": "The decline and fall arc violates Holiday's orientation toward renewed connection and restored celebration." },
+        { "archetype": "Overcoming the Monster", "rationale": "Physical monster confrontation requires a threat register incompatible with Holiday's warm, domestic setting and reconciliation focus." },
+        { "archetype": "The Escape", "rationale": "Escape's desperation and confinement conflict with Holiday's requirement for warmth and the eventual restoration of celebration." },
+        { "archetype": "The Hero's Journey", "rationale": "The Hero's Journey's mythic register and extended trial structure exceed the compressed, domestic scale Holiday stories typically require." },
+        { "archetype": "The Mystery Unveiled", "rationale": "Investigation's intellectual rigor displaces the emotional focus that Holiday stories prioritize." }
+      ]
+    }
+  ],
+
+  "summary_observations": [
+    "Drama is the most archetype-flexible genre, with 5 naturally compatible and 7 occasionally compatible archetypes, because its character-driven, emotionally grounded requirements accommodate most story structures when internalized.",
+    "Comedy (Restoration of Order) is the most universally compatible archetype, appearing as naturally compatible in 7 genres (Comedy, Romantic Comedy, Family, Holiday, Musical, Satire, Children's Literature) — any genre that permits playful tone and recoverable stakes can host it.",
+    "Coming of Age is the second most broadly compatible archetype, naturally fitting 8 genres (Drama, Young Adult, Children's Literature, Family, Holiday, Musical, Romance, Literary Fiction) — any genre focused on identity formation or growth can accommodate it.",
+    "The Mystery Unveiled is the most genre-restricted archetype — it appears as naturally compatible in only 4 genres (Mystery, Detective, Crime, Psychological) because its investigative structure and fair-clueing requirements impose strict constraints.",
+    "Tragedy and Rise and Fall are the most divisive archetypes — naturally compatible with dark genres (Drama, Historical, Political, Crime) but rarely compatible with genres that promise warmth, hope, or reconciliation (Family, Holiday, Comedy, Children's Literature, Romance).",
+    "Genre families share archetype profiles: (1) World-building genres (Fantasy, Sci-Fi, Adventure) naturally pair with Hero's Journey, Quest, and Overcoming the Monster. (2) Relationship genres (Romance, Romantic Comedy, Family) naturally pair with Comedy, Coming of Age, and Rebirth. (3) Investigation genres (Mystery, Detective) naturally pair with Mystery Unveiled. (4) Dark-consequence genres (Crime, War, Western) naturally pair with Revenge, Rise and Fall, and Sacrifice.",
+    "The 'naturally compatible' count varies from 1 (Mystery, Detective — both essentially require Mystery Unveiled) to 5 (Drama, Fantasy, Superhero), reflecting genre specificity: narrower genres are more archetype-restrictive.",
+    "Several archetype-genre pairings produce named forms: Hero's Journey + Fantasy = epic fantasy, Comedy + Romantic Comedy = rom-com, Mystery Unveiled + Detective = whodunit, Rebirth + Holiday = A Christmas Carol structure, Rise and Fall + Crime = gangster narrative, Rise and Fall + Biography = rise-and-fall biography."
+  ]
+}

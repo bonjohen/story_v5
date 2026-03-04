@@ -176,9 +176,9 @@ Build the reuse map that identifies shared constraint types across all 27 genre 
 
 Map how the 15 archetype time-graphs commonly pair with the 27 genre constraint-graphs.
 
-- [ ] For each genre, identify which archetypes are naturally compatible, occasionally compatible, and rarely compatible
-- [ ] For each pairing, provide a brief rationale (1–2 sentences)
-- [ ] Produce the compatibility matrix document → `data/genre_archetype_matrix.json`
+- [X] For each genre, identify which archetypes are naturally compatible, occasionally compatible, and rarely compatible
+- [X] For each pairing, provide a brief rationale (1–2 sentences)
+- [X] Produce the compatibility matrix document → `data/genre_archetype_matrix.json`
 
 ---
 
