@@ -1,0 +1,297 @@
+{
+  "title": "Archetype Emotional Arc Profiles",
+  "description": "Quantitative emotional trajectory for each of the 15 archetypes. Each node on the main spine is scored on four dimensions (0–1): tension, hope, fear, and resolution. Position is normalized 0–1 along the main spine. Variant nodes branch from the spine and are listed separately.",
+  "_stats": {
+    "archetypes_profiled": 15,
+    "dimensions": ["tension", "hope", "fear", "resolution"],
+    "arc_shapes_used": ["U-curve", "inverted-U", "descending", "ascending", "W-curve", "J-curve"]
+  },
+  "archetypes": [
+    {
+      "archetype": "The Hero's Journey",
+      "archetype_id": "01_heros_journey",
+      "arc_profile": [
+        { "node_id": "HJ_N01_ORDINARY_WORLD", "position": 0.00, "tension": 0.10, "hope": 0.50, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "HJ_N02_CALL_TO_ADVENTURE", "position": 0.09, "tension": 0.30, "hope": 0.55, "fear": 0.25, "resolution": 0.00 },
+        { "node_id": "HJ_N03_MENTOR", "position": 0.18, "tension": 0.25, "hope": 0.70, "fear": 0.15, "resolution": 0.00 },
+        { "node_id": "HJ_N04_THRESHOLD", "position": 0.27, "tension": 0.45, "hope": 0.60, "fear": 0.35, "resolution": 0.00 },
+        { "node_id": "HJ_N05_TRIALS", "position": 0.36, "tension": 0.60, "hope": 0.50, "fear": 0.45, "resolution": 0.05 },
+        { "node_id": "HJ_N06_APPROACH", "position": 0.45, "tension": 0.75, "hope": 0.40, "fear": 0.60, "resolution": 0.05 },
+        { "node_id": "HJ_N07_ORDEAL", "position": 0.55, "tension": 0.95, "hope": 0.20, "fear": 0.85, "resolution": 0.05 },
+        { "node_id": "HJ_N08_REWARD", "position": 0.64, "tension": 0.40, "hope": 0.80, "fear": 0.15, "resolution": 0.30 },
+        { "node_id": "HJ_N09_ROAD_BACK", "position": 0.73, "tension": 0.55, "hope": 0.65, "fear": 0.30, "resolution": 0.20 },
+        { "node_id": "HJ_N10_RESURRECTION", "position": 0.82, "tension": 0.85, "hope": 0.50, "fear": 0.55, "resolution": 0.15 },
+        { "node_id": "HJ_N11_RETURN_ELIXIR", "position": 1.00, "tension": 0.05, "hope": 0.90, "fear": 0.05, "resolution": 0.95 }
+      ],
+      "variant_profiles": [
+        { "node_id": "HJ_N50_REFUSAL_OF_CALL", "branches_from": "HJ_N02_CALL_TO_ADVENTURE", "tension": 0.35, "hope": 0.40, "fear": 0.35, "resolution": 0.00 }
+      ],
+      "arc_shape": "W-curve",
+      "dominant_emotion": "hope",
+      "emotional_range": 0.90,
+      "summary": "Starts at stable baseline, builds through trials to maximum tension at the Ordeal, drops sharply at Reward, then rises again through the Resurrection's second crisis before resolving to high hope. The W-shape reflects the double-crisis structure unique to this archetype."
+    },
+    {
+      "archetype": "Rags to Riches",
+      "archetype_id": "02_rags_to_riches",
+      "arc_profile": [
+        { "node_id": "RR_N01_LOWLY_STATE", "position": 0.00, "tension": 0.15, "hope": 0.20, "fear": 0.20, "resolution": 0.00 },
+        { "node_id": "RR_N02_OPPORTUNITY", "position": 0.14, "tension": 0.30, "hope": 0.60, "fear": 0.15, "resolution": 0.00 },
+        { "node_id": "RR_N03_INITIAL_RISE", "position": 0.29, "tension": 0.25, "hope": 0.75, "fear": 0.10, "resolution": 0.10 },
+        { "node_id": "RR_N04_SOCIAL_TRIALS", "position": 0.43, "tension": 0.50, "hope": 0.55, "fear": 0.35, "resolution": 0.10 },
+        { "node_id": "RR_N05_APPARENT_PEAK", "position": 0.57, "tension": 0.35, "hope": 0.80, "fear": 0.20, "resolution": 0.15 },
+        { "node_id": "RR_N06_CRISIS_OF_WORTH", "position": 0.71, "tension": 0.85, "hope": 0.25, "fear": 0.70, "resolution": 0.05 },
+        { "node_id": "RR_N07_PROOF_OF_CHARACTER", "position": 0.86, "tension": 0.70, "hope": 0.60, "fear": 0.35, "resolution": 0.20 },
+        { "node_id": "RR_N08_TRUE_ELEVATION", "position": 1.00, "tension": 0.05, "hope": 0.90, "fear": 0.05, "resolution": 0.95 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "J-curve",
+      "dominant_emotion": "hope",
+      "emotional_range": 0.85,
+      "summary": "Rises steadily from a low-hope starting position through opportunity and initial success, peaks at Apparent Peak, then crashes at Crisis of Worth before a sharp recovery. The J-curve reflects the 'rise, fall, true rise' pattern where earned success exceeds the initial false peak."
+    },
+    {
+      "archetype": "The Quest",
+      "archetype_id": "03_the_quest",
+      "arc_profile": [
+        { "node_id": "QU_N01_HOME_GROUND", "position": 0.00, "tension": 0.10, "hope": 0.45, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "QU_N02_OBJECTIVE_SET", "position": 0.13, "tension": 0.35, "hope": 0.60, "fear": 0.20, "resolution": 0.00 },
+        { "node_id": "QU_N03_COMPANIONS", "position": 0.25, "tension": 0.25, "hope": 0.70, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "QU_N04_JOURNEY_TRIALS", "position": 0.38, "tension": 0.55, "hope": 0.55, "fear": 0.40, "resolution": 0.05 },
+        { "node_id": "QU_N05_COHESION_TEST", "position": 0.50, "tension": 0.65, "hope": 0.40, "fear": 0.45, "resolution": 0.05 },
+        { "node_id": "QU_N06_FINAL_APPROACH", "position": 0.63, "tension": 0.80, "hope": 0.35, "fear": 0.65, "resolution": 0.05 },
+        { "node_id": "QU_N07_CLIMACTIC_ORDEAL", "position": 0.75, "tension": 0.95, "hope": 0.25, "fear": 0.80, "resolution": 0.05 },
+        { "node_id": "QU_N08_OBJECTIVE_WON", "position": 0.88, "tension": 0.20, "hope": 0.85, "fear": 0.10, "resolution": 0.60 },
+        { "node_id": "QU_N09_HOMECOMING", "position": 1.00, "tension": 0.05, "hope": 0.85, "fear": 0.05, "resolution": 0.95 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "U-curve",
+      "dominant_emotion": "hope",
+      "emotional_range": 0.80,
+      "summary": "Steady build from calm origin through escalating journey trials to maximum tension at the Climactic Ordeal, then a clean release through objective won and homecoming. The U-curve reflects a single sustained arc of increasing danger followed by triumphant resolution."
+    },
+    {
+      "archetype": "Voyage and Return",
+      "archetype_id": "04_voyage_and_return",
+      "arc_profile": [
+        { "node_id": "VR_N01_FAMILIAR_WORLD", "position": 0.00, "tension": 0.05, "hope": 0.50, "fear": 0.05, "resolution": 0.00 },
+        { "node_id": "VR_N02_PASSAGE", "position": 0.17, "tension": 0.30, "hope": 0.65, "fear": 0.15, "resolution": 0.00 },
+        { "node_id": "VR_N03_FASCINATION", "position": 0.33, "tension": 0.20, "hope": 0.80, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "VR_N04_SHADOW_EMERGES", "position": 0.50, "tension": 0.55, "hope": 0.45, "fear": 0.50, "resolution": 0.00 },
+        { "node_id": "VR_N05_FRUSTRATION", "position": 0.67, "tension": 0.80, "hope": 0.20, "fear": 0.75, "resolution": 0.00 },
+        { "node_id": "VR_N06_ESCAPE", "position": 0.83, "tension": 0.90, "hope": 0.35, "fear": 0.70, "resolution": 0.10 },
+        { "node_id": "VR_N07_RETURN_CHANGED", "position": 1.00, "tension": 0.10, "hope": 0.70, "fear": 0.10, "resolution": 0.85 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "U-curve",
+      "dominant_emotion": "fear",
+      "emotional_range": 0.85,
+      "summary": "Begins in safe familiarity, dips into wonder during the fascination phase, then plunges into fear and frustration as the other world turns hostile. The escape provides cathartic release, and the return restores equilibrium but with lasting change. Fear dominates the middle arc."
+    },
+    {
+      "archetype": "Overcoming the Monster",
+      "archetype_id": "05_overcoming_the_monster",
+      "arc_profile": [
+        { "node_id": "OM_N01_PEACEFUL_STATE", "position": 0.00, "tension": 0.10, "hope": 0.55, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "OM_N02_MONSTER_REVEALED", "position": 0.14, "tension": 0.45, "hope": 0.40, "fear": 0.50, "resolution": 0.00 },
+        { "node_id": "OM_N03_CALL_TO_CONFRONT", "position": 0.29, "tension": 0.50, "hope": 0.55, "fear": 0.40, "resolution": 0.00 },
+        { "node_id": "OM_N04_PREPARATION", "position": 0.43, "tension": 0.40, "hope": 0.65, "fear": 0.30, "resolution": 0.00 },
+        { "node_id": "OM_N05_INITIAL_ENCOUNTER", "position": 0.57, "tension": 0.70, "hope": 0.40, "fear": 0.60, "resolution": 0.05 },
+        { "node_id": "OM_N06_NIGHTMARE", "position": 0.71, "tension": 0.90, "hope": 0.15, "fear": 0.85, "resolution": 0.00 },
+        { "node_id": "OM_N07_FINAL_CONFRONT", "position": 0.86, "tension": 0.95, "hope": 0.30, "fear": 0.75, "resolution": 0.10 },
+        { "node_id": "OM_N08_WORLD_RESTORED", "position": 1.00, "tension": 0.05, "hope": 0.90, "fear": 0.05, "resolution": 0.95 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "U-curve",
+      "dominant_emotion": "fear",
+      "emotional_range": 0.90,
+      "summary": "Moves from peace to escalating fear as the monster is revealed and increasingly dominates. The nightmare phase represents maximum terror before the climactic confrontation. Resolution is sharp and complete — the world is restored. Fear is the dominant emotion through the long middle."
+    },
+    {
+      "archetype": "Rebirth",
+      "archetype_id": "06_rebirth",
+      "arc_profile": [
+        { "node_id": "RB_N01_FALLEN_STATE", "position": 0.00, "tension": 0.30, "hope": 0.10, "fear": 0.30, "resolution": 0.00 },
+        { "node_id": "RB_N02_WARNING", "position": 0.17, "tension": 0.45, "hope": 0.20, "fear": 0.40, "resolution": 0.00 },
+        { "node_id": "RB_N03_RESISTANCE", "position": 0.33, "tension": 0.60, "hope": 0.15, "fear": 0.50, "resolution": 0.00 },
+        { "node_id": "RB_N04_ORDEAL_OF_TRUTH", "position": 0.50, "tension": 0.85, "hope": 0.10, "fear": 0.70, "resolution": 0.00 },
+        { "node_id": "RB_N05_TURNING_POINT", "position": 0.67, "tension": 0.65, "hope": 0.50, "fear": 0.30, "resolution": 0.15 },
+        { "node_id": "RB_N06_ATONEMENT", "position": 0.83, "tension": 0.40, "hope": 0.75, "fear": 0.15, "resolution": 0.50 },
+        { "node_id": "RB_N07_RENEWAL", "position": 1.00, "tension": 0.10, "hope": 0.90, "fear": 0.05, "resolution": 0.90 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "ascending",
+      "dominant_emotion": "hope",
+      "emotional_range": 0.80,
+      "summary": "Begins in a fallen state where hope is near-absent. The first half deepens the darkness through resistance and ordeal. The turning point introduces hope for the first time, and the second half is a sustained ascent through atonement to renewal. The arc's power comes from the depth of the starting trough."
+    },
+    {
+      "archetype": "Tragedy",
+      "archetype_id": "07_tragedy",
+      "arc_profile": [
+        { "node_id": "TR_N01_ELEVATED_STATE", "position": 0.00, "tension": 0.10, "hope": 0.75, "fear": 0.05, "resolution": 0.00 },
+        { "node_id": "TR_N02_TEMPTATION", "position": 0.14, "tension": 0.30, "hope": 0.65, "fear": 0.15, "resolution": 0.00 },
+        { "node_id": "TR_N03_FATAL_CHOICE", "position": 0.29, "tension": 0.50, "hope": 0.50, "fear": 0.30, "resolution": 0.00 },
+        { "node_id": "TR_N04_APPARENT_SUCCESS", "position": 0.43, "tension": 0.30, "hope": 0.70, "fear": 0.15, "resolution": 0.05 },
+        { "node_id": "TR_N05_UNRAVELING", "position": 0.57, "tension": 0.70, "hope": 0.25, "fear": 0.60, "resolution": 0.00 },
+        { "node_id": "TR_N06_RECOGNITION", "position": 0.71, "tension": 0.85, "hope": 0.10, "fear": 0.75, "resolution": 0.05 },
+        { "node_id": "TR_N07_DOWNFALL", "position": 0.86, "tension": 0.95, "hope": 0.05, "fear": 0.90, "resolution": 0.10 },
+        { "node_id": "TR_N08_AFTERMATH", "position": 1.00, "tension": 0.30, "hope": 0.10, "fear": 0.30, "resolution": 0.70 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "descending",
+      "dominant_emotion": "fear",
+      "emotional_range": 0.85,
+      "summary": "Begins at maximum hope and low tension in an elevated state. The fatal choice introduces irreversible momentum. A false peak at Apparent Success masks the coming collapse. The second half is relentless descent through unraveling, recognition, and downfall. Resolution comes only as aftermath — the world endures, but the protagonist does not."
+    },
+    {
+      "archetype": "Comedy (Restoration of Order)",
+      "archetype_id": "08_comedy",
+      "arc_profile": [
+        { "node_id": "CO_N01_CONSTRAINED_ORDER", "position": 0.00, "tension": 0.20, "hope": 0.40, "fear": 0.15, "resolution": 0.00 },
+        { "node_id": "CO_N02_DISRUPTION", "position": 0.17, "tension": 0.35, "hope": 0.50, "fear": 0.20, "resolution": 0.00 },
+        { "node_id": "CO_N03_ESCALATING_CHAOS", "position": 0.33, "tension": 0.55, "hope": 0.45, "fear": 0.30, "resolution": 0.00 },
+        { "node_id": "CO_N04_DARK_MOMENT", "position": 0.50, "tension": 0.75, "hope": 0.25, "fear": 0.50, "resolution": 0.00 },
+        { "node_id": "CO_N05_UNMASKING", "position": 0.67, "tension": 0.60, "hope": 0.55, "fear": 0.25, "resolution": 0.15 },
+        { "node_id": "CO_N06_RECONCILIATION", "position": 0.83, "tension": 0.30, "hope": 0.80, "fear": 0.10, "resolution": 0.50 },
+        { "node_id": "CO_N07_NEW_HARMONY", "position": 1.00, "tension": 0.05, "hope": 0.85, "fear": 0.05, "resolution": 0.95 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "U-curve",
+      "dominant_emotion": "hope",
+      "emotional_range": 0.70,
+      "summary": "Begins in constrained normalcy, escalates through chaos to a dark moment where real harm threatens. The unmasking reveals truth, enabling reconciliation and restoration. The emotional range is narrower than tragic or heroic arcs because comedy promises that harm is recoverable — fear never reaches the extremes of other archetypes."
+    },
+    {
+      "archetype": "Coming of Age",
+      "archetype_id": "09_coming_of_age",
+      "arc_profile": [
+        { "node_id": "CA_N01_INNOCENCE", "position": 0.00, "tension": 0.05, "hope": 0.60, "fear": 0.05, "resolution": 0.00 },
+        { "node_id": "CA_N02_FIRST_EXPOSURE", "position": 0.17, "tension": 0.30, "hope": 0.50, "fear": 0.25, "resolution": 0.00 },
+        { "node_id": "CA_N03_TESTING_GROUND", "position": 0.33, "tension": 0.50, "hope": 0.45, "fear": 0.35, "resolution": 0.05 },
+        { "node_id": "CA_N04_MENTOR_OR_MODEL", "position": 0.50, "tension": 0.40, "hope": 0.60, "fear": 0.20, "resolution": 0.10 },
+        { "node_id": "CA_N05_CRISIS_OF_IDENTITY", "position": 0.67, "tension": 0.80, "hope": 0.25, "fear": 0.65, "resolution": 0.05 },
+        { "node_id": "CA_N06_LOSS_OF_INNOCENCE", "position": 0.83, "tension": 0.70, "hope": 0.35, "fear": 0.50, "resolution": 0.25 },
+        { "node_id": "CA_N07_NEW_MATURITY", "position": 1.00, "tension": 0.15, "hope": 0.65, "fear": 0.10, "resolution": 0.80 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "U-curve",
+      "dominant_emotion": "hope",
+      "emotional_range": 0.75,
+      "summary": "Begins in innocence with high hope and near-zero tension. Gradually introduces complexity through exposure and testing. The crisis of identity is the emotional nadir, followed by the bittersweet loss of innocence. Resolution brings maturity rather than triumph — hope is restored but tempered by experience. The curve is shallower than heroic arcs."
+    },
+    {
+      "archetype": "The Revenge",
+      "archetype_id": "10_the_revenge",
+      "arc_profile": [
+        { "node_id": "RV_N01_ORIGINAL_STATE", "position": 0.00, "tension": 0.10, "hope": 0.55, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "RV_N02_INCITING_WRONG", "position": 0.14, "tension": 0.70, "hope": 0.15, "fear": 0.60, "resolution": 0.00 },
+        { "node_id": "RV_N03_VOW", "position": 0.29, "tension": 0.75, "hope": 0.30, "fear": 0.35, "resolution": 0.00 },
+        { "node_id": "RV_N04_PREPARATION", "position": 0.43, "tension": 0.60, "hope": 0.45, "fear": 0.25, "resolution": 0.00 },
+        { "node_id": "RV_N05_PURSUIT", "position": 0.57, "tension": 0.80, "hope": 0.35, "fear": 0.40, "resolution": 0.05 },
+        { "node_id": "RV_N06_MORAL_CROSSROADS", "position": 0.71, "tension": 0.85, "hope": 0.25, "fear": 0.55, "resolution": 0.05 },
+        { "node_id": "RV_N07_FINAL_RECKONING", "position": 0.86, "tension": 0.95, "hope": 0.30, "fear": 0.50, "resolution": 0.15 },
+        { "node_id": "RV_N08_AFTERMATH", "position": 1.00, "tension": 0.25, "hope": 0.35, "fear": 0.20, "resolution": 0.65 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "inverted-U",
+      "dominant_emotion": "tension",
+      "emotional_range": 0.85,
+      "summary": "Tension spikes immediately at the inciting wrong and never fully subsides. The vow channels grief into purpose, creating sustained high tension through preparation and pursuit. The moral crossroads introduces existential fear about what the protagonist has become. Resolution is ambiguous — revenge may be achieved but the cost is visible. Tension dominates throughout."
+    },
+    {
+      "archetype": "The Escape",
+      "archetype_id": "11_the_escape",
+      "arc_profile": [
+        { "node_id": "ES_N01_CONFINEMENT", "position": 0.00, "tension": 0.40, "hope": 0.10, "fear": 0.50, "resolution": 0.00 },
+        { "node_id": "ES_N02_SPARK_OF_HOPE", "position": 0.17, "tension": 0.45, "hope": 0.35, "fear": 0.40, "resolution": 0.00 },
+        { "node_id": "ES_N03_PLANNING", "position": 0.33, "tension": 0.50, "hope": 0.50, "fear": 0.35, "resolution": 0.00 },
+        { "node_id": "ES_N04_SETBACKS", "position": 0.50, "tension": 0.70, "hope": 0.25, "fear": 0.65, "resolution": 0.00 },
+        { "node_id": "ES_N05_POINT_OF_NO_RETURN", "position": 0.67, "tension": 0.80, "hope": 0.40, "fear": 0.55, "resolution": 0.00 },
+        { "node_id": "ES_N06_ESCAPE_ATTEMPT", "position": 0.83, "tension": 0.95, "hope": 0.45, "fear": 0.70, "resolution": 0.10 },
+        { "node_id": "ES_N07_FREEDOM", "position": 1.00, "tension": 0.05, "hope": 0.90, "fear": 0.05, "resolution": 0.95 }
+      ],
+      "variant_profiles": [
+        { "node_id": "ES_N50_RECAPTURE", "branches_from": "ES_N06_ESCAPE_ATTEMPT", "tension": 0.90, "hope": 0.10, "fear": 0.90, "resolution": 0.00 }
+      ],
+      "arc_shape": "ascending",
+      "dominant_emotion": "fear",
+      "emotional_range": 0.90,
+      "summary": "Begins in high-fear confinement with near-zero hope. The spark introduces the possibility of escape, and tension builds steadily through planning and setbacks. The escape attempt is the peak of both tension and hope simultaneously — maximum stakes where success and failure are equally possible. Freedom provides the sharpest emotional release of any archetype."
+    },
+    {
+      "archetype": "The Sacrifice",
+      "archetype_id": "12_the_sacrifice",
+      "arc_profile": [
+        { "node_id": "SA_N01_VALUED_LIFE", "position": 0.00, "tension": 0.05, "hope": 0.70, "fear": 0.05, "resolution": 0.00 },
+        { "node_id": "SA_N02_THREAT_EMERGES", "position": 0.17, "tension": 0.40, "hope": 0.50, "fear": 0.35, "resolution": 0.00 },
+        { "node_id": "SA_N03_REALIZATION", "position": 0.33, "tension": 0.60, "hope": 0.30, "fear": 0.55, "resolution": 0.00 },
+        { "node_id": "SA_N04_RESISTANCE", "position": 0.50, "tension": 0.75, "hope": 0.25, "fear": 0.60, "resolution": 0.00 },
+        { "node_id": "SA_N05_DECISION", "position": 0.67, "tension": 0.85, "hope": 0.40, "fear": 0.50, "resolution": 0.10 },
+        { "node_id": "SA_N06_SACRIFICIAL_ACT", "position": 0.83, "tension": 0.90, "hope": 0.55, "fear": 0.40, "resolution": 0.30 },
+        { "node_id": "SA_N07_WORLD_SAVED", "position": 1.00, "tension": 0.10, "hope": 0.60, "fear": 0.10, "resolution": 0.85 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "inverted-U",
+      "dominant_emotion": "tension",
+      "emotional_range": 0.85,
+      "summary": "Begins with a valued life worth protecting, then escalates through threat and realization to sustained high tension. The decision is the emotional fulcrum — tension peaks but hope begins to rise as the protagonist accepts their choice. The sacrificial act is simultaneously the most fearful and most hopeful moment. Resolution is bittersweet — the world is saved but at irreversible cost."
+    },
+    {
+      "archetype": "The Mystery Unveiled",
+      "archetype_id": "13_the_mystery_unveiled",
+      "arc_profile": [
+        { "node_id": "MU_N01_SURFACE_ORDER", "position": 0.00, "tension": 0.15, "hope": 0.45, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "MU_N02_QUESTION_POSED", "position": 0.14, "tension": 0.35, "hope": 0.50, "fear": 0.20, "resolution": 0.00 },
+        { "node_id": "MU_N03_INITIAL_CLUES", "position": 0.29, "tension": 0.40, "hope": 0.55, "fear": 0.25, "resolution": 0.05 },
+        { "node_id": "MU_N04_FALSE_TRAIL", "position": 0.43, "tension": 0.55, "hope": 0.35, "fear": 0.40, "resolution": 0.00 },
+        { "node_id": "MU_N05_DEEPENING", "position": 0.57, "tension": 0.70, "hope": 0.30, "fear": 0.50, "resolution": 0.05 },
+        { "node_id": "MU_N06_BREAKTHROUGH", "position": 0.71, "tension": 0.75, "hope": 0.60, "fear": 0.35, "resolution": 0.20 },
+        { "node_id": "MU_N07_CONFRONTATION", "position": 0.86, "tension": 0.85, "hope": 0.50, "fear": 0.45, "resolution": 0.15 },
+        { "node_id": "MU_N08_NEW_UNDERSTANDING", "position": 1.00, "tension": 0.10, "hope": 0.70, "fear": 0.10, "resolution": 0.90 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "U-curve",
+      "dominant_emotion": "tension",
+      "emotional_range": 0.75,
+      "summary": "Begins with surface calm concealing hidden disorder. Tension builds steadily through investigation, peaking at the false trail's dead end. The breakthrough provides a hope surge that carries into the confrontation. Resolution brings clarity and understanding. The emotional range is narrower than action-oriented archetypes because the primary engine is intellectual rather than physical."
+    },
+    {
+      "archetype": "The Transformation",
+      "archetype_id": "14_the_transformation",
+      "arc_profile": [
+        { "node_id": "TF_N01_FIXED_IDENTITY", "position": 0.00, "tension": 0.15, "hope": 0.35, "fear": 0.15, "resolution": 0.00 },
+        { "node_id": "TF_N02_CATALYST_OF_CHANGE", "position": 0.17, "tension": 0.40, "hope": 0.30, "fear": 0.35, "resolution": 0.00 },
+        { "node_id": "TF_N03_DENIAL_AND_STRUGGLE", "position": 0.33, "tension": 0.60, "hope": 0.20, "fear": 0.50, "resolution": 0.00 },
+        { "node_id": "TF_N04_LIMINAL_STATE", "position": 0.50, "tension": 0.75, "hope": 0.15, "fear": 0.65, "resolution": 0.00 },
+        { "node_id": "TF_N05_CRUCIBLE", "position": 0.67, "tension": 0.90, "hope": 0.20, "fear": 0.70, "resolution": 0.05 },
+        { "node_id": "TF_N06_INTEGRATION", "position": 0.83, "tension": 0.45, "hope": 0.70, "fear": 0.20, "resolution": 0.45 },
+        { "node_id": "TF_N07_NEW_IDENTITY", "position": 1.00, "tension": 0.10, "hope": 0.75, "fear": 0.10, "resolution": 0.85 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "U-curve",
+      "dominant_emotion": "fear",
+      "emotional_range": 0.75,
+      "summary": "Begins in rigid identity with low emotional range. The catalyst shatters stability, and the arc descends through denial into the terrifying liminal state where the old self is gone but the new self has not formed. The crucible forces the choice, and integration brings rapid hope recovery. Fear of identity loss dominates the long middle section."
+    },
+    {
+      "archetype": "The Rise and Fall",
+      "archetype_id": "15_the_rise_and_fall",
+      "arc_profile": [
+        { "node_id": "RF_N01_HUMBLE_ORIGIN", "position": 0.00, "tension": 0.10, "hope": 0.30, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "RF_N02_FIRST_OPPORTUNITY", "position": 0.14, "tension": 0.25, "hope": 0.55, "fear": 0.10, "resolution": 0.00 },
+        { "node_id": "RF_N03_RAPID_ASCENT", "position": 0.29, "tension": 0.30, "hope": 0.80, "fear": 0.10, "resolution": 0.05 },
+        { "node_id": "RF_N04_PEAK_OF_POWER", "position": 0.43, "tension": 0.25, "hope": 0.85, "fear": 0.10, "resolution": 0.10 },
+        { "node_id": "RF_N05_CRACKS_FORM", "position": 0.57, "tension": 0.60, "hope": 0.40, "fear": 0.45, "resolution": 0.00 },
+        { "node_id": "RF_N06_DESPERATE_GRIP", "position": 0.71, "tension": 0.85, "hope": 0.15, "fear": 0.70, "resolution": 0.00 },
+        { "node_id": "RF_N07_FALL", "position": 0.86, "tension": 0.90, "hope": 0.05, "fear": 0.85, "resolution": 0.10 },
+        { "node_id": "RF_N08_LEGACY", "position": 1.00, "tension": 0.20, "hope": 0.20, "fear": 0.25, "resolution": 0.70 }
+      ],
+      "variant_profiles": [],
+      "arc_shape": "inverted-U",
+      "dominant_emotion": "hope",
+      "emotional_range": 0.80,
+      "summary": "Rises from humble beginnings through opportunity and rapid ascent to a peak of maximum hope. The arc then inverts — cracks form, desperation sets in, and the fall is steep. Resolution as legacy is muted; the world moves on. The inverted-U is the defining shape, mirroring Tragedy but starting lower and with more visible hubris in the ascent."
+    }
+  ]
+}
