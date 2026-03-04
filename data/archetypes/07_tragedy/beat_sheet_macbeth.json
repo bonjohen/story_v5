@@ -1,0 +1,219 @@
+{
+  "title": "Scene-Level Beat Sheet: Macbeth",
+  "work": "Macbeth",
+  "creator": "William Shakespeare",
+  "year": 1606,
+  "medium": "stage play",
+  "structure": "5 acts, 28 scenes",
+  "archetype": "07_tragedy",
+  "archetype_name": "Tragedy",
+  "description": "Maps every node of the Tragedy archetype to specific scenes in Shakespeare's Macbeth. The play is the archetypal tragedy of ambition — a noble warrior destroys himself through a single fatal choice and its cascading consequences.",
+  "beats": [
+    {
+      "node_id": "TR_N01_ELEVATED_STATE",
+      "label": "Elevated State",
+      "role": "Origin",
+      "scenes": [
+        {
+          "description": "Act 1, Scene 1 — Three witches establish an atmosphere of disorder ('Fair is foul, and foul is fair')",
+          "act_scene": "1.1",
+          "duration_pct": 2.0,
+          "notes": "The witches frame the entire play: moral categories will be inverted. This is not part of Macbeth's elevated state but the dramatic irony that undermines it."
+        },
+        {
+          "description": "Act 1, Scene 2 — Battlefield reports: Macbeth has defeated the rebels and the Norwegian invaders; Duncan praises him as 'brave Macbeth' and 'worthy gentleman'",
+          "act_scene": "1.2",
+          "duration_pct": 4.0,
+          "notes": "Macbeth's elevated state established through others' testimony: he is a war hero, trusted by his king, respected by his peers. He has everything the world can offer through legitimate means."
+        },
+        {
+          "description": "Act 1, Scene 3 (first half) — Macbeth and Banquo encounter the witches, who hail Macbeth as Thane of Glamis, Thane of Cawdor, and 'king hereafter'",
+          "act_scene": "1.3a",
+          "duration_pct": 4.0,
+          "notes": "The prophecy arrives at the peak of Macbeth's legitimate success. The elevated state is confirmed (he IS Thane of Glamis) and extended (Cawdor title arrives immediately). The 'king hereafter' plants the seed of temptation."
+        }
+      ],
+      "duration_pct": 10.0
+    },
+    {
+      "node_id": "TR_N02_TEMPTATION",
+      "label": "Temptation or Pressure",
+      "role": "Disruption",
+      "scenes": [
+        {
+          "description": "Act 1, Scene 3 (second half) — Macbeth's aside: 'If chance will have me king, why, chance may crown me / Without my stir.' He already imagines murder.",
+          "act_scene": "1.3b",
+          "duration_pct": 3.0,
+          "notes": "The temptation is internal: Macbeth's own ambition, activated by the prophecy. He tries to resist ('If chance will have me king') but his imagination immediately leaps to regicide."
+        },
+        {
+          "description": "Act 1, Scene 4 — Duncan names Malcolm as heir. Macbeth: 'Stars, hide your fires; / Let not light see my black and deep desires.'",
+          "act_scene": "1.4",
+          "duration_pct": 3.0,
+          "notes": "Malcolm's naming as heir closes the legitimate path to the throne. The temptation intensifies because patience is no longer a viable strategy."
+        },
+        {
+          "description": "Act 1, Scene 5 — Lady Macbeth reads the letter, invokes dark spirits ('unsex me here'), and begins planning Duncan's murder",
+          "act_scene": "1.5",
+          "duration_pct": 5.0,
+          "notes": "External pressure compounds internal temptation. Lady Macbeth is the human amplifier of the witches' prophecy — she converts possibility into plan."
+        },
+        {
+          "description": "Act 1, Scene 7 — Macbeth's soliloquy ('If it were done when 'tis done') debates the murder; Lady Macbeth attacks his manhood to overcome his resistance",
+          "act_scene": "1.7",
+          "duration_pct": 5.0,
+          "notes": "The full temptation scene: Macbeth articulates every reason not to act (loyalty, hospitality, Duncan's virtue, cosmic justice) and Lady Macbeth dismantles each one. The pressure is psychological manipulation: 'When you durst do it, then you were a man.'"
+        }
+      ],
+      "duration_pct": 16.0
+    },
+    {
+      "node_id": "TR_N03_FATAL_CHOICE",
+      "label": "Fatal Choice",
+      "role": "Threshold",
+      "scenes": [
+        {
+          "description": "Act 2, Scene 1 — 'Is this a dagger which I see before me?' — Macbeth hallucinates the dagger and walks toward Duncan's chamber",
+          "act_scene": "2.1",
+          "duration_pct": 4.0,
+          "notes": "The crossing point. The hallucinated dagger externalizes Macbeth's decision — he follows it as if compelled, but he is choosing. 'I go, and it is done; the bell invites me.'"
+        },
+        {
+          "description": "Act 2, Scene 2 — The murder of Duncan (offstage). Macbeth returns with bloody hands: 'I have done the deed.'",
+          "act_scene": "2.2",
+          "duration_pct": 5.0,
+          "notes": "The irreversible act. Macbeth's immediate horror ('Will all great Neptune's ocean wash this blood clean from my hand?') signals that he already knows the cost. The knocking at the gate is the ordinary world demanding entry."
+        }
+      ],
+      "duration_pct": 9.0
+    },
+    {
+      "node_id": "TR_N04_APPARENT_SUCCESS",
+      "label": "Apparent Success",
+      "role": "Reversal",
+      "scenes": [
+        {
+          "description": "Act 2, Scene 3 — Discovery of Duncan's body; Macbeth kills the guards (ostensibly in rage); Malcolm and Donalbain flee, making themselves suspects",
+          "act_scene": "2.3",
+          "duration_pct": 5.0,
+          "notes": "Everything falls into place: the heirs flee, suspicion lands elsewhere, and the path to the throne opens. Macbeth's improvised murder of the guards shows both cunning and escalating violence."
+        },
+        {
+          "description": "Act 2, Scene 4 — Macbeth is named King of Scotland. The old man notes unnatural portents (an owl killing a falcon, Duncan's horses eating each other).",
+          "act_scene": "2.4",
+          "duration_pct": 3.0,
+          "notes": "The coronation is Macbeth's peak. But the unnatural portents signal that the world itself rejects his kingship. The success is apparent, not real."
+        },
+        {
+          "description": "Act 3, Scene 1 — Macbeth is king. Banquo suspects him but says nothing. Macbeth orders Banquo's assassination.",
+          "act_scene": "3.1",
+          "duration_pct": 5.0,
+          "notes": "The apparent success is already eroding: Macbeth cannot enjoy his crown because Banquo knows too much. Power begets paranoia. Each crime demands another."
+        }
+      ],
+      "duration_pct": 13.0
+    },
+    {
+      "node_id": "TR_N05_UNRAVELING",
+      "label": "Unraveling",
+      "role": "Descent",
+      "scenes": [
+        {
+          "description": "Act 3, Scene 3 — Banquo is murdered but Fleance escapes. Macbeth: 'Then comes my fit again.'",
+          "act_scene": "3.3",
+          "duration_pct": 3.0,
+          "notes": "First major failure: Fleance's escape means the witches' prophecy (Banquo's descendants will be kings) remains in play. Macbeth's control begins to slip."
+        },
+        {
+          "description": "Act 3, Scene 4 — The banquet scene: Banquo's ghost appears to Macbeth, who raves before his court. Lady Macbeth struggles to cover for him.",
+          "act_scene": "3.4",
+          "duration_pct": 7.0,
+          "notes": "The public unraveling. Macbeth's guilt manifests as hallucination in front of his nobles. His political authority begins to crack. 'Blood will have blood.'"
+        },
+        {
+          "description": "Act 3, Scene 5 and Act 4, Scene 1 — Macbeth visits the witches; receives the second set of prophecies (beware Macduff, none of woman born, Birnam Wood)",
+          "act_scene": "3.5, 4.1",
+          "duration_pct": 6.0,
+          "notes": "Macbeth seeks certainty from the same source that began his destruction. The prophecies seem reassuring but are equivocal — the audience can see the traps Macbeth cannot."
+        },
+        {
+          "description": "Act 4, Scene 2 — Macbeth orders the murder of Macduff's wife and children",
+          "act_scene": "4.2",
+          "duration_pct": 4.0,
+          "notes": "The moral nadir. This murder has no strategic justification — Macduff has already fled. It is pure tyranny, violence without purpose. Macbeth has become the thing he feared."
+        },
+        {
+          "description": "Act 4, Scene 3 — Malcolm and Macduff in England; Macduff learns of his family's murder. Malcolm raises an army.",
+          "act_scene": "4.3",
+          "duration_pct": 6.0,
+          "notes": "The external forces organize against Macbeth. Macduff's grief ('He has no children') transforms personal loss into political motivation. The counter-force is gathering."
+        }
+      ],
+      "duration_pct": 26.0
+    },
+    {
+      "node_id": "TR_N06_RECOGNITION",
+      "label": "Recognition (Anagnorisis)",
+      "role": "Revelation",
+      "scenes": [
+        {
+          "description": "Act 5, Scene 3 — Macbeth reflects on what he has lost: 'I have lived long enough. My way of life / Is fall'n into the sere, the yellow leaf.'",
+          "act_scene": "5.3",
+          "duration_pct": 3.0,
+          "notes": "Macbeth sees clearly what his choices have cost: honor, love, obedience, troops of friends. He recognizes the emptiness of his achievement but cannot reverse course."
+        },
+        {
+          "description": "Act 5, Scene 5 — 'Tomorrow, and tomorrow, and tomorrow' — Macbeth's nihilistic soliloquy upon learning of Lady Macbeth's death. Then Birnam Wood 'moves.'",
+          "act_scene": "5.5",
+          "duration_pct": 4.0,
+          "notes": "The double recognition: Lady Macbeth's death strips away his last human connection, and the moving forest reveals the prophecy's equivocation. 'Life's but a walking shadow, a poor player / That struts and frets his hour upon the stage / And then is heard no more.' Full anagnorisis."
+        }
+      ],
+      "duration_pct": 7.0
+    },
+    {
+      "node_id": "TR_N07_DOWNFALL",
+      "label": "Downfall (Catastrophe)",
+      "role": "Irreversible Cost",
+      "scenes": [
+        {
+          "description": "Act 5, Scene 7 — Macbeth kills Young Siward, still trusting the 'none of woman born' prophecy",
+          "act_scene": "5.7",
+          "duration_pct": 2.0,
+          "notes": "Brief false confidence. Macbeth fights well but is relying on a prophecy he does not truly understand."
+        },
+        {
+          "description": "Act 5, Scene 8 — Macduff reveals he was 'from his mother's womb untimely ripped' (caesarean birth). Macbeth fights and is killed.",
+          "act_scene": "5.8",
+          "duration_pct": 5.0,
+          "notes": "The final equivocation revealed. Macbeth's last refuge — the prophecy — collapses. He fights anyway ('Lay on, Macduff, / And damned be him that first cries, \"Hold, enough!\"'), which restores a measure of tragic dignity. His death is inevitable but not cowardly."
+        }
+      ],
+      "duration_pct": 7.0
+    },
+    {
+      "node_id": "TR_N08_AFTERMATH",
+      "label": "Aftermath",
+      "role": "Resolution",
+      "scenes": [
+        {
+          "description": "Act 5, Scene 8 (continued) — Macduff enters with Macbeth's head. Malcolm is hailed as King of Scotland. Order is restored.",
+          "act_scene": "5.8b",
+          "duration_pct": 3.0,
+          "notes": "The world endures. Malcolm's ascension restores legitimate succession. The play's final lines look forward to healing ('What's more to do, / Which would be planted newly with the time'). The tragedy is Macbeth's alone — Scotland survives."
+        }
+      ],
+      "duration_pct": 3.0
+    }
+  ],
+  "_notes": {
+    "lady_macbeth_arc": "Lady Macbeth's sleepwalking scene (5.1) — 'Out, damned spot!' — is her own recognition/downfall compressed into a single scene. Her suicide (reported in 5.5) parallels Macbeth's downfall but precedes it, serving as both harbinger and loss.",
+    "porter_scene": "The Porter's scene (2.3 opening) provides comic relief and thematic commentary ('equivocation') but does not map to an archetype node. It is structural punctuation between the Fatal Choice and the discovery."
+  },
+  "_stats": {
+    "total_scenes_mapped": 18,
+    "total_duration_pct": 91.0,
+    "unmapped_pct": 9.0,
+    "unmapped_note": "Remaining ~9% accounts for the Porter scene (2.3 opening), Lady Macbeth's sleepwalking (5.1), minor connective scenes (3.2, 3.6, 5.2, 5.4, 5.6), and Act 1 Scene 6 (Duncan's arrival at Macbeth's castle — ironic dramatic setup)."
+  }
+}

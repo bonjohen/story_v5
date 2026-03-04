@@ -1,0 +1,242 @@
+{
+  "title": "Scene-Level Beat Sheet: Star Wars: Episode IV — A New Hope",
+  "work": "Star Wars: Episode IV — A New Hope",
+  "creator": "George Lucas",
+  "year": 1977,
+  "medium": "film",
+  "runtime_minutes": 121,
+  "archetype": "01_heros_journey",
+  "archetype_name": "The Hero's Journey",
+  "description": "Maps every node of the Hero's Journey archetype to specific scenes in Star Wars: Episode IV, with timestamps and duration percentages. The film is one of the purest Hero's Journey adaptations in cinema.",
+  "beats": [
+    {
+      "node_id": "HJ_N01_ORDINARY_WORLD",
+      "label": "Ordinary World",
+      "role": "Origin",
+      "scenes": [
+        {
+          "description": "Opening crawl and Rebel blockade runner captured by Star Destroyer",
+          "timestamp": "0:00:00–0:05:30",
+          "duration_minutes": 5.5,
+          "notes": "Establishes the galactic conflict as background context before we meet Luke."
+        },
+        {
+          "description": "Luke Skywalker's life on the moisture farm — purchasing droids, dreaming of the academy, dinner with Uncle Owen and Aunt Beru",
+          "timestamp": "0:14:00–0:22:00",
+          "duration_minutes": 8.0,
+          "notes": "The true Ordinary World: Luke is restless, trapped in routine, gazing at the twin sunset. Visual shorthand for longing."
+        }
+      ],
+      "duration_pct": 11.2
+    },
+    {
+      "node_id": "HJ_N02_CALL_TO_ADVENTURE",
+      "label": "Call to Adventure",
+      "role": "Disruption",
+      "scenes": [
+        {
+          "description": "R2-D2 plays Leia's holographic message — 'Help me, Obi-Wan Kenobi'",
+          "timestamp": "0:22:00–0:24:30",
+          "duration_minutes": 2.5,
+          "notes": "The literal call. Luke sees a beautiful princess asking for help — the call combines duty, mystery, and desire."
+        },
+        {
+          "description": "R2-D2 escapes to find Obi-Wan; Luke pursues and encounters the Tusken Raiders",
+          "timestamp": "0:24:30–0:29:00",
+          "duration_minutes": 4.5,
+          "notes": "The call draws Luke physically out of his ordinary world. The Tusken Raider attack is the first taste of danger."
+        }
+      ],
+      "duration_pct": 5.8
+    },
+    {
+      "node_id": "HJ_N50_REFUSAL_OF_CALL",
+      "label": "Refusal of the Call",
+      "role": "Commitment",
+      "variant": true,
+      "scenes": [
+        {
+          "description": "Luke tells Obi-Wan he can't go to Alderaan — 'I've got work to do. It's not that I like the Empire, I hate it, but...'",
+          "timestamp": "0:33:00–0:34:30",
+          "duration_minutes": 1.5,
+          "notes": "Classic refusal grounded in duty to family. Luke wants to go but feels obligated to stay. The refusal is brief — Lucas keeps momentum."
+        }
+      ],
+      "duration_pct": 1.2
+    },
+    {
+      "node_id": "HJ_N03_MENTOR",
+      "label": "Meeting the Mentor",
+      "role": "Catalyst",
+      "scenes": [
+        {
+          "description": "Obi-Wan's hut — reveals Luke's father was a Jedi, gives him the lightsaber, explains the Force",
+          "timestamp": "0:29:00–0:33:00",
+          "duration_minutes": 4.0,
+          "notes": "Obi-Wan reframes Luke's identity: you are not a farmer's nephew, you are a Jedi's son. The lightsaber is the physical token of inheritance."
+        },
+        {
+          "description": "Discovery of the destroyed Jawa sandcrawler; Owen and Beru murdered by stormtroopers",
+          "timestamp": "0:34:30–0:37:00",
+          "duration_minutes": 2.5,
+          "notes": "The refusal is overridden by destruction of the ordinary world. Luke's last ties to home are literally burned away. He commits to following Obi-Wan."
+        }
+      ],
+      "duration_pct": 5.4
+    },
+    {
+      "node_id": "HJ_N04_THRESHOLD",
+      "label": "Crossing the Threshold",
+      "role": "Threshold",
+      "scenes": [
+        {
+          "description": "Mos Eisley cantina — 'You will never find a more wretched hive of scum and villainy'",
+          "timestamp": "0:37:00–0:43:00",
+          "duration_minutes": 6.0,
+          "notes": "The cantina is the threshold between the familiar (farm) and the special world (galactic adventure). Alien creatures, violence, Han Solo — everything is new."
+        },
+        {
+          "description": "Han Solo negotiation and Millennium Falcon departure; escape from Mos Eisley under Imperial fire",
+          "timestamp": "0:43:00–0:49:00",
+          "duration_minutes": 6.0,
+          "notes": "Physically crossing the threshold: leaving Tatooine. The jump to hyperspace is the definitive boundary crossing."
+        }
+      ],
+      "duration_pct": 9.9
+    },
+    {
+      "node_id": "HJ_N05_TRIALS",
+      "label": "Road of Trials",
+      "role": "Trial",
+      "scenes": [
+        {
+          "description": "Lightsaber training with the blast shield helmet aboard the Falcon",
+          "timestamp": "0:49:00–0:51:00",
+          "duration_minutes": 2.0,
+          "notes": "First trial: learning to trust the Force. 'Your eyes can deceive you — don't trust them.'"
+        },
+        {
+          "description": "Arrival at Alderaan's debris field; captured by the Death Star's tractor beam",
+          "timestamp": "0:51:00–0:55:00",
+          "duration_minutes": 4.0,
+          "notes": "Second trial: discovery that Alderaan is destroyed, and the Falcon is caught. The stakes escalate from rescue mission to survival."
+        },
+        {
+          "description": "Hiding in smuggling compartments; disguising as stormtroopers; splitting up inside the Death Star",
+          "timestamp": "0:55:00–1:01:00",
+          "duration_minutes": 6.0,
+          "notes": "Infiltration trial: navigating enemy territory using cunning rather than force."
+        }
+      ],
+      "duration_pct": 9.9
+    },
+    {
+      "node_id": "HJ_N06_APPROACH",
+      "label": "Approach to the Inmost Cave",
+      "role": "Descent",
+      "scenes": [
+        {
+          "description": "Luke discovers Leia is aboard and insists on rescuing her; Han reluctantly agrees",
+          "timestamp": "1:01:00–1:04:00",
+          "duration_minutes": 3.0,
+          "notes": "The decision to go deeper into danger rather than escape. Luke overrides Han's pragmatism with idealism."
+        },
+        {
+          "description": "Detention block shootout and rescue of Leia; escape into the garbage compactor",
+          "timestamp": "1:04:00–1:13:00",
+          "duration_minutes": 9.0,
+          "notes": "The descent into the literal belly of the beast. The garbage compactor is the lowest physical point — trapped, crushed, surrounded by filth."
+        }
+      ],
+      "duration_pct": 9.9
+    },
+    {
+      "node_id": "HJ_N07_ORDEAL",
+      "label": "The Ordeal",
+      "role": "Crisis",
+      "scenes": [
+        {
+          "description": "Obi-Wan's duel with Darth Vader; Obi-Wan's death as Luke watches helplessly",
+          "timestamp": "1:18:00–1:23:00",
+          "duration_minutes": 5.0,
+          "notes": "The supreme ordeal: Luke loses his mentor. Obi-Wan's sacrifice ('If you strike me down...') transforms the loss into a spiritual inheritance. Luke must now carry the Force alone."
+        },
+        {
+          "description": "Escape from the Death Star under TIE fighter attack; Luke mans the gun turret",
+          "timestamp": "1:23:00–1:27:00",
+          "duration_minutes": 4.0,
+          "notes": "Immediate aftermath of the ordeal: Luke channels grief into action. His first real combat."
+        }
+      ],
+      "duration_pct": 7.4
+    },
+    {
+      "node_id": "HJ_N08_REWARD",
+      "label": "Reward (Seizing the Sword)",
+      "role": "Transformation",
+      "scenes": [
+        {
+          "description": "Arrival at the Rebel base on Yavin 4; delivery of the Death Star plans; battle briefing",
+          "timestamp": "1:27:00–1:35:00",
+          "duration_minutes": 8.0,
+          "notes": "The reward is threefold: the Death Star plans (tactical), the Rebel Alliance community (belonging), and Luke's new identity as a fighter pilot (purpose). He has transformed from a farm boy to a soldier."
+        }
+      ],
+      "duration_pct": 6.6
+    },
+    {
+      "node_id": "HJ_N09_ROAD_BACK",
+      "label": "The Road Back",
+      "role": "Trial",
+      "scenes": [
+        {
+          "description": "Trench run begins — Rebel fighters attack the Death Star; Gold Leader's failed run",
+          "timestamp": "1:35:00–1:44:00",
+          "duration_minutes": 9.0,
+          "notes": "The road back is literal: flying toward certain death to destroy the threat. Other pilots fail and die, raising the stakes until only Luke remains."
+        }
+      ],
+      "duration_pct": 7.4
+    },
+    {
+      "node_id": "HJ_N10_RESURRECTION",
+      "label": "Resurrection",
+      "role": "Crisis",
+      "scenes": [
+        {
+          "description": "Luke's trench run — Vader locks on, R2-D2 hit, 'Use the Force, Luke' — Han Solo returns to clear Vader; Luke fires the torpedoes",
+          "timestamp": "1:44:00–1:51:00",
+          "duration_minutes": 7.0,
+          "notes": "The final death-and-rebirth moment. Luke turns off his targeting computer (trusting the Force over technology), is saved by Han's return (friendship over self-interest), and destroys the Death Star. He dies as a farm boy and is resurrected as a hero."
+        }
+      ],
+      "duration_pct": 5.8
+    },
+    {
+      "node_id": "HJ_N11_RETURN_ELIXIR",
+      "label": "Return with the Elixir",
+      "role": "Resolution",
+      "scenes": [
+        {
+          "description": "Death Star explodes; triumphant return to Yavin 4",
+          "timestamp": "1:51:00–1:53:00",
+          "duration_minutes": 2.0,
+          "notes": "The explosion is the visible proof of victory — the elixir is safety for the Rebellion."
+        },
+        {
+          "description": "Medal ceremony — Leia awards medals to Luke and Han in the great hall",
+          "timestamp": "1:53:00–1:56:00",
+          "duration_minutes": 3.0,
+          "notes": "The elixir made visible: recognition, community, purpose. Luke stands where he once dreamed of standing — at the center of something that matters. The throne room shot mirrors the twin sunset shot, but longing has been replaced by fulfillment."
+        }
+      ],
+      "duration_pct": 4.1
+    }
+  ],
+  "_stats": {
+    "total_scenes": 19,
+    "total_duration_pct": 94.6,
+    "unmapped_pct": 5.4,
+    "unmapped_note": "Remaining ~5% accounts for transitional shots, establishing sequences, and the Droids' subplot aboard the blockade runner (C-3PO and R2-D2 before Luke appears)."
+  }
+}

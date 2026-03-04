@@ -84,7 +84,7 @@ Structural refactors to the graph data model.
 - [X] **#20 — Archetype variant graphs as separate JSON files**
   Split variant branches (currently embedded via 50–79 ID range) into separate graph files for cleaner tooling and independent analysis.
 
-- [ ] **#27 — Scene-level beat sheets**
+- [X] **#27 — Scene-level beat sheets**
   Extend archetype graphs to scene-level resolution for specific example works — mapping each node/edge to specific scenes with timestamps or page numbers.
 
 ---

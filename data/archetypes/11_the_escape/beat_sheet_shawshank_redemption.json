@@ -1,0 +1,200 @@
+{
+  "title": "Scene-Level Beat Sheet: The Shawshank Redemption",
+  "work": "The Shawshank Redemption",
+  "creator": "Frank Darabont (adapted from Stephen King's novella 'Rita Hayworth and Shawshank Redemption')",
+  "year": 1994,
+  "medium": "film",
+  "runtime_minutes": 142,
+  "archetype": "11_the_escape",
+  "archetype_name": "The Escape",
+  "description": "Maps every node of The Escape archetype to specific scenes in The Shawshank Redemption. The film is a dual escape narrative — physical (the tunnel) and psychological (hope vs. institutionalization) — making it the definitive example of this archetype.",
+  "beats": [
+    {
+      "node_id": "ES_N01_CONFINEMENT",
+      "label": "Confinement",
+      "role": "Origin",
+      "scenes": [
+        {
+          "description": "Trial and conviction — Andy Dufresne is sentenced to two consecutive life terms for the murder of his wife and her lover",
+          "timestamp": "0:00:00–0:04:00",
+          "duration_minutes": 4.0,
+          "notes": "Intercut trial footage with the night of the murders. The audience sees Andy's conviction but the editing deliberately withholds whether he's guilty. The confinement begins as legal rather than physical."
+        },
+        {
+          "description": "Arrival at Shawshank — bus ride, strip and delousing, first night. 'Fat Ass' breaks down and is beaten to death by Captain Hadley.",
+          "timestamp": "0:04:00–0:14:00",
+          "duration_minutes": 10.0,
+          "notes": "The prison as total institution. Every aspect of identity is stripped: clothes, name, dignity. Fat Ass's death establishes that the walls kill. Red's narration: 'I must admit I didn't think much of Andy first time I laid eyes on him.'"
+        },
+        {
+          "description": "Andy's early weeks — isolation, silence, the Sisters' sexual assaults over two years",
+          "timestamp": "0:14:00–0:22:00",
+          "duration_minutes": 8.0,
+          "notes": "Sustained confinement pressure. The Sisters represent the prison's capacity to break the body. Andy endures rather than adapts — his silence is read as arrogance but is actually resistance."
+        }
+      ],
+      "duration_pct": 15.5
+    },
+    {
+      "node_id": "ES_N02_SPARK_OF_HOPE",
+      "label": "Spark of Hope",
+      "role": "Disruption",
+      "scenes": [
+        {
+          "description": "Andy asks Red for a rock hammer — 'A man needs a hobby.' Red laughs at the tiny tool.",
+          "timestamp": "0:22:00–0:25:00",
+          "duration_minutes": 3.0,
+          "notes": "The spark is disguised as triviality. Red estimates it would take 600 years to tunnel out with that hammer. The audience, like Red, dismisses the possibility. The rock hammer is Chekhov's gun hidden in plain sight."
+        },
+        {
+          "description": "Andy carves chess pieces and starts the Rita Hayworth poster collection",
+          "timestamp": "0:25:00–0:28:00",
+          "duration_minutes": 3.0,
+          "notes": "The poster is the second disguised spark — ostensibly decoration, actually concealment. Andy builds the infrastructure of escape before anyone (including the audience) realizes escape is the plan."
+        }
+      ],
+      "duration_pct": 4.2
+    },
+    {
+      "node_id": "ES_N03_PLANNING",
+      "label": "Planning the Escape",
+      "role": "Catalyst",
+      "scenes": [
+        {
+          "description": "Rooftop tarring scene — Andy offers financial advice to Captain Hadley in exchange for beer for the work crew",
+          "timestamp": "0:28:00–0:37:00",
+          "duration_minutes": 9.0,
+          "notes": "Andy's plan operates on two levels: publicly, he builds value to the institution (financial expertise); privately, he tunnels. The rooftop scene establishes Andy's leverage — he makes himself indispensable."
+        },
+        {
+          "description": "Andy becomes the prison's unofficial financial advisor — does guards' taxes, manages Warden Norton's money laundering",
+          "timestamp": "0:37:00–0:50:00",
+          "duration_minutes": 13.0,
+          "notes": "The planning phase is extended because Andy's plan requires years of preparation. He builds a false identity (Randall Stephens) through the financial records he manages. Each tax return, each laundered dollar is a step toward escape. The audience sees institutionalization; Andy is executing a plan."
+        },
+        {
+          "description": "Andy plays Mozart over the prison PA system — 'The Marriage of Figaro' aria echoes across the yard",
+          "timestamp": "0:50:00–0:53:00",
+          "duration_minutes": 3.0,
+          "notes": "Not directly part of the escape plan, but reveals Andy's philosophy: 'There are places in this world that aren't made out of stone. There's something inside that they can't get to.' The inner escape sustains the outer plan."
+        }
+      ],
+      "duration_pct": 17.6
+    },
+    {
+      "node_id": "ES_N04_SETBACKS",
+      "label": "Setbacks and Near-Discovery",
+      "role": "Trial",
+      "scenes": [
+        {
+          "description": "Brooks Hatlen's release and suicide — 'Brooks was here. So was Red.'",
+          "timestamp": "0:53:00–1:00:00",
+          "duration_minutes": 7.0,
+          "notes": "Not Andy's setback but the thematic setback: Brooks shows what institutionalization does — the prison becomes the only world a man can navigate. This is the fate Andy is escaping, and what Red fears for himself."
+        },
+        {
+          "description": "Tommy Williams arrives and reveals that another inmate (Elmo Blatch) confessed to the murders Andy was convicted of — Andy is innocent",
+          "timestamp": "1:05:00–1:12:00",
+          "duration_minutes": 7.0,
+          "notes": "The hope of legitimate release. If the evidence is presented, Andy could be freed legally. This is the alternative to escape — the system correcting itself."
+        },
+        {
+          "description": "Warden Norton has Tommy killed to keep Andy trapped (Andy's financial skills are too valuable). Norton throws Andy in solitary for two months.",
+          "timestamp": "1:12:00–1:20:00",
+          "duration_minutes": 8.0,
+          "notes": "The definitive setback: the legitimate path is closed by the very institution that imprisoned him. Norton murders the witness and punishes Andy for seeking justice. The system will not correct itself — escape is the only option."
+        }
+      ],
+      "duration_pct": 15.5
+    },
+    {
+      "node_id": "ES_N05_POINT_OF_NO_RETURN",
+      "label": "Point of No Return",
+      "role": "Commitment",
+      "scenes": [
+        {
+          "description": "Andy emerges from solitary transformed — tells Red about Zihuatanejo: 'Get busy living, or get busy dying.'",
+          "timestamp": "1:20:00–1:27:00",
+          "duration_minutes": 7.0,
+          "notes": "The commitment scene. Andy has decided to execute the escape. Red reads it as suicidal ideation ('I was worried about Andy') — the audience shares Red's concern. The dialogue works on two levels: Andy means it literally (he will escape and go to Mexico) while Red hears it as a man giving up."
+        },
+        {
+          "description": "Andy asks Red to find a specific hayfield in Buxton if he ever gets out — a volcanic glass rock, 'something buried underneath that has no earthly business in a Maine hayfield'",
+          "timestamp": "1:27:00–1:30:00",
+          "duration_minutes": 3.0,
+          "notes": "Andy is leaving instructions for after his escape. He has committed and is now making arrangements. The specificity of the request (the exact field, the exact rock) tells us this has been planned for years."
+        }
+      ],
+      "duration_pct": 7.0
+    },
+    {
+      "node_id": "ES_N06_ESCAPE_ATTEMPT",
+      "label": "The Escape Attempt",
+      "role": "Crisis",
+      "scenes": [
+        {
+          "description": "The night of the escape — Andy's cell is empty at morning count. Norton discovers the tunnel behind the poster of Raquel Welch.",
+          "timestamp": "1:30:00–1:36:00",
+          "duration_minutes": 6.0,
+          "notes": "The reveal is shown from the outside first (the empty cell, Norton's shock, the poster) before the flashback. The audience shares Norton's disbelief before seeing the truth."
+        },
+        {
+          "description": "Flashback: Andy crawls through 500 yards of sewage pipe. Emerges into the stream in the thunderstorm, arms raised to the sky.",
+          "timestamp": "1:36:00–1:40:00",
+          "duration_minutes": 4.0,
+          "notes": "The iconic image. The sewer pipe is the birth canal — Andy is literally reborn through filth into freedom. The rain washes him clean. Red's narration: 'Andy Dufresne, who crawled through a river of shit and came out clean on the other side.'"
+        },
+        {
+          "description": "Andy as Randall Stephens — withdraws Norton's laundered money from multiple banks in a suit, mails the evidence to the newspaper",
+          "timestamp": "1:40:00–1:44:00",
+          "duration_minutes": 4.0,
+          "notes": "The escape is not just physical but systemic: Andy dismantles Norton's corruption from the outside. The escape plan was never just about leaving — it was about justice. Norton's suicide and Hadley's arrest follow."
+        }
+      ],
+      "duration_pct": 9.9
+    },
+    {
+      "node_id": "ES_N07_FREEDOM",
+      "label": "Freedom",
+      "role": "Resolution",
+      "scenes": [
+        {
+          "description": "Norton's downfall — police arrive, Hadley arrested, Norton shoots himself. Red narrates: 'I like to think the last thing that went through his head, other than that bullet, was how Andy Dufresne got the best of him.'",
+          "timestamp": "1:44:00–1:48:00",
+          "duration_minutes": 4.0,
+          "notes": "Freedom is confirmed through the oppressor's destruction. The system that confined Andy is dismantled."
+        },
+        {
+          "description": "Red's parole hearing — 'I don't give a shit.' Red is released.",
+          "timestamp": "1:48:00–1:52:00",
+          "duration_minutes": 4.0,
+          "notes": "Red's own escape: he stops performing rehabilitation for the parole board and speaks honestly. His freedom mirrors Andy's — both must stop conforming to the institution's expectations."
+        },
+        {
+          "description": "Red finds Andy's letter and money under the volcanic glass rock in Buxton. 'Hope is a good thing, maybe the best of things, and no good thing ever dies.'",
+          "timestamp": "1:52:00–1:57:00",
+          "duration_minutes": 5.0,
+          "notes": "The letter is the final spark — Andy's hope transferred to Red. Red chooses Zihuatanejo over the path of Brooks. He violates his parole and heads for Mexico."
+        },
+        {
+          "description": "Final scene — Red crosses the Mexican beach. Andy is working on a boat. They see each other. Embrace.",
+          "timestamp": "1:57:00–2:02:00",
+          "duration_minutes": 5.0,
+          "notes": "The image of absolute freedom: open water, blue sky, no walls. Red's narration: 'I hope I can make it across the border. I hope to see my friend and shake his hand. I hope the Pacific is as blue as it has been in my dreams. I hope.' The word 'hope' — the film's thesis — is the last word."
+        }
+      ],
+      "duration_pct": 12.7
+    }
+  ],
+  "_notes": {
+    "variant_not_activated": "The ES_N50_RECAPTURE variant node is not activated in this telling. Andy's escape succeeds on the first attempt. However, the Tommy Williams murder functions as a narrative recapture — Andy's hope of legitimate release is 'caught' and destroyed, forcing him back to the escape plan. The variant's emotional function is fulfilled without the literal plot event.",
+    "dual_protagonist": "The film is narrated by Red, making it a dual escape story: Andy escapes physically (the tunnel), Red escapes psychologically (institutionalization). The archetype maps primarily to Andy's external journey, but Red's internal journey is the emotional spine.",
+    "time_compression": "The film covers 19 years (1947–1966). The beat sheet maps to screen time rather than story time. The Planning phase covers ~15 years of story time but ~25 minutes of screen time."
+  },
+  "_stats": {
+    "total_scenes_mapped": 17,
+    "total_duration_pct": 82.4,
+    "unmapped_pct": 17.6,
+    "unmapped_note": "Remaining ~18% accounts for the opera scene's aftermath, various prison montages (yard scenes, library building, Red's earlier parole hearings), the Bogs/Sisters subplot resolution, and transitional narration sequences."
+  }
+}
