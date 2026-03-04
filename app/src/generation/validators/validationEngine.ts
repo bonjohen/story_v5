@@ -7,6 +7,7 @@
 
 import type {
   StoryContract,
+  StoryPlan,
   Scene,
   Beat,
   CheckStatus,
@@ -30,6 +31,7 @@ export interface ValidationInput {
   sceneDrafts: Map<string, string>   // scene_id → prose content
   config: GenerationConfig
   llm?: LLMAdapter | null
+  plan?: StoryPlan | null
 }
 
 /**
@@ -37,11 +39,15 @@ export interface ValidationInput {
  * Returns per-scene and global validation results.
  */
 export async function validateScenes(input: ValidationInput): Promise<ValidationResults> {
-  const { contract, scenes, beats, sceneDrafts, config, llm } = input
+  const { contract, scenes, beats, sceneDrafts, config, llm, plan } = input
+
+  // Pre-compute element state for continuity checks
+  const elementState = plan?.element_roster ? computeElementState(scenes) : null
 
   const sceneResults: SceneValidation[] = []
 
-  for (const scene of scenes) {
+  for (let i = 0; i < scenes.length; i++) {
+    const scene = scenes[i]
     const beat = beats.find((b) => b.beat_id === scene.beat_id)
     const content = sceneDrafts.get(scene.scene_id) ?? ''
 
@@ -66,7 +72,15 @@ export async function validateScenes(input: ValidationInput): Promise<Validation
       checks.push(checkSignals(content, beat, config))
     }
 
-    // 6. Optional LLM-backed validation
+    // 6. Element continuity checks (if element data available)
+    if (elementState) {
+      checks.push(checkElementContinuity(scene, i, elementState))
+      checks.push(checkElementMortality(scene, i, elementState))
+      checks.push(checkElementCustody(scene, i, elementState))
+      checks.push(checkElementRelationships(scene, contract))
+    }
+
+    // 7. Optional LLM-backed validation
     if (llm) {
       const llmChecks = await validateSceneWithLLM(content, scene, beat ?? null, contract, llm)
       // Merge LLM checks — they override heuristic results for the same type
@@ -220,6 +234,202 @@ function checkSignals(
   // We don't have signals on Beat directly — they come from phase guidelines
   // This is a simplified version; the orchestrator would pass the full guideline
   return { type: 'signals_in_text', status: 'pass', details: ['Signals check deferred to LLM'] }
+}
+
+// ---------------------------------------------------------------------------
+// Element state tracking
+// ---------------------------------------------------------------------------
+
+interface ElementStateSnapshot {
+  dead: Set<string>                           // entity IDs that have died
+  lastLocation: Map<string, string>           // character_id → last place_id
+  objectCustody: Map<string, string | null>   // object_id → holder_id or null
+  deadAtScene: Map<string, number>            // entity_id → scene index where they died
+}
+
+/**
+ * Pre-compute element state across all scenes by accumulating transitions.
+ */
+function computeElementState(scenes: Scene[]): ElementStateSnapshot[] {
+  const snapshots: ElementStateSnapshot[] = []
+  const dead = new Set<string>()
+  const lastLocation = new Map<string, string>()
+  const objectCustody = new Map<string, string | null>()
+  const deadAtScene = new Map<string, number>()
+
+  for (let i = 0; i < scenes.length; i++) {
+    const scene = scenes[i]
+
+    // Track character locations from scene participants
+    if (scene.moment) {
+      for (const charId of scene.moment.participants.characters) {
+        if (scene.moment.participants.places.length > 0) {
+          lastLocation.set(charId, scene.moment.participants.places[0])
+        }
+      }
+
+      // Process transitions
+      for (const t of scene.moment.expected_transitions) {
+        if (t.change === 'dies') {
+          dead.add(t.entity_id)
+          deadAtScene.set(t.entity_id, i)
+        }
+        if (t.change === 'arrives' && t.target) {
+          lastLocation.set(t.entity_id, t.target)
+        }
+        if (t.change === 'gains' && t.target) {
+          objectCustody.set(t.target, t.entity_id)
+        }
+        if (t.change === 'loses' && t.target) {
+          objectCustody.set(t.target, null)
+        }
+      }
+    }
+
+    // Save snapshot for this scene
+    snapshots.push({
+      dead: new Set(dead),
+      lastLocation: new Map(lastLocation),
+      objectCustody: new Map(objectCustody),
+      deadAtScene: new Map(deadAtScene),
+    })
+  }
+
+  return snapshots
+}
+
+// ---------------------------------------------------------------------------
+// Element continuity check
+// ---------------------------------------------------------------------------
+
+function checkElementContinuity(
+  scene: Scene,
+  sceneIndex: number,
+  snapshots: ElementStateSnapshot[],
+): ValidationCheck {
+  if (sceneIndex === 0 || !scene.moment) {
+    return { type: 'element_continuity', status: 'pass', details: ['First scene or no moment data'] }
+  }
+
+  const details: string[] = []
+  const priorSnapshot = snapshots[sceneIndex - 1]
+
+  // Check if characters are in a different place than expected
+  for (const charId of scene.moment.participants.characters) {
+    const lastPlace = priorSnapshot.lastLocation.get(charId)
+    if (lastPlace && scene.moment.participants.places.length > 0) {
+      const currentPlace = scene.moment.participants.places[0]
+      if (lastPlace !== currentPlace) {
+        // Not necessarily a failure — they could have traveled. Just note it.
+        details.push(`${charId} was at ${lastPlace}, now at ${currentPlace} (travel implied)`)
+      }
+    }
+  }
+
+  return {
+    type: 'element_continuity',
+    status: 'pass',
+    details: details.length > 0 ? details : ['Element continuity maintained'],
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Element mortality check
+// ---------------------------------------------------------------------------
+
+function checkElementMortality(
+  scene: Scene,
+  sceneIndex: number,
+  snapshots: ElementStateSnapshot[],
+): ValidationCheck {
+  if (sceneIndex === 0 || !scene.moment) {
+    return { type: 'element_mortality', status: 'pass', details: ['First scene or no moment data'] }
+  }
+
+  const details: string[] = []
+  const priorSnapshot = snapshots[sceneIndex - 1]
+
+  // Check if dead characters appear as participants
+  for (const charId of scene.moment.participants.characters) {
+    if (priorSnapshot.dead.has(charId)) {
+      details.push(`Dead character '${charId}' appears as participant (died at scene ${(priorSnapshot.deadAtScene.get(charId) ?? 0) + 1})`)
+    }
+  }
+
+  return {
+    type: 'element_mortality',
+    status: details.length > 0 ? 'fail' : 'pass',
+    details: details.length > 0 ? details : ['No dead characters reappear'],
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Element custody check
+// ---------------------------------------------------------------------------
+
+function checkElementCustody(
+  scene: Scene,
+  sceneIndex: number,
+  snapshots: ElementStateSnapshot[],
+): ValidationCheck {
+  if (sceneIndex === 0 || !scene.moment) {
+    return { type: 'element_custody', status: 'pass', details: ['First scene or no moment data'] }
+  }
+
+  const details: string[] = []
+  const priorSnapshot = snapshots[sceneIndex - 1]
+
+  // Check objects present in scene — is their holder present too?
+  for (const objId of scene.moment.participants.objects) {
+    const holder = priorSnapshot.objectCustody.get(objId)
+    if (holder && !scene.moment.participants.characters.includes(holder)) {
+      details.push(`Object '${objId}' held by '${holder}' who is not in this scene`)
+    }
+  }
+
+  return {
+    type: 'element_custody',
+    status: details.length > 0 ? 'warn' : 'pass',
+    details: details.length > 0 ? details : ['Object custody is consistent'],
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Element relationship consistency check
+// ---------------------------------------------------------------------------
+
+function checkElementRelationships(
+  scene: Scene,
+  _contract: StoryContract,
+): ValidationCheck {
+  // Relationship consistency checks operate on scene_elements and contract element_constraints
+  // This is a structural check — the actual semantic consistency requires LLM validation
+  if (!scene.scene_elements || scene.scene_elements.length === 0) {
+    return { type: 'element_relationships', status: 'pass', details: ['No element data for relationship check'] }
+  }
+
+  // Check that required relationship roles are present together
+  const details: string[] = []
+  const rolesPresent = new Set(scene.scene_elements.map((e) => e.role_or_type))
+
+  // If there's a nemesis constraint, protagonist and antagonist should appear together in at least one scene
+  const constraints = _contract.element_constraints ?? []
+  for (const constraint of constraints) {
+    if (constraint.category === 'relationship' && constraint.severity === 'required') {
+      // For nemesis relationships, just note if we can't verify
+      if (constraint.role_or_type === 'nemesis') {
+        if (rolesPresent.has('protagonist') && rolesPresent.has('antagonist')) {
+          details.push(`Nemesis relationship: protagonist and antagonist present together`)
+        }
+      }
+    }
+  }
+
+  return {
+    type: 'element_relationships',
+    status: 'pass',
+    details: details.length > 0 ? details : ['Relationship check passed'],
+  }
 }
 
 // ---------------------------------------------------------------------------

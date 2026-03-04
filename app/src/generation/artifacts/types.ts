@@ -182,12 +182,45 @@ export interface ValidationPolicy {
   signals_required: 'hard' | 'soft' | 'off'
 }
 
+/** Element template requirement extracted from archetype elements.json. */
+export interface ContractElementRequirement {
+  category: 'character' | 'place' | 'object'
+  role_or_type: string       // e.g., "protagonist", "ordinary_world", "weapon"
+  label: string              // e.g., "The Hero", "The Ordinary World"
+  definition: string
+  required: boolean
+  appears_at_nodes: string[]
+}
+
+/** Genre element constraint imported into the contract. */
+export interface ContractElementConstraint {
+  category: 'character' | 'place' | 'object' | 'relationship'
+  role_or_type: string
+  severity: 'required' | 'recommended' | 'optional'
+  description: string
+}
+
+/** Genre element rule imported into the contract. */
+export interface ContractElementRule {
+  rule_id: string
+  description: string
+  severity: 'required' | 'recommended' | 'optional'
+  applies_to: string
+  testable_condition: string
+}
+
 export interface StoryContract extends RunMetadata {
   archetype: ContractArchetype
   genre: ContractGenre
   global_boundaries: GlobalBoundaries
   phase_guidelines: PhaseGuideline[]
   validation_policy: ValidationPolicy
+  /** Element role requirements from archetype elements.json template. */
+  element_requirements?: ContractElementRequirement[]
+  /** Element constraints from genre element_constraints.json (when present). */
+  element_constraints?: ContractElementConstraint[]
+  /** Element rules from genre element_constraints.json (when present). */
+  element_rules?: ContractElementRule[]
 }
 
 // ---------------------------------------------------------------------------
@@ -234,6 +267,30 @@ export interface SceneConstraintsChecklist {
   must_not: string[]
 }
 
+/** Named element assigned to a scene. */
+export interface SceneElement {
+  id: string
+  name: string
+  role_or_type: string       // matches a ContractElementRequirement
+}
+
+/** A timeline moment generated for a scene during planning. */
+export interface PlanMoment {
+  moment_id: string
+  archetype_node: string
+  participants: {
+    characters: string[]     // element roster IDs
+    places: string[]
+    objects: string[]
+  }
+  expected_transitions: Array<{
+    entity_id: string
+    change: string           // ChangeType
+    target?: string
+    description?: string
+  }>
+}
+
 export interface Scene {
   scene_id: string
   beat_id: string
@@ -243,6 +300,12 @@ export interface Scene {
   archetype_trace: SceneArchetypeTrace
   genre_obligations: SceneGenreObligation[]
   constraints_checklist: SceneConstraintsChecklist
+  /** Named elements participating in this scene (populated by planner). */
+  scene_elements?: SceneElement[]
+  /** Objects present in this scene. */
+  objects?: string[]
+  /** Timeline moment for this scene (populated by planner). */
+  moment?: PlanMoment
 }
 
 export interface CoverageTargets {
@@ -250,10 +313,30 @@ export interface CoverageTargets {
   soft_constraints_min_coverage: number   // e.g. 0.6
 }
 
+/** A named element in the story's element roster. */
+export interface RosterEntry {
+  id: string
+  name: string
+  category: 'character' | 'place' | 'object'
+  role_or_type: string       // e.g., "protagonist", "ordinary_world", "weapon"
+  description?: string
+  traits?: string[]
+  motivations?: string[]
+}
+
+/** Element roster — the named cast, locations, and objects for a story. */
+export interface ElementRoster {
+  characters: RosterEntry[]
+  places: RosterEntry[]
+  objects: RosterEntry[]
+}
+
 export interface StoryPlan extends RunMetadata {
   beats: Beat[]
   scenes: Scene[]
   coverage_targets: CoverageTargets
+  /** Named element roster for the story (populated by planner). */
+  element_roster?: ElementRoster
 }
 
 // ---------------------------------------------------------------------------
@@ -266,6 +349,10 @@ export type ValidationCheckType =
   | 'tone'
   | 'entry_exit'
   | 'signals_in_text'
+  | 'element_continuity'
+  | 'element_mortality'
+  | 'element_custody'
+  | 'element_relationships'
 
 export interface ValidationCheck {
   type: ValidationCheckType
@@ -496,6 +583,8 @@ export interface VocabularyFile {
 // ---------------------------------------------------------------------------
 
 import type { StoryGraph, DataManifest } from '../../types/graph.ts'
+import type { ArchetypeElements } from '../../types/elements.ts'
+import type { GenreElementConstraints } from '../../types/element-constraints.ts'
 
 export interface LoadedCorpus {
   /** All 42 graphs, keyed by their directory path (e.g. "01_heros_journey") */
@@ -523,4 +612,10 @@ export interface LoadedCorpus {
 
   /** Stable hash of corpus content for reproducibility */
   corpusHash: string
+
+  /** Archetype element templates, keyed by archetype directory */
+  archetypeElements: Map<string, ArchetypeElements>
+
+  /** Genre element constraints, keyed by genre directory (only for genres that have them) */
+  genreElementConstraints: Map<string, GenreElementConstraints>
 }

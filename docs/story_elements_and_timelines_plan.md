@@ -150,30 +150,30 @@ The following genres constrain style and structure more than element composition
 
 ### Contract Compiler Extensions
 
-- [ ] Extend `StoryContract` type with `element_requirements` field — extracted from archetype `elements.json` template
-- [ ] Extend `StoryContract` type with `element_constraints` field — extracted from genre `element_constraints.json` (when present)
-- [ ] Update contract compiler to load and merge element templates from selected archetype
-- [ ] Update contract compiler to load and merge element constraints from selected genre (if file exists)
+- [X] Extend `StoryContract` type with `element_requirements` field — extracted from archetype `elements.json` template
+- [X] Extend `StoryContract` type with `element_constraints` field — extracted from genre `element_constraints.json` (when present)
+- [X] Update contract compiler to load and merge element templates from selected archetype
+- [X] Update contract compiler to load and merge element constraints from selected genre (if file exists)
 
 ### Planner Extensions
 
-- [ ] Extend `StoryPlan` type with `element_roster` field — named characters, places, objects assigned to template roles
-- [ ] Extend `StoryPlan` scene/beat structures with populated `characters[]`, `setting`, `objects[]` fields (currently empty placeholders)
-- [ ] Add timeline moment generation — for each planned scene, produce a moment with participants and expected transitions
-- [ ] Validate element roster covers all `required: true` template roles
+- [X] Extend `StoryPlan` type with `element_roster` field — named characters, places, objects assigned to template roles
+- [X] Extend `StoryPlan` scene/beat structures with populated `characters[]`, `setting`, `objects[]` fields (currently empty placeholders)
+- [X] Add timeline moment generation — for each planned scene, produce a moment with participants and expected transitions
+- [X] Validate element roster covers all `required: true` template roles
 
 ### Writer Agent Extensions
 
-- [ ] Extend per-scene writer context with element roster (who's there, what they want, what they know at this point)
-- [ ] Add character state tracking — accumulate transitions from prior moments to compute current character state per scene
-- [ ] Include object custody tracking in writer context — which character has which object at this point
+- [X] Extend per-scene writer context with element roster (who's there, what they want, what they know at this point)
+- [X] Add character state tracking — accumulate transitions from prior moments to compute current character state per scene
+- [X] Include object custody tracking in writer context — which character has which object at this point
 
 ### Validation Engine Extensions
 
-- [ ] Add element continuity check — character can't appear in a scene at place A if their last transition was `arrives` at place B
-- [ ] Add mortality check — dead characters don't participate in subsequent moments (unless resurrection is a story element)
-- [ ] Add object custody check — objects have traceable chain of possession
-- [ ] Add relationship consistency check — relationship types don't contradict (can't be both `ally` and `nemesis` simultaneously unless `shapeshifter` role)
+- [X] Add element continuity check — character can't appear in a scene at place A if their last transition was `arrives` at place B
+- [X] Add mortality check — dead characters don't participate in subsequent moments (unless resurrection is a story element)
+- [X] Add object custody check — objects have traceable chain of possession
+- [X] Add relationship consistency check — relationship types don't contradict (can't be both `ally` and `nemesis` simultaneously unless `shapeshifter` role)
 
 **Deliverable**: Generation pipeline produces stories with populated element rosters, per-scene character/place/object assignments, and timeline-based continuity validation.
 

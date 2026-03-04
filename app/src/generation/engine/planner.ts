@@ -9,8 +9,13 @@ import type {
   Beat,
   BeatHybridInfo,
   Scene,
+  SceneElement,
+  PlanMoment,
   EmotionalScores,
   CoverageTargets,
+  ElementRoster,
+  RosterEntry,
+  ContractElementRequirement,
   LoadedCorpus,
   GenerationConfig,
   SelectionResult,
@@ -47,7 +52,16 @@ export async function buildPlan(options: PlannerOptions): Promise<StoryPlan> {
   // 3. Verify coverage
   verifyCoverage(scenes, contract, config)
 
-  // 4. Optionally enhance with LLM
+  // 4. Build element roster from contract requirements
+  const elementRoster = buildElementRoster(contract)
+
+  // 5. Populate scenes with element assignments and timeline moments
+  populateScenesWithElements(scenes, contract, elementRoster)
+
+  // 6. Validate element roster covers required template roles
+  validateElementRosterCoverage(elementRoster, contract)
+
+  // 7. Optionally enhance with LLM
   if (llm) {
     await enhancePlanWithLLM(beats, scenes, contract, llm)
   }
@@ -65,6 +79,9 @@ export async function buildPlan(options: PlannerOptions): Promise<StoryPlan> {
     beats,
     scenes,
     coverage_targets: coverageTargets,
+    ...(elementRoster.characters.length > 0 || elementRoster.places.length > 0 || elementRoster.objects.length > 0
+      ? { element_roster: elementRoster }
+      : {}),
   }
 }
 
@@ -232,6 +249,152 @@ function isSceneObligation(nodeId: string, contract: StoryContract): boolean {
     return num >= 60 && num <= 79
   }
   return false
+}
+
+// ---------------------------------------------------------------------------
+// Element roster
+// ---------------------------------------------------------------------------
+
+/**
+ * Build a placeholder element roster from contract element requirements.
+ * Characters, places, and objects get IDs and placeholder names derived
+ * from their template labels. An LLM enhancement step can later replace
+ * these with story-specific names.
+ */
+function buildElementRoster(contract: StoryContract): ElementRoster {
+  const requirements = contract.element_requirements ?? []
+
+  const characters: RosterEntry[] = requirements
+    .filter((r) => r.category === 'character')
+    .map((r, i) => ({
+      id: `char_${String(i + 1).padStart(2, '0')}`,
+      name: r.label,
+      category: 'character' as const,
+      role_or_type: r.role_or_type,
+      description: r.definition,
+    }))
+
+  const places: RosterEntry[] = requirements
+    .filter((r) => r.category === 'place')
+    .map((r, i) => ({
+      id: `place_${String(i + 1).padStart(2, '0')}`,
+      name: r.label,
+      category: 'place' as const,
+      role_or_type: r.role_or_type,
+      description: r.definition,
+    }))
+
+  const objects: RosterEntry[] = requirements
+    .filter((r) => r.category === 'object')
+    .map((r, i) => ({
+      id: `obj_${String(i + 1).padStart(2, '0')}`,
+      name: r.label,
+      category: 'object' as const,
+      role_or_type: r.role_or_type,
+      description: r.definition,
+    }))
+
+  return { characters, places, objects }
+}
+
+/**
+ * Populate scenes with element assignments and timeline moments based on
+ * which template elements appear at each archetype node.
+ */
+function populateScenesWithElements(
+  scenes: Scene[],
+  contract: StoryContract,
+  roster: ElementRoster,
+): void {
+  const requirements = contract.element_requirements ?? []
+
+  // Build lookup: archetype node → which requirements appear there
+  const nodeToRequirements = new Map<string, ContractElementRequirement[]>()
+  for (const req of requirements) {
+    for (const nodeId of req.appears_at_nodes) {
+      if (!nodeToRequirements.has(nodeId)) nodeToRequirements.set(nodeId, [])
+      nodeToRequirements.get(nodeId)!.push(req)
+    }
+  }
+
+  // Build lookup: role_or_type → roster entry
+  const roleToEntry = new Map<string, RosterEntry>()
+  for (const entry of [...roster.characters, ...roster.places, ...roster.objects]) {
+    roleToEntry.set(`${entry.category}:${entry.role_or_type}`, entry)
+  }
+
+  let momentIndex = 1
+  for (const scene of scenes) {
+    const nodeId = scene.archetype_trace.node_id
+    const nodeReqs = nodeToRequirements.get(nodeId) ?? []
+
+    // Assign scene elements
+    const sceneElements: SceneElement[] = []
+    const charIds: string[] = []
+    const placeIds: string[] = []
+    const objectIds: string[] = []
+
+    for (const req of nodeReqs) {
+      const entry = roleToEntry.get(`${req.category}:${req.role_or_type}`)
+      if (!entry) continue
+
+      sceneElements.push({
+        id: entry.id,
+        name: entry.name,
+        role_or_type: entry.role_or_type,
+      })
+
+      if (req.category === 'character') charIds.push(entry.id)
+      if (req.category === 'place') placeIds.push(entry.id)
+      if (req.category === 'object') objectIds.push(entry.id)
+    }
+
+    // Populate the scene's character and setting fields
+    scene.scene_elements = sceneElements
+    scene.characters = charIds.length > 0 ? charIds : scene.characters
+    scene.objects = objectIds
+    if (placeIds.length > 0) {
+      scene.setting = placeIds[0]  // Primary place for the scene
+    }
+
+    // Build timeline moment
+    const momentId = `M${String(momentIndex).padStart(2, '0')}`
+    scene.moment = {
+      moment_id: momentId,
+      archetype_node: nodeId,
+      participants: {
+        characters: charIds,
+        places: placeIds,
+        objects: objectIds,
+      },
+      expected_transitions: [],  // Transitions populated by LLM enhancement or manual authoring
+    }
+    momentIndex++
+  }
+}
+
+/**
+ * Validate that the element roster covers all required template roles.
+ * Logs warnings for missing required elements.
+ */
+function validateElementRosterCoverage(
+  roster: ElementRoster,
+  contract: StoryContract,
+): void {
+  const requirements = contract.element_requirements ?? []
+  const requiredRoles = requirements.filter((r) => r.required)
+
+  const coveredRoles = new Set<string>()
+  for (const entry of [...roster.characters, ...roster.places, ...roster.objects]) {
+    coveredRoles.add(`${entry.category}:${entry.role_or_type}`)
+  }
+
+  for (const req of requiredRoles) {
+    const key = `${req.category}:${req.role_or_type}`
+    if (!coveredRoles.has(key)) {
+      console.warn(`[Planner] Missing required element: ${req.category} '${req.role_or_type}' (${req.label})`)
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------

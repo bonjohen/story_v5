@@ -157,7 +157,9 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       if (!beat) continue
 
       transition('GENERATING_SCENE', `Writing scene ${scene.scene_id}`)
-      const writeResult = await writeScene(scene, beat, contract, llm)
+      const sceneIndex = plan.scenes.indexOf(scene)
+      const priorScenes = plan.scenes.slice(0, sceneIndex)
+      const writeResult = await writeScene(scene, beat, contract, llm, plan, priorScenes)
       sceneDrafts.set(scene.scene_id, writeResult.content)
 
       // 6. Validate
@@ -169,6 +171,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
         sceneDrafts: new Map([[scene.scene_id, writeResult.content]]),
         config,
         llm,
+        plan,
       })
 
       // 7. Repair loop
@@ -202,6 +205,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
           sceneDrafts: new Map([[scene.scene_id, repairResult.revised_content]]),
           config,
           llm,
+          plan,
         })
         // Update sceneResult reference
         if (validation.scenes[0]) {
@@ -221,6 +225,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       sceneDrafts,
       config,
       llm,
+      plan,
     })
     result.validation = finalValidation
 

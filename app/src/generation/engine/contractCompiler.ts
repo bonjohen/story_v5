@@ -14,6 +14,9 @@ import type {
   StoryContract,
   ContractArchetype,
   ContractGenre,
+  ContractElementRequirement,
+  ContractElementConstraint,
+  ContractElementRule,
   GlobalBoundaries,
   PhaseGuideline,
   ValidationPolicy,
@@ -54,6 +57,12 @@ export function compileContract(
   const phaseGuidelines = buildPhaseGuidelines(archetypeGraph, genreGraph)
   const validationPolicy = buildValidationPolicy(config)
 
+  // Extract element requirements from archetype elements.json
+  const elementRequirements = buildElementRequirements(selection.primary_archetype, corpus)
+
+  // Extract element constraints from genre element_constraints.json
+  const { elementConstraints, elementRules } = buildElementConstraints(selection.primary_genre, corpus)
+
   return {
     schema_version: '1.0.0',
     run_id: selection.run_id,
@@ -64,6 +73,9 @@ export function compileContract(
     global_boundaries: globalBoundaries,
     phase_guidelines: phaseGuidelines,
     validation_policy: validationPolicy,
+    ...(elementRequirements.length > 0 ? { element_requirements: elementRequirements } : {}),
+    ...(elementConstraints.length > 0 ? { element_constraints: elementConstraints } : {}),
+    ...(elementRules.length > 0 ? { element_rules: elementRules } : {}),
   }
 }
 
@@ -247,6 +259,115 @@ function buildValidationPolicy(config: GenerationConfig): ValidationPolicy {
     entry_exit_required: true,
     signals_required: config.signals_policy.mode === 'block' ? 'hard' : 'soft',
   }
+}
+
+// ---------------------------------------------------------------------------
+// Element requirements (from archetype elements.json)
+// ---------------------------------------------------------------------------
+
+function buildElementRequirements(
+  archetypeDir: string,
+  corpus: LoadedCorpus,
+): ContractElementRequirement[] {
+  const elements = corpus.archetypeElements?.get(archetypeDir)
+  if (!elements) return []
+
+  const requirements: ContractElementRequirement[] = []
+
+  for (const char of elements.element_templates.characters) {
+    requirements.push({
+      category: 'character',
+      role_or_type: char.role,
+      label: char.label,
+      definition: char.definition,
+      required: char.required,
+      appears_at_nodes: char.appears_at_nodes,
+    })
+  }
+
+  for (const place of elements.element_templates.places) {
+    requirements.push({
+      category: 'place',
+      role_or_type: place.type,
+      label: place.label,
+      definition: place.definition,
+      required: place.required,
+      appears_at_nodes: place.appears_at_nodes,
+    })
+  }
+
+  for (const obj of elements.element_templates.objects) {
+    requirements.push({
+      category: 'object',
+      role_or_type: obj.type,
+      label: obj.label,
+      definition: obj.definition,
+      required: obj.required,
+      appears_at_nodes: obj.appears_at_nodes,
+    })
+  }
+
+  return requirements
+}
+
+// ---------------------------------------------------------------------------
+// Element constraints (from genre element_constraints.json)
+// ---------------------------------------------------------------------------
+
+function buildElementConstraints(
+  genreDir: string,
+  corpus: LoadedCorpus,
+): { elementConstraints: ContractElementConstraint[]; elementRules: ContractElementRule[] } {
+  const constraints = corpus.genreElementConstraints?.get(genreDir)
+  if (!constraints) return { elementConstraints: [], elementRules: [] }
+
+  const elementConstraints: ContractElementConstraint[] = []
+
+  for (const c of constraints.character_constraints) {
+    elementConstraints.push({
+      category: 'character',
+      role_or_type: c.role,
+      severity: c.severity,
+      description: c.description,
+    })
+  }
+
+  for (const r of constraints.relationship_constraints) {
+    elementConstraints.push({
+      category: 'relationship',
+      role_or_type: r.type,
+      severity: r.severity,
+      description: r.description,
+    })
+  }
+
+  for (const p of constraints.place_constraints) {
+    elementConstraints.push({
+      category: 'place',
+      role_or_type: p.type,
+      severity: p.severity,
+      description: p.description,
+    })
+  }
+
+  for (const o of constraints.object_constraints) {
+    elementConstraints.push({
+      category: 'object',
+      role_or_type: o.type,
+      severity: o.severity,
+      description: o.description,
+    })
+  }
+
+  const elementRules: ContractElementRule[] = constraints.element_rules.map((r) => ({
+    rule_id: r.rule_id,
+    description: r.description,
+    severity: r.severity,
+    applies_to: r.applies_to,
+    testable_condition: r.testable_condition,
+  }))
+
+  return { elementConstraints, elementRules }
 }
 
 // ---------------------------------------------------------------------------

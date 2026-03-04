@@ -9,6 +9,8 @@
 import { parseGraphJson } from '../../graph-engine/normalizer.ts'
 import { ARCHETYPE_DIRS, GENRE_DIRS } from '../../graph-engine/dataIndex.ts'
 import type { StoryGraph, DataManifest } from '../../types/graph.ts'
+import type { ArchetypeElements } from '../../types/elements.ts'
+import type { GenreElementConstraints } from '../../types/element-constraints.ts'
 import type {
   LoadedCorpus,
   GenreArchetypeMatrix,
@@ -87,11 +89,13 @@ function computeCorpusHash(components: string[]): string {
 // ---------------------------------------------------------------------------
 
 export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> {
-  // Load all graphs in parallel
-  const [archetypeGraphs, genreGraphs, variantGraphs] = await Promise.all([
+  // Load all graphs and element data in parallel
+  const [archetypeGraphs, genreGraphs, variantGraphs, archetypeElements, genreElementConstraints] = await Promise.all([
     loadArchetypeGraphs(provider),
     loadGenreGraphs(provider),
     loadVariantGraphs(provider),
+    loadArchetypeElements(provider),
+    loadGenreElementConstraints(provider),
   ])
 
   // Load cross-reference files in parallel
@@ -129,6 +133,8 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
   hashComponents.push(`arcs:${emotionalArcs.archetypes.length}`)
   hashComponents.push(`hybrids:${hybridPatterns.hybrids.length}`)
   hashComponents.push(`blends:${blendingModel.blends.length}`)
+  hashComponents.push(`elements:${archetypeElements.size}`)
+  hashComponents.push(`genreConstraints:${genreElementConstraints.size}`)
 
   const corpusHash = computeCorpusHash(hashComponents)
 
@@ -147,6 +153,8 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
     genreEdgeMeanings,
     manifest,
     corpusHash,
+    archetypeElements,
+    genreElementConstraints,
   }
 }
 
@@ -210,6 +218,44 @@ async function loadVariantGraphs(
   )
   for (const result of results) {
     if (result) map.set(result.dir, result.graph)
+  }
+  return map
+}
+
+async function loadArchetypeElements(
+  provider: DataProvider,
+): Promise<Map<string, ArchetypeElements>> {
+  const map = new Map<string, ArchetypeElements>()
+  const results = await Promise.all(
+    ARCHETYPE_DIRS.map(async (dir) => {
+      const path = `archetypes/${dir}/elements.json`
+      const hasElements = await provider.exists(path)
+      if (!hasElements) return null
+      const raw = await provider.loadJson(path) as ArchetypeElements
+      return { dir, elements: raw }
+    }),
+  )
+  for (const result of results) {
+    if (result) map.set(result.dir, result.elements)
+  }
+  return map
+}
+
+async function loadGenreElementConstraints(
+  provider: DataProvider,
+): Promise<Map<string, GenreElementConstraints>> {
+  const map = new Map<string, GenreElementConstraints>()
+  const results = await Promise.all(
+    GENRE_DIRS.map(async (dir) => {
+      const path = `genres/${dir}/element_constraints.json`
+      const hasConstraints = await provider.exists(path)
+      if (!hasConstraints) return null
+      const raw = await provider.loadJson(path) as GenreElementConstraints
+      return { dir, constraints: raw }
+    }),
+  )
+  for (const result of results) {
+    if (result) map.set(result.dir, result.constraints)
   }
   return map
 }
