@@ -16,7 +16,7 @@ This is a **data and content project** (no source code, build system, or tests) 
 docs/                              ← Planning, specs, and vocabulary
   v0_plan.md                       ← Authoritative statement of work (read first)
   goal_1.md                        ← Goal 1 task tracker (complete)
-  goal_2.md                        ← Goal 2 task tracker (in progress)
+  goal_2.md                        ← Goal 2 task tracker (complete)
   v-next.md                        ← Deferred tasks, known issues, suggestions
   archtypes.json                   ← 15 archetypes: descriptions, examples, genres
   genres.json                      ← 27 genres: descriptions, examples, popularity
@@ -31,17 +31,19 @@ data/                              ← Deliverable outputs
       narrative.md                 ← Narrative spec (walkthroughs, failure modes)
       examples.md                  ← Example mappings to real works
     cross_archetype_index.json     ← Shared node roles/edge meanings across all 15
-  genres/                          ← Goal 2 deliverables (in progress)
-    {nn_name}/                     ← Per-genre folder (27 total, when built)
+  genres/                          ← Goal 2 deliverables (complete)
+    {nn_name}/                     ← Per-genre folder (27 total)
       graph.json
       narrative.md
       examples.md
+    cross_genre_constraint_index.json  ← Shared constraint types across all 27
+  genre_archetype_matrix.json      ← 27 genres × 15 archetypes compatibility
 ```
 
 ## Goal Status
 
 - **Goal 1 — Archetype Graphs**: Complete. All 15 graph JSONs, 15 narrative specs, 15 example mappings, cross-archetype index, and validation done.
-- **Goal 2 — Genre Depth Graphs**: In progress. Track via `docs/goal_2.md`.
+- **Goal 2 — Genre Depth Graphs**: Complete. All 27 graph JSONs, 27 narrative specs, 27 example mappings, cross-genre constraint index, genre × archetype compatibility matrix, and validation done.
 
 ## Key Conventions
 
