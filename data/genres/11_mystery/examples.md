@@ -293,7 +293,7 @@
 
 ---
 
-**MY_E55_REVEAL_RESTRICTS_RESOLUTION — Reveal scene must meet the standard of satisfying resolution**
+**MY_E70_REVEAL_RESTRICTS_RESOLUTION — Reveal scene must meet the standard of satisfying resolution**
 
 - Knives Out's reveal scene earns the resolution standard through its double structure: the private explanation to Marta (which is complete and logical) is followed by the public confrontation with Ransom (which is evidential and witnessed). The private explanation ensures the logic is fully accounted for; the public confrontation ensures the solution is established beyond assertion. Blanc does not merely name Ransom — he demonstrates the mechanism and allows Ransom's own behavior (the attempted stabbing) to confirm the accusation.
 - In The Hound of the Baskervilles, the reveal scene meets the resolution standard because Holmes explains not just who but how and why: the phosphorescent hound, the inheritance chain, the geography of the escape route, and the sequence of events from Sir Charles's death to the present. No element is left unexplained.

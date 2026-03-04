@@ -237,7 +237,7 @@
 
 ---
 
-**WE_E52_CODE_TO_SHOWDOWN — Personal code requires payoff in the showdown**
+**WE_E70_CODE_TO_SHOWDOWN — Personal code requires payoff in the showdown**
 - **The Good, the Bad and the Ugly**: Blondie's code — which has been expressed throughout in his treatment of Tuco, his spare fair dealing, his refusal to simply kill when killing would be easier — pays off in the showdown in two specific ways: he has prepared (by secretly unloading Tuco's gun) in a manner that is tactical rather than dishonorable, and he has conducted the confrontation openly rather than by ambush. After Angel Eyes is dead, his treatment of Tuco — leaving him the gold, leaving him a means of escape, leaving him alive — is the code's final expression, simultaneously a punishment and a mercy.
 - **True Grit**: Rooster's code — true grit, the completion of what one has sworn to do — pays off in the charge against Ned Pepper's gang. The showdown is the code made action, the whole of Rooster's character expressed in a single suicidal charge.
 - **Unforgiven**: The code's payoff in the showdown is the film's most devastating argument. Munny's code — the promise to his dead wife, the rejection of violence — does not survive the showdown. What pays off in the saloon is not the reformed man's code but the gunfighter's code, the one that was never truly gone. The showdown reveals that the code was always the wrong tool for the job of transformation.
@@ -258,7 +258,7 @@
 
 ---
 
-**WE_E55_COMPETENCE_TO_SHOWDOWN — Physical competence is tested and proven in the showdown**
+**WE_E71_COMPETENCE_TO_SHOWDOWN — Physical competence is tested and proven in the showdown**
 - **The Good, the Bad and the Ugly**: The showdown at Sad Hill is the definitive testing of established physical competence. Blondie's speed on the draw has been demonstrated throughout — he is the fastest and most accurate man in the film — and the showdown proves that this competence is the determining factor in the confrontation's outcome. The preparation (unloading Tuco's gun) is itself an expression of competence: tactical intelligence applied to the problem of a three-way confrontation in which drawing first against two opponents is impossible. The film insists that Blondie's survival is earned, not given.
 - **True Grit**: Rooster's charge against Ned Pepper and his men is the showdown's competence test — the gap between a man who can fire accurately with both hands from a galloping horse and a man who cannot is the gap between survival and death, and the film does not allow the audience to forget it.
 - **Unforgiven**: The saloon sequence tests Munny's competence in the most extreme conditions — drunk, grieving, outnumbered, in darkness — and the fact that he kills everyone he intends to kill is the payoff of competence that was established before the film began and that the film has spent its entire duration making visible through its absence and then its terrible return.

@@ -89,7 +89,8 @@ interface GenreConfig {
   folder: string
 }
 
-const GENRES_TO_FIX: GenreConfig[] = [
+// Phase B1: systematic renumbering
+const B1_GENRES: GenreConfig[] = [
   { prefix: 'HR', folder: '10_horror' },
   { prefix: 'DT', folder: '13_detective' },
   { prefix: 'RC', folder: '09_romantic_comedy' },
@@ -98,6 +99,14 @@ const GENRES_TO_FIX: GenreConfig[] = [
   { prefix: 'FA', folder: '18_family' },
   { prefix: 'BI', folder: '17_biography' },
   { prefix: 'CR', folder: '12_crime' },
+]
+
+// Phase B2: cross-level edge fixes
+const B2_GENRES: GenreConfig[] = [
+  { prefix: 'YA', folder: '19_young_adult' },
+  { prefix: 'WE', folder: '24_western' },
+  { prefix: 'WR', folder: '16_war' },
+  { prefix: 'MY', folder: '11_mystery' },
 ]
 
 function processGenre(config: GenreConfig): Map<string, string> {
@@ -231,16 +240,26 @@ function processGenre(config: GenreConfig): Map<string, string> {
 }
 
 function main() {
+  const phase = process.argv[2] ?? 'all'
   console.log('Edge renumbering script\n')
-  console.log('=== Phase B1: Systematic renumbering (8 genres) ===\n')
 
   let totalRenamed = 0
-  for (const config of GENRES_TO_FIX) {
-    const renames = processGenre(config)
-    totalRenamed += renames.size
+
+  if (phase === 'all' || phase === 'b1') {
+    console.log('=== Phase B1: Systematic renumbering (8 genres) ===\n')
+    for (const config of B1_GENRES) {
+      totalRenamed += processGenre(config).size
+    }
   }
 
-  console.log(`\nTotal: ${totalRenamed} edges renumbered across ${GENRES_TO_FIX.length} genres.`)
+  if (phase === 'all' || phase === 'b2') {
+    console.log('\n=== Phase B2: Cross-level edge fixes (4 genres) ===\n')
+    for (const config of B2_GENRES) {
+      totalRenamed += processGenre(config).size
+    }
+  }
+
+  console.log(`\nTotal: ${totalRenamed} edges renumbered.`)
 }
 
 main()

@@ -790,24 +790,6 @@
       ]
     },
     {
-      "edge_id": "YA_E35_ALL_TO_ADULT_SHELTER",
-      "from": "YA_N12_AUTHORITY_VISIBLE",
-      "to": "YA_N42_ADULT_WORLD_SHELTER_CAGE",
-      "label": "Visible authority must be ambivalent â€” shelter and cage simultaneously",
-      "meaning": "introduces setting rule",
-      "preconditions": [
-        "Authority structures are established"
-      ],
-      "effects_on_stakes": "The ambivalence of authority raises the cost of both compliance and resistance",
-      "effects_on_character": "Protagonist cannot dismiss authority as simply wrong â€” they must navigate its genuine complexity",
-      "common_alternatives": [
-        "Some YA resolves the ambivalence by story's end, but only after genuinely inhabiting it"
-      ],
-      "anti_patterns": [
-        "Authority is either pure villain or pure helper â€” protagonist's navigation is too easy in either direction"
-      ]
-    },
-    {
       "edge_id": "YA_E50_SCHOOL_TO_IDENTITY_CHOICE",
       "from": "YA_N40_SCHOOL_SOCIAL_HIERARCHY",
       "to": "YA_N60_IDENTITY_CHOICE_SCENE",
@@ -913,6 +895,24 @@
       ],
       "anti_patterns": [
         "Confrontation resolves without producing any crystallization of the protagonist's identity"
+      ]
+    },
+    {
+      "edge_id": "YA_E70_ALL_TO_ADULT_SHELTER",
+      "from": "YA_N12_AUTHORITY_VISIBLE",
+      "to": "YA_N42_ADULT_WORLD_SHELTER_CAGE",
+      "label": "Visible authority must be ambivalent â€” shelter and cage simultaneously",
+      "meaning": "introduces setting rule",
+      "preconditions": [
+        "Authority structures are established"
+      ],
+      "effects_on_stakes": "The ambivalence of authority raises the cost of both compliance and resistance",
+      "effects_on_character": "Protagonist cannot dismiss authority as simply wrong â€” they must navigate its genuine complexity",
+      "common_alternatives": [
+        "Some YA resolves the ambivalence by story's end, but only after genuinely inhabiting it"
+      ],
+      "anti_patterns": [
+        "Authority is either pure villain or pure helper â€” protagonist's navigation is too easy in either direction"
       ]
     },
     {

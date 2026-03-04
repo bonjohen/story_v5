@@ -29,8 +29,8 @@ Renumber edges in affected genre graphs to match the documented convention. Each
 - [X] **#11 — Systematic edge numbering shift in 6–8 genre graphs**
   Renumbered 80 edges across HR, DT, RC, LF, CL, FA, BI, CR to match level-transition ranges. Updated graph.json, narrative.md, and examples.md for each. Script at `app/scripts/renumber-edges.ts`.
 
-- [ ] **#12 — Cross-level edges not in 70–89 range**
-  Young Adult, Western, War, Crime, Detective, and Mystery have level-skipping edges numbered in the destination level's range. Renumber to 70–89 cross-level range.
+- [X] **#12 — Cross-level edges not in 70–89 range**
+  Renumbered 6 cross-level edges in YA, WE, WR, MY to E70–E89 range. (CR and DT were fixed in #11.)
 
 ### Phase C — Content Enrichment (medium effort, content-heavy)
 

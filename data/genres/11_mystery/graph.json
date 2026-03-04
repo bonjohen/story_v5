@@ -904,7 +904,7 @@
       ]
     },
     {
-      "edge_id": "MY_E55_REVEAL_RESTRICTS_RESOLUTION",
+      "edge_id": "MY_E70_REVEAL_RESTRICTS_RESOLUTION",
       "from": "MY_N62_REVEAL_SCENE",
       "to": "MY_N13_SATISFYING_RESOLUTION",
       "label": "Reveal scene must meet the standard of satisfying resolution",

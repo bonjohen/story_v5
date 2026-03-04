@@ -843,26 +843,6 @@
       ]
     },
     {
-      "edge_id": "WE_E52_CODE_TO_SHOWDOWN",
-      "from": "WE_N11_MORAL_CODE",
-      "to": "WE_N60_SHOWDOWN",
-      "label": "Personal code requires payoff in the showdown",
-      "meaning": "requires payoff",
-      "preconditions": [
-        "Protagonist's code has been established and tested throughout the story"
-      ],
-      "effects_on_stakes": "The showdown is the moment the code is fully enacted — the protagonist demonstrates through action what they stand for",
-      "effects_on_character": "How the protagonist conducts the showdown — what they will and will not do — is the code's ultimate expression",
-      "common_alternatives": [
-        "Code requires refusing a killing shot on a disarmed enemy",
-        "Code requires facing the enemy openly rather than ambushing them",
-        "Code requires completing the confrontation even when retreat is available"
-      ],
-      "anti_patterns": [
-        "Showdown is won through a code violation — protagonist shoots first without warning, shoots in the back, uses deception that contravenes their established principles"
-      ]
-    },
-    {
       "edge_id": "WE_E53_FRONTIER_CODE_TO_ARRIVAL",
       "from": "WE_N42_CODE_OF_THE_FRONTIER",
       "to": "WE_N61_ARRIVAL_DEPARTURE",
@@ -902,7 +882,27 @@
       ]
     },
     {
-      "edge_id": "WE_E55_COMPETENCE_TO_SHOWDOWN",
+      "edge_id": "WE_E70_CODE_TO_SHOWDOWN",
+      "from": "WE_N11_MORAL_CODE",
+      "to": "WE_N60_SHOWDOWN",
+      "label": "Personal code requires payoff in the showdown",
+      "meaning": "requires payoff",
+      "preconditions": [
+        "Protagonist's code has been established and tested throughout the story"
+      ],
+      "effects_on_stakes": "The showdown is the moment the code is fully enacted — the protagonist demonstrates through action what they stand for",
+      "effects_on_character": "How the protagonist conducts the showdown — what they will and will not do — is the code's ultimate expression",
+      "common_alternatives": [
+        "Code requires refusing a killing shot on a disarmed enemy",
+        "Code requires facing the enemy openly rather than ambushing them",
+        "Code requires completing the confrontation even when retreat is available"
+      ],
+      "anti_patterns": [
+        "Showdown is won through a code violation — protagonist shoots first without warning, shoots in the back, uses deception that contravenes their established principles"
+      ]
+    },
+    {
+      "edge_id": "WE_E71_COMPETENCE_TO_SHOWDOWN",
       "from": "WE_N12_PHYSICAL_COMPETENCE",
       "to": "WE_N60_SHOWDOWN",
       "label": "Physical competence is tested and proven in the showdown",

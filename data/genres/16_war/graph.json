@@ -898,7 +898,27 @@
       ]
     },
     {
-      "edge_id": "WR_E54_DUTY_TO_MISSION_CLIMAX",
+      "edge_id": "WR_E56_LOSS_TO_MISSION_CLIMAX",
+      "from": "WR_N61_LOSS_COST_OF_WAR",
+      "to": "WR_N62_MISSION_CLIMAX",
+      "label": "Accumulated loss shapes the moral weight of the mission climax",
+      "meaning": "requires payoff",
+      "preconditions": [
+        "Prior loss scenes have established what the war has cost"
+      ],
+      "effects_on_stakes": "The climax is weighted by everything already paid — the mission's success or failure is measured against what it has cost",
+      "effects_on_character": "Protagonist carries the accumulated cost of prior losses into the final stand — it shapes what they are willing to do and why",
+      "common_alternatives": [
+        "Climax is an act of revenge for prior loss",
+        "Climax is an act of redemption for prior moral failure",
+        "Climax asks whether the final cost is worth what was already paid"
+      ],
+      "anti_patterns": [
+        "Mission climax proceeds as if prior losses never occurred — no emotional or moral continuity"
+      ]
+    },
+    {
+      "edge_id": "WR_E70_DUTY_TO_MISSION_CLIMAX",
       "from": "WR_N12_DUTY_VS_SURVIVAL",
       "to": "WR_N62_MISSION_CLIMAX",
       "label": "Duty-vs-survival tension reaches its decisive point at the mission climax",
@@ -918,7 +938,7 @@
       ]
     },
     {
-      "edge_id": "WR_E55_BROTHERHOOD_TO_MISSION_CLIMAX",
+      "edge_id": "WR_E71_BROTHERHOOD_TO_MISSION_CLIMAX",
       "from": "WR_N13_BROTHERHOOD_UNIT_COHESION",
       "to": "WR_N62_MISSION_CLIMAX",
       "label": "Unit cohesion or its fracture determines the character of the mission climax",
@@ -935,26 +955,6 @@
       ],
       "anti_patterns": [
         "Mission climax occurs without any meaningful engagement of unit relationships"
-      ]
-    },
-    {
-      "edge_id": "WR_E56_LOSS_TO_MISSION_CLIMAX",
-      "from": "WR_N61_LOSS_COST_OF_WAR",
-      "to": "WR_N62_MISSION_CLIMAX",
-      "label": "Accumulated loss shapes the moral weight of the mission climax",
-      "meaning": "requires payoff",
-      "preconditions": [
-        "Prior loss scenes have established what the war has cost"
-      ],
-      "effects_on_stakes": "The climax is weighted by everything already paid — the mission's success or failure is measured against what it has cost",
-      "effects_on_character": "Protagonist carries the accumulated cost of prior losses into the final stand — it shapes what they are willing to do and why",
-      "common_alternatives": [
-        "Climax is an act of revenge for prior loss",
-        "Climax is an act of redemption for prior moral failure",
-        "Climax asks whether the final cost is worth what was already paid"
-      ],
-      "anti_patterns": [
-        "Mission climax proceeds as if prior losses never occurred — no emotional or moral continuity"
       ]
     },
     {

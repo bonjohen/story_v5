@@ -258,14 +258,14 @@
 
 ---
 
-**WR_E54_DUTY_TO_MISSION_CLIMAX — Duty-vs-survival tension reaches its decisive point at the mission climax**
+**WR_E70_DUTY_TO_MISSION_CLIMAX — Duty-vs-survival tension reaches its decisive point at the mission climax**
 - **Saving Private Ryan**: The duty-versus-survival tension reaches its climax at Ramelle, where Miller must choose between defending the bridge — the mission — and withdrawing with the men he has left. He chooses the bridge. He has already told Ryan to earn it; now he is earning it himself. He is shot and dying on the bridge when the air support finally arrives, and his last words to Ryan are a command: "Earn this." Duty has been discharged at the cost of survival. The tension is resolved in the only way the film's logic permits.
 - **All Quiet on the Western Front**: Paul's duty-versus-survival tension is resolved in the moment of his death — he reaches for the butterfly on a quiet day, a gesture of survival instinct (curiosity, beauty, the desire to continue living) that exposes him to the sniper. The climax is not a heroic final stand but the survival instinct itself becoming the mechanism of death.
 - **Apocalypse Now**: Willard's mission climax is the termination of Kurtz — the completion of his duty — which has been in tension throughout the journey with the recognition that Kurtz is not wrong. Completing the mission means accepting the institutional logic that Kurtz rejected; refusing it means becoming Kurtz. Willard completes the mission and walks out, choosing duty over the alternative. Whether this constitutes survival in any meaningful sense is the film's open question.
 
 ---
 
-**WR_E55_BROTHERHOOD_TO_MISSION_CLIMAX — Unit cohesion or its fracture determines the character of the mission climax**
+**WR_E71_BROTHERHOOD_TO_MISSION_CLIMAX — Unit cohesion or its fracture determines the character of the mission climax**
 - **Saving Private Ryan**: The state of the unit at the Ramelle climax determines everything about how the final stand is fought. By this point, the squad has been reduced by losses and the addition of Ryan's unit; Upham's paralysis during Mellish's death has fractured the unit's confidence in one of its members. When the German assault begins, the squad fights with the knowledge of what it has lost and who it can rely on. Horvath's death removes Miller's most essential support; Mellish is already gone. The climax is fought by a diminished unit whose cohesion is tested to the breaking point — and holds, just barely, long enough.
 - **All Quiet on the Western Front**: Paul's unit has been progressively destroyed before the novel's climax. By the time Paul dies, he is essentially alone — Kat dead, Leer dead, Müller dead. The climax is not a unit action but a solitary death, the final consequence of the unit's total attrition. The brotherhood has been consumed by the war it was formed inside.
 - **Apocalypse Now**: The PBR crew's dissolution determines the character of the compound arrival. Willard reaches Kurtz essentially alone — Chef is dead, Clean is dead, Chief is dead, only Lance remains and he has been so psychologically consumed by the journey that he is no longer a functional presence. The climax is conducted in isolation, which is the film's final statement about what the brotherhood pattern produces in this particular war.

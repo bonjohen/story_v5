@@ -230,7 +230,7 @@
 
 ---
 
-**YA_E35_ALL_TO_ADULT_SHELTER — Visible authority must be ambivalent — shelter and cage simultaneously**
+**YA_E70_ALL_TO_ADULT_SHELTER — Visible authority must be ambivalent — shelter and cage simultaneously**
 - **The Hunger Games**: Haymitch is the novel's most precise realization of this ambivalence. His drinking is a cage — it makes him unreliable, delayed in his mentorship, unable to provide the consistent guidance that might save his tributes. But his strategy for Katniss — play up the romance narrative, leverage the sponsor system — is genuine expertise that keeps her alive. He is simultaneously the best possible mentor (he survived the Games, he knows the Capitol) and a compromised one (his survival cost him everything the Capitol could take). Katniss must navigate this ambivalence without the luxury of resolving it.
 - **The Fault in Our Stars**: Hazel's parents embody the shelter-and-cage ambivalence. The scene in which Hazel overhears her mother talking about social work programs and realizes her mother is preparing for life after Hazel's death is the moment the cage dimension becomes fully visible — her mother's love is genuine and also requires her to keep Hazel in the role of person-being-cared-for.
 - **The Perks of Being a Wallflower**: Bill the English teacher is the novel's most positive adult authority figure, and even he is ambivalent: his recognition of Charlie is real, his gift of books is genuine care, but his inability to ask the right question directly — what is actually happening to you — means that the shelter he provides is partial, and Charlie must eventually find the truth through a crisis Bill cannot prevent.
