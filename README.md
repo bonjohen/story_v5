@@ -21,13 +21,17 @@ The project models storytelling from two complementary dimensions:
 ```
 data/                              All graph data and cross-references
   vocabulary/                      Controlled vocabularies and ID conventions
+    index.md                         Description of all files in this folder
+
   archetypes/{nn_name}/            15 archetype folders
     graph.json                       Directed graph (nodes + edges)
     variants.json                    Variant branches (where applicable)
+    index.md                         Description of all files in this folder
     narrative.md                     Prose walkthrough of the graph
     examples.md                      2-4 real works mapped against the graph
   genres/{nn_name}/                27 genre folders
     graph.json                       Constraint hierarchy (5 levels + tone + anti-pattern)
+    index.md                         Description of all files in this folder
     narrative.md                     Prose walkthrough of constraints
     examples.md                      2-4 real works mapped against constraints
   cross_references/                 Cross-referencing datasets and corpus metadata
