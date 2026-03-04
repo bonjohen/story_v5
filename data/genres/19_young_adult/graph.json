@@ -3,6 +3,28 @@
   "name": "Young Adult",
   "type": "genre",
   "description": "Stories aimed at teen readers, typically centering identity formation, social belonging, first love, and boundary-testing choices. (This graph has 18 nodes — one more than the 17-node standard — because it includes a second Anti-Pattern node to capture an additional genre-specific pitfall.)",
+  "_metadata": {
+    "nodeCount": 18,
+    "edgeCount": 23,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 2
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 4,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 6,
+      "mandates element": 3,
+      "requires payoff": 3,
+      "prohibits element": 2
+    }
+  },
   "nodes": [
     {
       "node_id": "YA_N01_PROMISE",

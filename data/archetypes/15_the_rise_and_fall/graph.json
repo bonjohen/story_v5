@@ -3,94 +3,258 @@
   "name": "The Rise and Fall",
   "type": "archetype",
   "description": "A protagonist ascends to power or prominence and then declines due to flaw, corruption, or shifting circumstance.",
+  "_metadata": {
+    "nodeCount": 8,
+    "edgeCount": 7,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Threshold": 1,
+      "Reversal": 1,
+      "Descent": 1,
+      "Crisis": 1,
+      "Irreversible Cost": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "raises cost": 1,
+      "forces commitment": 1,
+      "reveals truth": 1,
+      "escalates conflict": 1,
+      "triggers crisis": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "RF_N01_HUMBLE_ORIGIN",
       "label": "Humble Origin",
       "role": "Origin",
       "definition": "The protagonist starts from a position of low status, limited power, or obscurity. They possess ambition, talent, or ruthlessness that the audience can identify early.",
-      "entry_conditions": ["Story opening", "Audience sees the character's starting position and driving ambition"],
-      "exit_conditions": ["An opportunity or opening for advancement appears"],
-      "typical_variants": ["Small-time criminal with big aspirations", "Talented outsider denied access to power", "Ambitious newcomer in a competitive field", "Ordinary person who discovers an exploitable advantage"],
-      "failure_modes": ["Character starts too high — no rise to dramatize", "Ambition is not visible early, making the rise feel random"],
-      "signals_in_text": ["Hunger and dissatisfaction", "Watching those with power", "Small acts that foreshadow the methods of the rise"]
+      "entry_conditions": [
+        "Story opening",
+        "Audience sees the character's starting position and driving ambition"
+      ],
+      "exit_conditions": [
+        "An opportunity or opening for advancement appears"
+      ],
+      "typical_variants": [
+        "Small-time criminal with big aspirations",
+        "Talented outsider denied access to power",
+        "Ambitious newcomer in a competitive field",
+        "Ordinary person who discovers an exploitable advantage"
+      ],
+      "failure_modes": [
+        "Character starts too high — no rise to dramatize",
+        "Ambition is not visible early, making the rise feel random"
+      ],
+      "signals_in_text": [
+        "Hunger and dissatisfaction",
+        "Watching those with power",
+        "Small acts that foreshadow the methods of the rise"
+      ]
     },
     {
       "node_id": "RF_N02_FIRST_OPPORTUNITY",
       "label": "First Opportunity",
       "role": "Disruption",
       "definition": "A chance for advancement presents itself — a gap in the hierarchy, a lucky break, or a moment where the character's specific talent or ruthlessness is exactly what's needed.",
-      "entry_conditions": ["Humble origin is established", "A structural opening appears"],
-      "exit_conditions": ["The protagonist seizes the opportunity, often through means that foreshadow the eventual fall"],
-      "typical_variants": ["A power vacuum to exploit", "A mentor or patron who opens doors", "A criminal opportunity with outsized reward", "Being in the right place with the right skill"],
-      "failure_modes": ["Opportunity is too easy — no risk or cleverness required", "Opportunity is unrelated to the character's qualities"],
-      "signals_in_text": ["Eyes lighting up", "A daring move", "Others underestimating the protagonist"]
+      "entry_conditions": [
+        "Humble origin is established",
+        "A structural opening appears"
+      ],
+      "exit_conditions": [
+        "The protagonist seizes the opportunity, often through means that foreshadow the eventual fall"
+      ],
+      "typical_variants": [
+        "A power vacuum to exploit",
+        "A mentor or patron who opens doors",
+        "A criminal opportunity with outsized reward",
+        "Being in the right place with the right skill"
+      ],
+      "failure_modes": [
+        "Opportunity is too easy — no risk or cleverness required",
+        "Opportunity is unrelated to the character's qualities"
+      ],
+      "signals_in_text": [
+        "Eyes lighting up",
+        "A daring move",
+        "Others underestimating the protagonist"
+      ]
     },
     {
       "node_id": "RF_N03_RAPID_ASCENT",
       "label": "Rapid Ascent",
       "role": "Threshold",
       "definition": "The protagonist rises quickly — gaining power, wealth, status, or influence at an accelerating rate. Success breeds success, and the methods that work are reinforced.",
-      "entry_conditions": ["The first opportunity has been seized", "The protagonist's methods are producing results"],
-      "exit_conditions": ["The protagonist reaches a level of power that makes them a major figure"],
-      "typical_variants": ["Building a criminal empire", "Climbing the corporate or political ladder", "Accumulating wealth through innovation or exploitation", "Gaining public fame and adulation"],
-      "failure_modes": ["Ascent is too slow and loses momentum", "No moral compromises during the rise — the fall will lack causal connection"],
-      "signals_in_text": ["Montage of victories", "Growing entourage", "Lifestyle escalation", "Early warnings ignored"]
+      "entry_conditions": [
+        "The first opportunity has been seized",
+        "The protagonist's methods are producing results"
+      ],
+      "exit_conditions": [
+        "The protagonist reaches a level of power that makes them a major figure"
+      ],
+      "typical_variants": [
+        "Building a criminal empire",
+        "Climbing the corporate or political ladder",
+        "Accumulating wealth through innovation or exploitation",
+        "Gaining public fame and adulation"
+      ],
+      "failure_modes": [
+        "Ascent is too slow and loses momentum",
+        "No moral compromises during the rise — the fall will lack causal connection"
+      ],
+      "signals_in_text": [
+        "Montage of victories",
+        "Growing entourage",
+        "Lifestyle escalation",
+        "Early warnings ignored"
+      ]
     },
     {
       "node_id": "RF_N04_PEAK_OF_POWER",
       "label": "Peak of Power",
       "role": "Reversal",
       "definition": "The protagonist reaches maximum power, wealth, or influence. They appear invulnerable. This is the pivot — everything after this is descent.",
-      "entry_conditions": ["The rapid ascent is complete", "The protagonist has achieved their visible goal"],
-      "exit_conditions": ["The first serious crack appears — a challenge, an overreach, or a consequence that can't be managed"],
-      "typical_variants": ["Controlling an empire", "Public adulation at its height", "Defeating all visible rivals", "A celebration or display of power"],
-      "failure_modes": ["Peak lasts too long — tension dissipates", "No visible seeds of the coming fall are present at the peak"],
-      "signals_in_text": ["Excess and display", "Isolation from honest feedback", "The last moment of triumph before things turn"]
+      "entry_conditions": [
+        "The rapid ascent is complete",
+        "The protagonist has achieved their visible goal"
+      ],
+      "exit_conditions": [
+        "The first serious crack appears — a challenge, an overreach, or a consequence that can't be managed"
+      ],
+      "typical_variants": [
+        "Controlling an empire",
+        "Public adulation at its height",
+        "Defeating all visible rivals",
+        "A celebration or display of power"
+      ],
+      "failure_modes": [
+        "Peak lasts too long — tension dissipates",
+        "No visible seeds of the coming fall are present at the peak"
+      ],
+      "signals_in_text": [
+        "Excess and display",
+        "Isolation from honest feedback",
+        "The last moment of triumph before things turn"
+      ]
     },
     {
       "node_id": "RF_N05_CRACKS_FORM",
       "label": "Cracks Form",
       "role": "Descent",
       "definition": "The methods that enabled the rise begin to generate consequences. Enemies multiply, allies become unreliable, the protagonist's flaw deepens, and the structure of power starts to erode.",
-      "entry_conditions": ["The peak has been reached", "The first consequence of the rise's methods materializes"],
-      "exit_conditions": ["The protagonist's position is clearly unsustainable; the fall is accelerating"],
-      "typical_variants": ["Betrayal by a trusted lieutenant", "Law enforcement or rivals closing in", "The protagonist's paranoia driving away allies", "Overreach that provokes unified opposition"],
-      "failure_modes": ["Cracks are caused by bad luck rather than by the character's methods", "The protagonist is never aware that things are slipping — no dramatic irony or self-knowledge"],
-      "signals_in_text": ["Paranoia", "Loss of trusted allies", "Increasingly desperate measures", "The character alone in a big room"]
+      "entry_conditions": [
+        "The peak has been reached",
+        "The first consequence of the rise's methods materializes"
+      ],
+      "exit_conditions": [
+        "The protagonist's position is clearly unsustainable; the fall is accelerating"
+      ],
+      "typical_variants": [
+        "Betrayal by a trusted lieutenant",
+        "Law enforcement or rivals closing in",
+        "The protagonist's paranoia driving away allies",
+        "Overreach that provokes unified opposition"
+      ],
+      "failure_modes": [
+        "Cracks are caused by bad luck rather than by the character's methods",
+        "The protagonist is never aware that things are slipping — no dramatic irony or self-knowledge"
+      ],
+      "signals_in_text": [
+        "Paranoia",
+        "Loss of trusted allies",
+        "Increasingly desperate measures",
+        "The character alone in a big room"
+      ]
     },
     {
       "node_id": "RF_N06_DESPERATE_GRIP",
       "label": "Desperate Grip",
       "role": "Crisis",
       "definition": "The protagonist fights to maintain power through increasingly extreme measures. The very qualities that enabled the rise — ambition, ruthlessness, charisma — are now turned to destructive ends.",
-      "entry_conditions": ["The cracks are visible", "The protagonist refuses to accept decline"],
-      "exit_conditions": ["The protagonist's actions precipitate the final collapse"],
-      "typical_variants": ["Violent crackdown on dissent", "Burning bridges with remaining allies", "A single catastrophic decision born of desperation", "Attempting to destroy evidence or silence witnesses"],
-      "failure_modes": ["Desperate measures succeed — the fall never comes", "The protagonist gives up without fighting, reducing dramatic tension"],
-      "signals_in_text": ["Escalating violence or deception", "Isolation", "A look in the mirror", "Others fleeing the protagonist"]
+      "entry_conditions": [
+        "The cracks are visible",
+        "The protagonist refuses to accept decline"
+      ],
+      "exit_conditions": [
+        "The protagonist's actions precipitate the final collapse"
+      ],
+      "typical_variants": [
+        "Violent crackdown on dissent",
+        "Burning bridges with remaining allies",
+        "A single catastrophic decision born of desperation",
+        "Attempting to destroy evidence or silence witnesses"
+      ],
+      "failure_modes": [
+        "Desperate measures succeed — the fall never comes",
+        "The protagonist gives up without fighting, reducing dramatic tension"
+      ],
+      "signals_in_text": [
+        "Escalating violence or deception",
+        "Isolation",
+        "A look in the mirror",
+        "Others fleeing the protagonist"
+      ]
     },
     {
       "node_id": "RF_N07_FALL",
       "label": "The Fall",
       "role": "Irreversible Cost",
       "definition": "The protagonist loses everything — power, freedom, relationships, or life. The fall is proportional to the height of the rise and causally connected to the methods used to achieve it.",
-      "entry_conditions": ["The desperate grip has failed", "The final consequence arrives"],
-      "exit_conditions": ["The protagonist's power is gone; their fate is sealed"],
-      "typical_variants": ["Arrest and imprisonment", "Violent overthrow or assassination", "Public disgrace and exile", "Abandoned by everyone, dying alone"],
-      "failure_modes": ["Fall is caused by random misfortune rather than the character's own actions", "Fall is so quick it has no weight", "Fall is presented as unjust rather than consequential"],
-      "signals_in_text": ["Empty rooms", "Handcuffs or gunshots", "The last ally turning away", "A final look at what was built"]
+      "entry_conditions": [
+        "The desperate grip has failed",
+        "The final consequence arrives"
+      ],
+      "exit_conditions": [
+        "The protagonist's power is gone; their fate is sealed"
+      ],
+      "typical_variants": [
+        "Arrest and imprisonment",
+        "Violent overthrow or assassination",
+        "Public disgrace and exile",
+        "Abandoned by everyone, dying alone"
+      ],
+      "failure_modes": [
+        "Fall is caused by random misfortune rather than the character's own actions",
+        "Fall is so quick it has no weight",
+        "Fall is presented as unjust rather than consequential"
+      ],
+      "signals_in_text": [
+        "Empty rooms",
+        "Handcuffs or gunshots",
+        "The last ally turning away",
+        "A final look at what was built"
+      ]
     },
     {
       "node_id": "RF_N08_LEGACY",
       "label": "Legacy",
       "role": "Resolution",
       "definition": "What remains after the fall — the impact on others, the lesson, the cautionary tale. The world goes on, shaped by what the protagonist built and destroyed.",
-      "entry_conditions": ["The fall is complete"],
-      "exit_conditions": ["A new equilibrium is established in the protagonist's absence"],
-      "typical_variants": ["Others inherit the wreckage", "The system the protagonist exploited continues unchanged", "A successor faces the same temptation", "The story becomes a warning retold by others"],
-      "failure_modes": ["Legacy is ignored — the story ends at the fall with no reflection", "Legacy is too redemptive — the fall's consequences are softened"],
-      "signals_in_text": ["Others picking up the pieces", "A news report or court proceeding", "Empty throne or abandoned office", "The world moving on"]
+      "entry_conditions": [
+        "The fall is complete"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established in the protagonist's absence"
+      ],
+      "typical_variants": [
+        "Others inherit the wreckage",
+        "The system the protagonist exploited continues unchanged",
+        "A successor faces the same temptation",
+        "The story becomes a warning retold by others"
+      ],
+      "failure_modes": [
+        "Legacy is ignored — the story ends at the fall with no reflection",
+        "Legacy is too redemptive — the fall's consequences are softened"
+      ],
+      "signals_in_text": [
+        "Others picking up the pieces",
+        "A news report or court proceeding",
+        "Empty throne or abandoned office",
+        "The world moving on"
+      ]
     }
   ],
   "edges": [

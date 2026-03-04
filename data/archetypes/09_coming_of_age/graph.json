@@ -3,83 +3,225 @@
   "name": "Coming of Age",
   "type": "archetype",
   "description": "A young protagonist matures through formative experiences, achieving psychological or moral growth.",
+  "_metadata": {
+    "nodeCount": 7,
+    "edgeCount": 6,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Trial": 1,
+      "Catalyst": 1,
+      "Crisis": 1,
+      "Irreversible Cost": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "forces commitment": 1,
+      "grants insight": 1,
+      "triggers crisis": 1,
+      "demands sacrifice": 1,
+      "enables transformation": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "CA_N01_INNOCENCE",
       "label": "Innocence",
       "role": "Origin",
       "definition": "The protagonist exists in a state of naivety, dependence, or incomplete understanding of the world. Their identity is defined by their sheltered context.",
-      "entry_conditions": ["Story opening", "Audience sees the character's youth, naivety, or limited worldview"],
-      "exit_conditions": ["An experience forces the character to confront something beyond their current understanding"],
-      "typical_variants": ["Child in a protective household", "Teenager with an untested worldview", "Young person on the cusp of a transition (new school, first job, move)"],
-      "failure_modes": ["Innocence is so extreme the character seems incompetent rather than young", "The sheltered world is never established, so loss of innocence has no impact"],
-      "signals_in_text": ["Simplistic judgments", "Dependence on adults or authority", "Curiosity about the wider world"]
+      "entry_conditions": [
+        "Story opening",
+        "Audience sees the character's youth, naivety, or limited worldview"
+      ],
+      "exit_conditions": [
+        "An experience forces the character to confront something beyond their current understanding"
+      ],
+      "typical_variants": [
+        "Child in a protective household",
+        "Teenager with an untested worldview",
+        "Young person on the cusp of a transition (new school, first job, move)"
+      ],
+      "failure_modes": [
+        "Innocence is so extreme the character seems incompetent rather than young",
+        "The sheltered world is never established, so loss of innocence has no impact"
+      ],
+      "signals_in_text": [
+        "Simplistic judgments",
+        "Dependence on adults or authority",
+        "Curiosity about the wider world"
+      ]
     },
     {
       "node_id": "CA_N02_FIRST_EXPOSURE",
       "label": "First Exposure",
       "role": "Disruption",
       "definition": "The protagonist encounters something that doesn't fit their existing worldview — injustice, mortality, adult complexity, or their own desire. The comfortable frame cracks.",
-      "entry_conditions": ["Innocence is established", "An experience intrudes that the character cannot process with existing tools"],
-      "exit_conditions": ["The character is unsettled; the old worldview is no longer sufficient"],
-      "typical_variants": ["Witnessing injustice or hypocrisy", "First encounter with death or loss", "Discovering a parent's or authority figure's flaw", "First romantic or sexual experience"],
-      "failure_modes": ["Exposure is too gentle to disturb anything", "Exposure is so traumatic it overwhelms the story's tone"],
-      "signals_in_text": ["Confusion or discomfort", "Questions without easy answers", "A moment that lingers"]
+      "entry_conditions": [
+        "Innocence is established",
+        "An experience intrudes that the character cannot process with existing tools"
+      ],
+      "exit_conditions": [
+        "The character is unsettled; the old worldview is no longer sufficient"
+      ],
+      "typical_variants": [
+        "Witnessing injustice or hypocrisy",
+        "First encounter with death or loss",
+        "Discovering a parent's or authority figure's flaw",
+        "First romantic or sexual experience"
+      ],
+      "failure_modes": [
+        "Exposure is too gentle to disturb anything",
+        "Exposure is so traumatic it overwhelms the story's tone"
+      ],
+      "signals_in_text": [
+        "Confusion or discomfort",
+        "Questions without easy answers",
+        "A moment that lingers"
+      ]
     },
     {
       "node_id": "CA_N03_TESTING_GROUND",
       "label": "Testing Ground",
       "role": "Trial",
       "definition": "The protagonist enters a social arena where their identity, beliefs, and relationships are tested — a new school, peer group, community, or challenge.",
-      "entry_conditions": ["First exposure has created instability", "The character enters a new or intensified social context"],
-      "exit_conditions": ["The character has been tested enough that their identity is in flux"],
-      "typical_variants": ["New school or social environment", "First independent journey", "Peer group with different values", "A challenge that requires new capabilities"],
-      "failure_modes": ["Testing ground is too easy — no real pressure on identity", "Tests are purely external with no impact on the character's self-understanding"],
-      "signals_in_text": ["Social friction", "Trying on new identities or behaviors", "Success and failure in new contexts"]
+      "entry_conditions": [
+        "First exposure has created instability",
+        "The character enters a new or intensified social context"
+      ],
+      "exit_conditions": [
+        "The character has been tested enough that their identity is in flux"
+      ],
+      "typical_variants": [
+        "New school or social environment",
+        "First independent journey",
+        "Peer group with different values",
+        "A challenge that requires new capabilities"
+      ],
+      "failure_modes": [
+        "Testing ground is too easy — no real pressure on identity",
+        "Tests are purely external with no impact on the character's self-understanding"
+      ],
+      "signals_in_text": [
+        "Social friction",
+        "Trying on new identities or behaviors",
+        "Success and failure in new contexts"
+      ]
     },
     {
       "node_id": "CA_N04_MENTOR_OR_MODEL",
       "label": "Mentor or Role Model",
       "role": "Catalyst",
       "definition": "The protagonist encounters a figure who represents a possible future self — an adult, older peer, or teacher who embodies values the character is beginning to form.",
-      "entry_conditions": ["The character is in the testing ground", "They need guidance or a model"],
-      "exit_conditions": ["The character has internalized something from the mentor, even if they later diverge"],
-      "typical_variants": ["Inspiring teacher", "Older friend or sibling figure", "Flawed adult who teaches by negative example", "A book, film, or idea that reshapes thinking"],
-      "failure_modes": ["Mentor is infallible — no complexity", "Mentor provides answers rather than questions"],
-      "signals_in_text": ["Conversations that shift perspective", "Admiration or emulation", "Advice that the character doesn't fully understand yet"]
+      "entry_conditions": [
+        "The character is in the testing ground",
+        "They need guidance or a model"
+      ],
+      "exit_conditions": [
+        "The character has internalized something from the mentor, even if they later diverge"
+      ],
+      "typical_variants": [
+        "Inspiring teacher",
+        "Older friend or sibling figure",
+        "Flawed adult who teaches by negative example",
+        "A book, film, or idea that reshapes thinking"
+      ],
+      "failure_modes": [
+        "Mentor is infallible — no complexity",
+        "Mentor provides answers rather than questions"
+      ],
+      "signals_in_text": [
+        "Conversations that shift perspective",
+        "Admiration or emulation",
+        "Advice that the character doesn't fully understand yet"
+      ]
     },
     {
       "node_id": "CA_N05_CRISIS_OF_IDENTITY",
       "label": "Crisis of Identity",
       "role": "Crisis",
       "definition": "The protagonist faces a situation that forces a definitive choice about who they are — a moral test, a loyalty conflict, or a moment where childhood beliefs and adult reality collide irreconcilably.",
-      "entry_conditions": ["Testing and mentorship have developed the character but not resolved their identity", "A situation demands a defining choice"],
-      "exit_conditions": ["The character makes a choice that commits them to a version of themselves"],
-      "typical_variants": ["Choosing between peer group and personal values", "Standing up to authority at personal cost", "Accepting a painful truth about someone they admire", "First act of genuine moral courage or serious moral failure"],
-      "failure_modes": ["Crisis is too small to be defining", "The right choice is obvious — no real tension", "Character is passive and the crisis resolves around them"],
-      "signals_in_text": ["A moment of agonizing choice", "Standing alone", "Doing something for the first time that defines who they'll become"]
+      "entry_conditions": [
+        "Testing and mentorship have developed the character but not resolved their identity",
+        "A situation demands a defining choice"
+      ],
+      "exit_conditions": [
+        "The character makes a choice that commits them to a version of themselves"
+      ],
+      "typical_variants": [
+        "Choosing between peer group and personal values",
+        "Standing up to authority at personal cost",
+        "Accepting a painful truth about someone they admire",
+        "First act of genuine moral courage or serious moral failure"
+      ],
+      "failure_modes": [
+        "Crisis is too small to be defining",
+        "The right choice is obvious — no real tension",
+        "Character is passive and the crisis resolves around them"
+      ],
+      "signals_in_text": [
+        "A moment of agonizing choice",
+        "Standing alone",
+        "Doing something for the first time that defines who they'll become"
+      ]
     },
     {
       "node_id": "CA_N06_LOSS_OF_INNOCENCE",
       "label": "Loss of Innocence",
       "role": "Irreversible Cost",
       "definition": "The protagonist permanently loses their naive worldview. This is not just learning — it is the irreversible end of a simpler way of seeing. Something is gained but something is also gone forever.",
-      "entry_conditions": ["The crisis has been faced", "The character has seen or done something that cannot be unseen or undone"],
-      "exit_conditions": ["The character carries this knowledge forward into their new identity"],
-      "typical_variants": ["Realizing the world is unjust and will not fix itself", "Understanding that people they trusted are flawed or wrong", "Accepting responsibility for a consequence of their own choice", "Understanding mortality or irreversible loss"],
-      "failure_modes": ["Loss is sentimental rather than genuinely costly", "The character loses innocence but gains nothing — it's just bleak", "Loss is stated but the character's behavior doesn't change"],
-      "signals_in_text": ["A quiet moment of realization", "Tears or silence rather than action", "Looking at familiar things with new eyes"]
+      "entry_conditions": [
+        "The crisis has been faced",
+        "The character has seen or done something that cannot be unseen or undone"
+      ],
+      "exit_conditions": [
+        "The character carries this knowledge forward into their new identity"
+      ],
+      "typical_variants": [
+        "Realizing the world is unjust and will not fix itself",
+        "Understanding that people they trusted are flawed or wrong",
+        "Accepting responsibility for a consequence of their own choice",
+        "Understanding mortality or irreversible loss"
+      ],
+      "failure_modes": [
+        "Loss is sentimental rather than genuinely costly",
+        "The character loses innocence but gains nothing — it's just bleak",
+        "Loss is stated but the character's behavior doesn't change"
+      ],
+      "signals_in_text": [
+        "A quiet moment of realization",
+        "Tears or silence rather than action",
+        "Looking at familiar things with new eyes"
+      ]
     },
     {
       "node_id": "CA_N07_NEW_MATURITY",
       "label": "New Maturity",
       "role": "Resolution",
       "definition": "The protagonist has crossed into a more adult understanding of the world. They are not yet fully formed, but they are no longer the person they were. The story closes on a character poised between what they were and what they will become.",
-      "entry_conditions": ["Loss of innocence is internalized", "The character has made a defining choice"],
-      "exit_conditions": ["A new equilibrium is established — the character's identity has shifted"],
-      "typical_variants": ["Quiet acceptance and forward motion", "Bittersweet farewell to childhood", "A first adult relationship or responsibility", "Returning to a familiar setting and seeing it differently"],
-      "failure_modes": ["Maturity is too complete — the character is suddenly a wise adult", "No visible difference from the opening — the experiences left no mark", "Ending is purely sad with no sense of growth"],
-      "signals_in_text": ["Contrast with the opening scene", "Changed relationships with parents or authority", "A small act that shows new understanding"]
+      "entry_conditions": [
+        "Loss of innocence is internalized",
+        "The character has made a defining choice"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established — the character's identity has shifted"
+      ],
+      "typical_variants": [
+        "Quiet acceptance and forward motion",
+        "Bittersweet farewell to childhood",
+        "A first adult relationship or responsibility",
+        "Returning to a familiar setting and seeing it differently"
+      ],
+      "failure_modes": [
+        "Maturity is too complete — the character is suddenly a wise adult",
+        "No visible difference from the opening — the experiences left no mark",
+        "Ending is purely sad with no sense of growth"
+      ],
+      "signals_in_text": [
+        "Contrast with the opening scene",
+        "Changed relationships with parents or authority",
+        "A small act that shows new understanding"
+      ]
     }
   ],
   "edges": [

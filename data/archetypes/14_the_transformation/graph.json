@@ -3,83 +3,224 @@
   "name": "The Transformation",
   "type": "archetype",
   "description": "A character undergoes profound internal or external change that redefines identity or worldview.",
+  "_metadata": {
+    "nodeCount": 7,
+    "edgeCount": 6,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Trial": 1,
+      "Descent": 1,
+      "Crisis": 1,
+      "Transformation": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "narrows options": 1,
+      "reveals truth": 1,
+      "triggers crisis": 1,
+      "enables transformation": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "TF_N01_FIXED_IDENTITY",
       "label": "Fixed Identity",
       "role": "Origin",
       "definition": "The protagonist has a settled sense of who they are — their role, their capabilities, their place in the world. This identity may be comfortable or constraining, but it is stable.",
-      "entry_conditions": ["Story opening", "Audience sees the character's established identity and its limits"],
-      "exit_conditions": ["A force or event begins to destabilize the fixed identity"],
-      "typical_variants": ["Professional identity (I am a scientist, a soldier, a mother)", "Social identity (I am normal, I am powerful, I am invisible)", "Self-concept (I am capable, I am broken, I am in control)"],
-      "failure_modes": ["Identity is so vaguely drawn that its transformation won't be visible", "Identity is presented as already unstable — no baseline for change"],
-      "signals_in_text": ["Routine behavior reflecting the identity", "Others treating the character according to the identity", "The character asserting who they are"]
+      "entry_conditions": [
+        "Story opening",
+        "Audience sees the character's established identity and its limits"
+      ],
+      "exit_conditions": [
+        "A force or event begins to destabilize the fixed identity"
+      ],
+      "typical_variants": [
+        "Professional identity (I am a scientist, a soldier, a mother)",
+        "Social identity (I am normal, I am powerful, I am invisible)",
+        "Self-concept (I am capable, I am broken, I am in control)"
+      ],
+      "failure_modes": [
+        "Identity is so vaguely drawn that its transformation won't be visible",
+        "Identity is presented as already unstable — no baseline for change"
+      ],
+      "signals_in_text": [
+        "Routine behavior reflecting the identity",
+        "Others treating the character according to the identity",
+        "The character asserting who they are"
+      ]
     },
     {
       "node_id": "TF_N02_CATALYST_OF_CHANGE",
       "label": "Catalyst of Change",
       "role": "Disruption",
       "definition": "An event, encounter, or internal shift begins the process of transformation. Something happens that the fixed identity cannot accommodate — a new power, a loss, a revelation, or a physical change.",
-      "entry_conditions": ["Fixed identity is established", "An external or internal force disrupts it"],
-      "exit_conditions": ["The character's identity is destabilized; the old self is no longer tenable"],
-      "typical_variants": ["Gaining a supernatural ability", "Suffering a physical or psychological trauma", "Encountering a radically different worldview", "Being placed in a context that makes the old identity impossible"],
-      "failure_modes": ["Catalyst is too minor to justify transformation", "Catalyst is so overwhelming the character is passive rather than struggling"],
-      "signals_in_text": ["Something new and unassimilable happening", "The character's first confused response", "Others reacting to the change"]
+      "entry_conditions": [
+        "Fixed identity is established",
+        "An external or internal force disrupts it"
+      ],
+      "exit_conditions": [
+        "The character's identity is destabilized; the old self is no longer tenable"
+      ],
+      "typical_variants": [
+        "Gaining a supernatural ability",
+        "Suffering a physical or psychological trauma",
+        "Encountering a radically different worldview",
+        "Being placed in a context that makes the old identity impossible"
+      ],
+      "failure_modes": [
+        "Catalyst is too minor to justify transformation",
+        "Catalyst is so overwhelming the character is passive rather than struggling"
+      ],
+      "signals_in_text": [
+        "Something new and unassimilable happening",
+        "The character's first confused response",
+        "Others reacting to the change"
+      ]
     },
     {
       "node_id": "TF_N03_DENIAL_AND_STRUGGLE",
       "label": "Denial and Struggle",
       "role": "Trial",
       "definition": "The protagonist resists the transformation, trying to maintain the old identity. They may hide the change, fight it, or pretend it isn't happening.",
-      "entry_conditions": ["The catalyst has occurred", "The character's identity is under threat"],
-      "exit_conditions": ["Denial fails — the transformation cannot be reversed or hidden"],
-      "typical_variants": ["Hiding new abilities or changes from others", "Seeking a cure or reversal", "Attempting to force the old identity onto new circumstances", "Lashing out at those who acknowledge the change"],
-      "failure_modes": ["Denial is perfunctory — the character adapts too quickly", "Denial is so extended the story stalls"],
-      "signals_in_text": ["Failed attempts to be normal", "Concealment", "Frustration and fear", "Others noticing something is different"]
+      "entry_conditions": [
+        "The catalyst has occurred",
+        "The character's identity is under threat"
+      ],
+      "exit_conditions": [
+        "Denial fails — the transformation cannot be reversed or hidden"
+      ],
+      "typical_variants": [
+        "Hiding new abilities or changes from others",
+        "Seeking a cure or reversal",
+        "Attempting to force the old identity onto new circumstances",
+        "Lashing out at those who acknowledge the change"
+      ],
+      "failure_modes": [
+        "Denial is perfunctory — the character adapts too quickly",
+        "Denial is so extended the story stalls"
+      ],
+      "signals_in_text": [
+        "Failed attempts to be normal",
+        "Concealment",
+        "Frustration and fear",
+        "Others noticing something is different"
+      ]
     },
     {
       "node_id": "TF_N04_LIMINAL_STATE",
       "label": "Liminal State",
       "role": "Descent",
       "definition": "The protagonist exists between identities — no longer who they were, not yet who they will become. This is a state of maximum vulnerability and disorientation.",
-      "entry_conditions": ["Denial has failed", "The old identity is gone but no new identity has formed"],
-      "exit_conditions": ["A crisis demands that the character act from their new self"],
-      "typical_variants": ["Social isolation as neither world accepts them", "Physical in-between state (half-transformed)", "Psychological dissolution — not knowing who they are", "Exile from former life without a new belonging"],
-      "failure_modes": ["Liminal state is too comfortable — no urgency to resolve it", "Character skips the in-between and is immediately settled in the new identity"],
-      "signals_in_text": ["Isolation", "Mirror scenes", "Questions of identity", "Others not recognizing the character"]
+      "entry_conditions": [
+        "Denial has failed",
+        "The old identity is gone but no new identity has formed"
+      ],
+      "exit_conditions": [
+        "A crisis demands that the character act from their new self"
+      ],
+      "typical_variants": [
+        "Social isolation as neither world accepts them",
+        "Physical in-between state (half-transformed)",
+        "Psychological dissolution — not knowing who they are",
+        "Exile from former life without a new belonging"
+      ],
+      "failure_modes": [
+        "Liminal state is too comfortable — no urgency to resolve it",
+        "Character skips the in-between and is immediately settled in the new identity"
+      ],
+      "signals_in_text": [
+        "Isolation",
+        "Mirror scenes",
+        "Questions of identity",
+        "Others not recognizing the character"
+      ]
     },
     {
       "node_id": "TF_N05_CRUCIBLE",
       "label": "Crucible",
       "role": "Crisis",
       "definition": "A crisis forces the protagonist to act decisively from whatever they are becoming. The old identity cannot solve this problem — only the emerging self can. This is the moment that forges the new identity.",
-      "entry_conditions": ["The liminal state has left the character vulnerable", "A threat or challenge demands action"],
-      "exit_conditions": ["The protagonist acts from the new identity — successfully or catastrophically"],
-      "typical_variants": ["Using new abilities to save others despite fear", "Making a choice that only the new self would make", "Confronting someone who embodies the old identity", "Public display of the transformed self"],
-      "failure_modes": ["Crucible can be solved by the old identity — no transformation was needed", "The new identity succeeds effortlessly — no struggle in the moment"],
-      "signals_in_text": ["Decisive action", "Embracing what was feared", "Others seeing the character for who they now are"]
+      "entry_conditions": [
+        "The liminal state has left the character vulnerable",
+        "A threat or challenge demands action"
+      ],
+      "exit_conditions": [
+        "The protagonist acts from the new identity — successfully or catastrophically"
+      ],
+      "typical_variants": [
+        "Using new abilities to save others despite fear",
+        "Making a choice that only the new self would make",
+        "Confronting someone who embodies the old identity",
+        "Public display of the transformed self"
+      ],
+      "failure_modes": [
+        "Crucible can be solved by the old identity — no transformation was needed",
+        "The new identity succeeds effortlessly — no struggle in the moment"
+      ],
+      "signals_in_text": [
+        "Decisive action",
+        "Embracing what was feared",
+        "Others seeing the character for who they now are"
+      ]
     },
     {
       "node_id": "TF_N06_INTEGRATION",
       "label": "Integration",
       "role": "Transformation",
       "definition": "The protagonist integrates the old and new selves into a coherent identity. They are not simply different — they are more complex, carrying the past into a new way of being.",
-      "entry_conditions": ["The crucible has been survived", "The character has proven the new identity under pressure"],
-      "exit_conditions": ["The character has a stable, integrated sense of self"],
-      "typical_variants": ["Accepting the transformation as permanent and meaningful", "Finding a way to honor the old self within the new identity", "Others accepting the transformed character", "Teaching or helping others through similar transitions"],
-      "failure_modes": ["Integration erases the old self entirely — no continuity", "Integration is purely triumphant with no sense of loss", "The character is unchanged despite everything — the transformation was cosmetic"],
-      "signals_in_text": ["Peace with the change", "New relationships formed on honest terms", "The character expressing who they are now"]
+      "entry_conditions": [
+        "The crucible has been survived",
+        "The character has proven the new identity under pressure"
+      ],
+      "exit_conditions": [
+        "The character has a stable, integrated sense of self"
+      ],
+      "typical_variants": [
+        "Accepting the transformation as permanent and meaningful",
+        "Finding a way to honor the old self within the new identity",
+        "Others accepting the transformed character",
+        "Teaching or helping others through similar transitions"
+      ],
+      "failure_modes": [
+        "Integration erases the old self entirely — no continuity",
+        "Integration is purely triumphant with no sense of loss",
+        "The character is unchanged despite everything — the transformation was cosmetic"
+      ],
+      "signals_in_text": [
+        "Peace with the change",
+        "New relationships formed on honest terms",
+        "The character expressing who they are now"
+      ]
     },
     {
       "node_id": "TF_N07_NEW_IDENTITY",
       "label": "New Identity",
       "role": "Resolution",
       "definition": "The protagonist inhabits their transformed self with stability and purpose. The world around them reflects the change — new roles, new relationships, new understanding.",
-      "entry_conditions": ["Integration is complete"],
-      "exit_conditions": ["A new equilibrium is established"],
-      "typical_variants": ["New role that fits the transformed character", "Transformed relationship to the community", "Quiet self-knowledge and acceptance", "Using the transformation to serve others"],
-      "failure_modes": ["New identity is identical to the old one — nothing really changed", "New identity is so foreign the audience doesn't recognize the character"],
-      "signals_in_text": ["Contrast with the opening", "The character in their new role", "Others responding to the transformed person"]
+      "entry_conditions": [
+        "Integration is complete"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established"
+      ],
+      "typical_variants": [
+        "New role that fits the transformed character",
+        "Transformed relationship to the community",
+        "Quiet self-knowledge and acceptance",
+        "Using the transformation to serve others"
+      ],
+      "failure_modes": [
+        "New identity is identical to the old one — nothing really changed",
+        "New identity is so foreign the audience doesn't recognize the character"
+      ],
+      "signals_in_text": [
+        "Contrast with the opening",
+        "The character in their new role",
+        "Others responding to the transformed person"
+      ]
     }
   ],
   "edges": [

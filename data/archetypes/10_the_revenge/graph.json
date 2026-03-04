@@ -3,94 +3,257 @@
   "name": "The Revenge",
   "type": "archetype",
   "description": "A protagonist pursues retaliation for injustice, often sacrificing morality or peace in the process.",
+  "_metadata": {
+    "nodeCount": 8,
+    "edgeCount": 7,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Commitment": 1,
+      "Catalyst": 1,
+      "Trial": 1,
+      "Revelation": 1,
+      "Crisis": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "forces commitment": 1,
+      "narrows options": 1,
+      "escalates conflict": 1,
+      "reveals truth": 1,
+      "triggers crisis": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "RV_N01_ORIGINAL_STATE",
       "label": "Original State",
       "role": "Origin",
       "definition": "The protagonist exists in a state of normalcy or contentment. The audience sees what the character has — relationships, honor, peace — so that its loss will matter.",
-      "entry_conditions": ["Story opening", "Audience sees what the character values and stands to lose"],
-      "exit_conditions": ["A grievous wrong is committed against the character or those they love"],
-      "typical_variants": ["Happy family life", "Honorable position in society", "Hard-won peace or retirement"],
-      "failure_modes": ["Original state is too brief or vague — the audience doesn't feel the loss", "Character has nothing to lose, so the inciting wrong lacks weight"],
-      "signals_in_text": ["Domestic scenes", "Established relationships", "Contentment or stability"]
+      "entry_conditions": [
+        "Story opening",
+        "Audience sees what the character values and stands to lose"
+      ],
+      "exit_conditions": [
+        "A grievous wrong is committed against the character or those they love"
+      ],
+      "typical_variants": [
+        "Happy family life",
+        "Honorable position in society",
+        "Hard-won peace or retirement"
+      ],
+      "failure_modes": [
+        "Original state is too brief or vague — the audience doesn't feel the loss",
+        "Character has nothing to lose, so the inciting wrong lacks weight"
+      ],
+      "signals_in_text": [
+        "Domestic scenes",
+        "Established relationships",
+        "Contentment or stability"
+      ]
     },
     {
       "node_id": "RV_N02_INCITING_WRONG",
       "label": "Inciting Wrong",
       "role": "Disruption",
       "definition": "A devastating injustice is committed against the protagonist — murder, betrayal, violation, or destruction of what they loved. The wrong is severe enough to justify the pursuit that follows.",
-      "entry_conditions": ["Original state is established", "An antagonist commits the wrong"],
-      "exit_conditions": ["The protagonist survives and the desire for revenge ignites"],
-      "typical_variants": ["Murder of a loved one", "Betrayal by a trusted figure", "Unjust imprisonment or exile", "Public humiliation and destruction of reputation"],
-      "failure_modes": ["Wrong is too mild to justify the scale of revenge", "Wrong is committed off-screen and lacks emotional impact", "The antagonist's motive is unclear or absent"],
-      "signals_in_text": ["Violence or betrayal", "Loss that cannot be undone", "The protagonist's world shattered"]
+      "entry_conditions": [
+        "Original state is established",
+        "An antagonist commits the wrong"
+      ],
+      "exit_conditions": [
+        "The protagonist survives and the desire for revenge ignites"
+      ],
+      "typical_variants": [
+        "Murder of a loved one",
+        "Betrayal by a trusted figure",
+        "Unjust imprisonment or exile",
+        "Public humiliation and destruction of reputation"
+      ],
+      "failure_modes": [
+        "Wrong is too mild to justify the scale of revenge",
+        "Wrong is committed off-screen and lacks emotional impact",
+        "The antagonist's motive is unclear or absent"
+      ],
+      "signals_in_text": [
+        "Violence or betrayal",
+        "Loss that cannot be undone",
+        "The protagonist's world shattered"
+      ]
     },
     {
       "node_id": "RV_N03_VOW",
       "label": "Vow of Revenge",
       "role": "Commitment",
       "definition": "The protagonist commits to retaliating against those responsible. The vow reorganizes their entire life around the pursuit of vengeance.",
-      "entry_conditions": ["The wrong is suffered", "The protagonist identifies the target(s)"],
-      "exit_conditions": ["The protagonist begins actively pursuing revenge"],
-      "typical_variants": ["Spoken oath witnessed by others", "Silent internal resolve", "Ritualistic commitment (burying the dead, marking the body)", "The vow is the character's only reason to keep living"],
-      "failure_modes": ["Vow is made too casually — no sense of the weight", "Character has no credible path to achieving revenge, yet pursues it without addressing this gap"],
-      "signals_in_text": ["Declaration of intent", "Transformation of demeanor", "Abandonment of former life"]
+      "entry_conditions": [
+        "The wrong is suffered",
+        "The protagonist identifies the target(s)"
+      ],
+      "exit_conditions": [
+        "The protagonist begins actively pursuing revenge"
+      ],
+      "typical_variants": [
+        "Spoken oath witnessed by others",
+        "Silent internal resolve",
+        "Ritualistic commitment (burying the dead, marking the body)",
+        "The vow is the character's only reason to keep living"
+      ],
+      "failure_modes": [
+        "Vow is made too casually — no sense of the weight",
+        "Character has no credible path to achieving revenge, yet pursues it without addressing this gap"
+      ],
+      "signals_in_text": [
+        "Declaration of intent",
+        "Transformation of demeanor",
+        "Abandonment of former life"
+      ]
     },
     {
       "node_id": "RV_N04_PREPARATION",
       "label": "Preparation",
       "role": "Catalyst",
       "definition": "The protagonist builds the capability to execute revenge — training, gathering allies, acquiring resources, or positioning themselves near the target.",
-      "entry_conditions": ["The vow is made", "The protagonist lacks the means to act immediately"],
-      "exit_conditions": ["The protagonist is ready to begin executing the plan"],
-      "typical_variants": ["Years of training or self-improvement", "Building a new identity to infiltrate", "Recruiting allies with shared grievances", "Accumulating wealth or weapons"],
-      "failure_modes": ["Preparation is skipped — the protagonist is immediately capable", "Preparation takes so long it delays momentum without adding depth"],
-      "signals_in_text": ["Training montage or time skip", "Strategic planning", "Transformation of the character's appearance or skills"]
+      "entry_conditions": [
+        "The vow is made",
+        "The protagonist lacks the means to act immediately"
+      ],
+      "exit_conditions": [
+        "The protagonist is ready to begin executing the plan"
+      ],
+      "typical_variants": [
+        "Years of training or self-improvement",
+        "Building a new identity to infiltrate",
+        "Recruiting allies with shared grievances",
+        "Accumulating wealth or weapons"
+      ],
+      "failure_modes": [
+        "Preparation is skipped — the protagonist is immediately capable",
+        "Preparation takes so long it delays momentum without adding depth"
+      ],
+      "signals_in_text": [
+        "Training montage or time skip",
+        "Strategic planning",
+        "Transformation of the character's appearance or skills"
+      ]
     },
     {
       "node_id": "RV_N05_PURSUIT",
       "label": "Pursuit and Escalation",
       "role": "Trial",
       "definition": "The protagonist methodically pursues the targets, removing obstacles and agents of the antagonist. Each step escalates the conflict and the moral cost.",
-      "entry_conditions": ["Preparation is complete", "The protagonist begins acting against the targets"],
-      "exit_conditions": ["The protagonist is close to the final target but has paid a significant moral or personal cost"],
-      "typical_variants": ["Eliminating the antagonist's lieutenants one by one", "Dismantling the antagonist's power structure", "Cat-and-mouse with the target", "Each kill or confrontation extracts a moral toll"],
-      "failure_modes": ["Pursuit is a series of easy victories with no cost", "No moral deterioration — the protagonist remains perfectly righteous", "The target never fights back or adapts"],
-      "signals_in_text": ["Confrontation sequences", "Growing ruthlessness", "Allies questioning the protagonist's methods", "The line between justice and cruelty blurring"]
+      "entry_conditions": [
+        "Preparation is complete",
+        "The protagonist begins acting against the targets"
+      ],
+      "exit_conditions": [
+        "The protagonist is close to the final target but has paid a significant moral or personal cost"
+      ],
+      "typical_variants": [
+        "Eliminating the antagonist's lieutenants one by one",
+        "Dismantling the antagonist's power structure",
+        "Cat-and-mouse with the target",
+        "Each kill or confrontation extracts a moral toll"
+      ],
+      "failure_modes": [
+        "Pursuit is a series of easy victories with no cost",
+        "No moral deterioration — the protagonist remains perfectly righteous",
+        "The target never fights back or adapts"
+      ],
+      "signals_in_text": [
+        "Confrontation sequences",
+        "Growing ruthlessness",
+        "Allies questioning the protagonist's methods",
+        "The line between justice and cruelty blurring"
+      ]
     },
     {
       "node_id": "RV_N06_MORAL_CROSSROADS",
       "label": "Moral Crossroads",
       "role": "Revelation",
       "definition": "The protagonist confronts the full cost of the revenge path — what they have become, who they have hurt, or what they have sacrificed. A choice crystallizes: continue or relent.",
-      "entry_conditions": ["The pursuit has exacted a visible toll", "A moment of clarity or confrontation forces self-examination"],
-      "exit_conditions": ["The protagonist chooses to proceed with the final act or to abandon revenge"],
-      "typical_variants": ["An innocent is harmed or threatened by the protagonist's actions", "A loved one confronts the protagonist about what they've become", "The protagonist sees a mirror of themselves in the antagonist", "An opportunity for a different life appears"],
-      "failure_modes": ["Crossroads is skipped — the protagonist never questions the path", "The moral cost is too theoretical — no concrete harm is shown"],
-      "signals_in_text": ["Moment of hesitation", "Confrontation with an ally or innocent", "Seeing the enemy as human"]
+      "entry_conditions": [
+        "The pursuit has exacted a visible toll",
+        "A moment of clarity or confrontation forces self-examination"
+      ],
+      "exit_conditions": [
+        "The protagonist chooses to proceed with the final act or to abandon revenge"
+      ],
+      "typical_variants": [
+        "An innocent is harmed or threatened by the protagonist's actions",
+        "A loved one confronts the protagonist about what they've become",
+        "The protagonist sees a mirror of themselves in the antagonist",
+        "An opportunity for a different life appears"
+      ],
+      "failure_modes": [
+        "Crossroads is skipped — the protagonist never questions the path",
+        "The moral cost is too theoretical — no concrete harm is shown"
+      ],
+      "signals_in_text": [
+        "Moment of hesitation",
+        "Confrontation with an ally or innocent",
+        "Seeing the enemy as human"
+      ]
     },
     {
       "node_id": "RV_N07_FINAL_RECKONING",
       "label": "Final Reckoning",
       "role": "Crisis",
       "definition": "The protagonist confronts the primary antagonist in the decisive moment. The encounter resolves the revenge but also determines the protagonist's ultimate fate — redeemed, destroyed, or hollowed out.",
-      "entry_conditions": ["The moral crossroads has been passed", "The protagonist faces the antagonist"],
-      "exit_conditions": ["The antagonist is defeated, pardoned, or escapes; the protagonist's fate is sealed"],
-      "typical_variants": ["Kill the antagonist and accept the consequences", "Spare the antagonist at the last moment", "Both are destroyed", "The antagonist is defeated but the protagonist gains nothing"],
-      "failure_modes": ["Reckoning is anticlimactic after the buildup", "The antagonist is too weak to be a worthy opponent", "No connection between the moral crossroads and the final choice"],
-      "signals_in_text": ["Face-to-face confrontation", "The final blow or the withheld blow", "Maximum emotional intensity"]
+      "entry_conditions": [
+        "The moral crossroads has been passed",
+        "The protagonist faces the antagonist"
+      ],
+      "exit_conditions": [
+        "The antagonist is defeated, pardoned, or escapes; the protagonist's fate is sealed"
+      ],
+      "typical_variants": [
+        "Kill the antagonist and accept the consequences",
+        "Spare the antagonist at the last moment",
+        "Both are destroyed",
+        "The antagonist is defeated but the protagonist gains nothing"
+      ],
+      "failure_modes": [
+        "Reckoning is anticlimactic after the buildup",
+        "The antagonist is too weak to be a worthy opponent",
+        "No connection between the moral crossroads and the final choice"
+      ],
+      "signals_in_text": [
+        "Face-to-face confrontation",
+        "The final blow or the withheld blow",
+        "Maximum emotional intensity"
+      ]
     },
     {
       "node_id": "RV_N08_AFTERMATH",
       "label": "Aftermath",
       "role": "Resolution",
       "definition": "The revenge is complete (or abandoned). The protagonist must live with the result — the emptiness of achieved vengeance, the peace of mercy, or the ruin of obsession.",
-      "entry_conditions": ["The final reckoning is resolved"],
-      "exit_conditions": ["A new equilibrium is established — stable but transformed"],
-      "typical_variants": ["Hollow victory — the protagonist has what they wanted but has lost themselves", "Peace through mercy — the protagonist finds freedom by letting go", "Death — the protagonist's destruction completes the cycle", "Ambiguous ending — the cost and gain are left for the audience to weigh"],
-      "failure_modes": ["Aftermath is skipped — the story ends at the kill", "Revenge is presented as purely satisfying with no cost", "The moral question raised at the crossroads is never answered"],
-      "signals_in_text": ["Silence after violence", "Empty rooms", "Changed relationships", "A final look or gesture"]
+      "entry_conditions": [
+        "The final reckoning is resolved"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established — stable but transformed"
+      ],
+      "typical_variants": [
+        "Hollow victory — the protagonist has what they wanted but has lost themselves",
+        "Peace through mercy — the protagonist finds freedom by letting go",
+        "Death — the protagonist's destruction completes the cycle",
+        "Ambiguous ending — the cost and gain are left for the audience to weigh"
+      ],
+      "failure_modes": [
+        "Aftermath is skipped — the story ends at the kill",
+        "Revenge is presented as purely satisfying with no cost",
+        "The moral question raised at the crossroads is never answered"
+      ],
+      "signals_in_text": [
+        "Silence after violence",
+        "Empty rooms",
+        "Changed relationships",
+        "A final look or gesture"
+      ]
     }
   ],
   "edges": [

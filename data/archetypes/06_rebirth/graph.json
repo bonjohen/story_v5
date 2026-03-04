@@ -3,83 +3,222 @@
   "name": "Rebirth",
   "type": "archetype",
   "description": "A morally or emotionally diminished character undergoes renewal through crisis, restoring integrity or humanity.",
+  "_metadata": {
+    "nodeCount": 7,
+    "edgeCount": 6,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Trial": 1,
+      "Crisis": 1,
+      "Commitment": 1,
+      "Transformation": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "narrows options": 1,
+      "reveals truth": 1,
+      "forces commitment": 1,
+      "demands sacrifice": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "RB_N01_FALLEN_STATE",
       "label": "Fallen State",
       "role": "Origin",
       "definition": "The protagonist exists in a condition of moral, emotional, or spiritual corruption. They may be powerful but are diminished in humanity — cold, selfish, cruel, or numb.",
-      "entry_conditions": ["Story opening", "The audience sees the character's corruption or emptiness"],
-      "exit_conditions": ["An external event or figure disrupts the character's insulated life"],
-      "typical_variants": ["Wealthy miser who exploits others", "Powerful figure who has lost empathy", "Ordinary person frozen by grief or cynicism"],
-      "failure_modes": ["Character is so repulsive the audience has no investment in their renewal", "Fallen state is told rather than shown through behavior"],
-      "signals_in_text": ["Cruelty or indifference to others", "Isolation despite wealth or power", "Rejection of warmth or connection"]
+      "entry_conditions": [
+        "Story opening",
+        "The audience sees the character's corruption or emptiness"
+      ],
+      "exit_conditions": [
+        "An external event or figure disrupts the character's insulated life"
+      ],
+      "typical_variants": [
+        "Wealthy miser who exploits others",
+        "Powerful figure who has lost empathy",
+        "Ordinary person frozen by grief or cynicism"
+      ],
+      "failure_modes": [
+        "Character is so repulsive the audience has no investment in their renewal",
+        "Fallen state is told rather than shown through behavior"
+      ],
+      "signals_in_text": [
+        "Cruelty or indifference to others",
+        "Isolation despite wealth or power",
+        "Rejection of warmth or connection"
+      ]
     },
     {
       "node_id": "RB_N02_WARNING",
       "label": "Warning or Catalyst",
       "role": "Disruption",
       "definition": "An event, encounter, or message signals that the character's current path leads to destruction. This is the first crack in the character's self-justification.",
-      "entry_conditions": ["Fallen state is established", "An outside force intrudes on the character's world"],
-      "exit_conditions": ["The character is unsettled but not yet changed"],
-      "typical_variants": ["A stranger or innocent challenges the character", "A prophecy or vision of consequences", "Loss of something the character didn't realize they valued"],
-      "failure_modes": ["Warning is too subtle to register", "Character changes immediately — no resistance"],
-      "signals_in_text": ["An encounter that leaves the character uneasy", "A mirror held up to their behavior", "A question they cannot answer"]
+      "entry_conditions": [
+        "Fallen state is established",
+        "An outside force intrudes on the character's world"
+      ],
+      "exit_conditions": [
+        "The character is unsettled but not yet changed"
+      ],
+      "typical_variants": [
+        "A stranger or innocent challenges the character",
+        "A prophecy or vision of consequences",
+        "Loss of something the character didn't realize they valued"
+      ],
+      "failure_modes": [
+        "Warning is too subtle to register",
+        "Character changes immediately — no resistance"
+      ],
+      "signals_in_text": [
+        "An encounter that leaves the character uneasy",
+        "A mirror held up to their behavior",
+        "A question they cannot answer"
+      ]
     },
     {
       "node_id": "RB_N03_RESISTANCE",
       "label": "Resistance and Denial",
       "role": "Trial",
       "definition": "The character dismisses or fights the warning, doubling down on their current behavior. Their defenses are tested but hold — for now.",
-      "entry_conditions": ["Warning has been received", "The character's identity is invested in the fallen state"],
-      "exit_conditions": ["A deeper crisis overwhelms the character's ability to deny"],
-      "typical_variants": ["Lashing out at the messenger", "Rationalizing harmful behavior", "Attempting to reassert control over others"],
-      "failure_modes": ["Resistance is perfunctory — character gives in too quickly", "No escalation between warning and deeper crisis"],
-      "signals_in_text": ["Anger at those who challenge them", "Reassertion of power", "Isolation deepens"]
+      "entry_conditions": [
+        "Warning has been received",
+        "The character's identity is invested in the fallen state"
+      ],
+      "exit_conditions": [
+        "A deeper crisis overwhelms the character's ability to deny"
+      ],
+      "typical_variants": [
+        "Lashing out at the messenger",
+        "Rationalizing harmful behavior",
+        "Attempting to reassert control over others"
+      ],
+      "failure_modes": [
+        "Resistance is perfunctory — character gives in too quickly",
+        "No escalation between warning and deeper crisis"
+      ],
+      "signals_in_text": [
+        "Anger at those who challenge them",
+        "Reassertion of power",
+        "Isolation deepens"
+      ]
     },
     {
       "node_id": "RB_N04_ORDEAL_OF_TRUTH",
       "label": "Ordeal of Truth",
       "role": "Crisis",
       "definition": "A shattering experience forces the character to see the full consequences of their fallen state. Denial is no longer possible. This is the moral and emotional bottom.",
-      "entry_conditions": ["Resistance has been exhausted", "An undeniable confrontation with truth occurs"],
-      "exit_conditions": ["The character accepts what they have become and feels the weight of it"],
-      "typical_variants": ["Vision of their impact on others", "Loss of the last person who cared", "Confrontation with their own death or irrelevance", "Witnessing the suffering they caused"],
-      "failure_modes": ["Ordeal is too gentle — character doesn't hit bottom", "Ordeal is external only — no internal reckoning"],
-      "signals_in_text": ["Breakdown", "Tears or confession", "Moment of horrified self-recognition"]
+      "entry_conditions": [
+        "Resistance has been exhausted",
+        "An undeniable confrontation with truth occurs"
+      ],
+      "exit_conditions": [
+        "The character accepts what they have become and feels the weight of it"
+      ],
+      "typical_variants": [
+        "Vision of their impact on others",
+        "Loss of the last person who cared",
+        "Confrontation with their own death or irrelevance",
+        "Witnessing the suffering they caused"
+      ],
+      "failure_modes": [
+        "Ordeal is too gentle — character doesn't hit bottom",
+        "Ordeal is external only — no internal reckoning"
+      ],
+      "signals_in_text": [
+        "Breakdown",
+        "Tears or confession",
+        "Moment of horrified self-recognition"
+      ]
     },
     {
       "node_id": "RB_N05_TURNING_POINT",
       "label": "Turning Point",
       "role": "Commitment",
       "definition": "The character makes a conscious choice to change. This is not yet redemption — it is the decision to pursue redemption, often at personal cost.",
-      "entry_conditions": ["The ordeal has broken through denial", "The character sees a path to change, however difficult"],
-      "exit_conditions": ["The character takes a concrete action that demonstrates the new commitment"],
-      "typical_variants": ["Public confession or apology", "Quiet resolve to make amends", "Giving up the source of their corrupt power", "Reaching out to someone they wronged"],
-      "failure_modes": ["Turning point is purely internal with no visible action", "Change is instantaneous with no struggle"],
-      "signals_in_text": ["A decision made aloud or in action", "Sacrifice of pride or power", "First genuine act of generosity or humility"]
+      "entry_conditions": [
+        "The ordeal has broken through denial",
+        "The character sees a path to change, however difficult"
+      ],
+      "exit_conditions": [
+        "The character takes a concrete action that demonstrates the new commitment"
+      ],
+      "typical_variants": [
+        "Public confession or apology",
+        "Quiet resolve to make amends",
+        "Giving up the source of their corrupt power",
+        "Reaching out to someone they wronged"
+      ],
+      "failure_modes": [
+        "Turning point is purely internal with no visible action",
+        "Change is instantaneous with no struggle"
+      ],
+      "signals_in_text": [
+        "A decision made aloud or in action",
+        "Sacrifice of pride or power",
+        "First genuine act of generosity or humility"
+      ]
     },
     {
       "node_id": "RB_N06_ATONEMENT",
       "label": "Atonement",
       "role": "Transformation",
       "definition": "The character acts to repair the damage they caused, demonstrating that the change is real. Atonement is costly and may not be fully accepted by those harmed.",
-      "entry_conditions": ["The turning point is made", "Others are skeptical or resistant"],
-      "exit_conditions": ["Enough genuine repair has occurred that the character's change is credible"],
-      "typical_variants": ["Material restitution", "Selfless act that risks the character's remaining status", "Reconciliation with a specific wronged person", "Public reversal of a harmful policy or practice"],
-      "failure_modes": ["Atonement is too easy — no one resists or doubts", "Atonement is performative with no real cost", "Character expects forgiveness as a reward"],
-      "signals_in_text": ["Acts of generosity or service", "Rejection by those they wronged (initially)", "Persistence despite resistance"]
+      "entry_conditions": [
+        "The turning point is made",
+        "Others are skeptical or resistant"
+      ],
+      "exit_conditions": [
+        "Enough genuine repair has occurred that the character's change is credible"
+      ],
+      "typical_variants": [
+        "Material restitution",
+        "Selfless act that risks the character's remaining status",
+        "Reconciliation with a specific wronged person",
+        "Public reversal of a harmful policy or practice"
+      ],
+      "failure_modes": [
+        "Atonement is too easy — no one resists or doubts",
+        "Atonement is performative with no real cost",
+        "Character expects forgiveness as a reward"
+      ],
+      "signals_in_text": [
+        "Acts of generosity or service",
+        "Rejection by those they wronged (initially)",
+        "Persistence despite resistance"
+      ]
     },
     {
       "node_id": "RB_N07_RENEWAL",
       "label": "Renewal",
       "role": "Resolution",
       "definition": "The character emerges renewed — not restored to a prior state, but transformed into someone more whole. The world around them reflects the change.",
-      "entry_conditions": ["Atonement is credible", "The character has paid the cost"],
-      "exit_conditions": ["A new equilibrium is established that integrates the character's past and their transformation"],
-      "typical_variants": ["Joyful reintegration into community", "Quiet peace and acceptance", "Death with dignity after the change is made", "New relationships built on genuine connection"],
-      "failure_modes": ["Renewal erases all consequences — everything is magically fine", "Renewal is purely sentimental with no structural change in the character's life"],
-      "signals_in_text": ["Contrast with the opening scene", "Warmth replacing coldness", "Community response", "Character at peace"]
+      "entry_conditions": [
+        "Atonement is credible",
+        "The character has paid the cost"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established that integrates the character's past and their transformation"
+      ],
+      "typical_variants": [
+        "Joyful reintegration into community",
+        "Quiet peace and acceptance",
+        "Death with dignity after the change is made",
+        "New relationships built on genuine connection"
+      ],
+      "failure_modes": [
+        "Renewal erases all consequences — everything is magically fine",
+        "Renewal is purely sentimental with no structural change in the character's life"
+      ],
+      "signals_in_text": [
+        "Contrast with the opening scene",
+        "Warmth replacing coldness",
+        "Community response",
+        "Character at peace"
+      ]
     }
   ],
   "edges": [

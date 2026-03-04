@@ -3,6 +3,29 @@
   "name": "Comedy",
   "type": "genre",
   "description": "Stories designed to amuse through humor, incongruity, and social friction, typically resolving tension through reconciliation or restored balance.",
+  "_metadata": {
+    "nodeCount": 17,
+    "edgeCount": 18,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 1
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 3,
+      "restricts resolution": 1,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 4,
+      "mandates element": 3,
+      "requires payoff": 1,
+      "prohibits element": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "CM_N01_PROMISE",
@@ -10,11 +33,26 @@
       "role": "Genre Promise",
       "level": 1,
       "definition": "The audience is promised amusement and emotional relief through humor, absurdity, or social friction, with tension resolving in reconciliation, restored balance, or joyful release rather than lasting harm.",
-      "entry_conditions": ["Story is positioned as comedy"],
-      "exit_conditions": ["Core constraints are established that fulfill this promise"],
-      "typical_variants": ["Character-driven comedy", "Situation-driven comedy", "Satire-adjacent comedy", "Physical/slapstick comedy"],
-      "failure_modes": ["Attempts humor but doesn't amuse", "Promises lightness but delivers mean-spiritedness"],
-      "signals_in_text": ["Tone is inviting and playful from the opening", "Characters and situations contain visible incongruities"]
+      "entry_conditions": [
+        "Story is positioned as comedy"
+      ],
+      "exit_conditions": [
+        "Core constraints are established that fulfill this promise"
+      ],
+      "typical_variants": [
+        "Character-driven comedy",
+        "Situation-driven comedy",
+        "Satire-adjacent comedy",
+        "Physical/slapstick comedy"
+      ],
+      "failure_modes": [
+        "Attempts humor but doesn't amuse",
+        "Promises lightness but delivers mean-spiritedness"
+      ],
+      "signals_in_text": [
+        "Tone is inviting and playful from the opening",
+        "Characters and situations contain visible incongruities"
+      ]
     },
     {
       "node_id": "CM_N10_HUMOR_ENGINE",
@@ -22,11 +60,26 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The story must generate humor as its primary audience experience — through dialogue, situation, character behavior, or structural irony — not merely include occasional jokes in an otherwise non-comic story.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Humor is present in the majority of scenes and drives engagement"],
-      "typical_variants": ["Verbal wit", "Physical comedy", "Situational irony", "Character-based absurdity"],
-      "failure_modes": ["Humor is incidental rather than structural", "Story is serious with occasional jokes"],
-      "signals_in_text": ["Most scenes contain at least one comic beat", "Audience response is primarily amusement"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Humor is present in the majority of scenes and drives engagement"
+      ],
+      "typical_variants": [
+        "Verbal wit",
+        "Physical comedy",
+        "Situational irony",
+        "Character-based absurdity"
+      ],
+      "failure_modes": [
+        "Humor is incidental rather than structural",
+        "Story is serious with occasional jokes"
+      ],
+      "signals_in_text": [
+        "Most scenes contain at least one comic beat",
+        "Audience response is primarily amusement"
+      ]
     },
     {
       "node_id": "CM_N11_INCONGRUITY",
@@ -34,11 +87,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Comedy requires visible incongruity — between what characters expect and what happens, between social roles and actual behavior, between self-image and reality.",
-      "entry_conditions": ["Characters and situation established"],
-      "exit_conditions": ["At least one major source of incongruity sustains the comedy"],
-      "typical_variants": ["Fish out of water", "Mistaken identity", "Status reversal", "Disguise/deception", "Culture clash"],
-      "failure_modes": ["Everything is as expected — no surprise or mismatch", "Incongruity is random rather than character-driven"],
-      "signals_in_text": ["Gap between what characters believe and what audience knows", "Social expectations subverted"]
+      "entry_conditions": [
+        "Characters and situation established"
+      ],
+      "exit_conditions": [
+        "At least one major source of incongruity sustains the comedy"
+      ],
+      "typical_variants": [
+        "Fish out of water",
+        "Mistaken identity",
+        "Status reversal",
+        "Disguise/deception",
+        "Culture clash"
+      ],
+      "failure_modes": [
+        "Everything is as expected — no surprise or mismatch",
+        "Incongruity is random rather than character-driven"
+      ],
+      "signals_in_text": [
+        "Gap between what characters believe and what audience knows",
+        "Social expectations subverted"
+      ]
     },
     {
       "node_id": "CM_N12_STAKES_RECOVERABLE",
@@ -46,11 +115,26 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Comedy needs genuine stakes to create tension, but those stakes must be ultimately recoverable — the audience trusts that lasting harm will not occur.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Stakes are established that matter to characters but don't threaten permanent destruction"],
-      "typical_variants": ["Social embarrassment", "Relationship jeopardy", "Job/status at risk", "Plan failure"],
-      "failure_modes": ["No stakes at all — nothing to lose", "Stakes are so high they override the comic tone"],
-      "signals_in_text": ["Characters face consequences that feel urgent in the moment", "Audience senses a safety net even during tension"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Stakes are established that matter to characters but don't threaten permanent destruction"
+      ],
+      "typical_variants": [
+        "Social embarrassment",
+        "Relationship jeopardy",
+        "Job/status at risk",
+        "Plan failure"
+      ],
+      "failure_modes": [
+        "No stakes at all — nothing to lose",
+        "Stakes are so high they override the comic tone"
+      ],
+      "signals_in_text": [
+        "Characters face consequences that feel urgent in the moment",
+        "Audience senses a safety net even during tension"
+      ]
     },
     {
       "node_id": "CM_N13_RESOLUTION_POSITIVE",
@@ -58,11 +142,26 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Comedy generally resolves toward reunion, reconciliation, or restored balance — the social order is repaired, relationships are mended, and the ending is more harmonious than the middle.",
-      "entry_conditions": ["Comic conflict established"],
-      "exit_conditions": ["Story ends with social harmony restored or improved"],
-      "typical_variants": ["Couples reunited", "Community reconciled", "Misunderstanding cleared", "Status quo restored with added wisdom"],
-      "failure_modes": ["Ending is bleak or punishing", "Resolution undermines the comic tone"],
-      "signals_in_text": ["Final scenes include reunion, celebration, or shared laughter", "Conflicts that drove the comedy are resolved"]
+      "entry_conditions": [
+        "Comic conflict established"
+      ],
+      "exit_conditions": [
+        "Story ends with social harmony restored or improved"
+      ],
+      "typical_variants": [
+        "Couples reunited",
+        "Community reconciled",
+        "Misunderstanding cleared",
+        "Status quo restored with added wisdom"
+      ],
+      "failure_modes": [
+        "Ending is bleak or punishing",
+        "Resolution undermines the comic tone"
+      ],
+      "signals_in_text": [
+        "Final scenes include reunion, celebration, or shared laughter",
+        "Conflicts that drove the comedy are resolved"
+      ]
     },
     {
       "node_id": "CM_N20_SCREWBALL",
@@ -70,11 +169,27 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Fast-paced comedy driven by verbal sparring, gender dynamics, and social-class friction, often featuring a central couple whose attraction manifests as conflict.",
-      "entry_conditions": ["Core constraints apply", "Central dynamic involves quick-witted characters in social friction"],
-      "exit_conditions": ["Wit and verbal combat are the primary comic engine"],
-      "typical_variants": ["Battle of the sexes", "Class collision", "Workplace sparring"],
-      "failure_modes": ["Verbal exchanges are slow or uninspired", "Sparring becomes genuinely hostile"],
-      "signals_in_text": ["Rapid-fire dialogue", "Verbal one-upmanship", "Physical comedy alongside wit"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Central dynamic involves quick-witted characters in social friction"
+      ],
+      "exit_conditions": [
+        "Wit and verbal combat are the primary comic engine"
+      ],
+      "typical_variants": [
+        "Battle of the sexes",
+        "Class collision",
+        "Workplace sparring"
+      ],
+      "failure_modes": [
+        "Verbal exchanges are slow or uninspired",
+        "Sparring becomes genuinely hostile"
+      ],
+      "signals_in_text": [
+        "Rapid-fire dialogue",
+        "Verbal one-upmanship",
+        "Physical comedy alongside wit"
+      ]
     },
     {
       "node_id": "CM_N21_FARCE",
@@ -82,11 +197,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Comedy built on escalating misunderstandings, mistaken identities, and physical chaos, where a small deception snowballs into increasingly absurd complications.",
-      "entry_conditions": ["Core constraints apply", "Initial deception or misunderstanding established"],
-      "exit_conditions": ["Deception escalates through multiple layers before exposure"],
-      "typical_variants": ["Door-slamming farce", "Mistaken identity", "Snowballing lie", "Multiple deceptions colliding"],
-      "failure_modes": ["Complications don't escalate — chaos is static", "Resolution is too easy — truth revealed without consequences"],
-      "signals_in_text": ["Characters maintaining increasingly difficult deceptions", "Near-misses and close calls", "Physical comedy driven by panic"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Initial deception or misunderstanding established"
+      ],
+      "exit_conditions": [
+        "Deception escalates through multiple layers before exposure"
+      ],
+      "typical_variants": [
+        "Door-slamming farce",
+        "Mistaken identity",
+        "Snowballing lie",
+        "Multiple deceptions colliding"
+      ],
+      "failure_modes": [
+        "Complications don't escalate — chaos is static",
+        "Resolution is too easy — truth revealed without consequences"
+      ],
+      "signals_in_text": [
+        "Characters maintaining increasingly difficult deceptions",
+        "Near-misses and close calls",
+        "Physical comedy driven by panic"
+      ]
     },
     {
       "node_id": "CM_N22_DARK_COMEDY",
@@ -94,11 +226,27 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Comedy that derives humor from subject matter typically considered serious, taboo, or disturbing — finding absurdity in mortality, crime, or social dysfunction.",
-      "entry_conditions": ["Core constraints apply", "Subject matter includes dark or taboo elements"],
-      "exit_conditions": ["Dark subject matter is treated with comic perspective without losing all emotional weight"],
-      "typical_variants": ["Death comedy", "Crime comedy", "Social dysfunction comedy", "Institutional absurdity"],
-      "failure_modes": ["Crosses into genuine cruelty without comic framing", "Dark elements overwhelm the humor"],
-      "signals_in_text": ["Juxtaposition of serious situations with absurd reactions", "Characters treating terrible situations with inappropriate normalcy"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Subject matter includes dark or taboo elements"
+      ],
+      "exit_conditions": [
+        "Dark subject matter is treated with comic perspective without losing all emotional weight"
+      ],
+      "typical_variants": [
+        "Death comedy",
+        "Crime comedy",
+        "Social dysfunction comedy",
+        "Institutional absurdity"
+      ],
+      "failure_modes": [
+        "Crosses into genuine cruelty without comic framing",
+        "Dark elements overwhelm the humor"
+      ],
+      "signals_in_text": [
+        "Juxtaposition of serious situations with absurd reactions",
+        "Characters treating terrible situations with inappropriate normalcy"
+      ]
     },
     {
       "node_id": "CM_N23_FISH_OUT_OF_WATER",
@@ -106,11 +254,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Comedy centered on a character placed in an environment where they don't belong — their unfamiliarity generates humor through cultural collision and failed adaptation.",
-      "entry_conditions": ["Core constraints apply", "Protagonist is displaced from their normal context"],
-      "exit_conditions": ["Character's displacement generates sustained comic friction"],
-      "typical_variants": ["Class displacement", "Cultural displacement", "Time displacement", "Professional displacement"],
-      "failure_modes": ["Character adapts too quickly — displacement vanishes", "Humor relies on mockery rather than mutual discovery"],
-      "signals_in_text": ["Character misreads social cues", "Basic tasks become comic challenges", "Gradual understanding between character and new environment"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Protagonist is displaced from their normal context"
+      ],
+      "exit_conditions": [
+        "Character's displacement generates sustained comic friction"
+      ],
+      "typical_variants": [
+        "Class displacement",
+        "Cultural displacement",
+        "Time displacement",
+        "Professional displacement"
+      ],
+      "failure_modes": [
+        "Character adapts too quickly — displacement vanishes",
+        "Humor relies on mockery rather than mutual discovery"
+      ],
+      "signals_in_text": [
+        "Character misreads social cues",
+        "Basic tasks become comic challenges",
+        "Gradual understanding between character and new environment"
+      ]
     },
     {
       "node_id": "CM_N40_SOCIAL_SETTING",
@@ -118,11 +283,27 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "Comedy settings should create situations where social friction is maximized — gatherings, workplaces, shared spaces — where characters cannot avoid each other or their problems.",
-      "entry_conditions": ["Subgenre pattern selected"],
-      "exit_conditions": ["Setting forces characters into comic proximity"],
-      "typical_variants": ["Wedding/party", "Workplace", "Family home", "Road trip/confined travel", "Small community"],
-      "failure_modes": ["Characters can easily avoid each other", "Setting has no social rules to subvert"],
-      "signals_in_text": ["Characters thrown together by circumstance", "Social expectations create pressure that generates humor"]
+      "entry_conditions": [
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "Setting forces characters into comic proximity"
+      ],
+      "typical_variants": [
+        "Wedding/party",
+        "Workplace",
+        "Family home",
+        "Road trip/confined travel",
+        "Small community"
+      ],
+      "failure_modes": [
+        "Characters can easily avoid each other",
+        "Setting has no social rules to subvert"
+      ],
+      "signals_in_text": [
+        "Characters thrown together by circumstance",
+        "Social expectations create pressure that generates humor"
+      ]
     },
     {
       "node_id": "CM_N41_RULES_TO_BREAK",
@@ -130,11 +311,26 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "Comedy requires visible social norms, expectations, or propriety that characters can violate — the humor comes from the gap between expected behavior and actual behavior.",
-      "entry_conditions": ["Social setting established"],
-      "exit_conditions": ["Social expectations are clear enough that their violation registers as comic"],
-      "typical_variants": ["Professional decorum", "Family propriety", "Class expectations", "Cultural norms"],
-      "failure_modes": ["No visible norms to subvert", "Norm violation is invisible to the audience"],
-      "signals_in_text": ["Characters aware of what they 'should' do vs. what they actually do", "Authority figures or social gatekeepers whose expectations are defied"]
+      "entry_conditions": [
+        "Social setting established"
+      ],
+      "exit_conditions": [
+        "Social expectations are clear enough that their violation registers as comic"
+      ],
+      "typical_variants": [
+        "Professional decorum",
+        "Family propriety",
+        "Class expectations",
+        "Cultural norms"
+      ],
+      "failure_modes": [
+        "No visible norms to subvert",
+        "Norm violation is invisible to the audience"
+      ],
+      "signals_in_text": [
+        "Characters aware of what they 'should' do vs. what they actually do",
+        "Authority figures or social gatekeepers whose expectations are defied"
+      ]
     },
     {
       "node_id": "CM_N42_TIMING_MECHANISM",
@@ -142,11 +338,26 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "Comedy often uses deadlines or timing mechanisms — the wedding is tomorrow, the boss arrives in an hour, the lie must be maintained until Saturday — to compress action and raise comic stakes.",
-      "entry_conditions": ["Comic conflict established"],
-      "exit_conditions": ["Time pressure forces characters to act rashly, increasing comic potential"],
-      "typical_variants": ["Event deadline (wedding, dinner, presentation)", "Arrival of authority figure", "Discovery deadline (secret must be maintained until X)"],
-      "failure_modes": ["No time pressure — characters can solve problems at leisure", "Deadline has no consequences if missed"],
-      "signals_in_text": ["References to impending event", "Characters racing against time", "Pacing accelerates as deadline approaches"]
+      "entry_conditions": [
+        "Comic conflict established"
+      ],
+      "exit_conditions": [
+        "Time pressure forces characters to act rashly, increasing comic potential"
+      ],
+      "typical_variants": [
+        "Event deadline (wedding, dinner, presentation)",
+        "Arrival of authority figure",
+        "Discovery deadline (secret must be maintained until X)"
+      ],
+      "failure_modes": [
+        "No time pressure — characters can solve problems at leisure",
+        "Deadline has no consequences if missed"
+      ],
+      "signals_in_text": [
+        "References to impending event",
+        "Characters racing against time",
+        "Pacing accelerates as deadline approaches"
+      ]
     },
     {
       "node_id": "CM_N60_COMIC_SETUP",
@@ -154,11 +365,26 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "An early scene that establishes the normal order and then introduces the comic disruption — the lie, the displacement, the misunderstanding — that will drive the comedy.",
-      "entry_conditions": ["Characters and setting established"],
-      "exit_conditions": ["The source of comic friction is in motion"],
-      "typical_variants": ["Inciting lie or deception", "Arrival in wrong context", "Misunderstanding that takes root", "Plan that immediately goes wrong"],
-      "failure_modes": ["Setup is too long before the comedy begins", "Disruption is too small to sustain a story"],
-      "signals_in_text": ["Audience recognizes the gap between what characters believe and what's true", "First major laugh is generated"]
+      "entry_conditions": [
+        "Characters and setting established"
+      ],
+      "exit_conditions": [
+        "The source of comic friction is in motion"
+      ],
+      "typical_variants": [
+        "Inciting lie or deception",
+        "Arrival in wrong context",
+        "Misunderstanding that takes root",
+        "Plan that immediately goes wrong"
+      ],
+      "failure_modes": [
+        "Setup is too long before the comedy begins",
+        "Disruption is too small to sustain a story"
+      ],
+      "signals_in_text": [
+        "Audience recognizes the gap between what characters believe and what's true",
+        "First major laugh is generated"
+      ]
     },
     {
       "node_id": "CM_N61_ESCALATION_SCENE",
@@ -166,11 +392,26 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene (or sequence) where the comic situation gets worse — the lie requires a bigger lie, the misunderstanding deepens, the fish-out-of-water faces a bigger challenge — before resolution is possible.",
-      "entry_conditions": ["Comic disruption established"],
-      "exit_conditions": ["Situation is more complicated and more absurd than before"],
-      "typical_variants": ["Double-down on deception", "New character complicates existing mess", "Public exposure nearly occurs", "Second misunderstanding layers on first"],
-      "failure_modes": ["Complications don't build on each other", "Escalation is repetitive rather than progressive"],
-      "signals_in_text": ["Each new complication makes the prior solution worse", "Characters' stress increases while audience amusement increases"]
+      "entry_conditions": [
+        "Comic disruption established"
+      ],
+      "exit_conditions": [
+        "Situation is more complicated and more absurd than before"
+      ],
+      "typical_variants": [
+        "Double-down on deception",
+        "New character complicates existing mess",
+        "Public exposure nearly occurs",
+        "Second misunderstanding layers on first"
+      ],
+      "failure_modes": [
+        "Complications don't build on each other",
+        "Escalation is repetitive rather than progressive"
+      ],
+      "signals_in_text": [
+        "Each new complication makes the prior solution worse",
+        "Characters' stress increases while audience amusement increases"
+      ]
     },
     {
       "node_id": "CM_N62_COMIC_CLIMAX",
@@ -178,11 +419,27 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "The scene of maximum comic chaos — all deceptions are exposed, all misunderstandings collide, or the absurdity reaches its peak — before the resolution restores order.",
-      "entry_conditions": ["Complications have reached unsustainable level"],
-      "exit_conditions": ["Truth is out, chaos has peaked, and resolution can begin"],
-      "typical_variants": ["Public exposure of all lies", "All parties converge in one scene", "Plan collapses spectacularly", "Climactic set piece of physical comedy"],
-      "failure_modes": ["Climax fizzles — truth emerges quietly", "Chaos is resolved too easily"],
-      "signals_in_text": ["Maximum number of characters in one scene", "Multiple reveals happening simultaneously", "Biggest laugh of the story"]
+      "entry_conditions": [
+        "Complications have reached unsustainable level"
+      ],
+      "exit_conditions": [
+        "Truth is out, chaos has peaked, and resolution can begin"
+      ],
+      "typical_variants": [
+        "Public exposure of all lies",
+        "All parties converge in one scene",
+        "Plan collapses spectacularly",
+        "Climactic set piece of physical comedy"
+      ],
+      "failure_modes": [
+        "Climax fizzles — truth emerges quietly",
+        "Chaos is resolved too easily"
+      ],
+      "signals_in_text": [
+        "Maximum number of characters in one scene",
+        "Multiple reveals happening simultaneously",
+        "Biggest laugh of the story"
+      ]
     },
     {
       "node_id": "CM_N80_PLAYFUL_TONE",
@@ -190,11 +447,26 @@
       "role": "Tone Marker",
       "level": null,
       "definition": "Comedy requires a predominantly playful tone — the narrative voice signals that events, while sometimes stressful for characters, are ultimately safe for the audience to enjoy.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Tone is maintained through language, pacing, and situation framing"],
-      "typical_variants": ["Warm and generous", "Sharp and witty", "Absurdist and irreverent", "Gentle and whimsical"],
-      "failure_modes": ["Tone becomes mean-spirited or cruel", "Playfulness disappears during serious moments without returning"],
-      "signals_in_text": ["Narrative voice has lightness even in tense moments", "Characters' suffering is temporary and acknowledged with empathy"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Tone is maintained through language, pacing, and situation framing"
+      ],
+      "typical_variants": [
+        "Warm and generous",
+        "Sharp and witty",
+        "Absurdist and irreverent",
+        "Gentle and whimsical"
+      ],
+      "failure_modes": [
+        "Tone becomes mean-spirited or cruel",
+        "Playfulness disappears during serious moments without returning"
+      ],
+      "signals_in_text": [
+        "Narrative voice has lightness even in tense moments",
+        "Characters' suffering is temporary and acknowledged with empathy"
+      ]
     },
     {
       "node_id": "CM_N90_CRUELTY_COMEDY",
@@ -202,11 +474,24 @@
       "role": "Anti-Pattern",
       "level": null,
       "definition": "Comedy fails when humor comes from genuine, lasting harm to sympathetic characters — when the audience laughs at suffering that isn't recovered from.",
-      "entry_conditions": ["Humor is generated from character distress"],
-      "exit_conditions": ["Distress is temporary and characters recover or are reconciled"],
-      "typical_variants": ["Bullying disguised as comedy", "Permanent humiliation of sympathetic characters", "Lasting harm played for laughs"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["Audience feels guilty laughing", "Character suffering persists into the resolution"]
+      "entry_conditions": [
+        "Humor is generated from character distress"
+      ],
+      "exit_conditions": [
+        "Distress is temporary and characters recover or are reconciled"
+      ],
+      "typical_variants": [
+        "Bullying disguised as comedy",
+        "Permanent humiliation of sympathetic characters",
+        "Lasting harm played for laughs"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode — its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "Audience feels guilty laughing",
+        "Character suffering persists into the resolution"
+      ]
     }
   ],
   "edges": [
@@ -216,11 +501,17 @@
       "to": "CM_N10_HUMOR_ENGINE",
       "label": "Promise requires humor as primary engine",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Every conflict must serve the comedy",
       "effects_on_character": "Characters' behavior must generate humor",
-      "common_alternatives": ["Dramedy balances humor with serious emotional weight"],
-      "anti_patterns": ["Humor is incidental to a non-comic story"]
+      "common_alternatives": [
+        "Dramedy balances humor with serious emotional weight"
+      ],
+      "anti_patterns": [
+        "Humor is incidental to a non-comic story"
+      ]
     },
     {
       "edge_id": "CM_E02_PROMISE_TO_INCONGRUITY",
@@ -228,11 +519,17 @@
       "to": "CM_N11_INCONGRUITY",
       "label": "Promise requires incongruity",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Tension comes from mismatch, not danger",
       "effects_on_character": "Characters must have blind spots or mismatched contexts",
-      "common_alternatives": ["Incongruity may be verbal, situational, or physical"],
-      "anti_patterns": ["Everything is as expected — no comic gap"]
+      "common_alternatives": [
+        "Incongruity may be verbal, situational, or physical"
+      ],
+      "anti_patterns": [
+        "Everything is as expected — no comic gap"
+      ]
     },
     {
       "edge_id": "CM_E03_PROMISE_TO_RECOVERABLE",
@@ -240,11 +537,17 @@
       "to": "CM_N12_STAKES_RECOVERABLE",
       "label": "Promise requires recoverable stakes",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Stakes must matter but not permanently destroy",
       "effects_on_character": "Characters face real pressure but will be okay",
-      "common_alternatives": ["Dark comedy pushes this boundary while maintaining comic framing"],
-      "anti_patterns": ["Permanent tragedy in a comedy — audience feels betrayed"]
+      "common_alternatives": [
+        "Dark comedy pushes this boundary while maintaining comic framing"
+      ],
+      "anti_patterns": [
+        "Permanent tragedy in a comedy — audience feels betrayed"
+      ]
     },
     {
       "edge_id": "CM_E04_PROMISE_TO_RESOLUTION",
@@ -252,11 +555,17 @@
       "to": "CM_N13_RESOLUTION_POSITIVE",
       "label": "Promise requires positive resolution",
       "meaning": "restricts resolution",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Audience trusts the story will end well",
       "effects_on_character": "Characters will find reconciliation or restored balance",
-      "common_alternatives": ["Dark comedy may end ambiguously but with comic perspective intact"],
-      "anti_patterns": ["Bleak or punishing ending that betrays the comic contract"]
+      "common_alternatives": [
+        "Dark comedy may end ambiguously but with comic perspective intact"
+      ],
+      "anti_patterns": [
+        "Bleak or punishing ending that betrays the comic contract"
+      ]
     },
     {
       "edge_id": "CM_E05_PROMISE_TO_TONE",
@@ -264,11 +573,17 @@
       "to": "CM_N80_PLAYFUL_TONE",
       "label": "Promise requires playful tone",
       "meaning": "sets tone",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Tone signals safety even during comic crises",
       "effects_on_character": "Characters' struggles are framed with lightness",
-      "common_alternatives": ["Tone may be warm, sharp, or absurdist depending on subgenre"],
-      "anti_patterns": ["Mean-spirited or grim tone sustained throughout"]
+      "common_alternatives": [
+        "Tone may be warm, sharp, or absurdist depending on subgenre"
+      ],
+      "anti_patterns": [
+        "Mean-spirited or grim tone sustained throughout"
+      ]
     },
     {
       "edge_id": "CM_E10_INCONGRUITY_TO_SCREWBALL",
@@ -276,11 +591,19 @@
       "to": "CM_N20_SCREWBALL",
       "label": "Incongruity as verbal/social sparring",
       "meaning": "branches into subtype",
-      "preconditions": ["Incongruity is between quick-witted characters in social friction"],
+      "preconditions": [
+        "Incongruity is between quick-witted characters in social friction"
+      ],
       "effects_on_stakes": "Stakes are romantic and social — who will win the verbal battle",
       "effects_on_character": "Characters defined by their wit and social position",
-      "common_alternatives": ["Farce", "Dark comedy", "Fish-out-of-water"],
-      "anti_patterns": ["Sparring is one-sided or humorless"]
+      "common_alternatives": [
+        "Farce",
+        "Dark comedy",
+        "Fish-out-of-water"
+      ],
+      "anti_patterns": [
+        "Sparring is one-sided or humorless"
+      ]
     },
     {
       "edge_id": "CM_E11_INCONGRUITY_TO_FARCE",
@@ -288,11 +611,19 @@
       "to": "CM_N21_FARCE",
       "label": "Incongruity as escalating misunderstanding",
       "meaning": "branches into subtype",
-      "preconditions": ["Incongruity is between appearance and reality, growing more extreme"],
+      "preconditions": [
+        "Incongruity is between appearance and reality, growing more extreme"
+      ],
       "effects_on_stakes": "Each layer of deception adds more to lose",
       "effects_on_character": "Characters become increasingly desperate to maintain deceptions",
-      "common_alternatives": ["Screwball", "Dark comedy", "Fish-out-of-water"],
-      "anti_patterns": ["Misunderstanding is small and easily cleared up"]
+      "common_alternatives": [
+        "Screwball",
+        "Dark comedy",
+        "Fish-out-of-water"
+      ],
+      "anti_patterns": [
+        "Misunderstanding is small and easily cleared up"
+      ]
     },
     {
       "edge_id": "CM_E12_INCONGRUITY_TO_DARK",
@@ -300,11 +631,19 @@
       "to": "CM_N22_DARK_COMEDY",
       "label": "Incongruity between serious subject and comic treatment",
       "meaning": "branches into subtype",
-      "preconditions": ["Incongruity is between dark subject matter and comic perspective"],
+      "preconditions": [
+        "Incongruity is between dark subject matter and comic perspective"
+      ],
       "effects_on_stakes": "Stakes may include death or crime but comic framing is maintained",
       "effects_on_character": "Characters respond to terrible situations with inappropriate normalcy or absurdity",
-      "common_alternatives": ["Screwball", "Farce", "Fish-out-of-water"],
-      "anti_patterns": ["Dark material overwhelms the comedy — becomes straightforward drama"]
+      "common_alternatives": [
+        "Screwball",
+        "Farce",
+        "Fish-out-of-water"
+      ],
+      "anti_patterns": [
+        "Dark material overwhelms the comedy — becomes straightforward drama"
+      ]
     },
     {
       "edge_id": "CM_E13_INCONGRUITY_TO_FISH",
@@ -312,11 +651,19 @@
       "to": "CM_N23_FISH_OUT_OF_WATER",
       "label": "Incongruity as cultural/contextual displacement",
       "meaning": "branches into subtype",
-      "preconditions": ["Incongruity is between character and their environment"],
+      "preconditions": [
+        "Incongruity is between character and their environment"
+      ],
       "effects_on_stakes": "Stakes include belonging and adaptation",
       "effects_on_character": "Character must navigate unfamiliar social terrain",
-      "common_alternatives": ["Screwball", "Farce", "Dark comedy"],
-      "anti_patterns": ["Character is merely clumsy — no genuine cultural collision"]
+      "common_alternatives": [
+        "Screwball",
+        "Farce",
+        "Dark comedy"
+      ],
+      "anti_patterns": [
+        "Character is merely clumsy — no genuine cultural collision"
+      ]
     },
     {
       "edge_id": "CM_E30_SCREWBALL_TO_SOCIAL",
@@ -324,11 +671,19 @@
       "to": "CM_N40_SOCIAL_SETTING",
       "label": "Screwball requires social friction setting",
       "meaning": "introduces setting rule",
-      "preconditions": ["Screwball subgenre selected"],
+      "preconditions": [
+        "Screwball subgenre selected"
+      ],
       "effects_on_stakes": "Social setting provides audience and witnesses for sparring",
       "effects_on_character": "Characters perform for each other and for society",
-      "common_alternatives": ["High society", "Workplace", "Competitive environment"],
-      "anti_patterns": ["Characters spar in isolation with no social context"]
+      "common_alternatives": [
+        "High society",
+        "Workplace",
+        "Competitive environment"
+      ],
+      "anti_patterns": [
+        "Characters spar in isolation with no social context"
+      ]
     },
     {
       "edge_id": "CM_E31_FARCE_TO_RULES",
@@ -336,11 +691,19 @@
       "to": "CM_N41_RULES_TO_BREAK",
       "label": "Farce requires visible rules to subvert",
       "meaning": "introduces setting rule",
-      "preconditions": ["Farce subgenre selected"],
+      "preconditions": [
+        "Farce subgenre selected"
+      ],
       "effects_on_stakes": "Breaking rules carries social consequences that fuel the comedy",
       "effects_on_character": "Characters desperately try to maintain appearances",
-      "common_alternatives": ["Professional rules", "Family expectations", "Social proprieties"],
-      "anti_patterns": ["No norms exist to violate — chaos without contrast"]
+      "common_alternatives": [
+        "Professional rules",
+        "Family expectations",
+        "Social proprieties"
+      ],
+      "anti_patterns": [
+        "No norms exist to violate — chaos without contrast"
+      ]
     },
     {
       "edge_id": "CM_E32_FARCE_TO_TIMING",
@@ -348,11 +711,19 @@
       "to": "CM_N42_TIMING_MECHANISM",
       "label": "Farce requires timing pressure",
       "meaning": "introduces setting rule",
-      "preconditions": ["Farce subgenre selected"],
+      "preconditions": [
+        "Farce subgenre selected"
+      ],
       "effects_on_stakes": "Deadline makes deception increasingly difficult to maintain",
       "effects_on_character": "Characters must act faster and more recklessly",
-      "common_alternatives": ["Event deadline", "Arrival of authority", "Exposure countdown"],
-      "anti_patterns": ["No time pressure — characters can untangle mess at leisure"]
+      "common_alternatives": [
+        "Event deadline",
+        "Arrival of authority",
+        "Exposure countdown"
+      ],
+      "anti_patterns": [
+        "No time pressure — characters can untangle mess at leisure"
+      ]
     },
     {
       "edge_id": "CM_E33_FISH_TO_SOCIAL",
@@ -360,11 +731,20 @@
       "to": "CM_N40_SOCIAL_SETTING",
       "label": "Fish-out-of-water needs unfamiliar social context",
       "meaning": "introduces setting rule",
-      "preconditions": ["Fish-out-of-water subgenre selected"],
+      "preconditions": [
+        "Fish-out-of-water subgenre selected"
+      ],
       "effects_on_stakes": "Unfamiliar social rules create constant comic friction",
       "effects_on_character": "Character must learn rules by breaking them",
-      "common_alternatives": ["New workplace", "Different social class", "Foreign culture", "Historical period"],
-      "anti_patterns": ["Character already understands the new environment"]
+      "common_alternatives": [
+        "New workplace",
+        "Different social class",
+        "Foreign culture",
+        "Historical period"
+      ],
+      "anti_patterns": [
+        "Character already understands the new environment"
+      ]
     },
     {
       "edge_id": "CM_E50_SOCIAL_TO_SETUP",
@@ -372,11 +752,17 @@
       "to": "CM_N60_COMIC_SETUP",
       "label": "Social setting generates comic disruption",
       "meaning": "mandates element",
-      "preconditions": ["Social setting established with its rules and expectations"],
+      "preconditions": [
+        "Social setting established with its rules and expectations"
+      ],
       "effects_on_stakes": "Disruption occurs within a social context that makes it consequential",
       "effects_on_character": "Character's disruption affects their social standing",
-      "common_alternatives": ["Disruption may be deliberate (lie) or accidental (misunderstanding)"],
-      "anti_patterns": ["Disruption occurs in social vacuum with no witnesses or consequences"]
+      "common_alternatives": [
+        "Disruption may be deliberate (lie) or accidental (misunderstanding)"
+      ],
+      "anti_patterns": [
+        "Disruption occurs in social vacuum with no witnesses or consequences"
+      ]
     },
     {
       "edge_id": "CM_E51_RULES_TO_ESCALATION",
@@ -384,11 +770,19 @@
       "to": "CM_N61_ESCALATION_SCENE",
       "label": "Breaking rules creates escalating complications",
       "meaning": "mandates element",
-      "preconditions": ["Social rules established and initially violated"],
+      "preconditions": [
+        "Social rules established and initially violated"
+      ],
       "effects_on_stakes": "Each rule violation requires a bigger cover-up",
       "effects_on_character": "Character sinks deeper into comic trouble",
-      "common_alternatives": ["Escalation through more lies", "Escalation through more people involved", "Escalation through higher-stakes setting"],
-      "anti_patterns": ["Rule violation has no consequences — nothing escalates"]
+      "common_alternatives": [
+        "Escalation through more lies",
+        "Escalation through more people involved",
+        "Escalation through higher-stakes setting"
+      ],
+      "anti_patterns": [
+        "Rule violation has no consequences — nothing escalates"
+      ]
     },
     {
       "edge_id": "CM_E52_TIMING_TO_CLIMAX",
@@ -396,11 +790,18 @@
       "to": "CM_N62_COMIC_CLIMAX",
       "label": "Deadline forces comic climax",
       "meaning": "mandates element",
-      "preconditions": ["Timing pressure established and approaching"],
+      "preconditions": [
+        "Timing pressure established and approaching"
+      ],
       "effects_on_stakes": "All deceptions must resolve before or at the deadline",
       "effects_on_character": "Characters can no longer maintain separate versions of reality",
-      "common_alternatives": ["Deadline triggers exposure", "Event forces all parties together"],
-      "anti_patterns": ["Deadline arrives but nothing is resolved"]
+      "common_alternatives": [
+        "Deadline triggers exposure",
+        "Event forces all parties together"
+      ],
+      "anti_patterns": [
+        "Deadline arrives but nothing is resolved"
+      ]
     },
     {
       "edge_id": "CM_E53_ESCALATION_TO_CLIMAX",
@@ -408,11 +809,19 @@
       "to": "CM_N62_COMIC_CLIMAX",
       "label": "Escalation builds to comic explosion",
       "meaning": "requires payoff",
-      "preconditions": ["Complications have stacked beyond sustainability"],
+      "preconditions": [
+        "Complications have stacked beyond sustainability"
+      ],
       "effects_on_stakes": "Everything comes to a head simultaneously",
       "effects_on_character": "Characters must face the truth and each other",
-      "common_alternatives": ["Gradual unraveling", "Single explosive reveal", "Multiple simultaneous revelations"],
-      "anti_patterns": ["Complications resolve one by one without a climactic convergence"]
+      "common_alternatives": [
+        "Gradual unraveling",
+        "Single explosive reveal",
+        "Multiple simultaneous revelations"
+      ],
+      "anti_patterns": [
+        "Complications resolve one by one without a climactic convergence"
+      ]
     },
     {
       "edge_id": "CM_E90_CRUELTY_WARNING",
@@ -420,11 +829,15 @@
       "to": "CM_N90_CRUELTY_COMEDY",
       "label": "Unrecoverable harm violates comedy",
       "meaning": "prohibits element",
-      "preconditions": ["Characters suffer lasting, unrecovered harm played for laughs"],
+      "preconditions": [
+        "Characters suffer lasting, unrecovered harm played for laughs"
+      ],
       "effects_on_stakes": "Audience sympathy overrides amusement",
       "effects_on_character": "Character becomes a victim rather than a comic participant",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes what to avoid"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern — it describes what to avoid"
+      ]
     }
   ]
 }

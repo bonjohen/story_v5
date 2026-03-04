@@ -3,6 +3,28 @@
   "name": "Fantasy",
   "type": "genre",
   "description": "Stories set in worlds with magical rules or supernatural forces, emphasizing wonder, mythic stakes, and transformative journeys.",
+  "_metadata": {
+    "nodeCount": 17,
+    "edgeCount": 18,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 1
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 4,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 4,
+      "mandates element": 3,
+      "requires payoff": 1,
+      "prohibits element": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "FN_N01_PROMISE",
@@ -10,11 +32,26 @@
       "role": "Genre Promise",
       "level": 1,
       "definition": "The audience is promised entry into a world where the impossible is real — magic, mythic forces, or supernatural elements exist and matter — and where wonder, transformation, and mythic-scale stakes drive the story.",
-      "entry_conditions": ["Story is positioned as fantasy"],
-      "exit_conditions": ["Core constraints are established that fulfill this promise"],
-      "typical_variants": ["Epic/high fantasy", "Urban fantasy", "Dark fantasy", "Mythic/fairy tale fantasy"],
-      "failure_modes": ["Magical world is dull or generic", "Fantasy elements are window dressing with no narrative function"],
-      "signals_in_text": ["Early introduction of a world that operates differently from reality", "Sense of wonder or awe at the impossible"]
+      "entry_conditions": [
+        "Story is positioned as fantasy"
+      ],
+      "exit_conditions": [
+        "Core constraints are established that fulfill this promise"
+      ],
+      "typical_variants": [
+        "Epic/high fantasy",
+        "Urban fantasy",
+        "Dark fantasy",
+        "Mythic/fairy tale fantasy"
+      ],
+      "failure_modes": [
+        "Magical world is dull or generic",
+        "Fantasy elements are window dressing with no narrative function"
+      ],
+      "signals_in_text": [
+        "Early introduction of a world that operates differently from reality",
+        "Sense of wonder or awe at the impossible"
+      ]
     },
     {
       "node_id": "FN_N10_MAGIC_SYSTEM",
@@ -22,11 +59,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The magical or supernatural elements must operate according to consistent internal rules — they may be mysterious but they cannot be arbitrary. Magic must have costs, limits, or conditions.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Audience understands what magic can and cannot do, even if the full system is not explained"],
-      "typical_variants": ["Hard magic (explicit rules)", "Soft magic (mysterious but consistent)", "Hybrid (hard for protagonist, soft for world)"],
-      "failure_modes": ["Magic solves any problem with no cost", "Rules change to suit the plot", "Magic has no limits or conditions"],
-      "signals_in_text": ["Characters reference costs or conditions of magic", "Magic fails or has unintended consequences", "Audience can predict what magic will and won't do"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Audience understands what magic can and cannot do, even if the full system is not explained"
+      ],
+      "typical_variants": [
+        "Hard magic (explicit rules)",
+        "Soft magic (mysterious but consistent)",
+        "Hybrid (hard for protagonist, soft for world)"
+      ],
+      "failure_modes": [
+        "Magic solves any problem with no cost",
+        "Rules change to suit the plot",
+        "Magic has no limits or conditions"
+      ],
+      "signals_in_text": [
+        "Characters reference costs or conditions of magic",
+        "Magic fails or has unintended consequences",
+        "Audience can predict what magic will and won't do"
+      ]
     },
     {
       "node_id": "FN_N11_WORLDBUILDING_COHERENT",
@@ -34,11 +87,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The fantasy world — its geography, cultures, history, politics, and ecology — must be internally consistent. The presence of magic should have visible consequences on how society works.",
-      "entry_conditions": ["Fantasy world introduced"],
-      "exit_conditions": ["World feels like a real place with its own logic, not a collection of cool ideas"],
-      "typical_variants": ["Deeply developed secondary world", "Our world with hidden magic", "Mythic/archetypal world", "Small-scale intimate world"],
-      "failure_modes": ["World is a grab bag of unrelated ideas", "Magic exists but society hasn't adapted to it", "Geography and culture are inconsistent"],
-      "signals_in_text": ["Details reinforce each other", "Characters behave consistently with their culture", "Consequences of magic are visible in daily life"]
+      "entry_conditions": [
+        "Fantasy world introduced"
+      ],
+      "exit_conditions": [
+        "World feels like a real place with its own logic, not a collection of cool ideas"
+      ],
+      "typical_variants": [
+        "Deeply developed secondary world",
+        "Our world with hidden magic",
+        "Mythic/archetypal world",
+        "Small-scale intimate world"
+      ],
+      "failure_modes": [
+        "World is a grab bag of unrelated ideas",
+        "Magic exists but society hasn't adapted to it",
+        "Geography and culture are inconsistent"
+      ],
+      "signals_in_text": [
+        "Details reinforce each other",
+        "Characters behave consistently with their culture",
+        "Consequences of magic are visible in daily life"
+      ]
     },
     {
       "node_id": "FN_N12_MYTHIC_STAKES",
@@ -46,11 +116,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Fantasy stakes should carry a sense of grandeur or fundamental transformation — the fate of a world, the balance of cosmic forces, or a profound personal metamorphosis that changes the nature of things.",
-      "entry_conditions": ["World and magic established"],
-      "exit_conditions": ["Stakes feel larger or deeper than ordinary conflict"],
-      "typical_variants": ["World-ending threat", "Balance of good and evil", "Personal transformation with cosmic significance", "Legacy and destiny"],
-      "failure_modes": ["Stakes are mundane despite a magical setting", "Grand stakes are announced but never felt"],
-      "signals_in_text": ["Prophecies, ancient evils, or cosmic forces referenced", "Character's journey has significance beyond the personal", "The world itself may change based on the outcome"]
+      "entry_conditions": [
+        "World and magic established"
+      ],
+      "exit_conditions": [
+        "Stakes feel larger or deeper than ordinary conflict"
+      ],
+      "typical_variants": [
+        "World-ending threat",
+        "Balance of good and evil",
+        "Personal transformation with cosmic significance",
+        "Legacy and destiny"
+      ],
+      "failure_modes": [
+        "Stakes are mundane despite a magical setting",
+        "Grand stakes are announced but never felt"
+      ],
+      "signals_in_text": [
+        "Prophecies, ancient evils, or cosmic forces referenced",
+        "Character's journey has significance beyond the personal",
+        "The world itself may change based on the outcome"
+      ]
     },
     {
       "node_id": "FN_N13_WONDER",
@@ -58,11 +144,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Fantasy must evoke wonder — awe at the impossible, delight in the strange, or reverence for the mythic. The audience should feel that entering this world is itself a reward.",
-      "entry_conditions": ["Fantasy world and magic introduced"],
-      "exit_conditions": ["At least some scenes evoke genuine wonder or awe"],
-      "typical_variants": ["Awe at vast landscapes", "Delight at magical creatures", "Reverence at ancient power", "Enchantment of the uncanny"],
-      "failure_modes": ["Magic is treated as mundane", "World is described but not evoked", "Nothing feels wondrous despite being impossible"],
-      "signals_in_text": ["Descriptive passages that invite the reader to see and feel the impossible", "Characters (especially newcomers) react with awe", "Moments of beauty or terror that could only exist in this world"]
+      "entry_conditions": [
+        "Fantasy world and magic introduced"
+      ],
+      "exit_conditions": [
+        "At least some scenes evoke genuine wonder or awe"
+      ],
+      "typical_variants": [
+        "Awe at vast landscapes",
+        "Delight at magical creatures",
+        "Reverence at ancient power",
+        "Enchantment of the uncanny"
+      ],
+      "failure_modes": [
+        "Magic is treated as mundane",
+        "World is described but not evoked",
+        "Nothing feels wondrous despite being impossible"
+      ],
+      "signals_in_text": [
+        "Descriptive passages that invite the reader to see and feel the impossible",
+        "Characters (especially newcomers) react with awe",
+        "Moments of beauty or terror that could only exist in this world"
+      ]
     },
     {
       "node_id": "FN_N20_EPIC",
@@ -70,11 +173,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Fantasy set in a fully realized secondary world with world-spanning stakes, large casts, and a struggle between forces of fundamental significance (good vs. evil, order vs. chaos).",
-      "entry_conditions": ["Core constraints apply", "Secondary world with grand-scale conflict"],
-      "exit_conditions": ["Story spans significant geography and involves forces larger than any individual"],
-      "typical_variants": ["Chosen one narrative", "War between kingdoms", "Quest to defeat ancient evil", "Multi-POV political fantasy"],
-      "failure_modes": ["Grand scope but no personal emotional stakes", "World is vast but shallow"],
-      "signals_in_text": ["Maps, multiple cultures, deep history", "Large cast with diverse motivations", "Fate of nations or worlds hangs in the balance"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Secondary world with grand-scale conflict"
+      ],
+      "exit_conditions": [
+        "Story spans significant geography and involves forces larger than any individual"
+      ],
+      "typical_variants": [
+        "Chosen one narrative",
+        "War between kingdoms",
+        "Quest to defeat ancient evil",
+        "Multi-POV political fantasy"
+      ],
+      "failure_modes": [
+        "Grand scope but no personal emotional stakes",
+        "World is vast but shallow"
+      ],
+      "signals_in_text": [
+        "Maps, multiple cultures, deep history",
+        "Large cast with diverse motivations",
+        "Fate of nations or worlds hangs in the balance"
+      ]
     },
     {
       "node_id": "FN_N21_URBAN",
@@ -82,11 +202,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Fantasy set in a contemporary or near-contemporary city where magic coexists with modern life — often hidden from ordinary people.",
-      "entry_conditions": ["Core constraints apply", "Setting is a recognizable modern city"],
-      "exit_conditions": ["Magic and modernity create friction and possibility"],
-      "typical_variants": ["Hidden magical society", "Supernatural detective", "Portal between worlds", "Magical realism in urban setting"],
-      "failure_modes": ["Modern setting but magic has no interaction with modern life", "City is generic backdrop rather than active element"],
-      "signals_in_text": ["Familiar city landmarks alongside magical elements", "Characters navigate both mundane and magical rules", "Technology and magic interact or conflict"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Setting is a recognizable modern city"
+      ],
+      "exit_conditions": [
+        "Magic and modernity create friction and possibility"
+      ],
+      "typical_variants": [
+        "Hidden magical society",
+        "Supernatural detective",
+        "Portal between worlds",
+        "Magical realism in urban setting"
+      ],
+      "failure_modes": [
+        "Modern setting but magic has no interaction with modern life",
+        "City is generic backdrop rather than active element"
+      ],
+      "signals_in_text": [
+        "Familiar city landmarks alongside magical elements",
+        "Characters navigate both mundane and magical rules",
+        "Technology and magic interact or conflict"
+      ]
     },
     {
       "node_id": "FN_N22_DARK",
@@ -94,11 +231,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Fantasy that emphasizes horror, moral ambiguity, and the terrible cost of magic — wonder is mixed with dread, and the magical world is as dangerous as it is marvelous.",
-      "entry_conditions": ["Core constraints apply", "Tone is dark, stakes include corruption or horror"],
-      "exit_conditions": ["Magic is dangerous, morality is ambiguous, and victory comes at genuine cost"],
-      "typical_variants": ["Grimdark", "Gothic fantasy", "Lovecraftian fantasy", "Fairy tale horror"],
-      "failure_modes": ["Darkness is purely aesthetic — no moral weight", "Becomes horror without the fantasy sense of wonder"],
-      "signals_in_text": ["Magic has terrible costs", "Moral choices are genuinely difficult", "Beauty and horror coexist"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Tone is dark, stakes include corruption or horror"
+      ],
+      "exit_conditions": [
+        "Magic is dangerous, morality is ambiguous, and victory comes at genuine cost"
+      ],
+      "typical_variants": [
+        "Grimdark",
+        "Gothic fantasy",
+        "Lovecraftian fantasy",
+        "Fairy tale horror"
+      ],
+      "failure_modes": [
+        "Darkness is purely aesthetic — no moral weight",
+        "Becomes horror without the fantasy sense of wonder"
+      ],
+      "signals_in_text": [
+        "Magic has terrible costs",
+        "Moral choices are genuinely difficult",
+        "Beauty and horror coexist"
+      ]
     },
     {
       "node_id": "FN_N23_MYTHIC",
@@ -106,11 +260,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Fantasy that draws directly on myth, folklore, or fairy tale structures — archetypal characters, symbolic landscapes, and stories with the logic of dreams rather than realism.",
-      "entry_conditions": ["Core constraints apply", "Story follows mythic/fairy tale logic"],
-      "exit_conditions": ["Story operates on symbolic and archetypal levels"],
-      "typical_variants": ["Fairy tale retelling", "Mythological adaptation", "Original myth-structured story", "Fable/parable"],
-      "failure_modes": ["Mythic elements are decorative rather than structural", "Story is a simple retelling without adding depth"],
-      "signals_in_text": ["Threes, quests, transformations", "Symbolic landscapes (dark forest, crystal tower)", "Characters represent archetypes"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Story follows mythic/fairy tale logic"
+      ],
+      "exit_conditions": [
+        "Story operates on symbolic and archetypal levels"
+      ],
+      "typical_variants": [
+        "Fairy tale retelling",
+        "Mythological adaptation",
+        "Original myth-structured story",
+        "Fable/parable"
+      ],
+      "failure_modes": [
+        "Mythic elements are decorative rather than structural",
+        "Story is a simple retelling without adding depth"
+      ],
+      "signals_in_text": [
+        "Threes, quests, transformations",
+        "Symbolic landscapes (dark forest, crystal tower)",
+        "Characters represent archetypes"
+      ]
     },
     {
       "node_id": "FN_N40_MAGIC_COST",
@@ -118,11 +289,27 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The use of magic must carry a price — physical exhaustion, moral corruption, sacrificed memories, shortened lifespan, or some other tangible cost that prevents magic from being a free solution.",
-      "entry_conditions": ["Magic system established"],
-      "exit_conditions": ["Characters visibly pay for using magic"],
-      "typical_variants": ["Physical cost (exhaustion, pain)", "Moral cost (corruption, bargain)", "Material cost (rare components, sacrifice)", "Knowledge cost (forbidden understanding)"],
-      "failure_modes": ["Magic is free and unlimited", "Cost is mentioned but never enforced"],
-      "signals_in_text": ["Characters weigh whether to use magic", "Aftermath of magic use shows the price", "Powerful magic requires proportionally greater cost"]
+      "entry_conditions": [
+        "Magic system established"
+      ],
+      "exit_conditions": [
+        "Characters visibly pay for using magic"
+      ],
+      "typical_variants": [
+        "Physical cost (exhaustion, pain)",
+        "Moral cost (corruption, bargain)",
+        "Material cost (rare components, sacrifice)",
+        "Knowledge cost (forbidden understanding)"
+      ],
+      "failure_modes": [
+        "Magic is free and unlimited",
+        "Cost is mentioned but never enforced"
+      ],
+      "signals_in_text": [
+        "Characters weigh whether to use magic",
+        "Aftermath of magic use shows the price",
+        "Powerful magic requires proportionally greater cost"
+      ]
     },
     {
       "node_id": "FN_N41_SECONDARY_WORLD_LOGIC",
@@ -130,11 +317,27 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The fantasy world's institutions, economies, technologies, and social structures must reflect the presence of magic — a world with healing magic would have different medicine; a world with teleportation would have different trade routes.",
-      "entry_conditions": ["World coherence established"],
-      "exit_conditions": ["Society visibly adapts to the existence of magic"],
-      "typical_variants": ["Magical economy", "Magical government/law", "Magical warfare", "Magical ecology"],
-      "failure_modes": ["Medieval European setting with magic bolted on", "Society ignores the implications of its own magic"],
-      "signals_in_text": ["Institutions reference magic in their structure", "Characters use magic in daily life, not just in crises", "Economic and political systems reflect magical capabilities"]
+      "entry_conditions": [
+        "World coherence established"
+      ],
+      "exit_conditions": [
+        "Society visibly adapts to the existence of magic"
+      ],
+      "typical_variants": [
+        "Magical economy",
+        "Magical government/law",
+        "Magical warfare",
+        "Magical ecology"
+      ],
+      "failure_modes": [
+        "Medieval European setting with magic bolted on",
+        "Society ignores the implications of its own magic"
+      ],
+      "signals_in_text": [
+        "Institutions reference magic in their structure",
+        "Characters use magic in daily life, not just in crises",
+        "Economic and political systems reflect magical capabilities"
+      ]
     },
     {
       "node_id": "FN_N42_BOUNDARY",
@@ -142,11 +345,27 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The story must define the boundary between the ordinary and the magical — whether it's a geographical border, a hidden world, a portal, or simply the difference between those who can see magic and those who can't.",
-      "entry_conditions": ["World established"],
-      "exit_conditions": ["Audience understands where the magical begins and the ordinary ends"],
-      "typical_variants": ["Portal/gateway", "Hidden in plain sight", "Geographical boundary (enchanted forest, forbidden mountain)", "Perceptual boundary (only some can see)"],
-      "failure_modes": ["Boundary is undefined — magic is everywhere without differentiation", "Boundary exists but has no narrative significance"],
-      "signals_in_text": ["Crossing moments where characters enter or leave the magical space", "Rules change when boundary is crossed", "Characters from different sides of the boundary clash"]
+      "entry_conditions": [
+        "World established"
+      ],
+      "exit_conditions": [
+        "Audience understands where the magical begins and the ordinary ends"
+      ],
+      "typical_variants": [
+        "Portal/gateway",
+        "Hidden in plain sight",
+        "Geographical boundary (enchanted forest, forbidden mountain)",
+        "Perceptual boundary (only some can see)"
+      ],
+      "failure_modes": [
+        "Boundary is undefined — magic is everywhere without differentiation",
+        "Boundary exists but has no narrative significance"
+      ],
+      "signals_in_text": [
+        "Crossing moments where characters enter or leave the magical space",
+        "Rules change when boundary is crossed",
+        "Characters from different sides of the boundary clash"
+      ]
     },
     {
       "node_id": "FN_N60_WORLD_ENTRY",
@@ -154,11 +373,27 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene that establishes the fantasy world and evokes wonder — the first time the audience (and often the protagonist) encounters the magical reality.",
-      "entry_conditions": ["Protagonist and ordinary context established"],
-      "exit_conditions": ["Audience has entered the fantasy world and felt its wonder"],
-      "typical_variants": ["Portal crossing", "First spell witnessed", "Arrival in magical city/landscape", "Discovery of hidden magical community"],
-      "failure_modes": ["World entry is flat and unimpressive", "Magic appears without any sense of wonder"],
-      "signals_in_text": ["Descriptive richness increases", "Character reacts with awe or fear", "Rules of the ordinary world visibly change"]
+      "entry_conditions": [
+        "Protagonist and ordinary context established"
+      ],
+      "exit_conditions": [
+        "Audience has entered the fantasy world and felt its wonder"
+      ],
+      "typical_variants": [
+        "Portal crossing",
+        "First spell witnessed",
+        "Arrival in magical city/landscape",
+        "Discovery of hidden magical community"
+      ],
+      "failure_modes": [
+        "World entry is flat and unimpressive",
+        "Magic appears without any sense of wonder"
+      ],
+      "signals_in_text": [
+        "Descriptive richness increases",
+        "Character reacts with awe or fear",
+        "Rules of the ordinary world visibly change"
+      ]
     },
     {
       "node_id": "FN_N61_MAGIC_TEST",
@@ -166,11 +401,28 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene where magic is used under significant pressure — revealing both its power and its cost — and the outcome demonstrates the magic system's rules in action.",
-      "entry_conditions": ["Magic system established", "High-stakes situation"],
-      "exit_conditions": ["Audience understands what magic can do and what it costs through demonstration"],
-      "typical_variants": ["First combat use of magic", "Desperate spell with severe cost", "Magic failing at critical moment", "Creative application of established rules"],
-      "failure_modes": ["Magic works perfectly with no tension", "Cost is hand-waved away"],
-      "signals_in_text": ["Character pays a visible price for magic use", "Outcome depends on established magical rules", "Stakes are high enough that magic's limitations matter"]
+      "entry_conditions": [
+        "Magic system established",
+        "High-stakes situation"
+      ],
+      "exit_conditions": [
+        "Audience understands what magic can do and what it costs through demonstration"
+      ],
+      "typical_variants": [
+        "First combat use of magic",
+        "Desperate spell with severe cost",
+        "Magic failing at critical moment",
+        "Creative application of established rules"
+      ],
+      "failure_modes": [
+        "Magic works perfectly with no tension",
+        "Cost is hand-waved away"
+      ],
+      "signals_in_text": [
+        "Character pays a visible price for magic use",
+        "Outcome depends on established magical rules",
+        "Stakes are high enough that magic's limitations matter"
+      ]
     },
     {
       "node_id": "FN_N62_MYTHIC_CLIMAX",
@@ -178,11 +430,27 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "The climactic scene where the story's mythic stakes are resolved — through a final magical confrontation, a transformation, or a choice that determines the fate of the world or the protagonist's fundamental nature.",
-      "entry_conditions": ["All escalation has led to this point"],
-      "exit_conditions": ["Mythic stakes are resolved and the world/protagonist is fundamentally changed"],
-      "typical_variants": ["Final magical battle", "Sacrifice that saves the world", "Transformation that completes the journey", "Choice between power and principle"],
-      "failure_modes": ["Climax is resolved by mundane means in a magical world", "Magical solution appears from nowhere (deus ex machina)"],
-      "signals_in_text": ["Maximum magical intensity", "Everything established comes together", "World or protagonist is permanently altered"]
+      "entry_conditions": [
+        "All escalation has led to this point"
+      ],
+      "exit_conditions": [
+        "Mythic stakes are resolved and the world/protagonist is fundamentally changed"
+      ],
+      "typical_variants": [
+        "Final magical battle",
+        "Sacrifice that saves the world",
+        "Transformation that completes the journey",
+        "Choice between power and principle"
+      ],
+      "failure_modes": [
+        "Climax is resolved by mundane means in a magical world",
+        "Magical solution appears from nowhere (deus ex machina)"
+      ],
+      "signals_in_text": [
+        "Maximum magical intensity",
+        "Everything established comes together",
+        "World or protagonist is permanently altered"
+      ]
     },
     {
       "node_id": "FN_N80_WONDER_TONE",
@@ -190,11 +458,27 @@
       "role": "Tone Marker",
       "level": null,
       "definition": "Fantasy requires a sense of the numinous — the tone must convey that the world is bigger, older, stranger, and more marvelous than ordinary life.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Language and description evoke wonder, awe, or enchantment"],
-      "typical_variants": ["Majestic and reverent", "Dark and sublime", "Whimsical and enchanting", "Strange and unsettling"],
-      "failure_modes": ["Tone is flat and utilitarian despite magical content", "Wonder is asserted but not evoked"],
-      "signals_in_text": ["Rich descriptive language for magical elements", "Scale and age of the world conveyed through detail", "Emotional responses to the impossible"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Language and description evoke wonder, awe, or enchantment"
+      ],
+      "typical_variants": [
+        "Majestic and reverent",
+        "Dark and sublime",
+        "Whimsical and enchanting",
+        "Strange and unsettling"
+      ],
+      "failure_modes": [
+        "Tone is flat and utilitarian despite magical content",
+        "Wonder is asserted but not evoked"
+      ],
+      "signals_in_text": [
+        "Rich descriptive language for magical elements",
+        "Scale and age of the world conveyed through detail",
+        "Emotional responses to the impossible"
+      ]
     },
     {
       "node_id": "FN_N90_DEUS_EX_MAGIC",
@@ -202,11 +486,24 @@
       "role": "Anti-Pattern",
       "level": null,
       "definition": "Fantasy fails when magic solves problems through previously unknown abilities, rule violations, or arbitrary power — when the solution couldn't have been predicted from established rules.",
-      "entry_conditions": ["Climactic or high-stakes magical resolution occurs"],
-      "exit_conditions": ["Resolution uses only previously established magical rules and capabilities"],
-      "typical_variants": ["New power appears at the last moment", "Established limits are broken without cost", "Ancient prophecy conveniently reinterpreted"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["Audience's reaction is 'where did that come from?' rather than 'of course!'", "Solution contradicts established magical rules"]
+      "entry_conditions": [
+        "Climactic or high-stakes magical resolution occurs"
+      ],
+      "exit_conditions": [
+        "Resolution uses only previously established magical rules and capabilities"
+      ],
+      "typical_variants": [
+        "New power appears at the last moment",
+        "Established limits are broken without cost",
+        "Ancient prophecy conveniently reinterpreted"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode — its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "Audience's reaction is 'where did that come from?' rather than 'of course!'",
+        "Solution contradicts established magical rules"
+      ]
     }
   ],
   "edges": [
@@ -216,11 +513,17 @@
       "to": "FN_N10_MAGIC_SYSTEM",
       "label": "Promise requires consistent magic system",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Magic creates opportunities and constraints that define the conflict",
       "effects_on_character": "Characters operate within magical rules that shape their choices",
-      "common_alternatives": ["Hard magic (fully explicit) vs. soft magic (mysterious but consistent)"],
-      "anti_patterns": ["Magic with no discernible rules or consistency"]
+      "common_alternatives": [
+        "Hard magic (fully explicit) vs. soft magic (mysterious but consistent)"
+      ],
+      "anti_patterns": [
+        "Magic with no discernible rules or consistency"
+      ]
     },
     {
       "edge_id": "FN_E02_PROMISE_TO_WORLD",
@@ -228,11 +531,17 @@
       "to": "FN_N11_WORLDBUILDING_COHERENT",
       "label": "Promise requires coherent world",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "World consistency makes consequences predictable and meaningful",
       "effects_on_character": "Characters are shaped by their world's rules and culture",
-      "common_alternatives": ["Deep worldbuilding vs. minimal but consistent worldbuilding"],
-      "anti_patterns": ["World is a collection of unrelated cool ideas"]
+      "common_alternatives": [
+        "Deep worldbuilding vs. minimal but consistent worldbuilding"
+      ],
+      "anti_patterns": [
+        "World is a collection of unrelated cool ideas"
+      ]
     },
     {
       "edge_id": "FN_E03_PROMISE_TO_STAKES",
@@ -240,11 +549,17 @@
       "to": "FN_N12_MYTHIC_STAKES",
       "label": "Promise requires mythic stakes",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Stakes are grander or deeper than ordinary life",
       "effects_on_character": "Characters' actions have significance beyond the personal",
-      "common_alternatives": ["World-scale stakes vs. deeply personal transformation"],
-      "anti_patterns": ["Mundane stakes in a magical world"]
+      "common_alternatives": [
+        "World-scale stakes vs. deeply personal transformation"
+      ],
+      "anti_patterns": [
+        "Mundane stakes in a magical world"
+      ]
     },
     {
       "edge_id": "FN_E04_PROMISE_TO_WONDER",
@@ -252,11 +567,17 @@
       "to": "FN_N13_WONDER",
       "label": "Promise requires sense of wonder",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Wonder makes the world worth fighting for",
       "effects_on_character": "Characters' encounters with the magical are emotionally charged",
-      "common_alternatives": ["Awe-inspiring wonder vs. dark sublime vs. enchanting whimsy"],
-      "anti_patterns": ["Magical world feels ordinary and unimpressive"]
+      "common_alternatives": [
+        "Awe-inspiring wonder vs. dark sublime vs. enchanting whimsy"
+      ],
+      "anti_patterns": [
+        "Magical world feels ordinary and unimpressive"
+      ]
     },
     {
       "edge_id": "FN_E05_PROMISE_TO_TONE",
@@ -264,11 +585,17 @@
       "to": "FN_N80_WONDER_TONE",
       "label": "Promise requires wonder tone",
       "meaning": "sets tone",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Tone communicates that this world is extraordinary",
       "effects_on_character": "Characters exist in a world of grandeur and possibility",
-      "common_alternatives": ["Majestic vs. dark vs. whimsical vs. unsettling"],
-      "anti_patterns": ["Flat, utilitarian prose for a magical world"]
+      "common_alternatives": [
+        "Majestic vs. dark vs. whimsical vs. unsettling"
+      ],
+      "anti_patterns": [
+        "Flat, utilitarian prose for a magical world"
+      ]
     },
     {
       "edge_id": "FN_E10_MAGIC_TO_EPIC",
@@ -276,11 +603,19 @@
       "to": "FN_N20_EPIC",
       "label": "Magic system at world-spanning scale",
       "meaning": "branches into subtype",
-      "preconditions": ["Magic operates at a scale affecting nations and civilizations"],
+      "preconditions": [
+        "Magic operates at a scale affecting nations and civilizations"
+      ],
       "effects_on_stakes": "Magic determines the fate of worlds",
       "effects_on_character": "Characters wield or face magic of immense power",
-      "common_alternatives": ["Urban fantasy", "Dark fantasy", "Mythic fantasy"],
-      "anti_patterns": ["Grand scope but magic is trivial"]
+      "common_alternatives": [
+        "Urban fantasy",
+        "Dark fantasy",
+        "Mythic fantasy"
+      ],
+      "anti_patterns": [
+        "Grand scope but magic is trivial"
+      ]
     },
     {
       "edge_id": "FN_E11_MAGIC_TO_URBAN",
@@ -288,11 +623,19 @@
       "to": "FN_N21_URBAN",
       "label": "Magic system hidden in modern world",
       "meaning": "branches into subtype",
-      "preconditions": ["Magic exists within a recognizable contemporary setting"],
+      "preconditions": [
+        "Magic exists within a recognizable contemporary setting"
+      ],
       "effects_on_stakes": "Magic must be hidden from or reconciled with the modern world",
       "effects_on_character": "Characters navigate between magical and mundane identities",
-      "common_alternatives": ["Epic fantasy", "Dark fantasy", "Mythic fantasy"],
-      "anti_patterns": ["Modern setting but magic has no interaction with modernity"]
+      "common_alternatives": [
+        "Epic fantasy",
+        "Dark fantasy",
+        "Mythic fantasy"
+      ],
+      "anti_patterns": [
+        "Modern setting but magic has no interaction with modernity"
+      ]
     },
     {
       "edge_id": "FN_E12_MAGIC_TO_DARK",
@@ -300,11 +643,19 @@
       "to": "FN_N22_DARK",
       "label": "Magic system with terrible costs and moral ambiguity",
       "meaning": "branches into subtype",
-      "preconditions": ["Magic is dangerous, corrupting, or horrifying"],
+      "preconditions": [
+        "Magic is dangerous, corrupting, or horrifying"
+      ],
       "effects_on_stakes": "Using magic may be as dangerous as the threats it fights",
       "effects_on_character": "Characters face moral corruption through magical power",
-      "common_alternatives": ["Epic fantasy", "Urban fantasy", "Mythic fantasy"],
-      "anti_patterns": ["Dark aesthetic but magic is safe and consequence-free"]
+      "common_alternatives": [
+        "Epic fantasy",
+        "Urban fantasy",
+        "Mythic fantasy"
+      ],
+      "anti_patterns": [
+        "Dark aesthetic but magic is safe and consequence-free"
+      ]
     },
     {
       "edge_id": "FN_E13_MAGIC_TO_MYTHIC",
@@ -312,11 +663,19 @@
       "to": "FN_N23_MYTHIC",
       "label": "Magic system as fairy tale/mythic logic",
       "meaning": "branches into subtype",
-      "preconditions": ["Magic operates by symbolic, archetypal rules"],
+      "preconditions": [
+        "Magic operates by symbolic, archetypal rules"
+      ],
       "effects_on_stakes": "Stakes are symbolic and transformative",
       "effects_on_character": "Characters undergo archetypal journeys",
-      "common_alternatives": ["Epic fantasy", "Urban fantasy", "Dark fantasy"],
-      "anti_patterns": ["Uses mythic trappings but lacks mythic logic"]
+      "common_alternatives": [
+        "Epic fantasy",
+        "Urban fantasy",
+        "Dark fantasy"
+      ],
+      "anti_patterns": [
+        "Uses mythic trappings but lacks mythic logic"
+      ]
     },
     {
       "edge_id": "FN_E30_EPIC_TO_WORLD",
@@ -324,11 +683,19 @@
       "to": "FN_N41_SECONDARY_WORLD_LOGIC",
       "label": "Epic scope requires world that operates by its own logic",
       "meaning": "introduces setting rule",
-      "preconditions": ["Epic subgenre selected"],
+      "preconditions": [
+        "Epic subgenre selected"
+      ],
       "effects_on_stakes": "World logic creates strategic possibilities and constraints",
       "effects_on_character": "Characters are embedded in cultures shaped by magic",
-      "common_alternatives": ["Detailed political systems", "Magical economies", "Magical ecology"],
-      "anti_patterns": ["Epic scope but generic medieval Europe setting"]
+      "common_alternatives": [
+        "Detailed political systems",
+        "Magical economies",
+        "Magical ecology"
+      ],
+      "anti_patterns": [
+        "Epic scope but generic medieval Europe setting"
+      ]
     },
     {
       "edge_id": "FN_E31_URBAN_TO_BOUNDARY",
@@ -336,11 +703,19 @@
       "to": "FN_N42_BOUNDARY",
       "label": "Urban fantasy requires boundary between worlds",
       "meaning": "introduces setting rule",
-      "preconditions": ["Urban subgenre selected"],
+      "preconditions": [
+        "Urban subgenre selected"
+      ],
       "effects_on_stakes": "Crossing the boundary has consequences",
       "effects_on_character": "Characters must navigate between ordinary and magical worlds",
-      "common_alternatives": ["Physical portals", "Hidden communities", "Perceptual barriers"],
-      "anti_patterns": ["No boundary — magic is openly known in the modern world without consequence"]
+      "common_alternatives": [
+        "Physical portals",
+        "Hidden communities",
+        "Perceptual barriers"
+      ],
+      "anti_patterns": [
+        "No boundary — magic is openly known in the modern world without consequence"
+      ]
     },
     {
       "edge_id": "FN_E32_DARK_TO_COST",
@@ -348,11 +723,20 @@
       "to": "FN_N40_MAGIC_COST",
       "label": "Dark fantasy requires visible magical costs",
       "meaning": "introduces setting rule",
-      "preconditions": ["Dark subgenre selected"],
+      "preconditions": [
+        "Dark subgenre selected"
+      ],
       "effects_on_stakes": "Magic use is itself a source of danger and moral compromise",
       "effects_on_character": "Characters are changed and corrupted by the magic they use",
-      "common_alternatives": ["Physical corruption", "Moral corruption", "Sanity cost", "Life force cost"],
-      "anti_patterns": ["Dark aesthetic but magic is free and safe"]
+      "common_alternatives": [
+        "Physical corruption",
+        "Moral corruption",
+        "Sanity cost",
+        "Life force cost"
+      ],
+      "anti_patterns": [
+        "Dark aesthetic but magic is free and safe"
+      ]
     },
     {
       "edge_id": "FN_E33_MYTHIC_TO_BOUNDARY",
@@ -360,11 +744,20 @@
       "to": "FN_N42_BOUNDARY",
       "label": "Mythic fantasy requires threshold between worlds",
       "meaning": "introduces setting rule",
-      "preconditions": ["Mythic subgenre selected"],
+      "preconditions": [
+        "Mythic subgenre selected"
+      ],
       "effects_on_stakes": "Crossing into the mythic realm changes the rules",
       "effects_on_character": "Characters undergo transformation by crossing",
-      "common_alternatives": ["Enchanted forest", "Underworld journey", "Dream realm", "Mirror world"],
-      "anti_patterns": ["Mythic elements but no threshold or transformation"]
+      "common_alternatives": [
+        "Enchanted forest",
+        "Underworld journey",
+        "Dream realm",
+        "Mirror world"
+      ],
+      "anti_patterns": [
+        "Mythic elements but no threshold or transformation"
+      ]
     },
     {
       "edge_id": "FN_E50_BOUNDARY_TO_ENTRY",
@@ -372,11 +765,19 @@
       "to": "FN_N60_WORLD_ENTRY",
       "label": "Boundary crossing creates world entry scene",
       "meaning": "mandates element",
-      "preconditions": ["Boundary between mundane and magical established"],
+      "preconditions": [
+        "Boundary between mundane and magical established"
+      ],
       "effects_on_stakes": "Audience enters the fantasy world alongside the character",
       "effects_on_character": "Character's worldview is fundamentally altered",
-      "common_alternatives": ["First portal crossing", "First sight of magical city", "First encounter with magical being"],
-      "anti_patterns": ["Boundary crossed without any sense of wonder or change"]
+      "common_alternatives": [
+        "First portal crossing",
+        "First sight of magical city",
+        "First encounter with magical being"
+      ],
+      "anti_patterns": [
+        "Boundary crossed without any sense of wonder or change"
+      ]
     },
     {
       "edge_id": "FN_E51_COST_TO_TEST",
@@ -384,11 +785,19 @@
       "to": "FN_N61_MAGIC_TEST",
       "label": "Magic costs create high-stakes magical scenes",
       "meaning": "mandates element",
-      "preconditions": ["Magic costs established"],
+      "preconditions": [
+        "Magic costs established"
+      ],
       "effects_on_stakes": "Using magic is a decision with real consequences",
       "effects_on_character": "Character must choose when magic is worth the price",
-      "common_alternatives": ["Combat magic", "Healing at great cost", "Forbidden knowledge"],
-      "anti_patterns": ["Magic used freely without any visible cost"]
+      "common_alternatives": [
+        "Combat magic",
+        "Healing at great cost",
+        "Forbidden knowledge"
+      ],
+      "anti_patterns": [
+        "Magic used freely without any visible cost"
+      ]
     },
     {
       "edge_id": "FN_E52_WORLD_TO_TEST",
@@ -396,11 +805,19 @@
       "to": "FN_N61_MAGIC_TEST",
       "label": "World logic creates magical pressure points",
       "meaning": "mandates element",
-      "preconditions": ["World logic and magic system established"],
+      "preconditions": [
+        "World logic and magic system established"
+      ],
       "effects_on_stakes": "Magical conflict is shaped by the world's rules",
       "effects_on_character": "Character must use the world's logic creatively",
-      "common_alternatives": ["Political magical conflict", "Military magical conflict", "Magical duel"],
-      "anti_patterns": ["Magic used outside the world's established logic"]
+      "common_alternatives": [
+        "Political magical conflict",
+        "Military magical conflict",
+        "Magical duel"
+      ],
+      "anti_patterns": [
+        "Magic used outside the world's established logic"
+      ]
     },
     {
       "edge_id": "FN_E53_TEST_TO_CLIMAX",
@@ -408,11 +825,19 @@
       "to": "FN_N62_MYTHIC_CLIMAX",
       "label": "Magic tested builds to mythic climax",
       "meaning": "requires payoff",
-      "preconditions": ["Magic has been used and its costs demonstrated"],
+      "preconditions": [
+        "Magic has been used and its costs demonstrated"
+      ],
       "effects_on_stakes": "Climax requires maximum magical commitment at maximum cost",
       "effects_on_character": "Character faces the ultimate magical choice",
-      "common_alternatives": ["Final battle", "Ultimate sacrifice", "World-altering transformation"],
-      "anti_patterns": ["Climax resolved without engaging the magic system"]
+      "common_alternatives": [
+        "Final battle",
+        "Ultimate sacrifice",
+        "World-altering transformation"
+      ],
+      "anti_patterns": [
+        "Climax resolved without engaging the magic system"
+      ]
     },
     {
       "edge_id": "FN_E90_DEUS_EX_WARNING",
@@ -420,11 +845,15 @@
       "to": "FN_N90_DEUS_EX_MAGIC",
       "label": "Arbitrary magic violates the genre contract",
       "meaning": "prohibits element",
-      "preconditions": ["Magic resolves a problem using previously unknown or contradictory rules"],
+      "preconditions": [
+        "Magic resolves a problem using previously unknown or contradictory rules"
+      ],
       "effects_on_stakes": "Stakes become meaningless if magic can do anything",
       "effects_on_character": "Character's struggle is retroactively devalued",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes what to avoid"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern — it describes what to avoid"
+      ]
     }
   ]
 }

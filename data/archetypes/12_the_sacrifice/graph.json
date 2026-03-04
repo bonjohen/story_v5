@@ -3,83 +3,230 @@
   "name": "The Sacrifice",
   "type": "archetype",
   "description": "A protagonist relinquishes something of great value for a greater good, affirming moral commitment.",
+  "_metadata": {
+    "nodeCount": 7,
+    "edgeCount": 6,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Revelation": 1,
+      "Trial": 1,
+      "Commitment": 1,
+      "Crisis": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "reveals truth": 1,
+      "tests resolve": 1,
+      "forces commitment": 1,
+      "demands sacrifice": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "SA_N01_VALUED_LIFE",
       "label": "Valued Life",
       "role": "Origin",
       "definition": "The protagonist has something genuinely worth living for — love, purpose, community, or personal fulfillment. The audience must feel what will be lost.",
-      "entry_conditions": ["Story opening", "Audience sees what the character treasures"],
-      "exit_conditions": ["A threat emerges that can only be stopped at enormous personal cost"],
-      "typical_variants": ["Family life that brings joy", "A mission or calling the character loves", "Relationships that define the character's identity", "A future the character has worked toward"],
-      "failure_modes": ["The character has nothing to lose — sacrifice carries no weight", "The valued life is shown too briefly to register"],
-      "signals_in_text": ["Scenes of connection and meaning", "The character expressing what matters to them", "Small moments of happiness"]
+      "entry_conditions": [
+        "Story opening",
+        "Audience sees what the character treasures"
+      ],
+      "exit_conditions": [
+        "A threat emerges that can only be stopped at enormous personal cost"
+      ],
+      "typical_variants": [
+        "Family life that brings joy",
+        "A mission or calling the character loves",
+        "Relationships that define the character's identity",
+        "A future the character has worked toward"
+      ],
+      "failure_modes": [
+        "The character has nothing to lose — sacrifice carries no weight",
+        "The valued life is shown too briefly to register"
+      ],
+      "signals_in_text": [
+        "Scenes of connection and meaning",
+        "The character expressing what matters to them",
+        "Small moments of happiness"
+      ]
     },
     {
       "node_id": "SA_N02_THREAT_EMERGES",
       "label": "Threat Emerges",
       "role": "Disruption",
       "definition": "A danger arises that threatens something larger than the protagonist — a community, a cause, or people the character loves. The threat cannot be stopped by ordinary means.",
-      "entry_conditions": ["Valued life is established", "An existential danger appears"],
-      "exit_conditions": ["The protagonist understands the scale of the threat and that it demands extraordinary response"],
-      "typical_variants": ["Invasion or catastrophe threatening the community", "A loved one in mortal danger", "A cause about to be lost without decisive action", "A systemic evil that can only be stopped at personal cost"],
-      "failure_modes": ["Threat is too abstract to feel real", "Threat could be stopped by easier means, making sacrifice unnecessary"],
-      "signals_in_text": ["Escalation of danger", "Failed conventional responses", "Others looking to the protagonist"]
+      "entry_conditions": [
+        "Valued life is established",
+        "An existential danger appears"
+      ],
+      "exit_conditions": [
+        "The protagonist understands the scale of the threat and that it demands extraordinary response"
+      ],
+      "typical_variants": [
+        "Invasion or catastrophe threatening the community",
+        "A loved one in mortal danger",
+        "A cause about to be lost without decisive action",
+        "A systemic evil that can only be stopped at personal cost"
+      ],
+      "failure_modes": [
+        "Threat is too abstract to feel real",
+        "Threat could be stopped by easier means, making sacrifice unnecessary"
+      ],
+      "signals_in_text": [
+        "Escalation of danger",
+        "Failed conventional responses",
+        "Others looking to the protagonist"
+      ]
     },
     {
       "node_id": "SA_N03_REALIZATION",
       "label": "Realization of Cost",
       "role": "Revelation",
       "definition": "The protagonist understands that stopping the threat requires giving up something irreplaceable — their life, their freedom, their relationships, or their future.",
-      "entry_conditions": ["The threat is known", "All lesser options have been exhausted or are clearly insufficient"],
-      "exit_conditions": ["The protagonist fully understands the price and has not yet decided to pay it"],
-      "typical_variants": ["Discovering that only their death will stop the threat", "Realizing that saving others means losing their own future", "Understanding that the sacrifice will go unrecognized", "Learning that the cost includes harm to those they love"],
-      "failure_modes": ["Realization is too abrupt — no time to process", "The cost is unclear or seems manageable, undermining the sacrifice's weight"],
-      "signals_in_text": ["A moment of terrible clarity", "Calculation of what must be given up", "The character looking at what they will lose"]
+      "entry_conditions": [
+        "The threat is known",
+        "All lesser options have been exhausted or are clearly insufficient"
+      ],
+      "exit_conditions": [
+        "The protagonist fully understands the price and has not yet decided to pay it"
+      ],
+      "typical_variants": [
+        "Discovering that only their death will stop the threat",
+        "Realizing that saving others means losing their own future",
+        "Understanding that the sacrifice will go unrecognized",
+        "Learning that the cost includes harm to those they love"
+      ],
+      "failure_modes": [
+        "Realization is too abrupt — no time to process",
+        "The cost is unclear or seems manageable, undermining the sacrifice's weight"
+      ],
+      "signals_in_text": [
+        "A moment of terrible clarity",
+        "Calculation of what must be given up",
+        "The character looking at what they will lose"
+      ]
     },
     {
       "node_id": "SA_N04_RESISTANCE",
       "label": "Resistance and Struggle",
       "role": "Trial",
       "definition": "The protagonist struggles with the decision. They seek alternatives, resist the necessity, or are tempted to let someone else pay the cost. This struggle makes the eventual choice meaningful.",
-      "entry_conditions": ["The cost is understood", "The character has not yet committed"],
-      "exit_conditions": ["All alternatives are exhausted; the character must choose"],
-      "typical_variants": ["Frantically searching for another way", "Others volunteering but being refused", "Temptation to walk away and let the threat proceed", "Bargaining with fate or with the antagonist"],
-      "failure_modes": ["Character accepts the sacrifice instantly — no struggle diminishes the choice", "Struggle goes on so long the urgency is lost"],
-      "signals_in_text": ["Desperation", "Arguments with allies", "Last-ditch alternative attempts", "Visible fear or grief"]
+      "entry_conditions": [
+        "The cost is understood",
+        "The character has not yet committed"
+      ],
+      "exit_conditions": [
+        "All alternatives are exhausted; the character must choose"
+      ],
+      "typical_variants": [
+        "Frantically searching for another way",
+        "Others volunteering but being refused",
+        "Temptation to walk away and let the threat proceed",
+        "Bargaining with fate or with the antagonist"
+      ],
+      "failure_modes": [
+        "Character accepts the sacrifice instantly — no struggle diminishes the choice",
+        "Struggle goes on so long the urgency is lost"
+      ],
+      "signals_in_text": [
+        "Desperation",
+        "Arguments with allies",
+        "Last-ditch alternative attempts",
+        "Visible fear or grief"
+      ]
     },
     {
       "node_id": "SA_N05_DECISION",
       "label": "The Decision",
       "role": "Commitment",
       "definition": "The protagonist chooses to make the sacrifice. This is a deliberate, conscious act — not an accident or an impulse. The character knows what they are giving up and chooses to give it.",
-      "entry_conditions": ["All alternatives are exhausted", "The threat remains and demands action"],
-      "exit_conditions": ["The protagonist commits to the sacrificial act"],
-      "typical_variants": ["Quiet resolve after a final goodbye", "Public declaration in front of those being saved", "Private decision made in solitude", "A decision made in the heat of the moment but with full awareness"],
-      "failure_modes": ["Decision is made by accident — removes moral agency", "Decision is forced by others — reduces the character's choice", "No visible moment of decision — the sacrifice just happens"],
-      "signals_in_text": ["A deep breath", "Final words to loved ones", "Letting go of the thing they wanted most", "Walking toward the danger"]
+      "entry_conditions": [
+        "All alternatives are exhausted",
+        "The threat remains and demands action"
+      ],
+      "exit_conditions": [
+        "The protagonist commits to the sacrificial act"
+      ],
+      "typical_variants": [
+        "Quiet resolve after a final goodbye",
+        "Public declaration in front of those being saved",
+        "Private decision made in solitude",
+        "A decision made in the heat of the moment but with full awareness"
+      ],
+      "failure_modes": [
+        "Decision is made by accident — removes moral agency",
+        "Decision is forced by others — reduces the character's choice",
+        "No visible moment of decision — the sacrifice just happens"
+      ],
+      "signals_in_text": [
+        "A deep breath",
+        "Final words to loved ones",
+        "Letting go of the thing they wanted most",
+        "Walking toward the danger"
+      ]
     },
     {
       "node_id": "SA_N06_SACRIFICIAL_ACT",
       "label": "The Sacrificial Act",
       "role": "Crisis",
       "definition": "The protagonist executes the sacrifice. The cost is paid — visibly, irrevocably, and with full awareness. This is the story's climactic moment.",
-      "entry_conditions": ["The decision is made", "The protagonist acts"],
-      "exit_conditions": ["The sacrifice is complete; the cost is paid"],
-      "typical_variants": ["Physical death to stop the threat", "Permanent separation from loved ones", "Giving up power, freedom, or identity", "Taking on suffering that others would have borne"],
-      "failure_modes": ["Sacrifice is undermined by a last-minute rescue", "The cost turns out to be less than advertised", "Sacrifice is graphically depicted but emotionally empty"],
-      "signals_in_text": ["The defining action", "Pain or loss shown clearly", "Others witnessing or affected", "Silence or light"]
+      "entry_conditions": [
+        "The decision is made",
+        "The protagonist acts"
+      ],
+      "exit_conditions": [
+        "The sacrifice is complete; the cost is paid"
+      ],
+      "typical_variants": [
+        "Physical death to stop the threat",
+        "Permanent separation from loved ones",
+        "Giving up power, freedom, or identity",
+        "Taking on suffering that others would have borne"
+      ],
+      "failure_modes": [
+        "Sacrifice is undermined by a last-minute rescue",
+        "The cost turns out to be less than advertised",
+        "Sacrifice is graphically depicted but emotionally empty"
+      ],
+      "signals_in_text": [
+        "The defining action",
+        "Pain or loss shown clearly",
+        "Others witnessing or affected",
+        "Silence or light"
+      ]
     },
     {
       "node_id": "SA_N07_WORLD_SAVED",
       "label": "World Saved",
       "role": "Resolution",
       "definition": "The threat is stopped and those who were saved must live with the cost that was paid. The sacrifice's meaning is reflected in how the world responds.",
-      "entry_conditions": ["The sacrifice is complete", "The threat is resolved"],
-      "exit_conditions": ["A new equilibrium is established — marked by the absence of the protagonist or what they gave up"],
-      "typical_variants": ["Mourning and honor for the fallen", "The saved community living in the peace that was bought", "Quiet recognition by those who knew the cost", "The sacrifice becomes legend or is forgotten — both carry meaning"],
-      "failure_modes": ["The world doesn't seem to register the sacrifice", "The cost is immediately undone (resurrection, return)", "The aftermath is so brief the sacrifice has no resonance"],
-      "signals_in_text": ["Empty chair or missing voice", "Others carrying on with awareness of the cost", "Memorial or tribute", "Changed behavior in those who were saved"]
+      "entry_conditions": [
+        "The sacrifice is complete",
+        "The threat is resolved"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established — marked by the absence of the protagonist or what they gave up"
+      ],
+      "typical_variants": [
+        "Mourning and honor for the fallen",
+        "The saved community living in the peace that was bought",
+        "Quiet recognition by those who knew the cost",
+        "The sacrifice becomes legend or is forgotten — both carry meaning"
+      ],
+      "failure_modes": [
+        "The world doesn't seem to register the sacrifice",
+        "The cost is immediately undone (resurrection, return)",
+        "The aftermath is so brief the sacrifice has no resonance"
+      ],
+      "signals_in_text": [
+        "Empty chair or missing voice",
+        "Others carrying on with awareness of the cost",
+        "Memorial or tribute",
+        "Changed behavior in those who were saved"
+      ]
     }
   ],
   "edges": [

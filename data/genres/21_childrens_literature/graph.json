@@ -3,6 +3,29 @@
   "name": "Children's Literature",
   "type": "genre",
   "description": "Stories written primarily for children, emphasizing clarity, imaginative engagement, and moral or emotional learning at age-appropriate stakes.",
+  "_metadata": {
+    "nodeCount": 17,
+    "edgeCount": 21,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 1
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 3,
+      "restricts resolution": 1,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 5,
+      "mandates element": 3,
+      "requires payoff": 3,
+      "prohibits element": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "CL_N01_PROMISE",
@@ -10,11 +33,27 @@
       "role": "Genre Promise",
       "level": 1,
       "definition": "The audience is promised a story in which a child or child-analog protagonist encounters a world full of genuine wonder and genuine challenge — where the stakes are real and personally felt even if they are age-appropriate in scale, where imagination is not decoration but the primary lens through which reality is navigated, and where the story concludes with a moral or emotional insight that belongs to the child, not to the adults watching over them.",
-      "entry_conditions": ["Story is positioned as a children's story"],
-      "exit_conditions": ["Core constraints are established that fulfill this promise"],
-      "typical_variants": ["Picture book with spare text and visual imagination", "Middle grade adventure with a child hero", "Animal allegory with child-level emotional truth", "Educational fable with embedded moral clarity"],
-      "failure_modes": ["Child protagonist is a vessel for adult anxieties rather than a genuine child perspective", "Wonder is absent — world is rendered with adult familiarity rather than fresh discovery", "Stakes are either trivially small or genuinely overwhelming — no age-appropriate calibration"],
-      "signals_in_text": ["Protagonist is established as a child with a child's scale of concern and capacity for wonder", "Tone invites the audience into a world seen freshly rather than already known"]
+      "entry_conditions": [
+        "Story is positioned as a children's story"
+      ],
+      "exit_conditions": [
+        "Core constraints are established that fulfill this promise"
+      ],
+      "typical_variants": [
+        "Picture book with spare text and visual imagination",
+        "Middle grade adventure with a child hero",
+        "Animal allegory with child-level emotional truth",
+        "Educational fable with embedded moral clarity"
+      ],
+      "failure_modes": [
+        "Child protagonist is a vessel for adult anxieties rather than a genuine child perspective",
+        "Wonder is absent — world is rendered with adult familiarity rather than fresh discovery",
+        "Stakes are either trivially small or genuinely overwhelming — no age-appropriate calibration"
+      ],
+      "signals_in_text": [
+        "Protagonist is established as a child with a child's scale of concern and capacity for wonder",
+        "Tone invites the audience into a world seen freshly rather than already known"
+      ]
     },
     {
       "node_id": "CL_N10_CHILD_PROTAGONIST",
@@ -22,11 +61,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The story's central consciousness must be a child — or an analog (a small creature, a new arrival, an innocent) who perceives and navigates the world with a child's scale, curiosity, and emotional logic. The protagonist's experience is the story's measure: what they find wonderful is wonderful, what they find frightening is frightening, what they learn is the lesson the story offers. An adult character cannot be the primary lens in children's literature without betraying the genre's fundamental promise.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Every major scene is experienced through the child protagonist's perception and emotional register"],
-      "typical_variants": ["Human child protagonist in a recognizable world", "Child protagonist in a magical or fantastical world", "Animal protagonist with child-level understanding and stakes", "Small or young creature encountering the world for the first time"],
-      "failure_modes": ["Adult characters drive the plot while the child watches", "Child protagonist thinks and reasons with adult sophistication, losing the child's-eye authenticity", "Protagonist is identified as a child but their concerns are fundamentally adult concerns in child clothing"],
-      "signals_in_text": ["Protagonist's observations are fresh, curious, and scaled to a child's frame of reference", "Decisions the protagonist makes arise from child logic — fairness, loyalty, curiosity, fear of the unknown — not adult strategy"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Every major scene is experienced through the child protagonist's perception and emotional register"
+      ],
+      "typical_variants": [
+        "Human child protagonist in a recognizable world",
+        "Child protagonist in a magical or fantastical world",
+        "Animal protagonist with child-level understanding and stakes",
+        "Small or young creature encountering the world for the first time"
+      ],
+      "failure_modes": [
+        "Adult characters drive the plot while the child watches",
+        "Child protagonist thinks and reasons with adult sophistication, losing the child's-eye authenticity",
+        "Protagonist is identified as a child but their concerns are fundamentally adult concerns in child clothing"
+      ],
+      "signals_in_text": [
+        "Protagonist's observations are fresh, curious, and scaled to a child's frame of reference",
+        "Decisions the protagonist makes arise from child logic — fairness, loyalty, curiosity, fear of the unknown — not adult strategy"
+      ]
     },
     {
       "node_id": "CL_N11_AGE_APPROPRIATE_STAKES",
@@ -34,11 +89,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The stakes in a children's story must be calibrated to a child's world — the first day at a new school, a lost toy of enormous personal significance, a friendship threatened, a small creature in danger, the fear of disappointing someone trusted. These stakes are not small: they are the full weight of the child's emotional world. The genre fails equally in two directions — stakes so trivial that no genuine tension is created, and stakes so overwhelming (death, existential danger, adult trauma) that the safe-enough frame is destroyed and the child reader cannot hold the story.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["The central conflict carries genuine emotional weight within a frame a child can inhabit and survive"],
-      "typical_variants": ["Social stakes — belonging, friendship, being seen and accepted", "Quest stakes — something lost or sought that matters deeply to the protagonist", "Protective stakes — a smaller creature, a friend, or something precious that needs defending", "Identity stakes — finding out who you are and what you are capable of"],
-      "failure_modes": ["Stakes are adult-sized — survival of the species, romantic love, mortality as the primary engine", "Stakes are so small that the story lacks genuine tension and the child's effort seems trivial", "Danger arrives and is immediately nullified — no genuine cost or risk is sustained"],
-      "signals_in_text": ["The threat to the protagonist is real enough to generate suspense but scaled to a world a child inhabits", "The child's emotional response to the stakes is legible and proportionate to their experience", "Resolution requires the child to genuinely earn it — the stakes have not been trivial"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "The central conflict carries genuine emotional weight within a frame a child can inhabit and survive"
+      ],
+      "typical_variants": [
+        "Social stakes — belonging, friendship, being seen and accepted",
+        "Quest stakes — something lost or sought that matters deeply to the protagonist",
+        "Protective stakes — a smaller creature, a friend, or something precious that needs defending",
+        "Identity stakes — finding out who you are and what you are capable of"
+      ],
+      "failure_modes": [
+        "Stakes are adult-sized — survival of the species, romantic love, mortality as the primary engine",
+        "Stakes are so small that the story lacks genuine tension and the child's effort seems trivial",
+        "Danger arrives and is immediately nullified — no genuine cost or risk is sustained"
+      ],
+      "signals_in_text": [
+        "The threat to the protagonist is real enough to generate suspense but scaled to a world a child inhabits",
+        "The child's emotional response to the stakes is legible and proportionate to their experience",
+        "Resolution requires the child to genuinely earn it — the stakes have not been trivial"
+      ]
     },
     {
       "node_id": "CL_N12_WONDER_CENTRAL",
@@ -46,11 +118,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Children's literature requires imagination and wonder as active structural elements, not decorative ones. The world the child protagonist inhabits must be capable of surprise, magic, or fresh revelation — whether that means actual fantastical magic, the magic of the natural world seen through fresh eyes, or the transformative power of play and story within a realistic setting. Wonder is not merely the genre's atmosphere; it is the primary mode through which the child protagonist (and reader) encounters and makes sense of the world.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["At least one scene generates genuine wonder — a moment when the world reveals something extraordinary, surprising, or newly seen"],
-      "typical_variants": ["Literal magical world entered or discovered by the child protagonist", "Natural world rendered with the sensory vividness of a child encountering it for the first time", "Ordinary objects or events transformed by the child's imaginative perception", "Story-within-story or play that generates its own imaginative space"],
-      "failure_modes": ["World is rendered with adult familiarity — nothing is fresh, strange, or wonderful", "Wonder is entirely decorative — fantastical elements appear without generating genuine awe or engagement", "Imagination is presented as childish delusion to be outgrown rather than as a legitimate way of knowing"],
-      "signals_in_text": ["Descriptions of the world carry sensory immediacy and surprise", "The child protagonist's encounter with wonder drives plot or character development, not just mood", "Readers are invited to experience the world as the child does — freshly, with genuine curiosity"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "At least one scene generates genuine wonder — a moment when the world reveals something extraordinary, surprising, or newly seen"
+      ],
+      "typical_variants": [
+        "Literal magical world entered or discovered by the child protagonist",
+        "Natural world rendered with the sensory vividness of a child encountering it for the first time",
+        "Ordinary objects or events transformed by the child's imaginative perception",
+        "Story-within-story or play that generates its own imaginative space"
+      ],
+      "failure_modes": [
+        "World is rendered with adult familiarity — nothing is fresh, strange, or wonderful",
+        "Wonder is entirely decorative — fantastical elements appear without generating genuine awe or engagement",
+        "Imagination is presented as childish delusion to be outgrown rather than as a legitimate way of knowing"
+      ],
+      "signals_in_text": [
+        "Descriptions of the world carry sensory immediacy and surprise",
+        "The child protagonist's encounter with wonder drives plot or character development, not just mood",
+        "Readers are invited to experience the world as the child does — freshly, with genuine curiosity"
+      ]
     },
     {
       "node_id": "CL_N13_MORAL_EMOTIONAL_TAKEAWAY",
@@ -58,11 +147,30 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Children's literature must deliver a genuine moral or emotional insight — something the child protagonist learns, discovers, or earns through the story — but must deliver it through the story's events and the protagonist's experience, never through an adult character explaining it or a narrative voice lecturing the reader. The lesson must feel like the child's own discovery, arising from what they lived through rather than what they were told. Preachiness is not a tone problem; it is a structural failure — it occurs when the lesson is announced rather than earned.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["The story's resolution delivers an insight that the child protagonist has genuinely earned through their experience, and which a child reader can recognize as true without being told to recognize it"],
-      "typical_variants": ["Friendship and loyalty — what it costs and what it gives", "Courage — the discovery that you are capable of more than you believed", "Empathy — learning to see from another's perspective", "Honesty and its consequences — what is lost and gained by telling the truth", "Self-acceptance — recognizing that who you are is enough"],
-      "failure_modes": ["An adult character delivers the lesson directly in dialogue, removing it from the child's own experience", "The narrative voice steps outside the story to explain what the child should have learned", "The lesson is so bluntly stated that child readers feel lectured rather than included", "The lesson is absent — the story concludes with no genuine insight, only plot resolution"],
-      "signals_in_text": ["The child protagonist arrives at the insight through their own actions and reflection, not through instruction", "The lesson is embodied in a specific scene or gesture rather than stated in abstract terms", "A child reader could articulate the lesson in their own words after finishing the story"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "The story's resolution delivers an insight that the child protagonist has genuinely earned through their experience, and which a child reader can recognize as true without being told to recognize it"
+      ],
+      "typical_variants": [
+        "Friendship and loyalty — what it costs and what it gives",
+        "Courage — the discovery that you are capable of more than you believed",
+        "Empathy — learning to see from another's perspective",
+        "Honesty and its consequences — what is lost and gained by telling the truth",
+        "Self-acceptance — recognizing that who you are is enough"
+      ],
+      "failure_modes": [
+        "An adult character delivers the lesson directly in dialogue, removing it from the child's own experience",
+        "The narrative voice steps outside the story to explain what the child should have learned",
+        "The lesson is so bluntly stated that child readers feel lectured rather than included",
+        "The lesson is absent — the story concludes with no genuine insight, only plot resolution"
+      ],
+      "signals_in_text": [
+        "The child protagonist arrives at the insight through their own actions and reflection, not through instruction",
+        "The lesson is embodied in a specific scene or gesture rather than stated in abstract terms",
+        "A child reader could articulate the lesson in their own words after finishing the story"
+      ]
     },
     {
       "node_id": "CL_N20_PICTURE_BOOK",
@@ -70,11 +178,31 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "A children's story in which text is minimal and imagery (actual or implied) carries significant narrative weight, designed for the youngest readers or for read-aloud experience shared between child and adult. The emotional and imaginative world must be established in very few words; each sentence must do multiple jobs; the rhythm of the language is as important as its meaning. Stakes are smallest-scale but fully felt within the child's intimate world — a lost blanket, a fear of the dark, the first day without a parent.",
-      "entry_conditions": ["Core constraints apply", "Protagonist is very young — toddler to early school age", "Language is simple, rhythmic, and dense with emotional weight per word"],
-      "exit_conditions": ["Story delivers complete emotional arc in very compressed form", "Language has a texture and rhythm that rewards being spoken aloud"],
-      "typical_variants": ["Bedtime story with night-fear and reassurance arc", "First experience story — first day, first loss, first friendship", "Wonder-of-the-natural-world story for the very young", "Simple animal protagonist with child-level emotional logic"],
-      "failure_modes": ["Language is condescending rather than precise — vocabulary is simple but tone is dismissive of the child's emotional world", "Story has no genuine arc — a series of pleasant images without conflict or resolution", "Lesson is too explicitly stated for the youngest audience — heavy-handed moralizing that displaces the imaginative experience"],
-      "signals_in_text": ["Each sentence is load-bearing — no filler", "Emotional truth is present even in very simple language", "The story functions as read-aloud text — rhythm and repetition serve the experience"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Protagonist is very young — toddler to early school age",
+        "Language is simple, rhythmic, and dense with emotional weight per word"
+      ],
+      "exit_conditions": [
+        "Story delivers complete emotional arc in very compressed form",
+        "Language has a texture and rhythm that rewards being spoken aloud"
+      ],
+      "typical_variants": [
+        "Bedtime story with night-fear and reassurance arc",
+        "First experience story — first day, first loss, first friendship",
+        "Wonder-of-the-natural-world story for the very young",
+        "Simple animal protagonist with child-level emotional logic"
+      ],
+      "failure_modes": [
+        "Language is condescending rather than precise — vocabulary is simple but tone is dismissive of the child's emotional world",
+        "Story has no genuine arc — a series of pleasant images without conflict or resolution",
+        "Lesson is too explicitly stated for the youngest audience — heavy-handed moralizing that displaces the imaginative experience"
+      ],
+      "signals_in_text": [
+        "Each sentence is load-bearing — no filler",
+        "Emotional truth is present even in very simple language",
+        "The story functions as read-aloud text — rhythm and repetition serve the experience"
+      ]
     },
     {
       "node_id": "CL_N21_MIDDLE_GRADE",
@@ -82,11 +210,30 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "A children's story for readers roughly ages eight to twelve, in which a child protagonist undergoes a genuine adventure — a quest, a mystery, a journey into an unfamiliar world — that tests their courage, loyalty, and growing sense of self. The adventure is age-appropriate in danger but not infantilized; middle grade protagonists can face real risk, real loss, and real moral complexity. The adventure serves as a crucible in which the child discovers who they are and what they stand for.",
-      "entry_conditions": ["Core constraints apply", "Protagonist is approximately eight to twelve years of age", "An external adventure provides the surface narrative while inner growth provides the emotional arc"],
-      "exit_conditions": ["Adventure and inner arc resolve together — the child's external achievement and internal discovery are inseparable"],
-      "typical_variants": ["Quest adventure — something must be found, rescued, or accomplished", "Mystery — something hidden must be uncovered, and the uncovering changes the protagonist", "Journey into another world, real or fantastical, that teaches the protagonist about their own", "Coming-of-age through a summer or formative episode that marks a transition"],
-      "failure_modes": ["Adventure is all external — plot events pile up without the protagonist genuinely changing", "Stakes are either too safe (no real danger) or too adult (death and violence overwhelming the child's-eye frame)", "The child protagonist is passive — carried through the adventure by adults or by circumstance rather than by their own choices and effort"],
-      "signals_in_text": ["The protagonist makes pivotal decisions that change the course of the adventure", "The adventure's outcome reflects the protagonist's growth — they succeed because of who they have become, not just what they have done", "Danger is real and sustained, but the frame holds — readers trust that the child can survive and grow"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Protagonist is approximately eight to twelve years of age",
+        "An external adventure provides the surface narrative while inner growth provides the emotional arc"
+      ],
+      "exit_conditions": [
+        "Adventure and inner arc resolve together — the child's external achievement and internal discovery are inseparable"
+      ],
+      "typical_variants": [
+        "Quest adventure — something must be found, rescued, or accomplished",
+        "Mystery — something hidden must be uncovered, and the uncovering changes the protagonist",
+        "Journey into another world, real or fantastical, that teaches the protagonist about their own",
+        "Coming-of-age through a summer or formative episode that marks a transition"
+      ],
+      "failure_modes": [
+        "Adventure is all external — plot events pile up without the protagonist genuinely changing",
+        "Stakes are either too safe (no real danger) or too adult (death and violence overwhelming the child's-eye frame)",
+        "The child protagonist is passive — carried through the adventure by adults or by circumstance rather than by their own choices and effort"
+      ],
+      "signals_in_text": [
+        "The protagonist makes pivotal decisions that change the course of the adventure",
+        "The adventure's outcome reflects the protagonist's growth — they succeed because of who they have become, not just what they have done",
+        "Danger is real and sustained, but the frame holds — readers trust that the child can survive and grow"
+      ]
     },
     {
       "node_id": "CL_N22_ANIMAL_ALLEGORY",
@@ -94,11 +241,31 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "A children's story in which animal characters or fantastical beings carry the emotional and moral weight of human experience, allowing the story to approach difficult truths — death, loss, fear, exclusion, courage — at one remove from direct human representation. The allegorical structure gives the child reader safety to engage with experiences that would be too overwhelming in direct human terms, while the animal or fantastical world generates the wonder that keeps the story alive as imagination rather than lesson.",
-      "entry_conditions": ["Core constraints apply", "Non-human protagonist carries child-level emotional logic and stakes", "Allegorical structure allows approach to emotionally complex territory within a safe frame"],
-      "exit_conditions": ["The animal or fantastical world is fully realized as its own world, not merely a thin disguise for human moralizing", "The allegorical meaning is available to child readers without being forced upon them"],
-      "typical_variants": ["Animal community story — belonging, exclusion, courage among creatures", "Toy or small-object protagonist navigating a child's world from below", "Fantastical creature encountering a human world for the first time", "Classic fable structure — brief narrative with embedded wisdom"],
-      "failure_modes": ["Animals are humans in fur — no genuine non-human perspective or logic", "Allegorical meaning overwhelms the story as its own imaginative experience", "The safe-remove structure is used to deliver harsher content than the age-appropriate frame can sustain"],
-      "signals_in_text": ["The animal protagonist's behavior is rooted in the logic of their nature as well as their emotional state", "Child readers can inhabit the animal perspective without needing to consciously decode the allegory", "The fantastical world is rendered with enough detail and internal consistency to be believed on its own terms"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Non-human protagonist carries child-level emotional logic and stakes",
+        "Allegorical structure allows approach to emotionally complex territory within a safe frame"
+      ],
+      "exit_conditions": [
+        "The animal or fantastical world is fully realized as its own world, not merely a thin disguise for human moralizing",
+        "The allegorical meaning is available to child readers without being forced upon them"
+      ],
+      "typical_variants": [
+        "Animal community story — belonging, exclusion, courage among creatures",
+        "Toy or small-object protagonist navigating a child's world from below",
+        "Fantastical creature encountering a human world for the first time",
+        "Classic fable structure — brief narrative with embedded wisdom"
+      ],
+      "failure_modes": [
+        "Animals are humans in fur — no genuine non-human perspective or logic",
+        "Allegorical meaning overwhelms the story as its own imaginative experience",
+        "The safe-remove structure is used to deliver harsher content than the age-appropriate frame can sustain"
+      ],
+      "signals_in_text": [
+        "The animal protagonist's behavior is rooted in the logic of their nature as well as their emotional state",
+        "Child readers can inhabit the animal perspective without needing to consciously decode the allegory",
+        "The fantastical world is rendered with enough detail and internal consistency to be believed on its own terms"
+      ]
     },
     {
       "node_id": "CL_N23_EDUCATIONAL_FABLE",
@@ -106,11 +273,31 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "A children's story in which the primary purpose is to convey a specific moral insight or practical wisdom — honesty, kindness, perseverance, fairness — through a brief narrative that dramatizes the lesson rather than states it. The fable structure is the most vulnerable to preachiness; it succeeds only when the story is genuinely engaging as a story first, and the moral emerges from the narrative events rather than being appended to them.",
-      "entry_conditions": ["Core constraints apply", "A specific moral or emotional lesson is the story's organizing principle", "Narrative is brief and focused — no subplot or structural complexity diverts from the central lesson"],
-      "exit_conditions": ["The moral emerges from the story's events rather than being externally stated", "The story is genuinely engaging as narrative, not merely as a delivery mechanism for the lesson"],
-      "typical_variants": ["Classic Aesop-style fable with animal characters and a stated or implied moral", "Modern moral fable with child protagonist whose choices dramatize a lesson", "Cautionary tale in which the cost of a bad choice is rendered vividly but not traumatically", "Positive model story in which virtuous choice is shown to be worthwhile and its own reward"],
-      "failure_modes": ["Moral is stated rather than dramatized — the story exists only to deliver the lesson, not as a story in its own right", "Characters are pure moral functions rather than genuine presences — the brave character, the dishonest character, with no texture beyond their moral role", "Lesson is too sophisticated or too abstract for the target age group, requiring adult mediation to be understood"],
-      "signals_in_text": ["The narrative events themselves carry the weight of the lesson — what happens is the argument", "Characters have enough texture to be believed as characters, even within the fable's brief scope", "Child readers can identify the lesson without being told — the story teaches by showing"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "A specific moral or emotional lesson is the story's organizing principle",
+        "Narrative is brief and focused — no subplot or structural complexity diverts from the central lesson"
+      ],
+      "exit_conditions": [
+        "The moral emerges from the story's events rather than being externally stated",
+        "The story is genuinely engaging as narrative, not merely as a delivery mechanism for the lesson"
+      ],
+      "typical_variants": [
+        "Classic Aesop-style fable with animal characters and a stated or implied moral",
+        "Modern moral fable with child protagonist whose choices dramatize a lesson",
+        "Cautionary tale in which the cost of a bad choice is rendered vividly but not traumatically",
+        "Positive model story in which virtuous choice is shown to be worthwhile and its own reward"
+      ],
+      "failure_modes": [
+        "Moral is stated rather than dramatized — the story exists only to deliver the lesson, not as a story in its own right",
+        "Characters are pure moral functions rather than genuine presences — the brave character, the dishonest character, with no texture beyond their moral role",
+        "Lesson is too sophisticated or too abstract for the target age group, requiring adult mediation to be understood"
+      ],
+      "signals_in_text": [
+        "The narrative events themselves carry the weight of the lesson — what happens is the argument",
+        "Characters have enough texture to be believed as characters, even within the fable's brief scope",
+        "Child readers can identify the lesson without being told — the story teaches by showing"
+      ]
     },
     {
       "node_id": "CL_N40_CHILDS_EYE_WORLD",
@@ -118,11 +305,28 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The world of a children's story must be rendered as it appears to the child protagonist — in scale, in emotional weight, in the things that are noticed and the things that are not. Adult concerns (money, politics, romantic relationships, professional status) recede or are invisible; child concerns (the texture of a blanket, the social dynamics of a classroom, the enormity of a forest at night, the particular grief of a broken toy) are front and center. The setting is not the objective world; it is the world as the child experiences it.",
-      "entry_conditions": ["Subgenre pattern selected"],
-      "exit_conditions": ["Setting details are chosen and rendered from the child protagonist's perspective and scale of attention"],
-      "typical_variants": ["Physical scale — large things are enormous, small things are precious and weighty", "Social scale — peer relationships and adult authority figures are the primary social architecture", "Temporal scale — a single afternoon can be a world; a school year is an epoch", "Emotional vividness — colors, textures, smells, and sounds are rendered with the intensity of a child's fresh perception"],
-      "failure_modes": ["Setting is rendered from an adult perspective — the child exists in a world calibrated to adult concerns", "Physical environment is described with adult architectural or geographical precision rather than with the child's selective, emotionally weighted attention", "Adult social dynamics (workplace hierarchies, political structures, romantic subplots) are foregrounded in the setting"],
-      "signals_in_text": ["Description foregrounds sensory details significant to the child protagonist", "Scale relationships in the setting reflect the child's experience — small spaces are intimate and safe or confining, large spaces are awe-inspiring or threatening", "The adult world is present at the margins but the child's world is the stage"]
+      "entry_conditions": [
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "Setting details are chosen and rendered from the child protagonist's perspective and scale of attention"
+      ],
+      "typical_variants": [
+        "Physical scale — large things are enormous, small things are precious and weighty",
+        "Social scale — peer relationships and adult authority figures are the primary social architecture",
+        "Temporal scale — a single afternoon can be a world; a school year is an epoch",
+        "Emotional vividness — colors, textures, smells, and sounds are rendered with the intensity of a child's fresh perception"
+      ],
+      "failure_modes": [
+        "Setting is rendered from an adult perspective — the child exists in a world calibrated to adult concerns",
+        "Physical environment is described with adult architectural or geographical precision rather than with the child's selective, emotionally weighted attention",
+        "Adult social dynamics (workplace hierarchies, political structures, romantic subplots) are foregrounded in the setting"
+      ],
+      "signals_in_text": [
+        "Description foregrounds sensory details significant to the child protagonist",
+        "Scale relationships in the setting reflect the child's experience — small spaces are intimate and safe or confining, large spaces are awe-inspiring or threatening",
+        "The adult world is present at the margins but the child's world is the stage"
+      ]
     },
     {
       "node_id": "CL_N41_SAFE_ENOUGH_FRAME",
@@ -130,11 +334,29 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The setting and narrative frame of a children's story must maintain a fundamental safety: the child protagonist can be genuinely frightened, genuinely challenged, genuinely at risk — but the world of the story is structured so that survival and growth are possible, and the child reader is never abandoned to despair. This is not about avoiding darkness; it is about calibrating darkness so that it generates courage rather than traumatic overwhelm. The safe-enough frame is the container that allows children to experience difficult emotions through the story safely.",
-      "entry_conditions": ["Child's-eye world established"],
-      "exit_conditions": ["Danger and difficulty are present and genuinely felt, but the frame is structured to allow survival, growth, and resolution"],
-      "typical_variants": ["Danger that is frightening but navigable — the child can act and the action can matter", "Loss that is real and grieved but not irreversible or nihilistic in its effect on the story's world", "Conflict that is genuinely difficult but scaled to what a child can inhabit and endure", "Adults present as backstop even when they are not in control of the immediate situation"],
-      "failure_modes": ["Danger is so large and so beyond the child's capacity to affect that the safe-enough frame collapses", "Loss is treated with adult nihilism rather than child-accessible grief and recovery", "Violence, cruelty, or despair arrives in a register that cannot be held within a child's imaginative frame", "Conversely, all danger is immediately and costlessly resolved — no genuine tension, no earned safety"],
-      "signals_in_text": ["Threatening elements are rendered with appropriate intensity but structured so that child action can affect outcomes", "Even in the darkest moments, there is a path through — not announced, but available", "Resolution feels earned and proportionate, not arbitrary — the child reader can feel that the danger was real and the survival was real"]
+      "entry_conditions": [
+        "Child's-eye world established"
+      ],
+      "exit_conditions": [
+        "Danger and difficulty are present and genuinely felt, but the frame is structured to allow survival, growth, and resolution"
+      ],
+      "typical_variants": [
+        "Danger that is frightening but navigable — the child can act and the action can matter",
+        "Loss that is real and grieved but not irreversible or nihilistic in its effect on the story's world",
+        "Conflict that is genuinely difficult but scaled to what a child can inhabit and endure",
+        "Adults present as backstop even when they are not in control of the immediate situation"
+      ],
+      "failure_modes": [
+        "Danger is so large and so beyond the child's capacity to affect that the safe-enough frame collapses",
+        "Loss is treated with adult nihilism rather than child-accessible grief and recovery",
+        "Violence, cruelty, or despair arrives in a register that cannot be held within a child's imaginative frame",
+        "Conversely, all danger is immediately and costlessly resolved — no genuine tension, no earned safety"
+      ],
+      "signals_in_text": [
+        "Threatening elements are rendered with appropriate intensity but structured so that child action can affect outcomes",
+        "Even in the darkest moments, there is a path through — not announced, but available",
+        "Resolution feels earned and proportionate, not arbitrary — the child reader can feel that the danger was real and the survival was real"
+      ]
     },
     {
       "node_id": "CL_N42_ADULT_FIGURES_PRESENT",
@@ -142,11 +364,28 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "In children's literature, adult characters function as the gravitational field of the world — they establish the rules, the safety net, and the emotional stakes of belonging — but the story's central action belongs to the child protagonist. Adults must be absent, limited, or unable to resolve the specific problem the child faces, so that the child's own agency is genuinely required. The child must be the one who acts, chooses, discovers, and earns the resolution. Adults who are simply incompetent or villainous are a failure mode as surely as adults who solve everything.",
-      "entry_conditions": ["Child's-eye world and safe-enough frame established"],
-      "exit_conditions": ["Adult characters are present in the story's world and establish the safety frame, but the central problem is one only the child protagonist can solve through their own actions"],
-      "typical_variants": ["Adults are present but preoccupied — the child must navigate their problem within the margins of adult attention", "Adults are physically absent for the adventure — the child is temporarily on their own", "Adults cannot understand the specific nature of the problem — it belongs to the child's world, not theirs", "Adults provide the backstop but cannot provide the answer — the child must find their own way"],
-      "failure_modes": ["Adults solve the central problem, reducing the child to witness of their own story", "Adults are cartoonishly villainous or incompetent — no genuine adult presence establishes the safety frame", "Adults are entirely absent, collapsing the safe-enough frame and leaving the child alone in a genuinely dangerous world without resource"],
-      "signals_in_text": ["The pivotal actions in the story are taken by the child protagonist, not facilitated by adults", "Adults are recognizably present in the story's world as authority figures and safety, even when they are not present in the immediate scene", "The child's success is their own — adults may support but cannot provide the key action or insight"]
+      "entry_conditions": [
+        "Child's-eye world and safe-enough frame established"
+      ],
+      "exit_conditions": [
+        "Adult characters are present in the story's world and establish the safety frame, but the central problem is one only the child protagonist can solve through their own actions"
+      ],
+      "typical_variants": [
+        "Adults are present but preoccupied — the child must navigate their problem within the margins of adult attention",
+        "Adults are physically absent for the adventure — the child is temporarily on their own",
+        "Adults cannot understand the specific nature of the problem — it belongs to the child's world, not theirs",
+        "Adults provide the backstop but cannot provide the answer — the child must find their own way"
+      ],
+      "failure_modes": [
+        "Adults solve the central problem, reducing the child to witness of their own story",
+        "Adults are cartoonishly villainous or incompetent — no genuine adult presence establishes the safety frame",
+        "Adults are entirely absent, collapsing the safe-enough frame and leaving the child alone in a genuinely dangerous world without resource"
+      ],
+      "signals_in_text": [
+        "The pivotal actions in the story are taken by the child protagonist, not facilitated by adults",
+        "Adults are recognizably present in the story's world as authority figures and safety, even when they are not present in the immediate scene",
+        "The child's success is their own — adults may support but cannot provide the key action or insight"
+      ]
     },
     {
       "node_id": "CL_N60_WONDER_DISCOVERY",
@@ -154,11 +393,29 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which the child protagonist encounters something extraordinary — a magical world, a creature, a place, an experience, or a revelation — that generates genuine wonder and opens the imaginative space of the story. This scene establishes that the world is larger, stranger, and more alive than the child knew, and that their engagement with it will require and reward the full force of their imagination. The wonder must be earned by the story's setup; it arrives as discovery, not as inventory.",
-      "entry_conditions": ["Child protagonist established", "Setting rendered from child's-eye perspective"],
-      "exit_conditions": ["The child protagonist has encountered something genuinely wonderful, and this encounter has opened the story's imaginative possibility space"],
-      "typical_variants": ["Discovery of a fantastical world or creature that was hidden within the ordinary world", "First encounter with a natural phenomenon rendered with the full vividness of a child's fresh perception", "A small, precise wonder — a single magical detail that the child notices and no adult would", "The moment when the rules of the world reveal themselves to be different from what the child assumed"],
-      "failure_modes": ["Wonder is announced rather than rendered — told to be wonderful rather than shown as wonderful", "Discovery is immediately explained away by an adult or by the narrative, collapsing the imaginative space", "Wonder is so enormous and impersonal that it overwhelms rather than invites — the child cannot enter it"],
-      "signals_in_text": ["The scene slows — description expands, sensory detail increases, pace gives way to immersion", "The child protagonist's response to the wonder is rendered in full — their surprise, curiosity, and dawning understanding", "The wonder opens a narrative question rather than closing one — it invites the story forward"]
+      "entry_conditions": [
+        "Child protagonist established",
+        "Setting rendered from child's-eye perspective"
+      ],
+      "exit_conditions": [
+        "The child protagonist has encountered something genuinely wonderful, and this encounter has opened the story's imaginative possibility space"
+      ],
+      "typical_variants": [
+        "Discovery of a fantastical world or creature that was hidden within the ordinary world",
+        "First encounter with a natural phenomenon rendered with the full vividness of a child's fresh perception",
+        "A small, precise wonder — a single magical detail that the child notices and no adult would",
+        "The moment when the rules of the world reveal themselves to be different from what the child assumed"
+      ],
+      "failure_modes": [
+        "Wonder is announced rather than rendered — told to be wonderful rather than shown as wonderful",
+        "Discovery is immediately explained away by an adult or by the narrative, collapsing the imaginative space",
+        "Wonder is so enormous and impersonal that it overwhelms rather than invites — the child cannot enter it"
+      ],
+      "signals_in_text": [
+        "The scene slows — description expands, sensory detail increases, pace gives way to immersion",
+        "The child protagonist's response to the wonder is rendered in full — their surprise, curiosity, and dawning understanding",
+        "The wonder opens a narrative question rather than closing one — it invites the story forward"
+      ]
     },
     {
       "node_id": "CL_N61_CHALLENGE_SCENE",
@@ -166,11 +423,30 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which the child protagonist faces the story's central challenge — the moment when the problem is at its most acute, when the easy path is unavailable, and when the child must draw on what they have discovered about themselves and their world to act. This scene must be genuinely difficult: the child should doubt themselves, the outcome should be uncertain, and the effort required should be real. The challenge tests not just competence but character — what the child is willing to do and who they are willing to be.",
-      "entry_conditions": ["Wonder and discovery established", "Stakes clearly felt by child protagonist"],
-      "exit_conditions": ["The child protagonist has faced the central challenge through their own agency, at genuine cost to their comfort or certainty"],
-      "typical_variants": ["The confrontation with the story's antagonist or obstacle — a moment of direct opposition", "The moment of choice — two paths diverge and the child must commit to the harder one", "The test of loyalty or courage — keeping faith with another when it would be easier not to", "The moment of creative problem-solving — using imagination or discovered knowledge to find a way through"],
-      "failure_modes": ["Challenge is resolved too easily — the child is not genuinely tested and no real effort is required", "An adult or external force resolves the challenge before the child can act", "The child succeeds through luck or accident rather than through their own developing character", "The challenge is too overwhelming — the child fails completely with no growth or no path forward"],
-      "signals_in_text": ["The child protagonist's fear or doubt is present and legible — this is not easy", "The child acts from their own choice and understanding, not from external instruction", "The scene's outcome represents a genuine change in the child's situation and inner state — something real has been risked and something real has been gained or lost"]
+      "entry_conditions": [
+        "Wonder and discovery established",
+        "Stakes clearly felt by child protagonist"
+      ],
+      "exit_conditions": [
+        "The child protagonist has faced the central challenge through their own agency, at genuine cost to their comfort or certainty"
+      ],
+      "typical_variants": [
+        "The confrontation with the story's antagonist or obstacle — a moment of direct opposition",
+        "The moment of choice — two paths diverge and the child must commit to the harder one",
+        "The test of loyalty or courage — keeping faith with another when it would be easier not to",
+        "The moment of creative problem-solving — using imagination or discovered knowledge to find a way through"
+      ],
+      "failure_modes": [
+        "Challenge is resolved too easily — the child is not genuinely tested and no real effort is required",
+        "An adult or external force resolves the challenge before the child can act",
+        "The child succeeds through luck or accident rather than through their own developing character",
+        "The challenge is too overwhelming — the child fails completely with no growth or no path forward"
+      ],
+      "signals_in_text": [
+        "The child protagonist's fear or doubt is present and legible — this is not easy",
+        "The child acts from their own choice and understanding, not from external instruction",
+        "The scene's outcome represents a genuine change in the child's situation and inner state — something real has been risked and something real has been gained or lost"
+      ]
     },
     {
       "node_id": "CL_N62_EARNED_RESOLUTION",
@@ -178,11 +454,31 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which the story's conflict is resolved and the child protagonist arrives at the insight that the story has been building toward — not through an adult explanation or a narrative lecture, but through the natural completion of their own experience. The resolution must be proportionate to the challenge: as large as the difficulty was, the understanding is as deep. The child is not the same as they were at the beginning; the story has genuinely changed them, and the resolution makes that change visible.",
-      "entry_conditions": ["Challenge fully dramatized", "Child protagonist has acted at genuine cost to their certainty or comfort"],
-      "exit_conditions": ["Central conflict is resolved through the child protagonist's own action or understanding", "Moral or emotional insight is present and available to child readers without being stated by the narrative"],
-      "typical_variants": ["The child achieves the quest goal and recognizes what it cost and what it gave", "The child repairs a broken relationship through an act of honesty, courage, or empathy", "The child makes peace with a loss or a fear they could not previously face", "The child discovers that they are capable of something they doubted — and this discovery is the resolution"],
-      "failure_modes": ["Resolution is purely plot-level — the problem is solved but the child is unchanged", "An adult delivers the resolution, removing the child's agency at the moment of payoff", "The insight is stated explicitly by the narrative rather than embodied in the scene", "Resolution undoes the challenge entirely, as if nothing was genuinely at stake"],
-      "signals_in_text": ["The child protagonist's behavior or perspective is visibly different from how they began the story", "The specific challenge or fear that drove the story is addressed at the resolution, not talked around", "The emotional note of the ending is warm and genuine — neither forced happiness nor unresolved sorrow, but something that feels true to what the child has lived through"]
+      "entry_conditions": [
+        "Challenge fully dramatized",
+        "Child protagonist has acted at genuine cost to their certainty or comfort"
+      ],
+      "exit_conditions": [
+        "Central conflict is resolved through the child protagonist's own action or understanding",
+        "Moral or emotional insight is present and available to child readers without being stated by the narrative"
+      ],
+      "typical_variants": [
+        "The child achieves the quest goal and recognizes what it cost and what it gave",
+        "The child repairs a broken relationship through an act of honesty, courage, or empathy",
+        "The child makes peace with a loss or a fear they could not previously face",
+        "The child discovers that they are capable of something they doubted — and this discovery is the resolution"
+      ],
+      "failure_modes": [
+        "Resolution is purely plot-level — the problem is solved but the child is unchanged",
+        "An adult delivers the resolution, removing the child's agency at the moment of payoff",
+        "The insight is stated explicitly by the narrative rather than embodied in the scene",
+        "Resolution undoes the challenge entirely, as if nothing was genuinely at stake"
+      ],
+      "signals_in_text": [
+        "The child protagonist's behavior or perspective is visibly different from how they began the story",
+        "The specific challenge or fear that drove the story is addressed at the resolution, not talked around",
+        "The emotional note of the ending is warm and genuine — neither forced happiness nor unresolved sorrow, but something that feels true to what the child has lived through"
+      ]
     },
     {
       "node_id": "CL_N80_CLARITY_WARMTH_WONDER",
@@ -190,11 +486,28 @@
       "role": "Tone Marker",
       "level": null,
       "definition": "Children's literature requires a tone that holds three qualities simultaneously: clarity (language and structure that a child can follow without losing the thread), warmth (a narrative voice that cares about its characters and its reader, that holds difficulty with affection rather than irony), and imaginative energy (a quality of aliveness in the prose that communicates that the writer finds the world genuinely interesting and that the reader's imagination is invited and valued). None of these qualities can be faked. Clarity without warmth is coldness. Warmth without clarity is sentimentality. Both without imaginative energy are competence without vitality.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Tone communicates genuine care for the child reader and genuine belief in the story's world"],
-      "typical_variants": ["Playful and rhythmic — language that takes pleasure in itself", "Quiet and precise — each word chosen for its exact weight and sound", "Vivid and sensory — rendering the world with physical immediacy", "Warm and direct — the narrative voice speaks to the child as an equal, not from above"],
-      "failure_modes": ["Condescension — simplicity of language used as a vehicle for dismissing or talking down to the child reader", "Exhausted competence — technically adequate children's prose that communicates no genuine interest in the story or the reader", "Ironic distance — the narrative voice that signals it is writing a children's story rather than believing in one"],
-      "signals_in_text": ["Language has a texture and rhythm that rewards attention", "The narrative voice is consistent and has a recognizable character — it is someone who believes in this story", "Difficult moments are rendered with care rather than dismissed or rushed past"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Tone communicates genuine care for the child reader and genuine belief in the story's world"
+      ],
+      "typical_variants": [
+        "Playful and rhythmic — language that takes pleasure in itself",
+        "Quiet and precise — each word chosen for its exact weight and sound",
+        "Vivid and sensory — rendering the world with physical immediacy",
+        "Warm and direct — the narrative voice speaks to the child as an equal, not from above"
+      ],
+      "failure_modes": [
+        "Condescension — simplicity of language used as a vehicle for dismissing or talking down to the child reader",
+        "Exhausted competence — technically adequate children's prose that communicates no genuine interest in the story or the reader",
+        "Ironic distance — the narrative voice that signals it is writing a children's story rather than believing in one"
+      ],
+      "signals_in_text": [
+        "Language has a texture and rhythm that rewards attention",
+        "The narrative voice is consistent and has a recognizable character — it is someone who believes in this story",
+        "Difficult moments are rendered with care rather than dismissed or rushed past"
+      ]
     },
     {
       "node_id": "CL_N90_CONDESCENSION",
@@ -202,11 +515,26 @@
       "role": "Anti-Pattern",
       "level": null,
       "definition": "Children's literature fails when the story exists primarily to serve adult purposes — to reassure adult anxieties, to instill values adults wish children to hold, or to deliver an adult's message using a child as a conduit. The condescension need not be intentional; it is most often structural. It manifests when the child protagonist has no genuine interiority of their own, when the lesson the story delivers is the adult's lesson rather than the child's discovery, when the child's-eye perspective is performed rather than inhabited, or when the story's warmth is directed at the child reader as an object to be shaped rather than a subject to be engaged. The child should feel the story was written for them, not at them.",
-      "entry_conditions": ["Story presents a child protagonist whose experience is framed by adult agenda rather than child perspective"],
-      "exit_conditions": ["Child protagonist must have genuine interiority, agency, and a perspective that exists for its own sake, not as a vehicle for adult purposes"],
-      "typical_variants": ["The lesson is the story — narrative exists only as delivery mechanism for adult moral instruction", "Child protagonist is passive and good — they receive the lesson rather than discover it through genuine struggle", "Wonder is used instrumentally — marvels appear to make the lesson palatable, not because the world is genuinely marvellous", "Adult characters are clearly the narrative's true identification figures — children will read and adults will feel confirmed"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["Narrative voice addresses the child reader from a position of knowing superiority rather than imaginative invitation", "Child protagonist's value is their receptivity — they are defined by what they learn rather than by who they are", "The story would serve adults equally well as children — no genuine child perspective distinguishes it"]
+      "entry_conditions": [
+        "Story presents a child protagonist whose experience is framed by adult agenda rather than child perspective"
+      ],
+      "exit_conditions": [
+        "Child protagonist must have genuine interiority, agency, and a perspective that exists for its own sake, not as a vehicle for adult purposes"
+      ],
+      "typical_variants": [
+        "The lesson is the story — narrative exists only as delivery mechanism for adult moral instruction",
+        "Child protagonist is passive and good — they receive the lesson rather than discover it through genuine struggle",
+        "Wonder is used instrumentally — marvels appear to make the lesson palatable, not because the world is genuinely marvellous",
+        "Adult characters are clearly the narrative's true identification figures — children will read and adults will feel confirmed"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode — its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "Narrative voice addresses the child reader from a position of knowing superiority rather than imaginative invitation",
+        "Child protagonist's value is their receptivity — they are defined by what they learn rather than by who they are",
+        "The story would serve adults equally well as children — no genuine child perspective distinguishes it"
+      ]
     }
   ],
   "edges": [
@@ -216,11 +544,17 @@
       "to": "CL_N10_CHILD_PROTAGONIST",
       "label": "Promise requires child or child-analog as primary consciousness",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "All stakes must be legible and proportionate from a child's experiential frame",
       "effects_on_character": "Protagonist's perception, logic, and emotional register must be authentically those of a child",
-      "common_alternatives": ["Animal or fantastical child-analog may substitute for a human child protagonist"],
-      "anti_patterns": ["Adult character as primary focalizer in a story marketed as children's literature"]
+      "common_alternatives": [
+        "Animal or fantastical child-analog may substitute for a human child protagonist"
+      ],
+      "anti_patterns": [
+        "Adult character as primary focalizer in a story marketed as children's literature"
+      ]
     },
     {
       "edge_id": "CL_E02_PROMISE_TO_STAKES",
@@ -228,11 +562,17 @@
       "to": "CL_N11_AGE_APPROPRIATE_STAKES",
       "label": "Promise requires stakes calibrated to a child's world",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Danger and difficulty must be real but not so overwhelming that the child reader cannot hold them",
       "effects_on_character": "What the protagonist most fears and most wants must be expressible in child terms",
-      "common_alternatives": ["Stakes may scale upward for older middle-grade readers while remaining within the child's-eye frame"],
-      "anti_patterns": ["Adult-scale stakes (mortality as primary driver, existential horror, romantic loss) imported into a child's story without calibration"]
+      "common_alternatives": [
+        "Stakes may scale upward for older middle-grade readers while remaining within the child's-eye frame"
+      ],
+      "anti_patterns": [
+        "Adult-scale stakes (mortality as primary driver, existential horror, romantic loss) imported into a child's story without calibration"
+      ]
     },
     {
       "edge_id": "CL_E03_PROMISE_TO_WONDER",
@@ -240,11 +580,17 @@
       "to": "CL_N12_WONDER_CENTRAL",
       "label": "Promise requires imagination and wonder as central structural elements",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "The world must be capable of generating genuine surprise and awe — wonder is not optional atmosphere",
       "effects_on_character": "The child protagonist's engagement with wonder is the primary mode of their development",
-      "common_alternatives": ["Wonder may be found in the natural world, in imagination, or in genuine magic — the source matters less than the presence"],
-      "anti_patterns": ["World rendered as already-known and familiar — no capacity for surprise or fresh discovery"]
+      "common_alternatives": [
+        "Wonder may be found in the natural world, in imagination, or in genuine magic — the source matters less than the presence"
+      ],
+      "anti_patterns": [
+        "World rendered as already-known and familiar — no capacity for surprise or fresh discovery"
+      ]
     },
     {
       "edge_id": "CL_E04_PROMISE_TO_TAKEAWAY",
@@ -252,11 +598,17 @@
       "to": "CL_N13_MORAL_EMOTIONAL_TAKEAWAY",
       "label": "Promise requires genuine moral or emotional insight without preachiness",
       "meaning": "restricts resolution",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "The story must be moving toward an insight as well as a plot resolution",
       "effects_on_character": "The child protagonist must arrive at the insight through their own experience, not through adult instruction",
-      "common_alternatives": ["Insight may be primarily emotional (I am capable; I am not alone) rather than moral (honesty is right)"],
-      "anti_patterns": ["Lesson is stated by adult character or narrative voice rather than earned by child protagonist's experience"]
+      "common_alternatives": [
+        "Insight may be primarily emotional (I am capable; I am not alone) rather than moral (honesty is right)"
+      ],
+      "anti_patterns": [
+        "Lesson is stated by adult character or narrative voice rather than earned by child protagonist's experience"
+      ]
     },
     {
       "edge_id": "CL_E05_PROMISE_TO_TONE",
@@ -264,11 +616,17 @@
       "to": "CL_N80_CLARITY_WARMTH_WONDER",
       "label": "Promise requires clarity, warmth, and imaginative energy in the narrative voice",
       "meaning": "sets tone",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Tone signals that the story takes the child's experience seriously and invites genuine imaginative engagement",
       "effects_on_character": "Characters are rendered with the warmth and precision that communicates genuine care",
-      "common_alternatives": ["Tone may be primarily playful, primarily quiet, or primarily vivid — all are valid provided all three qualities are present"],
-      "anti_patterns": ["Condescending, ironic, or coldly competent tone that communicates distance from the child's experience"]
+      "common_alternatives": [
+        "Tone may be primarily playful, primarily quiet, or primarily vivid — all are valid provided all three qualities are present"
+      ],
+      "anti_patterns": [
+        "Condescending, ironic, or coldly competent tone that communicates distance from the child's experience"
+      ]
     },
     {
       "edge_id": "CL_E10_CHILD_TO_PICTURE_BOOK",
@@ -276,11 +634,21 @@
       "to": "CL_N20_PICTURE_BOOK",
       "label": "Youngest child protagonist with minimal text and maximal emotional compression",
       "meaning": "branches into subtype",
-      "preconditions": ["Core constraints apply", "Protagonist is very young — toddler to early school age", "Language is compressed and rhythmic"],
+      "preconditions": [
+        "Core constraints apply",
+        "Protagonist is very young — toddler to early school age",
+        "Language is compressed and rhythmic"
+      ],
       "effects_on_stakes": "Intimate, small-scale stakes — the child's immediate world is the entire world",
       "effects_on_character": "Protagonist's inner life is communicated through image and action rather than interiority",
-      "common_alternatives": ["Middle grade adventure", "Animal allegory", "Educational fable"],
-      "anti_patterns": ["Verbose or analytically complex picture book that defeats the form's essential compression"]
+      "common_alternatives": [
+        "Middle grade adventure",
+        "Animal allegory",
+        "Educational fable"
+      ],
+      "anti_patterns": [
+        "Verbose or analytically complex picture book that defeats the form's essential compression"
+      ]
     },
     {
       "edge_id": "CL_E11_CHILD_TO_MIDDLE_GRADE",
@@ -288,11 +656,21 @@
       "to": "CL_N21_MIDDLE_GRADE",
       "label": "Older child protagonist whose growing capacity for agency drives a genuine adventure",
       "meaning": "branches into subtype",
-      "preconditions": ["Core constraints apply", "Protagonist is approximately eight to twelve years old", "External adventure and internal growth arc are present simultaneously"],
+      "preconditions": [
+        "Core constraints apply",
+        "Protagonist is approximately eight to twelve years old",
+        "External adventure and internal growth arc are present simultaneously"
+      ],
       "effects_on_stakes": "Stakes may include genuine danger and moral complexity appropriate to the eight-to-twelve age range",
       "effects_on_character": "Protagonist's choices drive the adventure — their agency is central to the plot's progression",
-      "common_alternatives": ["Picture book", "Animal allegory", "Educational fable"],
-      "anti_patterns": ["Child protagonist is passive — swept through adventure by adults or circumstances rather than driving it by their own choices"]
+      "common_alternatives": [
+        "Picture book",
+        "Animal allegory",
+        "Educational fable"
+      ],
+      "anti_patterns": [
+        "Child protagonist is passive — swept through adventure by adults or circumstances rather than driving it by their own choices"
+      ]
     },
     {
       "edge_id": "CL_E12_WONDER_TO_ANIMAL_ALLEGORY",
@@ -300,11 +678,21 @@
       "to": "CL_N22_ANIMAL_ALLEGORY",
       "label": "Wonder channeled through non-human protagonist and allegorical world",
       "meaning": "branches into subtype",
-      "preconditions": ["Core constraints apply", "Non-human protagonist carries child-level emotional logic", "Allegorical structure provides safe distance for approaching difficult territory"],
+      "preconditions": [
+        "Core constraints apply",
+        "Non-human protagonist carries child-level emotional logic",
+        "Allegorical structure provides safe distance for approaching difficult territory"
+      ],
       "effects_on_stakes": "Stakes involve the animal or fantastical community's survival, belonging, or transformation",
       "effects_on_character": "Non-human protagonist's nature shapes how they experience and navigate the world's wonders",
-      "common_alternatives": ["Picture book", "Middle grade adventure", "Educational fable"],
-      "anti_patterns": ["Animal characters are merely humans in costume with no genuine non-human perspective or logic"]
+      "common_alternatives": [
+        "Picture book",
+        "Middle grade adventure",
+        "Educational fable"
+      ],
+      "anti_patterns": [
+        "Animal characters are merely humans in costume with no genuine non-human perspective or logic"
+      ]
     },
     {
       "edge_id": "CL_E13_TAKEAWAY_TO_FABLE",
@@ -312,11 +700,21 @@
       "to": "CL_N23_EDUCATIONAL_FABLE",
       "label": "Moral or emotional takeaway is the organizing principle of the brief fable narrative",
       "meaning": "branches into subtype",
-      "preconditions": ["Core constraints apply", "Specific moral lesson is the narrative's central purpose", "Narrative is brief and focused"],
+      "preconditions": [
+        "Core constraints apply",
+        "Specific moral lesson is the narrative's central purpose",
+        "Narrative is brief and focused"
+      ],
       "effects_on_stakes": "Stakes are structured to dramatize the specific lesson — what is gained or lost by the choice the story examines",
       "effects_on_character": "Characters embody moral positions but must retain enough texture to be believed as characters",
-      "common_alternatives": ["Picture book", "Middle grade adventure", "Animal allegory"],
-      "anti_patterns": ["Lesson is the story's entire content — no genuine narrative, only illustrated instruction"]
+      "common_alternatives": [
+        "Picture book",
+        "Middle grade adventure",
+        "Animal allegory"
+      ],
+      "anti_patterns": [
+        "Lesson is the story's entire content — no genuine narrative, only illustrated instruction"
+      ]
     },
     {
       "edge_id": "CL_E20_PICTURE_BOOK_TO_CHILDS_EYE",
@@ -324,11 +722,17 @@
       "to": "CL_N40_CHILDS_EYE_WORLD",
       "label": "Picture book world rendered entirely through the youngest child's scale and perception",
       "meaning": "introduces setting rule",
-      "preconditions": ["Picture book subgenre selected"],
+      "preconditions": [
+        "Picture book subgenre selected"
+      ],
       "effects_on_stakes": "Every setting element must be immediately legible and emotionally significant to a very young child",
       "effects_on_character": "The youngest protagonist's world is intimate — home, family, immediate environment — seen with maximum sensory vividness",
-      "common_alternatives": ["Animal protagonist may carry the child's-eye world into non-domestic settings"],
-      "anti_patterns": ["Picture book setting described from adult perspective — architecturally or geographically precise rather than emotionally vivid"]
+      "common_alternatives": [
+        "Animal protagonist may carry the child's-eye world into non-domestic settings"
+      ],
+      "anti_patterns": [
+        "Picture book setting described from adult perspective — architecturally or geographically precise rather than emotionally vivid"
+      ]
     },
     {
       "edge_id": "CL_E21_MIDDLE_GRADE_TO_SAFE_FRAME",
@@ -336,11 +740,17 @@
       "to": "CL_N41_SAFE_ENOUGH_FRAME",
       "label": "Middle grade adventure maintains safe-enough frame even as danger intensifies",
       "meaning": "introduces setting rule",
-      "preconditions": ["Middle grade subgenre selected"],
+      "preconditions": [
+        "Middle grade subgenre selected"
+      ],
       "effects_on_stakes": "Danger can be real and sustained but must be structured so the child reader can hold it",
       "effects_on_character": "Protagonist faces genuine risk but is always a child who can act and whose action can matter",
-      "common_alternatives": ["Frame may stretch at the climax — maximum tension — before returning to safety at resolution"],
-      "anti_patterns": ["Middle grade adventure crosses into genuinely traumatic territory — violence, death, despair — that overwhelms the safe-enough frame"]
+      "common_alternatives": [
+        "Frame may stretch at the climax — maximum tension — before returning to safety at resolution"
+      ],
+      "anti_patterns": [
+        "Middle grade adventure crosses into genuinely traumatic territory — violence, death, despair — that overwhelms the safe-enough frame"
+      ]
     },
     {
       "edge_id": "CL_E22_ANIMAL_ALLEGORY_TO_CHILDS_EYE",
@@ -348,11 +758,17 @@
       "to": "CL_N40_CHILDS_EYE_WORLD",
       "label": "Animal allegory world is rendered as the animal protagonist experiences it — which mirrors a child's-eye perspective",
       "meaning": "introduces setting rule",
-      "preconditions": ["Animal allegory subgenre selected"],
+      "preconditions": [
+        "Animal allegory subgenre selected"
+      ],
       "effects_on_stakes": "The animal world's scale, dangers, and wonders are calibrated to the animal protagonist's size and nature",
       "effects_on_character": "Setting is seen through the animal protagonist's perceptual frame — which carries the freshness and scale of a child's perspective",
-      "common_alternatives": ["Fantastical world may supplement or replace naturalistic animal setting while maintaining the child's-eye quality of fresh discovery"],
-      "anti_patterns": ["Animal world is rendered with adult naturalistic precision rather than the selective, emotionally weighted attention of the child's-eye frame"]
+      "common_alternatives": [
+        "Fantastical world may supplement or replace naturalistic animal setting while maintaining the child's-eye quality of fresh discovery"
+      ],
+      "anti_patterns": [
+        "Animal world is rendered with adult naturalistic precision rather than the selective, emotionally weighted attention of the child's-eye frame"
+      ]
     },
     {
       "edge_id": "CL_E23_FABLE_TO_ADULT_FIGURES",
@@ -360,11 +776,17 @@
       "to": "CL_N42_ADULT_FIGURES_PRESENT",
       "label": "Fable structure requires the moral lesson to be discovered by the protagonist, not delivered by an authority figure",
       "meaning": "introduces setting rule",
-      "preconditions": ["Educational fable subgenre selected"],
+      "preconditions": [
+        "Educational fable subgenre selected"
+      ],
       "effects_on_stakes": "The cost and value of the choice dramatized by the fable must be experienced by the protagonist, not narrated by a wise elder",
       "effects_on_character": "Even in a brief fable, the protagonist must exercise agency — choosing and experiencing consequences — rather than receiving wisdom",
-      "common_alternatives": ["A wise elder character may prompt reflection after the protagonist has already acted and experienced consequences"],
-      "anti_patterns": ["Wise adult or elder delivers the lesson directly to a passive protagonist who simply receives and accepts it"]
+      "common_alternatives": [
+        "A wise elder character may prompt reflection after the protagonist has already acted and experienced consequences"
+      ],
+      "anti_patterns": [
+        "Wise adult or elder delivers the lesson directly to a passive protagonist who simply receives and accepts it"
+      ]
     },
     {
       "edge_id": "CL_E24_MIDDLE_GRADE_TO_ADULT_FIGURES",
@@ -372,11 +794,17 @@
       "to": "CL_N42_ADULT_FIGURES_PRESENT",
       "label": "Middle grade adventure requires adult presence as safety frame while child protagonist drives the central action",
       "meaning": "introduces setting rule",
-      "preconditions": ["Middle grade subgenre selected"],
+      "preconditions": [
+        "Middle grade subgenre selected"
+      ],
       "effects_on_stakes": "The tension between the child's need to act and the adult world's presence and limits is a source of narrative energy",
       "effects_on_character": "Protagonist must navigate both the adventure and the adult world — finding the space in which their own agency operates",
-      "common_alternatives": ["Adults may be temporarily absent, creating the adventure space, while remaining the implied safety net"],
-      "anti_patterns": ["Adults either solve the adventure's central challenge or are so completely absent that the safe-enough frame collapses"]
+      "common_alternatives": [
+        "Adults may be temporarily absent, creating the adventure space, while remaining the implied safety net"
+      ],
+      "anti_patterns": [
+        "Adults either solve the adventure's central challenge or are so completely absent that the safe-enough frame collapses"
+      ]
     },
     {
       "edge_id": "CL_E30_CHILDS_EYE_TO_WONDER",
@@ -384,11 +812,17 @@
       "to": "CL_N60_WONDER_DISCOVERY",
       "label": "Child's-eye world is the condition for genuine wonder — familiar enough to ground, strange enough to astonish",
       "meaning": "mandates element",
-      "preconditions": ["World established from child's-eye perspective"],
+      "preconditions": [
+        "World established from child's-eye perspective"
+      ],
       "effects_on_stakes": "Wonder is felt because the child's scale and perspective makes it genuinely extraordinary rather than merely noted",
       "effects_on_character": "The child protagonist's capacity for wonder — their freshness of perception — is what allows the discovery to be the story's imaginative opening",
-      "common_alternatives": ["Wonder may arrive within the familiar world transformed, or in an entirely new world entered for the first time"],
-      "anti_patterns": ["Wonder scene arrives in a world already rendered as adult-familiar — the discovery has no one in the story to be astonished by it"]
+      "common_alternatives": [
+        "Wonder may arrive within the familiar world transformed, or in an entirely new world entered for the first time"
+      ],
+      "anti_patterns": [
+        "Wonder scene arrives in a world already rendered as adult-familiar — the discovery has no one in the story to be astonished by it"
+      ]
     },
     {
       "edge_id": "CL_E31_SAFE_FRAME_TO_CHALLENGE",
@@ -396,11 +830,17 @@
       "to": "CL_N61_CHALLENGE_SCENE",
       "label": "Safe-enough frame is what makes genuine challenge narratively productive — danger can be real because survival and growth are possible",
       "meaning": "mandates element",
-      "preconditions": ["Safe-enough frame established"],
+      "preconditions": [
+        "Safe-enough frame established"
+      ],
       "effects_on_stakes": "Challenge can reach its maximum intensity within the frame — the child is genuinely at risk within a structure that allows them to act",
       "effects_on_character": "Child protagonist draws on everything discovered in the wonder scene to face the challenge — imagination and discovery are the resources",
-      "common_alternatives": ["Challenge may test the safe-enough frame to its limit before the resolution restores it"],
-      "anti_patterns": ["Challenge arrives in a story where the safe-enough frame has not been established — danger is raw rather than productive"]
+      "common_alternatives": [
+        "Challenge may test the safe-enough frame to its limit before the resolution restores it"
+      ],
+      "anti_patterns": [
+        "Challenge arrives in a story where the safe-enough frame has not been established — danger is raw rather than productive"
+      ]
     },
     {
       "edge_id": "CL_E32_ADULT_FIGURES_TO_CHALLENGE",
@@ -408,11 +848,17 @@
       "to": "CL_N61_CHALLENGE_SCENE",
       "label": "Adult figures are present in the story's world but cannot resolve the specific challenge — child's agency is required",
       "meaning": "mandates element",
-      "preconditions": ["Adult figures established as present but not in control of the child's central problem"],
+      "preconditions": [
+        "Adult figures established as present but not in control of the child's central problem"
+      ],
       "effects_on_stakes": "The child cannot simply defer to adults — they must act themselves, and their action must genuinely determine the outcome",
       "effects_on_character": "The protagonist discovers their own capacity precisely because adult help is unavailable for this specific challenge",
-      "common_alternatives": ["Adult figures may be consulted but cannot provide the key action or insight — the child must supply it themselves"],
-      "anti_patterns": ["Adult figure steps in at the challenge scene's climax and resolves the central problem, removing the child's agency at the moment of payoff"]
+      "common_alternatives": [
+        "Adult figures may be consulted but cannot provide the key action or insight — the child must supply it themselves"
+      ],
+      "anti_patterns": [
+        "Adult figure steps in at the challenge scene's climax and resolves the central problem, removing the child's agency at the moment of payoff"
+      ]
     },
     {
       "edge_id": "CL_E40_WONDER_TO_CHALLENGE",
@@ -420,11 +866,17 @@
       "to": "CL_N61_CHALLENGE_SCENE",
       "label": "Wonder and discovery establish the resources and the expanded world that make the challenge possible and navigable",
       "meaning": "requires payoff",
-      "preconditions": ["Wonder scene has opened the story's imaginative space and established the world's larger possibilities"],
+      "preconditions": [
+        "Wonder scene has opened the story's imaginative space and established the world's larger possibilities"
+      ],
       "effects_on_stakes": "What the child discovered in the wonder scene is what they will need at the challenge — the two are structurally linked",
       "effects_on_character": "The child protagonist carries what they learned and discovered into the challenge — their growth from the wonder scene is the resource they draw on",
-      "common_alternatives": ["Discovery may be more internal — a quality or capacity the child found in themselves rather than in the world — that becomes the challenge's key"],
-      "anti_patterns": ["Wonder scene and challenge scene are disconnected — what was discovered plays no role in how the challenge is faced"]
+      "common_alternatives": [
+        "Discovery may be more internal — a quality or capacity the child found in themselves rather than in the world — that becomes the challenge's key"
+      ],
+      "anti_patterns": [
+        "Wonder scene and challenge scene are disconnected — what was discovered plays no role in how the challenge is faced"
+      ]
     },
     {
       "edge_id": "CL_E41_CHALLENGE_TO_RESOLUTION",
@@ -432,11 +884,18 @@
       "to": "CL_N62_EARNED_RESOLUTION",
       "label": "Challenge, fully and genuinely dramatized, creates the conditions for earned resolution and insight",
       "meaning": "requires payoff",
-      "preconditions": ["Challenge has been fully dramatized with genuine difficulty and genuine child agency", "Child protagonist has acted at real cost"],
+      "preconditions": [
+        "Challenge has been fully dramatized with genuine difficulty and genuine child agency",
+        "Child protagonist has acted at real cost"
+      ],
       "effects_on_stakes": "Resolution is meaningful because what was at stake was genuinely risked",
       "effects_on_character": "The child arrives at the resolution changed — what they learned in the challenge is the insight they carry into the resolution",
-      "common_alternatives": ["Resolution may be partial — child has grown but not all problems are solved — within the middle grade or allegory subgenres"],
-      "anti_patterns": ["Resolution arrives before the challenge is fully dramatized — the insight is cheap because the difficulty was not real"]
+      "common_alternatives": [
+        "Resolution may be partial — child has grown but not all problems are solved — within the middle grade or allegory subgenres"
+      ],
+      "anti_patterns": [
+        "Resolution arrives before the challenge is fully dramatized — the insight is cheap because the difficulty was not real"
+      ]
     },
     {
       "edge_id": "CL_E42_TAKEAWAY_TO_RESOLUTION",
@@ -444,11 +903,18 @@
       "to": "CL_N62_EARNED_RESOLUTION",
       "label": "Moral or emotional takeaway is delivered through the resolution, not before it",
       "meaning": "requires payoff",
-      "preconditions": ["Challenge completed", "Child protagonist has acted and experienced consequences"],
+      "preconditions": [
+        "Challenge completed",
+        "Child protagonist has acted and experienced consequences"
+      ],
       "effects_on_stakes": "The resolution's emotional weight is the weight of the insight — the child has genuinely earned the understanding they arrive at",
       "effects_on_character": "The child protagonist's change is the story's evidence that the insight is real, not performed",
-      "common_alternatives": ["Insight may be small and personal rather than large and universal — proportionate to the story's scale and the child's age"],
-      "anti_patterns": ["Takeaway is delivered outside the resolution — stated by an adult character before the child has earned it through experience"]
+      "common_alternatives": [
+        "Insight may be small and personal rather than large and universal — proportionate to the story's scale and the child's age"
+      ],
+      "anti_patterns": [
+        "Takeaway is delivered outside the resolution — stated by an adult character before the child has earned it through experience"
+      ]
     },
     {
       "edge_id": "CL_E90_CONDESCENSION_WARNING",
@@ -456,11 +922,15 @@
       "to": "CL_N90_CONDESCENSION",
       "label": "Moral takeaway imposed rather than earned collapses into condescension and adult agenda",
       "meaning": "prohibits element",
-      "preconditions": ["Story pursues a moral lesson that is delivered by adult characters or narrative voice rather than earned by the child protagonist's experience"],
+      "preconditions": [
+        "Story pursues a moral lesson that is delivered by adult characters or narrative voice rather than earned by the child protagonist's experience"
+      ],
       "effects_on_stakes": "Lesson that is imposed rather than discovered has no genuine stakes — the child protagonist is passive recipient, not active discoverer",
       "effects_on_character": "Child protagonist exists as a vehicle for the adult's message rather than as a genuine subject with their own interiority and agency",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes what to avoid"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern — it describes what to avoid"
+      ]
     }
   ]
 }

@@ -3,94 +3,250 @@
   "name": "Tragedy",
   "type": "archetype",
   "description": "A protagonist's flaw or irreversible choice leads to downfall, emphasizing inevitability and moral consequence.",
+  "_metadata": {
+    "nodeCount": 8,
+    "edgeCount": 7,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Threshold": 1,
+      "Reversal": 1,
+      "Descent": 1,
+      "Revelation": 1,
+      "Irreversible Cost": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "forces commitment": 1,
+      "raises cost": 1,
+      "narrows options": 1,
+      "reveals truth": 1,
+      "triggers crisis": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "TR_N01_ELEVATED_STATE",
       "label": "Elevated State",
       "role": "Origin",
       "definition": "The protagonist begins in a position of strength, virtue, or promise. They have something real to lose — status, love, integrity, or potential.",
-      "entry_conditions": ["Story opening", "The audience sees the character's admirable qualities and their position"],
-      "exit_conditions": ["A temptation or pressure activates the character's latent flaw"],
-      "typical_variants": ["Noble leader with political power", "Talented individual with bright prospects", "Loving person in a stable relationship"],
-      "failure_modes": ["Character starts too low — there's no height from which to fall", "Elevated state is unearned, making the audience indifferent to loss"],
-      "signals_in_text": ["Admiration from others", "Competence and success", "A hint of the flaw beneath the surface"]
+      "entry_conditions": [
+        "Story opening",
+        "The audience sees the character's admirable qualities and their position"
+      ],
+      "exit_conditions": [
+        "A temptation or pressure activates the character's latent flaw"
+      ],
+      "typical_variants": [
+        "Noble leader with political power",
+        "Talented individual with bright prospects",
+        "Loving person in a stable relationship"
+      ],
+      "failure_modes": [
+        "Character starts too low — there's no height from which to fall",
+        "Elevated state is unearned, making the audience indifferent to loss"
+      ],
+      "signals_in_text": [
+        "Admiration from others",
+        "Competence and success",
+        "A hint of the flaw beneath the surface"
+      ]
     },
     {
       "node_id": "TR_N02_TEMPTATION",
       "label": "Temptation or Pressure",
       "role": "Disruption",
       "definition": "A situation arises that activates the protagonist's specific flaw — ambition, jealousy, pride, desire, or fear. The flaw was always present but now has an object.",
-      "entry_conditions": ["Elevated state is established", "An external circumstance creates the opportunity for the flaw to act"],
-      "exit_conditions": ["The protagonist makes a choice that begins the descent"],
-      "typical_variants": ["Offer of power that requires moral compromise", "Jealousy triggered by a rival", "Fear of loss that drives desperate action", "Ambition amplified by opportunity"],
-      "failure_modes": ["Temptation is too mild to justify what follows", "The flaw is not established before the temptation arrives"],
-      "signals_in_text": ["A proposition or opportunity", "Internal debate", "The first rationalization"]
+      "entry_conditions": [
+        "Elevated state is established",
+        "An external circumstance creates the opportunity for the flaw to act"
+      ],
+      "exit_conditions": [
+        "The protagonist makes a choice that begins the descent"
+      ],
+      "typical_variants": [
+        "Offer of power that requires moral compromise",
+        "Jealousy triggered by a rival",
+        "Fear of loss that drives desperate action",
+        "Ambition amplified by opportunity"
+      ],
+      "failure_modes": [
+        "Temptation is too mild to justify what follows",
+        "The flaw is not established before the temptation arrives"
+      ],
+      "signals_in_text": [
+        "A proposition or opportunity",
+        "Internal debate",
+        "The first rationalization"
+      ]
     },
     {
       "node_id": "TR_N03_FATAL_CHOICE",
       "label": "Fatal Choice",
       "role": "Threshold",
       "definition": "The protagonist makes the irreversible decision that sets the tragedy in motion. They cross a moral or practical line that cannot be uncrossed.",
-      "entry_conditions": ["Temptation is active", "The protagonist could still turn back but chooses not to"],
-      "exit_conditions": ["The action is taken; consequences are now inevitable"],
-      "typical_variants": ["Murder or betrayal", "A lie that will compound", "Seizing power through illegitimate means", "Abandoning a moral principle for advantage"],
-      "failure_modes": ["Choice is forced rather than chosen — removes moral weight", "Choice is so minor that the eventual consequences feel disproportionate"],
-      "signals_in_text": ["A deliberate transgression", "Crossing a line the character previously respected", "A moment of guilty awareness immediately suppressed"]
+      "entry_conditions": [
+        "Temptation is active",
+        "The protagonist could still turn back but chooses not to"
+      ],
+      "exit_conditions": [
+        "The action is taken; consequences are now inevitable"
+      ],
+      "typical_variants": [
+        "Murder or betrayal",
+        "A lie that will compound",
+        "Seizing power through illegitimate means",
+        "Abandoning a moral principle for advantage"
+      ],
+      "failure_modes": [
+        "Choice is forced rather than chosen — removes moral weight",
+        "Choice is so minor that the eventual consequences feel disproportionate"
+      ],
+      "signals_in_text": [
+        "A deliberate transgression",
+        "Crossing a line the character previously respected",
+        "A moment of guilty awareness immediately suppressed"
+      ]
     },
     {
       "node_id": "TR_N04_APPARENT_SUCCESS",
       "label": "Apparent Success",
       "role": "Reversal",
       "definition": "The fatal choice initially appears to work. The protagonist gains what they sought, reinforcing the belief that the transgression was justified.",
-      "entry_conditions": ["The fatal choice has been made", "Immediate consequences are positive"],
-      "exit_conditions": ["Cracks begin to appear — the cost starts to surface"],
-      "typical_variants": ["Power consolidated", "Rival eliminated", "Wealth or status obtained", "Secret remains hidden"],
-      "failure_modes": ["Success lasts too long — the story loses tension", "No seeds of the coming unraveling are planted"],
-      "signals_in_text": ["Celebration or relief", "Growing confidence", "Small warning signs the character ignores"]
+      "entry_conditions": [
+        "The fatal choice has been made",
+        "Immediate consequences are positive"
+      ],
+      "exit_conditions": [
+        "Cracks begin to appear — the cost starts to surface"
+      ],
+      "typical_variants": [
+        "Power consolidated",
+        "Rival eliminated",
+        "Wealth or status obtained",
+        "Secret remains hidden"
+      ],
+      "failure_modes": [
+        "Success lasts too long — the story loses tension",
+        "No seeds of the coming unraveling are planted"
+      ],
+      "signals_in_text": [
+        "Celebration or relief",
+        "Growing confidence",
+        "Small warning signs the character ignores"
+      ]
     },
     {
       "node_id": "TR_N05_UNRAVELING",
       "label": "Unraveling",
       "role": "Descent",
       "definition": "The consequences of the fatal choice begin to multiply. Each attempt to maintain the illusion of success requires further transgression, creating a compounding spiral.",
-      "entry_conditions": ["Apparent success is eroding", "New threats emerge from the original choice"],
-      "exit_conditions": ["The character's position is untenable; exposure or catastrophe is imminent"],
-      "typical_variants": ["Cover-up requires more lies or violence", "Allies turn as they discover the truth", "Paranoia and isolation increase", "The original flaw deepens under pressure"],
-      "failure_modes": ["Unraveling is caused entirely by external bad luck rather than the flaw", "Character never has a moment of recognition during the descent"],
-      "signals_in_text": ["Escalating deception", "Loss of allies", "Sleeplessness or paranoia", "Increasingly desperate measures"]
+      "entry_conditions": [
+        "Apparent success is eroding",
+        "New threats emerge from the original choice"
+      ],
+      "exit_conditions": [
+        "The character's position is untenable; exposure or catastrophe is imminent"
+      ],
+      "typical_variants": [
+        "Cover-up requires more lies or violence",
+        "Allies turn as they discover the truth",
+        "Paranoia and isolation increase",
+        "The original flaw deepens under pressure"
+      ],
+      "failure_modes": [
+        "Unraveling is caused entirely by external bad luck rather than the flaw",
+        "Character never has a moment of recognition during the descent"
+      ],
+      "signals_in_text": [
+        "Escalating deception",
+        "Loss of allies",
+        "Sleeplessness or paranoia",
+        "Increasingly desperate measures"
+      ]
     },
     {
       "node_id": "TR_N06_RECOGNITION",
       "label": "Recognition (Anagnorisis)",
       "role": "Revelation",
       "definition": "The protagonist sees clearly — often for the first time — the full scope of what they have done and what they have become. This is the tragic insight.",
-      "entry_conditions": ["The unraveling has proceeded far enough that denial is impossible"],
-      "exit_conditions": ["The character understands but cannot reverse the damage"],
-      "typical_variants": ["Public exposure forces self-confrontation", "A mirror moment — seeing themselves through another's eyes", "Realizing the thing they sacrificed was the thing they truly valued"],
-      "failure_modes": ["Recognition never comes — the character remains deluded (this can work but changes the story's meaning)", "Recognition is too neat and intellectual, lacking emotional devastation"],
-      "signals_in_text": ["Moment of horrified clarity", "Confession or soliloquy", "'What have I done' realization"]
+      "entry_conditions": [
+        "The unraveling has proceeded far enough that denial is impossible"
+      ],
+      "exit_conditions": [
+        "The character understands but cannot reverse the damage"
+      ],
+      "typical_variants": [
+        "Public exposure forces self-confrontation",
+        "A mirror moment — seeing themselves through another's eyes",
+        "Realizing the thing they sacrificed was the thing they truly valued"
+      ],
+      "failure_modes": [
+        "Recognition never comes — the character remains deluded (this can work but changes the story's meaning)",
+        "Recognition is too neat and intellectual, lacking emotional devastation"
+      ],
+      "signals_in_text": [
+        "Moment of horrified clarity",
+        "Confession or soliloquy",
+        "'What have I done' realization"
+      ]
     },
     {
       "node_id": "TR_N07_DOWNFALL",
       "label": "Downfall (Catastrophe)",
       "role": "Irreversible Cost",
       "definition": "The protagonist suffers the full consequences — death, exile, ruin, or permanent loss. The punishment is proportional to the transgression but feels inevitable rather than arbitrary.",
-      "entry_conditions": ["Recognition has occurred (or the character is beyond recognition)", "The consequences arrive"],
-      "exit_conditions": ["The protagonist's fate is sealed"],
-      "typical_variants": ["Death by the protagonist's own hand or the hand of those wronged", "Exile and permanent separation from what they valued", "Madness or total isolation", "Public ruin and disgrace"],
-      "failure_modes": ["Downfall feels random rather than caused by the flaw", "Downfall is so extreme it seems sadistic rather than meaningful"],
-      "signals_in_text": ["Death or destruction", "Final confrontation", "Loss of everything gained"]
+      "entry_conditions": [
+        "Recognition has occurred (or the character is beyond recognition)",
+        "The consequences arrive"
+      ],
+      "exit_conditions": [
+        "The protagonist's fate is sealed"
+      ],
+      "typical_variants": [
+        "Death by the protagonist's own hand or the hand of those wronged",
+        "Exile and permanent separation from what they valued",
+        "Madness or total isolation",
+        "Public ruin and disgrace"
+      ],
+      "failure_modes": [
+        "Downfall feels random rather than caused by the flaw",
+        "Downfall is so extreme it seems sadistic rather than meaningful"
+      ],
+      "signals_in_text": [
+        "Death or destruction",
+        "Final confrontation",
+        "Loss of everything gained"
+      ]
     },
     {
       "node_id": "TR_N08_AFTERMATH",
       "label": "Aftermath",
       "role": "Resolution",
       "definition": "The world after the protagonist's fall. Order may be restored, but the cost is visible. The tragedy's meaning is crystallized in what remains.",
-      "entry_conditions": ["The downfall is complete"],
-      "exit_conditions": ["A new equilibrium is established, scarred by the events"],
-      "typical_variants": ["Survivors mourn and rebuild", "A chorus or narrator reflects on the meaning", "The world is diminished by the loss", "A successor inherits the consequences"],
-      "failure_modes": ["Aftermath is skipped — the story ends at the moment of death", "Aftermath is so tidy it undermines the tragedy's weight"],
-      "signals_in_text": ["Funeral or memorial", "Reflection on what was lost", "Restoration of order at a cost"]
+      "entry_conditions": [
+        "The downfall is complete"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established, scarred by the events"
+      ],
+      "typical_variants": [
+        "Survivors mourn and rebuild",
+        "A chorus or narrator reflects on the meaning",
+        "The world is diminished by the loss",
+        "A successor inherits the consequences"
+      ],
+      "failure_modes": [
+        "Aftermath is skipped — the story ends at the moment of death",
+        "Aftermath is so tidy it undermines the tragedy's weight"
+      ],
+      "signals_in_text": [
+        "Funeral or memorial",
+        "Reflection on what was lost",
+        "Restoration of order at a cost"
+      ]
     }
   ],
   "edges": [

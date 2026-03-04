@@ -3,138 +3,365 @@
   "name": "The Hero's Journey",
   "type": "archetype",
   "description": "A protagonist departs from the ordinary world, undergoes trials and transformation in a special world, and returns changed. The structure emphasizes initiation, crisis, and reintegration.",
+  "_metadata": {
+    "nodeCount": 12,
+    "edgeCount": 12,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Commitment": 1,
+      "Catalyst": 1,
+      "Threshold": 1,
+      "Trial": 2,
+      "Descent": 1,
+      "Crisis": 2,
+      "Transformation": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "narrows options": 2,
+      "forces commitment": 2,
+      "grants insight": 1,
+      "tests resolve": 1,
+      "triggers crisis": 1,
+      "enables transformation": 1,
+      "raises cost": 1,
+      "demands sacrifice": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "HJ_N01_ORDINARY_WORLD",
       "label": "Ordinary World",
       "role": "Origin",
       "definition": "The protagonist's familiar, stable environment before any call to change. Establishes what is normal and what the character values or lacks.",
-      "entry_conditions": ["Story opening", "Audience has no prior context"],
-      "exit_conditions": ["A disruption or summons arrives that cannot be ignored"],
-      "typical_variants": ["Idyllic peace that masks inner dissatisfaction", "Oppressive normalcy the character endures", "Comfortable mediocrity the character accepts"],
-      "failure_modes": ["World is so bland the audience has no reason to care about what the character might lose", "Ordinary world is never clearly established, so departure has no weight"],
-      "signals_in_text": ["Domestic routines", "Unfulfilled longing", "Contrast between character's life and the wider world"]
+      "entry_conditions": [
+        "Story opening",
+        "Audience has no prior context"
+      ],
+      "exit_conditions": [
+        "A disruption or summons arrives that cannot be ignored"
+      ],
+      "typical_variants": [
+        "Idyllic peace that masks inner dissatisfaction",
+        "Oppressive normalcy the character endures",
+        "Comfortable mediocrity the character accepts"
+      ],
+      "failure_modes": [
+        "World is so bland the audience has no reason to care about what the character might lose",
+        "Ordinary world is never clearly established, so departure has no weight"
+      ],
+      "signals_in_text": [
+        "Domestic routines",
+        "Unfulfilled longing",
+        "Contrast between character's life and the wider world"
+      ]
     },
     {
       "node_id": "HJ_N02_CALL_TO_ADVENTURE",
       "label": "Call to Adventure",
       "role": "Disruption",
       "definition": "An external event, message, or encounter that presents the protagonist with a problem or opportunity that the ordinary world cannot resolve.",
-      "entry_conditions": ["Ordinary world is established", "An outside force intrudes"],
-      "exit_conditions": ["The protagonist acknowledges the call exists (acceptance or refusal)"],
-      "typical_variants": ["Herald delivers a message", "Discovery of a mystery or injustice", "Personal loss that demands response"],
-      "failure_modes": ["Call is too vague to create urgency", "Call is so overwhelming it removes choice entirely"],
-      "signals_in_text": ["Arrival of a stranger", "News of a threat", "An invitation or challenge"]
+      "entry_conditions": [
+        "Ordinary world is established",
+        "An outside force intrudes"
+      ],
+      "exit_conditions": [
+        "The protagonist acknowledges the call exists (acceptance or refusal)"
+      ],
+      "typical_variants": [
+        "Herald delivers a message",
+        "Discovery of a mystery or injustice",
+        "Personal loss that demands response"
+      ],
+      "failure_modes": [
+        "Call is too vague to create urgency",
+        "Call is so overwhelming it removes choice entirely"
+      ],
+      "signals_in_text": [
+        "Arrival of a stranger",
+        "News of a threat",
+        "An invitation or challenge"
+      ]
     },
     {
       "node_id": "HJ_N50_REFUSAL_OF_CALL",
       "label": "Refusal of the Call",
       "role": "Commitment",
       "definition": "The protagonist hesitates or declines the call, revealing fear, obligation, or attachment to the ordinary world.",
-      "entry_conditions": ["Call has been received", "Character has reason to resist"],
-      "exit_conditions": ["An escalation or new event overrides the refusal"],
-      "typical_variants": ["Fear-based refusal", "Duty to family or community", "Disbelief that the call is real"],
-      "failure_modes": ["Refusal lasts so long it stalls momentum", "Refusal has no credible basis"],
-      "signals_in_text": ["Excuses", "Turning away", "Rationalization of inaction"]
+      "entry_conditions": [
+        "Call has been received",
+        "Character has reason to resist"
+      ],
+      "exit_conditions": [
+        "An escalation or new event overrides the refusal"
+      ],
+      "typical_variants": [
+        "Fear-based refusal",
+        "Duty to family or community",
+        "Disbelief that the call is real"
+      ],
+      "failure_modes": [
+        "Refusal lasts so long it stalls momentum",
+        "Refusal has no credible basis"
+      ],
+      "signals_in_text": [
+        "Excuses",
+        "Turning away",
+        "Rationalization of inaction"
+      ]
     },
     {
       "node_id": "HJ_N03_MENTOR",
       "label": "Meeting the Mentor",
       "role": "Catalyst",
       "definition": "The protagonist encounters a figure who provides guidance, tools, or confidence needed to accept the journey.",
-      "entry_conditions": ["Call is acknowledged", "Protagonist lacks something needed to proceed"],
-      "exit_conditions": ["Protagonist has received what the mentor can give at this stage"],
-      "typical_variants": ["Wise elder", "Reluctant guide with a past", "Supernatural aid", "A text, artifact, or inherited knowledge"],
-      "failure_modes": ["Mentor solves problems for the hero, removing agency", "Mentor's gift has no cost or limit"],
-      "signals_in_text": ["Training montage", "Gift of a weapon or talisman", "Cryptic advice that pays off later"]
+      "entry_conditions": [
+        "Call is acknowledged",
+        "Protagonist lacks something needed to proceed"
+      ],
+      "exit_conditions": [
+        "Protagonist has received what the mentor can give at this stage"
+      ],
+      "typical_variants": [
+        "Wise elder",
+        "Reluctant guide with a past",
+        "Supernatural aid",
+        "A text, artifact, or inherited knowledge"
+      ],
+      "failure_modes": [
+        "Mentor solves problems for the hero, removing agency",
+        "Mentor's gift has no cost or limit"
+      ],
+      "signals_in_text": [
+        "Training montage",
+        "Gift of a weapon or talisman",
+        "Cryptic advice that pays off later"
+      ]
     },
     {
       "node_id": "HJ_N04_THRESHOLD",
       "label": "Crossing the Threshold",
       "role": "Threshold",
       "definition": "The protagonist leaves the ordinary world and enters the special world where the adventure's rules apply. This is the first irreversible step.",
-      "entry_conditions": ["Protagonist has accepted the call (possibly after refusal)", "Means to cross exists"],
-      "exit_conditions": ["The protagonist is fully in the special world with no easy return"],
-      "typical_variants": ["Physical departure (portal, journey)", "Social departure (breaking a rule, defying authority)", "Psychological departure (accepting a new identity)"],
-      "failure_modes": ["Crossing is trivial with no sense of risk", "Character can easily return, undermining irreversibility"],
-      "signals_in_text": ["Leaving home", "Entering a forbidden zone", "A door that locks behind"]
+      "entry_conditions": [
+        "Protagonist has accepted the call (possibly after refusal)",
+        "Means to cross exists"
+      ],
+      "exit_conditions": [
+        "The protagonist is fully in the special world with no easy return"
+      ],
+      "typical_variants": [
+        "Physical departure (portal, journey)",
+        "Social departure (breaking a rule, defying authority)",
+        "Psychological departure (accepting a new identity)"
+      ],
+      "failure_modes": [
+        "Crossing is trivial with no sense of risk",
+        "Character can easily return, undermining irreversibility"
+      ],
+      "signals_in_text": [
+        "Leaving home",
+        "Entering a forbidden zone",
+        "A door that locks behind"
+      ]
     },
     {
       "node_id": "HJ_N05_TRIALS",
       "label": "Road of Trials",
       "role": "Trial",
       "definition": "A series of tests, enemies, and allies encountered in the special world that build the protagonist's competence and reveal the world's rules.",
-      "entry_conditions": ["Protagonist is in the special world", "Central conflict is not yet at peak"],
-      "exit_conditions": ["Protagonist has gained enough experience or allies for the next major challenge"],
-      "typical_variants": ["Sequential escalating challenges", "Parallel tests of different virtues", "Repeated failure before breakthrough"],
-      "failure_modes": ["Trials are too easy and cost nothing", "Trials are disconnected from the central conflict", "No progression in difficulty or learning"],
-      "signals_in_text": ["New allies and enemies introduced", "Skills tested and developed", "Setbacks that teach"]
+      "entry_conditions": [
+        "Protagonist is in the special world",
+        "Central conflict is not yet at peak"
+      ],
+      "exit_conditions": [
+        "Protagonist has gained enough experience or allies for the next major challenge"
+      ],
+      "typical_variants": [
+        "Sequential escalating challenges",
+        "Parallel tests of different virtues",
+        "Repeated failure before breakthrough"
+      ],
+      "failure_modes": [
+        "Trials are too easy and cost nothing",
+        "Trials are disconnected from the central conflict",
+        "No progression in difficulty or learning"
+      ],
+      "signals_in_text": [
+        "New allies and enemies introduced",
+        "Skills tested and developed",
+        "Setbacks that teach"
+      ]
     },
     {
       "node_id": "HJ_N06_APPROACH",
       "label": "Approach to the Inmost Cave",
       "role": "Descent",
       "definition": "The protagonist prepares for the central ordeal, entering the most dangerous region of the special world.",
-      "entry_conditions": ["Trials have been faced", "The source of the central threat is identified"],
-      "exit_conditions": ["The protagonist stands at the threshold of the supreme ordeal"],
-      "typical_variants": ["Planning and preparation", "Journey into enemy territory", "Psychological steeling"],
-      "failure_modes": ["No sense of escalating danger", "Approach is skipped, making the ordeal feel sudden"],
-      "signals_in_text": ["Tension building", "Final preparations", "Warnings from allies"]
+      "entry_conditions": [
+        "Trials have been faced",
+        "The source of the central threat is identified"
+      ],
+      "exit_conditions": [
+        "The protagonist stands at the threshold of the supreme ordeal"
+      ],
+      "typical_variants": [
+        "Planning and preparation",
+        "Journey into enemy territory",
+        "Psychological steeling"
+      ],
+      "failure_modes": [
+        "No sense of escalating danger",
+        "Approach is skipped, making the ordeal feel sudden"
+      ],
+      "signals_in_text": [
+        "Tension building",
+        "Final preparations",
+        "Warnings from allies"
+      ]
     },
     {
       "node_id": "HJ_N07_ORDEAL",
       "label": "The Ordeal",
       "role": "Crisis",
       "definition": "The protagonist faces the greatest challenge — a confrontation with death, the shadow, or the central antagonistic force. This is the story's structural climax of the inner journey.",
-      "entry_conditions": ["Protagonist has reached the inmost cave", "All prior preparation is now tested"],
-      "exit_conditions": ["The protagonist survives (transformed) or fails (tragically)"],
-      "typical_variants": ["Physical death-and-rebirth", "Confrontation with the shadow self", "Betrayal by an ally", "Sacrifice of something cherished"],
-      "failure_modes": ["Ordeal is won too easily", "Ordeal has no personal cost", "Outcome feels arbitrary rather than earned"],
-      "signals_in_text": ["Apparent defeat", "Moment of despair", "Drawing on deep reserves"]
+      "entry_conditions": [
+        "Protagonist has reached the inmost cave",
+        "All prior preparation is now tested"
+      ],
+      "exit_conditions": [
+        "The protagonist survives (transformed) or fails (tragically)"
+      ],
+      "typical_variants": [
+        "Physical death-and-rebirth",
+        "Confrontation with the shadow self",
+        "Betrayal by an ally",
+        "Sacrifice of something cherished"
+      ],
+      "failure_modes": [
+        "Ordeal is won too easily",
+        "Ordeal has no personal cost",
+        "Outcome feels arbitrary rather than earned"
+      ],
+      "signals_in_text": [
+        "Apparent defeat",
+        "Moment of despair",
+        "Drawing on deep reserves"
+      ]
     },
     {
       "node_id": "HJ_N08_REWARD",
       "label": "Reward (Seizing the Sword)",
       "role": "Transformation",
       "definition": "Having survived the ordeal, the protagonist claims the prize — knowledge, power, reconciliation, or an object of great value.",
-      "entry_conditions": ["The ordeal has been survived", "The cost has been paid"],
-      "exit_conditions": ["The protagonist possesses or embodies the reward"],
-      "typical_variants": ["Physical treasure", "Self-knowledge", "Reconciliation with a lost figure", "New power or status"],
-      "failure_modes": ["Reward feels unearned", "Reward is never used or tested", "Reward is handed over without effort"],
-      "signals_in_text": ["Celebration or relief", "New clarity", "Claiming or receiving a gift"]
+      "entry_conditions": [
+        "The ordeal has been survived",
+        "The cost has been paid"
+      ],
+      "exit_conditions": [
+        "The protagonist possesses or embodies the reward"
+      ],
+      "typical_variants": [
+        "Physical treasure",
+        "Self-knowledge",
+        "Reconciliation with a lost figure",
+        "New power or status"
+      ],
+      "failure_modes": [
+        "Reward feels unearned",
+        "Reward is never used or tested",
+        "Reward is handed over without effort"
+      ],
+      "signals_in_text": [
+        "Celebration or relief",
+        "New clarity",
+        "Claiming or receiving a gift"
+      ]
     },
     {
       "node_id": "HJ_N09_ROAD_BACK",
       "label": "The Road Back",
       "role": "Trial",
       "definition": "The protagonist begins the return to the ordinary world but faces new dangers or temptations that test whether the transformation will hold.",
-      "entry_conditions": ["Reward has been claimed", "The special world is not yet left behind"],
-      "exit_conditions": ["The protagonist commits to completing the return"],
-      "typical_variants": ["Chase or pursuit by remaining antagonists", "Temptation to stay in the special world", "Moral test of whether to use the reward selfishly"],
-      "failure_modes": ["Return is uneventful", "No tension about whether the character has truly changed"],
-      "signals_in_text": ["Urgency to return", "Pursuit", "Doubt about going back"]
+      "entry_conditions": [
+        "Reward has been claimed",
+        "The special world is not yet left behind"
+      ],
+      "exit_conditions": [
+        "The protagonist commits to completing the return"
+      ],
+      "typical_variants": [
+        "Chase or pursuit by remaining antagonists",
+        "Temptation to stay in the special world",
+        "Moral test of whether to use the reward selfishly"
+      ],
+      "failure_modes": [
+        "Return is uneventful",
+        "No tension about whether the character has truly changed"
+      ],
+      "signals_in_text": [
+        "Urgency to return",
+        "Pursuit",
+        "Doubt about going back"
+      ]
     },
     {
       "node_id": "HJ_N10_RESURRECTION",
       "label": "Resurrection",
       "role": "Crisis",
       "definition": "A final, climactic test where the protagonist must apply everything learned. This is the external climax — the last purification before return.",
-      "entry_conditions": ["The road back has presented a final threat", "The stakes encompass more than just the protagonist"],
-      "exit_conditions": ["The protagonist definitively resolves the central conflict"],
-      "typical_variants": ["Final battle with the antagonist", "A second death-and-rebirth", "A public demonstration of transformation"],
-      "failure_modes": ["Feels redundant after the ordeal", "Resolved by external force rather than the hero's growth"],
-      "signals_in_text": ["Last stand", "Sacrifice for others", "Proof of change under pressure"]
+      "entry_conditions": [
+        "The road back has presented a final threat",
+        "The stakes encompass more than just the protagonist"
+      ],
+      "exit_conditions": [
+        "The protagonist definitively resolves the central conflict"
+      ],
+      "typical_variants": [
+        "Final battle with the antagonist",
+        "A second death-and-rebirth",
+        "A public demonstration of transformation"
+      ],
+      "failure_modes": [
+        "Feels redundant after the ordeal",
+        "Resolved by external force rather than the hero's growth"
+      ],
+      "signals_in_text": [
+        "Last stand",
+        "Sacrifice for others",
+        "Proof of change under pressure"
+      ]
     },
     {
       "node_id": "HJ_N11_RETURN_ELIXIR",
       "label": "Return with the Elixir",
       "role": "Resolution",
       "definition": "The protagonist returns to the ordinary world carrying the reward or wisdom gained, which benefits the community or transforms the character's place in it.",
-      "entry_conditions": ["The resurrection test is passed", "The character is ready to reintegrate"],
-      "exit_conditions": ["The new equilibrium is established"],
-      "typical_variants": ["Triumphant homecoming", "Bittersweet return (world has changed)", "Quiet reintegration with internal peace"],
-      "failure_modes": ["Return is glossed over", "Elixir has no visible impact on the ordinary world", "Character seems unchanged despite the journey"],
-      "signals_in_text": ["Homecoming scene", "Sharing knowledge or gifts", "Contrast with the opening"]
+      "entry_conditions": [
+        "The resurrection test is passed",
+        "The character is ready to reintegrate"
+      ],
+      "exit_conditions": [
+        "The new equilibrium is established"
+      ],
+      "typical_variants": [
+        "Triumphant homecoming",
+        "Bittersweet return (world has changed)",
+        "Quiet reintegration with internal peace"
+      ],
+      "failure_modes": [
+        "Return is glossed over",
+        "Elixir has no visible impact on the ordinary world",
+        "Character seems unchanged despite the journey"
+      ],
+      "signals_in_text": [
+        "Homecoming scene",
+        "Sharing knowledge or gifts",
+        "Contrast with the opening"
+      ]
     }
   ],
   "edges": [

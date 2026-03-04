@@ -3,6 +3,28 @@
   "name": "Science Fiction",
   "type": "genre",
   "description": "Stories exploring speculative technology, future societies, or alternative realities, using 'what if' premises to test ideas and consequences.",
+  "_metadata": {
+    "nodeCount": 17,
+    "edgeCount": 18,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 1
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 4,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 4,
+      "mandates element": 3,
+      "requires payoff": 1,
+      "prohibits element": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "SF_N01_PROMISE",
@@ -10,11 +32,26 @@
       "role": "Genre Promise",
       "level": 1,
       "definition": "The audience is promised a story that explores a speculative premise — 'what if X were true?' — where the consequences of that premise are rigorously followed through society, technology, and human behavior.",
-      "entry_conditions": ["Story is positioned as science fiction"],
-      "exit_conditions": ["Core constraints are established that fulfill this promise"],
-      "typical_variants": ["Hard SF (technology-focused)", "Social SF (society-focused)", "Space opera (adventure-focused)", "Dystopian/post-apocalyptic"],
-      "failure_modes": ["Speculative premise is window dressing with no consequences explored", "Technology is magic with a science label"],
-      "signals_in_text": ["Early introduction of the speculative premise", "World visibly differs from ours in specific, logical ways"]
+      "entry_conditions": [
+        "Story is positioned as science fiction"
+      ],
+      "exit_conditions": [
+        "Core constraints are established that fulfill this promise"
+      ],
+      "typical_variants": [
+        "Hard SF (technology-focused)",
+        "Social SF (society-focused)",
+        "Space opera (adventure-focused)",
+        "Dystopian/post-apocalyptic"
+      ],
+      "failure_modes": [
+        "Speculative premise is window dressing with no consequences explored",
+        "Technology is magic with a science label"
+      ],
+      "signals_in_text": [
+        "Early introduction of the speculative premise",
+        "World visibly differs from ours in specific, logical ways"
+      ]
     },
     {
       "node_id": "SF_N10_SPECULATIVE_PREMISE",
@@ -22,11 +59,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The story must center on a 'what if' — a speculative technology, scientific discovery, social change, or alternative reality — and that premise must drive the plot rather than merely decorate it.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["The speculative premise is essential — remove it and the story collapses"],
-      "typical_variants": ["Technological what-if (AI, FTL, biotech)", "Social what-if (new governance, altered demographics)", "Cosmological what-if (first contact, multiverse)", "Environmental what-if (climate collapse, terraforming)"],
-      "failure_modes": ["Premise could be removed without affecting the story", "Premise is mentioned but its implications are not explored"],
-      "signals_in_text": ["Characters grapple with the premise's implications", "Plot events are consequences of the premise", "Conflict arises from the premise itself"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "The speculative premise is essential — remove it and the story collapses"
+      ],
+      "typical_variants": [
+        "Technological what-if (AI, FTL, biotech)",
+        "Social what-if (new governance, altered demographics)",
+        "Cosmological what-if (first contact, multiverse)",
+        "Environmental what-if (climate collapse, terraforming)"
+      ],
+      "failure_modes": [
+        "Premise could be removed without affecting the story",
+        "Premise is mentioned but its implications are not explored"
+      ],
+      "signals_in_text": [
+        "Characters grapple with the premise's implications",
+        "Plot events are consequences of the premise",
+        "Conflict arises from the premise itself"
+      ]
     },
     {
       "node_id": "SF_N11_INTERNAL_CONSISTENCY",
@@ -34,11 +87,25 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The speculative elements must follow their own rules consistently — if FTL travel exists, it always works the same way; if AI is sentient, it behaves consistently with its established nature.",
-      "entry_conditions": ["Speculative premise introduced"],
-      "exit_conditions": ["Rules of the speculative element are respected throughout"],
-      "typical_variants": ["Rigorous scientific consistency", "Internally consistent but scientifically loose", "Consistent within genre conventions (space opera physics)"],
-      "failure_modes": ["Technology capabilities change based on plot needs", "Rules established early are broken later for convenience"],
-      "signals_in_text": ["Characters understand and reference technological limitations", "Audience can predict what technology will and won't do"]
+      "entry_conditions": [
+        "Speculative premise introduced"
+      ],
+      "exit_conditions": [
+        "Rules of the speculative element are respected throughout"
+      ],
+      "typical_variants": [
+        "Rigorous scientific consistency",
+        "Internally consistent but scientifically loose",
+        "Consistent within genre conventions (space opera physics)"
+      ],
+      "failure_modes": [
+        "Technology capabilities change based on plot needs",
+        "Rules established early are broken later for convenience"
+      ],
+      "signals_in_text": [
+        "Characters understand and reference technological limitations",
+        "Audience can predict what technology will and won't do"
+      ]
     },
     {
       "node_id": "SF_N12_CONSEQUENCES",
@@ -46,11 +113,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The story must show how the speculative premise affects individuals, society, ethics, or the human condition — not just that the technology exists, but what it means for people.",
-      "entry_conditions": ["Speculative premise and rules established"],
-      "exit_conditions": ["The premise's effects on human life, society, or ethics are visible"],
-      "typical_variants": ["Personal consequences (how it changes one life)", "Social consequences (how it changes civilization)", "Ethical consequences (moral dilemmas it creates)", "Existential consequences (what it reveals about humanity)"],
-      "failure_modes": ["Technology exists but no one is affected by it", "Consequences are superficial or ignored"],
-      "signals_in_text": ["Characters debate the implications", "Society has adapted (or failed to adapt) to the premise", "Moral questions arise directly from the speculative element"]
+      "entry_conditions": [
+        "Speculative premise and rules established"
+      ],
+      "exit_conditions": [
+        "The premise's effects on human life, society, or ethics are visible"
+      ],
+      "typical_variants": [
+        "Personal consequences (how it changes one life)",
+        "Social consequences (how it changes civilization)",
+        "Ethical consequences (moral dilemmas it creates)",
+        "Existential consequences (what it reveals about humanity)"
+      ],
+      "failure_modes": [
+        "Technology exists but no one is affected by it",
+        "Consequences are superficial or ignored"
+      ],
+      "signals_in_text": [
+        "Characters debate the implications",
+        "Society has adapted (or failed to adapt) to the premise",
+        "Moral questions arise directly from the speculative element"
+      ]
     },
     {
       "node_id": "SF_N13_PLAUSIBILITY",
@@ -58,11 +141,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The premise must feel like it could happen — even if it requires extrapolation — given an internal logic the audience can follow. 'Could' doesn't mean 'scientifically likely' but 'logically coherent.'",
-      "entry_conditions": ["Speculative premise established"],
-      "exit_conditions": ["Audience accepts the premise as plausible within the story's framework"],
-      "typical_variants": ["Scientifically rigorous", "Extrapolated from current trends", "Logically coherent within genre conventions", "Allegorically plausible"],
-      "failure_modes": ["Premise feels arbitrary or magical", "No attempt to justify or ground the speculation"],
-      "signals_in_text": ["Technical or social details that ground the premise", "Characters take the premise seriously", "Worldbuilding supports the plausibility"]
+      "entry_conditions": [
+        "Speculative premise established"
+      ],
+      "exit_conditions": [
+        "Audience accepts the premise as plausible within the story's framework"
+      ],
+      "typical_variants": [
+        "Scientifically rigorous",
+        "Extrapolated from current trends",
+        "Logically coherent within genre conventions",
+        "Allegorically plausible"
+      ],
+      "failure_modes": [
+        "Premise feels arbitrary or magical",
+        "No attempt to justify or ground the speculation"
+      ],
+      "signals_in_text": [
+        "Technical or social details that ground the premise",
+        "Characters take the premise seriously",
+        "Worldbuilding supports the plausibility"
+      ]
     },
     {
       "node_id": "SF_N20_HARD_SF",
@@ -70,11 +169,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "SF where scientific accuracy and technical rigor are central — the speculative premise is grounded in real or extrapolated science, and problem-solving through scientific reasoning drives the plot.",
-      "entry_conditions": ["Core constraints apply", "Scientific accuracy is prioritized"],
-      "exit_conditions": ["Technology and science are explained, consistent, and central to problem-solving"],
-      "typical_variants": ["Engineering problem SF", "Space exploration SF", "Near-future extrapolation", "Astrophysics-driven"],
-      "failure_modes": ["Claims scientific rigor but physics are wrong", "Science is accurate but story is a textbook not a narrative"],
-      "signals_in_text": ["Technical detail in descriptions", "Characters solve problems through scientific reasoning", "Real physics and engineering constrain the plot"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Scientific accuracy is prioritized"
+      ],
+      "exit_conditions": [
+        "Technology and science are explained, consistent, and central to problem-solving"
+      ],
+      "typical_variants": [
+        "Engineering problem SF",
+        "Space exploration SF",
+        "Near-future extrapolation",
+        "Astrophysics-driven"
+      ],
+      "failure_modes": [
+        "Claims scientific rigor but physics are wrong",
+        "Science is accurate but story is a textbook not a narrative"
+      ],
+      "signals_in_text": [
+        "Technical detail in descriptions",
+        "Characters solve problems through scientific reasoning",
+        "Real physics and engineering constrain the plot"
+      ]
     },
     {
       "node_id": "SF_N21_SOCIAL_SF",
@@ -82,11 +198,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "SF focused on how speculative changes affect society, politics, culture, and human relationships — the 'what if' is primarily social rather than technological.",
-      "entry_conditions": ["Core constraints apply", "Social implications are the primary focus"],
-      "exit_conditions": ["Story explores how a speculative change reshapes human society and relationships"],
-      "typical_variants": ["Dystopian/utopian", "First contact (cultural impact)", "Altered social structure", "Post-scarcity society"],
-      "failure_modes": ["Social commentary overwhelms narrative", "Society described but not dramatized through characters"],
-      "signals_in_text": ["Characters navigating altered social norms", "Political and cultural institutions shaped by the premise", "Interpersonal relationships affected by the speculative change"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Social implications are the primary focus"
+      ],
+      "exit_conditions": [
+        "Story explores how a speculative change reshapes human society and relationships"
+      ],
+      "typical_variants": [
+        "Dystopian/utopian",
+        "First contact (cultural impact)",
+        "Altered social structure",
+        "Post-scarcity society"
+      ],
+      "failure_modes": [
+        "Social commentary overwhelms narrative",
+        "Society described but not dramatized through characters"
+      ],
+      "signals_in_text": [
+        "Characters navigating altered social norms",
+        "Political and cultural institutions shaped by the premise",
+        "Interpersonal relationships affected by the speculative change"
+      ]
     },
     {
       "node_id": "SF_N22_SPACE_OPERA",
@@ -94,11 +227,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "SF that emphasizes adventure, drama, and grand scale — interstellar civilizations, galactic conflicts, and epic scope — with looser scientific constraints but strong narrative momentum.",
-      "entry_conditions": ["Core constraints apply", "Setting is interstellar or galactic in scope"],
-      "exit_conditions": ["Story delivers adventure and drama at civilizational scale"],
-      "typical_variants": ["Military space opera", "Political space opera", "Exploration space opera", "Romantic space opera"],
-      "failure_modes": ["Scale is vast but stakes are impersonal", "Adventure without any speculative substance"],
-      "signals_in_text": ["Multiple star systems or civilizations", "Fleet battles or diplomatic crises", "Individual characters against civilizational backdrop"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Setting is interstellar or galactic in scope"
+      ],
+      "exit_conditions": [
+        "Story delivers adventure and drama at civilizational scale"
+      ],
+      "typical_variants": [
+        "Military space opera",
+        "Political space opera",
+        "Exploration space opera",
+        "Romantic space opera"
+      ],
+      "failure_modes": [
+        "Scale is vast but stakes are impersonal",
+        "Adventure without any speculative substance"
+      ],
+      "signals_in_text": [
+        "Multiple star systems or civilizations",
+        "Fleet battles or diplomatic crises",
+        "Individual characters against civilizational backdrop"
+      ]
     },
     {
       "node_id": "SF_N23_DYSTOPIAN",
@@ -106,11 +256,28 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "SF set in a degraded or collapsed future — exploring what happens when speculative premises go wrong, societies fail, or catastrophic events reshape human existence.",
-      "entry_conditions": ["Core constraints apply", "Setting is a degraded or collapsed future"],
-      "exit_conditions": ["Story explores survival, resistance, or adaptation in a broken world"],
-      "typical_variants": ["Totalitarian dystopia", "Environmental collapse", "Technological catastrophe", "Social collapse"],
-      "failure_modes": ["Dystopia is aesthetic — oppression has no mechanisms", "Post-apocalypse is adventure playground with no weight"],
-      "signals_in_text": ["Detailed mechanisms of social control or collapse", "Characters constrained by systemic oppression or scarcity", "Memory of what was lost"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Setting is a degraded or collapsed future"
+      ],
+      "exit_conditions": [
+        "Story explores survival, resistance, or adaptation in a broken world"
+      ],
+      "typical_variants": [
+        "Totalitarian dystopia",
+        "Environmental collapse",
+        "Technological catastrophe",
+        "Social collapse"
+      ],
+      "failure_modes": [
+        "Dystopia is aesthetic — oppression has no mechanisms",
+        "Post-apocalypse is adventure playground with no weight"
+      ],
+      "signals_in_text": [
+        "Detailed mechanisms of social control or collapse",
+        "Characters constrained by systemic oppression or scarcity",
+        "Memory of what was lost"
+      ]
     },
     {
       "node_id": "SF_N40_TECH_RULES",
@@ -118,11 +285,26 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The story's speculative technology must have explicitly defined capabilities and limitations that the audience can track — creating opportunities for clever solutions and meaningful constraints.",
-      "entry_conditions": ["Subgenre pattern selected"],
-      "exit_conditions": ["Audience understands what the technology can and cannot do"],
-      "typical_variants": ["Hard limits (energy, speed, materials)", "Soft limits (social, ethical, economic)", "Built-in tradeoffs (capability vs. cost)"],
-      "failure_modes": ["Technology does whatever the plot needs", "Limits are stated but routinely violated"],
-      "signals_in_text": ["Characters reference limitations", "Technology fails in predictable ways", "Solutions work within established constraints"]
+      "entry_conditions": [
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "Audience understands what the technology can and cannot do"
+      ],
+      "typical_variants": [
+        "Hard limits (energy, speed, materials)",
+        "Soft limits (social, ethical, economic)",
+        "Built-in tradeoffs (capability vs. cost)"
+      ],
+      "failure_modes": [
+        "Technology does whatever the plot needs",
+        "Limits are stated but routinely violated"
+      ],
+      "signals_in_text": [
+        "Characters reference limitations",
+        "Technology fails in predictable ways",
+        "Solutions work within established constraints"
+      ]
     },
     {
       "node_id": "SF_N41_SOCIETY_ADAPTED",
@@ -130,11 +312,27 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The story's society must reflect the speculative premise — institutions, economies, cultures, and daily life must show the visible effects of the technology or change that defines this world.",
-      "entry_conditions": ["Speculative premise and subgenre established"],
-      "exit_conditions": ["Society is visibly different from ours in ways that follow from the premise"],
-      "typical_variants": ["New economic systems", "Altered social hierarchies", "Changed daily life routines", "New legal/ethical frameworks"],
-      "failure_modes": ["Present-day society with future technology bolted on", "Society mentioned but not shown"],
-      "signals_in_text": ["Background details reflect the premise", "Characters' occupations, relationships, and routines differ from ours", "Institutions have adapted to the speculative reality"]
+      "entry_conditions": [
+        "Speculative premise and subgenre established"
+      ],
+      "exit_conditions": [
+        "Society is visibly different from ours in ways that follow from the premise"
+      ],
+      "typical_variants": [
+        "New economic systems",
+        "Altered social hierarchies",
+        "Changed daily life routines",
+        "New legal/ethical frameworks"
+      ],
+      "failure_modes": [
+        "Present-day society with future technology bolted on",
+        "Society mentioned but not shown"
+      ],
+      "signals_in_text": [
+        "Background details reflect the premise",
+        "Characters' occupations, relationships, and routines differ from ours",
+        "Institutions have adapted to the speculative reality"
+      ]
     },
     {
       "node_id": "SF_N42_EXTRAPOLATION_ANCHOR",
@@ -142,11 +340,25 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "However far the speculative premise extrapolates, the story must maintain a recognizable human emotional and psychological core — the audience must be able to connect with characters despite the alien context.",
-      "entry_conditions": ["Speculative world established"],
-      "exit_conditions": ["Characters feel emotionally real despite their speculative context"],
-      "typical_variants": ["Familiar emotions in alien contexts", "Relatable motivations despite posthuman abilities", "Universal human dilemmas in speculative settings"],
-      "failure_modes": ["Characters are so alien they're unrelatable", "Emotional life is subordinated to technical worldbuilding"],
-      "signals_in_text": ["Characters express recognizable desires, fears, and attachments", "Interpersonal dynamics feel real despite speculative setting"]
+      "entry_conditions": [
+        "Speculative world established"
+      ],
+      "exit_conditions": [
+        "Characters feel emotionally real despite their speculative context"
+      ],
+      "typical_variants": [
+        "Familiar emotions in alien contexts",
+        "Relatable motivations despite posthuman abilities",
+        "Universal human dilemmas in speculative settings"
+      ],
+      "failure_modes": [
+        "Characters are so alien they're unrelatable",
+        "Emotional life is subordinated to technical worldbuilding"
+      ],
+      "signals_in_text": [
+        "Characters express recognizable desires, fears, and attachments",
+        "Interpersonal dynamics feel real despite speculative setting"
+      ]
     },
     {
       "node_id": "SF_N60_PREMISE_REVEAL",
@@ -154,11 +366,27 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "An early scene that establishes the speculative premise and shows the audience how this world differs from ours — the 'what if' made concrete.",
-      "entry_conditions": ["Story begins"],
-      "exit_conditions": ["Audience understands the speculative premise and its visible effects"],
-      "typical_variants": ["Technology demonstration", "Daily life showing adapted society", "Contrast between old and new world", "Character encountering the speculative element"],
-      "failure_modes": ["Premise explained through exposition dump", "World difference is trivial or cosmetic"],
-      "signals_in_text": ["Show-don't-tell demonstration of the premise", "Character interaction with speculative elements", "Audience immediately sees how this world is different"]
+      "entry_conditions": [
+        "Story begins"
+      ],
+      "exit_conditions": [
+        "Audience understands the speculative premise and its visible effects"
+      ],
+      "typical_variants": [
+        "Technology demonstration",
+        "Daily life showing adapted society",
+        "Contrast between old and new world",
+        "Character encountering the speculative element"
+      ],
+      "failure_modes": [
+        "Premise explained through exposition dump",
+        "World difference is trivial or cosmetic"
+      ],
+      "signals_in_text": [
+        "Show-don't-tell demonstration of the premise",
+        "Character interaction with speculative elements",
+        "Audience immediately sees how this world is different"
+      ]
     },
     {
       "node_id": "SF_N61_CONSEQUENCE_SCENE",
@@ -166,11 +394,27 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene where the consequences of the speculative premise create a moral dilemma, social conflict, or human cost that couldn't exist in our world — the premise's implications made personal.",
-      "entry_conditions": ["Premise established and characters are living within it"],
-      "exit_conditions": ["Character faces a choice or consequence that is unique to this speculative world"],
-      "typical_variants": ["Ethical dilemma created by technology", "Social conflict arising from speculative change", "Personal cost of living in this world", "Discovery that the premise has hidden consequences"],
-      "failure_modes": ["Dilemma could exist in any setting — premise is irrelevant", "Consequence is theoretical rather than dramatized"],
-      "signals_in_text": ["Character must make a choice that requires the speculative context", "Emotional weight comes directly from the premise", "Audience thinks about what they would do in this situation"]
+      "entry_conditions": [
+        "Premise established and characters are living within it"
+      ],
+      "exit_conditions": [
+        "Character faces a choice or consequence that is unique to this speculative world"
+      ],
+      "typical_variants": [
+        "Ethical dilemma created by technology",
+        "Social conflict arising from speculative change",
+        "Personal cost of living in this world",
+        "Discovery that the premise has hidden consequences"
+      ],
+      "failure_modes": [
+        "Dilemma could exist in any setting — premise is irrelevant",
+        "Consequence is theoretical rather than dramatized"
+      ],
+      "signals_in_text": [
+        "Character must make a choice that requires the speculative context",
+        "Emotional weight comes directly from the premise",
+        "Audience thinks about what they would do in this situation"
+      ]
     },
     {
       "node_id": "SF_N62_RESOLUTION_SCENE",
@@ -178,11 +422,27 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "The climactic resolution must depend on the speculative premise — the solution, sacrifice, or transformation must be one that could only happen in this speculative world.",
-      "entry_conditions": ["All escalation has led to this point"],
-      "exit_conditions": ["Central conflict is resolved in a way that requires the speculative premise"],
-      "typical_variants": ["Clever use of established technology", "Social revolution enabled by the premise", "Sacrifice unique to this world's rules", "Transcendence or transformation through the premise"],
-      "failure_modes": ["Resolution is generic and doesn't use the premise", "Solution violates established speculative rules"],
-      "signals_in_text": ["Resolution uses established rules creatively", "Outcome could not happen in our world", "Premise's full implications are realized"]
+      "entry_conditions": [
+        "All escalation has led to this point"
+      ],
+      "exit_conditions": [
+        "Central conflict is resolved in a way that requires the speculative premise"
+      ],
+      "typical_variants": [
+        "Clever use of established technology",
+        "Social revolution enabled by the premise",
+        "Sacrifice unique to this world's rules",
+        "Transcendence or transformation through the premise"
+      ],
+      "failure_modes": [
+        "Resolution is generic and doesn't use the premise",
+        "Solution violates established speculative rules"
+      ],
+      "signals_in_text": [
+        "Resolution uses established rules creatively",
+        "Outcome could not happen in our world",
+        "Premise's full implications are realized"
+      ]
     },
     {
       "node_id": "SF_N80_INTELLECTUAL_ENGAGEMENT",
@@ -190,11 +450,27 @@
       "role": "Tone Marker",
       "level": null,
       "definition": "SF requires a tone that engages the audience's intellect — curiosity about how things work, what could happen, and what it would mean. The tone invites thinking, not just feeling.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Story stimulates curiosity and thought alongside emotional engagement"],
-      "typical_variants": ["Sense of wonder at possibility", "Analytical problem-solving tone", "Philosophical questioning", "Speculative excitement"],
-      "failure_modes": ["Story is purely emotional with no intellectual dimension", "Intellectual content is dry and disconnected from narrative"],
-      "signals_in_text": ["Characters think about implications", "Audience is invited to consider the 'what if'", "Technical or social details reward attention"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Story stimulates curiosity and thought alongside emotional engagement"
+      ],
+      "typical_variants": [
+        "Sense of wonder at possibility",
+        "Analytical problem-solving tone",
+        "Philosophical questioning",
+        "Speculative excitement"
+      ],
+      "failure_modes": [
+        "Story is purely emotional with no intellectual dimension",
+        "Intellectual content is dry and disconnected from narrative"
+      ],
+      "signals_in_text": [
+        "Characters think about implications",
+        "Audience is invited to consider the 'what if'",
+        "Technical or social details reward attention"
+      ]
     },
     {
       "node_id": "SF_N90_TECH_MAGIC",
@@ -202,11 +478,24 @@
       "role": "Anti-Pattern",
       "level": null,
       "definition": "SF fails when technology operates as magic — with no consistent rules, no understandable limits, and no grounding in any extrapolative logic. 'Sufficiently advanced technology' is not an excuse for arbitrary capabilities.",
-      "entry_conditions": ["Technology is used in the story"],
-      "exit_conditions": ["Technology operates within defined, consistent rules"],
-      "typical_variants": ["Technology does whatever the plot requires", "Scientific terminology used to disguise magical thinking", "Rules change between scenes"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["Technology capabilities surprise the audience without setup", "No consistent rules govern what technology can do"]
+      "entry_conditions": [
+        "Technology is used in the story"
+      ],
+      "exit_conditions": [
+        "Technology operates within defined, consistent rules"
+      ],
+      "typical_variants": [
+        "Technology does whatever the plot requires",
+        "Scientific terminology used to disguise magical thinking",
+        "Rules change between scenes"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode — its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "Technology capabilities surprise the audience without setup",
+        "No consistent rules govern what technology can do"
+      ]
     }
   ],
   "edges": [
@@ -216,11 +505,17 @@
       "to": "SF_N10_SPECULATIVE_PREMISE",
       "label": "Promise requires a speculative premise",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "The premise defines what kind of conflict is possible",
       "effects_on_character": "Characters exist in a world shaped by the premise",
-      "common_alternatives": ["Single major premise vs. multiple interconnected premises"],
-      "anti_patterns": ["No clear speculative premise — just set in the future"]
+      "common_alternatives": [
+        "Single major premise vs. multiple interconnected premises"
+      ],
+      "anti_patterns": [
+        "No clear speculative premise — just set in the future"
+      ]
     },
     {
       "edge_id": "SF_E02_PROMISE_TO_CONSISTENCY",
@@ -228,11 +523,17 @@
       "to": "SF_N11_INTERNAL_CONSISTENCY",
       "label": "Promise requires internal consistency",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Consistent rules make outcomes meaningful",
       "effects_on_character": "Characters can make informed decisions based on known rules",
-      "common_alternatives": ["Strict scientific consistency vs. consistent genre conventions"],
-      "anti_patterns": ["Rules change based on plot needs"]
+      "common_alternatives": [
+        "Strict scientific consistency vs. consistent genre conventions"
+      ],
+      "anti_patterns": [
+        "Rules change based on plot needs"
+      ]
     },
     {
       "edge_id": "SF_E03_PROMISE_TO_CONSEQUENCES",
@@ -240,11 +541,17 @@
       "to": "SF_N12_CONSEQUENCES",
       "label": "Promise requires explored consequences",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Consequences create the story's conflict and meaning",
       "effects_on_character": "Characters are affected by and respond to the premise's implications",
-      "common_alternatives": ["Personal vs. societal vs. ethical consequences"],
-      "anti_patterns": ["Premise exists but its effects on people are never shown"]
+      "common_alternatives": [
+        "Personal vs. societal vs. ethical consequences"
+      ],
+      "anti_patterns": [
+        "Premise exists but its effects on people are never shown"
+      ]
     },
     {
       "edge_id": "SF_E04_PROMISE_TO_PLAUSIBILITY",
@@ -252,11 +559,17 @@
       "to": "SF_N13_PLAUSIBILITY",
       "label": "Promise requires plausible speculation",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Plausibility makes stakes feel real",
       "effects_on_character": "Characters inhabit a world the audience can believe in",
-      "common_alternatives": ["Scientifically rigorous vs. genre-convention plausible"],
-      "anti_patterns": ["Premise is arbitrary with no attempt at grounding"]
+      "common_alternatives": [
+        "Scientifically rigorous vs. genre-convention plausible"
+      ],
+      "anti_patterns": [
+        "Premise is arbitrary with no attempt at grounding"
+      ]
     },
     {
       "edge_id": "SF_E05_PROMISE_TO_TONE",
@@ -264,11 +577,17 @@
       "to": "SF_N80_INTELLECTUAL_ENGAGEMENT",
       "label": "Promise requires intellectual engagement",
       "meaning": "sets tone",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Intellectual stakes complement emotional stakes",
       "effects_on_character": "Characters think as well as feel",
-      "common_alternatives": ["Wonder-driven vs. analytical vs. philosophical"],
-      "anti_patterns": ["No intellectual dimension — speculative setting is purely decorative"]
+      "common_alternatives": [
+        "Wonder-driven vs. analytical vs. philosophical"
+      ],
+      "anti_patterns": [
+        "No intellectual dimension — speculative setting is purely decorative"
+      ]
     },
     {
       "edge_id": "SF_E10_PREMISE_TO_HARD",
@@ -276,11 +595,19 @@
       "to": "SF_N20_HARD_SF",
       "label": "Premise explored with scientific rigor",
       "meaning": "branches into subtype",
-      "preconditions": ["Premise is grounded in real or extrapolated science"],
+      "preconditions": [
+        "Premise is grounded in real or extrapolated science"
+      ],
       "effects_on_stakes": "Scientific constraints define what's possible",
       "effects_on_character": "Characters solve problems through scientific reasoning",
-      "common_alternatives": ["Social SF", "Space opera", "Dystopian"],
-      "anti_patterns": ["Claims scientific rigor but physics are wrong"]
+      "common_alternatives": [
+        "Social SF",
+        "Space opera",
+        "Dystopian"
+      ],
+      "anti_patterns": [
+        "Claims scientific rigor but physics are wrong"
+      ]
     },
     {
       "edge_id": "SF_E11_PREMISE_TO_SOCIAL",
@@ -288,11 +615,19 @@
       "to": "SF_N21_SOCIAL_SF",
       "label": "Premise explored through social impact",
       "meaning": "branches into subtype",
-      "preconditions": ["Premise primarily affects society and human relationships"],
+      "preconditions": [
+        "Premise primarily affects society and human relationships"
+      ],
       "effects_on_stakes": "Social disruption and adaptation define the conflict",
       "effects_on_character": "Characters navigate a society reshaped by the premise",
-      "common_alternatives": ["Hard SF", "Space opera", "Dystopian"],
-      "anti_patterns": ["Social commentary without narrative engagement"]
+      "common_alternatives": [
+        "Hard SF",
+        "Space opera",
+        "Dystopian"
+      ],
+      "anti_patterns": [
+        "Social commentary without narrative engagement"
+      ]
     },
     {
       "edge_id": "SF_E12_PREMISE_TO_OPERA",
@@ -300,11 +635,19 @@
       "to": "SF_N22_SPACE_OPERA",
       "label": "Premise at galactic scale with adventure focus",
       "meaning": "branches into subtype",
-      "preconditions": ["Premise enables interstellar civilization and conflict"],
+      "preconditions": [
+        "Premise enables interstellar civilization and conflict"
+      ],
       "effects_on_stakes": "Stakes are civilizational",
       "effects_on_character": "Characters represent factions or civilizations",
-      "common_alternatives": ["Hard SF", "Social SF", "Dystopian"],
-      "anti_patterns": ["Scale without substance"]
+      "common_alternatives": [
+        "Hard SF",
+        "Social SF",
+        "Dystopian"
+      ],
+      "anti_patterns": [
+        "Scale without substance"
+      ]
     },
     {
       "edge_id": "SF_E13_PREMISE_TO_DYSTOPIAN",
@@ -312,11 +655,19 @@
       "to": "SF_N23_DYSTOPIAN",
       "label": "Premise gone wrong — degraded future",
       "meaning": "branches into subtype",
-      "preconditions": ["Premise has led to societal collapse or oppression"],
+      "preconditions": [
+        "Premise has led to societal collapse or oppression"
+      ],
       "effects_on_stakes": "Survival and resistance define the conflict",
       "effects_on_character": "Characters live under constraint and seek freedom or meaning",
-      "common_alternatives": ["Hard SF", "Social SF", "Space opera"],
-      "anti_patterns": ["Dystopian aesthetic without mechanisms of oppression"]
+      "common_alternatives": [
+        "Hard SF",
+        "Social SF",
+        "Space opera"
+      ],
+      "anti_patterns": [
+        "Dystopian aesthetic without mechanisms of oppression"
+      ]
     },
     {
       "edge_id": "SF_E30_HARD_TO_TECH",
@@ -324,11 +675,19 @@
       "to": "SF_N40_TECH_RULES",
       "label": "Hard SF requires rigorous technology rules",
       "meaning": "introduces setting rule",
-      "preconditions": ["Hard SF subgenre selected"],
+      "preconditions": [
+        "Hard SF subgenre selected"
+      ],
       "effects_on_stakes": "Technical constraints create the puzzle",
       "effects_on_character": "Characters must understand and work within technical limits",
-      "common_alternatives": ["Physics-based limits", "Engineering-based limits", "Biological limits"],
-      "anti_patterns": ["Technology has no defined limits despite claims of scientific rigor"]
+      "common_alternatives": [
+        "Physics-based limits",
+        "Engineering-based limits",
+        "Biological limits"
+      ],
+      "anti_patterns": [
+        "Technology has no defined limits despite claims of scientific rigor"
+      ]
     },
     {
       "edge_id": "SF_E31_SOCIAL_TO_SOCIETY",
@@ -336,11 +695,19 @@
       "to": "SF_N41_SOCIETY_ADAPTED",
       "label": "Social SF requires visibly adapted society",
       "meaning": "introduces setting rule",
-      "preconditions": ["Social SF subgenre selected"],
+      "preconditions": [
+        "Social SF subgenre selected"
+      ],
       "effects_on_stakes": "Social structures create constraints and conflicts",
       "effects_on_character": "Characters navigate adapted institutions and norms",
-      "common_alternatives": ["Utopian adaptation", "Dystopian adaptation", "Transitional adaptation"],
-      "anti_patterns": ["Modern society with one speculative element and no adaptation"]
+      "common_alternatives": [
+        "Utopian adaptation",
+        "Dystopian adaptation",
+        "Transitional adaptation"
+      ],
+      "anti_patterns": [
+        "Modern society with one speculative element and no adaptation"
+      ]
     },
     {
       "edge_id": "SF_E32_OPERA_TO_ANCHOR",
@@ -348,11 +715,18 @@
       "to": "SF_N42_EXTRAPOLATION_ANCHOR",
       "label": "Space opera requires human anchor despite grand scale",
       "meaning": "introduces setting rule",
-      "preconditions": ["Space opera subgenre selected"],
+      "preconditions": [
+        "Space opera subgenre selected"
+      ],
       "effects_on_stakes": "Grand stakes are felt through individual human experience",
       "effects_on_character": "Characters are relatable despite extraordinary context",
-      "common_alternatives": ["Personal love story against galactic war", "Individual moral choice with civilizational consequences"],
-      "anti_patterns": ["Characters are as alien as their setting — no emotional connection"]
+      "common_alternatives": [
+        "Personal love story against galactic war",
+        "Individual moral choice with civilizational consequences"
+      ],
+      "anti_patterns": [
+        "Characters are as alien as their setting — no emotional connection"
+      ]
     },
     {
       "edge_id": "SF_E33_DYSTOPIAN_TO_SOCIETY",
@@ -360,11 +734,20 @@
       "to": "SF_N41_SOCIETY_ADAPTED",
       "label": "Dystopia requires visible social mechanisms",
       "meaning": "introduces setting rule",
-      "preconditions": ["Dystopian subgenre selected"],
+      "preconditions": [
+        "Dystopian subgenre selected"
+      ],
       "effects_on_stakes": "Oppressive mechanisms create the constraints characters face",
       "effects_on_character": "Characters live under visible, enforceable social control",
-      "common_alternatives": ["Totalitarian control", "Corporate control", "Algorithmic control", "Resource-scarcity control"],
-      "anti_patterns": ["Dystopia is aesthetic — no mechanisms of control shown"]
+      "common_alternatives": [
+        "Totalitarian control",
+        "Corporate control",
+        "Algorithmic control",
+        "Resource-scarcity control"
+      ],
+      "anti_patterns": [
+        "Dystopia is aesthetic — no mechanisms of control shown"
+      ]
     },
     {
       "edge_id": "SF_E50_TECH_TO_PREMISE",
@@ -372,11 +755,19 @@
       "to": "SF_N60_PREMISE_REVEAL",
       "label": "Technology rules generate premise establishment scene",
       "meaning": "mandates element",
-      "preconditions": ["Technology and its rules defined"],
+      "preconditions": [
+        "Technology and its rules defined"
+      ],
       "effects_on_stakes": "Audience learns the rules that will govern the conflict",
       "effects_on_character": "Character demonstrates or encounters the technology",
-      "common_alternatives": ["Demonstration scene", "Daily-use scene", "Malfunction scene"],
-      "anti_patterns": ["Technology explained through exposition dump rather than scene"]
+      "common_alternatives": [
+        "Demonstration scene",
+        "Daily-use scene",
+        "Malfunction scene"
+      ],
+      "anti_patterns": [
+        "Technology explained through exposition dump rather than scene"
+      ]
     },
     {
       "edge_id": "SF_E51_SOCIETY_TO_CONSEQUENCE",
@@ -384,11 +775,19 @@
       "to": "SF_N61_CONSEQUENCE_SCENE",
       "label": "Adapted society creates ethical dilemma scenes",
       "meaning": "mandates element",
-      "preconditions": ["Adapted society established"],
+      "preconditions": [
+        "Adapted society established"
+      ],
       "effects_on_stakes": "Social structure creates dilemmas unique to this world",
       "effects_on_character": "Character faces moral choices that require the speculative context",
-      "common_alternatives": ["Individual ethical dilemma", "Social justice conflict", "Discovery of hidden cost"],
-      "anti_patterns": ["Dilemma is generic and could exist in any setting"]
+      "common_alternatives": [
+        "Individual ethical dilemma",
+        "Social justice conflict",
+        "Discovery of hidden cost"
+      ],
+      "anti_patterns": [
+        "Dilemma is generic and could exist in any setting"
+      ]
     },
     {
       "edge_id": "SF_E52_ANCHOR_TO_CONSEQUENCE",
@@ -396,11 +795,19 @@
       "to": "SF_N61_CONSEQUENCE_SCENE",
       "label": "Human anchor makes consequences personal",
       "meaning": "mandates element",
-      "preconditions": ["Human emotional core established in speculative context"],
+      "preconditions": [
+        "Human emotional core established in speculative context"
+      ],
       "effects_on_stakes": "Consequences are felt emotionally, not just intellectually",
       "effects_on_character": "Speculative consequences become personal and relatable",
-      "common_alternatives": ["Personal loss", "Relationship tested by speculative circumstance", "Identity crisis"],
-      "anti_patterns": ["Consequences are abstract and impersonal"]
+      "common_alternatives": [
+        "Personal loss",
+        "Relationship tested by speculative circumstance",
+        "Identity crisis"
+      ],
+      "anti_patterns": [
+        "Consequences are abstract and impersonal"
+      ]
     },
     {
       "edge_id": "SF_E53_CONSEQUENCE_TO_RESOLUTION",
@@ -408,11 +815,20 @@
       "to": "SF_N62_RESOLUTION_SCENE",
       "label": "Consequences build to premise-dependent resolution",
       "meaning": "requires payoff",
-      "preconditions": ["Consequences of the premise have been dramatized"],
+      "preconditions": [
+        "Consequences of the premise have been dramatized"
+      ],
       "effects_on_stakes": "Resolution addresses the premise's central question",
       "effects_on_character": "Character's final action is meaningful because of the speculative context",
-      "common_alternatives": ["Technology-based solution", "Social revolution", "Transcendence", "Acceptance of consequences"],
-      "anti_patterns": ["Resolution ignores the speculative premise"]
+      "common_alternatives": [
+        "Technology-based solution",
+        "Social revolution",
+        "Transcendence",
+        "Acceptance of consequences"
+      ],
+      "anti_patterns": [
+        "Resolution ignores the speculative premise"
+      ]
     },
     {
       "edge_id": "SF_E90_TECH_MAGIC_WARNING",
@@ -420,11 +836,15 @@
       "to": "SF_N90_TECH_MAGIC",
       "label": "Inconsistent technology becomes magic",
       "meaning": "prohibits element",
-      "preconditions": ["Technology operates without consistent rules"],
+      "preconditions": [
+        "Technology operates without consistent rules"
+      ],
       "effects_on_stakes": "Audience stops trusting the world's logic",
       "effects_on_character": "Character's scientific reasoning becomes meaningless",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes what to avoid"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern — it describes what to avoid"
+      ]
     }
   ]
 }

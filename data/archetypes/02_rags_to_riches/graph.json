@@ -3,94 +3,245 @@
   "name": "Rags to Riches",
   "type": "archetype",
   "description": "A disadvantaged protagonist rises to success, status, or fulfillment through perseverance, talent, luck, or moral worth.",
+  "_metadata": {
+    "nodeCount": 8,
+    "edgeCount": 7,
+    "nodesPerRole": {
+      "Origin": 1,
+      "Disruption": 1,
+      "Threshold": 1,
+      "Trial": 1,
+      "Reversal": 1,
+      "Crisis": 1,
+      "Commitment": 1,
+      "Resolution": 1
+    },
+    "edgesPerMeaning": {
+      "disrupts order": 1,
+      "forces commitment": 1,
+      "tests resolve": 1,
+      "raises cost": 1,
+      "reveals truth": 1,
+      "demands sacrifice": 1,
+      "restores equilibrium": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "RR_N01_LOWLY_STATE",
       "label": "Lowly State",
       "role": "Origin",
       "definition": "The protagonist exists in a condition of poverty, obscurity, or oppression. The gap between their potential and their circumstances is visible to the audience if not to the world.",
-      "entry_conditions": ["Story opening", "Audience sees the character's disadvantage clearly"],
-      "exit_conditions": ["An opportunity or catalyst appears that makes change possible"],
-      "typical_variants": ["Orphan in hostile household", "Talented person trapped by class", "Decent person ground down by circumstance"],
-      "failure_modes": ["Protagonist's lowliness is told but not felt", "No hint of inner quality that justifies eventual rise"],
-      "signals_in_text": ["Menial labor", "Mistreatment by others", "Small acts of dignity or skill"]
+      "entry_conditions": [
+        "Story opening",
+        "Audience sees the character's disadvantage clearly"
+      ],
+      "exit_conditions": [
+        "An opportunity or catalyst appears that makes change possible"
+      ],
+      "typical_variants": [
+        "Orphan in hostile household",
+        "Talented person trapped by class",
+        "Decent person ground down by circumstance"
+      ],
+      "failure_modes": [
+        "Protagonist's lowliness is told but not felt",
+        "No hint of inner quality that justifies eventual rise"
+      ],
+      "signals_in_text": [
+        "Menial labor",
+        "Mistreatment by others",
+        "Small acts of dignity or skill"
+      ]
     },
     {
       "node_id": "RR_N02_OPPORTUNITY",
       "label": "Opportunity Appears",
       "role": "Disruption",
       "definition": "A chance event, benefactor, or discovery opens a path out of the lowly state. The protagonist may not yet recognize its significance.",
-      "entry_conditions": ["Lowly state is established", "An external change intrudes"],
-      "exit_conditions": ["The protagonist engages with the opportunity"],
-      "typical_variants": ["Invitation from a powerful figure", "Discovery of a hidden talent or inheritance", "Lucky break that provides access to a new world"],
-      "failure_modes": ["Opportunity is so large it removes all challenge", "Opportunity has no connection to the character's qualities"],
-      "signals_in_text": ["Unexpected invitation", "Finding something valuable", "Being noticed by someone powerful"]
+      "entry_conditions": [
+        "Lowly state is established",
+        "An external change intrudes"
+      ],
+      "exit_conditions": [
+        "The protagonist engages with the opportunity"
+      ],
+      "typical_variants": [
+        "Invitation from a powerful figure",
+        "Discovery of a hidden talent or inheritance",
+        "Lucky break that provides access to a new world"
+      ],
+      "failure_modes": [
+        "Opportunity is so large it removes all challenge",
+        "Opportunity has no connection to the character's qualities"
+      ],
+      "signals_in_text": [
+        "Unexpected invitation",
+        "Finding something valuable",
+        "Being noticed by someone powerful"
+      ]
     },
     {
       "node_id": "RR_N03_INITIAL_RISE",
       "label": "Initial Rise",
       "role": "Threshold",
       "definition": "The protagonist enters a new social or material world, experiencing early success or acceptance. The contrast with the lowly state is sharp.",
-      "entry_conditions": ["Opportunity has been seized", "Protagonist enters a new environment"],
-      "exit_conditions": ["The protagonist has tasted success but has not yet been tested"],
-      "typical_variants": ["First public recognition", "Entry into a higher social circle", "Early financial or professional success"],
-      "failure_modes": ["Rise is too smooth — no friction or doubt", "The character adapts instantly with no disorientation"],
-      "signals_in_text": ["Awe at new surroundings", "Early wins", "Social acceptance or admiration"]
+      "entry_conditions": [
+        "Opportunity has been seized",
+        "Protagonist enters a new environment"
+      ],
+      "exit_conditions": [
+        "The protagonist has tasted success but has not yet been tested"
+      ],
+      "typical_variants": [
+        "First public recognition",
+        "Entry into a higher social circle",
+        "Early financial or professional success"
+      ],
+      "failure_modes": [
+        "Rise is too smooth — no friction or doubt",
+        "The character adapts instantly with no disorientation"
+      ],
+      "signals_in_text": [
+        "Awe at new surroundings",
+        "Early wins",
+        "Social acceptance or admiration"
+      ]
     },
     {
       "node_id": "RR_N04_SOCIAL_TRIALS",
       "label": "Social Trials",
       "role": "Trial",
       "definition": "The protagonist faces challenges from the new world: jealousy, tests of worthiness, cultural friction, or exposure of their origins.",
-      "entry_conditions": ["Initial rise is underway", "Others in the new world resist or test the protagonist"],
-      "exit_conditions": ["Protagonist has navigated enough challenges to reach a position of apparent security"],
-      "typical_variants": ["Rival who resents the newcomer", "Social test the protagonist nearly fails", "Betrayal by a supposed ally"],
-      "failure_modes": ["Trials are trivial and never threaten the rise", "No antagonist or structural opposition"],
-      "signals_in_text": ["Humiliation at a social event", "Rival's sabotage", "Moments of impostor syndrome"]
+      "entry_conditions": [
+        "Initial rise is underway",
+        "Others in the new world resist or test the protagonist"
+      ],
+      "exit_conditions": [
+        "Protagonist has navigated enough challenges to reach a position of apparent security"
+      ],
+      "typical_variants": [
+        "Rival who resents the newcomer",
+        "Social test the protagonist nearly fails",
+        "Betrayal by a supposed ally"
+      ],
+      "failure_modes": [
+        "Trials are trivial and never threaten the rise",
+        "No antagonist or structural opposition"
+      ],
+      "signals_in_text": [
+        "Humiliation at a social event",
+        "Rival's sabotage",
+        "Moments of impostor syndrome"
+      ]
     },
     {
       "node_id": "RR_N05_APPARENT_PEAK",
       "label": "Apparent Peak",
       "role": "Reversal",
       "definition": "The protagonist reaches what appears to be the summit of success. This is a false resolution — the character has risen but has not yet been fully tested.",
-      "entry_conditions": ["Social trials are largely overcome", "External success is at its height"],
-      "exit_conditions": ["A crisis reveals that the rise is incomplete or built on fragile ground"],
-      "typical_variants": ["Public triumph", "Winning the prize or the love interest", "Maximum wealth or status"],
-      "failure_modes": ["Peak feels like the real ending — no tension remains", "No seeds of the coming crisis are planted earlier"],
-      "signals_in_text": ["Celebration scene", "Achievement of the stated goal", "Brief moment of everything going right"]
+      "entry_conditions": [
+        "Social trials are largely overcome",
+        "External success is at its height"
+      ],
+      "exit_conditions": [
+        "A crisis reveals that the rise is incomplete or built on fragile ground"
+      ],
+      "typical_variants": [
+        "Public triumph",
+        "Winning the prize or the love interest",
+        "Maximum wealth or status"
+      ],
+      "failure_modes": [
+        "Peak feels like the real ending — no tension remains",
+        "No seeds of the coming crisis are planted earlier"
+      ],
+      "signals_in_text": [
+        "Celebration scene",
+        "Achievement of the stated goal",
+        "Brief moment of everything going right"
+      ]
     },
     {
       "node_id": "RR_N06_CRISIS_OF_WORTH",
       "label": "Crisis of Worth",
       "role": "Crisis",
       "definition": "The protagonist's position is threatened — their origins are exposed, their luck runs out, or they face a moral test that wealth or status cannot solve.",
-      "entry_conditions": ["Apparent peak has been reached", "A flaw, secret, or external force destabilizes the position"],
-      "exit_conditions": ["The protagonist must choose between the trappings of success and their true values"],
-      "typical_variants": ["Public exposure of origins", "Loss of the benefactor or fortune", "Moral dilemma between ambition and integrity"],
-      "failure_modes": ["Crisis is resolved by external rescue rather than character choice", "Crisis is trivial and the protagonist never truly risks losing what was gained"],
-      "signals_in_text": ["Humiliation", "Loss of allies", "Moment of despair"]
+      "entry_conditions": [
+        "Apparent peak has been reached",
+        "A flaw, secret, or external force destabilizes the position"
+      ],
+      "exit_conditions": [
+        "The protagonist must choose between the trappings of success and their true values"
+      ],
+      "typical_variants": [
+        "Public exposure of origins",
+        "Loss of the benefactor or fortune",
+        "Moral dilemma between ambition and integrity"
+      ],
+      "failure_modes": [
+        "Crisis is resolved by external rescue rather than character choice",
+        "Crisis is trivial and the protagonist never truly risks losing what was gained"
+      ],
+      "signals_in_text": [
+        "Humiliation",
+        "Loss of allies",
+        "Moment of despair"
+      ]
     },
     {
       "node_id": "RR_N07_PROOF_OF_CHARACTER",
       "label": "Proof of Character",
       "role": "Commitment",
       "definition": "The protagonist demonstrates their true worth through an act that proves their rise was deserved — not by luck or deception, but by genuine quality.",
-      "entry_conditions": ["Crisis has stripped away false supports", "The protagonist must act from core values"],
-      "exit_conditions": ["The protagonist's moral or personal quality is publicly or privately validated"],
-      "typical_variants": ["Selfless act that costs the protagonist their gains", "Demonstration of the talent that was always latent", "Choosing integrity over advantage"],
-      "failure_modes": ["Proof is handed to the character rather than earned", "No real cost to proving worth"],
-      "signals_in_text": ["Decisive moral choice", "Talent displayed under pressure", "Others recognize the character's true nature"]
+      "entry_conditions": [
+        "Crisis has stripped away false supports",
+        "The protagonist must act from core values"
+      ],
+      "exit_conditions": [
+        "The protagonist's moral or personal quality is publicly or privately validated"
+      ],
+      "typical_variants": [
+        "Selfless act that costs the protagonist their gains",
+        "Demonstration of the talent that was always latent",
+        "Choosing integrity over advantage"
+      ],
+      "failure_modes": [
+        "Proof is handed to the character rather than earned",
+        "No real cost to proving worth"
+      ],
+      "signals_in_text": [
+        "Decisive moral choice",
+        "Talent displayed under pressure",
+        "Others recognize the character's true nature"
+      ]
     },
     {
       "node_id": "RR_N08_TRUE_ELEVATION",
       "label": "True Elevation",
       "role": "Resolution",
       "definition": "The protagonist achieves a stable, earned position — richer in character than in the apparent peak. The new status reflects who they are, not just what they have.",
-      "entry_conditions": ["Proof of character is complete", "The crisis is resolved"],
-      "exit_conditions": ["A new equilibrium is established that integrates the character's origin and growth"],
-      "typical_variants": ["Restored to a higher position with new respect", "Modest but dignified success", "Recognition by those who matter most"],
-      "failure_modes": ["Elevation is purely material with no character dimension", "Ending ignores the cost paid during the crisis"],
-      "signals_in_text": ["Contrast with opening scene", "Community recognition", "Peace with origins"]
+      "entry_conditions": [
+        "Proof of character is complete",
+        "The crisis is resolved"
+      ],
+      "exit_conditions": [
+        "A new equilibrium is established that integrates the character's origin and growth"
+      ],
+      "typical_variants": [
+        "Restored to a higher position with new respect",
+        "Modest but dignified success",
+        "Recognition by those who matter most"
+      ],
+      "failure_modes": [
+        "Elevation is purely material with no character dimension",
+        "Ending ignores the cost paid during the crisis"
+      ],
+      "signals_in_text": [
+        "Contrast with opening scene",
+        "Community recognition",
+        "Peace with origins"
+      ]
     }
   ],
   "edges": [

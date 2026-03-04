@@ -3,6 +3,28 @@
   "name": "Romance",
   "type": "genre",
   "description": "Stories where the central arc focuses on forming, testing, or restoring an intimate relationship, with emotional choice as the primary engine. (This graph's constraint definitions are intentionally more detailed than the genre average to capture the nuanced relationship dynamics central to Romance.)",
+  "_metadata": {
+    "nodeCount": 17,
+    "edgeCount": 20,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 1
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 4,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 5,
+      "mandates element": 3,
+      "requires payoff": 2,
+      "prohibits element": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "RO_N01_PROMISE",

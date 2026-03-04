@@ -3,6 +3,28 @@
   "name": "Historical",
   "type": "genre",
   "description": "Stories set in a recognizable past, using period detail and historical context as a primary source of stakes and theme.",
+  "_metadata": {
+    "nodeCount": 17,
+    "edgeCount": 19,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 1
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 4,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 4,
+      "mandates element": 3,
+      "requires payoff": 2,
+      "prohibits element": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "HI_N01_PROMISE",
@@ -10,11 +32,28 @@
       "role": "Genre Promise",
       "level": 1,
       "definition": "The audience is promised immersive entry into a specific, recognizable past, where period conditions are not decorative backdrop but the engine of conflict, consequence, and meaning. History is not setting — it is fate.",
-      "entry_conditions": ["Story is positioned as historical fiction or historical drama"],
-      "exit_conditions": ["Core constraints are established that anchor the story in a specific, functional past"],
-      "typical_variants": ["Intimate period drama focused on a single life", "Sweeping historical epic spanning events and generations", "Biographical historical centered on a known figure", "Revisionist history that interrogates received narratives"],
-      "failure_modes": ["Period detail is decorative costume rather than operative force", "Audience cannot identify what era is depicted or why it matters", "Story could be transplanted to any era without loss"],
-      "signals_in_text": ["Opening establishes date, place, and social conditions with specificity", "First conflict arises from period conditions rather than universal character psychology alone", "Narrative voice treats historical context as constitutive, not incidental"]
+      "entry_conditions": [
+        "Story is positioned as historical fiction or historical drama"
+      ],
+      "exit_conditions": [
+        "Core constraints are established that anchor the story in a specific, functional past"
+      ],
+      "typical_variants": [
+        "Intimate period drama focused on a single life",
+        "Sweeping historical epic spanning events and generations",
+        "Biographical historical centered on a known figure",
+        "Revisionist history that interrogates received narratives"
+      ],
+      "failure_modes": [
+        "Period detail is decorative costume rather than operative force",
+        "Audience cannot identify what era is depicted or why it matters",
+        "Story could be transplanted to any era without loss"
+      ],
+      "signals_in_text": [
+        "Opening establishes date, place, and social conditions with specificity",
+        "First conflict arises from period conditions rather than universal character psychology alone",
+        "Narrative voice treats historical context as constitutive, not incidental"
+      ]
     },
     {
       "node_id": "HI_N10_SPECIFIC_PERIOD",
@@ -22,11 +61,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The story must be anchored to a period that is identifiable — through date, event, geography, social system, or cultural marker — and that specificity must do narrative work. Vague historicity ('long ago') does not fulfill this constraint.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["The reader can identify the period within a generation or recognizable era, and that period carries inherent stakes"],
-      "typical_variants": ["Pinned to a specific year and location", "Defined by a named historical event (war, revolution, plague)", "Defined by a named social system (feudalism, chattel slavery, empire)"],
-      "failure_modes": ["Period is so vague it functions as pseudo-fantasy", "Historical markers are dropped in but do not generate plot", "Specificity is lavished on costume and architecture but absent from social structure"],
-      "signals_in_text": ["Dates, place names, or event names are used", "Characters know their world's rules with period-accurate literacy", "Anachronistic language or technology is absent"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "The reader can identify the period within a generation or recognizable era, and that period carries inherent stakes"
+      ],
+      "typical_variants": [
+        "Pinned to a specific year and location",
+        "Defined by a named historical event (war, revolution, plague)",
+        "Defined by a named social system (feudalism, chattel slavery, empire)"
+      ],
+      "failure_modes": [
+        "Period is so vague it functions as pseudo-fantasy",
+        "Historical markers are dropped in but do not generate plot",
+        "Specificity is lavished on costume and architecture but absent from social structure"
+      ],
+      "signals_in_text": [
+        "Dates, place names, or event names are used",
+        "Characters know their world's rules with period-accurate literacy",
+        "Anachronistic language or technology is absent"
+      ]
     },
     {
       "node_id": "HI_N11_CONTEXT_GENERATES_CONFLICT",
@@ -34,11 +89,29 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The central conflict must arise from the historical situation itself — the war, the social order, the economic system, the political crisis — not merely coincide with it. History must be the cause, not the backdrop.",
-      "entry_conditions": ["Genre promise established", "Specific period established"],
-      "exit_conditions": ["Removing the historical context would collapse the central conflict"],
-      "typical_variants": ["War separates or destroys what characters value", "Social system makes the protagonist's desire structurally forbidden", "Historical event forces an impossible choice", "Political upheaval reorders all relationships"],
-      "failure_modes": ["Conflict is a universal love story or family quarrel that merely happens to be set in the past", "Historical event is avoided by characters rather than engaged", "Period detail is scenic but the story's engine is purely personal psychology"],
-      "signals_in_text": ["Characters reference historical conditions as the source of their problem", "Plot turning points are triggered by historical events", "Resolution is shaped by how history resolves, not just how characters choose"]
+      "entry_conditions": [
+        "Genre promise established",
+        "Specific period established"
+      ],
+      "exit_conditions": [
+        "Removing the historical context would collapse the central conflict"
+      ],
+      "typical_variants": [
+        "War separates or destroys what characters value",
+        "Social system makes the protagonist's desire structurally forbidden",
+        "Historical event forces an impossible choice",
+        "Political upheaval reorders all relationships"
+      ],
+      "failure_modes": [
+        "Conflict is a universal love story or family quarrel that merely happens to be set in the past",
+        "Historical event is avoided by characters rather than engaged",
+        "Period detail is scenic but the story's engine is purely personal psychology"
+      ],
+      "signals_in_text": [
+        "Characters reference historical conditions as the source of their problem",
+        "Plot turning points are triggered by historical events",
+        "Resolution is shaped by how history resolves, not just how characters choose"
+      ]
     },
     {
       "node_id": "HI_N12_PERIOD_CONSTRAINTS_ENFORCED",
@@ -46,11 +119,29 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The social rules of the period — about gender, class, race, religion, law, and custom — must be enforced as real limits that cost characters something. They cannot be ignored when inconvenient or overcome without consequence.",
-      "entry_conditions": ["Period established", "Characters positioned within the period's social structure"],
-      "exit_conditions": ["At least one major constraint is operative throughout the story, generating stakes"],
-      "typical_variants": ["Gender constraints limit what a female character can do or say", "Class constraints limit access to resources or relationships", "Legal constraints make the character's desire criminal or forbidden", "Religious constraints define what is thinkable or speakable"],
-      "failure_modes": ["Characters behave as if social constraints do not apply to them without narrative justification", "Constraints are mentioned but never enforced", "Characters overcome period constraints too easily and without meaningful cost"],
-      "signals_in_text": ["Characters modify behavior in response to social rules", "Failed transgressions result in punishment, ostracism, or loss", "Other characters enforce period norms through pressure or consequence"]
+      "entry_conditions": [
+        "Period established",
+        "Characters positioned within the period's social structure"
+      ],
+      "exit_conditions": [
+        "At least one major constraint is operative throughout the story, generating stakes"
+      ],
+      "typical_variants": [
+        "Gender constraints limit what a female character can do or say",
+        "Class constraints limit access to resources or relationships",
+        "Legal constraints make the character's desire criminal or forbidden",
+        "Religious constraints define what is thinkable or speakable"
+      ],
+      "failure_modes": [
+        "Characters behave as if social constraints do not apply to them without narrative justification",
+        "Constraints are mentioned but never enforced",
+        "Characters overcome period constraints too easily and without meaningful cost"
+      ],
+      "signals_in_text": [
+        "Characters modify behavior in response to social rules",
+        "Failed transgressions result in punishment, ostracism, or loss",
+        "Other characters enforce period norms through pressure or consequence"
+      ]
     },
     {
       "node_id": "HI_N13_PERIOD_WORLDVIEW",
@@ -58,11 +149,27 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Characters must think, believe, and perceive using the conceptual framework available to people of their era. They may be exceptional within their time, but they cannot be anachronistically modern in consciousness, vocabulary, or moral framework without narrative justification.",
-      "entry_conditions": ["Characters established within the period"],
-      "exit_conditions": ["Character interiority is consistent with period-available thought, even when characters are in tension with their society"],
-      "typical_variants": ["Character is ahead of their time but still bound by its vocabulary and limits", "Character's blind spots reflect period ideology", "Character's moral universe is shaped by available religion, philosophy, or science"],
-      "failure_modes": ["Character voices contemporary progressive values in period costume", "Character is aware of historical irony unavailable to someone living that moment", "Character uses concepts or language that had not yet been invented"],
-      "signals_in_text": ["Interiority reflects period frameworks for self-understanding", "Character's assumptions about the world are legible as period-specific", "Moments of moral complexity arise from period constraints on moral vocabulary, not from modern ambivalence"]
+      "entry_conditions": [
+        "Characters established within the period"
+      ],
+      "exit_conditions": [
+        "Character interiority is consistent with period-available thought, even when characters are in tension with their society"
+      ],
+      "typical_variants": [
+        "Character is ahead of their time but still bound by its vocabulary and limits",
+        "Character's blind spots reflect period ideology",
+        "Character's moral universe is shaped by available religion, philosophy, or science"
+      ],
+      "failure_modes": [
+        "Character voices contemporary progressive values in period costume",
+        "Character is aware of historical irony unavailable to someone living that moment",
+        "Character uses concepts or language that had not yet been invented"
+      ],
+      "signals_in_text": [
+        "Interiority reflects period frameworks for self-understanding",
+        "Character's assumptions about the world are legible as period-specific",
+        "Moments of moral complexity arise from period constraints on moral vocabulary, not from modern ambivalence"
+      ]
     },
     {
       "node_id": "HI_N20_PERIOD_DRAMA",
@@ -70,11 +177,29 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Historical fiction focused on the intimate lives of individuals or families, where the period is the social and emotional environment in which private struggles play out. Scale is human rather than epic.",
-      "entry_conditions": ["Core constraints apply", "Story centers on personal or familial conflict within a historical period"],
-      "exit_conditions": ["Private stakes (love, marriage, inheritance, survival, identity) are resolved or permanently altered by period conditions"],
-      "typical_variants": ["Courtship constrained by class or family expectation", "Domestic survival during crisis (war, famine, plague)", "Personal identity in tension with period norms", "Marriage as social contract under period law"],
-      "failure_modes": ["Period becomes invisible behind the romance or family story", "Intimate stakes are resolved by characters defying their period with no cost", "Story is indistinguishable from a contemporary drama in period dress"],
-      "signals_in_text": ["Settings are domestic — estates, households, market towns", "Social calls, letters, and rituals structure daily life", "Private choices are constrained by public period codes"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Story centers on personal or familial conflict within a historical period"
+      ],
+      "exit_conditions": [
+        "Private stakes (love, marriage, inheritance, survival, identity) are resolved or permanently altered by period conditions"
+      ],
+      "typical_variants": [
+        "Courtship constrained by class or family expectation",
+        "Domestic survival during crisis (war, famine, plague)",
+        "Personal identity in tension with period norms",
+        "Marriage as social contract under period law"
+      ],
+      "failure_modes": [
+        "Period becomes invisible behind the romance or family story",
+        "Intimate stakes are resolved by characters defying their period with no cost",
+        "Story is indistinguishable from a contemporary drama in period dress"
+      ],
+      "signals_in_text": [
+        "Settings are domestic — estates, households, market towns",
+        "Social calls, letters, and rituals structure daily life",
+        "Private choices are constrained by public period codes"
+      ]
     },
     {
       "node_id": "HI_N21_HISTORICAL_EPIC",
@@ -82,11 +207,30 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Historical fiction that spans large events, multiple locations, or long timescales, using the grand scale of history to generate stakes that exceed individual lives while keeping human figures at the center.",
-      "entry_conditions": ["Core constraints apply", "Story scope encompasses major historical events, movements, or eras"],
-      "exit_conditions": ["The epic's historical arc provides the structure for the human story's arc, and the scale feels earned rather than inflated"],
-      "typical_variants": ["War epic following soldiers from mobilization to aftermath", "Revolution narrative spanning multiple phases and perspectives", "Dynasty saga across generations", "Empire and its consequences across colonizer and colonized"],
-      "failure_modes": ["Scale swamps the human story — events happen but no character is legible", "Epic scope is claimed but the story is actually small and local in execution", "Historical events are spectacle rather than force that shapes characters"],
-      "signals_in_text": ["Multiple locations across a geography", "Significant passage of time within the narrative", "Historical events punctuate and restructure the human plot", "Multiple point-of-view characters reflecting different positions within the historical situation"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Story scope encompasses major historical events, movements, or eras"
+      ],
+      "exit_conditions": [
+        "The epic's historical arc provides the structure for the human story's arc, and the scale feels earned rather than inflated"
+      ],
+      "typical_variants": [
+        "War epic following soldiers from mobilization to aftermath",
+        "Revolution narrative spanning multiple phases and perspectives",
+        "Dynasty saga across generations",
+        "Empire and its consequences across colonizer and colonized"
+      ],
+      "failure_modes": [
+        "Scale swamps the human story — events happen but no character is legible",
+        "Epic scope is claimed but the story is actually small and local in execution",
+        "Historical events are spectacle rather than force that shapes characters"
+      ],
+      "signals_in_text": [
+        "Multiple locations across a geography",
+        "Significant passage of time within the narrative",
+        "Historical events punctuate and restructure the human plot",
+        "Multiple point-of-view characters reflecting different positions within the historical situation"
+      ]
     },
     {
       "node_id": "HI_N22_BIOGRAPHICAL_HISTORICAL",
@@ -94,11 +238,29 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Historical fiction centered on a known historical figure, where the gap between public record and private interiority generates the story's interest. The known figure's historical outcome creates dramatic irony and forward momentum.",
-      "entry_conditions": ["Core constraints apply", "Central character is a documented historical figure known to the audience"],
-      "exit_conditions": ["The figure's known historical fate has been reached, or the narrative has illuminated the figure's inner life in a way that reframes the historical record"],
-      "typical_variants": ["Political figure's private life behind public decisions", "Artist or intellectual at the moment of their defining work", "Historical villain examined from within their own logic", "Marginalized historical figure recovered from silence"],
-      "failure_modes": ["Historical figure behaves in ways directly contradicted by the record without narrative justification", "Story adds nothing to what the historical record already provides", "Dramatic irony of the known outcome is ignored rather than deployed"],
-      "signals_in_text": ["Historical figure named, with documented facts woven into the narrative", "Reader's prior knowledge of the figure creates irony", "Narrative focuses on moments underdocumented by the historical record"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Central character is a documented historical figure known to the audience"
+      ],
+      "exit_conditions": [
+        "The figure's known historical fate has been reached, or the narrative has illuminated the figure's inner life in a way that reframes the historical record"
+      ],
+      "typical_variants": [
+        "Political figure's private life behind public decisions",
+        "Artist or intellectual at the moment of their defining work",
+        "Historical villain examined from within their own logic",
+        "Marginalized historical figure recovered from silence"
+      ],
+      "failure_modes": [
+        "Historical figure behaves in ways directly contradicted by the record without narrative justification",
+        "Story adds nothing to what the historical record already provides",
+        "Dramatic irony of the known outcome is ignored rather than deployed"
+      ],
+      "signals_in_text": [
+        "Historical figure named, with documented facts woven into the narrative",
+        "Reader's prior knowledge of the figure creates irony",
+        "Narrative focuses on moments underdocumented by the historical record"
+      ]
     },
     {
       "node_id": "HI_N23_REVISIONIST_HISTORY",
@@ -106,11 +268,29 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Historical fiction that deliberately interrogates, inverts, or diverges from the received historical record — either by foregrounding suppressed perspectives or by asking 'what if' to illuminate what the historical record obscures.",
-      "entry_conditions": ["Core constraints apply", "Story consciously departs from or interrogates the dominant historical narrative"],
-      "exit_conditions": ["The departure from received history is purposeful and illuminates something the standard account forecloses"],
-      "typical_variants": ["Marginalized perspective displacing the canonical narrative", "Counterfactual that reveals the contingency of outcomes taken as inevitable", "Mythologized history stripped of its mythology", "Subaltern history — the war from the perspective of the occupied"],
-      "failure_modes": ["Revision is arbitrary rather than purposeful — changes history without insight", "Revisionism is used to avoid the discipline of period accuracy", "Counterfactual is a wish-fulfillment exercise with no analytical dimension"],
-      "signals_in_text": ["Narrative explicitly positions against a received account", "Foregrounded perspective is one the standard history marginalizes or erases", "Historical divergence is marked and thematized rather than hidden"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Story consciously departs from or interrogates the dominant historical narrative"
+      ],
+      "exit_conditions": [
+        "The departure from received history is purposeful and illuminates something the standard account forecloses"
+      ],
+      "typical_variants": [
+        "Marginalized perspective displacing the canonical narrative",
+        "Counterfactual that reveals the contingency of outcomes taken as inevitable",
+        "Mythologized history stripped of its mythology",
+        "Subaltern history — the war from the perspective of the occupied"
+      ],
+      "failure_modes": [
+        "Revision is arbitrary rather than purposeful — changes history without insight",
+        "Revisionism is used to avoid the discipline of period accuracy",
+        "Counterfactual is a wish-fulfillment exercise with no analytical dimension"
+      ],
+      "signals_in_text": [
+        "Narrative explicitly positions against a received account",
+        "Foregrounded perspective is one the standard history marginalizes or erases",
+        "Historical divergence is marked and thematized rather than hidden"
+      ]
     },
     {
       "node_id": "HI_N40_MATERIAL_CULTURE",
@@ -118,11 +298,29 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The physical world of the story — tools, transport, medicine, food, clothing, architecture, communication — must be consistent with what was available in the period. Material anachronisms undermine audience immersion and period contract.",
-      "entry_conditions": ["Subgenre pattern selected", "Period established"],
-      "exit_conditions": ["Physical world details are consistent with period-available material culture and actively texture the narrative"],
-      "typical_variants": ["Pre-industrial material constraints shape plot (no antibiotics, no rapid travel)", "Period communication limits (letters, messengers) structure the narrative", "Period medicine creates specific stakes (childbirth danger, epidemic)", "Economic material realities constrain character options"],
-      "failure_modes": ["Technology, vocabulary, or objects appear that did not exist in the period", "Period material culture is mentioned but has no effect on plot or character options", "Physical world is generic rather than specifically period-textured"],
-      "signals_in_text": ["Transport, communication, and medicine function at period capacity", "Characters' options are visibly limited by what their period provides", "Physical details are specific enough to place the reader in the period without becoming a catalog"]
+      "entry_conditions": [
+        "Subgenre pattern selected",
+        "Period established"
+      ],
+      "exit_conditions": [
+        "Physical world details are consistent with period-available material culture and actively texture the narrative"
+      ],
+      "typical_variants": [
+        "Pre-industrial material constraints shape plot (no antibiotics, no rapid travel)",
+        "Period communication limits (letters, messengers) structure the narrative",
+        "Period medicine creates specific stakes (childbirth danger, epidemic)",
+        "Economic material realities constrain character options"
+      ],
+      "failure_modes": [
+        "Technology, vocabulary, or objects appear that did not exist in the period",
+        "Period material culture is mentioned but has no effect on plot or character options",
+        "Physical world is generic rather than specifically period-textured"
+      ],
+      "signals_in_text": [
+        "Transport, communication, and medicine function at period capacity",
+        "Characters' options are visibly limited by what their period provides",
+        "Physical details are specific enough to place the reader in the period without becoming a catalog"
+      ]
     },
     {
       "node_id": "HI_N41_SOCIAL_HIERARCHY",
@@ -130,11 +328,29 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The period's specific social order — feudal, colonial, aristocratic, caste-based, or otherwise — must function as a real constraint on what characters can do, say, aspire to, or become. The hierarchy must be enforced within the narrative.",
-      "entry_conditions": ["Period social structure established", "Characters placed within that structure"],
-      "exit_conditions": ["Characters' options and stakes are visibly shaped by their position in the social hierarchy"],
-      "typical_variants": ["Class hierarchy limits marriage, profession, and movement", "Gender hierarchy limits legal personhood and public speech", "Racial hierarchy creates legally enforced violence and dispossession", "Religious hierarchy controls access to education, legitimacy, and salvation"],
-      "failure_modes": ["Social hierarchy is present in world-building but never constrains any specific character", "Characters move through social strata without the friction those strata impose", "Hierarchy is mentioned as backdrop rather than enforced as operative force"],
-      "signals_in_text": ["Characters use period-appropriate forms of address and deference", "Violations of hierarchy result in period-accurate consequences", "Characters' ambitions are calibrated to what their position permits"]
+      "entry_conditions": [
+        "Period social structure established",
+        "Characters placed within that structure"
+      ],
+      "exit_conditions": [
+        "Characters' options and stakes are visibly shaped by their position in the social hierarchy"
+      ],
+      "typical_variants": [
+        "Class hierarchy limits marriage, profession, and movement",
+        "Gender hierarchy limits legal personhood and public speech",
+        "Racial hierarchy creates legally enforced violence and dispossession",
+        "Religious hierarchy controls access to education, legitimacy, and salvation"
+      ],
+      "failure_modes": [
+        "Social hierarchy is present in world-building but never constrains any specific character",
+        "Characters move through social strata without the friction those strata impose",
+        "Hierarchy is mentioned as backdrop rather than enforced as operative force"
+      ],
+      "signals_in_text": [
+        "Characters use period-appropriate forms of address and deference",
+        "Violations of hierarchy result in period-accurate consequences",
+        "Characters' ambitions are calibrated to what their position permits"
+      ]
     },
     {
       "node_id": "HI_N42_HISTORICAL_EVENTS_STRUCTURE",
@@ -142,11 +358,29 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "Known or plausible historical events — battles, elections, epidemics, famines, legal changes, cultural shifts — must function as structural elements that shape the plot's turning points and the characters' stakes, not merely as ambient color.",
-      "entry_conditions": ["Period established", "Subgenre pattern selected"],
-      "exit_conditions": ["At least one historical event directly alters the plot's trajectory or the characters' options"],
-      "typical_variants": ["Battle outcome determines which characters survive and what world they return to", "Legislative change makes the protagonist's situation suddenly legal or illegal", "Epidemic or natural disaster restructures economic and social relationships", "Political revolution reorders who has power and who is at risk"],
-      "failure_modes": ["Historical events are mentioned but characters are insulated from their effects", "Events happen 'offscreen' and have no plot consequences", "Historical structure is vague — the story is set 'during the war' but the war does nothing"],
-      "signals_in_text": ["Characters track historical events because their lives depend on them", "Plot turning points coincide with historical turning points", "Characters' plans are disrupted or enabled by historical events they did not control"]
+      "entry_conditions": [
+        "Period established",
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "At least one historical event directly alters the plot's trajectory or the characters' options"
+      ],
+      "typical_variants": [
+        "Battle outcome determines which characters survive and what world they return to",
+        "Legislative change makes the protagonist's situation suddenly legal or illegal",
+        "Epidemic or natural disaster restructures economic and social relationships",
+        "Political revolution reorders who has power and who is at risk"
+      ],
+      "failure_modes": [
+        "Historical events are mentioned but characters are insulated from their effects",
+        "Events happen 'offscreen' and have no plot consequences",
+        "Historical structure is vague — the story is set 'during the war' but the war does nothing"
+      ],
+      "signals_in_text": [
+        "Characters track historical events because their lives depend on them",
+        "Plot turning points coincide with historical turning points",
+        "Characters' plans are disrupted or enabled by historical events they did not control"
+      ]
     },
     {
       "node_id": "HI_N60_PERIOD_ESTABLISHMENT",
@@ -154,11 +388,28 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "An early scene that immerses the reader in the specific period through sensory, social, and historical detail — establishing not just when and where but what the rules of this world are, what is at stake for people of this time, and what the dominant constraints are.",
-      "entry_conditions": ["Story has opened"],
-      "exit_conditions": ["Reader is anchored in a specific, functional period with legible social rules and stakes"],
-      "typical_variants": ["Opening scene at a period-specific event (market, court, battlefield, ritual)", "Domestic scene that reveals the social rules through ordinary interaction", "Character's encounter with period institution (church, court, estate, regiment)", "Juxtaposition of privilege and constraint that maps the social order"],
-      "failure_modes": ["Period establishment is a history-lecture prologue rather than a lived scene", "Period details are inventory rather than drama", "Scene establishes setting but does not establish stakes or social rules"],
-      "signals_in_text": ["Specific sensory details anchor the reader in time and place", "A transaction, ritual, or interaction reveals who has power and who does not", "Characters' behavior is legibly shaped by period expectations without authorial explanation"]
+      "entry_conditions": [
+        "Story has opened"
+      ],
+      "exit_conditions": [
+        "Reader is anchored in a specific, functional period with legible social rules and stakes"
+      ],
+      "typical_variants": [
+        "Opening scene at a period-specific event (market, court, battlefield, ritual)",
+        "Domestic scene that reveals the social rules through ordinary interaction",
+        "Character's encounter with period institution (church, court, estate, regiment)",
+        "Juxtaposition of privilege and constraint that maps the social order"
+      ],
+      "failure_modes": [
+        "Period establishment is a history-lecture prologue rather than a lived scene",
+        "Period details are inventory rather than drama",
+        "Scene establishes setting but does not establish stakes or social rules"
+      ],
+      "signals_in_text": [
+        "Specific sensory details anchor the reader in time and place",
+        "A transaction, ritual, or interaction reveals who has power and who does not",
+        "Characters' behavior is legibly shaped by period expectations without authorial explanation"
+      ]
     },
     {
       "node_id": "HI_N61_DESIRE_VS_CONSTRAINT",
@@ -166,11 +417,29 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which the protagonist's personal want or need directly collides with a period-specific constraint — social, legal, material, or ideological — making the cost of the historical situation viscerally concrete.",
-      "entry_conditions": ["Period constraints established", "Character's desire established"],
-      "exit_conditions": ["The collision has produced a specific, concrete cost or choice that the character must carry forward"],
-      "typical_variants": ["Character is refused, dismissed, or punished for transgressing period hierarchy", "Character discovers their desire is impossible under period law or custom", "Character must lie, hide, or perform in order to survive within period constraints", "Character is forced to choose between what they want and what their period permits"],
-      "failure_modes": ["Constraint is introduced but resolved too easily", "Character overcomes constraint without cost, defeating the historical premise", "Scene states the constraint but does not dramatize its weight"],
-      "signals_in_text": ["Scene turns on a specific period rule that the character cannot get around", "Emotional stakes are made concrete by the historical specificity of what is forbidden", "Character's response — compliance, resistance, or evasion — reveals character within period conditions"]
+      "entry_conditions": [
+        "Period constraints established",
+        "Character's desire established"
+      ],
+      "exit_conditions": [
+        "The collision has produced a specific, concrete cost or choice that the character must carry forward"
+      ],
+      "typical_variants": [
+        "Character is refused, dismissed, or punished for transgressing period hierarchy",
+        "Character discovers their desire is impossible under period law or custom",
+        "Character must lie, hide, or perform in order to survive within period constraints",
+        "Character is forced to choose between what they want and what their period permits"
+      ],
+      "failure_modes": [
+        "Constraint is introduced but resolved too easily",
+        "Character overcomes constraint without cost, defeating the historical premise",
+        "Scene states the constraint but does not dramatize its weight"
+      ],
+      "signals_in_text": [
+        "Scene turns on a specific period rule that the character cannot get around",
+        "Emotional stakes are made concrete by the historical specificity of what is forbidden",
+        "Character's response — compliance, resistance, or evasion — reveals character within period conditions"
+      ]
     },
     {
       "node_id": "HI_N62_HISTORICAL_CONSEQUENCE",
@@ -178,11 +447,29 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which the broader historical situation delivers a consequence that the characters cannot escape or override — demonstrating that history, not just character, is an agent in the story.",
-      "entry_conditions": ["Historical stakes established", "Historical events have been operative in the narrative"],
-      "exit_conditions": ["A historically-driven consequence has permanently altered the characters' situation, confirming that history is the engine of this story"],
-      "typical_variants": ["News of a historical event (battle lost, king dead, law changed) arrives and immediately restructures what the characters can do", "A character is swept up in a historical event — arrested, conscripted, displaced, dispossessed", "Historical consequence arrives as irony — character's plan is undone by history they could not foresee", "The historical record closes around the character, and their individual outcome is confirmed or sealed"],
-      "failure_modes": ["Historical consequence is mentioned but absorbed without plot effect", "Characters escape the historical consequence through implausible luck or exception", "Consequence scene is rushed or summarized rather than dramatized"],
-      "signals_in_text": ["Scene pivot is triggered by historical event, not by character decision", "Characters express helplessness or urgency in response to forces outside their control", "Aftermath of the scene is a permanently altered situation that the rest of the story must navigate"]
+      "entry_conditions": [
+        "Historical stakes established",
+        "Historical events have been operative in the narrative"
+      ],
+      "exit_conditions": [
+        "A historically-driven consequence has permanently altered the characters' situation, confirming that history is the engine of this story"
+      ],
+      "typical_variants": [
+        "News of a historical event (battle lost, king dead, law changed) arrives and immediately restructures what the characters can do",
+        "A character is swept up in a historical event — arrested, conscripted, displaced, dispossessed",
+        "Historical consequence arrives as irony — character's plan is undone by history they could not foresee",
+        "The historical record closes around the character, and their individual outcome is confirmed or sealed"
+      ],
+      "failure_modes": [
+        "Historical consequence is mentioned but absorbed without plot effect",
+        "Characters escape the historical consequence through implausible luck or exception",
+        "Consequence scene is rushed or summarized rather than dramatized"
+      ],
+      "signals_in_text": [
+        "Scene pivot is triggered by historical event, not by character decision",
+        "Characters express helplessness or urgency in response to forces outside their control",
+        "Aftermath of the scene is a permanently altered situation that the rest of the story must navigate"
+      ]
     },
     {
       "node_id": "HI_N80_PERIOD_ATMOSPHERE",
@@ -190,11 +477,30 @@
       "role": "Tone Marker",
       "level": null,
       "definition": "Historical fiction requires a tonal commitment to period immersion — language, sensory detail, social texture, and narrative attitude must consistently evoke the specific world of the period. The tone is neither nostalgic nor condescending toward the past, but inhabited.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Tone is maintained through prose register, scene construction, dialogue idiom, and period-specific sensory texture"],
-      "typical_variants": ["Austere and unsentimental — the past is hard, costly, and unromantic", "Richly textured and sensory — the period's material and social world is rendered in full", "Elegiac — the past is irretrievably lost, and the tone mourns it", "Ironic — the distance between past and present is deployed as critical lens"],
-      "failure_modes": ["Tone is tourist-guide historical — the past is picturesque but not inhabited", "Prose register is contemporary throughout, breaking period immersion", "Tone romanticizes the period in ways that erase its violence or injustice", "Tone is condescending — the past is presented as simply inferior to the present"],
-      "signals_in_text": ["Prose rhythm and vocabulary reflect period register without pastiche", "Sensory details are specific to the period rather than generically 'old'", "Narrator's attitude toward the past is consistent and purposeful", "Social texture — who speaks, how, to whom, with what deference — is period-calibrated"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Tone is maintained through prose register, scene construction, dialogue idiom, and period-specific sensory texture"
+      ],
+      "typical_variants": [
+        "Austere and unsentimental — the past is hard, costly, and unromantic",
+        "Richly textured and sensory — the period's material and social world is rendered in full",
+        "Elegiac — the past is irretrievably lost, and the tone mourns it",
+        "Ironic — the distance between past and present is deployed as critical lens"
+      ],
+      "failure_modes": [
+        "Tone is tourist-guide historical — the past is picturesque but not inhabited",
+        "Prose register is contemporary throughout, breaking period immersion",
+        "Tone romanticizes the period in ways that erase its violence or injustice",
+        "Tone is condescending — the past is presented as simply inferior to the present"
+      ],
+      "signals_in_text": [
+        "Prose rhythm and vocabulary reflect period register without pastiche",
+        "Sensory details are specific to the period rather than generically 'old'",
+        "Narrator's attitude toward the past is consistent and purposeful",
+        "Social texture — who speaks, how, to whom, with what deference — is period-calibrated"
+      ]
     },
     {
       "node_id": "HI_N90_ANACHRONISTIC_CHARACTER",
@@ -202,11 +508,27 @@
       "role": "Anti-Pattern",
       "level": null,
       "definition": "Historical fiction fails when characters think, speak, and act with the moral framework, psychological vocabulary, and social assumptions of the contemporary world while nominally inhabiting the past. The body is in costume; the mind is in the present.",
-      "entry_conditions": ["Characters are nominally set in a historical period"],
-      "exit_conditions": ["Characters demonstrate consistent period-appropriate consciousness, even when they are exceptional within their time"],
-      "typical_variants": ["Female character in a rigidly patriarchal society who faces no internalized constraints", "Character in a slaveholding society who holds fully modern abolitionist consciousness without period tension", "Medieval character who reasons in recognizably secular, rights-based modern terms", "Historical figure who uses contemporary therapeutic or political vocabulary"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["Characters express modern political or psychological concepts unavailable in their period", "Period social constraints are treated as external impositions characters can simply decide to ignore", "Dialogue sounds contemporary despite period setting", "Characters have no blind spots that reflect their period's ideology"]
+      "entry_conditions": [
+        "Characters are nominally set in a historical period"
+      ],
+      "exit_conditions": [
+        "Characters demonstrate consistent period-appropriate consciousness, even when they are exceptional within their time"
+      ],
+      "typical_variants": [
+        "Female character in a rigidly patriarchal society who faces no internalized constraints",
+        "Character in a slaveholding society who holds fully modern abolitionist consciousness without period tension",
+        "Medieval character who reasons in recognizably secular, rights-based modern terms",
+        "Historical figure who uses contemporary therapeutic or political vocabulary"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode — its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "Characters express modern political or psychological concepts unavailable in their period",
+        "Period social constraints are treated as external impositions characters can simply decide to ignore",
+        "Dialogue sounds contemporary despite period setting",
+        "Characters have no blind spots that reflect their period's ideology"
+      ]
     }
   ],
   "edges": [
@@ -216,11 +538,17 @@
       "to": "HI_N10_SPECIFIC_PERIOD",
       "label": "Promise requires a specific, recognizable period",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Stakes can only be historical if the period is specific enough to carry its own conditions and consequences",
       "effects_on_character": "Characters must be anchored in a period that has real rules — not floating in a generic past",
-      "common_alternatives": ["Some historical fiction defines period through event rather than date, but specificity is still required"],
-      "anti_patterns": ["Vague historical setting that functions as fantasy without genre accountability"]
+      "common_alternatives": [
+        "Some historical fiction defines period through event rather than date, but specificity is still required"
+      ],
+      "anti_patterns": [
+        "Vague historical setting that functions as fantasy without genre accountability"
+      ]
     },
     {
       "edge_id": "HI_E02_PROMISE_TO_CONTEXT_GENERATES",
@@ -228,11 +556,17 @@
       "to": "HI_N11_CONTEXT_GENERATES_CONFLICT",
       "label": "Promise requires history as engine, not decoration",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Stakes are only historical if the period's conditions are causing them",
       "effects_on_character": "Characters must be in conflict with or because of their historical situation",
-      "common_alternatives": ["Biographical historical may center on internal conflict, but historical context must still shape its form"],
-      "anti_patterns": ["Period setting that could be swapped for any other setting without affecting the plot"]
+      "common_alternatives": [
+        "Biographical historical may center on internal conflict, but historical context must still shape its form"
+      ],
+      "anti_patterns": [
+        "Period setting that could be swapped for any other setting without affecting the plot"
+      ]
     },
     {
       "edge_id": "HI_E03_PROMISE_TO_CONSTRAINTS_ENFORCED",
@@ -240,11 +574,17 @@
       "to": "HI_N12_PERIOD_CONSTRAINTS_ENFORCED",
       "label": "Promise requires period constraints to have teeth",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Period constraints are the source of the genre's specific stakes",
       "effects_on_character": "Characters cannot be exempt from the rules of their time",
-      "common_alternatives": ["Exceptional characters may push against constraints, but the constraint must still cost them something"],
-      "anti_patterns": ["Characters in period setting who face no period-specific limits"]
+      "common_alternatives": [
+        "Exceptional characters may push against constraints, but the constraint must still cost them something"
+      ],
+      "anti_patterns": [
+        "Characters in period setting who face no period-specific limits"
+      ]
     },
     {
       "edge_id": "HI_E04_PROMISE_TO_WORLDVIEW",
@@ -252,11 +592,17 @@
       "to": "HI_N13_PERIOD_WORLDVIEW",
       "label": "Promise requires period-authentic consciousness",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "If characters think anachronistically, period stakes collapse",
       "effects_on_character": "Characters' inner lives must be consistent with what was thinkable in their time",
-      "common_alternatives": ["Revisionist historical fiction may deliberately foreground anachronism as a device, but must do so purposefully"],
-      "anti_patterns": ["Contemporary moral vocabulary spoken by historical characters without narrative acknowledgment"]
+      "common_alternatives": [
+        "Revisionist historical fiction may deliberately foreground anachronism as a device, but must do so purposefully"
+      ],
+      "anti_patterns": [
+        "Contemporary moral vocabulary spoken by historical characters without narrative acknowledgment"
+      ]
     },
     {
       "edge_id": "HI_E05_PROMISE_TO_TONE",
@@ -264,11 +610,17 @@
       "to": "HI_N80_PERIOD_ATMOSPHERE",
       "label": "Promise requires immersive period atmosphere",
       "meaning": "sets tone",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Tonal immersion is what makes period stakes feel real rather than theatrical",
       "effects_on_character": "Characters must inhabit the period in their language, manner, and assumption",
-      "common_alternatives": ["Ironic or revisionist historical fiction may cultivate critical distance, but tone must still be purposeful rather than accidental"],
-      "anti_patterns": ["Generic 'old-timey' atmosphere that gestures at period without committing to it"]
+      "common_alternatives": [
+        "Ironic or revisionist historical fiction may cultivate critical distance, but tone must still be purposeful rather than accidental"
+      ],
+      "anti_patterns": [
+        "Generic 'old-timey' atmosphere that gestures at period without committing to it"
+      ]
     },
     {
       "edge_id": "HI_E10_SPECIFIC_TO_PERIOD_DRAMA",
@@ -276,11 +628,18 @@
       "to": "HI_N20_PERIOD_DRAMA",
       "label": "Specific period as intimate social world",
       "meaning": "branches into subtype",
-      "preconditions": ["Period is specific and the stakes are personal and familial rather than epic"],
+      "preconditions": [
+        "Period is specific and the stakes are personal and familial rather than epic"
+      ],
       "effects_on_stakes": "Period specificity generates the social rules that constrain intimate relationships",
       "effects_on_character": "Characters defined by their position within the intimate social world of the period",
-      "common_alternatives": ["Historical epic", "Biographical historical"],
-      "anti_patterns": ["Period drama that uses historical setting as costume for a universal romance or family story"]
+      "common_alternatives": [
+        "Historical epic",
+        "Biographical historical"
+      ],
+      "anti_patterns": [
+        "Period drama that uses historical setting as costume for a universal romance or family story"
+      ]
     },
     {
       "edge_id": "HI_E11_CONTEXT_TO_EPIC",
@@ -288,11 +647,18 @@
       "to": "HI_N21_HISTORICAL_EPIC",
       "label": "Historical context at epic scale",
       "meaning": "branches into subtype",
-      "preconditions": ["Historical context generates conflict at a scale that encompasses large events and multiple lives"],
+      "preconditions": [
+        "Historical context generates conflict at a scale that encompasses large events and multiple lives"
+      ],
       "effects_on_stakes": "Stakes are both personal and civilizational — individual lives at risk within historical upheaval",
       "effects_on_character": "Characters are caught within historical forces larger than themselves",
-      "common_alternatives": ["Period drama", "Biographical historical"],
-      "anti_patterns": ["Epic scale claimed but only one character's personal story is actually told"]
+      "common_alternatives": [
+        "Period drama",
+        "Biographical historical"
+      ],
+      "anti_patterns": [
+        "Epic scale claimed but only one character's personal story is actually told"
+      ]
     },
     {
       "edge_id": "HI_E12_WORLDVIEW_TO_BIOGRAPHICAL",
@@ -300,11 +666,18 @@
       "to": "HI_N22_BIOGRAPHICAL_HISTORICAL",
       "label": "Known figure's worldview illuminated from within",
       "meaning": "branches into subtype",
-      "preconditions": ["Central character is a documented historical figure whose period worldview is both known and incompletely recorded"],
+      "preconditions": [
+        "Central character is a documented historical figure whose period worldview is both known and incompletely recorded"
+      ],
       "effects_on_stakes": "Dramatic irony from the known historical outcome creates stakes the character cannot see",
       "effects_on_character": "Character's consciousness is the site where historical record and private interiority meet",
-      "common_alternatives": ["Period drama", "Revisionist history"],
-      "anti_patterns": ["Biographical historical where the figure is simply a vehicle for the author's contemporary views"]
+      "common_alternatives": [
+        "Period drama",
+        "Revisionist history"
+      ],
+      "anti_patterns": [
+        "Biographical historical where the figure is simply a vehicle for the author's contemporary views"
+      ]
     },
     {
       "edge_id": "HI_E13_CONSTRAINTS_TO_REVISIONIST",
@@ -312,11 +685,18 @@
       "to": "HI_N23_REVISIONIST_HISTORY",
       "label": "Interrogating which constraints the record enforced and which it erased",
       "meaning": "branches into subtype",
-      "preconditions": ["The dominant historical record has enforced certain constraints on whose experience is visible"],
+      "preconditions": [
+        "The dominant historical record has enforced certain constraints on whose experience is visible"
+      ],
       "effects_on_stakes": "Revision creates stakes by restoring what the record suppressed",
       "effects_on_character": "Characters whose experience was marginalized or erased by the historical record are centered",
-      "common_alternatives": ["Period drama", "Historical epic"],
-      "anti_patterns": ["Revisionist history that changes the record for wish-fulfillment rather than critical illumination"]
+      "common_alternatives": [
+        "Period drama",
+        "Historical epic"
+      ],
+      "anti_patterns": [
+        "Revisionist history that changes the record for wish-fulfillment rather than critical illumination"
+      ]
     },
     {
       "edge_id": "HI_E30_PERIOD_DRAMA_TO_MATERIAL",
@@ -324,11 +704,17 @@
       "to": "HI_N40_MATERIAL_CULTURE",
       "label": "Period drama requires accurate material world",
       "meaning": "introduces setting rule",
-      "preconditions": ["Period drama subgenre selected"],
+      "preconditions": [
+        "Period drama subgenre selected"
+      ],
       "effects_on_stakes": "Material constraints (medicine, travel, communication) create the specific texture of period stakes",
       "effects_on_character": "Characters' daily lives are shaped by what their period provides and withholds",
-      "common_alternatives": ["Material culture may be selectively detailed — not every object needs period research, but operative objects must be accurate"],
-      "anti_patterns": ["Period drama with anachronistic technology that removes period-specific constraints"]
+      "common_alternatives": [
+        "Material culture may be selectively detailed — not every object needs period research, but operative objects must be accurate"
+      ],
+      "anti_patterns": [
+        "Period drama with anachronistic technology that removes period-specific constraints"
+      ]
     },
     {
       "edge_id": "HI_E31_EPIC_TO_EVENTS_STRUCTURE",
@@ -336,11 +722,17 @@
       "to": "HI_N42_HISTORICAL_EVENTS_STRUCTURE",
       "label": "Epic requires historical events as structural backbone",
       "meaning": "introduces setting rule",
-      "preconditions": ["Historical epic subgenre selected"],
+      "preconditions": [
+        "Historical epic subgenre selected"
+      ],
       "effects_on_stakes": "Historical events provide the turning points that make the epic's scale legible",
       "effects_on_character": "Characters' fates are structured by the arc of historical events",
-      "common_alternatives": ["Events may be foregrounded as spectacle or experienced obliquely through characters' lives"],
-      "anti_patterns": ["Historical epic where the named historical events are ambient rather than structurally operative"]
+      "common_alternatives": [
+        "Events may be foregrounded as spectacle or experienced obliquely through characters' lives"
+      ],
+      "anti_patterns": [
+        "Historical epic where the named historical events are ambient rather than structurally operative"
+      ]
     },
     {
       "edge_id": "HI_E32_BIOGRAPHICAL_TO_SOCIAL_HIERARCHY",
@@ -348,11 +740,18 @@
       "to": "HI_N41_SOCIAL_HIERARCHY",
       "label": "Biographical subject's position in period hierarchy shapes their story",
       "meaning": "introduces setting rule",
-      "preconditions": ["Biographical historical subgenre selected", "Historical figure is positioned within the period's social order"],
+      "preconditions": [
+        "Biographical historical subgenre selected",
+        "Historical figure is positioned within the period's social order"
+      ],
       "effects_on_stakes": "The figure's position in the hierarchy determines what they can and cannot do, even if they are powerful",
       "effects_on_character": "Historical figure is humanized by the specific constraints their social position imposed",
-      "common_alternatives": ["Some biographical historical fiction focuses on marginalized figures — hierarchy operates as dispossession rather than privilege"],
-      "anti_patterns": ["Biographical historical that treats the subject as exempt from their period's social structure"]
+      "common_alternatives": [
+        "Some biographical historical fiction focuses on marginalized figures — hierarchy operates as dispossession rather than privilege"
+      ],
+      "anti_patterns": [
+        "Biographical historical that treats the subject as exempt from their period's social structure"
+      ]
     },
     {
       "edge_id": "HI_E33_REVISIONIST_TO_SOCIAL_HIERARCHY",
@@ -360,11 +759,17 @@
       "to": "HI_N41_SOCIAL_HIERARCHY",
       "label": "Revisionism exposes how hierarchy shaped the historical record",
       "meaning": "introduces setting rule",
-      "preconditions": ["Revisionist subgenre selected"],
+      "preconditions": [
+        "Revisionist subgenre selected"
+      ],
       "effects_on_stakes": "Social hierarchy is the mechanism that suppressed the perspective being restored",
       "effects_on_character": "Characters at the bottom of the hierarchy are centered rather than marginalized",
-      "common_alternatives": ["Counterfactual revisionism may alter the hierarchy itself, but must show how the altered hierarchy produces different outcomes"],
-      "anti_patterns": ["Revisionist history that displaces the dominant narrative without engaging the hierarchy that produced it"]
+      "common_alternatives": [
+        "Counterfactual revisionism may alter the hierarchy itself, but must show how the altered hierarchy produces different outcomes"
+      ],
+      "anti_patterns": [
+        "Revisionist history that displaces the dominant narrative without engaging the hierarchy that produced it"
+      ]
     },
     {
       "edge_id": "HI_E50_MATERIAL_TO_PERIOD_ESTABLISHMENT",
@@ -372,11 +777,17 @@
       "to": "HI_N60_PERIOD_ESTABLISHMENT",
       "label": "Material culture is the content of the period establishment scene",
       "meaning": "mandates element",
-      "preconditions": ["Material culture is established as period-accurate"],
+      "preconditions": [
+        "Material culture is established as period-accurate"
+      ],
       "effects_on_stakes": "Period establishment scene uses material detail to anchor readers in the specific world",
       "effects_on_character": "Characters are introduced within their material world, revealing their position and constraints",
-      "common_alternatives": ["Period establishment may foreground social interaction over material detail, but material world must be present"],
-      "anti_patterns": ["Period establishment scene that narrates history rather than inhabiting the period's material texture"]
+      "common_alternatives": [
+        "Period establishment may foreground social interaction over material detail, but material world must be present"
+      ],
+      "anti_patterns": [
+        "Period establishment scene that narrates history rather than inhabiting the period's material texture"
+      ]
     },
     {
       "edge_id": "HI_E51_SOCIAL_HIERARCHY_TO_DESIRE_CONSTRAINT",
@@ -384,11 +795,18 @@
       "to": "HI_N61_DESIRE_VS_CONSTRAINT",
       "label": "Social hierarchy is the source of the period constraint against which desire collides",
       "meaning": "mandates element",
-      "preconditions": ["Social hierarchy established as operative", "Character's desire established"],
+      "preconditions": [
+        "Social hierarchy established as operative",
+        "Character's desire established"
+      ],
       "effects_on_stakes": "The hierarchy makes the character's desire structurally costly or forbidden",
       "effects_on_character": "Character must choose between desire and the hierarchy's demands",
-      "common_alternatives": ["Constraint may be legal, religious, or material rather than social, but hierarchy must be visible in the constraint's enforcement"],
-      "anti_patterns": ["Desire-versus-constraint scene where the constraint is merely personal rather than period-specific"]
+      "common_alternatives": [
+        "Constraint may be legal, religious, or material rather than social, but hierarchy must be visible in the constraint's enforcement"
+      ],
+      "anti_patterns": [
+        "Desire-versus-constraint scene where the constraint is merely personal rather than period-specific"
+      ]
     },
     {
       "edge_id": "HI_E52_EVENTS_TO_HISTORICAL_CONSEQUENCE",
@@ -396,11 +814,17 @@
       "to": "HI_N62_HISTORICAL_CONSEQUENCE",
       "label": "Historical events deliver consequences characters cannot escape",
       "meaning": "mandates element",
-      "preconditions": ["Historical events established as structurally operative"],
+      "preconditions": [
+        "Historical events established as structurally operative"
+      ],
       "effects_on_stakes": "Historical consequence scene confirms that history is the engine, not just the backdrop",
       "effects_on_character": "Characters are acted upon by history, not just by each other",
-      "common_alternatives": ["Consequence may be delivered via news, arrival of a historical figure, or characters being swept into an event"],
-      "anti_patterns": ["Historical events referenced but delivering no concrete consequence to any character in a scene"]
+      "common_alternatives": [
+        "Consequence may be delivered via news, arrival of a historical figure, or characters being swept into an event"
+      ],
+      "anti_patterns": [
+        "Historical events referenced but delivering no concrete consequence to any character in a scene"
+      ]
     },
     {
       "edge_id": "HI_E53_PERIOD_ESTABLISHMENT_TO_DESIRE_CONSTRAINT",
@@ -408,11 +832,17 @@
       "to": "HI_N61_DESIRE_VS_CONSTRAINT",
       "label": "Period establishment creates the conditions for the constraint collision",
       "meaning": "requires payoff",
-      "preconditions": ["Period establishment has made the social rules legible"],
+      "preconditions": [
+        "Period establishment has made the social rules legible"
+      ],
       "effects_on_stakes": "The established rules make the clash between desire and constraint dramatically legible",
       "effects_on_character": "The character's desire is measured against the established period world",
-      "common_alternatives": ["Desire-constraint collision may come immediately after period establishment or be delayed until the stakes are higher"],
-      "anti_patterns": ["Period establishment with no subsequent collision between desire and the period's rules"]
+      "common_alternatives": [
+        "Desire-constraint collision may come immediately after period establishment or be delayed until the stakes are higher"
+      ],
+      "anti_patterns": [
+        "Period establishment with no subsequent collision between desire and the period's rules"
+      ]
     },
     {
       "edge_id": "HI_E54_DESIRE_CONSTRAINT_TO_HISTORICAL_CONSEQUENCE",
@@ -420,11 +850,17 @@
       "to": "HI_N62_HISTORICAL_CONSEQUENCE",
       "label": "Personal collision with period constraint leads to historical consequence",
       "meaning": "requires payoff",
-      "preconditions": ["Desire-constraint collision has been dramatized"],
+      "preconditions": [
+        "Desire-constraint collision has been dramatized"
+      ],
       "effects_on_stakes": "Historical consequence confirms that the personal and the historical are entangled — one cannot escape the other",
       "effects_on_character": "Character's personal situation is permanently altered by a historical force they could not control",
-      "common_alternatives": ["Consequence may arrive before or after the personal collision — the entanglement is the point, not the sequence"],
-      "anti_patterns": ["Personal collision with period constraint that resolves without any historical dimension"]
+      "common_alternatives": [
+        "Consequence may arrive before or after the personal collision — the entanglement is the point, not the sequence"
+      ],
+      "anti_patterns": [
+        "Personal collision with period constraint that resolves without any historical dimension"
+      ]
     },
     {
       "edge_id": "HI_E90_ANACHRONISM_WARNING",
@@ -432,11 +868,15 @@
       "to": "HI_N90_ANACHRONISTIC_CHARACTER",
       "label": "Period worldview requirement — violation produces anachronistic characters",
       "meaning": "prohibits element",
-      "preconditions": ["Characters fail to be anchored in their period's available consciousness"],
+      "preconditions": [
+        "Characters fail to be anchored in their period's available consciousness"
+      ],
       "effects_on_stakes": "Period stakes collapse when characters are implicitly contemporary — there is no historical cost if the character already thinks like us",
       "effects_on_character": "Character becomes a contemporary protagonist in costume, defeating the genre's purpose",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes what the constraint exists to prevent"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern — it describes what the constraint exists to prevent"
+      ]
     }
   ]
 }

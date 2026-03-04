@@ -3,6 +3,28 @@
   "name": "Political",
   "type": "genre",
   "description": "Stories where the central arena of conflict is power — who holds it, who wants it, and what it costs to gain, keep, or resist it. Governance, collective decision-making, and institutional mechanics are not backdrop but the primary engine of drama, with personal stakes inseparable from public consequence.",
+  "_metadata": {
+    "nodeCount": 17,
+    "edgeCount": 19,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 1
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 4,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 4,
+      "mandates element": 3,
+      "requires payoff": 2,
+      "prohibits element": 1
+    }
+  },
   "nodes": [
     {
       "node_id": "PL_N01_PROMISE",
@@ -10,11 +32,26 @@
       "role": "Genre Promise",
       "level": 1,
       "definition": "The audience is promised a story where power, governance, and collective decision-making are the central arena of conflict — not the incidental backdrop for a personal story. Politics is the terrain, and navigating institutional structures, competing factions, and the gap between public virtue and private maneuvering is the primary dramatic activity. The genre promises that what is at stake matters beyond the individual: careers, ideologies, populations, and futures are in play.",
-      "entry_conditions": ["Story is positioned as political genre"],
-      "exit_conditions": ["Core constraints are established that fulfill the promise of power as the central arena"],
-      "typical_variants": ["Political thriller", "Political drama", "Dystopian political fiction", "Campaign and election narrative"],
-      "failure_modes": ["Political setting is used only as color while the real conflict is purely personal or romantic", "Power is depicted without showing how it actually operates — institutions are invisible or irrelevant"],
-      "signals_in_text": ["Opening establishes a power structure that the protagonist must navigate, contest, or survive", "Stakes are framed in terms of collective consequence from the first act"]
+      "entry_conditions": [
+        "Story is positioned as political genre"
+      ],
+      "exit_conditions": [
+        "Core constraints are established that fulfill the promise of power as the central arena"
+      ],
+      "typical_variants": [
+        "Political thriller",
+        "Political drama",
+        "Dystopian political fiction",
+        "Campaign and election narrative"
+      ],
+      "failure_modes": [
+        "Political setting is used only as color while the real conflict is purely personal or romantic",
+        "Power is depicted without showing how it actually operates — institutions are invisible or irrelevant"
+      ],
+      "signals_in_text": [
+        "Opening establishes a power structure that the protagonist must navigate, contest, or survive",
+        "Stakes are framed in terms of collective consequence from the first act"
+      ]
     },
     {
       "node_id": "PL_N10_LEGIBLE_POWER",
@@ -22,11 +59,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "The audience must be able to understand who has power, how it is held, and what the rules of the game are — even when those rules are corrupt or unspoken. Political fiction fails when power operates as pure mystery or magic; the machinery of governance, coalition-building, and institutional leverage must be rendered visible enough to generate meaningful dramatic stakes. Legibility does not mean simplicity: the structures can be complex, but they must be comprehensible to the audience as the protagonist navigates them.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["The audience understands the relevant power structures well enough to anticipate what moves are available and what their consequences would be"],
-      "typical_variants": ["Legislative mechanics exposed through procedural drama", "Party or faction hierarchies mapped through character relationships", "Bureaucratic constraints revealed as characters attempt to work around or through them", "Electoral arithmetic rendered visible through campaign strategy"],
-      "failure_modes": ["Power is concentrated in opaque individual authority with no structural logic", "The audience cannot identify who the relevant players are or what levers they control", "Institutional mechanics are hand-waved away when they become inconvenient to the plot"],
-      "signals_in_text": ["Characters explicitly discuss what moves are available and why certain options are foreclosed", "Institutional rules constrain protagonist choices in ways that feel specific rather than arbitrary", "The audience understands why a particular person or faction controls a particular resource or decision"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "The audience understands the relevant power structures well enough to anticipate what moves are available and what their consequences would be"
+      ],
+      "typical_variants": [
+        "Legislative mechanics exposed through procedural drama",
+        "Party or faction hierarchies mapped through character relationships",
+        "Bureaucratic constraints revealed as characters attempt to work around or through them",
+        "Electoral arithmetic rendered visible through campaign strategy"
+      ],
+      "failure_modes": [
+        "Power is concentrated in opaque individual authority with no structural logic",
+        "The audience cannot identify who the relevant players are or what levers they control",
+        "Institutional mechanics are hand-waved away when they become inconvenient to the plot"
+      ],
+      "signals_in_text": [
+        "Characters explicitly discuss what moves are available and why certain options are foreclosed",
+        "Institutional rules constrain protagonist choices in ways that feel specific rather than arbitrary",
+        "The audience understands why a particular person or faction controls a particular resource or decision"
+      ]
     },
     {
       "node_id": "PL_N11_COLLECTIVE_STAKES",
@@ -34,11 +88,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Political stories must maintain a dimension of consequence that extends beyond the protagonist's personal fate. Even when the story follows an individual's rise, fall, or moral compromise, the genre requires that what happens to them has implications for others — constituents, citizens, subordinates, generations. Personal ambition and collective stakes must be kept in tension rather than resolved in favor of one or the other. When a politician's career ends, someone loses healthcare; when a coup succeeds, an entire society changes.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Every major plot decision carries both personal and collective stakes that are held in simultaneous view"],
-      "typical_variants": ["Policy consequences dramatized through specific affected individuals", "Protagonist's personal betrayal producing public harm", "Abstract ideological conflict rendered concrete through its impact on communities", "Individual power secured at the explicit cost of collective welfare"],
-      "failure_modes": ["Personal stakes completely crowd out collective ones — the story becomes a private drama that happens to be set in politics", "Collective stakes are gestured at abstractly but never dramatized with specific human cost", "Resolution satisfies the protagonist personally while collective consequences are left unexamined"],
-      "signals_in_text": ["Scene-level choices carry both 'what does this mean for my career' and 'what does this mean for the people I govern'", "Secondary characters exist as representatives of the populations affected by power decisions", "The story does not allow the protagonist to win privately while the public loses without registering this as significant"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Every major plot decision carries both personal and collective stakes that are held in simultaneous view"
+      ],
+      "typical_variants": [
+        "Policy consequences dramatized through specific affected individuals",
+        "Protagonist's personal betrayal producing public harm",
+        "Abstract ideological conflict rendered concrete through its impact on communities",
+        "Individual power secured at the explicit cost of collective welfare"
+      ],
+      "failure_modes": [
+        "Personal stakes completely crowd out collective ones — the story becomes a private drama that happens to be set in politics",
+        "Collective stakes are gestured at abstractly but never dramatized with specific human cost",
+        "Resolution satisfies the protagonist personally while collective consequences are left unexamined"
+      ],
+      "signals_in_text": [
+        "Scene-level choices carry both 'what does this mean for my career' and 'what does this mean for the people I govern'",
+        "Secondary characters exist as representatives of the populations affected by power decisions",
+        "The story does not allow the protagonist to win privately while the public loses without registering this as significant"
+      ]
     },
     {
       "node_id": "PL_N12_COMPROMISE_AND_STRATEGY",
@@ -46,11 +117,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "In political fiction, protagonists achieve goals not through physical action or individual heroism but through negotiation, coalition-building, strategic sacrifice, and the calculated management of information and relationships. The genre insists that power is exercised through means — deals, alliances, leverage, timing — and that the willingness to compromise one's purity is the engine of political agency. Characters who refuse all compromise are either crushed or become the genre's idealism cautionary tale.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["The protagonist's path through the story requires making strategic choices that involve genuine trade-offs — getting something requires giving something up"],
-      "typical_variants": ["Alliance built through mutual concession that costs both parties something real", "Victory achieved by deploying leverage at precisely the right moment", "Strategic sacrifice of a secondary goal to preserve the primary one", "Information managed — revealed, withheld, or leaked — as a primary political weapon"],
-      "failure_modes": ["Protagonist achieves political goals through personal moral force alone, without strategic calculation", "Deals and negotiations are depicted but have no actual cost — concessions are costless", "Strategy is replaced by coincidence or external rescue at the climax"],
-      "signals_in_text": ["Characters explicitly identify what they want and what they are willing to give to get it", "Negotiations have visible give-and-take where both parties lose something", "The protagonist's strategy is legible to the audience even when concealed from other characters"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "The protagonist's path through the story requires making strategic choices that involve genuine trade-offs — getting something requires giving something up"
+      ],
+      "typical_variants": [
+        "Alliance built through mutual concession that costs both parties something real",
+        "Victory achieved by deploying leverage at precisely the right moment",
+        "Strategic sacrifice of a secondary goal to preserve the primary one",
+        "Information managed — revealed, withheld, or leaked — as a primary political weapon"
+      ],
+      "failure_modes": [
+        "Protagonist achieves political goals through personal moral force alone, without strategic calculation",
+        "Deals and negotiations are depicted but have no actual cost — concessions are costless",
+        "Strategy is replaced by coincidence or external rescue at the climax"
+      ],
+      "signals_in_text": [
+        "Characters explicitly identify what they want and what they are willing to give to get it",
+        "Negotiations have visible give-and-take where both parties lose something",
+        "The protagonist's strategy is legible to the audience even when concealed from other characters"
+      ]
     },
     {
       "node_id": "PL_N13_INSTITUTIONAL_MECHANICS",
@@ -58,11 +146,28 @@
       "role": "Core Constraint",
       "level": 2,
       "definition": "Political fiction derives its plot engine not from personal psychology alone but from the specific rules, procedures, and rhythms of institutions — elections have schedules, legislation has process, courts have procedure, appointments require confirmation. These mechanics are not obstacles to the story; they are the story's structural spine. Deadlines created by institutional process generate urgency, rules create the constraints that force creative solutions, and the gap between institutional form and real-world power creates the genre's characteristic dramatic irony.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["The plot's timeline and turning points are shaped by institutional processes rather than only by character will"],
-      "typical_variants": ["Legislative vote deadline creating countdown structure", "Electoral calendar forcing characters to act within specific windows", "Procedural rules weaponized or exploited by one faction against another", "Confirmation hearings, trials, or formal proceedings as dramatic set pieces"],
-      "failure_modes": ["Institutional processes are bypassed or ignored when they would constrain the protagonist's preferred action", "Plot turns depend entirely on character decisions with no institutional constraints shaping the available options", "The story could be transplanted to any setting without losing its plot — the specific institutional machinery is irrelevant"],
-      "signals_in_text": ["Characters' actions are constrained and enabled by specific procedural rules", "Deadlines tied to institutional process create the story's urgency", "Knowledge of how institutions work is itself a form of power in the story"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "The plot's timeline and turning points are shaped by institutional processes rather than only by character will"
+      ],
+      "typical_variants": [
+        "Legislative vote deadline creating countdown structure",
+        "Electoral calendar forcing characters to act within specific windows",
+        "Procedural rules weaponized or exploited by one faction against another",
+        "Confirmation hearings, trials, or formal proceedings as dramatic set pieces"
+      ],
+      "failure_modes": [
+        "Institutional processes are bypassed or ignored when they would constrain the protagonist's preferred action",
+        "Plot turns depend entirely on character decisions with no institutional constraints shaping the available options",
+        "The story could be transplanted to any setting without losing its plot — the specific institutional machinery is irrelevant"
+      ],
+      "signals_in_text": [
+        "Characters' actions are constrained and enabled by specific procedural rules",
+        "Deadlines tied to institutional process create the story's urgency",
+        "Knowledge of how institutions work is itself a form of power in the story"
+      ]
     },
     {
       "node_id": "PL_N20_POLITICAL_THRILLER",
@@ -70,11 +175,29 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Political genre fused with thriller mechanics — institutional power structures generate not just drama but danger, with protagonists navigating conspiracies, coups, assassinations, leaks, and cover-ups under time pressure and real physical or professional threat. The thriller's urgency accelerates political maneuvering into crisis, and the stakes of political failure include death or catastrophic harm. What distinguishes this from pure thriller is that the danger is rooted in the specific vulnerabilities of power: who can be silenced, who controls information, who has institutional impunity.",
-      "entry_conditions": ["Core constraints apply", "Political conflict generates threat to life, freedom, or catastrophic collective harm under time pressure"],
-      "exit_conditions": ["Protagonist navigates escalating danger rooted in power structures toward a crisis that must be resolved before irreversible harm occurs"],
-      "typical_variants": ["Conspiracy thriller where institutional actors cover up politically inconvenient truth", "Coup or regime-change thriller where the protagonist must act before power consolidates against them", "Whistleblower thriller where exposing truth requires surviving the system's self-protective violence", "Assassination/succession thriller where the mechanics of power transfer are the terrain of danger"],
-      "failure_modes": ["Thriller danger becomes so dominant that political mechanics are abandoned in the final act", "Conspiracy is resolved through physical confrontation rather than through political leverage or exposure", "The political dimension is revealed to be incidental — the real story is personal revenge or survival"],
-      "signals_in_text": ["Danger is traceable to specific actors with institutional power to harm", "Clock is running against an institutional deadline or an irreversible political event", "Protagonist's best weapons are information and institutional knowledge, not physical capability"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Political conflict generates threat to life, freedom, or catastrophic collective harm under time pressure"
+      ],
+      "exit_conditions": [
+        "Protagonist navigates escalating danger rooted in power structures toward a crisis that must be resolved before irreversible harm occurs"
+      ],
+      "typical_variants": [
+        "Conspiracy thriller where institutional actors cover up politically inconvenient truth",
+        "Coup or regime-change thriller where the protagonist must act before power consolidates against them",
+        "Whistleblower thriller where exposing truth requires surviving the system's self-protective violence",
+        "Assassination/succession thriller where the mechanics of power transfer are the terrain of danger"
+      ],
+      "failure_modes": [
+        "Thriller danger becomes so dominant that political mechanics are abandoned in the final act",
+        "Conspiracy is resolved through physical confrontation rather than through political leverage or exposure",
+        "The political dimension is revealed to be incidental — the real story is personal revenge or survival"
+      ],
+      "signals_in_text": [
+        "Danger is traceable to specific actors with institutional power to harm",
+        "Clock is running against an institutional deadline or an irreversible political event",
+        "Protagonist's best weapons are information and institutional knowledge, not physical capability"
+      ]
     },
     {
       "node_id": "PL_N21_POLITICAL_DRAMA",
@@ -82,11 +205,29 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Political genre without thriller urgency — the drama lies in the process of governance itself, in the moral costs of wielding power, in the slow corrosion of idealism under institutional pressure, and in the human relationships that are both the tools and casualties of political life. The stakes are real but measured in compromise, betrayal, and the distance between who a character intended to be and who they have become. Political drama holds the procedural and the personal in continuous tension without resolving either.",
-      "entry_conditions": ["Core constraints apply", "Primary interest is in the moral and human costs of power rather than in thriller danger"],
-      "exit_conditions": ["Character arc is measured in terms of political and moral evolution — what they sacrificed, what they preserved, and whether the ends justified the means"],
-      "typical_variants": ["Inside-the-room governance drama showing how laws are actually made and at what cost", "Rise-and-fall narrative tracking a politician's moral compromise across a career", "Idealism-versus-pragmatism drama where a principled character confronts the limits of purity in power", "Tragedy of office where institutional demands destroy a basically good person"],
-      "failure_modes": ["Moral costs are identified but not dramatized — characters describe corruption without enacting it in scene", "The drama resolves with institutional success that ignores personal and moral wreckage", "Idealism wins without cost — the protagonist achieves political goals without genuine compromise"],
-      "signals_in_text": ["Scenes of procedural negotiation are also scenes of moral reckoning", "The protagonist's relationships change in direct proportion to their acquisition or exercise of power", "The audience holds a running account of what has been given up in exchange for what has been gained"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Primary interest is in the moral and human costs of power rather than in thriller danger"
+      ],
+      "exit_conditions": [
+        "Character arc is measured in terms of political and moral evolution — what they sacrificed, what they preserved, and whether the ends justified the means"
+      ],
+      "typical_variants": [
+        "Inside-the-room governance drama showing how laws are actually made and at what cost",
+        "Rise-and-fall narrative tracking a politician's moral compromise across a career",
+        "Idealism-versus-pragmatism drama where a principled character confronts the limits of purity in power",
+        "Tragedy of office where institutional demands destroy a basically good person"
+      ],
+      "failure_modes": [
+        "Moral costs are identified but not dramatized — characters describe corruption without enacting it in scene",
+        "The drama resolves with institutional success that ignores personal and moral wreckage",
+        "Idealism wins without cost — the protagonist achieves political goals without genuine compromise"
+      ],
+      "signals_in_text": [
+        "Scenes of procedural negotiation are also scenes of moral reckoning",
+        "The protagonist's relationships change in direct proportion to their acquisition or exercise of power",
+        "The audience holds a running account of what has been given up in exchange for what has been gained"
+      ]
     },
     {
       "node_id": "PL_N22_DYSTOPIAN_POLITICAL",
@@ -94,11 +235,29 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Political genre set in a society where the failure or perversion of governance structures has produced systemic oppression — the political machines are working, but working in service of control rather than welfare. The genre requires that the dystopia's mechanisms be politically legible: specific ideologies, enforcement apparatuses, propaganda systems, and factional interests maintain the oppressive order. Resistance is not merely personal defiance but political action against a comprehensible system.",
-      "entry_conditions": ["Core constraints apply", "Setting is a society where political structures have been perverted into instruments of systemic oppression"],
-      "exit_conditions": ["The oppressive system's mechanics are rendered legible enough that the protagonist's resistance constitutes a genuine political act rather than mere personal escape"],
-      "typical_variants": ["Totalitarian state where information control and surveillance are the primary instruments of power", "Corporate-captured governance where economic power has absorbed political function", "Theocratic or ideological state where dissent is defined as crime", "Post-democratic society where the forms of democracy are preserved while its substance has been destroyed"],
-      "failure_modes": ["Dystopia functions as pure atmosphere — the political mechanisms are never explained or made specific", "Resistance is purely personal survival rather than politically meaningful action", "The oppressive system collapses through the protagonist's individual heroism without political organizing, coalition, or strategy"],
-      "signals_in_text": ["The specific ideology or interest that benefits from the oppressive order is identifiable", "Enforcement mechanisms are institutional rather than purely personal", "Resistance, when it succeeds, does so through political means that parallel the genre's core constraints"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Setting is a society where political structures have been perverted into instruments of systemic oppression"
+      ],
+      "exit_conditions": [
+        "The oppressive system's mechanics are rendered legible enough that the protagonist's resistance constitutes a genuine political act rather than mere personal escape"
+      ],
+      "typical_variants": [
+        "Totalitarian state where information control and surveillance are the primary instruments of power",
+        "Corporate-captured governance where economic power has absorbed political function",
+        "Theocratic or ideological state where dissent is defined as crime",
+        "Post-democratic society where the forms of democracy are preserved while its substance has been destroyed"
+      ],
+      "failure_modes": [
+        "Dystopia functions as pure atmosphere — the political mechanisms are never explained or made specific",
+        "Resistance is purely personal survival rather than politically meaningful action",
+        "The oppressive system collapses through the protagonist's individual heroism without political organizing, coalition, or strategy"
+      ],
+      "signals_in_text": [
+        "The specific ideology or interest that benefits from the oppressive order is identifiable",
+        "Enforcement mechanisms are institutional rather than purely personal",
+        "Resistance, when it succeeds, does so through political means that parallel the genre's core constraints"
+      ]
     },
     {
       "node_id": "PL_N23_CAMPAIGN_ELECTION",
@@ -106,11 +265,29 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Political genre structured around the mechanics and drama of electoral competition — the campaign is both the plot engine and the moral laboratory, as candidates and operatives navigate the conflict between winning and integrity. The electoral calendar provides the story's spine, with each phase of the campaign (announcement, primary, convention, general, election night) creating distinct dramatic obligations. The genre is distinguished by its attention to the operational realities of politics: polling, messaging, fundraising, opposition research, voter contact — these are not decoration but the actual instruments of power.",
-      "entry_conditions": ["Core constraints apply", "An election or campaign is the story's central structure and deadline"],
-      "exit_conditions": ["The campaign's competitive logic shapes all major decisions, with the election result — win or lose — serving as the structural climax"],
-      "typical_variants": ["Underdog campaign against a dominant incumbent that requires unconventional strategy", "Primary challenge exposing ideological fractures within a coalition", "Campaign corrupted by the pressures of opposition research, dark money, or scandal management", "Election night and its aftermath as the story's primary dramatic arena"],
-      "failure_modes": ["Campaign mechanics are depicted at the level of montage and buzzwords without operational specificity", "The election's outcome is predetermined in feel from the start, eliminating genuine narrative tension", "The campaign is background while a personal romance or thriller plot is foregrounded"],
-      "signals_in_text": ["Characters discuss specific strategic problems with specific proposed solutions", "The campaign's resource constraints and coalition pressures shape character choices", "The election functions as both plot climax and moral verdict on the choices made to get there"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "An election or campaign is the story's central structure and deadline"
+      ],
+      "exit_conditions": [
+        "The campaign's competitive logic shapes all major decisions, with the election result — win or lose — serving as the structural climax"
+      ],
+      "typical_variants": [
+        "Underdog campaign against a dominant incumbent that requires unconventional strategy",
+        "Primary challenge exposing ideological fractures within a coalition",
+        "Campaign corrupted by the pressures of opposition research, dark money, or scandal management",
+        "Election night and its aftermath as the story's primary dramatic arena"
+      ],
+      "failure_modes": [
+        "Campaign mechanics are depicted at the level of montage and buzzwords without operational specificity",
+        "The election's outcome is predetermined in feel from the start, eliminating genuine narrative tension",
+        "The campaign is background while a personal romance or thriller plot is foregrounded"
+      ],
+      "signals_in_text": [
+        "Characters discuss specific strategic problems with specific proposed solutions",
+        "The campaign's resource constraints and coalition pressures shape character choices",
+        "The election functions as both plot climax and moral verdict on the choices made to get there"
+      ]
     },
     {
       "node_id": "PL_N40_INSTITUTIONAL_REALISM",
@@ -118,11 +295,28 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The political world of the story must depict power as it actually operates — through specific institutional rules, resource dependencies, procedural leverage, and relationship networks — rather than as an abstraction or a simple hierarchy where the person at the top simply commands. Institutional realism means that characters cannot do whatever they want simply because they hold an impressive title; the machinery they operate through constrains them even as it empowers them. This realism is the genre's primary source of dramatic irony and strategic tension.",
-      "entry_conditions": ["Subgenre pattern selected"],
-      "exit_conditions": ["Every significant power move in the story is achievable through identifiable institutional mechanisms, and the constraints of those mechanisms are respected"],
-      "typical_variants": ["Legislative procedures that must be followed to pass or block bills", "Judicial and legal constraints that apply even to executive power", "Party discipline, caucus dynamics, and factional leverage within coalitions", "Budget and staffing constraints that limit what even powerful officials can actually do"],
-      "failure_modes": ["Characters with power simply do what they want without institutional constraint", "Institutional rules are invented or ignored case-by-case as plot convenience requires", "The story's depiction of how power works is so schematic that it could apply to any fictional government"],
-      "signals_in_text": ["Characters identify specific procedural options and their costs before taking action", "Institutional rules are weaponized by antagonists in ways that constrain the protagonist's responses", "The most powerful characters are also the most constrained by institutional expectations and dependencies"]
+      "entry_conditions": [
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "Every significant power move in the story is achievable through identifiable institutional mechanisms, and the constraints of those mechanisms are respected"
+      ],
+      "typical_variants": [
+        "Legislative procedures that must be followed to pass or block bills",
+        "Judicial and legal constraints that apply even to executive power",
+        "Party discipline, caucus dynamics, and factional leverage within coalitions",
+        "Budget and staffing constraints that limit what even powerful officials can actually do"
+      ],
+      "failure_modes": [
+        "Characters with power simply do what they want without institutional constraint",
+        "Institutional rules are invented or ignored case-by-case as plot convenience requires",
+        "The story's depiction of how power works is so schematic that it could apply to any fictional government"
+      ],
+      "signals_in_text": [
+        "Characters identify specific procedural options and their costs before taking action",
+        "Institutional rules are weaponized by antagonists in ways that constrain the protagonist's responses",
+        "The most powerful characters are also the most constrained by institutional expectations and dependencies"
+      ]
     },
     {
       "node_id": "PL_N41_COMPETING_FACTIONS",
@@ -130,11 +324,28 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "The political world must be populated by factions — parties, wings, caucuses, agencies, interests, or movements — whose motivations and goals are comprehensible to the audience even when they oppose the protagonist. Legible antagonism is essential: factions that oppose the protagonist must have reasons that make sense within their own framework, not simply be obstacles or villains. This multidimensional factional landscape creates the negotiation space that is political drama's primary terrain.",
-      "entry_conditions": ["Subgenre pattern selected"],
-      "exit_conditions": ["At least three distinct factions with legible, differentiated interests are present in the story's political landscape"],
-      "typical_variants": ["Ideological wings within a single party creating internal coalition problems", "Opposition party with coherent but opposing values and interests", "External interests — donors, media, foreign actors — with their own agendas intersecting with the main political conflict", "Bureaucratic or institutional actors whose interests are in stability and self-preservation regardless of who wins"],
-      "failure_modes": ["Opposition is reduced to villainy without comprehensible political interest", "All factions resolve into a simple binary of good versus evil", "Factions shift their positions for plot convenience without internal logic or political cost"],
-      "signals_in_text": ["The audience can articulate what each major faction wants and why", "Faction behavior is consistent with their stated interests even when it creates problems for the protagonist", "Coalition possibilities and incompatibilities are part of the story's strategic landscape"]
+      "entry_conditions": [
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "At least three distinct factions with legible, differentiated interests are present in the story's political landscape"
+      ],
+      "typical_variants": [
+        "Ideological wings within a single party creating internal coalition problems",
+        "Opposition party with coherent but opposing values and interests",
+        "External interests — donors, media, foreign actors — with their own agendas intersecting with the main political conflict",
+        "Bureaucratic or institutional actors whose interests are in stability and self-preservation regardless of who wins"
+      ],
+      "failure_modes": [
+        "Opposition is reduced to villainy without comprehensible political interest",
+        "All factions resolve into a simple binary of good versus evil",
+        "Factions shift their positions for plot convenience without internal logic or political cost"
+      ],
+      "signals_in_text": [
+        "The audience can articulate what each major faction wants and why",
+        "Faction behavior is consistent with their stated interests even when it creates problems for the protagonist",
+        "Coalition possibilities and incompatibilities are part of the story's strategic landscape"
+      ]
     },
     {
       "node_id": "PL_N42_PUBLIC_PRIVATE_FACE",
@@ -142,11 +353,28 @@
       "role": "Setting Rule",
       "level": 4,
       "definition": "Political fiction requires sustained tension between what political actors do in public and what they do in private — between the performance of governance and the actual exercise of power. The gap between public rhetoric and private maneuvering is not mere hypocrisy to be exposed; it is a structural feature of political life that the genre must dramatize as an ongoing condition. Characters must manage multiple versions of themselves across different audiences, and the story must show both registers with equal seriousness.",
-      "entry_conditions": ["Subgenre pattern selected"],
-      "exit_conditions": ["The story consistently differentiates between public political performance and private political reality, treating both as genuine and important"],
-      "typical_variants": ["Speech and press conference as public performance contrasted with the deal-making that preceded it", "Political ally who is publicly supportive and privately undermining", "Policy position maintained publicly while its private costs are borne by specific constituencies", "Character who performs conviction they no longer privately hold"],
-      "failure_modes": ["Public performance is treated as simply false and private maneuvering as simply true — the genre's moral complexity is flattened", "Public and private are identical — characters say the same things in both registers, eliminating the tension", "The reveal of the gap between public and private is treated as a single plot event rather than an ongoing structural condition"],
-      "signals_in_text": ["Scenes are constructed to show the same character behaving differently across public and private contexts", "The audience holds information that specific other characters do not, creating sustained dramatic irony", "Characters explicitly manage what can be said where and to whom"]
+      "entry_conditions": [
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "The story consistently differentiates between public political performance and private political reality, treating both as genuine and important"
+      ],
+      "typical_variants": [
+        "Speech and press conference as public performance contrasted with the deal-making that preceded it",
+        "Political ally who is publicly supportive and privately undermining",
+        "Policy position maintained publicly while its private costs are borne by specific constituencies",
+        "Character who performs conviction they no longer privately hold"
+      ],
+      "failure_modes": [
+        "Public performance is treated as simply false and private maneuvering as simply true — the genre's moral complexity is flattened",
+        "Public and private are identical — characters say the same things in both registers, eliminating the tension",
+        "The reveal of the gap between public and private is treated as a single plot event rather than an ongoing structural condition"
+      ],
+      "signals_in_text": [
+        "Scenes are constructed to show the same character behaving differently across public and private contexts",
+        "The audience holds information that specific other characters do not, creating sustained dramatic irony",
+        "Characters explicitly manage what can be said where and to whom"
+      ]
     },
     {
       "node_id": "PL_N60_NEGOTIATION_DEAL",
@@ -154,11 +382,29 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which political actors bargain directly — each with something the other wants, each with lines they will not cross — and a deal is struck or fails that shifts the story's power configuration. The scene must have genuine exchange: both parties must give something real to get something real, or the negotiation must collapse in a way that forecloses previously available options. Political deal-making scenes are the genre's primary demonstration that power is relational and contingent rather than absolute.",
-      "entry_conditions": ["Factional landscape established", "Protagonist needs something that requires another actor's cooperation or compliance"],
-      "exit_conditions": ["An agreement is reached or definitively collapses, and the story's power landscape is materially different afterward"],
-      "typical_variants": ["Closed-room bargain where both parties trade on mutual vulnerability", "Coalition negotiation where multiple parties must align around a shared minimum position", "Leverage negotiation where one party controls information or resources the other requires", "Failed negotiation that pushes one or both parties toward harder, costlier alternatives"],
-      "failure_modes": ["One party gives everything and the other gives nothing — the scene is capitulation, not negotiation", "The deal has no cost to the protagonist — no genuine sacrifice is made to secure the agreement", "Negotiation happens off-screen and the audience receives only the result"],
-      "signals_in_text": ["Each party's position and their bottom line are legible before and during the scene", "The deal struck is not the deal either party wanted — it reflects genuine compromise", "The cost of the deal is registered in the scene, not deferred"]
+      "entry_conditions": [
+        "Factional landscape established",
+        "Protagonist needs something that requires another actor's cooperation or compliance"
+      ],
+      "exit_conditions": [
+        "An agreement is reached or definitively collapses, and the story's power landscape is materially different afterward"
+      ],
+      "typical_variants": [
+        "Closed-room bargain where both parties trade on mutual vulnerability",
+        "Coalition negotiation where multiple parties must align around a shared minimum position",
+        "Leverage negotiation where one party controls information or resources the other requires",
+        "Failed negotiation that pushes one or both parties toward harder, costlier alternatives"
+      ],
+      "failure_modes": [
+        "One party gives everything and the other gives nothing — the scene is capitulation, not negotiation",
+        "The deal has no cost to the protagonist — no genuine sacrifice is made to secure the agreement",
+        "Negotiation happens off-screen and the audience receives only the result"
+      ],
+      "signals_in_text": [
+        "Each party's position and their bottom line are legible before and during the scene",
+        "The deal struck is not the deal either party wanted — it reflects genuine compromise",
+        "The cost of the deal is registered in the scene, not deferred"
+      ]
     },
     {
       "node_id": "PL_N61_BETRAYAL_REALIGNMENT",
@@ -166,11 +412,28 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which an ally defects, a coalition fractures, or a character shifts their political allegiance in a way that materially alters the story's power balance. Political betrayal differs from personal betrayal in that it is embedded in a calculation — the betrayer has weighed interests and found the protagonist wanting against an alternative. The scene must make both the betrayal and its political logic comprehensible, because in political fiction, betrayal without comprehensible motive is merely melodrama.",
-      "entry_conditions": ["Coalition or alliance has been established as the protagonist's primary political resource"],
-      "exit_conditions": ["A key figure defects or an alliance fractures, and the protagonist must recalculate their position from a weaker base"],
-      "typical_variants": ["Ally whose interests have diverged from the protagonist's and who acts on that divergence", "Defection triggered by the protagonist's own compromise or failure — the betrayal has political justice", "Manufactured betrayal where an antagonist has created conditions for the split", "Realignment where an enemy becomes a conditional ally under changed circumstances"],
-      "failure_modes": ["Betrayal is unmotivated or purely personal — no political logic explains the shift", "The betrayal has no lasting political consequence — the protagonist recovers without cost", "Betrayer is simply revealed as secretly evil rather than as a political actor pursuing their own comprehensible interests"],
-      "signals_in_text": ["The betrayer's political calculus is legible to the audience even if not to the protagonist", "The moment of betrayal is staged as a political event, not just an emotional one", "The realignment changes the visible power balance in ways that constrain subsequent options"]
+      "entry_conditions": [
+        "Coalition or alliance has been established as the protagonist's primary political resource"
+      ],
+      "exit_conditions": [
+        "A key figure defects or an alliance fractures, and the protagonist must recalculate their position from a weaker base"
+      ],
+      "typical_variants": [
+        "Ally whose interests have diverged from the protagonist's and who acts on that divergence",
+        "Defection triggered by the protagonist's own compromise or failure — the betrayal has political justice",
+        "Manufactured betrayal where an antagonist has created conditions for the split",
+        "Realignment where an enemy becomes a conditional ally under changed circumstances"
+      ],
+      "failure_modes": [
+        "Betrayal is unmotivated or purely personal — no political logic explains the shift",
+        "The betrayal has no lasting political consequence — the protagonist recovers without cost",
+        "Betrayer is simply revealed as secretly evil rather than as a political actor pursuing their own comprehensible interests"
+      ],
+      "signals_in_text": [
+        "The betrayer's political calculus is legible to the audience even if not to the protagonist",
+        "The moment of betrayal is staged as a political event, not just an emotional one",
+        "The realignment changes the visible power balance in ways that constrain subsequent options"
+      ]
     },
     {
       "node_id": "PL_N62_PUBLIC_SPEECH_PERSUASION",
@@ -178,11 +441,29 @@
       "role": "Scene Obligation",
       "level": 5,
       "definition": "A scene in which a political actor must persuade a public audience — voters, legislators, a party caucus, a press conference, a courtroom — and where the outcome of that persuasion attempt has material political consequence. The scene must dramatize rhetoric as a form of power: what is said, how it is framed, what is left unsaid, and how the audience receives it all matter. Political persuasion scenes are the genre's primary demonstration that language is itself a political instrument.",
-      "entry_conditions": ["Public political stakes are established", "A formal or informal persuasion context exists where audience response will shift the power balance"],
-      "exit_conditions": ["The speech or persuasion attempt concludes, and the audience response creates a new political reality that the story must then navigate"],
-      "typical_variants": ["Campaign speech that shifts the electoral dynamic", "Floor speech or testimony that moves votes or public opinion", "Press conference where framing controls the political narrative of an event", "Internal party or caucus speech that holds or fractures a coalition"],
-      "failure_modes": ["Speech is received as automatically persuasive because the protagonist is good — no resistance, skepticism, or partial failure is depicted", "The content of the argument is never actually articulated — the persuasion is rendered as emotional montage", "Audience response has no political consequence — the speech changes hearts but not the power landscape"],
-      "signals_in_text": ["The specific argument being made is legible and contested, not simply inspirational", "The audience's response is differentiated — some persuaded, some resistant, some unmoved", "The outcome of the persuasion attempt changes something concrete in the story's power configuration"]
+      "entry_conditions": [
+        "Public political stakes are established",
+        "A formal or informal persuasion context exists where audience response will shift the power balance"
+      ],
+      "exit_conditions": [
+        "The speech or persuasion attempt concludes, and the audience response creates a new political reality that the story must then navigate"
+      ],
+      "typical_variants": [
+        "Campaign speech that shifts the electoral dynamic",
+        "Floor speech or testimony that moves votes or public opinion",
+        "Press conference where framing controls the political narrative of an event",
+        "Internal party or caucus speech that holds or fractures a coalition"
+      ],
+      "failure_modes": [
+        "Speech is received as automatically persuasive because the protagonist is good — no resistance, skepticism, or partial failure is depicted",
+        "The content of the argument is never actually articulated — the persuasion is rendered as emotional montage",
+        "Audience response has no political consequence — the speech changes hearts but not the power landscape"
+      ],
+      "signals_in_text": [
+        "The specific argument being made is legible and contested, not simply inspirational",
+        "The audience's response is differentiated — some persuaded, some resistant, some unmoved",
+        "The outcome of the persuasion attempt changes something concrete in the story's power configuration"
+      ]
     },
     {
       "node_id": "PL_N80_CALCULATED_AMBIGUITY",
@@ -190,11 +471,28 @@
       "role": "Tone Marker",
       "level": null,
       "definition": "Political fiction requires a pervasive tone of intelligence and calculation — the sense that every actor is playing a game they understand, making moves with awareness of cost and consequence, and that the story respects this intelligence rather than patronizing it. The genre's characteristic moral texture is ambiguity rather than clarity: good people do harmful things for comprehensible reasons, and bad people sometimes serve genuine interests. Political fiction refuses the comfort of simple moral verdict while still insisting that choices and their consequences matter.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Tone maintains the texture of strategic intelligence and moral complexity throughout, never collapsing into simple heroism or villainy"],
-      "typical_variants": ["Scenes where the morally correct position and the politically viable position are clearly different", "Antagonists whose positions have genuine merit even while their methods are objectionable", "Protagonists whose victories come with visible moral costs that are not subsequently absolved", "Moments of genuine principle that are also moments of strategic calculation — the two are not presented as mutually exclusive"],
-      "failure_modes": ["Tone shifts to simple heroism at the climax — the protagonist's virtue triumphs without political cost", "Moral ambiguity is deployed symmetrically to suggest that all positions are equally valid, evacuating political meaning", "The calculating tone becomes cynical to the point that no character has any genuine conviction"],
-      "signals_in_text": ["Characters can articulate the best version of the opposing position", "The audience is not told whom to root for through tone or framing — they must decide based on the choices depicted", "Victories and losses are registered in moral as well as political terms"]
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Tone maintains the texture of strategic intelligence and moral complexity throughout, never collapsing into simple heroism or villainy"
+      ],
+      "typical_variants": [
+        "Scenes where the morally correct position and the politically viable position are clearly different",
+        "Antagonists whose positions have genuine merit even while their methods are objectionable",
+        "Protagonists whose victories come with visible moral costs that are not subsequently absolved",
+        "Moments of genuine principle that are also moments of strategic calculation — the two are not presented as mutually exclusive"
+      ],
+      "failure_modes": [
+        "Tone shifts to simple heroism at the climax — the protagonist's virtue triumphs without political cost",
+        "Moral ambiguity is deployed symmetrically to suggest that all positions are equally valid, evacuating political meaning",
+        "The calculating tone becomes cynical to the point that no character has any genuine conviction"
+      ],
+      "signals_in_text": [
+        "Characters can articulate the best version of the opposing position",
+        "The audience is not told whom to root for through tone or framing — they must decide based on the choices depicted",
+        "Victories and losses are registered in moral as well as political terms"
+      ]
     },
     {
       "node_id": "PL_N90_NAIVE_IDEALISM",
@@ -202,11 +500,26 @@
       "role": "Anti-Pattern",
       "level": null,
       "definition": "Political fiction fails when it presents a protagonist whose moral virtue and good intentions are sufficient to overcome institutional resistance, strategic opposition, and the structural constraints of power. This anti-pattern treats political change as a matter of will and sincerity rather than strategy, coalition-building, and the management of real constraints. It is not that idealism is wrong — political drama requires idealists — but that idealism without strategic engagement with how power actually works produces wish fulfillment rather than political drama.",
-      "entry_conditions": ["Protagonist holds principled political positions in conflict with institutional or factional opposition"],
-      "exit_conditions": ["Protagonist's idealism is tested by real institutional and strategic constraints — they must either adapt their means or pay a genuine price for refusing to"],
-      "typical_variants": ["Hero speech that spontaneously converts all opposition through its emotional force alone", "Revelation of the protagonist's good character that causes antagonists to stand down without political cost to anyone", "Institutional reform achieved through personal moral example rather than through political organizing and leverage", "Election won because the electorate spontaneously recognizes the candidate's virtue"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["Political opposition dissolves in response to the protagonist's sincerity rather than their strategy", "No genuine cost is paid for maintaining idealism in a system that punishes it", "The gap between the protagonist's good intentions and the actual mechanics of political change is never acknowledged as a problem"]
+      "entry_conditions": [
+        "Protagonist holds principled political positions in conflict with institutional or factional opposition"
+      ],
+      "exit_conditions": [
+        "Protagonist's idealism is tested by real institutional and strategic constraints — they must either adapt their means or pay a genuine price for refusing to"
+      ],
+      "typical_variants": [
+        "Hero speech that spontaneously converts all opposition through its emotional force alone",
+        "Revelation of the protagonist's good character that causes antagonists to stand down without political cost to anyone",
+        "Institutional reform achieved through personal moral example rather than through political organizing and leverage",
+        "Election won because the electorate spontaneously recognizes the candidate's virtue"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode — its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "Political opposition dissolves in response to the protagonist's sincerity rather than their strategy",
+        "No genuine cost is paid for maintaining idealism in a system that punishes it",
+        "The gap between the protagonist's good intentions and the actual mechanics of political change is never acknowledged as a problem"
+      ]
     }
   ],
   "edges": [
@@ -216,11 +529,20 @@
       "to": "PL_N10_LEGIBLE_POWER",
       "label": "Promise requires that power structures be made comprehensible",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "The audience can understand what is at stake in each political move because they understand how power works in this world",
       "effects_on_character": "Protagonist's choices are understood as moves within a comprehensible system, not as magic or coincidence",
-      "common_alternatives": ["Legislative mechanics", "Party hierarchy", "Bureaucratic constraint", "Electoral arithmetic"],
-      "anti_patterns": ["Power operates as mysterious individual authority with no structural logic the audience can follow"]
+      "common_alternatives": [
+        "Legislative mechanics",
+        "Party hierarchy",
+        "Bureaucratic constraint",
+        "Electoral arithmetic"
+      ],
+      "anti_patterns": [
+        "Power operates as mysterious individual authority with no structural logic the audience can follow"
+      ]
     },
     {
       "edge_id": "PL_E02_PROMISE_TO_COLLECTIVE_STAKES",
@@ -228,11 +550,18 @@
       "to": "PL_N11_COLLECTIVE_STAKES",
       "label": "Promise requires that consequences extend beyond personal fate",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Personal and collective stakes are held in simultaneous view, neither canceling the other",
       "effects_on_character": "Protagonist must reckon with what their choices mean for others, not only for themselves",
-      "common_alternatives": ["Policy consequences rendered through specific affected individuals", "Personal betrayal producing public harm"],
-      "anti_patterns": ["Political setting is used only as backdrop for a story whose stakes are entirely personal"]
+      "common_alternatives": [
+        "Policy consequences rendered through specific affected individuals",
+        "Personal betrayal producing public harm"
+      ],
+      "anti_patterns": [
+        "Political setting is used only as backdrop for a story whose stakes are entirely personal"
+      ]
     },
     {
       "edge_id": "PL_E03_PROMISE_TO_COMPROMISE",
@@ -240,11 +569,18 @@
       "to": "PL_N12_COMPROMISE_AND_STRATEGY",
       "label": "Promise requires that strategy and compromise are the means of political action",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "What characters want and what they must give up to get it are both constantly in view",
       "effects_on_character": "Protagonist cannot act through will or virtue alone — they must calculate, negotiate, and accept costs",
-      "common_alternatives": ["Alliance through mutual concession", "Victory through leverage deployed at the right moment"],
-      "anti_patterns": ["Protagonist achieves political goals through personal moral force without strategic calculation"]
+      "common_alternatives": [
+        "Alliance through mutual concession",
+        "Victory through leverage deployed at the right moment"
+      ],
+      "anti_patterns": [
+        "Protagonist achieves political goals through personal moral force without strategic calculation"
+      ]
     },
     {
       "edge_id": "PL_E04_PROMISE_TO_INSTITUTIONAL",
@@ -252,11 +588,19 @@
       "to": "PL_N13_INSTITUTIONAL_MECHANICS",
       "label": "Promise requires that institutional mechanics drive and shape the plot",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Deadlines and constraints are institutional, not merely personal — the calendar matters",
       "effects_on_character": "Character choices are shaped by procedural realities they cannot simply wish away",
-      "common_alternatives": ["Legislative countdown", "Electoral calendar", "Procedural rules weaponized by antagonists"],
-      "anti_patterns": ["Plot turns depend entirely on character will with no institutional constraints shaping available options"]
+      "common_alternatives": [
+        "Legislative countdown",
+        "Electoral calendar",
+        "Procedural rules weaponized by antagonists"
+      ],
+      "anti_patterns": [
+        "Plot turns depend entirely on character will with no institutional constraints shaping available options"
+      ]
     },
     {
       "edge_id": "PL_E05_PROMISE_TO_TONE",
@@ -264,11 +608,18 @@
       "to": "PL_N80_CALCULATED_AMBIGUITY",
       "label": "Promise requires tone of calculated intelligence and moral ambiguity",
       "meaning": "sets tone",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "The moral cost of political choices is held open rather than resolved in favor of simple heroism or villainy",
       "effects_on_character": "Characters are understood as strategic actors with comprehensible motivations, not as simple heroes or villains",
-      "common_alternatives": ["Scenes where moral correctness and political viability diverge", "Antagonists with genuine merit in their positions"],
-      "anti_patterns": ["Tone collapses to simple heroism at the climax — protagonist's virtue triumphs without political cost"]
+      "common_alternatives": [
+        "Scenes where moral correctness and political viability diverge",
+        "Antagonists with genuine merit in their positions"
+      ],
+      "anti_patterns": [
+        "Tone collapses to simple heroism at the climax — protagonist's virtue triumphs without political cost"
+      ]
     },
     {
       "edge_id": "PL_E10_LEGIBLE_TO_THRILLER",
@@ -276,11 +627,19 @@
       "to": "PL_N20_POLITICAL_THRILLER",
       "label": "Legible power structures make political danger specific and traceable",
       "meaning": "branches into subtype",
-      "preconditions": ["Power structures are comprehensible enough that the source of threat is institutionally identifiable"],
+      "preconditions": [
+        "Power structures are comprehensible enough that the source of threat is institutionally identifiable"
+      ],
       "effects_on_stakes": "Danger is rooted in specific institutional actors and their capacity for harm rather than in anonymous villainy",
       "effects_on_character": "Protagonist understands the system well enough to identify both the threat and the available counter-moves",
-      "common_alternatives": ["Political drama", "Dystopian political", "Campaign narrative"],
-      "anti_patterns": ["Conspiracy is so opaque that the audience cannot identify who benefits or what levers they control"]
+      "common_alternatives": [
+        "Political drama",
+        "Dystopian political",
+        "Campaign narrative"
+      ],
+      "anti_patterns": [
+        "Conspiracy is so opaque that the audience cannot identify who benefits or what levers they control"
+      ]
     },
     {
       "edge_id": "PL_E11_COMPROMISE_TO_DRAMA",
@@ -288,11 +647,19 @@
       "to": "PL_N21_POLITICAL_DRAMA",
       "label": "Strategic compromise as the primary source of moral and dramatic conflict",
       "meaning": "branches into subtype",
-      "preconditions": ["The moral costs of strategic compromise are the story's primary dramatic subject"],
+      "preconditions": [
+        "The moral costs of strategic compromise are the story's primary dramatic subject"
+      ],
       "effects_on_stakes": "Stakes are measured in moral terms — what the protagonist has given up, who they have become",
       "effects_on_character": "Character arc is defined by the accumulation of compromises and their cost to identity and integrity",
-      "common_alternatives": ["Political thriller", "Dystopian political", "Campaign narrative"],
-      "anti_patterns": ["Strategic compromise occurs but its moral cost is never dramatized or registered"]
+      "common_alternatives": [
+        "Political thriller",
+        "Dystopian political",
+        "Campaign narrative"
+      ],
+      "anti_patterns": [
+        "Strategic compromise occurs but its moral cost is never dramatized or registered"
+      ]
     },
     {
       "edge_id": "PL_E12_COLLECTIVE_TO_DYSTOPIAN",
@@ -300,11 +667,19 @@
       "to": "PL_N22_DYSTOPIAN_POLITICAL",
       "label": "Collective stakes at systemic scale when governance structures have been perverted",
       "meaning": "branches into subtype",
-      "preconditions": ["Collective stakes are systemic — entire populations are affected by the perversion of political structures"],
+      "preconditions": [
+        "Collective stakes are systemic — entire populations are affected by the perversion of political structures"
+      ],
       "effects_on_stakes": "The stakes include the ongoing welfare of everyone living under the oppressive system, not just the protagonist's survival",
       "effects_on_character": "Protagonist's individual choices carry weight as either complicity in or resistance to the system",
-      "common_alternatives": ["Political thriller", "Political drama", "Campaign narrative"],
-      "anti_patterns": ["Dystopia is atmospheric without specific political mechanisms — resistance is purely personal escape"]
+      "common_alternatives": [
+        "Political thriller",
+        "Political drama",
+        "Campaign narrative"
+      ],
+      "anti_patterns": [
+        "Dystopia is atmospheric without specific political mechanisms — resistance is purely personal escape"
+      ]
     },
     {
       "edge_id": "PL_E13_INSTITUTIONAL_TO_CAMPAIGN",
@@ -312,11 +687,19 @@
       "to": "PL_N23_CAMPAIGN_ELECTION",
       "label": "Electoral institutional mechanics provide the campaign narrative's structural spine",
       "meaning": "branches into subtype",
-      "preconditions": ["An election with a fixed institutional calendar is the story's central structural event"],
+      "preconditions": [
+        "An election with a fixed institutional calendar is the story's central structural event"
+      ],
       "effects_on_stakes": "The election functions as both plot climax and moral verdict — winning and losing carry different meanings depending on how they were achieved",
       "effects_on_character": "The campaign's operational demands force character choices that test integrity under competitive pressure",
-      "common_alternatives": ["Political thriller", "Political drama", "Dystopian political"],
-      "anti_patterns": ["Campaign mechanics are decorative — the election outcome is never genuinely in doubt and creates no real narrative tension"]
+      "common_alternatives": [
+        "Political thriller",
+        "Political drama",
+        "Dystopian political"
+      ],
+      "anti_patterns": [
+        "Campaign mechanics are decorative — the election outcome is never genuinely in doubt and creates no real narrative tension"
+      ]
     },
     {
       "edge_id": "PL_E30_THRILLER_TO_INSTITUTIONAL_REALISM",
@@ -324,11 +707,18 @@
       "to": "PL_N40_INSTITUTIONAL_REALISM",
       "label": "Political thriller requires institutional realism to root danger in specific power mechanics",
       "meaning": "introduces setting rule",
-      "preconditions": ["Political thriller subgenre selected"],
+      "preconditions": [
+        "Political thriller subgenre selected"
+      ],
       "effects_on_stakes": "Danger is institutionally specific — the audience understands exactly why certain actors can harm others with impunity",
       "effects_on_character": "Protagonist navigates threat using knowledge of institutional mechanics as their primary resource",
-      "common_alternatives": ["Conspiracy rooted in specific agency or legislative process", "Impunity rooted in institutional position"],
-      "anti_patterns": ["Danger is generic — any powerful antagonist could pose this threat regardless of specific institutional context"]
+      "common_alternatives": [
+        "Conspiracy rooted in specific agency or legislative process",
+        "Impunity rooted in institutional position"
+      ],
+      "anti_patterns": [
+        "Danger is generic — any powerful antagonist could pose this threat regardless of specific institutional context"
+      ]
     },
     {
       "edge_id": "PL_E31_DRAMA_TO_COMPETING_FACTIONS",
@@ -336,11 +726,18 @@
       "to": "PL_N41_COMPETING_FACTIONS",
       "label": "Political drama requires competing factions whose interests create the negotiation landscape",
       "meaning": "introduces setting rule",
-      "preconditions": ["Political drama subgenre selected"],
+      "preconditions": [
+        "Political drama subgenre selected"
+      ],
       "effects_on_stakes": "The protagonist cannot simply act — they must navigate a field of actors with their own comprehensible interests",
       "effects_on_character": "Character's strategic choices reflect which factional interests they are willing to serve or sacrifice at each turn",
-      "common_alternatives": ["Ideological wings creating internal coalition problems", "Bureaucratic actors whose interest is institutional stability"],
-      "anti_patterns": ["Opposition reduces to simple villainy without comprehensible interest — negotiation is impossible by design"]
+      "common_alternatives": [
+        "Ideological wings creating internal coalition problems",
+        "Bureaucratic actors whose interest is institutional stability"
+      ],
+      "anti_patterns": [
+        "Opposition reduces to simple villainy without comprehensible interest — negotiation is impossible by design"
+      ]
     },
     {
       "edge_id": "PL_E32_DYSTOPIAN_TO_PUBLIC_PRIVATE",
@@ -348,11 +745,18 @@
       "to": "PL_N42_PUBLIC_PRIVATE_FACE",
       "label": "Dystopian political fiction depends on the gap between regime performance and actual power",
       "meaning": "introduces setting rule",
-      "preconditions": ["Dystopian political subgenre selected"],
+      "preconditions": [
+        "Dystopian political subgenre selected"
+      ],
       "effects_on_stakes": "The official public reality and the actual operative reality are systematically different — this gap is both the oppression and the space for resistance",
       "effects_on_character": "Protagonist must navigate between performed compliance and private resistance, with the gap between them as both survival tool and moral burden",
-      "common_alternatives": ["Propaganda maintained publicly while private enforcement is brutal", "Official ideology masking factional interest"],
-      "anti_patterns": ["Dystopian regime is transparently evil even to its own agents — no gap between its public ideology and private reality"]
+      "common_alternatives": [
+        "Propaganda maintained publicly while private enforcement is brutal",
+        "Official ideology masking factional interest"
+      ],
+      "anti_patterns": [
+        "Dystopian regime is transparently evil even to its own agents — no gap between its public ideology and private reality"
+      ]
     },
     {
       "edge_id": "PL_E33_CAMPAIGN_TO_COMPETING_FACTIONS",
@@ -360,11 +764,18 @@
       "to": "PL_N41_COMPETING_FACTIONS",
       "label": "Campaign narrative requires legible factional landscape whose alignment determines the election",
       "meaning": "introduces setting rule",
-      "preconditions": ["Campaign and election subgenre selected"],
+      "preconditions": [
+        "Campaign and election subgenre selected"
+      ],
       "effects_on_stakes": "The election's outcome depends on which factions are assembled into a winning coalition — strategy is about alignment, not just messaging",
       "effects_on_character": "Candidate and operatives must make choices about which factional interests to serve and which to sacrifice to build the necessary coalition",
-      "common_alternatives": ["Party wings with competing demands on the candidate", "External interests — donors, media, movements — whose alignment is contested"],
-      "anti_patterns": ["Campaign is fought against an undifferentiated general electorate with no factional structure — strategy is purely about messaging to a monolithic audience"]
+      "common_alternatives": [
+        "Party wings with competing demands on the candidate",
+        "External interests — donors, media, movements — whose alignment is contested"
+      ],
+      "anti_patterns": [
+        "Campaign is fought against an undifferentiated general electorate with no factional structure — strategy is purely about messaging to a monolithic audience"
+      ]
     },
     {
       "edge_id": "PL_E50_INSTITUTIONAL_TO_NEGOTIATION",
@@ -372,11 +783,18 @@
       "to": "PL_N60_NEGOTIATION_DEAL",
       "label": "Institutional realism makes deal-making scenes specific and consequential",
       "meaning": "mandates element",
-      "preconditions": ["Institutional mechanics are established and legible"],
+      "preconditions": [
+        "Institutional mechanics are established and legible"
+      ],
       "effects_on_stakes": "The deal's terms are understood against the background of what each party can actually deliver and what constraints apply",
       "effects_on_character": "Protagonist must demonstrate political intelligence — knowing what to ask for, what to offer, and where the other party's limits lie",
-      "common_alternatives": ["Closed-room bargain on mutual vulnerability", "Leverage negotiation over specific institutional resource"],
-      "anti_patterns": ["Negotiation scene is staged without either party operating under institutional constraints — they simply agree or disagree"]
+      "common_alternatives": [
+        "Closed-room bargain on mutual vulnerability",
+        "Leverage negotiation over specific institutional resource"
+      ],
+      "anti_patterns": [
+        "Negotiation scene is staged without either party operating under institutional constraints — they simply agree or disagree"
+      ]
     },
     {
       "edge_id": "PL_E51_FACTIONS_TO_BETRAYAL",
@@ -384,11 +802,18 @@
       "to": "PL_N61_BETRAYAL_REALIGNMENT",
       "label": "Factional landscape creates the conditions for politically comprehensible betrayal",
       "meaning": "mandates element",
-      "preconditions": ["Multiple factions with legible interests are present and the protagonist depends on at least one for their political position"],
+      "preconditions": [
+        "Multiple factions with legible interests are present and the protagonist depends on at least one for their political position"
+      ],
       "effects_on_stakes": "Betrayal is a political event — it shifts the factional balance and forecloses options that were previously available",
       "effects_on_character": "Protagonist must rebuild from a weaker factional position, which requires either new concessions or new strategy",
-      "common_alternatives": ["Ally whose interests have genuinely diverged", "Defection triggered by the protagonist's own compromise or failure"],
-      "anti_patterns": ["Betrayal is purely personal and has no lasting political consequence — protagonist recovers without cost"]
+      "common_alternatives": [
+        "Ally whose interests have genuinely diverged",
+        "Defection triggered by the protagonist's own compromise or failure"
+      ],
+      "anti_patterns": [
+        "Betrayal is purely personal and has no lasting political consequence — protagonist recovers without cost"
+      ]
     },
     {
       "edge_id": "PL_E52_PUBLIC_PRIVATE_TO_SPEECH",
@@ -396,11 +821,18 @@
       "to": "PL_N62_PUBLIC_SPEECH_PERSUASION",
       "label": "Public-private tension makes the speech scene a site of strategic performance",
       "meaning": "mandates element",
-      "preconditions": ["The tension between public performance and private reality is established as a structural feature of the story's world"],
+      "preconditions": [
+        "The tension between public performance and private reality is established as a structural feature of the story's world"
+      ],
       "effects_on_stakes": "The speech is understood as a performance calibrated for a specific audience — the audience knows what the speaker privately believes and how it differs",
       "effects_on_character": "Protagonist must construct a public argument that is both strategically effective and not so far from private conviction that the performance collapses",
-      "common_alternatives": ["Campaign speech whose framing contradicts the private deal just made", "Public position that must be maintained in spite of private knowledge"],
-      "anti_patterns": ["Speech scene presents public statement as simply identical with private conviction — the performance dimension is eliminated"]
+      "common_alternatives": [
+        "Campaign speech whose framing contradicts the private deal just made",
+        "Public position that must be maintained in spite of private knowledge"
+      ],
+      "anti_patterns": [
+        "Speech scene presents public statement as simply identical with private conviction — the performance dimension is eliminated"
+      ]
     },
     {
       "edge_id": "PL_E70_NEGOTIATION_TO_BETRAYAL",
@@ -408,11 +840,18 @@
       "to": "PL_N61_BETRAYAL_REALIGNMENT",
       "label": "Deals create obligations that, when violated, constitute political betrayal",
       "meaning": "requires payoff",
-      "preconditions": ["A deal has been struck that creates mutual obligations between political actors"],
+      "preconditions": [
+        "A deal has been struck that creates mutual obligations between political actors"
+      ],
       "effects_on_stakes": "Betrayal of a negotiated deal is more politically significant than simple opposition — it destroys the trust infrastructure that makes future deals possible",
       "effects_on_character": "Protagonist must decide whether to retaliate, absorb the cost, or find a way to reconstitute the relationship under new terms",
-      "common_alternatives": ["Betrayer violates the deal's terms under pressure from a third faction", "Protagonist's own prior compromise creates the conditions for the deal's collapse"],
-      "anti_patterns": ["Deal is violated without political consequence — the betrayer faces no cost and the protagonist recovers without adjustment"]
+      "common_alternatives": [
+        "Betrayer violates the deal's terms under pressure from a third faction",
+        "Protagonist's own prior compromise creates the conditions for the deal's collapse"
+      ],
+      "anti_patterns": [
+        "Deal is violated without political consequence — the betrayer faces no cost and the protagonist recovers without adjustment"
+      ]
     },
     {
       "edge_id": "PL_E71_BETRAYAL_TO_SPEECH",
@@ -420,11 +859,18 @@
       "to": "PL_N62_PUBLIC_SPEECH_PERSUASION",
       "label": "Political realignment forces protagonist to publicly reconstitute their position",
       "meaning": "requires payoff",
-      "preconditions": ["A significant betrayal or realignment has changed the protagonist's political position"],
+      "preconditions": [
+        "A significant betrayal or realignment has changed the protagonist's political position"
+      ],
       "effects_on_stakes": "The speech scene is now weighted with the knowledge that a prior coalition has fractured — its success or failure determines whether the protagonist can rebuild",
       "effects_on_character": "Protagonist must perform confidence and coherence in a public context while privately navigating the damage of the realignment",
-      "common_alternatives": ["Candidate speech after a damaging defection that must reframe the political narrative", "Legislative address after losing a key ally that must hold remaining coalition"],
-      "anti_patterns": ["Betrayal has no bearing on the subsequent speech scene — protagonist performs as if nothing has changed"]
+      "common_alternatives": [
+        "Candidate speech after a damaging defection that must reframe the political narrative",
+        "Legislative address after losing a key ally that must hold remaining coalition"
+      ],
+      "anti_patterns": [
+        "Betrayal has no bearing on the subsequent speech scene — protagonist performs as if nothing has changed"
+      ]
     },
     {
       "edge_id": "PL_E90_IDEALISM_WARNING",
@@ -432,11 +878,15 @@
       "to": "PL_N90_NAIVE_IDEALISM",
       "label": "Abandoning strategic engagement in favor of moral virtue alone produces the genre's core anti-pattern",
       "meaning": "prohibits element",
-      "preconditions": ["Protagonist faces a situation where principled refusal to compromise conflicts with political effectiveness"],
+      "preconditions": [
+        "Protagonist faces a situation where principled refusal to compromise conflicts with political effectiveness"
+      ],
       "effects_on_stakes": "Naive idealism eliminates the genre's central tension — if virtue is sufficient, there are no real stakes",
       "effects_on_character": "Character is insulated from the genuine cost of political choice — they are rewarded for refusing to engage with how power actually works",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes the failure mode of allowing moral virtue to substitute for political strategy without cost"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern — it describes the failure mode of allowing moral virtue to substitute for political strategy without cost"
+      ]
     }
   ]
 }

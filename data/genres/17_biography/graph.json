@@ -3,6 +3,28 @@
   "name": "Biography",
   "type": "genre",
   "description": "Narratives based on real individuals, emphasizing formative events and character development while balancing fidelity and dramatic structure. (This graph has 18 nodes — one more than the 17-node standard — because it includes a second Anti-Pattern node to capture an additional genre-specific pitfall.)",
+  "_metadata": {
+    "nodeCount": 18,
+    "edgeCount": 20,
+    "nodesPerRole": {
+      "Genre Promise": 1,
+      "Core Constraint": 4,
+      "Subgenre Pattern": 4,
+      "Setting Rule": 3,
+      "Scene Obligation": 3,
+      "Tone Marker": 1,
+      "Anti-Pattern": 2
+    },
+    "edgesPerMeaning": {
+      "specifies constraint": 4,
+      "sets tone": 1,
+      "branches into subtype": 4,
+      "introduces setting rule": 4,
+      "mandates element": 3,
+      "requires payoff": 2,
+      "prohibits element": 2
+    }
+  },
   "nodes": [
     {
       "node_id": "BI_N01_PROMISE",

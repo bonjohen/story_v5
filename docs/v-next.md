@@ -19,8 +19,8 @@ Mechanical cleanup tasks that improve consistency and documentation quality.
 - [X] **#18 — Romance/Romantic Comedy graph.json size consistency**
   Romance and Romantic Comedy are ~2× genre average size due to more detailed relationship-focused constraint definitions. Documented as intentional in each graph.json description.
 
-- [ ] **#40 — Graph metadata block**
-  Add a `metadata` section to each graph.json with node count, edge count, level distribution (genre) or variant count (archetype), creation date, and last-validated date. Supports dashboards and reporting without full parsing.
+- [X] **#40 — Graph metadata block**
+  Injected `_metadata` block (nodeCount, edgeCount, nodesPerRole, edgesPerMeaning) into all 42 graph.json files via `app/scripts/inject-metadata.ts`.
 
 ### Phase B — Edge Numbering Consistency (medium effort, mechanical)
 
