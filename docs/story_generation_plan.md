@@ -224,25 +224,25 @@ This file is maintained by the coding agent so that [ ] means not started, [~] m
 **Goal:** Wire all engines into a single deterministic orchestrator with clean state transitions.
 
 ### 6.1 State machine
-- [ ] Create `app/src/generation/engine/orchestrator.ts`
-- [ ] States: IDLE → LOADED_CORPUS → SELECTED → CONTRACT_READY → PLANNED → GENERATING_SCENE → VALIDATING_SCENE → REPAIRING_SCENE → COMPLETED → FAILED
-- [ ] Transitions validated: no skipping steps, no invalid state changes
-- [ ] Progress events emitted for UI/CLI consumption
+- [X] Create `app/src/generation/engine/orchestrator.ts`
+- [X] States: IDLE → LOADED_CORPUS → SELECTED → CONTRACT_READY → PLANNED → GENERATING_SCENE → VALIDATING_SCENE → REPAIRING_SCENE → COMPLETED → FAILED
+- [X] Transitions validated: no skipping steps, no invalid state changes
+- [X] Progress events emitted for UI/CLI consumption
 
 ### 6.2 Run folder management
-- [ ] Each run writes all artifacts to `outputs/runs/{run_id}/`
-- [ ] Run ID format: `RUN_{YYYY}_{MM}_{DD}_{NNNN}`
-- [ ] Input request, selection, contract, plan, scene drafts, validation, trace, compliance report
+- [X] Each run writes all artifacts to `outputs/runs/{run_id}/`
+- [X] Run ID format: `RUN_{YYYY}_{MM}_{DD}_{NNNN}`
+- [X] Input request, selection, contract, plan, scene drafts, validation, trace, compliance report
 
 ### 6.3 Error handling
-- [ ] Transition to FAILED on unrecoverable errors
-- [ ] Preserve partial artifacts for debugging
-- [ ] Emit structured error artifacts with step and context
+- [X] Transition to FAILED on unrecoverable errors
+- [X] Preserve partial artifacts for debugging
+- [X] Emit structured error artifacts with step and context
 
 ### 6.4 Tests
-- [ ] State machine transition tests (valid and invalid)
-- [ ] Full orchestration integration test (request → completion)
-- [ ] Failure mode tests (LLM timeout, validation loop exhaustion)
+- [X] State machine transition tests (valid and invalid)
+- [X] Full orchestration integration test (request → completion)
+- [X] Failure mode tests (LLM timeout, validation loop exhaustion)
 
 **Verification:** Orchestrator transitions are deterministic. Full run produces all expected artifacts. Failure states preserve partial output.
 
