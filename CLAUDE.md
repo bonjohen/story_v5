@@ -10,7 +10,7 @@ This is a **data and content project** that models storytelling structures as fo
 
 2. **Genre Depth Graphs** — model genre constraints at increasing levels of detail (Genre Promise → Core Constraints → Subgenre Pattern → World/Setting Rules → Scene Obligations) for 27 genres. Edges represent refinement steps that narrow creative degrees of freedom.
 
-The next planned work is an **Interactive Visual Graph Interface** — a web-based narrative structure exploration engine. See `docs/interactive_viewer_design.md` (specification) and `docs/interactive_viewer_plan.md` (8-phase implementation plan).
+3. **Interactive Visual Graph Interface** — a web-based narrative structure exploration engine built with React 19, TypeScript, Vite, Cytoscape.js, and Zustand. All 8 implementation phases are complete. See `docs/interactive_viewer_design.md` (specification) and `docs/interactive_viewer_plan.md` (implementation plan, all phases `[X]`).
 
 ## Repository Structure
 
@@ -45,13 +45,24 @@ data/                              ← Deliverable outputs
   cross_archetype_index.json       ← Shared node roles/edge meanings across all 15
   cross_genre_constraint_index.json ← Shared constraint types across all 27
   genre_archetype_matrix.json      ← 27 genres × 15 archetypes compatibility
+
+app/                               ← Interactive viewer (React + TypeScript + Vite)
+  src/
+    components/                    ← Reusable UI components (GraphSearch, SettingsPanel, etc.)
+    panels/                        ← Side panels (DetailPanel, SimulationPanel, ExportPanel, etc.)
+    render/                        ← Cytoscape canvas, styles, element builders
+    graph-engine/                  ← Normalizer, validator, data index, example parser
+    store/                         ← Zustand stores (graphStore, simulationStore, settingsStore)
+    layout/                        ← Graph layout algorithms
+    types/                         ← TypeScript interfaces
+  public/data/                     ← Copied graph JSON data served by Vite
 ```
 
 ## Goal Status
 
 - **Goal 1 — Archetype Graphs**: Complete. All 15 graph JSONs, 15 narrative specs, 15 example mappings, cross-archetype index, and validation done.
 - **Goal 2 — Genre Depth Graphs**: Complete. All 27 graph JSONs, 27 narrative specs, 27 example mappings, cross-genre constraint index, genre × archetype compatibility matrix, and validation done.
-- **Next — Interactive Viewer**: Planned. 8-phase implementation plan ready in `docs/interactive_viewer_plan.md`.
+- **Goal 3 — Interactive Viewer**: Complete. All 8 phases implemented (scaffolding, core rendering, navigation, detail panels, simulation, examples, analytics, polish/accessibility/export).
 
 ## Key Conventions
 
