@@ -1,0 +1,190 @@
+{
+  "title": "Cross-Medium Adaptation Mapping",
+  "description": "Analyzes how archetype graphs shift when stories are adapted between mediums. For 6 works that exist in multiple mediums, documents which nodes compress, expand, change role, or are added/removed. Derives general rules per medium transition type.",
+  "_stats": {
+    "works_analyzed": 6,
+    "transition_types": ["novel_to_film", "novel_to_tv", "film_to_game", "stage_to_film"],
+    "general_rules_derived": 12
+  },
+  "adaptations": [
+    {
+      "work": "The Lord of the Rings",
+      "creator": "J.R.R. Tolkien → Peter Jackson",
+      "archetype": "03_the_quest",
+      "transition": "novel_to_film",
+      "source_medium": "novel (trilogy)",
+      "target_medium": "film (trilogy)",
+      "node_changes": [
+        { "node_role": "Origin", "node_label": "Home Ground (The Shire)", "change": "compressed", "note": "Extensive Shire chapters compressed to a brief opening sequence. Film uses visual shorthand (cozy hobbit-holes, party scene) to establish what takes 100+ pages." },
+        { "node_role": "Catalyst", "node_label": "Gathering Companions (Council of Elrond)", "change": "compressed", "note": "Multi-day council compressed to a single scene. Character introductions that took chapters happen simultaneously through visual composition." },
+        { "node_role": "Trial", "node_label": "Journey Trials (Moria, Rohan, etc.)", "change": "expanded_and_restructured", "note": "Physical trials expanded with elaborate action sequences. Battle of Helm's Deep (a chapter) becomes a 40-minute film centerpiece. Visual medium rewards spectacle." },
+        { "node_role": "Revelation", "node_label": "Cohesion Test (Breaking of the Fellowship)", "change": "expanded", "note": "The Fellowship's fracture becomes the climactic event of Film 1. The novel treats it as one event among many; the film makes it a structural hinge." },
+        { "node_role": "Descent", "node_label": "Final Approach (Mordor)", "change": "compressed", "note": "Sam and Frodo's long Mordor march compressed. Novel's pacing of exhaustion and despair is shortened for film rhythm." },
+        { "node_role": "Crisis", "node_label": "Climactic Ordeal (Mount Doom)", "change": "preserved", "note": "The crisis point is nearly identical across mediums — this is the structural element both mediums cannot change." },
+        { "node_role": "Resolution", "node_label": "Homecoming (The Scouring of the Shire)", "change": "removed", "note": "The novel's final major sequence — the Scouring of the Shire — is entirely removed. Film cannot sustain a second climax after the Ring's destruction." }
+      ],
+      "medium_affordances": "Film compresses setup and dialogue, expands visual spectacle, and cannot sustain extended denouement. The novel's thematic resolution (reclaiming the Shire) is sacrificed for narrative momentum."
+    },
+    {
+      "work": "Game of Thrones",
+      "creator": "George R.R. Martin → David Benioff & D.B. Weiss",
+      "archetype": "15_the_rise_and_fall",
+      "transition": "novel_to_tv",
+      "source_medium": "novel series (ongoing)",
+      "target_medium": "television series (8 seasons)",
+      "node_changes": [
+        { "node_role": "Origin", "node_label": "Multiple Humble Origins", "change": "expanded", "note": "TV's episodic structure allows sustained parallel Origin phases for multiple characters. Each POV character gets their own introduction arc spread over episodes." },
+        { "node_role": "Disruption", "node_label": "Multiple First Opportunities", "change": "expanded", "note": "Each character's inciting event can be developed across episodes. TV rewards parallel storylines that novels can sustain but films cannot." },
+        { "node_role": "Trial", "node_label": "Political Maneuvering", "change": "expanded", "note": "TV's weekly format transforms political trials into sustained suspense arcs. Season-long subplots expand what in the novel are chapter-length sequences." },
+        { "node_role": "Reversal", "node_label": "Peak of Power", "change": "preserved_as_season_climax", "note": "Major reversals (Red Wedding, Cersei's Walk, Battle of the Bastards) become season climactic episodes. The novel's narrative peaks become the TV season's structural peaks." },
+        { "node_role": "Descent", "node_label": "Cracks Form", "change": "expanded", "note": "TV allows multiple characters' descent arcs to run simultaneously over many episodes, creating intersecting downfall narratives." },
+        { "node_role": "Resolution", "node_label": "Legacy", "change": "compressed", "note": "The series finale compressed resolution for dozens of character arcs into a limited number of episodes, widely criticized as rushed." }
+      ],
+      "medium_affordances": "Television's episodic structure excels at parallel storylines, sustained political complexity, and slow-burn character development. It struggles with convergent resolution — resolving many parallel arcs simultaneously requires more time than a series finale provides."
+    },
+    {
+      "work": "Jurassic Park",
+      "creator": "Michael Crichton → Steven Spielberg → Universal Games",
+      "archetype": "05_overcoming_the_monster",
+      "transition": "novel_to_film",
+      "source_medium": "novel",
+      "target_medium": "film",
+      "node_changes": [
+        { "node_role": "Origin", "node_label": "Peaceful State", "change": "compressed", "note": "The novel's extended scientific setup (DNA extraction, park development) is compressed to a brief helicopter tour exposition." },
+        { "node_role": "Disruption", "node_label": "Monster Revealed", "change": "expanded", "note": "The film expands the wonder/awe of first seeing dinosaurs into a major set piece. Visual medium maximizes the spectacle of revelation." },
+        { "node_role": "Catalyst", "node_label": "Preparation", "change": "compressed", "note": "The novel's detailed technical preparation (security systems, breeding analysis) is reduced to dialogue scenes." },
+        { "node_role": "Trial", "node_label": "Initial Encounter", "change": "expanded", "note": "The T-Rex attack becomes an extended suspense sequence. Film's visual and auditory tools (the approaching footstep vibrations in the water glass) create experiences the novel cannot." },
+        { "node_role": "Descent", "node_label": "Nightmare Phase", "change": "restructured", "note": "The novel's distributed raptor encounters are restructured into a concentrated kitchen scene. Film demands focused, sustained set pieces rather than distributed encounters." },
+        { "node_role": "Crisis", "node_label": "Final Confrontation", "change": "changed_role", "note": "The novel's climax involves deliberate system reboot; the film's climax is the T-Rex intervening (deus ex machina/spectacle). The crisis shifts from intellectual to visceral." },
+        { "node_role": "Resolution", "node_label": "World Restored", "change": "compressed", "note": "The novel's extended aftermath (military cleanup, government response) becomes a brief helicopter escape." }
+      ],
+      "medium_affordances": "Film transforms intellectual suspense (novel) into visceral spectacle. Technical exposition is compressed; visual encounters are expanded. The climax shifts from problem-solving to spectacle. Film rewards concentrated set pieces over distributed encounters."
+    },
+    {
+      "work": "Les Misérables",
+      "creator": "Victor Hugo → Boublil & Schönberg → Tom Hooper",
+      "archetype": "06_rebirth",
+      "transition": "novel_to_stage_to_film",
+      "source_medium": "novel",
+      "target_medium": "stage musical → film",
+      "node_changes": [
+        { "node_role": "Origin", "node_label": "Fallen State (Valjean as convict)", "change": "compressed_in_stage_expanded_in_film", "note": "The novel's extensive prison backstory is compressed to a single prologue song on stage. The film partially restores visual detail (chain gang, bishop's house) but remains compressed vs. novel." },
+        { "node_role": "Disruption", "node_label": "Warning (Bishop's mercy)", "change": "preserved_across_all", "note": "The bishop's gift of candlesticks is the structural hinge in all three mediums — it cannot be compressed because it IS the rebirth catalyst." },
+        { "node_role": "Trial", "node_label": "Resistance (Valjean's new life under threat)", "change": "expanded_in_stage", "note": "The musical expands the emotional content of each trial through song. What takes narrative description in the novel becomes an emotional experience through music." },
+        { "node_role": "Crisis", "node_label": "Ordeal of Truth (Courtroom/Barricade)", "change": "restructured", "note": "The novel's multiple crisis points (courtroom, barricade, sewer) are compressed and musicalized. Stage collapses time; film restores some temporal expansion." },
+        { "node_role": "Transformation", "node_label": "Atonement", "change": "musicalized", "note": "Valjean's moral transformation is externalized through reprise — the same melody with changed lyrics shows internal change. Neither novel nor film can achieve this structural parallel as efficiently." },
+        { "node_role": "Resolution", "node_label": "Renewal (Valjean's death)", "change": "expanded_in_stage", "note": "The death scene becomes the emotional climax of the musical, with the finale ensemble providing a catharsis the novel achieves through prose epilogue." }
+      ],
+      "medium_affordances": "Stage musical externalizes interior states through song, compresses narrative time, and uses reprise structure to show character transformation. Film partially reverses the compression by adding visual detail but maintains the musical's emotional externalization. The novel's discursive analysis of moral philosophy cannot survive in either adaptation."
+    },
+    {
+      "work": "The Witcher",
+      "creator": "Andrzej Sapkowski → CD Projekt Red",
+      "archetype": "01_heros_journey",
+      "transition": "novel_to_game",
+      "source_medium": "novel series",
+      "target_medium": "video game (RPG)",
+      "node_changes": [
+        { "node_role": "Origin", "node_label": "Ordinary World", "change": "player_controlled", "note": "The game's open world lets the player experience the 'ordinary world' at their own pace. What is a narrative given in the novel becomes an explorable environment." },
+        { "node_role": "Disruption", "node_label": "Call to Adventure", "change": "branching", "note": "The game offers multiple quest lines that serve as calls to adventure. The player chooses which disruption to pursue, unlike the novel's single narrative path." },
+        { "node_role": "Catalyst", "node_label": "Mentor", "change": "distributed", "note": "Mentor-like NPCs are distributed throughout the world. The player encounters guidance on their own schedule through conversation systems." },
+        { "node_role": "Trial", "node_label": "Road of Trials", "change": "massively_expanded", "note": "The game's side quests and monster contracts massively expand the trial phase. Players can spend 100+ hours on trials that occupy chapters in the novel. This is the game medium's greatest structural affordance." },
+        { "node_role": "Crisis", "node_label": "The Ordeal", "change": "player_agency_added", "note": "The climactic confrontation includes player choices that determine the outcome. The novel's fixed crisis becomes a branching decision tree." },
+        { "node_role": "Resolution", "node_label": "Return", "change": "multiple_endings", "note": "The game has multiple endings based on accumulated player choices. The novel's single resolution becomes a possibility space." }
+      ],
+      "medium_affordances": "Games transform the audience from observer to participant. The Road of Trials phase expands massively because gameplay IS trial-repetition. Crisis and Resolution gain branching outcomes. The linear narrative arc becomes a possibility space where the archetype provides structure but the player provides agency. Setup and resolution compress relative to the trial phase."
+    },
+    {
+      "work": "Romeo and Juliet",
+      "creator": "William Shakespeare → Baz Luhrmann / Various",
+      "archetype": "07_tragedy",
+      "transition": "stage_to_film",
+      "source_medium": "stage play",
+      "target_medium": "film (multiple adaptations)",
+      "node_changes": [
+        { "node_role": "Origin", "node_label": "Elevated State (Two households)", "change": "visualized", "note": "The stage's verbal exposition ('Two households, both alike in dignity') becomes visual world-building. Film shows the Montague/Capulet conflict through environment, costume, and action." },
+        { "node_role": "Disruption", "node_label": "Temptation (The ball)", "change": "expanded", "note": "The ball scene is expanded visually. Stage relies on language to create the atmosphere of the party; film creates immersive spectacle." },
+        { "node_role": "Threshold", "node_label": "Fatal Choice (Secret marriage)", "change": "preserved", "note": "The structural hinge of the secret marriage is preserved across all adaptations — it is the irreversible commitment that creates the tragedy." },
+        { "node_role": "Reversal", "node_label": "Apparent Success (Brief happiness)", "change": "expanded_emotionally", "note": "Film can use intimate cinematography (close-ups, lighting) to make the brief happiness more vivid, heightening the contrast with the coming fall." },
+        { "node_role": "Descent", "node_label": "Unraveling (Tybalt's death, banishment)", "change": "action_expanded", "note": "The sword fight and its aftermath are expanded into kinetic action sequences. Stage relies on choreography in a fixed space; film uses environment, editing, and scale." },
+        { "node_role": "Irreversible Cost", "node_label": "Downfall (Double suicide)", "change": "preserved_with_visual_power", "note": "The death scene is preserved but gains visual intimacy impossible on stage. Close-ups of actors' faces during the final moments create emotional impact stage cannot match at scale." },
+        { "node_role": "Resolution", "node_label": "Aftermath (Prince's judgment)", "change": "compressed", "note": "Film typically compresses the Prince's speech and the families' reconciliation. The stage's rhetorical closure is replaced by visual epilogue." }
+      ],
+      "medium_affordances": "Film transforms theatrical rhetoric into visual storytelling. Verbal exposition becomes visual world-building. Action scenes gain kinetic energy and environmental scope. Intimate moments gain close-up emotional power. But rhetorical and poetic language — Shakespeare's primary tool — loses primacy in the visual medium."
+    }
+  ],
+  "general_rules": [
+    {
+      "rule_id": "GR01",
+      "transition": "novel_to_film",
+      "rule": "Origin and Resolution phases compress; Trial and Crisis phases expand.",
+      "explanation": "Novels establish worlds through description and interiority; films establish worlds visually in seconds. Films cannot sustain extended denouement, so resolution is compressed. But films expand physical trials and confrontations into extended set pieces."
+    },
+    {
+      "rule_id": "GR02",
+      "transition": "novel_to_film",
+      "rule": "Intellectual exposition becomes visual spectacle.",
+      "explanation": "Technical, philosophical, or analytical content that works in prose must be converted to visual or dialogue form. The adaptation typically replaces understanding with experience."
+    },
+    {
+      "rule_id": "GR03",
+      "transition": "novel_to_film",
+      "rule": "Distributed encounters are consolidated into focused set pieces.",
+      "explanation": "Novels can sustain many small encounters; films require concentrated sequences. Multiple novel chapters become single film scenes with higher intensity."
+    },
+    {
+      "rule_id": "GR04",
+      "transition": "novel_to_tv",
+      "rule": "Parallel storylines expand; convergent resolution compresses.",
+      "explanation": "Television's episodic structure excels at sustaining multiple parallel arcs over many episodes but struggles to converge them satisfactorily in a finale."
+    },
+    {
+      "rule_id": "GR05",
+      "transition": "novel_to_tv",
+      "rule": "Reversal nodes become season-ending climaxes.",
+      "explanation": "The novel's major reversal points (deaths, betrayals, revelations) are positioned as season-ending or penultimate episodes, creating the structural rhythm of the television season."
+    },
+    {
+      "rule_id": "GR06",
+      "transition": "novel_to_tv",
+      "rule": "Character introductions spread across episodes rather than compressing.",
+      "explanation": "Where film must introduce characters quickly, television can introduce them gradually, dedicating episodes to individual character development."
+    },
+    {
+      "rule_id": "GR07",
+      "transition": "any_to_game",
+      "rule": "The Trial phase massively expands; Origin and Resolution compress.",
+      "explanation": "Games ARE trials — the gameplay loop is repetition of challenge and reward. The narrative setup exists to contextualize the gameplay, and resolution provides closure, but neither receives the same investment as the trial phase."
+    },
+    {
+      "rule_id": "GR08",
+      "transition": "any_to_game",
+      "rule": "Fixed plot points become branching decision trees.",
+      "explanation": "Games add player agency to crisis and resolution moments. The single narrative path becomes a possibility space where player choices determine outcomes."
+    },
+    {
+      "rule_id": "GR09",
+      "transition": "any_to_game",
+      "rule": "Mentor/Catalyst nodes become distributed NPC interactions.",
+      "explanation": "The concentrated mentor encounter is replaced by a network of NPCs who provide guidance, tools, and context throughout the game world."
+    },
+    {
+      "rule_id": "GR10",
+      "transition": "stage_to_film",
+      "rule": "Verbal exposition becomes visual world-building.",
+      "explanation": "Stage relies on language to establish setting, time, and social context. Film replaces this with production design, cinematography, and visual shorthand."
+    },
+    {
+      "rule_id": "GR11",
+      "transition": "stage_to_film",
+      "rule": "Interior emotional states gain visual expression through cinematography.",
+      "explanation": "Stage communicates interiority through soliloquy and body language visible from distance. Film uses close-ups, lighting, and editing to create intimate access to emotional states."
+    },
+    {
+      "rule_id": "GR12",
+      "transition": "any_to_musical",
+      "rule": "Interior states are externalized through song; transformation is shown through musical reprise.",
+      "explanation": "The musical uniquely externalizes what is internal. A character's feelings become audible through song, and character change is demonstrated through reprise — the same melody with changed lyrics proves transformation structurally."
+    }
+  ]
+}
