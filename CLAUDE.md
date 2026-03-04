@@ -15,23 +15,24 @@ This is a **data and content project** that models storytelling structures as fo
 ## Repository Structure
 
 ```
-docs/                              ← Planning, specs, and vocabulary
+docs/                              ← Planning, specs, and task tracking
   v0_plan.md                       ← Authoritative statement of work (read first)
   goal_1.md                        ← Goal 1 task tracker (complete)
   goal_2.md                        ← Goal 2 task tracker (complete)
-  v-next.md                        ← 42 tracked items: issues, suggestions, enhancements
+  v-next.md                        ← Deferred items: issues, suggestions, enhancements
   interactive_viewer_design.md     ← UI/UX spec for interactive graph viewer
   interactive_viewer_plan.md       ← 8-phase implementation plan for the viewer
   archetypes.json                   ← 15 archetypes: descriptions, examples, genres
   genres.json                      ← 27 genres: descriptions, examples, popularity
-  archetype_edge_vocabulary.json   ← 15 controlled edge meanings for archetypes
-  archetype_node_roles.json        ← 14 controlled node roles for archetypes
-  archetype_id_convention.md       ← ID naming convention for archetype nodes/edges
-  genre_edge_vocabulary.json       ← 12 controlled edge meanings for genres
-  genre_node_roles.json            ← 7 controlled node roles for genres
-  genre_id_convention.md           ← ID naming convention for genre nodes/edges
 
 data/                              ← Deliverable outputs
+  vocabulary/                      ← Controlled vocabularies and ID conventions
+    archetype_edge_vocabulary.json ← 15 controlled edge meanings for archetypes
+    archetype_node_roles.json      ← 14 controlled node roles for archetypes
+    archetype_id_convention.md     ← ID naming convention for archetype nodes/edges
+    genre_edge_vocabulary.json     ← 12 controlled edge meanings for genres
+    genre_node_roles.json          ← 7 controlled node roles for genres
+    genre_id_convention.md         ← ID naming convention for genre nodes/edges
   archetypes/                      ← Goal 1 deliverables (complete)
     {nn_name}/                     ← Per-archetype folder (15 total)
       graph.json                   ← Directed graph JSON
@@ -77,8 +78,8 @@ All graph deliverables follow the schema in `docs/v0_plan.md` §1.1–1.2:
 
 ### Controlled Vocabulary
 
-- **Archetype** edge meanings and node roles: `docs/archetype_edge_vocabulary.json` and `docs/archetype_node_roles.json`
-- **Genre** edge meanings and node roles: `docs/genre_edge_vocabulary.json` and `docs/genre_node_roles.json`
+- **Archetype** edge meanings and node roles: `data/vocabulary/archetype_edge_vocabulary.json` and `data/vocabulary/archetype_node_roles.json`
+- **Genre** edge meanings and node roles: `data/vocabulary/genre_edge_vocabulary.json` and `data/vocabulary/genre_node_roles.json`
 
 ### Task Tracking
 
@@ -109,5 +110,4 @@ Deferred work is tracked in `docs/v-next.md` (42 items across issues, suggestion
 
 - `archetypes.json` filename is misspelled (#13) — renaming requires updating all references
 - 6–8 genre graphs have systematic edge numbering shifts (#11) — convention clarified but inconsistency persists
-- Vocabulary files split between `docs/` and `data/` (#4, #7) — consolidation suggested (#23)
 - No automated validation script for graph-narrative ID correspondence (#10)

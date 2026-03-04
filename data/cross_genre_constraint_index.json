@@ -1,6 +1,6 @@
 {
   "title": "Cross-Genre Constraint Index",
-  "description": "Reuse map identifying shared constraint types, recurring scene obligations, and edge meaning usage across all 27 genre depth graphs. Generated from analysis of all genre graph.json deliverables and the controlled vocabulary in genre_edge_vocabulary.json and genre_node_roles.json.",
+  "description": "Reuse map identifying shared constraint types, recurring scene obligations, and edge meaning usage across all 27 genre depth graphs. Generated from analysis of all genre graph.json deliverables and the controlled vocabulary in data/vocabulary/genre_edge_vocabulary.json and data/vocabulary/genre_node_roles.json.",
 
   "constraint_type_index": {
     "summary": "16 recurring constraint types identified across 27 genre graphs. These are thematic patterns that appear as Core Constraint (Level 2) or Setting Rule (Level 4) nodes in multiple genres. Stakes Escalation is the most common, appearing in 8 genres. Every constraint type listed appears in at least 3 genres.",

@@ -1,6 +1,6 @@
 {
   "title": "Cross-Archetype Index",
-  "description": "Reuse map identifying shared structural concepts (node roles and edge meanings) across all 15 archetype graphs. Generated from the controlled vocabulary in archetype_node_roles.json and archetype_edge_vocabulary.json.",
+  "description": "Reuse map identifying shared structural concepts (node roles and edge meanings) across all 15 archetype graphs. Generated from the controlled vocabulary in data/vocabulary/archetype_node_roles.json and data/vocabulary/archetype_edge_vocabulary.json.",
   "node_role_index": {
     "summary": "14 distinct node roles across 120 total node instances. Origin and Resolution are universal (all 15 archetypes). Crisis appears in all 15 but has two instances in The Hero's Journey.",
     "roles": [

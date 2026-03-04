@@ -9,9 +9,9 @@ Each phase ends with a commit.
 
 Establish the shared foundation that all 27 genre graphs will depend on.
 
-- [X] Define the controlled vocabulary of genre edge meanings (refinement relationships: e.g., "specifies constraint", "narrows scope", "branches into subtype", "mandates element", "prohibits element") and document it in `docs/genre_edge_vocabulary.json`
-- [X] Define the controlled vocabulary of genre node levels/roles (the five-level spine: Genre Promise, Core Constraints, Subgenre Pattern, World/Setting Rules, Scene Obligations — plus any additional structural roles) and document it in `docs/genre_node_roles.json`
-- [X] Define the ID naming convention for genre nodes and edges (prefix per genre, numbering scheme) and document it in `docs/genre_id_convention.md`
+- [X] Define the controlled vocabulary of genre edge meanings (refinement relationships: e.g., "specifies constraint", "narrows scope", "branches into subtype", "mandates element", "prohibits element") and document it in `data/vocabulary/genre_edge_vocabulary.json`
+- [X] Define the controlled vocabulary of genre node levels/roles (the five-level spine: Genre Promise, Core Constraints, Subgenre Pattern, World/Setting Rules, Scene Obligations — plus any additional structural roles) and document it in `data/vocabulary/genre_node_roles.json`
+- [X] Define the ID naming convention for genre nodes and edges (prefix per genre, numbering scheme) and document it in `data/vocabulary/genre_id_convention.md`
 
 ---
 

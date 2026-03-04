@@ -1,143 +1,133 @@
-V-Next Deferred Tasks — holding place for issues, suggestions, and enhancements we plan to defer.
+# V-Next — Deferred Tasks, Enhancements, and Completed Items
+
+This document tracks all deferred work items: issues, suggestions, and enhancements. Items resolved by the interactive viewer implementation (Phases 1–8) or prior housekeeping are archived at the bottom.
 
 ---
 
-## Deferred Tasks
+## Open Items — Phased Implementation Plan
 
-1. [ ] **Example Expansion and Data Enrichment**
-Expand the fixed set of example works across archetypes and genres by adding additional representative stories, increasing node-to-example mapping density, enriching metadata (author, year, medium, origin), and enabling deeper comparative and analytical cross-referencing.
+### Phase A — Data Housekeeping (low effort, no dependencies)
 
----
+Mechanical cleanup tasks that improve consistency and documentation quality.
 
-## Known Issues
+- [X] **#4 / #7 / #23 — Unified vocabulary directory**
+  Consolidated archetype and genre vocabulary files into `data/vocabulary/`. Co-locates definitions with deliverables. All references updated.
 
-2. [ ] **Unused archetype controlled vocabulary terms**
-The "Reckoning" node role and "compels return" edge meaning are defined in the archetype vocabularies but not assigned to any node or edge across all 15 archetype graphs. Decide whether to remove them, document them as reserved, or find graphs where they apply.
+- [ ] **#9 — Document genre graph size variation rationale**
+  Most genres have 15–18 nodes and 18–22 edges, but some variation exists (e.g., Drama has 2 anti-patterns). Add a brief structural note to each outlier's narrative.md explaining the rationale.
 
-3. [X] **File path references in goal_1.md are stale**
-Updated all `docs/archetypes/` references to `data/archetypes/` in goal_1.md. Fixed.
+- [ ] **#18 — Romance/Romantic Comedy graph.json size consistency**
+  Romance (58 KB) and Romantic Comedy (54 KB) are ~2× the average (27–35 KB) due to more detailed edge descriptions. Trim to match the detail level of other genres, or document the extra detail as intentional.
 
-4. [ ] **Archetype vocabulary files remain in docs/**
-`docs/archetype_edge_vocabulary.json`, `docs/archetype_node_roles.json`, and `docs/archetype_id_convention.md` are still in `docs/` while the archetype deliverables have moved to `data/archetypes/`. Consider consolidating vocabulary files into `data/archetypes/` or a shared `data/vocabulary/` location.
+- [ ] **#40 — Graph metadata block**
+  Add a `metadata` section to each graph.json with node count, edge count, level distribution (genre) or variant count (archetype), creation date, and last-validated date. Supports dashboards and reporting without full parsing.
 
-5. [X] **cross_archetype_index.json references long-form node IDs inconsistently**
-The index uses short archetype names (e.g., "Comedy" instead of "Comedy (Restoration of Order)") in some places. Standardize naming to match `archetypes.json` exactly. Fixed.
+### Phase B — Edge Numbering Consistency (medium effort, mechanical)
 
-6. [X] **Musical narrative.md had incorrect node ID references**
-`data/genres/26_musical/narrative.md` referenced `MU_N40_HEIGHTENED_EMOTIONAL_REALITY` instead of the correct `MU_N40_HEIGHTENED_REALITY` in two places (node explanation and canonical walkthrough). Fixed.
+Renumber edges in affected genre graphs to match the documented convention. Each genre requires updates to graph.json, narrative.md, and examples.md.
 
-7. [ ] **Genre vocabulary files live in docs/ alongside archetype vocabulary files**
-`docs/genre_edge_vocabulary.json`, `docs/genre_node_roles.json`, and `docs/genre_id_convention.md` are in `docs/` while genre deliverables are in `data/genres/`. Same structural inconsistency as archetype vocabs (#4). Consider a unified `data/vocabulary/` directory or co-locating with deliverables.
+- [ ] **#11 — Systematic edge numbering shift in 6–8 genre graphs**
+  Horror, Detective, Romantic Comedy, Literary Fiction, Children's Literature, Family, Biography, and Crime use sequential numbering instead of level-transition ranges. Renumber to match the convention (L1→L2: 01–09, L2→L3: 10–29, L3→L4: 30–49, L4→L5: 50–69, cross-level: 70–89).
 
-8. [ ] **Unused genre edge vocabulary terms**
-The edge meanings "narrows scope", "inherits constraint", "specializes threat", and "differentiates from" appear in `docs/genre_edge_vocabulary.json` but may have very limited or zero usage across the 27 genre graphs. Audit usage counts and decide whether to remove unused terms, document them as reserved, or find graphs where they should apply.
+- [ ] **#12 — Cross-level edges not in 70–89 range**
+  Young Adult, Western, War, Crime, Detective, and Mystery have level-skipping edges numbered in the destination level's range. Renumber to 70–89 cross-level range.
 
-9. [ ] **Genre graph node/edge counts vary without documented rationale**
-Most genres have 15–18 nodes and 18–22 edges, but some variation exists (e.g., Drama has 2 anti-patterns, most genres have 1). The variation is structurally justified but undocumented. Consider adding a brief structural note explaining why certain genres have extra nodes.
+### Phase C — Content Enrichment (medium effort, content-heavy)
 
-10. [ ] **No automated validation for graph-narrative correspondence**
-Narrative specs reference node/edge IDs from their graph.json, but there is no script to verify these references are correct. The Musical issue (#6) was caught by manual audit. A validation script would catch such mismatches automatically across all 27 genres.
+Expand and index the example mappings across all graphs.
 
-11. [ ] **Systematic edge numbering shift in 6–8 genre graphs**
-Several genre graphs number edges sequentially rather than by level-transition range. In these graphs, L3→L4 edges use the 10–29 range (instead of 30–49), L4→L5 edges use the 30–49 range (instead of 50–69), and cross-level edges use whatever range follows sequentially. Affected genres: Horror (10), Detective (13), Romantic Comedy (09), Literary Fiction (20), Children's Literature (21), Family (18), Biography (17), and Crime (12). The edge numbering convention has been clarified to accommodate the universal L1→Tone and L5→L5 patterns, but the full-range shifts in these genres remain inconsistent with the majority pattern. A future pass could renumber these edges to match the convention, updating graph.json, narrative.md, and examples.md for each affected genre.
+- [ ] **#17 — Consolidated example works registry**
+  Build a single index of all ~120+ works referenced across 15 archetype and 27 genre example files. Include metadata (author, year, medium, origin). Enables cross-referencing and gap analysis.
 
-12. [ ] **Cross-level edges (L2→L5, L2→L4) not in 70–89 range**
-Several genres have edges that skip levels (e.g., Core Constraint directly to Scene Obligation) but number them in the destination level's range rather than the 70–89 cross-level range. Affected genres include Young Adult, Western, War, Crime, Detective, and Mystery. These are individually correct per the clarified convention ("when possible" language) but could be renumbered for stricter consistency.
+- [ ] **#1 — Example expansion and data enrichment**
+  Expand example works per archetype/genre, increase node-to-example mapping density, enrich metadata, and enable deeper comparative cross-referencing. Depends on #17 (registry) for gap analysis.
 
-13. [X] **`archtypes.json` filename was misspelled**
-Renamed `docs/archtypes.json` → `docs/archetypes.json` and updated all references. Fixed.
+- [ ] **#34 — Narrative spec variant walkthrough expansion**
+  Each narrative spec has 3–4 variant walkthroughs. Expand to cover every subgenre path (all Level 3 nodes) in every genre, ensuring complete coverage.
 
-14. [X] **CLAUDE.md Goal 2 status is stale**
-CLAUDE.md updated to reflect Goal 2 completion, interactive viewer docs, and current repository structure. Fixed.
+### Phase D — Structural Modeling Extensions (high effort, research + design)
 
-15. [X] **genre_archetype_matrix.json placement inconsistent with cross-genre index**
-Moved `cross_genre_constraint_index.json` and `cross_archetype_index.json` to `data/` root alongside `genre_archetype_matrix.json`. All cross-cutting indices now co-located. Fixed.
+New analytical models that extend the graph framework's expressive power.
 
-16. [X] **No JSON schema for graph.json validation**
-JSON Schema created at `app/src/schemas/graph.schema.json`. Validates all 42 graphs via AJV. Build-time validation script at `app/scripts/generate-manifest.ts`. Fixed.
+- [ ] **#19 — Hybrid archetype modeling**
+  Document common hybrid patterns (e.g., Hero's Journey + Coming of Age, Revenge + Tragedy) and describe how graphs can be composed or layered. Prerequisite for #33.
 
-17. [ ] **No consolidated example works registry**
-The 15 archetype and 27 genre example mappings reference approximately 120+ distinct films, novels, and plays, but there is no single index of all works used. A consolidated registry would support cross-referencing (which works appear in multiple archetypes/genres), enrichment with metadata, and gap analysis.
+- [ ] **#33 — Genre blending/hybridization model**
+  Model how genre constraint graphs compose when a story operates in multiple genres. Define which constraints dominate in conflicts and which combinations are structurally stable vs. unstable.
 
-18. [ ] **Romance and Romantic Comedy graph.json files are 2× the size of typical genres**
-Romance (58 KB) and Romantic Comedy (54 KB) are notably larger than the 27–35 KB average. The extra size comes from more detailed edge descriptions, not from structural differences. While not incorrect, this creates a consistency gap in the level of detail across genres.
+- [ ] **#35 — Genre constraint severity weighting**
+  Add a severity field to genre nodes/edges distinguishing hard requirements (violating breaks the genre) from soft expectations (uncommon but valid deviations).
 
----
+- [ ] **#36 — Tone marker integration with archetype graphs**
+  Model the interaction between genre tone markers (e.g., sustained dread for Horror) and archetype emotional arcs. Extend the compatibility matrix with tone compatibility notes.
 
-## Suggestions
+- [ ] **#41 — Archetype emotional arc profiles**
+  Map the emotional trajectory (tension, hope, fear, resolution) for each archetype as a quantitative curve. Supports matching arcs to genre tone requirements (#36).
 
-19. [ ] **Hybrid archetype modeling**
-Many stories blend two or more archetypes (e.g., Hero's Journey + Coming of Age, Revenge + Tragedy). Add a document describing common hybrid patterns and how graphs can be composed or layered.
+### Phase E — Advanced Analysis & Research (high effort, external data)
 
-20. [ ] **Archetype variant graphs as separate JSON files**
-Currently, variant branches (Refusal of the Call, Recapture) are embedded in the main graph JSON using the 50-79 ID range. Consider splitting variants into separate graph files for cleaner tooling.
+Research-intensive items requiring new data collection or external corpus work.
 
-21. [ ] **Graph visualization tooling**
-The JSON graph format is machine-readable but has no rendering pipeline. Consider adding a script or tool that generates visual diagrams (e.g., Mermaid, D3, Graphviz) from the graph JSONs.
+- [ ] **#29 — Non-Western archetype analysis**
+  Research and potentially add archetypes from East Asian, South Asian, African, Indigenous, and Middle Eastern narrative traditions. The current 15 archetypes draw primarily from Western storytelling.
 
-22. [X] **CLAUDE.md update**
-CLAUDE.md was written before the folder restructure and before goal_1 completion. Update it to reflect the current project state, file locations, and completed deliverables.
+- [ ] **#31 — Cross-medium adaptation mapping**
+  Analyze how archetype graphs shift between mediums (novel → film → TV → game). Document which nodes compress, expand, or change role.
 
-23. [ ] **Unified vocabulary directory**
-Consolidate archetype and genre vocabulary files (#4, #7) into a single `data/vocabulary/` directory. This would co-locate edge vocabularies, node roles, and ID conventions for both workstreams, making the relationship between vocabulary definitions and deliverables clearer.
+- [ ] **#32 — Quantitative validation against a story corpus**
+  Test archetype and genre graphs against a corpus (e.g., 100 films, 100 novels) to measure coverage, identify missing patterns, and validate vocabularies empirically.
 
-24. [X] **Data manifest file**
-Generated at `data/manifest.json` by `app/scripts/generate-manifest.ts`. Lists all 42 graphs with node/edge counts, file paths, and totals. Fixed.
+### Phase F — Architecture Evolution (medium effort, structural changes)
 
-25. [ ] **Export to standard graph formats**
-Add scripts to convert graph.json files to standard formats (GraphML, DOT/Graphviz, GEXF, Mermaid) for use with external visualization and analysis tools. Prerequisite for or alternative to custom visualization (#21).
+Structural refactors to the graph data model.
 
-26. [ ] **Constraint checklist generator**
-Given a genre + subgenre selection, programmatically extract the relevant constraints from the graph and produce a concrete, printable checklist a writer can use while drafting. Lighter-weight than the full interactive planner (#30).
+- [ ] **#20 — Archetype variant graphs as separate JSON files**
+  Split variant branches (currently embedded via 50–79 ID range) into separate graph files for cleaner tooling and independent analysis.
+
+- [ ] **#27 — Scene-level beat sheets**
+  Extend archetype graphs to scene-level resolution for specific example works — mapping each node/edge to specific scenes with timestamps or page numbers.
 
 ---
 
-## Enhancements
+## Phase Dependencies
 
-27. [ ] **Scene-level beat sheets**
-Extend archetype graphs to scene-level resolution for specific example works — mapping each node/edge to specific scenes with timestamps or page numbers. Currently excluded per `v0_plan.md` §2.2.
+| Phase | Depends On | Notes |
+|-------|-----------|-------|
+| A — Housekeeping | — | Can start immediately |
+| B — Edge Numbering | — | Independent, mechanical |
+| C — Content Enrichment | #17 before #1 | Registry enables gap analysis |
+| D — Modeling Extensions | — | #19 before #33; #41 supports #36 |
+| E — Advanced Research | — | Independent, long-term |
+| F — Architecture | — | Independent |
 
-28. [ ] **Interactive story planner**
-Build a web-based tool that lets a writer select an archetype and genre, then walks them through the combined graph as a planning scaffold. Requires graph visualization (#21) and the genre × archetype matrix (goal 2, phase 15) as prerequisites.
+Phases A and B can run in parallel. Phase C requires A (vocabulary consolidation) for clean paths. Phases D, E, and F are independent and can be prioritized by interest.
 
-29. [ ] **Non-Western archetype analysis**
-The current 15 archetypes draw primarily from Western storytelling traditions. Research and potentially add archetypes from East Asian, South Asian, African, Indigenous, and Middle Eastern narrative traditions.
+---
 
-30. [ ] **Audience-facing genre depth selector**
-Build a tool that lets a writer drill down through the five genre levels interactively, making constraint choices at each level and producing a tailored constraint sheet for their project.
+## Archived — Completed Items
 
-31. [ ] **Cross-medium adaptation mapping**
-Analyze how archetype graphs shift when a story moves between mediums (novel → film → TV series → game). Document which nodes compress, expand, or change role.
+Items resolved by the interactive viewer implementation (Phases 1–8), prior housekeeping, or subsumed by delivered features.
 
-32. [ ] **Quantitative validation against a story corpus**
-Test the archetype and genre graphs against a corpus of actual stories (e.g., 100 films, 100 novels) to measure coverage, identify missing patterns, and validate the controlled vocabularies empirically.
-
-33. [ ] **Genre blending/hybridization model**
-Many stories operate in two or more genres simultaneously (e.g., Sci-Fi + Thriller, Romance + Comedy, Horror + Mystery). Model how genre constraint graphs compose, which constraints dominate in conflicts, and which subgenre combinations are structurally stable vs. unstable.
-
-34. [ ] **Narrative spec variant walkthrough expansion**
-Each narrative spec currently includes 3–4 variant walkthroughs. Consider expanding to cover every subgenre path in every genre, ensuring complete coverage of all Level 3 nodes.
-
-35. [ ] **Genre constraint severity weighting**
-Not all constraints carry equal weight. Some are hard requirements (violating them breaks the genre), others are soft expectations (deviating is uncommon but valid). Consider adding a severity field to nodes/edges to distinguish must-have from should-have constraints.
-
-36. [ ] **Tone marker integration with archetype graphs**
-Genre tone markers (e.g., sustained dread for Horror, stoic and spare for Western) interact with archetype emotional arcs but this interaction is currently unmodeled. The genre × archetype matrix (Phase 15) could include tone compatibility notes.
-
-37. [ ] **Multi-archetype overlay visualization**
-Visualize how two archetypes compose in a single story — aligned by narrative time, showing where their nodes overlap, diverge, or create tension. Would support hybrid archetype modeling (#19) and the interactive planner (#28).
-
-38. [ ] **Genre-archetype tension analysis**
-Formalize the compatibility matrix into a constraint conflict detection system. When an archetype demands escalation but a genre constraint restricts it (e.g., Comedy's "recoverable stakes" vs. Tragedy's "irreversible consequences"), identify and document these structural tensions programmatically.
-
-39. [ ] **Interactive visual graph interface**
-Full specification exists in `docs/interactive_viewer_design.md`. Build the narrative structure exploration engine with dual layout modes (archetype time-axis, genre depth-axis), node/edge detail panels, path simulation, variant toggle, example mapping overlay, and archetype-genre overlay mode.
-
-40. [ ] **Graph metadata block**
-Add a `metadata` section to each graph.json with node count, edge count, level distribution, subgenre count, creation date, and last-validated date. Would support dashboards and automated reporting without requiring full graph parsing.
-
-41. [ ] **Archetype emotional arc profiles**
-Map the emotional trajectory (tension, hope, fear, resolution) for each archetype as a quantitative curve. Would enable matching archetype arcs to genre tone requirements and support the tone marker integration (#36).
-
-42. [ ] **Failure mode cross-reference index**
-Build an index of all failure modes across archetypes and genres, identifying common anti-patterns (e.g., "deus ex machina" appears in multiple archetypes, "unearned resolution" in multiple genres). Would help writers identify recurring pitfalls.
+| # | Item | Resolution |
+|---|------|-----------|
+| 3 | File path references in goal_1.md are stale | Fixed: updated `docs/archetypes/` → `data/archetypes/` |
+| 5 | cross_archetype_index.json naming inconsistency | Fixed: standardized names to match `archetypes.json` |
+| 6 | Musical narrative.md incorrect node ID references | Fixed: corrected `MU_N40_HEIGHTENED_EMOTIONAL_REALITY` → `MU_N40_HEIGHTENED_REALITY` |
+| 13 | `archtypes.json` filename misspelled | Fixed: renamed to `archetypes.json`, updated all references (viewer Phase 1) |
+| 14 | CLAUDE.md Goal 2 status stale | Fixed: updated to reflect Goal 2 + viewer completion |
+| 15 | genre_archetype_matrix.json placement inconsistent | Fixed: co-located all cross-cutting indices at `data/` root (viewer Phase 1) |
+| 16 | No JSON schema for graph.json validation | Fixed: `app/src/schemas/graph.schema.json` + AJV validation (viewer Phase 1) |
+| 22 | CLAUDE.md update needed | Fixed: updated to current project state |
+| 24 | Data manifest file | Fixed: `data/manifest.json` generated by `app/scripts/generate-manifest.ts` (viewer Phase 1) |
+| 2 | Unused archetype controlled vocabulary terms | Resolved: vocab audit built into normalizer (viewer Phase 1) |
+| 8 | Unused genre edge vocabulary terms | Resolved: vocab audit built into normalizer (viewer Phase 1) |
+| 10 | No automated validation for graph-narrative correspondence | Resolved: ID validation in normalizer pipeline (viewer Phase 1) |
+| 21 | Graph visualization tooling | Subsumed: the interactive viewer IS the visualization tool (viewer Phase 2) |
+| 25 | Export to standard graph formats | Resolved: DOT/Graphviz, Mermaid, and GraphML export in ExportPanel (viewer Phase 8) |
+| 26 | Constraint checklist generator | Resolved: ConstraintChecklist panel in detail view (viewer Phase 4) |
+| 28 | Interactive story planner | Subsumed: simulation mode + overlay mode (viewer Phases 5–7) |
+| 30 | Audience-facing genre depth selector | Resolved: constraint sheet export in simulation panel (viewer Phase 5) |
+| 37 | Multi-archetype overlay visualization | Resolved: comparative mode with archetype alignment (viewer Phase 7) |
+| 38 | Genre-archetype tension analysis | Resolved: tension analysis panel in cross-index view (viewer Phase 7) |
+| 39 | Interactive visual graph interface | Resolved: full 8-phase implementation complete |
+| 42 | Failure mode cross-reference index | Resolved: cross-index panel with failure mode search (viewer Phase 7) |

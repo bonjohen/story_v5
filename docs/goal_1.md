@@ -9,9 +9,9 @@ Each phase ends with a commit.
 
 Establish the shared foundation that all 15 archetype graphs will depend on.
 
-- [X] Define the controlled vocabulary of edge meanings (e.g., "forces commitment", "reveals truth", "narrows options", "raises cost", "reframes goal") and document it in `docs/archetype_edge_vocabulary.json`
-- [X] Define the controlled vocabulary of node roles (e.g., "Commitment", "Reversal", "Revelation", "Irreversible Cost", "Threshold", "Trial") and document it in `docs/archetype_node_roles.json`
-- [X] Define the ID naming convention for nodes and edges (prefix per archetype, numbering scheme) and document it in `docs/archetype_id_convention.md`
+- [X] Define the controlled vocabulary of edge meanings (e.g., "forces commitment", "reveals truth", "narrows options", "raises cost", "reframes goal") and document it in `data/vocabulary/archetype_edge_vocabulary.json`
+- [X] Define the controlled vocabulary of node roles (e.g., "Commitment", "Reversal", "Revelation", "Irreversible Cost", "Threshold", "Trial") and document it in `data/vocabulary/archetype_node_roles.json`
+- [X] Define the ID naming convention for nodes and edges (prefix per archetype, numbering scheme) and document it in `data/vocabulary/archetype_id_convention.md`
 
 ---
 

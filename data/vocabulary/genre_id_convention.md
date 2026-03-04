@@ -97,5 +97,5 @@ Format: `{PREFIX}_E{##}_{SHORT_NAME}`
 
 ## Controlled Vocabulary Reference
 
-- **Edge meanings**: `docs/genre_edge_vocabulary.json` (12 terms)
-- **Node roles**: `docs/genre_node_roles.json` (7 roles: 5 spine levels + 2 structural)
+- **Edge meanings**: `data/vocabulary/genre_edge_vocabulary.json` (12 terms)
+- **Node roles**: `data/vocabulary/genre_node_roles.json` (7 roles: 5 spine levels + 2 structural)
