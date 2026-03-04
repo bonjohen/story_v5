@@ -13,8 +13,8 @@ Mechanical cleanup tasks that improve consistency and documentation quality.
 - [X] **#4 / #7 / #23 — Unified vocabulary directory**
   Consolidated archetype and genre vocabulary files into `data/vocabulary/`. Co-locates definitions with deliverables. All references updated.
 
-- [ ] **#9 — Document genre graph size variation rationale**
-  Most genres have 15–18 nodes and 18–22 edges, but some variation exists (e.g., Drama has 2 anti-patterns). Add a brief structural note to each outlier's narrative.md explaining the rationale.
+- [X] **#9 — Document genre graph size variation rationale**
+  Six genres (Drama, Biography, Young Adult, Literary Fiction, Musical, Holiday) have 18 nodes vs. the standard 17 due to a second Anti-Pattern node. Structural note added to each graph.json description.
 
 - [ ] **#18 — Romance/Romantic Comedy graph.json size consistency**
   Romance (58 KB) and Romantic Comedy (54 KB) are ~2× the average (27–35 KB) due to more detailed edge descriptions. Trim to match the detail level of other genres, or document the extra detail as intentional.

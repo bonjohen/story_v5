@@ -2,67 +2,149 @@
   "id": "17_biography",
   "name": "Biography",
   "type": "genre",
-  "description": "Narratives based on real individuals, emphasizing formative events and character development while balancing fidelity and dramatic structure.",
+  "description": "Narratives based on real individuals, emphasizing formative events and character development while balancing fidelity and dramatic structure. (This graph has 18 nodes — one more than the 17-node standard — because it includes a second Anti-Pattern node to capture an additional genre-specific pitfall.)",
   "nodes": [
     {
       "node_id": "BI_N01_PROMISE",
       "label": "Biography Promise",
       "role": "Genre Promise",
       "level": 1,
-      "definition": "The audience is promised intimate access to a real person's inner life — not a chronological record, but a dramatic excavation of the events, choices, and contradictions that made them who they were. The promise is revelation: we will understand this person in ways that historical record alone cannot provide.",
-      "entry_conditions": ["Story is positioned as biography or biographical drama"],
-      "exit_conditions": ["Core constraints are established that fulfill this promise"],
-      "typical_variants": ["Rise-and-fall biography tracing greatness and collapse", "Portrait study illuminating character over event", "Period-of-life biography focused on a decisive chapter"],
-      "failure_modes": ["Delivering a Wikipedia summary without dramatic shape", "Hagiography that flatters the subject rather than revealing them", "So much historical fidelity that the human being disappears into event"],
-      "signals_in_text": ["Selective focus on formative rather than comprehensive events", "Private scenes that illuminate public persona", "Narrative voice that interprets rather than merely recounts"]
+      "definition": "The audience is promised intimate access to a real person's inner life â€” not a chronological record, but a dramatic excavation of the events, choices, and contradictions that made them who they were. The promise is revelation: we will understand this person in ways that historical record alone cannot provide.",
+      "entry_conditions": [
+        "Story is positioned as biography or biographical drama"
+      ],
+      "exit_conditions": [
+        "Core constraints are established that fulfill this promise"
+      ],
+      "typical_variants": [
+        "Rise-and-fall biography tracing greatness and collapse",
+        "Portrait study illuminating character over event",
+        "Period-of-life biography focused on a decisive chapter"
+      ],
+      "failure_modes": [
+        "Delivering a Wikipedia summary without dramatic shape",
+        "Hagiography that flatters the subject rather than revealing them",
+        "So much historical fidelity that the human being disappears into event"
+      ],
+      "signals_in_text": [
+        "Selective focus on formative rather than comprehensive events",
+        "Private scenes that illuminate public persona",
+        "Narrative voice that interprets rather than merely recounts"
+      ]
     },
     {
       "node_id": "BI_N10_REAL_PERSON",
-      "label": "Based on a Real Person — Accuracy Matters",
+      "label": "Based on a Real Person â€” Accuracy Matters",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The subject is a documented historical individual whose life constrains the story. The narrative cannot invent key events, fabricate relationships, or fundamentally misrepresent the subject's actions and beliefs without violating the genre contract. Historical fidelity is not optional — it is the foundation of the audience's trust.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Subject's documented life is the structural skeleton of the narrative"],
-      "typical_variants": ["Full historical fidelity with documented sources", "Dramatized composite scenes true in spirit if not letter", "Explicit acknowledgment of speculative elements"],
-      "failure_modes": ["Inventing consequential events that did not happen", "Attributing beliefs or actions to the subject that contradict the record", "Using the real person's name to lend credibility to essentially fictional narrative"],
-      "signals_in_text": ["Events correspond to documented history", "Real relationships are rendered with fidelity to known character", "Period detail is accurate to the subject's actual world"]
+      "definition": "The subject is a documented historical individual whose life constrains the story. The narrative cannot invent key events, fabricate relationships, or fundamentally misrepresent the subject's actions and beliefs without violating the genre contract. Historical fidelity is not optional â€” it is the foundation of the audience's trust.",
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Subject's documented life is the structural skeleton of the narrative"
+      ],
+      "typical_variants": [
+        "Full historical fidelity with documented sources",
+        "Dramatized composite scenes true in spirit if not letter",
+        "Explicit acknowledgment of speculative elements"
+      ],
+      "failure_modes": [
+        "Inventing consequential events that did not happen",
+        "Attributing beliefs or actions to the subject that contradict the record",
+        "Using the real person's name to lend credibility to essentially fictional narrative"
+      ],
+      "signals_in_text": [
+        "Events correspond to documented history",
+        "Real relationships are rendered with fidelity to known character",
+        "Period detail is accurate to the subject's actual world"
+      ]
     },
     {
       "node_id": "BI_N11_FORMATIVE_SELECTION",
       "label": "Formative Events Must Be Selected and Dramatized",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Biography is not a complete life but a curated argument about which events mattered most. The writer must select the formative moments — the events that shaped the subject's character, drove their decisions, and explain who they became — and render them with full dramatic weight, not as chronological checkboxes.",
-      "entry_conditions": ["Subject's life is established as the source material"],
-      "exit_conditions": ["A clear principle of selection is visible — the narrative knows why each included event matters"],
-      "typical_variants": ["Childhood wound that echoes throughout adult life", "Pivotal professional failure that reorients ambition", "Defining relationship that becomes the key to character"],
-      "failure_modes": ["Including every significant event in the subject's life with equal weight", "Events are included because they happened, not because they illuminate", "The selection principle is invisible — the narrative seems arbitrary"],
-      "signals_in_text": ["Earlier scenes are explicitly echoed in later ones", "Some famous events are omitted because they do not serve the character argument", "The narrative pauses at certain events to give them disproportionate time and attention"]
+      "definition": "Biography is not a complete life but a curated argument about which events mattered most. The writer must select the formative moments â€” the events that shaped the subject's character, drove their decisions, and explain who they became â€” and render them with full dramatic weight, not as chronological checkboxes.",
+      "entry_conditions": [
+        "Subject's life is established as the source material"
+      ],
+      "exit_conditions": [
+        "A clear principle of selection is visible â€” the narrative knows why each included event matters"
+      ],
+      "typical_variants": [
+        "Childhood wound that echoes throughout adult life",
+        "Pivotal professional failure that reorients ambition",
+        "Defining relationship that becomes the key to character"
+      ],
+      "failure_modes": [
+        "Including every significant event in the subject's life with equal weight",
+        "Events are included because they happened, not because they illuminate",
+        "The selection principle is invisible â€” the narrative seems arbitrary"
+      ],
+      "signals_in_text": [
+        "Earlier scenes are explicitly echoed in later ones",
+        "Some famous events are omitted because they do not serve the character argument",
+        "The narrative pauses at certain events to give them disproportionate time and attention"
+      ]
     },
     {
       "node_id": "BI_N12_CHARACTER_ARC_FROM_FACTS",
       "label": "Character Arc Must Emerge from Real Events",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The subject's internal change, growth, or deterioration must be grounded in the actual documented events of their life. The dramatic arc cannot be imposed on the subject — it must be discovered within the record. The biographer's art is finding the arc that was always there.",
-      "entry_conditions": ["Formative events have been selected"],
-      "exit_conditions": ["The subject's internal state visibly changes in response to actual events", "The arc can be traced back to documented causes"],
-      "typical_variants": ["Idealism corrupted by power and circumstance", "Private wound slowly finding public expression", "Greatness achieved then unmade by the same qualities that built it"],
-      "failure_modes": ["Arc is imposed on events rather than emerging from them", "Subject is static — the same person at end as at beginning despite everything that happened", "Arc requires inventing motivations the record does not support"],
-      "signals_in_text": ["The subject's language, behavior, and relationships visibly shift across the narrative", "Changes can be attributed to specific scenes that preceded them", "The arc illuminates why the historical record turned out as it did"]
+      "definition": "The subject's internal change, growth, or deterioration must be grounded in the actual documented events of their life. The dramatic arc cannot be imposed on the subject â€” it must be discovered within the record. The biographer's art is finding the arc that was always there.",
+      "entry_conditions": [
+        "Formative events have been selected"
+      ],
+      "exit_conditions": [
+        "The subject's internal state visibly changes in response to actual events",
+        "The arc can be traced back to documented causes"
+      ],
+      "typical_variants": [
+        "Idealism corrupted by power and circumstance",
+        "Private wound slowly finding public expression",
+        "Greatness achieved then unmade by the same qualities that built it"
+      ],
+      "failure_modes": [
+        "Arc is imposed on events rather than emerging from them",
+        "Subject is static â€” the same person at end as at beginning despite everything that happened",
+        "Arc requires inventing motivations the record does not support"
+      ],
+      "signals_in_text": [
+        "The subject's language, behavior, and relationships visibly shift across the narrative",
+        "Changes can be attributed to specific scenes that preceded them",
+        "The arc illuminates why the historical record turned out as it did"
+      ]
     },
     {
       "node_id": "BI_N13_FIDELITY_VS_DRAMA",
       "label": "Balance Between Fidelity to Facts and Dramatic Needs",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Biography operates in the permanent tension between what actually happened and what the dramatic form requires. The writer must navigate this honestly — compressing time, compositing characters, dramatizing undocumented private moments — while never crossing into distortion that falsifies the essential truth of the subject's life.",
-      "entry_conditions": ["Genre promise established", "Subject's documented history is the source"],
-      "exit_conditions": ["Every dramatic liberty taken is in service of deeper truth rather than convenience or sensation"],
-      "typical_variants": ["Compression: multiple real events collapsed into one dramatic scene", "Invention within fact: imagining a conversation whose emotional content is documented", "Omission: excluding true events that would distort the narrative's central argument"],
-      "failure_modes": ["Dramatic needs override accuracy to the point of misrepresentation", "Slavish fidelity produces a document rather than a drama", "Liberties are taken for sensation rather than illumination"],
-      "signals_in_text": ["Author's note acknowledges what is invented and what is documented", "Invented scenes feel psychologically consistent with the documented record", "The dramatic shape illuminates rather than contradicts historical understanding"]
+      "definition": "Biography operates in the permanent tension between what actually happened and what the dramatic form requires. The writer must navigate this honestly â€” compressing time, compositing characters, dramatizing undocumented private moments â€” while never crossing into distortion that falsifies the essential truth of the subject's life.",
+      "entry_conditions": [
+        "Genre promise established",
+        "Subject's documented history is the source"
+      ],
+      "exit_conditions": [
+        "Every dramatic liberty taken is in service of deeper truth rather than convenience or sensation"
+      ],
+      "typical_variants": [
+        "Compression: multiple real events collapsed into one dramatic scene",
+        "Invention within fact: imagining a conversation whose emotional content is documented",
+        "Omission: excluding true events that would distort the narrative's central argument"
+      ],
+      "failure_modes": [
+        "Dramatic needs override accuracy to the point of misrepresentation",
+        "Slavish fidelity produces a document rather than a drama",
+        "Liberties are taken for sensation rather than illumination"
+      ],
+      "signals_in_text": [
+        "Author's note acknowledges what is invented and what is documented",
+        "Invented scenes feel psychologically consistent with the documented record",
+        "The dramatic shape illuminates rather than contradicts historical understanding"
+      ]
     },
     {
       "node_id": "BI_N20_RISE_AND_FALL",
@@ -70,35 +152,89 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Biography structured as a trajectory: the subject rises to power, prominence, or achievement through exceptional ability and circumstance, then falls through hubris, circumstance, or the very qualities that enabled the rise. The structure provides inherent dramatic shape because the peak makes the descent meaningful.",
-      "entry_conditions": ["Core constraints apply", "Subject's life has a documentable rise and significant decline or fall"],
-      "exit_conditions": ["Both the ascent and the collapse are dramatized", "The connection between rise and fall is made legible through character"],
-      "typical_variants": ["Political leader whose strength becomes tyranny", "Artist whose ambition destroys their work and relationships", "Business figure whose innovation calcifies into ruthlessness"],
-      "failure_modes": ["Rise is dramatized but fall is rushed or treated as external misfortune", "Fall does not connect to character — the subject is brought down by bad luck rather than who they are", "Structure is so schematic that the subject becomes a morality tale rather than a person"],
-      "signals_in_text": ["Early virtues are shown to carry the seeds of later vices", "The peak moment is dramatized with full weight", "The fall is shown as the logical consequence of the rise, not an accident"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "Subject's life has a documentable rise and significant decline or fall"
+      ],
+      "exit_conditions": [
+        "Both the ascent and the collapse are dramatized",
+        "The connection between rise and fall is made legible through character"
+      ],
+      "typical_variants": [
+        "Political leader whose strength becomes tyranny",
+        "Artist whose ambition destroys their work and relationships",
+        "Business figure whose innovation calcifies into ruthlessness"
+      ],
+      "failure_modes": [
+        "Rise is dramatized but fall is rushed or treated as external misfortune",
+        "Fall does not connect to character â€” the subject is brought down by bad luck rather than who they are",
+        "Structure is so schematic that the subject becomes a morality tale rather than a person"
+      ],
+      "signals_in_text": [
+        "Early virtues are shown to carry the seeds of later vices",
+        "The peak moment is dramatized with full weight",
+        "The fall is shown as the logical consequence of the rise, not an accident"
+      ]
     },
     {
       "node_id": "BI_N21_PORTRAIT_STUDY",
       "label": "Portrait / Character Study",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Biography organized around understanding who the subject was rather than what happened to them. Event is subordinate to character revelation. The narrative circles around a central enigma — a contradiction, a mystery, a defining quality — and the dramatic engine is the progressive illumination of that quality.",
-      "entry_conditions": ["Core constraints apply", "The subject has a compelling inner life whose complexity is the primary interest"],
-      "exit_conditions": ["The central character question is illuminated, if not fully answered", "The audience understands something about the subject they could not have grasped from the historical record alone"],
-      "typical_variants": ["The public figure whose private self is the story", "The overlooked figure rescued from misrepresentation", "The figure whose contradictions are the subject"],
-      "failure_modes": ["Portrait remains surface — we see what the subject did but not who they were", "The enigma is explained rather than revealed", "The subject is reduced to a thesis rather than a person"],
-      "signals_in_text": ["Private scenes carry more narrative weight than public events", "The same character quality is shown from multiple angles and contexts", "The narrative resists simple judgment of the subject"]
+      "definition": "Biography organized around understanding who the subject was rather than what happened to them. Event is subordinate to character revelation. The narrative circles around a central enigma â€” a contradiction, a mystery, a defining quality â€” and the dramatic engine is the progressive illumination of that quality.",
+      "entry_conditions": [
+        "Core constraints apply",
+        "The subject has a compelling inner life whose complexity is the primary interest"
+      ],
+      "exit_conditions": [
+        "The central character question is illuminated, if not fully answered",
+        "The audience understands something about the subject they could not have grasped from the historical record alone"
+      ],
+      "typical_variants": [
+        "The public figure whose private self is the story",
+        "The overlooked figure rescued from misrepresentation",
+        "The figure whose contradictions are the subject"
+      ],
+      "failure_modes": [
+        "Portrait remains surface â€” we see what the subject did but not who they were",
+        "The enigma is explained rather than revealed",
+        "The subject is reduced to a thesis rather than a person"
+      ],
+      "signals_in_text": [
+        "Private scenes carry more narrative weight than public events",
+        "The same character quality is shown from multiple angles and contexts",
+        "The narrative resists simple judgment of the subject"
+      ]
     },
     {
       "node_id": "BI_N22_PERIOD_OF_LIFE",
       "label": "Period-of-Life Biography",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Biography that focuses on a specific chapter of the subject's life — typically a decisive, crisis-laden, or transformative period — rather than attempting a cradle-to-grave account. The compression of time forces dramatic intensity and allows deep rather than broad treatment.",
-      "entry_conditions": ["Core constraints apply", "A specific period of the subject's life is identifiably decisive or transformative"],
-      "exit_conditions": ["The period is treated with depth", "The relationship between this period and the subject's larger life is made clear"],
-      "typical_variants": ["The crisis year that changed everything", "The formative youth before public life began", "The late period of reckoning and summation"],
-      "failure_modes": ["The period is arbitrarily chosen with no argument for why it is decisive", "The period is treated in isolation with no sense of before and after", "Depth promised but the narrative still rushes through events chronologically"],
-      "signals_in_text": ["Explicit or implicit framing of why this period matters", "The period has a beginning, middle, and end that function dramatically", "Events before and after the period are referenced to establish context"]
+      "definition": "Biography that focuses on a specific chapter of the subject's life â€” typically a decisive, crisis-laden, or transformative period â€” rather than attempting a cradle-to-grave account. The compression of time forces dramatic intensity and allows deep rather than broad treatment.",
+      "entry_conditions": [
+        "Core constraints apply",
+        "A specific period of the subject's life is identifiably decisive or transformative"
+      ],
+      "exit_conditions": [
+        "The period is treated with depth",
+        "The relationship between this period and the subject's larger life is made clear"
+      ],
+      "typical_variants": [
+        "The crisis year that changed everything",
+        "The formative youth before public life began",
+        "The late period of reckoning and summation"
+      ],
+      "failure_modes": [
+        "The period is arbitrarily chosen with no argument for why it is decisive",
+        "The period is treated in isolation with no sense of before and after",
+        "Depth promised but the narrative still rushes through events chronologically"
+      ],
+      "signals_in_text": [
+        "Explicit or implicit framing of why this period matters",
+        "The period has a beginning, middle, and end that function dramatically",
+        "Events before and after the period are referenced to establish context"
+      ]
     },
     {
       "node_id": "BI_N23_AUTHORIZED_VS_CRITICAL",
@@ -106,119 +242,286 @@
       "role": "Subgenre Pattern",
       "level": 3,
       "definition": "Biography exists on a spectrum from authorized accounts (shaped or approved by the subject or their estate, prone to idealization) to critical accounts (examining failure, contradiction, and complicity the subject might prefer hidden). Each mode carries distinct narrative obligations and failure modes.",
-      "entry_conditions": ["Core constraints apply", "The narrative's relationship to the subject's own perspective is established"],
-      "exit_conditions": ["The chosen stance toward the subject is consistent and serves a coherent argument"],
-      "typical_variants": ["Authorized account that still finds honest complexity", "Critical biography that maintains respect without hagiography", "Revisionist biography that corrects prior idealization"],
-      "failure_modes": ["Hagiography that becomes propaganda — the subject can do no wrong", "Critical biography that becomes a prosecution rather than an inquiry", "Stance is inconsistent — alternating between celebration and condemnation without argument"],
-      "signals_in_text": ["Uncomfortable truths are included rather than elided", "The narrative voice maintains a consistent evaluative posture toward the subject", "The subject's own account of their life is presented but not automatically endorsed"]
+      "entry_conditions": [
+        "Core constraints apply",
+        "The narrative's relationship to the subject's own perspective is established"
+      ],
+      "exit_conditions": [
+        "The chosen stance toward the subject is consistent and serves a coherent argument"
+      ],
+      "typical_variants": [
+        "Authorized account that still finds honest complexity",
+        "Critical biography that maintains respect without hagiography",
+        "Revisionist biography that corrects prior idealization"
+      ],
+      "failure_modes": [
+        "Hagiography that becomes propaganda â€” the subject can do no wrong",
+        "Critical biography that becomes a prosecution rather than an inquiry",
+        "Stance is inconsistent â€” alternating between celebration and condemnation without argument"
+      ],
+      "signals_in_text": [
+        "Uncomfortable truths are included rather than elided",
+        "The narrative voice maintains a consistent evaluative posture toward the subject",
+        "The subject's own account of their life is presented but not automatically endorsed"
+      ]
     },
     {
       "node_id": "BI_N40_HISTORICAL_CONTEXT",
       "label": "Real Historical Context Must Be Rendered",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The world the subject inhabited — its political climate, social structures, cultural norms, and material conditions — must be rendered with sufficient specificity to explain why events unfolded as they did. Historical context is not backdrop; it is the medium through which character acts.",
-      "entry_conditions": ["Subgenre pattern selected"],
-      "exit_conditions": ["The period's specific conditions are shown to shape the subject's options and choices", "Anachronistic values are not imposed on the subject's historical situation"],
-      "typical_variants": ["Political context that constrains or enables the subject's ambitions", "Social norms that explain behavior otherwise incomprehensible in modern terms", "Economic conditions that determine what was possible"],
-      "failure_modes": ["Historical period is merely decorative — costumes and sets with no structural function", "Modern values are projected onto the subject, making them either a hero ahead of their time or a villain by contemporary standards", "Context is so foregrounded that the subject's individuality is lost in sociological generalization"],
-      "signals_in_text": ["The subject's choices are intelligible given the period's actual constraints", "Period-specific language, concepts, and frames of reference appear in the narrative", "Historical events are shown to impinge directly on the subject's life"]
+      "definition": "The world the subject inhabited â€” its political climate, social structures, cultural norms, and material conditions â€” must be rendered with sufficient specificity to explain why events unfolded as they did. Historical context is not backdrop; it is the medium through which character acts.",
+      "entry_conditions": [
+        "Subgenre pattern selected"
+      ],
+      "exit_conditions": [
+        "The period's specific conditions are shown to shape the subject's options and choices",
+        "Anachronistic values are not imposed on the subject's historical situation"
+      ],
+      "typical_variants": [
+        "Political context that constrains or enables the subject's ambitions",
+        "Social norms that explain behavior otherwise incomprehensible in modern terms",
+        "Economic conditions that determine what was possible"
+      ],
+      "failure_modes": [
+        "Historical period is merely decorative â€” costumes and sets with no structural function",
+        "Modern values are projected onto the subject, making them either a hero ahead of their time or a villain by contemporary standards",
+        "Context is so foregrounded that the subject's individuality is lost in sociological generalization"
+      ],
+      "signals_in_text": [
+        "The subject's choices are intelligible given the period's actual constraints",
+        "Period-specific language, concepts, and frames of reference appear in the narrative",
+        "Historical events are shown to impinge directly on the subject's life"
+      ]
     },
     {
       "node_id": "BI_N41_REAL_RELATIONSHIPS",
       "label": "Real Relationships Anchor the Drama",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The subject's documented relationships — family, rivals, collaborators, enemies, lovers — are the primary dramatic material. These relationships must be rendered with fidelity to the known record while dramatizing the emotional texture that the record implies but does not always state explicitly.",
-      "entry_conditions": ["Subject's significant relationships have been identified"],
-      "exit_conditions": ["Key relationships are active forces in the narrative", "Relationships change or are tested by events"],
-      "typical_variants": ["The formative parent whose shadow the subject never escapes", "The rival who defines the subject's ambition", "The intimate partner who sees the private self the public never sees"],
-      "failure_modes": ["Real relationships are present but passive — they do not drive or alter the subject's choices", "Relationships are invented without documentary basis in ways that distort the record", "Only professional relationships are shown; intimate life is elided or sanitized"],
-      "signals_in_text": ["Key figures in the subject's life appear as fully rendered characters, not instruments", "The subject's behavior changes in the presence of different people", "Documented conflicts, alliances, and affections are dramatized rather than summarized"]
+      "definition": "The subject's documented relationships â€” family, rivals, collaborators, enemies, lovers â€” are the primary dramatic material. These relationships must be rendered with fidelity to the known record while dramatizing the emotional texture that the record implies but does not always state explicitly.",
+      "entry_conditions": [
+        "Subject's significant relationships have been identified"
+      ],
+      "exit_conditions": [
+        "Key relationships are active forces in the narrative",
+        "Relationships change or are tested by events"
+      ],
+      "typical_variants": [
+        "The formative parent whose shadow the subject never escapes",
+        "The rival who defines the subject's ambition",
+        "The intimate partner who sees the private self the public never sees"
+      ],
+      "failure_modes": [
+        "Real relationships are present but passive â€” they do not drive or alter the subject's choices",
+        "Relationships are invented without documentary basis in ways that distort the record",
+        "Only professional relationships are shown; intimate life is elided or sanitized"
+      ],
+      "signals_in_text": [
+        "Key figures in the subject's life appear as fully rendered characters, not instruments",
+        "The subject's behavior changes in the presence of different people",
+        "Documented conflicts, alliances, and affections are dramatized rather than summarized"
+      ]
     },
     {
       "node_id": "BI_N42_PUBLIC_VS_PRIVATE",
       "label": "Public vs. Private Self Divergence",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "Biography's specific dramatic resource is access to the gap between the subject's public persona and their private self. This divergence — what they showed the world versus what they were in unobserved moments — is where the narrative's most revelatory work happens.",
-      "entry_conditions": ["Subject is a public figure with a documented public persona"],
-      "exit_conditions": ["Both the public and private selves are rendered", "The tension or continuity between them is made dramatically meaningful"],
-      "typical_variants": ["The celebrated figure who is privately tormented", "The private person whose public face is a constructed performance", "The figure whose public and private selves are surprisingly continuous — itself a revelation"],
-      "failure_modes": ["Only the public record is dramatized — biography becomes journalism", "Private scenes are invented without grounding in documented psychology", "The divergence is stated but not dramatized — we are told the subject was different in private but never shown it"],
-      "signals_in_text": ["Private scenes explicitly contrast with or complicate public scenes", "The subject modifies their behavior, language, or affect in different social contexts", "Moments of unguarded authenticity occur in private that are suppressed in public settings"]
+      "definition": "Biography's specific dramatic resource is access to the gap between the subject's public persona and their private self. This divergence â€” what they showed the world versus what they were in unobserved moments â€” is where the narrative's most revelatory work happens.",
+      "entry_conditions": [
+        "Subject is a public figure with a documented public persona"
+      ],
+      "exit_conditions": [
+        "Both the public and private selves are rendered",
+        "The tension or continuity between them is made dramatically meaningful"
+      ],
+      "typical_variants": [
+        "The celebrated figure who is privately tormented",
+        "The private person whose public face is a constructed performance",
+        "The figure whose public and private selves are surprisingly continuous â€” itself a revelation"
+      ],
+      "failure_modes": [
+        "Only the public record is dramatized â€” biography becomes journalism",
+        "Private scenes are invented without grounding in documented psychology",
+        "The divergence is stated but not dramatized â€” we are told the subject was different in private but never shown it"
+      ],
+      "signals_in_text": [
+        "Private scenes explicitly contrast with or complicate public scenes",
+        "The subject modifies their behavior, language, or affect in different social contexts",
+        "Moments of unguarded authenticity occur in private that are suppressed in public settings"
+      ]
     },
     {
       "node_id": "BI_N60_DEFINING_MOMENT",
       "label": "Defining Moment Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "Every biography must dramatize the event that made the subject who they are — the moment of formation, decision, or revelation from which the rest of their life follows. This scene is the biographical argument's anchor: it explains the subject. It may be a single event or the culmination of a formative period, but it must be given full dramatic treatment.",
-      "entry_conditions": ["Core constraints are established", "The narrative has built sufficient context for the scene to land"],
-      "exit_conditions": ["The defining moment is rendered with full dramatic weight", "The causal connection between this moment and the subject's subsequent life is legible"],
-      "typical_variants": ["The childhood wound that becomes adult drive", "The pivotal professional success or failure that sets the life's trajectory", "The moment of moral choice that the subject must live with forever"],
-      "failure_modes": ["Defining moment is summarized rather than dramatized", "The scene is present but not identified as significant — it passes at the same narrative speed as everything else", "The connection between this moment and the subject's later life is never made explicit"],
-      "signals_in_text": ["The scene receives disproportionate time, detail, and emotional attention", "The narrative slows down for this scene relative to surrounding material", "Later events in the story explicitly echo or reference this moment"]
+      "definition": "Every biography must dramatize the event that made the subject who they are â€” the moment of formation, decision, or revelation from which the rest of their life follows. This scene is the biographical argument's anchor: it explains the subject. It may be a single event or the culmination of a formative period, but it must be given full dramatic treatment.",
+      "entry_conditions": [
+        "Core constraints are established",
+        "The narrative has built sufficient context for the scene to land"
+      ],
+      "exit_conditions": [
+        "The defining moment is rendered with full dramatic weight",
+        "The causal connection between this moment and the subject's subsequent life is legible"
+      ],
+      "typical_variants": [
+        "The childhood wound that becomes adult drive",
+        "The pivotal professional success or failure that sets the life's trajectory",
+        "The moment of moral choice that the subject must live with forever"
+      ],
+      "failure_modes": [
+        "Defining moment is summarized rather than dramatized",
+        "The scene is present but not identified as significant â€” it passes at the same narrative speed as everything else",
+        "The connection between this moment and the subject's later life is never made explicit"
+      ],
+      "signals_in_text": [
+        "The scene receives disproportionate time, detail, and emotional attention",
+        "The narrative slows down for this scene relative to surrounding material",
+        "Later events in the story explicitly echo or reference this moment"
+      ]
     },
     {
       "node_id": "BI_N61_CRUCIBLE_SCENE",
       "label": "Crucible / Pressure Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "A scene of maximum pressure in which the subject's essential character is tested and revealed — the moment when circumstances demand the most from the subject and we see, under that pressure, who they truly are. The crucible does not have to be the climax, but it must be the point of maximum character revelation.",
-      "entry_conditions": ["Stakes are fully established", "The subject's core character has been sufficiently established for the test to be legible"],
-      "exit_conditions": ["The subject's response to maximum pressure reveals character clearly", "The scene advances the narrative's argument about who the subject is"],
-      "typical_variants": ["Public crisis requiring immediate high-stakes decision", "Private confrontation with the consequences of their choices", "Moment of temptation or capitulation that shows the limits of their character"],
-      "failure_modes": ["The pressure is external but the subject's response is not dramatized", "The scene reveals only competence or incompetence, not character", "The crucible is resolved too easily — the pressure is not sustained long enough to genuinely test"],
-      "signals_in_text": ["Scene is structurally positioned at a point of maximum narrative tension", "Subject's behavior in this scene differs from or confirms behavior in earlier scenes in revealing ways", "Other characters observe and react to how the subject handles the pressure"]
+      "definition": "A scene of maximum pressure in which the subject's essential character is tested and revealed â€” the moment when circumstances demand the most from the subject and we see, under that pressure, who they truly are. The crucible does not have to be the climax, but it must be the point of maximum character revelation.",
+      "entry_conditions": [
+        "Stakes are fully established",
+        "The subject's core character has been sufficiently established for the test to be legible"
+      ],
+      "exit_conditions": [
+        "The subject's response to maximum pressure reveals character clearly",
+        "The scene advances the narrative's argument about who the subject is"
+      ],
+      "typical_variants": [
+        "Public crisis requiring immediate high-stakes decision",
+        "Private confrontation with the consequences of their choices",
+        "Moment of temptation or capitulation that shows the limits of their character"
+      ],
+      "failure_modes": [
+        "The pressure is external but the subject's response is not dramatized",
+        "The scene reveals only competence or incompetence, not character",
+        "The crucible is resolved too easily â€” the pressure is not sustained long enough to genuinely test"
+      ],
+      "signals_in_text": [
+        "Scene is structurally positioned at a point of maximum narrative tension",
+        "Subject's behavior in this scene differs from or confirms behavior in earlier scenes in revealing ways",
+        "Other characters observe and react to how the subject handles the pressure"
+      ]
     },
     {
       "node_id": "BI_N62_LEGACY_SUMMATION",
       "label": "Legacy / Summation Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "A scene, sequence, or structural moment near the end of the narrative that articulates what the subject's life amounted to — not in the terms of official history, but in the terms the biography has argued for. This is the moment the narrative makes its case: here is what this person meant, here is what endured, here is what was lost.",
-      "entry_conditions": ["The narrative arc has reached or approached its conclusion", "The character argument has been sufficiently developed to support summation"],
-      "exit_conditions": ["The subject's life is given a final dramatic frame that is interpretive, not merely factual", "The audience is left with an understanding of the subject's significance that the historical record alone could not provide"],
-      "typical_variants": ["Death or late-life scene that crystallizes what the life built or destroyed", "Final public act that demonstrates the subject's enduring impact", "Intimate private moment at the end that reframes the entire public narrative"],
-      "failure_modes": ["Summation is purely factual — what happened next — without interpretive weight", "Legacy is stated in voice-over or title cards rather than dramatized", "The scene contradicts the character argument the narrative has built rather than fulfilling it"],
-      "signals_in_text": ["The scene echoes or reverses the defining moment scene", "Language and imagery from throughout the narrative return in altered form", "The narrative voice, if present, speaks with earned authority rather than journalistic distance"]
+      "definition": "A scene, sequence, or structural moment near the end of the narrative that articulates what the subject's life amounted to â€” not in the terms of official history, but in the terms the biography has argued for. This is the moment the narrative makes its case: here is what this person meant, here is what endured, here is what was lost.",
+      "entry_conditions": [
+        "The narrative arc has reached or approached its conclusion",
+        "The character argument has been sufficiently developed to support summation"
+      ],
+      "exit_conditions": [
+        "The subject's life is given a final dramatic frame that is interpretive, not merely factual",
+        "The audience is left with an understanding of the subject's significance that the historical record alone could not provide"
+      ],
+      "typical_variants": [
+        "Death or late-life scene that crystallizes what the life built or destroyed",
+        "Final public act that demonstrates the subject's enduring impact",
+        "Intimate private moment at the end that reframes the entire public narrative"
+      ],
+      "failure_modes": [
+        "Summation is purely factual â€” what happened next â€” without interpretive weight",
+        "Legacy is stated in voice-over or title cards rather than dramatized",
+        "The scene contradicts the character argument the narrative has built rather than fulfilling it"
+      ],
+      "signals_in_text": [
+        "The scene echoes or reverses the defining moment scene",
+        "Language and imagery from throughout the narrative return in altered form",
+        "The narrative voice, if present, speaks with earned authority rather than journalistic distance"
+      ]
     },
     {
       "node_id": "BI_N80_INTIMATE_GRAVITY",
       "label": "Intimate Revelation and Historical Gravity",
       "role": "Tone Marker",
       "level": null,
-      "definition": "Biography requires a dual tone: the intimacy of close character observation — the sense that we are genuinely close to this person, that we are seeing what others could not — combined with the gravity of historical consequence, the awareness that this life mattered beyond the merely personal. Neither tone alone is sufficient; the genre demands both simultaneously.",
-      "entry_conditions": ["Genre promise established"],
-      "exit_conditions": ["Individual scenes carry emotional intimacy while the overall narrative maintains historical perspective", "The subject is treated as both a private person and a figure of historical significance"],
-      "typical_variants": ["Austere historical seriousness warmed by intimate private scenes", "Close character observation that never loses sight of larger significance", "Tone that shifts register between public and private settings"],
-      "failure_modes": ["Pure intimacy without historical weight reduces biography to gossip or sentiment", "Pure historical gravity without intimacy reduces biography to academic chronicle", "Tone is inconsistent — either the intimacy or the gravity feels forced"],
-      "signals_in_text": ["Private scenes are written with emotional closeness and sensory specificity", "Public and historical scenes are framed to show their larger stakes", "The narrative voice maintains awareness of both the personal and the historical simultaneously"]
+      "definition": "Biography requires a dual tone: the intimacy of close character observation â€” the sense that we are genuinely close to this person, that we are seeing what others could not â€” combined with the gravity of historical consequence, the awareness that this life mattered beyond the merely personal. Neither tone alone is sufficient; the genre demands both simultaneously.",
+      "entry_conditions": [
+        "Genre promise established"
+      ],
+      "exit_conditions": [
+        "Individual scenes carry emotional intimacy while the overall narrative maintains historical perspective",
+        "The subject is treated as both a private person and a figure of historical significance"
+      ],
+      "typical_variants": [
+        "Austere historical seriousness warmed by intimate private scenes",
+        "Close character observation that never loses sight of larger significance",
+        "Tone that shifts register between public and private settings"
+      ],
+      "failure_modes": [
+        "Pure intimacy without historical weight reduces biography to gossip or sentiment",
+        "Pure historical gravity without intimacy reduces biography to academic chronicle",
+        "Tone is inconsistent â€” either the intimacy or the gravity feels forced"
+      ],
+      "signals_in_text": [
+        "Private scenes are written with emotional closeness and sensory specificity",
+        "Public and historical scenes are framed to show their larger stakes",
+        "The narrative voice maintains awareness of both the personal and the historical simultaneously"
+      ]
     },
     {
       "node_id": "BI_N90_WIKIPEDIA_PAGE",
-      "label": "Wikipedia Page — Chronological Events Without Dramatic Structure",
+      "label": "Wikipedia Page â€” Chronological Events Without Dramatic Structure",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "Biography fails when it becomes a chronological inventory of the subject's life events — birth, education, early career, achievements, later achievements, death — with no dramatic selection, no interpretive argument, and no revelation of inner life. The events are present but the person is absent. This is the definitive genre violation.",
-      "entry_conditions": ["Biographical subject is established"],
-      "exit_conditions": ["A dramatic principle of selection is applied — not all events are given equal weight, and the selection serves a character argument"],
-      "typical_variants": ["Cradle-to-grave narrative with no scenes of disproportionate weight", "Summary narration substituting for dramatized scenes", "Absence of inner life — only external events are depicted"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["Each life event receives roughly equal narrative space", "Events are connected by 'and then' rather than 'because of'", "The subject's inner experience is never accessed — only their public actions are recorded"]
+      "definition": "Biography fails when it becomes a chronological inventory of the subject's life events â€” birth, education, early career, achievements, later achievements, death â€” with no dramatic selection, no interpretive argument, and no revelation of inner life. The events are present but the person is absent. This is the definitive genre violation.",
+      "entry_conditions": [
+        "Biographical subject is established"
+      ],
+      "exit_conditions": [
+        "A dramatic principle of selection is applied â€” not all events are given equal weight, and the selection serves a character argument"
+      ],
+      "typical_variants": [
+        "Cradle-to-grave narrative with no scenes of disproportionate weight",
+        "Summary narration substituting for dramatized scenes",
+        "Absence of inner life â€” only external events are depicted"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode â€” its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "Each life event receives roughly equal narrative space",
+        "Events are connected by 'and then' rather than 'because of'",
+        "The subject's inner experience is never accessed â€” only their public actions are recorded"
+      ]
     },
     {
       "node_id": "BI_N91_HAGIOGRAPHIC_DISTORTION",
-      "label": "Hagiographic Distortion — Subject Idealized Beyond Truth",
+      "label": "Hagiographic Distortion â€” Subject Idealized Beyond Truth",
       "role": "Anti-Pattern",
       "level": null,
       "definition": "Biography fails when the narrative suppresses evidence of the subject's failures, contradictions, or moral complexity in order to produce an idealized portrait. This violates both historical fidelity and dramatic truth: a subject without flaws has no character arc, faces no genuine crucible, and teaches nothing about the human condition.",
-      "entry_conditions": ["Subject is a celebrated or admired figure"],
-      "exit_conditions": ["The subject's failures, contradictions, and moral complexities are included and given sufficient weight"],
-      "typical_variants": ["Authorized biography that suppresses unflattering material", "Narrative that explains away failures as external misfortune", "Portrait that presents the subject's flaws as secret virtues"],
-      "failure_modes": ["This node IS the failure mode — its presence indicates a genre violation"],
-      "signals_in_text": ["All adversity the subject faces is externally caused", "The subject never makes a genuinely wrong or morally compromised choice", "Contradictions in the historical record are elided rather than examined"]
+      "entry_conditions": [
+        "Subject is a celebrated or admired figure"
+      ],
+      "exit_conditions": [
+        "The subject's failures, contradictions, and moral complexities are included and given sufficient weight"
+      ],
+      "typical_variants": [
+        "Authorized biography that suppresses unflattering material",
+        "Narrative that explains away failures as external misfortune",
+        "Portrait that presents the subject's flaws as secret virtues"
+      ],
+      "failure_modes": [
+        "This node IS the failure mode â€” its presence indicates a genre violation"
+      ],
+      "signals_in_text": [
+        "All adversity the subject faces is externally caused",
+        "The subject never makes a genuinely wrong or morally compromised choice",
+        "Contradictions in the historical record are elided rather than examined"
+      ]
     }
   ],
   "edges": [
@@ -228,11 +531,17 @@
       "to": "BI_N10_REAL_PERSON",
       "label": "Promise is grounded in historical fidelity",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
-      "effects_on_stakes": "Stakes are real because they happened — the audience knows the events had actual consequences",
+      "preconditions": [
+        "Genre promise established"
+      ],
+      "effects_on_stakes": "Stakes are real because they happened â€” the audience knows the events had actual consequences",
       "effects_on_character": "Character must be grounded in documented evidence, not invention",
-      "common_alternatives": ["Biographical fiction may take greater liberties but must signal its fictionality"],
-      "anti_patterns": ["Using a real person's name and life while inventing consequential events"]
+      "common_alternatives": [
+        "Biographical fiction may take greater liberties but must signal its fictionality"
+      ],
+      "anti_patterns": [
+        "Using a real person's name and life while inventing consequential events"
+      ]
     },
     {
       "edge_id": "BI_E02_PROMISE_TO_SELECTION",
@@ -240,11 +549,17 @@
       "to": "BI_N11_FORMATIVE_SELECTION",
       "label": "Promise requires purposeful selection of formative events",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Selection determines which events carry dramatic weight",
       "effects_on_character": "Only the events that illuminate character need to be included",
-      "common_alternatives": ["Some biographical forms include more events but still apply a hierarchy of emphasis"],
-      "anti_patterns": ["Treating all documented events as equally worthy of inclusion"]
+      "common_alternatives": [
+        "Some biographical forms include more events but still apply a hierarchy of emphasis"
+      ],
+      "anti_patterns": [
+        "Treating all documented events as equally worthy of inclusion"
+      ]
     },
     {
       "edge_id": "BI_E03_PROMISE_TO_ARC",
@@ -252,11 +567,17 @@
       "to": "BI_N12_CHARACTER_ARC_FROM_FACTS",
       "label": "Promise requires character arc discoverable in the record",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
-      "effects_on_stakes": "Arc gives stakes their direction — we understand what the subject stands to gain or lose",
+      "preconditions": [
+        "Genre promise established"
+      ],
+      "effects_on_stakes": "Arc gives stakes their direction â€” we understand what the subject stands to gain or lose",
       "effects_on_character": "Character must visibly change or be revealed across the narrative",
-      "common_alternatives": ["Portrait studies may argue for a static character whose consistency is itself the revelation"],
-      "anti_patterns": ["Arc is imposed on events rather than discovered within them"]
+      "common_alternatives": [
+        "Portrait studies may argue for a static character whose consistency is itself the revelation"
+      ],
+      "anti_patterns": [
+        "Arc is imposed on events rather than discovered within them"
+      ]
     },
     {
       "edge_id": "BI_E04_PROMISE_TO_FIDELITY_BALANCE",
@@ -264,11 +585,17 @@
       "to": "BI_N13_FIDELITY_VS_DRAMA",
       "label": "Promise requires honest navigation of fidelity and dramatic needs",
       "meaning": "specifies constraint",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Audience trust depends on knowing the narrative is not fabricating",
       "effects_on_character": "Dramatic liberties must serve character truth, not convenience",
-      "common_alternatives": ["Different biographical modes permit different degrees of dramatic liberty, but all require transparency"],
-      "anti_patterns": ["Dramatic shape imposed at the cost of misrepresenting the subject"]
+      "common_alternatives": [
+        "Different biographical modes permit different degrees of dramatic liberty, but all require transparency"
+      ],
+      "anti_patterns": [
+        "Dramatic shape imposed at the cost of misrepresenting the subject"
+      ]
     },
     {
       "edge_id": "BI_E05_PROMISE_TO_TONE",
@@ -276,11 +603,17 @@
       "to": "BI_N80_INTIMATE_GRAVITY",
       "label": "Promise requires dual tone of intimacy and historical gravity",
       "meaning": "sets tone",
-      "preconditions": ["Genre promise established"],
+      "preconditions": [
+        "Genre promise established"
+      ],
       "effects_on_stakes": "Tone signals both the personal and historical significance of the subject's life",
       "effects_on_character": "Subject must be rendered as both an individual and a historical figure",
-      "common_alternatives": ["Some biographical works favor one tone, but the genre expectation encompasses both"],
-      "anti_patterns": ["Pure academic distance or pure personal gossip without the other dimension"]
+      "common_alternatives": [
+        "Some biographical works favor one tone, but the genre expectation encompasses both"
+      ],
+      "anti_patterns": [
+        "Pure academic distance or pure personal gossip without the other dimension"
+      ]
     },
     {
       "edge_id": "BI_E10_REAL_PERSON_TO_RISE_FALL",
@@ -288,11 +621,18 @@
       "to": "BI_N20_RISE_AND_FALL",
       "label": "Historical record supports rise-and-fall trajectory",
       "meaning": "branches into subtype",
-      "preconditions": ["Subject's documented life has a significant ascent and decline"],
+      "preconditions": [
+        "Subject's documented life has a significant ascent and decline"
+      ],
       "effects_on_stakes": "Stakes shift from whether the subject will succeed to whether they will survive their success",
       "effects_on_character": "Character qualities shown in the rise must be visibly connected to the fall",
-      "common_alternatives": ["Portrait study", "Period-of-life biography"],
-      "anti_patterns": ["Rise-and-fall structure applied to a life that does not actually support it"]
+      "common_alternatives": [
+        "Portrait study",
+        "Period-of-life biography"
+      ],
+      "anti_patterns": [
+        "Rise-and-fall structure applied to a life that does not actually support it"
+      ]
     },
     {
       "edge_id": "BI_E11_SELECTION_TO_PORTRAIT",
@@ -300,11 +640,18 @@
       "to": "BI_N21_PORTRAIT_STUDY",
       "label": "Selection principle organized around character revelation",
       "meaning": "branches into subtype",
-      "preconditions": ["Events are selected primarily for their character-illuminating power rather than narrative drama"],
+      "preconditions": [
+        "Events are selected primarily for their character-illuminating power rather than narrative drama"
+      ],
       "effects_on_stakes": "Stakes are the understanding of the subject's inner life rather than the outcome of external events",
       "effects_on_character": "Character complexity is the primary subject, not accomplishment or failure",
-      "common_alternatives": ["Rise-and-fall biography", "Period-of-life biography"],
-      "anti_patterns": ["Portrait study that remains surface — action without interiority"]
+      "common_alternatives": [
+        "Rise-and-fall biography",
+        "Period-of-life biography"
+      ],
+      "anti_patterns": [
+        "Portrait study that remains surface â€” action without interiority"
+      ]
     },
     {
       "edge_id": "BI_E12_ARC_TO_PERIOD",
@@ -312,11 +659,18 @@
       "to": "BI_N22_PERIOD_OF_LIFE",
       "label": "Character arc concentrated in a decisive period",
       "meaning": "branches into subtype",
-      "preconditions": ["The most significant transformation of character occurs within an identifiable period"],
-      "effects_on_stakes": "Compression intensifies the arc — change happens under time pressure",
+      "preconditions": [
+        "The most significant transformation of character occurs within an identifiable period"
+      ],
+      "effects_on_stakes": "Compression intensifies the arc â€” change happens under time pressure",
       "effects_on_character": "Character at the beginning of the period is measurably different from character at the end",
-      "common_alternatives": ["Rise-and-fall biography spanning the full life", "Portrait study"],
-      "anti_patterns": ["Period selected arbitrarily without argument for why this chapter is decisive"]
+      "common_alternatives": [
+        "Rise-and-fall biography spanning the full life",
+        "Portrait study"
+      ],
+      "anti_patterns": [
+        "Period selected arbitrarily without argument for why this chapter is decisive"
+      ]
     },
     {
       "edge_id": "BI_E13_FIDELITY_TO_AUTHORIZED",
@@ -324,11 +678,17 @@
       "to": "BI_N23_AUTHORIZED_VS_CRITICAL",
       "label": "Fidelity tension resolved differently across authorized and critical modes",
       "meaning": "branches into subtype",
-      "preconditions": ["The narrative's relationship to the subject's own account is established"],
+      "preconditions": [
+        "The narrative's relationship to the subject's own account is established"
+      ],
       "effects_on_stakes": "The mode determines what kind of truth the narrative is pursuing",
       "effects_on_character": "Authorized mode risks idealization; critical mode risks prosecution",
-      "common_alternatives": ["Some biographies are neither authorized nor polemically critical — they pursue complex truth independently"],
-      "anti_patterns": ["Mode is inconsistent or undeclared, leaving the audience uncertain about the narrative's relationship to truth"]
+      "common_alternatives": [
+        "Some biographies are neither authorized nor polemically critical â€” they pursue complex truth independently"
+      ],
+      "anti_patterns": [
+        "Mode is inconsistent or undeclared, leaving the audience uncertain about the narrative's relationship to truth"
+      ]
     },
     {
       "edge_id": "BI_E30_RISE_FALL_TO_HISTORICAL",
@@ -336,11 +696,17 @@
       "to": "BI_N40_HISTORICAL_CONTEXT",
       "label": "Rise and fall require historically grounded conditions",
       "meaning": "introduces setting rule",
-      "preconditions": ["Rise-and-fall subgenre selected"],
+      "preconditions": [
+        "Rise-and-fall subgenre selected"
+      ],
       "effects_on_stakes": "Historical conditions explain what enabled the rise and what accelerated the fall",
       "effects_on_character": "Character choices are intelligible within their historical moment",
-      "common_alternatives": ["Historical context may be foregrounded differently depending on whether the rise or fall is the narrative focus"],
-      "anti_patterns": ["Rise and fall treated as purely personal without the historical forces that shaped them"]
+      "common_alternatives": [
+        "Historical context may be foregrounded differently depending on whether the rise or fall is the narrative focus"
+      ],
+      "anti_patterns": [
+        "Rise and fall treated as purely personal without the historical forces that shaped them"
+      ]
     },
     {
       "edge_id": "BI_E31_PORTRAIT_TO_REAL_RELATIONSHIPS",
@@ -348,11 +714,17 @@
       "to": "BI_N41_REAL_RELATIONSHIPS",
       "label": "Portrait study built from the subject's real relationships",
       "meaning": "introduces setting rule",
-      "preconditions": ["Portrait subgenre selected"],
+      "preconditions": [
+        "Portrait subgenre selected"
+      ],
       "effects_on_stakes": "Character is revealed through how the subject relates to real others",
       "effects_on_character": "Relationships are the mirrors in which the subject's character becomes visible",
-      "common_alternatives": ["Some portrait studies are more solitary, focusing on the subject's inner monologue or creative work"],
-      "anti_patterns": ["Portrait study that renders the subject in isolation without the real relationships that defined them"]
+      "common_alternatives": [
+        "Some portrait studies are more solitary, focusing on the subject's inner monologue or creative work"
+      ],
+      "anti_patterns": [
+        "Portrait study that renders the subject in isolation without the real relationships that defined them"
+      ]
     },
     {
       "edge_id": "BI_E32_PERIOD_TO_PUBLIC_PRIVATE",
@@ -360,11 +732,17 @@
       "to": "BI_N42_PUBLIC_VS_PRIVATE",
       "label": "Period-of-life biography exploits public-private divergence intensively",
       "meaning": "introduces setting rule",
-      "preconditions": ["Period-of-life subgenre selected"],
+      "preconditions": [
+        "Period-of-life subgenre selected"
+      ],
       "effects_on_stakes": "Compression allows deeper access to both public and private selves within the period",
       "effects_on_character": "The gap between public persona and private self is often most acute during periods of crisis",
-      "common_alternatives": ["Some period-of-life biographies are primarily public — focused on a specific professional episode"],
-      "anti_patterns": ["Period-of-life biography that remains in public view throughout, never accessing the private self"]
+      "common_alternatives": [
+        "Some period-of-life biographies are primarily public â€” focused on a specific professional episode"
+      ],
+      "anti_patterns": [
+        "Period-of-life biography that remains in public view throughout, never accessing the private self"
+      ]
     },
     {
       "edge_id": "BI_E33_AUTHORIZED_TO_REAL_RELATIONSHIPS",
@@ -372,11 +750,17 @@
       "to": "BI_N41_REAL_RELATIONSHIPS",
       "label": "Authorized vs. critical stance determines how relationships are rendered",
       "meaning": "introduces setting rule",
-      "preconditions": ["Authorized/critical mode established"],
+      "preconditions": [
+        "Authorized/critical mode established"
+      ],
       "effects_on_stakes": "Critical biography may reveal relationship dynamics the subject or authorized accounts suppressed",
       "effects_on_character": "The mode's stance toward truth shapes which relationship truths are surfaced",
-      "common_alternatives": ["Authorized biography may still render relationships honestly if the subject's estate permits it"],
-      "anti_patterns": ["All biographies sanitize relationships regardless of mode — hagiographic failure"]
+      "common_alternatives": [
+        "Authorized biography may still render relationships honestly if the subject's estate permits it"
+      ],
+      "anti_patterns": [
+        "All biographies sanitize relationships regardless of mode â€” hagiographic failure"
+      ]
     },
     {
       "edge_id": "BI_E40_HISTORICAL_TO_DEFINING_MOMENT",
@@ -384,11 +768,18 @@
       "to": "BI_N60_DEFINING_MOMENT",
       "label": "Historical context makes the defining moment intelligible",
       "meaning": "mandates element",
-      "preconditions": ["Historical context is established", "The defining moment is embedded in a specific historical situation"],
+      "preconditions": [
+        "Historical context is established",
+        "The defining moment is embedded in a specific historical situation"
+      ],
       "effects_on_stakes": "The moment's significance is understood against its historical backdrop",
       "effects_on_character": "The subject's response to the moment is legible given their historical circumstances",
-      "common_alternatives": ["Some defining moments are primarily personal rather than historical, but even these are shaped by period"],
-      "anti_patterns": ["Defining moment presented without the historical context that gives it meaning"]
+      "common_alternatives": [
+        "Some defining moments are primarily personal rather than historical, but even these are shaped by period"
+      ],
+      "anti_patterns": [
+        "Defining moment presented without the historical context that gives it meaning"
+      ]
     },
     {
       "edge_id": "BI_E41_RELATIONSHIPS_TO_CRUCIBLE",
@@ -396,11 +787,17 @@
       "to": "BI_N61_CRUCIBLE_SCENE",
       "label": "Real relationships provide the pressure of the crucible",
       "meaning": "mandates element",
-      "preconditions": ["Key relationships are established and under pressure"],
+      "preconditions": [
+        "Key relationships are established and under pressure"
+      ],
       "effects_on_stakes": "Crucible pressure often comes from or is witnessed by the subject's closest real associates",
       "effects_on_character": "Character is revealed under pressure in the presence of those who know the subject best",
-      "common_alternatives": ["Some crucible scenes are solitary — the subject alone with a decision"],
-      "anti_patterns": ["Crucible scene that is purely abstract without the grounding of real relationships"]
+      "common_alternatives": [
+        "Some crucible scenes are solitary â€” the subject alone with a decision"
+      ],
+      "anti_patterns": [
+        "Crucible scene that is purely abstract without the grounding of real relationships"
+      ]
     },
     {
       "edge_id": "BI_E42_PUBLIC_PRIVATE_TO_LEGACY",
@@ -408,11 +805,17 @@
       "to": "BI_N62_LEGACY_SUMMATION",
       "label": "Legacy scene reconciles or crystallizes the public-private divergence",
       "meaning": "mandates element",
-      "preconditions": ["Public and private selves have been established and contrasted"],
+      "preconditions": [
+        "Public and private selves have been established and contrasted"
+      ],
       "effects_on_stakes": "Legacy is assessed in terms of both the public achievement and the private cost",
       "effects_on_character": "The summation integrates both dimensions of the subject",
-      "common_alternatives": ["Some legacy scenes focus primarily on public impact; the private cost is implied"],
-      "anti_patterns": ["Legacy scene that addresses only public achievement without acknowledging the private life's complexity"]
+      "common_alternatives": [
+        "Some legacy scenes focus primarily on public impact; the private cost is implied"
+      ],
+      "anti_patterns": [
+        "Legacy scene that addresses only public achievement without acknowledging the private life's complexity"
+      ]
     },
     {
       "edge_id": "BI_E50_DEFINING_TO_CRUCIBLE",
@@ -420,11 +823,17 @@
       "to": "BI_N61_CRUCIBLE_SCENE",
       "label": "Defining moment establishes what the crucible will test",
       "meaning": "requires payoff",
-      "preconditions": ["Defining moment has occurred and established the subject's core character"],
+      "preconditions": [
+        "Defining moment has occurred and established the subject's core character"
+      ],
       "effects_on_stakes": "Crucible tests whether the character formed in the defining moment holds under maximum pressure",
       "effects_on_character": "The crucible reveals whether the subject's formation was strength or fragility",
-      "common_alternatives": ["In some biographies the crucible precedes the defining moment — the crisis provokes the formation"],
-      "anti_patterns": ["Crucible that tests qualities never established by prior character work"]
+      "common_alternatives": [
+        "In some biographies the crucible precedes the defining moment â€” the crisis provokes the formation"
+      ],
+      "anti_patterns": [
+        "Crucible that tests qualities never established by prior character work"
+      ]
     },
     {
       "edge_id": "BI_E51_CRUCIBLE_TO_LEGACY",
@@ -432,11 +841,17 @@
       "to": "BI_N62_LEGACY_SUMMATION",
       "label": "How the subject handles the crucible determines the legacy",
       "meaning": "requires payoff",
-      "preconditions": ["Crucible scene has revealed the subject's character under maximum pressure"],
+      "preconditions": [
+        "Crucible scene has revealed the subject's character under maximum pressure"
+      ],
       "effects_on_stakes": "The legacy summation assesses the consequences of the crucible's outcome",
       "effects_on_character": "Legacy is earned or undermined by what the crucible revealed",
-      "common_alternatives": ["Legacy may be assessed in terms of public impact rather than the personal crucible"],
-      "anti_patterns": ["Legacy summation that does not connect to how the subject handled their central test"]
+      "common_alternatives": [
+        "Legacy may be assessed in terms of public impact rather than the personal crucible"
+      ],
+      "anti_patterns": [
+        "Legacy summation that does not connect to how the subject handled their central test"
+      ]
     },
     {
       "edge_id": "BI_E90_WIKIPEDIA_WARNING",
@@ -444,11 +859,15 @@
       "to": "BI_N90_WIKIPEDIA_PAGE",
       "label": "Failure to select produces the Wikipedia anti-pattern",
       "meaning": "prohibits element",
-      "preconditions": ["Events are included without a principle of dramatic selection"],
+      "preconditions": [
+        "Events are included without a principle of dramatic selection"
+      ],
       "effects_on_stakes": "All events carry equal weight, so none carry real weight",
-      "effects_on_character": "Character is never revealed — only actions are recorded",
+      "effects_on_character": "Character is never revealed â€” only actions are recorded",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes what to avoid"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern â€” it describes what to avoid"
+      ]
     },
     {
       "edge_id": "BI_E91_HAGIOGRAPHY_WARNING",
@@ -456,11 +875,15 @@
       "to": "BI_N91_HAGIOGRAPHIC_DISTORTION",
       "label": "Prioritizing dramatic appeal over truth produces hagiography",
       "meaning": "prohibits element",
-      "preconditions": ["Dramatic needs override fidelity to uncomfortable truths about the subject"],
+      "preconditions": [
+        "Dramatic needs override fidelity to uncomfortable truths about the subject"
+      ],
       "effects_on_stakes": "Stakes are false because the subject's failures are not real failures in the narrative",
       "effects_on_character": "Character has no genuine arc because only the upward trajectory is shown",
       "common_alternatives": [],
-      "anti_patterns": ["This edge IS the anti-pattern — it describes what to avoid"]
+      "anti_patterns": [
+        "This edge IS the anti-pattern â€” it describes what to avoid"
+      ]
     }
   ]
 }
