@@ -66,40 +66,40 @@ This file is maintained by the coding agent so that [ ] means not started, [~] m
 **Goal:** Implement the deterministic selection and contract compilation pipeline. This phase requires zero LLM calls — it is pure computation over the corpus.
 
 ### 2.1 Selection engine
-- [ ] Create `app/src/generation/engine/selectionEngine.ts`
-- [ ] Accept `StoryRequest` as input
-- [ ] Look up genre–archetype compatibility from `genre_archetype_matrix.json`
-- [ ] Score candidates: natural (1.0), occasional (0.6), rare (0.2)
-- [ ] Score tone compatibility from `tone_archetype_integration.json`: reinforcing (+0.2), neutral (+0.0), contrasting (−0.1)
-- [ ] If user provided both archetype and genre: validate compatibility, return with rationale
-- [ ] If user provided only one: rank and select the top-scoring complement
-- [ ] If blending enabled: select blend pattern from `genre_blending_model.json`, reject "unstable" unless explicitly allowed
-- [ ] If hybrid enabled: select hybrid pattern from `hybrid_archetype_patterns.json`, capture divergence points
-- [ ] Emit `SelectionResult` artifact
+- [X] Create `app/src/generation/engine/selectionEngine.ts`
+- [X] Accept `StoryRequest` as input
+- [X] Look up genre–archetype compatibility from `genre_archetype_matrix.json`
+- [X] Score candidates: natural (1.0), occasional (0.6), rare (0.2)
+- [X] Score tone compatibility from `tone_archetype_integration.json`: reinforcing (+0.2), neutral (+0.0), contrasting (−0.1)
+- [X] If user provided both archetype and genre: validate compatibility, return with rationale
+- [X] If user provided only one: rank and select the top-scoring complement
+- [X] If blending enabled: select blend pattern from `genre_blending_model.json`, reject "unstable" unless explicitly allowed
+- [X] If hybrid enabled: select hybrid pattern from `hybrid_archetype_patterns.json`, capture divergence points
+- [X] Emit `SelectionResult` artifact
 
 ### 2.2 Contract compiler
-- [ ] Create `app/src/generation/engine/contractCompiler.ts`
-- [ ] Accept `SelectionResult` + loaded corpus as input
-- [ ] Extract archetype spine nodes and required roles
-- [ ] Extract variant nodes (if archetype has variants.json)
-- [ ] Extract genre nodes by level (L1–L5 + tone + anti-patterns)
-- [ ] Partition genre constraints into hard/soft using severity field
-- [ ] Build `global_boundaries` from: genre promise, hard constraints, anti-patterns, user content limits
-- [ ] Build `phase_guidelines` for each archetype spine node: entry/exit conditions, failure modes, signals, linked genre obligations
-- [ ] Build `validation_policy` from generation config
-- [ ] Emit `StoryContract` artifact
+- [X] Create `app/src/generation/engine/contractCompiler.ts`
+- [X] Accept `SelectionResult` + loaded corpus as input
+- [X] Extract archetype spine nodes and required roles
+- [X] Extract variant nodes (if archetype has variants.json)
+- [X] Extract genre nodes by level (L1–L5 + tone + anti-patterns)
+- [X] Partition genre constraints into hard/soft using severity field
+- [X] Build `global_boundaries` from: genre promise, hard constraints, anti-patterns, user content limits
+- [X] Build `phase_guidelines` for each archetype spine node: entry/exit conditions, failure modes, signals, linked genre obligations
+- [X] Build `validation_policy` from generation config
+- [X] Emit `StoryContract` artifact
 
 ### 2.3 Artifact I/O helpers
-- [ ] Create `app/src/generation/artifacts/io.ts`
-- [ ] Implement `writeArtifact(runDir, name, data)` — writes JSON with schema validation
-- [ ] Implement `readArtifact(runDir, name, schema)` — reads and validates JSON
-- [ ] Implement `createRunDir(baseDir)` — creates `outputs/runs/{run_id}/` with timestamp-based ID
+- [X] Create `app/src/generation/artifacts/io.ts`
+- [X] Implement `writeArtifact(runDir, name, data)` — writes JSON with schema validation
+- [X] Implement `readArtifact(runDir, name, schema)` — reads and validates JSON
+- [X] Implement `createRunDir(baseDir)` — creates `outputs/runs/{run_id}/` with timestamp-based ID
 
 ### 2.4 Tests
-- [ ] Unit tests for selection engine (all branches: both provided, one missing, blend, hybrid)
-- [ ] Unit tests for contract compiler (verify all spine nodes appear, hard/soft partitioning correct)
-- [ ] Integration test: story_request → selection_result → story_contract round-trip
-- [ ] Golden-file test: fixed input produces deterministic output
+- [X] Unit tests for selection engine (all branches: both provided, one missing, blend, hybrid)
+- [X] Unit tests for contract compiler (verify all spine nodes appear, hard/soft partitioning correct)
+- [X] Integration test: story_request → selection_result → story_contract round-trip
+- [X] Golden-file test: fixed input produces deterministic output
 
 **Verification:** Given a fixed `story_request.json`, the pipeline deterministically produces `selection_result.json` and `story_contract.json`. All hard constraints appear in the contract. All anti-patterns appear in exclusions.
 
