@@ -20,6 +20,7 @@ interface GraphCanvasProps {
   simulationState?: SimulationVisuals
   failureModeNodes?: string[]
   activeVariant?: string | null
+  exampleMappedNodes?: string[]
 }
 
 export function GraphCanvas({
@@ -30,6 +31,7 @@ export function GraphCanvas({
   simulationState,
   failureModeNodes,
   activeVariant,
+  exampleMappedNodes,
 }: GraphCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cyRef = useRef<Core | null>(null)
@@ -299,6 +301,34 @@ export function GraphCanvas({
       }
     })
   }, [activeVariant])
+
+  // Example mode highlighting
+  useEffect(() => {
+    const cy = cyRef.current
+    if (!cy) return
+
+    cy.elements().removeClass('example-mapped example-unmapped')
+
+    if (!exampleMappedNodes || exampleMappedNodes.length === 0) return
+
+    const mappedSet = new Set(exampleMappedNodes)
+
+    cy.nodes().forEach((node) => {
+      if (mappedSet.has(node.id())) {
+        node.addClass('example-mapped')
+      } else {
+        node.addClass('example-unmapped')
+      }
+    })
+
+    cy.edges().forEach((edge) => {
+      const src = edge.source().id()
+      const tgt = edge.target().id()
+      if (!mappedSet.has(src) && !mappedSet.has(tgt)) {
+        edge.addClass('example-unmapped')
+      }
+    })
+  }, [exampleMappedNodes])
 
   // Center on selected node (triggered by search or keyboard nav)
   useEffect(() => {

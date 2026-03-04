@@ -5,6 +5,7 @@ import { GraphSelectorPanel } from './components/GraphSelectorPanel.tsx'
 import { VariantToggle, computeFailureModeNodes } from './components/VariantToggle.tsx'
 import { DetailPanel, EdgeTooltip } from './panels/DetailPanel.tsx'
 import { SimulationPanel } from './panels/SimulationPanel.tsx'
+import { ExampleOverlay } from './panels/ExampleOverlay.tsx'
 import { GraphSearch } from './components/GraphSearch.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSimulationStore } from './store/simulationStore.ts'
@@ -54,6 +55,16 @@ function App() {
   const [showFailureModes, setShowFailureModes] = useState(false)
   // Bottom panel toggle (simulation)
   const [showSimulation, setShowSimulation] = useState(false)
+  // Example mode
+  const [exampleMappedNodes, setExampleMappedNodes] = useState<string[]>([])
+
+  const handleExampleHighlight = useCallback((nodeIds: string[]) => {
+    setExampleMappedNodes(nodeIds)
+  }, [])
+
+  const handleExampleClearHighlight = useCallback(() => {
+    setExampleMappedNodes([])
+  }, [])
 
   // Load manifest once at startup
   useEffect(() => {
@@ -346,6 +357,14 @@ function App() {
                   onToggleFailureModes={() => setShowFailureModes((v) => !v)}
                 />
               )}
+              {/* Example overlay (below variant toggle) */}
+              {currentGraph && (
+                <ExampleOverlay
+                  graph={currentGraph}
+                  onHighlightNodes={handleExampleHighlight}
+                  onClearHighlight={handleExampleClearHighlight}
+                />
+              )}
             </>
           )}
         </aside>
@@ -370,6 +389,7 @@ function App() {
                   } : undefined}
                   failureModeNodes={failureModeNodes}
                   activeVariant={activeVariant}
+                  exampleMappedNodes={exampleMappedNodes.length > 0 ? exampleMappedNodes : undefined}
                 />
               </div>
             ) : (

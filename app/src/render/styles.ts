@@ -484,6 +484,28 @@ export function getCoreStyle(graphType: 'archetype' | 'genre'): Stylesheet[] {
         opacity: 0.1,
       },
     },
+
+    // --- Example mode styles ---
+    {
+      selector: 'node.example-mapped',
+      style: {
+        'border-color': '#3b82f6',
+        'border-width': 3,
+        'z-index': 10,
+      },
+    },
+    {
+      selector: 'node.example-unmapped',
+      style: {
+        opacity: 0.3,
+      },
+    },
+    {
+      selector: 'edge.example-unmapped',
+      style: {
+        opacity: 0.15,
+      },
+    },
   ]
 }
 

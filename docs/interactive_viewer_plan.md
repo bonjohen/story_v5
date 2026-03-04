@@ -177,21 +177,21 @@ Stage, commit, and push, then continue working.
 
 **Goal**: Connect graph structure to concrete story examples.
 
-- [ ] Build **example data parser**:
+- [X] Build **example data parser**:
   - Parse each genre/archetype `examples.md` file into structured data
   - Extract node-to-example and edge-to-example mappings
   - Identify primary work and cross-reference works
-- [ ] Implement **Example Mode toggle** (design spec §5.5):
+- [X] Implement **Example Mode toggle** (design spec §5.5):
   - Toggle button activates example overlay
   - Nodes with example mappings glow or show a badge
   - Clicking a glowing node shows the example text alongside the definition
-- [ ] Add **edge example annotations**:
+- [X] Add **edge example annotations**:
   - Edges with mapped examples show a subtle indicator
   - Hover reveals the example scene description
-- [ ] Implement **example work selector**:
+- [X] Implement **example work selector**:
   - Dropdown of available example works for the current graph
   - Selecting a work highlights only the nodes/edges mapped to it
-- [ ] Add **two-example comparison**:
+- [X] Add **two-example comparison**:
   - Select two works simultaneously
   - Nodes mapped to both glow differently from nodes mapped to only one
   - Structural divergence becomes visible at a glance
