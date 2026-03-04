@@ -14,14 +14,14 @@ Expand the fixed set of example works across archetypes and genres by adding add
 2. [ ] **Unused archetype controlled vocabulary terms**
 The "Reckoning" node role and "compels return" edge meaning are defined in the archetype vocabularies but not assigned to any node or edge across all 15 archetype graphs. Decide whether to remove them, document them as reserved, or find graphs where they apply.
 
-3. [ ] **File path references in goal_1.md are stale**
-Goal 1 references `docs/archetypes/` paths throughout, but archetype files have been moved to `data/archetypes/{name}/`. The goal file should be updated to reflect the current file structure, or marked as historical.
+3. [X] **File path references in goal_1.md are stale**
+Updated all `docs/archetypes/` references to `data/archetypes/` in goal_1.md. Fixed.
 
 4. [ ] **Archetype vocabulary files remain in docs/**
 `docs/archetype_edge_vocabulary.json`, `docs/archetype_node_roles.json`, and `docs/archetype_id_convention.md` are still in `docs/` while the archetype deliverables have moved to `data/archetypes/`. Consider consolidating vocabulary files into `data/archetypes/` or a shared `data/vocabulary/` location.
 
-5. [ ] **cross_archetype_index.json references long-form node IDs inconsistently**
-The index uses short archetype names (e.g., "Comedy" instead of "Comedy (Restoration of Order)") in some places. Standardize naming to match `archtypes.json` exactly.
+5. [X] **cross_archetype_index.json references long-form node IDs inconsistently**
+The index uses short archetype names (e.g., "Comedy" instead of "Comedy (Restoration of Order)") in some places. Standardize naming to match `archetypes.json` exactly. Fixed.
 
 6. [X] **Musical narrative.md had incorrect node ID references**
 `data/genres/26_musical/narrative.md` referenced `MU_N40_HEIGHTENED_EMOTIONAL_REALITY` instead of the correct `MU_N40_HEIGHTENED_REALITY` in two places (node explanation and canonical walkthrough). Fixed.
@@ -44,14 +44,14 @@ Several genre graphs number edges sequentially rather than by level-transition r
 12. [ ] **Cross-level edges (L2→L5, L2→L4) not in 70–89 range**
 Several genres have edges that skip levels (e.g., Core Constraint directly to Scene Obligation) but number them in the destination level's range rather than the 70–89 cross-level range. Affected genres include Young Adult, Western, War, Crime, Detective, and Mystery. These are individually correct per the clarified convention ("when possible" language) but could be renumbered for stricter consistency.
 
-13. [ ] **`archtypes.json` filename is misspelled**
-The file `docs/archtypes.json` should be `docs/archetypes.json`. The misspelling is referenced consistently throughout the project (CLAUDE.md, cross-indices, matrix), so renaming requires updating all references. Low risk but persistent source of confusion.
+13. [X] **`archtypes.json` filename was misspelled**
+Renamed `docs/archtypes.json` → `docs/archetypes.json` and updated all references. Fixed.
 
-14. [ ] **CLAUDE.md Goal 2 status is stale**
-CLAUDE.md says Goal 2 is "In progress" but all 16 phases are complete. Also, the repository structure section does not list `data/genre_archetype_matrix.json`, `data/genres/cross_genre_constraint_index.json`, or `docs/interactive_viewer_design.md`. Update to reflect the current project state.
+14. [X] **CLAUDE.md Goal 2 status is stale**
+CLAUDE.md updated to reflect Goal 2 completion, interactive viewer docs, and current repository structure. Fixed.
 
-15. [ ] **genre_archetype_matrix.json placement inconsistent with cross-genre index**
-`data/genre_archetype_matrix.json` lives at the `data/` root while `data/genres/cross_genre_constraint_index.json` lives inside `data/genres/`. Both are cross-cutting deliverables. Consider co-locating them (either both at `data/` root or both in a shared `data/indices/` directory).
+15. [X] **genre_archetype_matrix.json placement inconsistent with cross-genre index**
+Moved `cross_genre_constraint_index.json` and `cross_archetype_index.json` to `data/` root alongside `genre_archetype_matrix.json`. All cross-cutting indices now co-located. Fixed.
 
 16. [ ] **No JSON schema for graph.json validation**
 All 42 graph files (15 archetype + 27 genre) follow the same node/edge schema defined in `v0_plan.md` §1.1–1.2, but there is no formal JSON Schema file. Adding one would enable programmatic validation, IDE autocompletion, and CI integration.

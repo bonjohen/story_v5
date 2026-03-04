@@ -22,7 +22,7 @@ docs/                              ← Planning, specs, and vocabulary
   v-next.md                        ← 42 tracked items: issues, suggestions, enhancements
   interactive_viewer_design.md     ← UI/UX spec for interactive graph viewer
   interactive_viewer_plan.md       ← 8-phase implementation plan for the viewer
-  archtypes.json                   ← 15 archetypes: descriptions, examples, genres
+  archetypes.json                   ← 15 archetypes: descriptions, examples, genres
   genres.json                      ← 27 genres: descriptions, examples, popularity
   archetype_edge_vocabulary.json   ← 15 controlled edge meanings for archetypes
   archetype_node_roles.json        ← 14 controlled node roles for archetypes
@@ -37,13 +37,13 @@ data/                              ← Deliverable outputs
       graph.json                   ← Directed graph JSON
       narrative.md                 ← Narrative spec (walkthroughs, failure modes)
       examples.md                  ← Example mappings to real works
-    cross_archetype_index.json     ← Shared node roles/edge meanings across all 15
   genres/                          ← Goal 2 deliverables (complete)
     {nn_name}/                     ← Per-genre folder (27 total)
       graph.json
       narrative.md
       examples.md
-    cross_genre_constraint_index.json  ← Shared constraint types across all 27
+  cross_archetype_index.json       ← Shared node roles/edge meanings across all 15
+  cross_genre_constraint_index.json ← Shared constraint types across all 27
   genre_archetype_matrix.json      ← 27 genres × 15 archetypes compatibility
 ```
 
@@ -96,7 +96,7 @@ Deferred work is tracked in `docs/v-next.md` (42 items across issues, suggestion
 
 ### Known Issues (see v-next.md for full list)
 
-- `archtypes.json` filename is misspelled (#13) — renaming requires updating all references
+- `archetypes.json` filename is misspelled (#13) — renaming requires updating all references
 - 6–8 genre graphs have systematic edge numbering shifts (#11) — convention clarified but inconsistency persists
 - Vocabulary files split between `docs/` and `data/` (#4, #7) — consolidation suggested (#23)
 - No automated validation script for graph-narrative ID correspondence (#10)

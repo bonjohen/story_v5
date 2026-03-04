@@ -38,7 +38,7 @@ This plan breaks the interactive viewer specification into 8 implementation phas
 
 ### Data housekeeping (v-next items, done as part of Phase 1 setup):
 
-- [ ] **Fix `archtypes.json` filename** (v-next #13 — rename to `archetypes.json` and update all references in CLAUDE.md, cross-indices, and matrix; must be done before the normalizer references it)
+- [ ] **Fix `archetypes.json` filename** (v-next #13 — rename to `archetypes.json` and update all references in CLAUDE.md, cross-indices, and matrix; must be done before the normalizer references it)
 - [ ] **Fix stale paths in goal_1.md** (v-next #3 — find-replace `docs/archetypes/` → `data/archetypes/`, or mark as historical)
 - [ ] **Standardize cross_archetype_index.json naming** (v-next #5 — match archetype names to `archetypes.json` exactly while building the parser)
 - [ ] **Co-locate cross-cutting index files** (v-next #15 — move `genre_archetype_matrix.json` and `cross_genre_constraint_index.json` to a consistent location, either both at `data/` root or both in `data/indices/`)
@@ -294,7 +294,7 @@ The following v-next items are resolved as part of viewer implementation work:
 | 5 | cross_archetype_index naming | 1 | Fixed while building parser |
 | 8 | Unused genre edge vocabulary terms | 1 | Vocab audit in normalizer |
 | 10 | No automated validation script | 1 | ID validation in normalizer |
-| 13 | `archtypes.json` typo | 1 | Rename before normalizer references it |
+| 13 | `archetypes.json` typo | 1 | Rename before normalizer references it |
 | 14 | CLAUDE.md stale | 1 | Already fixed, mark done |
 | 15 | Matrix placement inconsistent | 1 | Co-locate during data setup |
 | 16 | No JSON schema | 1 | Produced alongside TS interfaces |
