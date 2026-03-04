@@ -200,20 +200,20 @@ This file is maintained by the coding agent so that [ ] means not started, [~] m
 **Goal:** Produce the trace map and compliance report that make every decision auditable.
 
 ### 5.1 Trace engine
-- [ ] Create `app/src/generation/engine/traceEngine.ts`
-- [ ] For each scene: record archetype node/edges, genre obligations satisfied, tone marker
-- [ ] Aggregate: total constraint coverage, anti-pattern violation count, tone warnings
-- [ ] Emit `StoryTrace` artifact
+- [X] Create `app/src/generation/engine/traceEngine.ts`
+- [X] For each scene: record archetype node/edges, genre obligations satisfied, tone marker
+- [X] Aggregate: total constraint coverage, anti-pattern violation count, tone warnings
+- [X] Emit `StoryTrace` artifact
 
 ### 5.2 Compliance report
-- [ ] Generate `compliance_report.md` in run folder
-- [ ] Summary: hard constraint coverage, soft constraint coverage, anti-pattern violations, tone warnings
-- [ ] Scene table: scene_id → archetype node → genre obligations → status
-- [ ] Flag any unresolved warnings or partial coverage
+- [X] Generate `compliance_report.md` in run folder
+- [X] Summary: hard constraint coverage, soft constraint coverage, anti-pattern violations, tone warnings
+- [X] Scene table: scene_id → archetype node → genre obligations → status
+- [X] Flag any unresolved warnings or partial coverage
 
 ### 5.3 Tests
-- [ ] Unit tests for trace aggregation
-- [ ] Integration test: full pipeline produces valid trace and report
+- [X] Unit tests for trace aggregation
+- [X] Integration test: full pipeline produces valid trace and report
 
 **Verification:** Every scene maps to exactly one archetype node. All hard constraints are traced. Compliance report is human-readable.
 
