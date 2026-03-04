@@ -678,7 +678,7 @@
       ]
     },
     {
-      "edge_id": "FA_E20_ANIMATED_TO_HOME",
+      "edge_id": "FA_E30_ANIMATED_TO_HOME",
       "from": "FA_N20_ANIMATED_ADVENTURE",
       "to": "FA_N40_HOME_SPACES",
       "label": "Animated adventure roots its emotional stakes in family home spaces",
@@ -697,7 +697,7 @@
       ]
     },
     {
-      "edge_id": "FA_E21_DRAMA_TO_RITUALS",
+      "edge_id": "FA_E31_DRAMA_TO_RITUALS",
       "from": "FA_N21_MULTIGENERATIONAL_DRAMA",
       "to": "FA_N41_RITUALS_TRADITIONS",
       "label": "Multigenerational drama is organized by family rituals",
@@ -715,7 +715,7 @@
       ]
     },
     {
-      "edge_id": "FA_E22_COMEDY_TO_GENERATIONAL",
+      "edge_id": "FA_E32_COMEDY_TO_GENERATIONAL",
       "from": "FA_N22_FAMILY_COMEDY",
       "to": "FA_N42_GENERATIONAL_INTERACTION",
       "label": "Family comedy requires multiple generations generating friction",
@@ -733,7 +733,7 @@
       ]
     },
     {
-      "edge_id": "FA_E23_COMING_TO_HOME",
+      "edge_id": "FA_E33_COMING_TO_HOME",
       "from": "FA_N23_COMING_OF_AGE",
       "to": "FA_N40_HOME_SPACES",
       "label": "Coming-of-age arc is anchored in family home as both sanctuary and constraint",
@@ -751,7 +751,7 @@
       ]
     },
     {
-      "edge_id": "FA_E24_DRAMA_TO_GENERATIONAL",
+      "edge_id": "FA_E34_DRAMA_TO_GENERATIONAL",
       "from": "FA_N21_MULTIGENERATIONAL_DRAMA",
       "to": "FA_N42_GENERATIONAL_INTERACTION",
       "label": "Multigenerational drama requires active intergenerational conflict",
@@ -769,7 +769,7 @@
       ]
     },
     {
-      "edge_id": "FA_E30_HOME_TO_GATHERING",
+      "edge_id": "FA_E50_HOME_TO_GATHERING",
       "from": "FA_N40_HOME_SPACES",
       "to": "FA_N60_GATHERING_DISRUPTION",
       "label": "Emotionally charged home space is the site of family gathering and disruption",
@@ -787,7 +787,7 @@
       ]
     },
     {
-      "edge_id": "FA_E31_RITUALS_TO_GATHERING",
+      "edge_id": "FA_E51_RITUALS_TO_GATHERING",
       "from": "FA_N41_RITUALS_TRADITIONS",
       "to": "FA_N60_GATHERING_DISRUPTION",
       "label": "Family ritual is the occasion for gathering that is disrupted",
@@ -805,7 +805,7 @@
       ]
     },
     {
-      "edge_id": "FA_E32_GENERATIONAL_TO_CLASH",
+      "edge_id": "FA_E52_GENERATIONAL_TO_CLASH",
       "from": "FA_N42_GENERATIONAL_INTERACTION",
       "to": "FA_N61_GENERATIONAL_CLASH",
       "label": "Intergenerational presence creates conditions for clash or misunderstanding",
@@ -823,7 +823,7 @@
       ]
     },
     {
-      "edge_id": "FA_E40_GATHERING_TO_CLASH",
+      "edge_id": "FA_E53_GATHERING_TO_CLASH",
       "from": "FA_N60_GATHERING_DISRUPTION",
       "to": "FA_N61_GENERATIONAL_CLASH",
       "label": "Gathering disruption escalates into generational confrontation",
@@ -841,7 +841,7 @@
       ]
     },
     {
-      "edge_id": "FA_E41_CLASH_TO_RECONCILIATION",
+      "edge_id": "FA_E54_CLASH_TO_RECONCILIATION",
       "from": "FA_N61_GENERATIONAL_CLASH",
       "to": "FA_N62_RECONCILIATION_REUNION",
       "label": "Generational clash, fully dramatized, creates conditions for reconciliation",
@@ -860,7 +860,7 @@
       ]
     },
     {
-      "edge_id": "FA_E42_BELONGING_TO_RECONCILIATION",
+      "edge_id": "FA_E70_BELONGING_TO_RECONCILIATION",
       "from": "FA_N12_BELONGING_STAKES",
       "to": "FA_N62_RECONCILIATION_REUNION",
       "label": "Belonging stakes are resolved through the reconciliation scene",

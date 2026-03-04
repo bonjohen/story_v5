@@ -109,5 +109,4 @@ Deferred work is tracked in `docs/v-next.md` (42 items across issues, suggestion
 ### Known Issues (see v-next.md for full list)
 
 - `archetypes.json` filename is misspelled (#13) — renaming requires updating all references
-- 6–8 genre graphs have systematic edge numbering shifts (#11) — convention clarified but inconsistency persists
 - No automated validation script for graph-narrative ID correspondence (#10)

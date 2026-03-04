@@ -709,7 +709,7 @@
       ]
     },
     {
-      "edge_id": "HR_E20_SUPERNATURAL_TO_ISOLATION",
+      "edge_id": "HR_E30_SUPERNATURAL_TO_ISOLATION",
       "from": "HR_N20_SUPERNATURAL",
       "to": "HR_N40_ISOLATION",
       "label": "Supernatural horror requires isolation — help cannot reach or believe",
@@ -727,7 +727,7 @@
       ]
     },
     {
-      "edge_id": "HR_E21_SUPERNATURAL_TO_UNCANNY",
+      "edge_id": "HR_E31_SUPERNATURAL_TO_UNCANNY",
       "from": "HR_N20_SUPERNATURAL",
       "to": "HR_N41_UNCANNY",
       "label": "Supernatural horror works through the uncanny — familiar made threatening",
@@ -747,7 +747,7 @@
       ]
     },
     {
-      "edge_id": "HR_E22_SLASHER_TO_ISOLATION",
+      "edge_id": "HR_E32_SLASHER_TO_ISOLATION",
       "from": "HR_N21_SLASHER",
       "to": "HR_N40_ISOLATION",
       "label": "Slasher horror requires isolation — escape routes must be cut off",
@@ -767,7 +767,7 @@
       ]
     },
     {
-      "edge_id": "HR_E23_SLASHER_TO_CONCEALMENT",
+      "edge_id": "HR_E33_SLASHER_TO_CONCEALMENT",
       "from": "HR_N21_SLASHER",
       "to": "HR_N42_CONCEALMENT",
       "label": "Slasher threat uses darkness and concealment to operate",
@@ -787,7 +787,7 @@
       ]
     },
     {
-      "edge_id": "HR_E24_COSMIC_TO_CONCEALMENT",
+      "edge_id": "HR_E34_COSMIC_TO_CONCEALMENT",
       "from": "HR_N22_COSMIC",
       "to": "HR_N42_CONCEALMENT",
       "label": "Cosmic threat is concealed by its incomprehensibility — cannot be fully seen or known",
@@ -807,7 +807,7 @@
       ]
     },
     {
-      "edge_id": "HR_E25_PSYCHOLOGICAL_TO_UNCANNY",
+      "edge_id": "HR_E35_PSYCHOLOGICAL_TO_UNCANNY",
       "from": "HR_N23_PSYCHOLOGICAL",
       "to": "HR_N41_UNCANNY",
       "label": "Psychological horror weaponizes the uncanny — familiar reality becomes unreliable",
@@ -827,7 +827,7 @@
       ]
     },
     {
-      "edge_id": "HR_E30_ISOLATION_TO_ANOMALY",
+      "edge_id": "HR_E50_ISOLATION_TO_ANOMALY",
       "from": "HR_N40_ISOLATION",
       "to": "HR_N60_FIRST_ANOMALY",
       "label": "Isolation creates conditions for the first anomaly to land without rescue",
@@ -847,7 +847,7 @@
       ]
     },
     {
-      "edge_id": "HR_E31_UNCANNY_TO_ANOMALY",
+      "edge_id": "HR_E51_UNCANNY_TO_ANOMALY",
       "from": "HR_N41_UNCANNY",
       "to": "HR_N60_FIRST_ANOMALY",
       "label": "Uncanny setting delivers the first anomaly through familiar-turned-threatening",
@@ -868,7 +868,7 @@
       ]
     },
     {
-      "edge_id": "HR_E32_CONCEALMENT_TO_ANOMALY",
+      "edge_id": "HR_E52_CONCEALMENT_TO_ANOMALY",
       "from": "HR_N42_CONCEALMENT",
       "to": "HR_N60_FIRST_ANOMALY",
       "label": "Concealment shapes first anomaly — threat sensed but not fully seen",
@@ -888,7 +888,7 @@
       ]
     },
     {
-      "edge_id": "HR_E40_ANOMALY_TO_ESCALATION",
+      "edge_id": "HR_E53_ANOMALY_TO_ESCALATION",
       "from": "HR_N60_FIRST_ANOMALY",
       "to": "HR_N61_ESCALATION",
       "label": "First anomaly initiates the escalation sequence",
@@ -908,7 +908,7 @@
       ]
     },
     {
-      "edge_id": "HR_E41_ESCALATION_TO_CONFRONTATION",
+      "edge_id": "HR_E54_ESCALATION_TO_CONFRONTATION",
       "from": "HR_N61_ESCALATION",
       "to": "HR_N62_FINAL_CONFRONTATION",
       "label": "Escalation sequence builds to the final confrontation at maximum danger",
@@ -930,7 +930,7 @@
       ]
     },
     {
-      "edge_id": "HR_E50_THREAT_LOGIC_TO_ESCALATION",
+      "edge_id": "HR_E70_THREAT_LOGIC_TO_ESCALATION",
       "from": "HR_N13_THREAT_LOGIC",
       "to": "HR_N61_ESCALATION",
       "label": "Threat logic structures the escalation — rules determine how danger grows",
@@ -950,7 +950,7 @@
       ]
     },
     {
-      "edge_id": "HR_E51_THREAT_LOGIC_TO_CONFRONTATION",
+      "edge_id": "HR_E71_THREAT_LOGIC_TO_CONFRONTATION",
       "from": "HR_N13_THREAT_LOGIC",
       "to": "HR_N62_FINAL_CONFRONTATION",
       "label": "Threat logic determines what confrontation can accomplish",
@@ -970,7 +970,7 @@
       ]
     },
     {
-      "edge_id": "HR_E60_CONSEQUENCE_FREE_WARNING",
+      "edge_id": "HR_E90_CONSEQUENCE_FREE_WARNING",
       "from": "HR_N12_ATMOSPHERE_DREAD",
       "to": "HR_N90_CONSEQUENCE_FREE_SCARES",
       "label": "Consequence-free scares destroy the atmosphere of dread",

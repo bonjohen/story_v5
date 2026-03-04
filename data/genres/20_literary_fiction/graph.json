@@ -715,7 +715,7 @@
       ]
     },
     {
-      "edge_id": "LF_E20_PSYCHOLOGICAL_TO_SYMBOLIC",
+      "edge_id": "LF_E30_PSYCHOLOGICAL_TO_SYMBOLIC",
       "from": "LF_N20_PSYCHOLOGICAL_REALISM",
       "to": "LF_N40_SYMBOLIC_MUNDANE",
       "label": "Psychological realism embeds meaning in the concrete world",
@@ -733,7 +733,7 @@
       ]
     },
     {
-      "edge_id": "LF_E21_PSYCHOLOGICAL_TO_INTERIOR",
+      "edge_id": "LF_E31_PSYCHOLOGICAL_TO_INTERIOR",
       "from": "LF_N20_PSYCHOLOGICAL_REALISM",
       "to": "LF_N42_INTERIOR_EXTERIOR",
       "label": "Psychological realism demands equally vivid interior and exterior",
@@ -751,7 +751,7 @@
       ]
     },
     {
-      "edge_id": "LF_E22_EXPERIMENTAL_TO_NONLINEAR",
+      "edge_id": "LF_E32_EXPERIMENTAL_TO_NONLINEAR",
       "from": "LF_N21_EXPERIMENTAL",
       "to": "LF_N41_NONLINEAR_TIME",
       "label": "Experimental form frequently disrupts linear time",
@@ -769,7 +769,7 @@
       ]
     },
     {
-      "edge_id": "LF_E23_DOMESTIC_TO_SYMBOLIC",
+      "edge_id": "LF_E33_DOMESTIC_TO_SYMBOLIC",
       "from": "LF_N22_DOMESTIC_LITERARY",
       "to": "LF_N40_SYMBOLIC_MUNDANE",
       "label": "Domestic fiction invests mundane detail with symbolic weight",
@@ -787,7 +787,7 @@
       ]
     },
     {
-      "edge_id": "LF_E24_SOCIAL_TO_INTERIOR",
+      "edge_id": "LF_E34_SOCIAL_TO_INTERIOR",
       "from": "LF_N23_SOCIAL_POLITICAL_LITERARY",
       "to": "LF_N42_INTERIOR_EXTERIOR",
       "label": "Social forces are rendered as interior experience",
@@ -805,7 +805,7 @@
       ]
     },
     {
-      "edge_id": "LF_E30_SYMBOLIC_TO_INTERIORITY_SCENE",
+      "edge_id": "LF_E50_SYMBOLIC_TO_INTERIORITY_SCENE",
       "from": "LF_N40_SYMBOLIC_MUNDANE",
       "to": "LF_N60_INTERIORITY_SCENE",
       "label": "Symbolic setting occasions deep interior rendering",
@@ -823,7 +823,7 @@
       ]
     },
     {
-      "edge_id": "LF_E31_NONLINEAR_TO_INTERIORITY_SCENE",
+      "edge_id": "LF_E51_NONLINEAR_TO_INTERIORITY_SCENE",
       "from": "LF_N41_NONLINEAR_TIME",
       "to": "LF_N60_INTERIORITY_SCENE",
       "label": "Non-linear time creates space for deep interior rendering",
@@ -841,7 +841,7 @@
       ]
     },
     {
-      "edge_id": "LF_E32_INTERIOR_TO_INTERIORITY_SCENE",
+      "edge_id": "LF_E52_INTERIOR_TO_INTERIORITY_SCENE",
       "from": "LF_N42_INTERIOR_EXTERIOR",
       "to": "LF_N60_INTERIORITY_SCENE",
       "label": "Equal interiority and exteriority requires dedicated interior scenes",
@@ -859,7 +859,7 @@
       ]
     },
     {
-      "edge_id": "LF_E40_INTERIORITY_SCENE_TO_EPIPHANY",
+      "edge_id": "LF_E53_INTERIORITY_SCENE_TO_EPIPHANY",
       "from": "LF_N60_INTERIORITY_SCENE",
       "to": "LF_N61_EPIPHANY_SCENE",
       "label": "Deep interiority prepares the ground for genuine shift in understanding",
@@ -878,7 +878,7 @@
       ]
     },
     {
-      "edge_id": "LF_E41_EPIPHANY_TO_AMBIGUOUS_ENDING",
+      "edge_id": "LF_E54_EPIPHANY_TO_AMBIGUOUS_ENDING",
       "from": "LF_N61_EPIPHANY_SCENE",
       "to": "LF_N62_AMBIGUOUS_ENDING",
       "label": "Shift in understanding leads to resonant but open ending",

@@ -188,77 +188,77 @@
 
 ---
 
-**FA_E20_ANIMATED_TO_HOME — Animated adventure roots its emotional stakes in family home spaces**
+**FA_E30_ANIMATED_TO_HOME — Animated adventure roots its emotional stakes in family home spaces**
 - **Finding Nemo**: The anemone's emotional weight is established in the film's opening sequence so completely that every subsequent reference to it carries that weight. When Marlin, lost in the open ocean, tells Dory he has to get back and she asks where, he says "I don't know" — a moment whose despair is possible only because the film has established that home is not a location but a relationship, and the relationship has been severed. The tank functions as a secondary home space whose emotional charge is the charge of captivity-turned-community: the fish make a home of their prison, which is exactly what Marlin has done with the anemone.
 - **Little Women**: The March family home is the novel's emotional anchor. The sisters' departures — Meg to Laurence, Jo to New York, Amy to Europe — are measured against the home they leave, and their returns are always about what has changed in the home and in themselves.
 - **Coco**: The Rivera family compound, with its ofrenda room and its workshop, is the home space whose emotional charge anchors the adventure. Miguel's attic — his secret music room — is the space that contains the self he cannot express in the family's shared home.
 
 ---
 
-**FA_E21_DRAMA_TO_RITUALS — Multigenerational drama is organized by family rituals**
+**FA_E31_DRAMA_TO_RITUALS — Multigenerational drama is organized by family rituals**
 - **Finding Nemo**: The first-day-of-school ritual is the film's organizing family occasion, concentrating Marlin's anxiety and Nemo's eagerness in a charged moment that both have been preparing for differently. The ritual of the school day — orientation, meeting classmates, the structured entry into the wider world — is precisely the ritual that the family's particular dynamic makes explosive.
 - **Little Women**: The novel is organized around the ritual calendar: Christmas, birthdays, Father's absence and return. Each ritual concentrates the family's emotional state and makes the sisters' relationships visible under the pressure of shared occasion.
 - **Coco**: Día de los Muertos is both the film's master ritual and its narrative engine. The ritual's annual structure — the ofrenda, the marigold bridge, the family gathering — organizes the drama and provides its deadline. The ritual's disruption (Miguel's absence from the living family's celebration) is the story's initiating condition.
 
 ---
 
-**FA_E22_COMEDY_TO_GENERATIONAL — Family comedy requires multiple generations generating friction**
+**FA_E32_COMEDY_TO_GENERATIONAL — Family comedy requires multiple generations generating friction**
 - **Finding Nemo**: The film's comedy of generational friction is concentrated in the Crush-Marlin contrast. Crush's parenting philosophy ("How do you know when they're ready?") and his easy, proud observation of Squirt navigating the current alone generates comedy precisely through the gap between his ease and Marlin's terror. The generational joke is not that Crush is right and Marlin is wrong — it is that the same love can express itself as freedom or as fear, and the distance between the two is both comic and heartbreaking.
 - **Little Women**: The comedy of generational friction is expressed through Marmee's patient endurance of the girls' schemes and her dry awareness that they must learn things she cannot teach them — they must live them instead.
 - **Coco**: The comedy of Mama Imelda — furious, magnificent, determined to maintain her dignity in death as in life — arises from the generational friction between her fixed prohibition and Miguel's living need. Her comedy is inseparable from her love.
 
 ---
 
-**FA_E23_COMING_TO_HOME — Coming-of-age arc is anchored in family home as both sanctuary and constraint**
+**FA_E33_COMING_TO_HOME — Coming-of-age arc is anchored in family home as both sanctuary and constraint**
 - **Finding Nemo**: The anemone is both sanctuary and constraint for Nemo in precisely the terms this edge describes. It is genuinely safe — Marlin is right that the ocean is dangerous — and it is genuinely confining — Nemo is right that he cannot grow inside it. His coming-of-age requires leaving it (capture), surviving without it (the tank), and returning to it transformed (capable of swimming back into the wider world from a secure base rather than a locked room). The film's final image of Nemo swimming away from the anemone into school is the coming-of-age image: he leaves home, and his leaving is now an expression of wholeness rather than defiance.
 - **Little Women**: The March family home is simultaneously the sisters' greatest love and the constraint they must define themselves against. Jo's journey to New York is exactly this leaving — the home as sanctuary she must depart in order to discover who she is outside its warmth.
 - **Coco**: Miguel's coming-of-age requires leaving the family compound (literally and physically, into the Land of the Dead) in order to return to it transformed. His return — playing the song "Remember Me" for Coco — is the coming-of-age's completion: he brings his music back to the family rather than choosing between them.
 
 ---
 
-**FA_E24_DRAMA_TO_GENERATIONAL — Multigenerational drama requires active intergenerational conflict**
+**FA_E34_DRAMA_TO_GENERATIONAL — Multigenerational drama requires active intergenerational conflict**
 - **Finding Nemo**: The intergenerational conflict is active in both directions. Nemo presses actively against Marlin's restrictions; Marlin actively imposes them. Neither generation is passive. The sea turtle scene dramatizes this by showing Marlin the alternative: a parenting style in which the older generation's role is to watch with pride, not grip with fear. Crush's generation actively trusts; Marlin's actively controls. The conflict between these generational stances is what drives the film's dramatic question.
 - **Little Women**: Each generation is dramatically active. Marmee does not simply observe her daughters — she shapes them, advises them, expresses her own suppressed desires through them. The daughters push back, make choices Marmee would not have made, and are shaped by the resistance as much as by the guidance.
 - **Coco**: The dead ancestors are not passive symbols but dramatically active characters with their own agendas, limitations, and emotional histories. Mama Imelda actively prosecutes her prohibition even in death; Hector actively tries to reach his daughter; Ernesto actively protects his stolen fame. Each generation is driving the conflict.
 
 ---
 
-**FA_E30_HOME_TO_GATHERING — Emotionally charged home space is the site of family gathering and disruption**
+**FA_E50_HOME_TO_GATHERING — Emotionally charged home space is the site of family gathering and disruption**
 - **Finding Nemo**: The reef — specifically the area at the anemone and the open water of the first school day — is the charged domestic space in which the gathering (Marlin and Nemo's walk to school) and the disruption (Nemo's capture) take place. The emotional weight of the anemone as the family's entire world makes its disruption not merely an adventure's inciting event but the rupture of everything the family has been.
 - **Little Women**: The March family home is the site of every major gathering and disruption: the Christmas morning gathering, the arrival of bad news about Father, the return of the wounded soldier. Each disruption carries the weight of the home's accumulated emotional history.
 - **Coco**: The family compound's ofrenda room is the site of the gathering (Día de los Muertos preparation) and the disruption (Abuelita's destruction of Miguel's guitar, Miguel's flight). The charged nature of the ofrenda space — the family's entire relationship with its dead — makes the disruption there spiritually as well as dramatically significant.
 
 ---
 
-**FA_E31_RITUALS_TO_GATHERING — Family ritual is the occasion for gathering that is disrupted**
+**FA_E51_RITUALS_TO_GATHERING — Family ritual is the occasion for gathering that is disrupted**
 - **Finding Nemo**: The school-day ritual organizes the gathering. It is not a random morning walk but a charged family occasion — the first day of school, a milestone both Marlin and Nemo have been preparing for — and the ritual's disruption (Nemo's capture instead of his first day of class) carries the symbolic weight of everything the ritual represented: the orderly, supervised entry into the world that Marlin needed and Nemo needed differently.
 - **Little Women**: Each ritual gathering in the novel is disrupted by the family's actual emotional state — the Christmas morning that cannot be fully joyful with Father absent, the birthday that carries the shadow of Beth's illness.
 - **Coco**: The Día de los Muertos ritual is disrupted by Miguel's choice to pursue music rather than participate in the family's observance, sending him into the Land of the Dead. The ritual's disruption is the film's engine: the very occasion meant to honor family connection becomes the occasion of the family's deepest rupture.
 
 ---
 
-**FA_E32_GENERATIONAL_TO_CLASH — Intergenerational presence creates conditions for clash or misunderstanding**
+**FA_E52_GENERATIONAL_TO_CLASH — Intergenerational presence creates conditions for clash or misunderstanding**
 - **Finding Nemo**: The conditions for the clash are established in the film's first school scene through the simple juxtaposition of Marlin's behavior (anxious warnings, clutching, cataloging dangers) and Nemo's behavior (eager, impatient, embarrassed). Two generations with different relationships to the same family history — the barracuda attack that Nemo does not remember and that Marlin cannot forget — are placed in the same scene, and the clash is structurally inevitable. The film gives both generations' perspectives full weight: we see Nemo's humiliation and we see Marlin's terror, and both are real.
 - **Little Women**: The intergenerational presence of Marmee and her daughters creates constant conditions for clash — the most significant being Jo's rejection of Marmee's model of patient self-abnegation, and the later revelation that Marmee herself has struggled with exactly the anger Jo expresses so freely.
 - **Coco**: Every scene in the Land of the Dead is a scene of intergenerational presence creating conditions for misunderstanding: Miguel assumes Ernesto is his ancestor; the dead ancestors assume Miguel is there to reconnect rather than to claim musical blessing for himself; Hector misunderstands Miguel's initial willingness to use Ernesto's photograph. The misunderstandings are all rooted in what each generation knows and doesn't know about the family's history.
 
 ---
 
-**FA_E40_GATHERING_TO_CLASH — Gathering disruption escalates into generational confrontation**
+**FA_E53_GATHERING_TO_CLASH — Gathering disruption escalates into generational confrontation**
 - **Finding Nemo**: The escalation from gathering to clash is compressed into the school-day scene's final moments. The gathering (school orientation) is disrupted (Marlin's intervention), and the disruption immediately escalates into the generational confrontation (Nemo's open defiance, the swim to the boat, Marlin's shouted demand for return, Nemo's capture). The scene moves from gathering to disruption to clash in a single continuous sequence, with each beat raising the stakes of the generational divide until the confrontation produces its irreversible consequence.
 - **Little Women**: The gathering disruptions in the novel escalate into generational confrontations that clarify the sisters' diverging trajectories — the confrontation between Jo and Marmee over Jo's temper being the most explicitly stated, the confrontations over marriage choices being the most dramatically significant.
 - **Coco**: The gathering disruption (Abuelita's destruction of the guitar) escalates directly into the generational confrontation that sends Miguel to the Land of the Dead — where a series of escalating confrontations with his dead ancestors constitutes the film's central sequence of clash scenes.
 
 ---
 
-**FA_E41_CLASH_TO_RECONCILIATION — Generational clash, fully dramatized, creates conditions for reconciliation**
+**FA_E54_CLASH_TO_RECONCILIATION — Generational clash, fully dramatized, creates conditions for reconciliation**
 - **Finding Nemo**: The film earns its reconciliation by refusing to shortcut the clash. Marlin must lose Nemo — must cross an entire ocean, must face his own failure in the whale's darkness, must watch his son apparently die — before the conditions for genuine reconciliation exist. The reconciliation is not possible after the school-day argument; it requires that both characters have been changed by everything between the argument and the reunion. Nemo has become someone who can lead others; Marlin has become someone who can choose trust over control. Only then does the reconciliation have content beyond apology.
 - **Little Women**: The clash between Jo and the demands of conventional femininity must be fully dramatized — Jo must refuse Laurie, must suffer the consequences of her choices, must lose Beth — before the novel can arrive at its version of reconciliation: Jo's mature acceptance of an unconventional life that is nonetheless a life built on love.
 - **Coco**: The clash between Miguel and Mama Imelda, between the Rivera family and its suppressed musical history, must be fully dramatized — the truth of Ernesto's betrayal must be exposed, Hector must nearly disappear entirely — before the reconciliation is possible. The film earns the ofrenda restoration and Imelda's blessing by showing exactly how much they cost.
 
 ---
 
-**FA_E42_BELONGING_TO_RECONCILIATION — Belonging stakes are resolved through the reconciliation scene**
+**FA_E70_BELONGING_TO_RECONCILIATION — Belonging stakes are resolved through the reconciliation scene**
 - **Finding Nemo**: The reconciliation directly addresses the belonging stakes established at the film's opening. Nemo's need to belong in the world beyond the anemone is resolved not by Marlin accepting it intellectually but by Marlin demonstrating it — sending Nemo to school, watching him go, choosing not to follow. Marlin's belonging need — to matter to Nemo, to be needed rather than resented — is resolved in the reunion scene, in the simplest possible way: Nemo says "I love you, Dad" through the action of treating Marlin as a partner in solving the netted-fish crisis. The specific belonging wound (Marlin's fear that loving Nemo means controlling him; Nemo's fear that loving his father means surrendering himself) is addressed in the reconciliation, not worked around.
 - **Little Women**: The belonging stakes — Jo's need to belong to her family without losing herself — are resolved in the novel's conclusion, which allows her to build a new family (the school, Professor Bhaer) that does not require her to abandon her first family but extends it.
 - **Coco**: The belonging stakes are resolved with precision: Miguel is welcomed back by his living family with knowledge of his musical heritage rather than prohibition against it, and the Rivera ancestors are restored to full family memory through Hector's photograph. Both belonging needs — to the living and to the dead — are simultaneously addressed in the reconciliation.

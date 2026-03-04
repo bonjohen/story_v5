@@ -20,8 +20,8 @@
       "sets tone": 1,
       "branches into subtype": 4,
       "introduces setting rule": 4,
-      "mandates element": 3,
       "requires payoff": 2,
+      "mandates element": 3,
       "prohibits element": 2
     }
   },
@@ -785,61 +785,6 @@
       ]
     },
     {
-      "edge_id": "BI_E40_HISTORICAL_TO_DEFINING_MOMENT",
-      "from": "BI_N40_HISTORICAL_CONTEXT",
-      "to": "BI_N60_DEFINING_MOMENT",
-      "label": "Historical context makes the defining moment intelligible",
-      "meaning": "mandates element",
-      "preconditions": [
-        "Historical context is established",
-        "The defining moment is embedded in a specific historical situation"
-      ],
-      "effects_on_stakes": "The moment's significance is understood against its historical backdrop",
-      "effects_on_character": "The subject's response to the moment is legible given their historical circumstances",
-      "common_alternatives": [
-        "Some defining moments are primarily personal rather than historical, but even these are shaped by period"
-      ],
-      "anti_patterns": [
-        "Defining moment presented without the historical context that gives it meaning"
-      ]
-    },
-    {
-      "edge_id": "BI_E41_RELATIONSHIPS_TO_CRUCIBLE",
-      "from": "BI_N41_REAL_RELATIONSHIPS",
-      "to": "BI_N61_CRUCIBLE_SCENE",
-      "label": "Real relationships provide the pressure of the crucible",
-      "meaning": "mandates element",
-      "preconditions": [
-        "Key relationships are established and under pressure"
-      ],
-      "effects_on_stakes": "Crucible pressure often comes from or is witnessed by the subject's closest real associates",
-      "effects_on_character": "Character is revealed under pressure in the presence of those who know the subject best",
-      "common_alternatives": [
-        "Some crucible scenes are solitary â€” the subject alone with a decision"
-      ],
-      "anti_patterns": [
-        "Crucible scene that is purely abstract without the grounding of real relationships"
-      ]
-    },
-    {
-      "edge_id": "BI_E42_PUBLIC_PRIVATE_TO_LEGACY",
-      "from": "BI_N42_PUBLIC_VS_PRIVATE",
-      "to": "BI_N62_LEGACY_SUMMATION",
-      "label": "Legacy scene reconciles or crystallizes the public-private divergence",
-      "meaning": "mandates element",
-      "preconditions": [
-        "Public and private selves have been established and contrasted"
-      ],
-      "effects_on_stakes": "Legacy is assessed in terms of both the public achievement and the private cost",
-      "effects_on_character": "The summation integrates both dimensions of the subject",
-      "common_alternatives": [
-        "Some legacy scenes focus primarily on public impact; the private cost is implied"
-      ],
-      "anti_patterns": [
-        "Legacy scene that addresses only public achievement without acknowledging the private life's complexity"
-      ]
-    },
-    {
       "edge_id": "BI_E50_DEFINING_TO_CRUCIBLE",
       "from": "BI_N60_DEFINING_MOMENT",
       "to": "BI_N61_CRUCIBLE_SCENE",
@@ -873,6 +818,61 @@
       ],
       "anti_patterns": [
         "Legacy summation that does not connect to how the subject handled their central test"
+      ]
+    },
+    {
+      "edge_id": "BI_E52_HISTORICAL_TO_DEFINING_MOMENT",
+      "from": "BI_N40_HISTORICAL_CONTEXT",
+      "to": "BI_N60_DEFINING_MOMENT",
+      "label": "Historical context makes the defining moment intelligible",
+      "meaning": "mandates element",
+      "preconditions": [
+        "Historical context is established",
+        "The defining moment is embedded in a specific historical situation"
+      ],
+      "effects_on_stakes": "The moment's significance is understood against its historical backdrop",
+      "effects_on_character": "The subject's response to the moment is legible given their historical circumstances",
+      "common_alternatives": [
+        "Some defining moments are primarily personal rather than historical, but even these are shaped by period"
+      ],
+      "anti_patterns": [
+        "Defining moment presented without the historical context that gives it meaning"
+      ]
+    },
+    {
+      "edge_id": "BI_E53_RELATIONSHIPS_TO_CRUCIBLE",
+      "from": "BI_N41_REAL_RELATIONSHIPS",
+      "to": "BI_N61_CRUCIBLE_SCENE",
+      "label": "Real relationships provide the pressure of the crucible",
+      "meaning": "mandates element",
+      "preconditions": [
+        "Key relationships are established and under pressure"
+      ],
+      "effects_on_stakes": "Crucible pressure often comes from or is witnessed by the subject's closest real associates",
+      "effects_on_character": "Character is revealed under pressure in the presence of those who know the subject best",
+      "common_alternatives": [
+        "Some crucible scenes are solitary â€” the subject alone with a decision"
+      ],
+      "anti_patterns": [
+        "Crucible scene that is purely abstract without the grounding of real relationships"
+      ]
+    },
+    {
+      "edge_id": "BI_E54_PUBLIC_PRIVATE_TO_LEGACY",
+      "from": "BI_N42_PUBLIC_VS_PRIVATE",
+      "to": "BI_N62_LEGACY_SUMMATION",
+      "label": "Legacy scene reconciles or crystallizes the public-private divergence",
+      "meaning": "mandates element",
+      "preconditions": [
+        "Public and private selves have been established and contrasted"
+      ],
+      "effects_on_stakes": "Legacy is assessed in terms of both the public achievement and the private cost",
+      "effects_on_character": "The summation integrates both dimensions of the subject",
+      "common_alternatives": [
+        "Some legacy scenes focus primarily on public impact; the private cost is implied"
+      ],
+      "anti_patterns": [
+        "Legacy scene that addresses only public achievement without acknowledging the private life's complexity"
       ]
     },
     {

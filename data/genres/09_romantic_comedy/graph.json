@@ -19,11 +19,11 @@
       "specifies constraint": 3,
       "restricts resolution": 1,
       "sets tone": 1,
-      "prohibits element": 3,
       "branches into subtype": 4,
       "introduces setting rule": 5,
       "mandates element": 3,
-      "requires payoff": 3
+      "requires payoff": 3,
+      "prohibits element": 3
     }
   },
   "nodes": [
@@ -669,23 +669,6 @@
       ]
     },
     {
-      "edge_id": "RC_E06_PROMISE_TO_ANTI",
-      "from": "RC_N01_PROMISE",
-      "to": "RC_N90_CHEMISTRY_DEFICIENCY",
-      "label": "Promise is violated when chemistry is absent or comedy is heartless",
-      "meaning": "prohibits element",
-      "preconditions": [
-        "Leads are present but audience perceives no attraction",
-        "Comedy operates independently of romantic feeling"
-      ],
-      "effects_on_stakes": "Without chemistry, romantic stakes collapse â€” audience has no investment in whether the couple unites",
-      "effects_on_character": "Without heart in the comedy, characters are comic functions rather than people â€” audience cannot root for them",
-      "common_alternatives": [],
-      "anti_patterns": [
-        "This edge IS the anti-pattern description â€” it names what the promise forbids"
-      ]
-    },
-    {
       "edge_id": "RC_E10_MISMATCH_TO_SCREWBALL",
       "from": "RC_N11_MISMATCH_BEFORE_UNION",
       "to": "RC_N20_SCREWBALL",
@@ -770,7 +753,7 @@
       ]
     },
     {
-      "edge_id": "RC_E20_SCREWBALL_TO_FORCED_PROXIMITY",
+      "edge_id": "RC_E30_SCREWBALL_TO_FORCED_PROXIMITY",
       "from": "RC_N20_SCREWBALL",
       "to": "RC_N40_FORCED_PROXIMITY",
       "label": "Screwball requires setting that ensures repeated sparring",
@@ -791,7 +774,7 @@
       ]
     },
     {
-      "edge_id": "RC_E21_WORKPLACE_TO_SOCIAL_AUDIENCE",
+      "edge_id": "RC_E31_WORKPLACE_TO_SOCIAL_AUDIENCE",
       "from": "RC_N21_WORKPLACE_ROMCOM",
       "to": "RC_N41_SOCIAL_AUDIENCE",
       "label": "Workplace rom-com requires coworker social audience",
@@ -811,7 +794,7 @@
       ]
     },
     {
-      "edge_id": "RC_E22_FRIENDS_TO_PUBLIC_PRIVATE",
+      "edge_id": "RC_E32_FRIENDS_TO_PUBLIC_PRIVATE",
       "from": "RC_N22_FRIENDS_TO_LOVERS",
       "to": "RC_N42_PUBLIC_PRIVATE_DIVERGENCE",
       "label": "Friends-to-lovers relies on gap between public friendship and private feeling",
@@ -830,7 +813,7 @@
       ]
     },
     {
-      "edge_id": "RC_E23_FAKE_TO_SOCIAL_AUDIENCE",
+      "edge_id": "RC_E33_FAKE_TO_SOCIAL_AUDIENCE",
       "from": "RC_N23_FAKE_RELATIONSHIP",
       "to": "RC_N41_SOCIAL_AUDIENCE",
       "label": "Fake relationship requires social audience to perform for",
@@ -851,7 +834,7 @@
       ]
     },
     {
-      "edge_id": "RC_E24_FAKE_TO_PUBLIC_PRIVATE",
+      "edge_id": "RC_E34_FAKE_TO_PUBLIC_PRIVATE",
       "from": "RC_N23_FAKE_RELATIONSHIP",
       "to": "RC_N42_PUBLIC_PRIVATE_DIVERGENCE",
       "label": "Fake relationship is built on public-private divergence",
@@ -867,7 +850,7 @@
       ]
     },
     {
-      "edge_id": "RC_E30_FORCED_PROXIMITY_TO_MEET_CUTE",
+      "edge_id": "RC_E50_FORCED_PROXIMITY_TO_MEET_CUTE",
       "from": "RC_N40_FORCED_PROXIMITY",
       "to": "RC_N60_MEET_CUTE",
       "label": "Setting generates the charged first encounter",
@@ -887,7 +870,7 @@
       ]
     },
     {
-      "edge_id": "RC_E31_SOCIAL_AUDIENCE_TO_MISUNDERSTANDING",
+      "edge_id": "RC_E51_SOCIAL_AUDIENCE_TO_MISUNDERSTANDING",
       "from": "RC_N41_SOCIAL_AUDIENCE",
       "to": "RC_N61_MISUNDERSTANDING_ESCALATION",
       "label": "Social audience amplifies and escalates misunderstandings",
@@ -908,7 +891,7 @@
       ]
     },
     {
-      "edge_id": "RC_E32_PUBLIC_PRIVATE_TO_MISUNDERSTANDING",
+      "edge_id": "RC_E52_PUBLIC_PRIVATE_TO_MISUNDERSTANDING",
       "from": "RC_N42_PUBLIC_PRIVATE_DIVERGENCE",
       "to": "RC_N61_MISUNDERSTANDING_ESCALATION",
       "label": "Gap between public and private behavior generates peak misunderstanding",
@@ -929,7 +912,7 @@
       ]
     },
     {
-      "edge_id": "RC_E40_MEET_CUTE_TO_MISUNDERSTANDING",
+      "edge_id": "RC_E53_MEET_CUTE_TO_MISUNDERSTANDING",
       "from": "RC_N60_MEET_CUTE",
       "to": "RC_N61_MISUNDERSTANDING_ESCALATION",
       "label": "First impression established in meet-cute becomes the wrong assumption escalated",
@@ -948,7 +931,7 @@
       ]
     },
     {
-      "edge_id": "RC_E41_MISUNDERSTANDING_TO_GESTURE",
+      "edge_id": "RC_E54_MISUNDERSTANDING_TO_GESTURE",
       "from": "RC_N61_MISUNDERSTANDING_ESCALATION",
       "to": "RC_N62_GRAND_GESTURE",
       "label": "Misunderstanding clears and creates space for romantic gesture",
@@ -968,7 +951,7 @@
       ]
     },
     {
-      "edge_id": "RC_E42_DUAL_PAYOFF_TO_GESTURE",
+      "edge_id": "RC_E70_DUAL_PAYOFF_TO_GESTURE",
       "from": "RC_N13_DUAL_PAYOFF_RESOLUTION",
       "to": "RC_N62_GRAND_GESTURE",
       "label": "Dual payoff is delivered through the gesture scene",
@@ -988,7 +971,24 @@
       ]
     },
     {
-      "edge_id": "RC_E50_CO_EQUAL_TO_ANTI",
+      "edge_id": "RC_E90_PROMISE_TO_ANTI",
+      "from": "RC_N01_PROMISE",
+      "to": "RC_N90_CHEMISTRY_DEFICIENCY",
+      "label": "Promise is violated when chemistry is absent or comedy is heartless",
+      "meaning": "prohibits element",
+      "preconditions": [
+        "Leads are present but audience perceives no attraction",
+        "Comedy operates independently of romantic feeling"
+      ],
+      "effects_on_stakes": "Without chemistry, romantic stakes collapse â€” audience has no investment in whether the couple unites",
+      "effects_on_character": "Without heart in the comedy, characters are comic functions rather than people â€” audience cannot root for them",
+      "common_alternatives": [],
+      "anti_patterns": [
+        "This edge IS the anti-pattern description â€” it names what the promise forbids"
+      ]
+    },
+    {
+      "edge_id": "RC_E91_CO_EQUAL_TO_ANTI",
       "from": "RC_N10_CO_EQUAL_ENGINES",
       "to": "RC_N90_CHEMISTRY_DEFICIENCY",
       "label": "Failure to balance comedy and romance produces chemistry deficiency",
@@ -1004,7 +1004,7 @@
       ]
     },
     {
-      "edge_id": "RC_E51_TONE_TO_ANTI",
+      "edge_id": "RC_E92_TONE_TO_ANTI",
       "from": "RC_N80_TONE_WIT_WARMTH",
       "to": "RC_N90_CHEMISTRY_DEFICIENCY",
       "label": "Loss of warmth or wit collapses into chemistry deficiency",

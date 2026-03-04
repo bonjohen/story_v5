@@ -20,9 +20,9 @@
       "sets tone": 1,
       "branches into subtype": 4,
       "introduces setting rule": 4,
-      "mandates element": 3,
       "requires payoff": 2,
       "narrows scope": 1,
+      "mandates element": 3,
       "prohibits element": 1
     }
   },
@@ -806,64 +806,6 @@
       ]
     },
     {
-      "edge_id": "CR_E40_ECOSYSTEM_TO_CRIME_SCENE",
-      "from": "CR_N40_CRIMINAL_ECOSYSTEM",
-      "to": "CR_N60_CRIME_SCENE",
-      "label": "Criminal ecosystem makes the crime scene legible",
-      "meaning": "mandates element",
-      "preconditions": [
-        "Criminal ecosystem established"
-      ],
-      "effects_on_stakes": "The crime scene is understood within the rules and logic of the criminal world",
-      "effects_on_character": "Characters read the crime scene through the lens of their knowledge of the ecosystem",
-      "common_alternatives": [
-        "Insider perspective on crime scene vs. outsider investigative perspective"
-      ],
-      "anti_patterns": [
-        "Crime scene exists in isolation from the world that produced it"
-      ]
-    },
-    {
-      "edge_id": "CR_E41_LAW_TO_RECKONING",
-      "from": "CR_N41_LAW_ENFORCEMENT",
-      "to": "CR_N62_RECKONING",
-      "label": "Law enforcement presence makes legal reckoning possible",
-      "meaning": "mandates element",
-      "preconditions": [
-        "Law enforcement has been actively building toward accountability"
-      ],
-      "effects_on_stakes": "Reckoning may arrive through legal channels — arrest, trial, conviction",
-      "effects_on_character": "The law's arrival is experienced as consequence, not rescue",
-      "common_alternatives": [
-        "Legal reckoning",
-        "Criminal-on-criminal reckoning",
-        "Internal moral reckoning"
-      ],
-      "anti_patterns": [
-        "Law enforcement is present throughout but plays no role in the reckoning"
-      ]
-    },
-    {
-      "edge_id": "CR_E42_TERRITORY_TO_MORAL_COMPROMISE",
-      "from": "CR_N42_TERRITORY_AND_POWER",
-      "to": "CR_N61_MORAL_COMPROMISE",
-      "label": "Control of space demands moral compromise to maintain",
-      "meaning": "mandates element",
-      "preconditions": [
-        "Territorial and power dynamics established"
-      ],
-      "effects_on_stakes": "Holding or taking power requires crossing moral lines",
-      "effects_on_character": "Character must compromise their values to compete in the power landscape",
-      "common_alternatives": [
-        "Violence to defend territory",
-        "Betrayal to gain position",
-        "Corruption to maintain control"
-      ],
-      "anti_patterns": [
-        "Character accumulates power and territory without any moral cost"
-      ]
-    },
-    {
       "edge_id": "CR_E50_CRIME_SCENE_TO_RECKONING",
       "from": "CR_N60_CRIME_SCENE",
       "to": "CR_N62_RECKONING",
@@ -922,6 +864,64 @@
       ],
       "anti_patterns": [
         "Moral compromise is entirely disconnected from the central criminal act"
+      ]
+    },
+    {
+      "edge_id": "CR_E53_ECOSYSTEM_TO_CRIME_SCENE",
+      "from": "CR_N40_CRIMINAL_ECOSYSTEM",
+      "to": "CR_N60_CRIME_SCENE",
+      "label": "Criminal ecosystem makes the crime scene legible",
+      "meaning": "mandates element",
+      "preconditions": [
+        "Criminal ecosystem established"
+      ],
+      "effects_on_stakes": "The crime scene is understood within the rules and logic of the criminal world",
+      "effects_on_character": "Characters read the crime scene through the lens of their knowledge of the ecosystem",
+      "common_alternatives": [
+        "Insider perspective on crime scene vs. outsider investigative perspective"
+      ],
+      "anti_patterns": [
+        "Crime scene exists in isolation from the world that produced it"
+      ]
+    },
+    {
+      "edge_id": "CR_E54_LAW_TO_RECKONING",
+      "from": "CR_N41_LAW_ENFORCEMENT",
+      "to": "CR_N62_RECKONING",
+      "label": "Law enforcement presence makes legal reckoning possible",
+      "meaning": "mandates element",
+      "preconditions": [
+        "Law enforcement has been actively building toward accountability"
+      ],
+      "effects_on_stakes": "Reckoning may arrive through legal channels — arrest, trial, conviction",
+      "effects_on_character": "The law's arrival is experienced as consequence, not rescue",
+      "common_alternatives": [
+        "Legal reckoning",
+        "Criminal-on-criminal reckoning",
+        "Internal moral reckoning"
+      ],
+      "anti_patterns": [
+        "Law enforcement is present throughout but plays no role in the reckoning"
+      ]
+    },
+    {
+      "edge_id": "CR_E55_TERRITORY_TO_MORAL_COMPROMISE",
+      "from": "CR_N42_TERRITORY_AND_POWER",
+      "to": "CR_N61_MORAL_COMPROMISE",
+      "label": "Control of space demands moral compromise to maintain",
+      "meaning": "mandates element",
+      "preconditions": [
+        "Territorial and power dynamics established"
+      ],
+      "effects_on_stakes": "Holding or taking power requires crossing moral lines",
+      "effects_on_character": "Character must compromise their values to compete in the power landscape",
+      "common_alternatives": [
+        "Violence to defend territory",
+        "Betrayal to gain position",
+        "Corruption to maintain control"
+      ],
+      "anti_patterns": [
+        "Character accumulates power and territory without any moral cost"
       ]
     },
     {

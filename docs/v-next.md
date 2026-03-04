@@ -26,8 +26,8 @@ Mechanical cleanup tasks that improve consistency and documentation quality.
 
 Renumber edges in affected genre graphs to match the documented convention. Each genre requires updates to graph.json, narrative.md, and examples.md.
 
-- [ ] **#11 — Systematic edge numbering shift in 6–8 genre graphs**
-  Horror, Detective, Romantic Comedy, Literary Fiction, Children's Literature, Family, Biography, and Crime use sequential numbering instead of level-transition ranges. Renumber to match the convention (L1→L2: 01–09, L2→L3: 10–29, L3→L4: 30–49, L4→L5: 50–69, cross-level: 70–89).
+- [X] **#11 — Systematic edge numbering shift in 6–8 genre graphs**
+  Renumbered 80 edges across HR, DT, RC, LF, CL, FA, BI, CR to match level-transition ranges. Updated graph.json, narrative.md, and examples.md for each. Script at `app/scripts/renumber-edges.ts`.
 
 - [ ] **#12 — Cross-level edges not in 70–89 range**
   Young Adult, Western, War, Crime, Detective, and Mystery have level-skipping edges numbered in the destination level's range. Renumber to 70–89 cross-level range.

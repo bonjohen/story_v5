@@ -217,7 +217,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E20_SUPERNATURAL_TO_ISOLATION — Supernatural horror requires isolation**
+**HR_E30_SUPERNATURAL_TO_ISOLATION — Supernatural horror requires isolation**
 
 - The social isolation in *Get Out* is the specific condition that allows the supernatural-adjacent threat to operate without interruption: Chris is one Black man in a white enclave where everyone is a participant in the conspiracy, including the other apparently Black people. The supernatural (the Sunken Place, the Coagula procedure) requires this social isolation to function — there is no institutional framework that can see or name what is happening to him.
 - *The Shining*: Geographic isolation enables the supernatural — the Overlook's distance from any help, the winter's communication blackout, and the destroyed snowcat mean that Dick Hallorann's supernatural perception (the only external force that might intervene) must travel impossibly far to be useful. The isolation is both physical and metaphysical.
@@ -225,7 +225,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E21_SUPERNATURAL_TO_UNCANNY — Supernatural horror works through the uncanny**
+**HR_E31_SUPERNATURAL_TO_UNCANNY — Supernatural horror works through the uncanny**
 
 - The Coagula procedure in *Get Out* works through the uncanny by operating on familiar people and spaces: the threat is in the beautiful home, in the charming family, in the domestic routine of tea and breakfast. The groundskeeper's sprint in the dark is uncanny because he should be safe and peripheral. Logan's screaming fit at the flash is uncanny because he had seemed merely awkward. The supernatural displaces itself into the ordinary.
 - *The Shining*: The Overlook's supernatural manifestations are consistently uncanny in the precise Freudian sense — they are familiar things made strange. The ghost barman is a bartender doing his job. The ballroom party is a party. The woman in Room 217 is a beautiful woman in a bath. The horror is the gap between what they should be and what they are.
@@ -233,7 +233,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E22_SLASHER_TO_ISOLATION — Slasher horror requires isolation**
+**HR_E32_SLASHER_TO_ISOLATION — Slasher horror requires isolation**
 
 - *Get Out*'s third-act survival sequence requires the Armitage estate as the isolated location: Chris cannot simply leave because his car keys have been taken, the house is miles from town, and every exit is monitored by a family member. The isolation is structural (rural location) and operational (the family controls all movement). Jeremy blocking the front door is the moment isolation converts to siege.
 - *The Shining*: The slasher isolation at the Overlook is geographic and infrastructural — winter cuts the road, the snowcat is sabotaged by Jack, the radio is destroyed, the phone lines are dead. Wendy and Danny cannot leave; Jack is between them and any exit. King achieves the slasher isolation prerequisite through weather and vehicle sabotage rather than supernatural means.
@@ -241,7 +241,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E23_SLASHER_TO_CONCEALMENT — Slasher threat uses darkness and concealment**
+**HR_E33_SLASHER_TO_CONCEALMENT — Slasher threat uses darkness and concealment**
 
 - In *Get Out*'s survival sequence, darkness and architectural concealment operate precisely as slasher conventions demand: Chris moves through the Armitage house with the threat location uncertain, Rod's headlights in the driveway providing the only external light, and the house's interior unlit after the fire. Jeremy's approach in the dark, Dean's position in the basement, Rose shooting from the upper window — each attack comes from a position of concealment.
 - *The Shining*: Jack's stalking through the Overlook uses the hotel's architecture as concealment — the corridors' angles, the basement, the hedge maze's walls. The roque mallet appears before Jack does in several scenes. King gives the predator the building's concealment as a weapon; Wendy's barricaded room and Danny's maze strategy are both responses to this concealment principle.
@@ -249,7 +249,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E24_COSMIC_TO_CONCEALMENT — Cosmic threat is concealed by its incomprehensibility**
+**HR_E34_COSMIC_TO_CONCEALMENT — Cosmic threat is concealed by its incomprehensibility**
 
 - The Coagula conspiracy's full scale is cognitively concealed throughout *Get Out* — Chris sees only one family, one estate, one party. The auction, the photographs of previous victims, the newspaper clippings that Rod finds represent only the tip of what is implied to be a vast, organized structure. The conspiracy's full extent is not revealed; what is revealed is presented as one instance of an ongoing operation with no visible limit.
 - *The Shining*: The Overlook's full supernatural nature is never entirely explained — King provides no origin for the hotel's malevolence, no theology for its ghost-accumulation, no limit to its power. The concealment is cosmic because the hotel's evil is simply there, without justification or boundary.
@@ -257,7 +257,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E25_PSYCHOLOGICAL_TO_UNCANNY — Psychological horror weaponizes the uncanny**
+**HR_E35_PSYCHOLOGICAL_TO_UNCANNY — Psychological horror weaponizes the uncanny**
 
 - *Get Out*'s psychological horror weaponizes the uncanny through the Sunken Place itself — Chris is in his own body, in the familiar world, but displaced into an observer's paralysis. His own psychological wound (his mother's death) is used to construct this prison. The uncanny is the familiar self made inaccessible: he is present but absent, visible but erased.
 - *The Shining*: Jack's psychological deterioration weaponizes the uncanny through his relation to Wendy and Danny — the husband and father who should be protector becomes the pursuer. The novel makes the uncanny specific by grounding it in Jack's voice, his humor, his recognizable frustrations, all now deployed in the service of murder.
@@ -265,7 +265,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E30_ISOLATION_TO_ANOMALY — Isolation creates conditions for the first anomaly to land without rescue**
+**HR_E50_ISOLATION_TO_ANOMALY — Isolation creates conditions for the first anomaly to land without rescue**
 
 - Walter's nighttime sprint at Chris occurs after isolation has been established — they are at the Armitage estate, miles from any help, with Chris's phone the only connection to the external world and Rod the only person who might take him seriously. The anomaly lands without rescue because there is no rescue available: Missy, Dean, Rose, Jeremy, Georgina are all inside the conspiracy. Chris's "what the f—" is spoken into silence.
 - *The Shining*: Danny's first anomaly — Tony's visions, the REDRUM premonition — occurs in the context of the family's established isolation within the Overlook. There is no one Danny can tell: his father would dismiss it, his mother would worry without understanding, the hotel staff is gone. The isolation ensures the anomaly lands on Danny alone.
@@ -273,7 +273,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E31_UNCANNY_TO_ANOMALY — Uncanny setting delivers the first anomaly through familiar-turned-threatening**
+**HR_E51_UNCANNY_TO_ANOMALY — Uncanny setting delivers the first anomaly through familiar-turned-threatening**
 
 - Walter's sprint is the first anomaly delivered through the uncanny: a groundskeeper (familiar, domestic role) in a recognizable setting (the Armitage estate's well-lit lawn) behaving in a way that violates the role's expected behavior completely. The anomaly's power depends on the prior establishment of the estate as a normal, safe environment for a guest.
 - *The Shining*: The REDRUM vision in the bathroom mirror is uncanny in its delivery — a child's bedroom mirror (familiar), a word that looks like a child's crayon scrawl (familiar), but the word is burning and insistent and wrong. The anomaly is powerful because the familiar space makes the violation register.
@@ -281,7 +281,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E32_CONCEALMENT_TO_ANOMALY — Concealment shapes first anomaly — threat sensed but not fully seen**
+**HR_E52_CONCEALMENT_TO_ANOMALY — Concealment shapes first anomaly — threat sensed but not fully seen**
 
 - The Coagula procedure at the time of the first anomaly is entirely concealed: Chris sees Walter behave wrongly but has no framework to understand it. The anomaly is a symptom without a diagnosis. The full mechanism — that Walter is a previous victim with a displaced consciousness — is not revealed for another hour of film. The partial revelation is the source of its dread.
 - *The Shining*: REDRUM is concealed in the sense that Danny cannot read it — the word is mirrored, its meaning hidden behind a cognitive barrier that is the mirror of its physical barrier. The anomaly is present but not yet legible. The full concealment is maintained through the novel's middle section until Wendy's mirror-reading in the climax.
@@ -289,7 +289,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E40_ANOMALY_TO_ESCALATION — First anomaly initiates the escalation sequence**
+**HR_E53_ANOMALY_TO_ESCALATION — First anomaly initiates the escalation sequence**
 
 - Walter's nocturnal sprint (anomaly) directly initiates *Get Out*'s escalation: it is not isolated. The next morning brings Missy's hypnotherapy, then the garden party's relentless scrutiny, then Logan's screaming fit, then Chris's discovery of the basement photographs. The anomaly is the first step in a pattern that builds without pause or reset. The film never allows Chris to return to a baseline of safety after Walter's sprint.
 - *The Shining*: Danny's Tony-visions (anomaly) initiate the novel's escalation sequence — each subsequent vision is more specific and more terrible. The REDRUM vision leads to the hedge animal movements, to the woman in Room 217, to Jack's ballroom encounter with Grady. The anomaly is the narrative's first step into an ascending staircase of horror.
@@ -297,7 +297,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E41_ESCALATION_TO_CONFRONTATION — Escalation sequence builds to the final confrontation**
+**HR_E54_ESCALATION_TO_CONFRONTATION — Escalation sequence builds to the final confrontation**
 
 - *Get Out*'s escalation — the photos, Logan's fit, the auction reveal, the Sunken Place mechanism, the hypnotherapy chair — accumulates into the specific conditions of the final confrontation: Chris strapped in a basement chair with cotton in the armrests and Missy's voice on a screen, with every Armitage family member positioned between him and any exit. The confrontation's specific shape (the cotton, the antler, the fire) is determined by everything the escalation established.
 - *The Shining*: The escalation through Jack's psychological deterioration and the Overlook's manifestations culminates in the specific final confrontation in the hedge maze — Danny's survival strategy (stepping backwards in his own tracks) is the product of everything he has learned about his father and the hotel during the escalation. The confrontation's form follows directly from the escalation's content.
@@ -305,7 +305,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E50_THREAT_LOGIC_TO_ESCALATION — Threat logic structures the escalation**
+**HR_E70_THREAT_LOGIC_TO_ESCALATION — Threat logic structures the escalation**
 
 - The Coagula procedure's logic directly structures *Get Out*'s escalation: the threat's rules (hypnosis activates the Sunken Place; proximity to the victims reveals their trapped consciousness; camera flash disrupts the hypnotic overlay) determine the specific shape of each escalation beat. Logan's flash-reaction is not a random scare — it is a logical consequence of the procedure's mechanics. The escalation follows the rules.
 - *The Shining*: The Overlook's logic structures the escalation: it can act only through human instruments; it must first undermine Jack's sobriety and self-control; it cannot act directly against Danny's shine. These rules determine why the hotel accelerates Jack's deterioration rather than acting directly, why it kills Hallorann to prevent intervention, and why Danny ultimately survives.
@@ -313,7 +313,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E51_THREAT_LOGIC_TO_CONFRONTATION — Threat logic determines what confrontation can accomplish**
+**HR_E71_THREAT_LOGIC_TO_CONFRONTATION — Threat logic determines what confrontation can accomplish**
 
 - The Coagula procedure's logic determines the specific resolution available to Chris: the cotton in the chair's armrests (blocking the hypnotic trigger) is a rule loophole — the Sunken Place cannot be activated without the teacup mechanism, and the teacup mechanism cannot reach him if he is not hypnotized. Chris's survival depends on knowing and exploiting the specific rules he has partially learned through the escalation.
 - *The Shining*: The Overlook's logic determines what the final confrontation can accomplish: Danny cannot simply fight his father; he must exploit the rule that the hotel operates through Jack's physical agency and Jack's physical limitations. The maze strategy is a logical application of rules Danny has learned about both his father and the hotel's constraints.
@@ -321,7 +321,7 @@ Cross-references: *The Shining* (Stephen King, 1977 novel); *The Exorcist* (Will
 
 ---
 
-**HR_E60_CONSEQUENCE_FREE_WARNING — Consequence-free scares destroy the atmosphere of dread**
+**HR_E90_CONSEQUENCE_FREE_WARNING — Consequence-free scares destroy the atmosphere of dread**
 
 - *Get Out* avoids this anti-pattern precisely: the film's scares are cumulative and irreversible. Missy's hypnotherapy in the first night is not a false alarm — it directly causes the Sunken Place sequence that ends the film. Walter's sprint is not a red herring — Walter is an enslaved victim. Every threatening moment accumulates rather than resetting, which is why the film's final threat landing is felt as inevitable rather than arbitrary.
 - *The Shining*: King avoids consequence-free scares by attaching permanent cost — Danny's neck marks from Room 217, Jack's irreversible sobriety break with Lloyd, Wendy's arm broken by Jack, Hallorann's murder. The hedge animals' apparent movement in early chapters is the only potential consequence-free scare, and King resolves it ambiguously rather than dismissing it.

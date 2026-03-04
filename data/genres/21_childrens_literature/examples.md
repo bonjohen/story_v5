@@ -188,77 +188,77 @@
 
 ---
 
-**CL_E20_PICTURE_BOOK_TO_CHILDS_EYE — Picture book world rendered entirely through the youngest child's scale and perception**
+**CL_E30_PICTURE_BOOK_TO_CHILDS_EYE — Picture book world rendered entirely through the youngest child's scale and perception**
 - **Alice's Adventures in Wonderland**: The Wonderland setting is rendered through Alice's experiential scale at every point — its most iconic features are features Alice encounters as a seven-year-old body in a space calibrated to the wrong sizes. The mushroom, the door, the pool of tears she cries — all of these are rendered through the physical experience of a child in a world that keeps rescaling.
 - **Charlotte's Web**: The barn is rendered through its animal inhabitants' perceptual scale — the smell of grain and manure as experienced at pig- and spider-height, the overhead sounds of the farm family, the enormous significance of the fair's noise and light. The child's-eye world and the animal's-eye world are functionally identical in their emotional vividness.
 - **The Cat in the Hat**: The picture book setting is rendered entirely through the child-narrator's field of attention — the window and the rain outside, the clean house whose cleanliness is the story's initial condition, the fish bowl's position in the room. Everything in the book's world is exactly at child-eye height and child-scale concern.
 
 ---
 
-**CL_E21_MIDDLE_GRADE_TO_SAFE_FRAME — Middle grade adventure maintains safe-enough frame even as danger intensifies**
+**CL_E31_MIDDLE_GRADE_TO_SAFE_FRAME — Middle grade adventure maintains safe-enough frame even as danger intensifies**
 - **Alice's Adventures in Wonderland**: Carroll maintains the safe-enough frame through the dream container and through the consistent absurdism that prevents any threat from landing with full adult weight. The Queen's sentences are never executed; the danger is always also ridiculous. Alice's growing size in the trial scene is the physical embodiment of the safe frame reasserting itself — she literally cannot be threatened by something so small.
 - **Charlotte's Web**: White maintains the safe-enough frame through the farm's continuity — the Zuckermans' reliable presence, the barn's seasonal rhythms, Wilbur's actual physical safety. Within this frame, White allows Charlotte's death to be genuinely devastating; the frame does not protect the reader from grief but does provide a structure in which grief is possible without despair.
 - **The Cat in the Hat**: The safe frame in The Cat in the Hat is the most explicit structural feature of the story: the mother will return; the house must be restored; the Cat's clean-up machine is the guarantee that the adventure will have an exit. Seuss activates the frame only when the mess has reached its maximum — the frame's operation is the story's resolution.
 
 ---
 
-**CL_E22_ANIMAL_ALLEGORY_TO_CHILDS_EYE — Animal allegory world rendered as the animal protagonist experiences it**
+**CL_E32_ANIMAL_ALLEGORY_TO_CHILDS_EYE — Animal allegory world rendered as the animal protagonist experiences it**
 - **Alice's Adventures in Wonderland**: The Wonderland animals' perceptual frames are rendered with consistency — the Caterpillar experiences the mushroom as his platform, not as an object of external wonder; the Cheshire Cat experiences the world from above, from a position of comprehensive observation. Carroll renders each animal's world from the inside, which gives the child's-eye quality of fresh, specific attention to each encounter.
 - **Charlotte's Web**: White renders the barn world through each animal's nature — Charlotte's perception of the world as a web of possible connections, Templeton's rat-logic of pure self-interest, Wilbur's pig-nature of social warmth and anxiety. The child's-eye quality is present because each perception is rendered fresh, as if for the first time.
 - **The Cat in the Hat**: The Cat's perceptual frame — that the house is a space of unlimited imaginative possibility — is the child's-eye world rendered through fantasy: what the house looks like to a mind that does not accept the distinction between permitted and forbidden play.
 
 ---
 
-**CL_E23_FABLE_TO_ADULT_FIGURES — Fable structure requires moral lesson to be discovered by protagonist, not delivered by authority figure**
+**CL_E33_FABLE_TO_ADULT_FIGURES — Fable structure requires moral lesson to be discovered by protagonist, not delivered by authority figure**
 - **Alice's Adventures in Wonderland**: Every adult authority figure in Wonderland who attempts to deliver lessons — the Duchess, the Mock Turtle, the Caterpillar — is shown to deliver nonsense or irrelevance. The insight Alice earns is specifically unavailable to any of them. Carroll makes this structural: the adults cannot navigate Wonderland either, so Alice's discovery of her own judgment is genuinely her own.
 - **Charlotte's Web**: Charlotte never delivers the moral of her own story to Wilbur. She writes in her web, works her plan, and dies. The insight about friendship and sacrifice is available only through what Wilbur experiences, not through what Charlotte teaches.
 - **The Cat in the Hat**: The fish, who functions as the adult-authority figure in the story, never succeeds in stopping the chaos he protests throughout. His authority is present but impotent. The resolution is achieved not through adult authority (the fish) but through the children's own insistence (the boy telling the Cat to leave) and the Cat's own agency.
 
 ---
 
-**CL_E24_MIDDLE_GRADE_TO_ADULT_FIGURES — Middle grade adventure requires adult presence as safety frame while child protagonist drives central action**
+**CL_E34_MIDDLE_GRADE_TO_ADULT_FIGURES — Middle grade adventure requires adult presence as safety frame while child protagonist drives central action**
 - **Alice's Adventures in Wonderland**: The adult world above ground — Alice's sister, the Victorian household — functions as the safety frame whose presence is implied throughout the dream. Alice does not call for adult help in Wonderland because adults cannot access it; her agency is required precisely because no adult can navigate the space she is in. The frame holds because waking is always available.
 - **Charlotte's Web**: The adult humans are the safety frame for the barnyard world. Fern's advocacy for Wilbur at the novel's opening and her continuing presence as audience to the barn world establishes the human safety net even as the central action belongs entirely to the animals. The Zuckermans' decision to keep Wilbur is made by adults, but it is made because of Charlotte's work, not because of any adult argument.
 - **The Cat in the Hat**: The mother's anticipated return is the adult-figures-present element of the story: she is not there, but she is the frame within which every action is evaluated. The fish speaks for her absence. The children's final anxiety about whether to tell her is the story's acknowledgment that the adult world will ultimately frame and judge the adventure, even though it could not have participated in it.
 
 ---
 
-**CL_E30_CHILDS_EYE_TO_WONDER — Child's-eye world is the condition for genuine wonder**
+**CL_E50_CHILDS_EYE_TO_WONDER — Child's-eye world is the condition for genuine wonder**
 - **Alice's Adventures in Wonderland**: The child's-eye world is what makes Wonderland wondrous — because Alice approaches each new encounter with the freshness of a child who does not yet know what to dismiss. When she sees the Cheshire Cat, she does not think about how it is impossible; she engages with it as the situation requires. Her child's-eye perception is the condition of Wonderland's wonder: an adult's world-weariness would dissolve the place.
 - **Charlotte's Web**: Wilbur's child-analog freshness is what makes the barnyard wondrous — his delight in the first snow, his grief at Charlotte's absence, his awe at the web. The child's-eye perception of the animal protagonist makes the ordinary barn extraordinary.
 - **The Cat in the Hat**: The children's boredom — the explicit state of having nothing to see — is the child's-eye condition that makes the Cat's arrival maximally wondrous. Wonder requires a perceiver who is fully available to be astonished, and the children's boredom creates that availability completely.
 
 ---
 
-**CL_E31_SAFE_FRAME_TO_CHALLENGE — Safe-enough frame makes genuine challenge narratively productive**
+**CL_E51_SAFE_FRAME_TO_CHALLENGE — Safe-enough frame makes genuine challenge narratively productive**
 - **Alice's Adventures in Wonderland**: The trial is Alice's most genuine challenge — the moment when the arbitrary machinery of Wonderland is directed at her personally, and she must respond. The safe-enough frame (dream logic, her growing size, the absurdism that underlies the threat) makes it possible for Carroll to push this challenge to its maximum without the story becoming genuinely traumatic. The frame holds, and so the challenge generates courage rather than paralysis.
 - **Charlotte's Web**: Charlotte's dying is the central challenge scene's safe-enough frame: White has established the farm's continuity and Wilbur's survival so securely that the reader can fully feel Charlotte's death without being devastated by the loss of the world. The frame makes the grief productive — it can be entered and experienced without collapsing the story.
 - **The Cat in the Hat**: The safe frame — the clean-up machine, the story's metrical structure — makes the chaos of Thing One and Thing Two's kite-flying maximally frightening without being genuinely threatening. The reader knows the house will be restored; this allows them to experience the disorder fully.
 
 ---
 
-**CL_E32_ADULT_FIGURES_TO_CHALLENGE — Adult figures cannot resolve the specific challenge — child's agency is required**
+**CL_E52_ADULT_FIGURES_TO_CHALLENGE — Adult figures cannot resolve the specific challenge — child's agency is required**
 - **Alice's Adventures in Wonderland**: No adult figure can help Alice at the trial. The King and Queen are the antagonists; the other court members are complicit or helpless. Alice must find her own resolution, which she does through the accumulation of her own judgment over the entire adventure. Her challenge is specifically unreachable by adult help.
 - **Charlotte's Web**: No adult figure can understand Charlotte's plan for Wilbur — the humans cannot hear the barn animals, cannot read the web as a communication from a spider who understands the situation. Wilbur's survival requires Charlotte's intelligence and effort, not human intervention.
 - **The Cat in the Hat**: The fish cannot stop Thing One and Thing Two; the children cannot clean the mess; the only figure who can resolve the challenge is the Cat himself, and he does so only when the children insist. The resolution requires the children's agency — their demand — even though it also requires the Cat's capabilities.
 
 ---
 
-**CL_E40_WONDER_TO_CHALLENGE — Wonder and discovery establish resources that make the challenge navigable**
+**CL_E53_WONDER_TO_CHALLENGE — Wonder and discovery establish resources that make the challenge navigable**
 - **Alice's Adventures in Wonderland**: Alice's accumulated experience of Wonderland's illogic — every conversation with every absurd authority figure — is the resource she draws on at the trial. She has learned that Wonderland's rules are invented, that its threats are not final, and that her own judgment is more reliable than the place's claimed authorities. The wonder scenes are the training; the challenge is where what was discovered is applied.
 - **Charlotte's Web**: The wonder of Charlotte's intelligence — discovered in the early barn conversations — is the resource that makes Wilbur's challenge (the fair, survival, loss) navigable. He knows that friendship is real and active, that effort on behalf of another is possible, because he has watched Charlotte demonstrate it. The wonder scene is the model for what the challenge will require.
 - **The Cat in the Hat**: The Thing One and Thing Two sequence connects directly to the clean-up machine resolution — the Things create the chaos and the Cat's machine resolves it, so the wonder of the Cat's arrival (which introduced both) is precisely the resource that makes the resolution possible. What arrived as wonder resolves as capability.
 
 ---
 
-**CL_E41_CHALLENGE_TO_RESOLUTION — Challenge fully dramatized creates conditions for earned resolution**
+**CL_E54_CHALLENGE_TO_RESOLUTION — Challenge fully dramatized creates conditions for earned resolution**
 - **Alice's Adventures in Wonderland**: Carroll earns the resolution — Alice's "You're nothing but a pack of cards!" — by sustaining the trial scene's challenge long enough that Alice's growing size and growing clarity are both fully dramatized. The challenge has gone to its maximum (she herself is on trial, the logic is fully corrupt, no adult authority can help her) before the resolution arrives. The insight is worth exactly the challenge that produced it.
 - **Charlotte's Web**: White earns the resolution — Charlotte's death and Wilbur's carrying of her memory — by sustaining Charlotte's decline through the entire fair sequence with full emotional honesty. The resolution is proportionate to the challenge; neither is minimized.
 - **The Cat in the Hat**: The challenge — the house in full disorder, the mother about to return — is sustained until its maximum before the Cat's machine resolves it. The resolution arrives at the last possible moment, which is the condition of its being earned.
 
 ---
 
-**CL_E42_TAKEAWAY_TO_RESOLUTION — Moral or emotional takeaway is delivered through the resolution, not before it**
+**CL_E70_TAKEAWAY_TO_RESOLUTION — Moral or emotional takeaway is delivered through the resolution, not before it**
 - **Alice's Adventures in Wonderland**: Carroll delivers the takeaway — the child's capacity to name and dissolve arbitrary authority — in the act of the resolution itself. Alice does not understand the lesson and then apply it; she applies it and the understanding arrives simultaneously in the doing. The takeaway is the resolution, not a commentary appended to it.
 - **Charlotte's Web**: The takeaway about friendship and loss is delivered in the novel's final paragraphs — in Wilbur's behavior, in the spiders who are Charlotte's children but cannot replace her, in the narrator's final acknowledgment of Charlotte's rarity. The takeaway is not separate from the resolution; it is the resolution's emotional content.
 - **The Cat in the Hat**: Seuss delivers the takeaway in the final question — "What would YOU do if your mother asked you?" — which arrives after the resolution (the clean house, the Cat's departure) and makes the takeaway the reader's own active engagement rather than a delivered lesson. The question is the resolution's final movement.

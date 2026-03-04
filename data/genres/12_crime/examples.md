@@ -253,7 +253,7 @@ Cross-references: **Scarface** (1983, dir. Brian De Palma) | **The Wire** (2002�
 
 ---
 
-**CR_E40_ECOSYSTEM_TO_CRIME_SCENE — Criminal ecosystem makes the crime scene legible**
+**CR_E53_ECOSYSTEM_TO_CRIME_SCENE — Criminal ecosystem makes the crime scene legible**
 
 - The Godfather's restaurant scene is comprehensible only because the criminal ecosystem has been established: we understand why a neutral meeting location was needed, why the weapon had to be pre-positioned, why McCluskey's presence complicated the plan, and why Michael's crossing of this line is irreversible. The crime scene (Louis Restaurant) is read through the ecosystem's logic — it is not just a murder, it is a declaration of war that must be managed diplomatically.
 - Scarface's Sun Ray hotel chainsaw scene is legible only through the ecosystem: the cocaine-for-green-cards transaction gone wrong, the Colombians' decision to steal the cocaine and kill the buyers, Tony's recognition that the Colombians have violated the rules of a criminal transaction. The ecosystem's violated protocol is what makes the scene comprehensible as a crime scene rather than random violence.
@@ -261,7 +261,7 @@ Cross-references: **Scarface** (1983, dir. Brian De Palma) | **The Wire** (2002�
 
 ---
 
-**CR_E41_LAW_TO_RECKONING — Law enforcement presence makes legal reckoning possible**
+**CR_E54_LAW_TO_RECKONING — Law enforcement presence makes legal reckoning possible**
 
 - The Godfather deliberately withholds legal reckoning: there is no arrest at the film's end, no FBI breakthrough, no RICO indictment. The law's presence throughout (the FBI cameras, the corrupt cops) makes visible a system that has been institutionally neutralized, and the film's reckoning is therefore internal and moral rather than legal. The law's active but ineffective presence is what makes the film's non-legal reckoning meaningful — it is not that Michael escapes justice, it is that justice has been made structurally unavailable.
 - Scarface's legal reckoning is set in motion by law enforcement's long surveillance operation and arrives through the money laundering indictment — but the indictment is itself a weapon Sosa uses against Tony rather than a pure law enforcement achievement. The legal reckoning becomes the mechanism of criminal reckoning; the two are indistinguishable. Tony's death is both a legal and criminal outcome.
@@ -269,7 +269,7 @@ Cross-references: **Scarface** (1983, dir. Brian De Palma) | **The Wire** (2002�
 
 ---
 
-**CR_E42_TERRITORY_TO_MORAL_COMPROMISE — Control of space demands moral compromise to maintain**
+**CR_E55_TERRITORY_TO_MORAL_COMPROMISE — Control of space demands moral compromise to maintain**
 
 - The Godfather makes this edge explicit in Michael's assumption of the Don's position: to maintain the Corleone compound (its security, its political protection, its family safety), Michael must order the murder of Carlo (his sister's husband, his nephew's father), must lie to Kay, must become the instrument of violence he spent the film's first act refusing to be. Every square foot of the Corleone territory is maintained through moral compromise.
 - Scarface's territorial expansion and moral compromise are coextensive: every new territory Tony acquires requires a new moral line crossed. The Diaz Brothers killed for the first green card deal. Frank Lopez undermined and then murdered for Miami distribution. The Colombians killed in their home for market position. Each territorial gain is purchased with a specific moral compromise, and Tony is always aware of the price he is paying.

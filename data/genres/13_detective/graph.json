@@ -723,7 +723,7 @@
       ]
     },
     {
-      "edge_id": "DT_E20_CLASSIC_TO_CRIME_SCENE",
+      "edge_id": "DT_E30_CLASSIC_TO_CRIME_SCENE",
       "from": "DT_N20_CLASSIC_GOLDEN_AGE",
       "to": "DT_N40_CRIME_SCENE_EVIDENCE",
       "label": "Golden-age puzzle centers on reading physical evidence",
@@ -743,7 +743,7 @@
       ]
     },
     {
-      "edge_id": "DT_E21_HARDBOILED_TO_INTERVIEW",
+      "edge_id": "DT_E31_HARDBOILED_TO_INTERVIEW",
       "from": "DT_N21_HARDBOILED",
       "to": "DT_N41_INTERVIEW_DYNAMICS",
       "label": "Hardboiled investigation runs on dangerous human encounters",
@@ -763,7 +763,7 @@
       ]
     },
     {
-      "edge_id": "DT_E22_POLICE_TO_INSTITUTIONAL",
+      "edge_id": "DT_E32_POLICE_TO_INSTITUTIONAL",
       "from": "DT_N22_POLICE_DETECTIVE",
       "to": "DT_N42_INSTITUTIONAL_CONTEXT",
       "label": "Police procedural is structured by institutional rules and hierarchy",
@@ -783,7 +783,7 @@
       ]
     },
     {
-      "edge_id": "DT_E23_AMATEUR_TO_INTERVIEW",
+      "edge_id": "DT_E33_AMATEUR_TO_INTERVIEW",
       "from": "DT_N23_AMATEUR_CONSULTING",
       "to": "DT_N41_INTERVIEW_DYNAMICS",
       "label": "Amateur detective relies on conversational skill to compensate for lack of authority",
@@ -803,7 +803,7 @@
       ]
     },
     {
-      "edge_id": "DT_E30_CRIME_SCENE_TO_ASSIGNMENT",
+      "edge_id": "DT_E50_CRIME_SCENE_TO_ASSIGNMENT",
       "from": "DT_N40_CRIME_SCENE_EVIDENCE",
       "to": "DT_N60_CASE_ASSIGNMENT",
       "label": "Crime scene discovery initiates detective's case engagement",
@@ -823,7 +823,7 @@
       ]
     },
     {
-      "edge_id": "DT_E31_INTERVIEW_TO_BREAKTHROUGH",
+      "edge_id": "DT_E51_INTERVIEW_TO_BREAKTHROUGH",
       "from": "DT_N41_INTERVIEW_DYNAMICS",
       "to": "DT_N61_INVESTIGATION_BREAKTHROUGH",
       "label": "Key interview produces critical investigative breakthrough",
@@ -843,7 +843,7 @@
       ]
     },
     {
-      "edge_id": "DT_E32_INSTITUTIONAL_TO_ASSIGNMENT",
+      "edge_id": "DT_E52_INSTITUTIONAL_TO_ASSIGNMENT",
       "from": "DT_N42_INSTITUTIONAL_CONTEXT",
       "to": "DT_N60_CASE_ASSIGNMENT",
       "label": "Institutional context frames how the case is assigned and defined",
@@ -861,7 +861,7 @@
       ]
     },
     {
-      "edge_id": "DT_E40_ASSIGNMENT_TO_BREAKTHROUGH",
+      "edge_id": "DT_E53_ASSIGNMENT_TO_BREAKTHROUGH",
       "from": "DT_N60_CASE_ASSIGNMENT",
       "to": "DT_N61_INVESTIGATION_BREAKTHROUGH",
       "label": "Case engagement drives investigation toward breakthrough",
@@ -879,7 +879,7 @@
       ]
     },
     {
-      "edge_id": "DT_E41_BREAKTHROUGH_TO_SOLUTION",
+      "edge_id": "DT_E54_BREAKTHROUGH_TO_SOLUTION",
       "from": "DT_N61_INVESTIGATION_BREAKTHROUGH",
       "to": "DT_N62_SOLUTION_PRESENTATION",
       "label": "Investigation breakthrough leads to solution presentation",
@@ -898,7 +898,7 @@
       ]
     },
     {
-      "edge_id": "DT_E42_WORTHY_CASE_TO_BREAKTHROUGH",
+      "edge_id": "DT_E70_WORTHY_CASE_TO_BREAKTHROUGH",
       "from": "DT_N12_WORTHY_CASE",
       "to": "DT_N61_INVESTIGATION_BREAKTHROUGH",
       "label": "Case difficulty makes breakthrough meaningful",
@@ -916,7 +916,7 @@
       ]
     },
     {
-      "edge_id": "DT_E43_EARNED_SOLUTION_TO_PRESENTATION",
+      "edge_id": "DT_E71_EARNED_SOLUTION_TO_PRESENTATION",
       "from": "DT_N13_EARNED_SOLUTION",
       "to": "DT_N62_SOLUTION_PRESENTATION",
       "label": "Solution earned through detective's work is demonstrated in presentation",
@@ -934,23 +934,7 @@
       ]
     },
     {
-      "edge_id": "DT_E50_PASSIVE_DETECTIVE_WARNING",
-      "from": "DT_N13_EARNED_SOLUTION",
-      "to": "DT_N90_PASSIVE_DETECTIVE",
-      "label": "Unearned solution violates the detective contract",
-      "meaning": "prohibits element",
-      "preconditions": [
-        "Solution arises without being caused by detective's investigative work"
-      ],
-      "effects_on_stakes": "Audience feels cheated — the promise of watching a detective solve a case is unfulfilled",
-      "effects_on_character": "Detective is rendered decorative — their presence is incidental to the outcome",
-      "common_alternatives": [],
-      "anti_patterns": [
-        "This edge IS the anti-pattern — it describes what to avoid"
-      ]
-    },
-    {
-      "edge_id": "DT_E51_CLASSIC_DIFFERENTIATES_HARDBOILED",
+      "edge_id": "DT_E72_CLASSIC_DIFFERENTIATES_HARDBOILED",
       "from": "DT_N20_CLASSIC_GOLDEN_AGE",
       "to": "DT_N21_HARDBOILED",
       "label": "Classic puzzle focus differs from hardboiled moral danger",
@@ -969,7 +953,7 @@
       ]
     },
     {
-      "edge_id": "DT_E52_POLICE_DIFFERENTIATES_AMATEUR",
+      "edge_id": "DT_E73_POLICE_DIFFERENTIATES_AMATEUR",
       "from": "DT_N22_POLICE_DETECTIVE",
       "to": "DT_N23_AMATEUR_CONSULTING",
       "label": "Institutional authority differs from outsider perspective",
@@ -985,6 +969,22 @@
       "anti_patterns": [
         "Police detective with no institutional accountability",
         "Amateur detective with full institutional resources and authority"
+      ]
+    },
+    {
+      "edge_id": "DT_E90_PASSIVE_DETECTIVE_WARNING",
+      "from": "DT_N13_EARNED_SOLUTION",
+      "to": "DT_N90_PASSIVE_DETECTIVE",
+      "label": "Unearned solution violates the detective contract",
+      "meaning": "prohibits element",
+      "preconditions": [
+        "Solution arises without being caused by detective's investigative work"
+      ],
+      "effects_on_stakes": "Audience feels cheated — the promise of watching a detective solve a case is unfulfilled",
+      "effects_on_character": "Detective is rendered decorative — their presence is incidental to the outcome",
+      "common_alternatives": [],
+      "anti_patterns": [
+        "This edge IS the anti-pattern — it describes what to avoid"
       ]
     }
   ]

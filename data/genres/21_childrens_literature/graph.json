@@ -717,7 +717,7 @@
       ]
     },
     {
-      "edge_id": "CL_E20_PICTURE_BOOK_TO_CHILDS_EYE",
+      "edge_id": "CL_E30_PICTURE_BOOK_TO_CHILDS_EYE",
       "from": "CL_N20_PICTURE_BOOK",
       "to": "CL_N40_CHILDS_EYE_WORLD",
       "label": "Picture book world rendered entirely through the youngest child's scale and perception",
@@ -735,7 +735,7 @@
       ]
     },
     {
-      "edge_id": "CL_E21_MIDDLE_GRADE_TO_SAFE_FRAME",
+      "edge_id": "CL_E31_MIDDLE_GRADE_TO_SAFE_FRAME",
       "from": "CL_N21_MIDDLE_GRADE",
       "to": "CL_N41_SAFE_ENOUGH_FRAME",
       "label": "Middle grade adventure maintains safe-enough frame even as danger intensifies",
@@ -753,7 +753,7 @@
       ]
     },
     {
-      "edge_id": "CL_E22_ANIMAL_ALLEGORY_TO_CHILDS_EYE",
+      "edge_id": "CL_E32_ANIMAL_ALLEGORY_TO_CHILDS_EYE",
       "from": "CL_N22_ANIMAL_ALLEGORY",
       "to": "CL_N40_CHILDS_EYE_WORLD",
       "label": "Animal allegory world is rendered as the animal protagonist experiences it — which mirrors a child's-eye perspective",
@@ -771,7 +771,7 @@
       ]
     },
     {
-      "edge_id": "CL_E23_FABLE_TO_ADULT_FIGURES",
+      "edge_id": "CL_E33_FABLE_TO_ADULT_FIGURES",
       "from": "CL_N23_EDUCATIONAL_FABLE",
       "to": "CL_N42_ADULT_FIGURES_PRESENT",
       "label": "Fable structure requires the moral lesson to be discovered by the protagonist, not delivered by an authority figure",
@@ -789,7 +789,7 @@
       ]
     },
     {
-      "edge_id": "CL_E24_MIDDLE_GRADE_TO_ADULT_FIGURES",
+      "edge_id": "CL_E34_MIDDLE_GRADE_TO_ADULT_FIGURES",
       "from": "CL_N21_MIDDLE_GRADE",
       "to": "CL_N42_ADULT_FIGURES_PRESENT",
       "label": "Middle grade adventure requires adult presence as safety frame while child protagonist drives the central action",
@@ -807,7 +807,7 @@
       ]
     },
     {
-      "edge_id": "CL_E30_CHILDS_EYE_TO_WONDER",
+      "edge_id": "CL_E50_CHILDS_EYE_TO_WONDER",
       "from": "CL_N40_CHILDS_EYE_WORLD",
       "to": "CL_N60_WONDER_DISCOVERY",
       "label": "Child's-eye world is the condition for genuine wonder — familiar enough to ground, strange enough to astonish",
@@ -825,7 +825,7 @@
       ]
     },
     {
-      "edge_id": "CL_E31_SAFE_FRAME_TO_CHALLENGE",
+      "edge_id": "CL_E51_SAFE_FRAME_TO_CHALLENGE",
       "from": "CL_N41_SAFE_ENOUGH_FRAME",
       "to": "CL_N61_CHALLENGE_SCENE",
       "label": "Safe-enough frame is what makes genuine challenge narratively productive — danger can be real because survival and growth are possible",
@@ -843,7 +843,7 @@
       ]
     },
     {
-      "edge_id": "CL_E32_ADULT_FIGURES_TO_CHALLENGE",
+      "edge_id": "CL_E52_ADULT_FIGURES_TO_CHALLENGE",
       "from": "CL_N42_ADULT_FIGURES_PRESENT",
       "to": "CL_N61_CHALLENGE_SCENE",
       "label": "Adult figures are present in the story's world but cannot resolve the specific challenge — child's agency is required",
@@ -861,7 +861,7 @@
       ]
     },
     {
-      "edge_id": "CL_E40_WONDER_TO_CHALLENGE",
+      "edge_id": "CL_E53_WONDER_TO_CHALLENGE",
       "from": "CL_N60_WONDER_DISCOVERY",
       "to": "CL_N61_CHALLENGE_SCENE",
       "label": "Wonder and discovery establish the resources and the expanded world that make the challenge possible and navigable",
@@ -879,7 +879,7 @@
       ]
     },
     {
-      "edge_id": "CL_E41_CHALLENGE_TO_RESOLUTION",
+      "edge_id": "CL_E54_CHALLENGE_TO_RESOLUTION",
       "from": "CL_N61_CHALLENGE_SCENE",
       "to": "CL_N62_EARNED_RESOLUTION",
       "label": "Challenge, fully and genuinely dramatized, creates the conditions for earned resolution and insight",
@@ -898,7 +898,7 @@
       ]
     },
     {
-      "edge_id": "CL_E42_TAKEAWAY_TO_RESOLUTION",
+      "edge_id": "CL_E70_TAKEAWAY_TO_RESOLUTION",
       "from": "CL_N13_MORAL_EMOTIONAL_TAKEAWAY",
       "to": "CL_N62_EARNED_RESOLUTION",
       "label": "Moral or emotional takeaway is delivered through the resolution, not before it",

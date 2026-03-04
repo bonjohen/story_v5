@@ -195,70 +195,70 @@
 
 ---
 
-**LF_E20_PSYCHOLOGICAL_TO_SYMBOLIC — Psychological realism embeds meaning in the concrete world**
+**LF_E30_PSYCHOLOGICAL_TO_SYMBOLIC — Psychological realism embeds meaning in the concrete world**
 - **Beloved**: The clearing is the clearest example of this edge: a specific physical location that functions simultaneously as a plausible outdoor space near 124 and as the site where Baby Suggs offered the community the possibility of self-love. When Sethe returns and feels hands on her throat — hands she cannot identify, that might be Beloved's or the ghost's or her own — the symbolic register is activated by Sethe's psychological state. The concrete world is the surface on which her psychology is written.
 - **The Great Gatsby**: The Valley of Ashes — the industrial wasteland between West Egg and New York — is a psychologically grounded symbolic setting: Nick perceives it as desolation, as the cost of the gilded life, as the place where the waste of wealthy carelessness accumulates. Its symbolic weight arises from the psychologically accurate way Nick sees and processes the world around him.
 - **Normal People**: The scholar's rock in Connell's school that Marianne is associated with — a specific, concrete object — carries the weight of her status as an outsider in her own school, her solitude, the way she is both noticed and invisible.
 
 ---
 
-**LF_E21_PSYCHOLOGICAL_TO_INTERIOR — Psychological realism demands equally vivid interior and exterior**
+**LF_E31_PSYCHOLOGICAL_TO_INTERIOR — Psychological realism demands equally vivid interior and exterior**
 - **Beloved**: The novel renders Sethe's encounter with the tree on her back — which she cannot see — with the same vividness as the exterior description Paul D gives of it. She experiences the scar from inside; he sees it from outside; the reader holds both simultaneously. The interior rendering of what it means to carry something you cannot see, to be told it is beautiful when you experienced it as destruction, is as vivid as any exterior scene in the novel.
 - **The Great Gatsby**: Nick's interior processing of the party at Gatsby's — his simultaneous glamour-susceptibility and moral discomfort — is as vivid as the exterior spectacle. Fitzgerald gives equal narrative space to what Nick sees and what Nick feels about what he sees.
 - **Normal People**: The scene where Connell does not invite Marianne to the debs is rendered with equal vividness from both sides: what Connell does (an exterior event) and what Marianne experiences in response (an interior event of equal weight and duration).
 
 ---
 
-**LF_E22_EXPERIMENTAL_TO_NONLINEAR — Experimental form frequently disrupts linear time**
+**LF_E32_EXPERIMENTAL_TO_NONLINEAR — Experimental form frequently disrupts linear time**
 - **Beloved**: The disruption of linear time is the novel's primary formal strategy. The reader learns what happened eighteen years ago through a progressive revelation that is structured by consciousness rather than chronology — by what Sethe can approach, what Denver needs to not know, what Paul D discovers and when. The temporal non-linearity is not decorative; it is the formal expression of the novel's argument that traumatic time does not move chronologically and cannot be rendered as if it does.
 - **The Great Gatsby**: The retrospective narrative structure — Nick looking back on a summer from an unspecified present — creates a double temporal register in which every scene is both immediate and already past, both experienced and already mourned.
 - **Normal People**: Rooney's chapter structure — named by month and year, sometimes skipping time, sometimes lingering — creates a temporal rhythm that is motivated by the relationship's intensity rather than by chronological completeness. We spend months in periods of crisis and lose entire years in a line break.
 
 ---
 
-**LF_E23_DOMESTIC_TO_SYMBOLIC — Domestic fiction invests mundane detail with symbolic weight**
+**LF_E33_DOMESTIC_TO_SYMBOLIC — Domestic fiction invests mundane detail with symbolic weight**
 - **Beloved**: The woodshed at 124 Bluestone Road is the novel's most fully realized example of domestic-to-symbolic: a mundane outbuilding that is simultaneously, and permanently, the site of the most terrible thing Sethe has ever done. After the infanticide, every time the woodshed appears in the narrative, it carries its full historical and emotional weight — it cannot be seen without that weight — which is how Morrison renders the way traumatic events transform the domestic landscape into a map of grief.
 - **The Great Gatsby**: Gatsby's mansion — its rooms that are never comfortable, its parties from which the host is always slightly absent — is a domestic symbol of a man who has constructed an elaborate stage set and cannot inhabit it as a home. The mansion is Gatsby's psychology made concrete.
 - **Normal People**: The specific domestic objects of Connell's and Marianne's relationship — the silver chain, the spare key, the particular way their bodies arrange themselves in whatever bedroom they occupy — carry the accumulated weight of the relationship's history. Rooney invests them with symbolic weight through repetition and precision rather than through announcement.
 
 ---
 
-**LF_E24_SOCIAL_TO_INTERIOR — Social forces are rendered as interior experience**
+**LF_E34_SOCIAL_TO_INTERIOR — Social forces are rendered as interior experience**
 - **Beloved**: The way slavery has colonized Sethe's interior life is the novel's central social-to-interior rendering. Schoolteacher's lesson — cataloguing Sethe's "animal characteristics" in two columns — is not an external fact about Sethe but an ideological intrusion into her self-understanding. When Sethe hears that schoolteacher is coming to take her children back, what she acts on is not simply fear but the internalized knowledge of what it means for a Black woman's children to be property, felt in the body as an imperative rather than reasoned as an argument. The social force is not the context for Sethe's experience; it is the substance of it.
 - **The Great Gatsby**: The social force of class exclusion — old money's contempt for new money, East Egg's contempt for West Egg — is rendered as interior experience through the specific register of Nick's social anxiety: his awareness of what his suit costs, his discomfort at the ostentation of Gatsby's parties, his knowledge of how he is being assessed at every moment.
 - **Normal People**: The social force of class difference — Marianne's family's wealth, Connell's family's precarity — is rendered as interior experience in the specific quality of embarrassment and inadequacy each character feels in the other's domestic space. Social class is not background; it is the interior texture of every scene.
 
 ---
 
-**LF_E30_SYMBOLIC_TO_INTERIORITY_SCENE — Symbolic setting occasions deep interior rendering**
+**LF_E50_SYMBOLIC_TO_INTERIORITY_SCENE — Symbolic setting occasions deep interior rendering**
 - **Beloved**: The clearing — Baby Suggs's outdoor sanctuary — occasions Morrison's most extended interiority scene in which Sethe goes there alone and attempts to receive the comfort Baby Suggs used to offer. The symbolic weight of the clearing (a space of chosen self-love, community grace) generates the interior rendering: Sethe's attempt to access that grace alone, the hands that close around her throat, the inability to be sure whose hands they are or what they want. The symbolic setting is the occasion for the scene; the interior rendering is the scene's substance.
 - **The Great Gatsby**: The green light occasions Nick's deepest interiority scene at the novel's close — his extended meditation on what Gatsby's gesture toward the light meant, what America did with that impulse, what is lost in the gap between aspiration and arrival. The symbolic object generates the interior rendering.
 - **Normal People**: The specific domestic settings that accumulate symbolic weight — Connell's bedroom in his family home, Marianne's family's large cold house — generate the interiority scenes in which each character processes what the relationship costs them in that specific location.
 
 ---
 
-**LF_E31_NONLINEAR_TO_INTERIORITY_SCENE — Non-linear time creates space for deep interior rendering**
+**LF_E51_NONLINEAR_TO_INTERIORITY_SCENE — Non-linear time creates space for deep interior rendering**
 - **Beloved**: The novel's non-linear temporal structure creates interior scenes that exist outside plot sequence. The passage in which Baby Suggs's memories of her children — each one sold away — are rendered is not positioned in the narrative at the moment Baby Suggs remembers them but at the moment the narrative needs the reader to understand what was taken from her. The temporal dislocation is what enables the interior rendering: freed from chronological sequence, Morrison can give the memory the exact weight and position it deserves.
 - **The Great Gatsby**: Nick's retrospective narration creates interior scenes in which he processes, from a temporal remove, what he was experiencing at the time. The distance between the experiencing Nick and the narrating Nick generates the interior rendering — Nick can see things about his own interiority that he could not see while inside the experience.
 - **Normal People**: Rooney's time skips create interior scenes in which a character's state at a given moment carries the weight of the time that has passed between chapters. The chapter that returns to a relationship after a year apart generates interior rendering — what the gap has meant, what has changed — that the linear narrative could not produce.
 
 ---
 
-**LF_E32_INTERIOR_TO_INTERIORITY_SCENE — Equal interiority and exteriority requires dedicated interior scenes**
+**LF_E52_INTERIOR_TO_INTERIORITY_SCENE — Equal interiority and exteriority requires dedicated interior scenes**
 - **Beloved**: Morrison dedicates multiple pages to interior scenes that have no exterior counterpart — Sethe's circling approach to the memory of the infanticide, Denver's construction of a story about her sister from partial information, Paul D's confrontation with what he has been carrying in his tobacco-tin heart. These are not interruptions of exterior events but scenes in their own right, with their own duration and texture.
 - **The Great Gatsby**: Nick's interior scenes — his processing of Gatsby's parties, his long meditation at the novel's end — are given narrative space equal to the exterior events they respond to. Fitzgerald does not compress interior experience into summary; he renders it as scene.
 - **Normal People**: Rooney gives interior experience its own scenes: Marianne alone after being excluded from the debs, Connell alone processing his inability to speak about what Marianne means to him. The interior scenes are not embedded in exterior action but exist as primary narrative events.
 
 ---
 
-**LF_E40_INTERIORITY_SCENE_TO_EPIPHANY — Deep interiority prepares the ground for genuine shift in understanding**
+**LF_E53_INTERIORITY_SCENE_TO_EPIPHANY — Deep interiority prepares the ground for genuine shift in understanding**
 - **Beloved**: Paul D's epiphany — his arrival at the understanding that he can be present with Sethe, that "she is a friend of my mind" — is only meaningful because Morrison has spent the preceding pages rendering what he has been carrying and what it has cost him to carry it. The tobacco-tin heart, the way he kept his feelings locked in a smaller and smaller container, the way he moved on before anything could attach — these interior scenes are what make the shift in understanding real rather than sentimental. The epiphany is earned by the interior work that precedes it.
 - **The Great Gatsby**: Nick's epiphany about the Buchanans — "they were careless people" — is earned by the interiority scenes in which Nick processed his ambivalence about their world, his fascination and his unease. The shift in understanding arrives not as insight but as clarity: Nick can finally see what was always true because the interior work has worn away his willingness to romanticize.
 - **Normal People**: Marianne's arrival at a sense of herself as worthy of ordinary love — not the punishing love she has sought — is prepared for by the interiority scenes in which Rooney has rendered, precisely and without judgment, the psychology that drove her to seek punishment. The shift in understanding is quiet and hard-won.
 
 ---
 
-**LF_E41_EPIPHANY_TO_AMBIGUOUS_ENDING — Shift in understanding leads to resonant but open ending**
+**LF_E54_EPIPHANY_TO_AMBIGUOUS_ENDING — Shift in understanding leads to resonant but open ending**
 - **Beloved**: Paul D's shift in understanding — his return to Sethe, his willingness to be present — leads directly to the novel's ambiguous ending: an ending that holds the possibility of something like healing without resolving the question of whether healing is available. "Me and you, we got more yesterday than anybody. We need some kind of tomorrow." The ending holds the shift without explaining what it produces. Then Morrison pulls back further into the ambiguity of the final pages, leaving the reader without resolution in the novel's most productive sense.
 - **The Great Gatsby**: Nick's epiphany about the Buchanans produces an ending that refuses consolation: the green light is still there, the past is not recoverable, America continues to produce Gatsbys who will reach across water toward something that recedes as they approach. The shift in understanding does not produce resolution — it produces a clearer view of the unresolvable.
 - **Normal People**: Marianne's shift in understanding — her recognition that she can let Connell go — produces an ending that is simultaneously a loss and a kind of freedom: "He'll go." The ambiguity of the ending is precise: we know what happens (he leaves) and we do not know what it means (whether this is the right choice, what their future holds, whether either of them will be all right).

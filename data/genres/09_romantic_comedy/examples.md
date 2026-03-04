@@ -189,7 +189,7 @@
 
 ---
 
-**RC_E06_PROMISE_TO_ANTI — Promise is violated when chemistry is absent or comedy is heartless**
+**RC_E90_PROMISE_TO_ANTI — Promise is violated when chemistry is absent or comedy is heartless**
 
 - The film anticipates the anti-pattern and builds the defense into its structure: the friendship years are the stretch most vulnerable to chemistry deficiency, so Ephron loads them with sustained intimacy (the phone calls, the shared viewing of Casablanca, the public emotional disclosure) to prevent the romantic engine from going cold.
 - Harry's one-night stand after his divorce is the film's sharpest illustration of romance without chemistry: he describes the aftermath — "it's just awful, I'm looking at the ceiling and I can't remember her name" — as an example of sex disconnected from feeling. The anti-pattern is named and rejected within the film.
@@ -229,7 +229,7 @@
 
 ---
 
-**RC_E20_SCREWBALL_TO_FORCED_PROXIMITY — Screwball requires setting that ensures repeated sparring**
+**RC_E30_SCREWBALL_TO_FORCED_PROXIMITY — Screwball requires setting that ensures repeated sparring**
 
 - New York in the 1980s is the film's forcing mechanism for its screwball structure: it is a city small enough (in its cultural-professional world) to keep throwing Harry and Sally together at book events, restaurants, and parties, and large enough to allow them to disappear between encounters. The city is calibrated to make their reunion seem both inevitable and coincidental.
 - The Jess-and-Marie connection is the formal mechanism: once their mutual friends marry, Harry and Sally are permanently embedded in the same social structure. The city stops being accidental and the setting becomes a standing date.
@@ -237,7 +237,7 @@
 
 ---
 
-**RC_E21_WORKPLACE_TO_SOCIAL_AUDIENCE — Workplace rom-com requires coworker social audience**
+**RC_E31_WORKPLACE_TO_SOCIAL_AUDIENCE — Workplace rom-com requires coworker social audience**
 
 - The film does not use the workplace social audience. Its social audience is the friendship group (Jess and Marie) and the New York cultural scene, not a professional community.
 - The absence of workplace social audience is a deliberate choice: by keeping the social audience in the friendship sphere, Ephron ensures that the observers care about both people's happiness rather than their professional performance, which makes the eventual union feel like a personal triumph rather than a professional accommodation.
@@ -245,7 +245,7 @@
 
 ---
 
-**RC_E22_FRIENDS_TO_PUBLIC_PRIVATE — Friends-to-lovers relies on gap between public friendship and private feeling**
+**RC_E32_FRIENDS_TO_PUBLIC_PRIVATE — Friends-to-lovers relies on gap between public friendship and private feeling**
 
 - The Casablanca phone scene is the purest expression of this gap: publicly, Harry and Sally are watching a film separately; privately, they are talking on the phone in the dark. The scene is a duet performed as a solo — they are together in every meaningful sense while insisting on physical separation.
 - The gap between public friendship and private feeling is at its widest in the roller-skating scene and the museum visit: in public they argue, tease, and perform the friend-relationship for each other and for any observers; in private (the late-night calls, the post-grief embrace) the intimacy has no name and both parties treat it as emergency care rather than love.
@@ -253,7 +253,7 @@
 
 ---
 
-**RC_E23_FAKE_TO_SOCIAL_AUDIENCE — Fake relationship requires social audience to perform for**
+**RC_E33_FAKE_TO_SOCIAL_AUDIENCE — Fake relationship requires social audience to perform for**
 
 - This edge does not directly apply to When Harry Met Sally..., which inverts the fake-relationship structure. The relevant social audience in the film is not an audience for a performed romance but an audience for a performed non-romance — Harry and Sally perform friendship for Jess and Marie while the social audience suspects the truth.
 - Jess's "you're in love with her" to Harry is the social audience piercing the performance: the fake friendship is exposed to the social audience before it is exposed to the leads themselves.
@@ -261,7 +261,7 @@
 
 ---
 
-**RC_E24_FAKE_TO_PUBLIC_PRIVATE — Fake relationship is built on public-private divergence**
+**RC_E34_FAKE_TO_PUBLIC_PRIVATE — Fake relationship is built on public-private divergence**
 
 - The film's inverted fake-relationship structure makes this edge apply in reverse: the public-private divergence is between the performance of friendship (public) and the reality of romantic love (private). Every scene where Harry and Sally behave as friends in company while their private dynamic is romantic is this edge running backwards.
 - The most explicit version is the double date at the roller rink: Harry and Sally skate together, finishing each other's sentences and operating as a unit, in front of Marie and Jess, while technically being present to support their friends' new relationship. The private emotional reality (they are the couple) is visible to the audience and invisible to the participants.
@@ -269,7 +269,7 @@
 
 ---
 
-**RC_E30_FORCED_PROXIMITY_TO_MEET_CUTE — Setting generates the charged first encounter**
+**RC_E50_FORCED_PROXIMITY_TO_MEET_CUTE — Setting generates the charged first encounter**
 
 - The 1977 drive from Chicago to New York is the forcing mechanism that generates the charged encounter: without the eighteen-hour car journey, Harry and Sally would have met briefly at a party and parted. The setting ensures that the first impression has time to become the wrong impression — they cover enough ground conversationally in the car to build the entire architecture of their misunderstanding.
 - The charging element of the encounter comes from Harry's death-anxiety monologue and the orgasm discussion — two subjects that accelerate intimacy beyond what the social occasion (a carpool with a mutual friend's girlfriend) would normally allow. The setting forces the encounter; the conversation makes it charged.
@@ -277,7 +277,7 @@
 
 ---
 
-**RC_E31_SOCIAL_AUDIENCE_TO_MISUNDERSTANDING — Social audience amplifies and escalates misunderstandings**
+**RC_E51_SOCIAL_AUDIENCE_TO_MISUNDERSTANDING — Social audience amplifies and escalates misunderstandings**
 
 - The escalation of the post-sex misunderstanding is managed through Jess and Marie: Harry tells Jess his version (I panicked, it was a mistake), Sally tells Marie her version (he left immediately, I should never have done it), and their married friends exchange the two versions, creating a double-mediated misunderstanding that neither Harry nor Sally can correct because neither knows what the other said.
 - The film's social amplification reaches its peak at the New Year's Eve party: Harry tells Jess he is not in love with Sally; Jess tells him he is. The social audience has now arrived at the truth before the leads, and the audience watches Harry absorb that information in real time. The social world delivers the revelation.
@@ -285,7 +285,7 @@
 
 ---
 
-**RC_E32_PUBLIC_PRIVATE_TO_MISUNDERSTANDING — Gap between public and private behavior generates peak misunderstanding**
+**RC_E52_PUBLIC_PRIVATE_TO_MISUNDERSTANDING — Gap between public and private behavior generates peak misunderstanding**
 
 - The post-sex morning scene is generated entirely by the public-private gap: privately, Harry's panic is about his feelings (he is afraid he is in love with her); publicly, his exit looks like indifference or regret. Sally reads the public behavior and draws the wrong conclusion — that he acted out of lust rather than fear. Both characters are being accurate about what they observed and wrong about what it meant.
 - The film's peak misunderstanding — sustained across three months of non-communication — is entirely the product of this gap: the private emotional reality (they are both devastated by what happened) is invisible to each other because the public behavior (avoidance) reads as rejection.
@@ -293,7 +293,7 @@
 
 ---
 
-**RC_E40_MEET_CUTE_TO_MISUNDERSTANDING — First impression established in meet-cute becomes the wrong assumption escalated**
+**RC_E53_MEET_CUTE_TO_MISUNDERSTANDING — First impression established in meet-cute becomes the wrong assumption escalated**
 
 - Harry's thesis — stated in the first car scene and never retracted — is the wrong assumption the film escalates. Every scene of their friendship is Harry and Sally acting as if Harry was right (men and women cannot be friends), and the post-sex escalation is the film's demonstration that he was both right and wrong in ways neither of them anticipated.
 - The escalation makes visible the cost of the first impression: twelve years of a friendship that was also a suppressed love story, two failed relationships each, the post-sex panic that ruins the friendship — all of it traces back to the wrong conclusion Harry announced at mile 100 of the drive.
@@ -301,7 +301,7 @@
 
 ---
 
-**RC_E41_MISUNDERSTANDING_TO_GESTURE — Misunderstanding clears and creates space for romantic gesture**
+**RC_E54_MISUNDERSTANDING_TO_GESTURE — Misunderstanding clears and creates space for romantic gesture**
 
 - The misunderstanding clears in a single line: Jess's "you're in love with her" lands, and the film cuts to Harry alone in his apartment on New Year's Eve, understanding what he has done and what he must do. The clearing is private — no scene between Harry and Sally, just Harry arriving at the truth alone — and it immediately produces the run.
 - The gesture is made possible by the clearing: if Harry arrived at the New Year's party while still in denial, the speech would be an apology or a negotiation. Because the misunderstanding has cleared, the speech is a declaration. The precision of the transition is why the ending works.
@@ -309,7 +309,7 @@
 
 ---
 
-**RC_E42_DUAL_PAYOFF_TO_GESTURE — Dual payoff is delivered through the gesture scene**
+**RC_E70_DUAL_PAYOFF_TO_GESTURE — Dual payoff is delivered through the gesture scene**
 
 - Harry's New Year's Eve speech is the film's dual-payoff delivery mechanism: the romantic payoff is the declaration of love and Sally's tearful "you're the worst," which is itself a capitulation; the comic payoff is Harry's list of Sally's specific eccentricities as evidence of love — the comedy of the catalogue is inseparable from the romance of the declaration.
 - The film's dual payoff is also structural: the final documentary interview with Harry and Sally — now a couple, finishing each other's sentences, arguing about the timeline of the proposal — is the comic payoff for the romantic union. They are together, and they are still themselves.
@@ -317,7 +317,7 @@
 
 ---
 
-**RC_E50_CO_EQUAL_TO_ANTI — Failure to balance comedy and romance produces chemistry deficiency**
+**RC_E91_CO_EQUAL_TO_ANTI — Failure to balance comedy and romance produces chemistry deficiency**
 
 - The film's middle act is its most vulnerable to this failure: the years of friendship risk becoming a comedy of manners (witty exchanges, food orders, pop-culture debates) without romantic charge. Ephron prevents deficiency by loading the friendship scenes with the specific content of falling in love — Sally's Joe announcement, Harry's divorce, the grief scenes — which keeps the romantic engine running at low heat through the comedy sequences.
 - The post-sex section (approximately twenty minutes of screen time) risks becoming pure romantic drama — too much pain, not enough wit. The film corrects by giving every painful exchange a comic kicker: the split-screen therapy sessions ("They were the wrong people for me!") run the grief through a comedy format.
@@ -325,7 +325,7 @@
 
 ---
 
-**RC_E51_TONE_TO_ANTI — Loss of warmth or wit collapses into chemistry deficiency**
+**RC_E92_TONE_TO_ANTI — Loss of warmth or wit collapses into chemistry deficiency**
 
 - The film tests the warmth side of the tonal equation in Harry's post-divorce scenes: his grief is real, his loneliness is played without irony, and the scenes with Sally where she holds him are warm without being witty. The balance is sustained by the context — these scenes are embedded in a film that has established its comic register thoroughly enough that the warmth reads as earned depth rather than tonal collapse.
 - The film tests the wit side of the tonal equation in the orgasm scene: if the scene played as cold satire of male self-delusion, it would be funny but heartless. Meg Ryan's performance is warm and self-amused, and the "I'll have what she's having" button is delivered with a grandmother's pleasure rather than a comedian's snap, which keeps the warmth present inside the wit.

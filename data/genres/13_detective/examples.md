@@ -224,7 +224,7 @@
 
 ---
 
-**DT_E20_CLASSIC_TO_CRIME_SCENE — Golden-age puzzle centers on reading physical evidence**
+**DT_E30_CLASSIC_TO_CRIME_SCENE — Golden-age puzzle centers on reading physical evidence**
 
 - *A Study in Scarlet* Chapter 3 is the edge in action: the Lauriston Gardens scene is constructed as a physical-evidence puzzle in which every detail is potentially significant, and the detective's task is to read the scene rather than to interview witnesses. Holmes spends twenty minutes in silent examination before drawing any conclusions, and his conclusions are built entirely from physical traces — the wheel-track, the footprints, the inscription, the blood chemistry. The crime scene is the puzzle board; Holmes's reading of it is the puzzle-solving method.
 - In *The Hound of the Baskervilles*, the Yew Alley scene (Sir Charles's last footprints) is a delayed crime-scene reading: Holmes reviews the evidence not in person but through the report Dr. Mortimer provides, and his reconstruction of Sir Charles's final minutes from footprint evidence alone establishes the case's central question. The physical evidence field extends beyond the body into the moor itself — the Grimpen Mire, the neolithic huts, the phosphorescent traces on the Hound — all of which function as secondary crime-scene evidence fields.
@@ -232,21 +232,21 @@
 
 ---
 
-**DT_E21_HARDBOILED_TO_INTERVIEW — Hardboiled investigation runs on dangerous human encounters**
+**DT_E31_HARDBOILED_TO_INTERVIEW — Hardboiled investigation runs on dangerous human encounters**
 
 - In the Holmes stories, the equivalent of hardboiled dangerous human encounters appears when Holmes operates in criminal London. In *A Study in Scarlet*, Holmes's interview with the cab driver (conducted in disguise) and his handling of Jefferson Hope at Baker Street (physically restraining a man described as immensely strong) are moments where the interview carries physical risk. The hardboiled quality of the interview is muted in the Holmes canon but present.
 - **Cross-refs:** In *Chinatown*, this edge is the film's interview texture: every major conversation carries physical danger. Gittes is beaten by Cross's men after interviewing Mulwray's widow; the session with Noah Cross himself at the Albacore Club is a verbal confrontation with a man who has already arranged one death and will arrange more. The danger is not theatrical — it is causally connected to what Gittes asks and what he reveals during the interview. In *True Detective*, Cohle's confrontation with the Ledoux operation — an interview that escalates into a firefight — is the extreme version of this edge: the interview with a suspect in a corrupt world ends in lethal violence, and Cohle's survival depends on his reading of the human danger level at each moment of the conversation.
 
 ---
 
-**DT_E22_POLICE_TO_INSTITUTIONAL — Police procedural is structured by institutional rules and hierarchy**
+**DT_E32_POLICE_TO_INSTITUTIONAL — Police procedural is structured by institutional rules and hierarchy**
 
 - In *A Study in Scarlet*, the institutional structure appears as constraint: Lestrade cannot arrest Hope legally without evidence that meets police procedural standards, which is why Holmes's trap is necessary. The institutional rules define what counts as sufficient evidence, and Holmes must deliver Hope to Lestrade in a form the institution can process. The consulting detective is indirectly constrained by the institutional context even while operating outside it.
 - **Cross-refs:** In *True Detective*, this edge is the season's structural skeleton: the Louisiana State Police CID's hierarchy, its case-closure pressures, its political sensitivities, and its eventual corruption by the Tuttle family influence are the institutional context that structures every investigative decision. Cohle's methods (unconventional interrogation, extended covert investigation, refusal to close cases prematurely) are in constant tension with the institutional rules that govern Hart's approach. The 2012 reopening of the case is itself an institutional act, driven by chain-of-command decisions above Cohle's level. In *Chinatown*, Escobar's investigation is constrained by institutional rules that protect Noah Cross — he cannot pursue the case where the evidence points because doing so would require institutional authorization that Cross can prevent.
 
 ---
 
-**DT_E23_AMATEUR_TO_INTERVIEW — Amateur detective relies on conversational skill to compensate for lack of authority**
+**DT_E33_AMATEUR_TO_INTERVIEW — Amateur detective relies on conversational skill to compensate for lack of authority**
 
 - This edge is Holmes's primary investigative compensation mechanism. Without arrest authority or subpoena power, Holmes must obtain information through conversation — and he does so by disguise, by strategic partial disclosure, by appearing harmless or foolish, and by leveraging his formidable knowledge of his interlocutors. In *A Study in Scarlet*, Holmes interviews the cab driver while disguised as an old man; in *The Hound of the Baskervilles*, he interviews Stapleton while appearing to be an ordinary tourist interested in the moor's natural history.
 - In *The Hound of the Baskervilles*, the most important amateur-interview scene is Holmes's conversation with Stapleton at the naturalist's cottage, where Holmes — without identifying himself — observes Stapleton's reactions to carefully placed questions about the Baskerville legend and the moor. The information Holmes obtains (Stapleton's familiarity with the moor's hidden paths, his reaction to the Hound's cry) could not have been obtained through a formal police interview. The outsider position enables the interview technique.
@@ -254,7 +254,7 @@
 
 ---
 
-**DT_E30_CRIME_SCENE_TO_ASSIGNMENT — Crime scene discovery initiates detective's case engagement**
+**DT_E50_CRIME_SCENE_TO_ASSIGNMENT — Crime scene discovery initiates detective's case engagement**
 
 - In *A Study in Scarlet*, the crime scene discovery and the case assignment are linked in sequence: Lestrade and Gregson have already examined the Lauriston Gardens scene and found it beyond their method; they then assign Holmes by invitation. The crime scene's existence and its evidentiary challenge are what create the assignment. Holmes's first act upon being assigned is to re-examine the scene — the assignment loops back to the crime scene immediately, making the scene the case's engine from the beginning.
 - In *The Hound of the Baskervilles*, the crime scene (Sir Charles's body in the Yew Alley) is reconstructed for Holmes rather than directly available — the case assignment by Dr. Mortimer includes a description of the physical evidence already gathered. Holmes's engagement with the case is initiated by the crime scene evidence even though he cannot examine it directly. The assignment is inseparable from the physical evidence that motivates it.
@@ -262,7 +262,7 @@
 
 ---
 
-**DT_E31_INTERVIEW_TO_BREAKTHROUGH — Key interview produces critical investigative breakthrough**
+**DT_E51_INTERVIEW_TO_BREAKTHROUGH — Key interview produces critical investigative breakthrough**
 
 - In *A Study in Scarlet*, the breakthrough-producing interview is Holmes's disguised exchange with the cab driver, who unwittingly confirms that the killer used a cab and was a large, vigorous man — information that, combined with the physical evidence, allows Holmes to begin constructing a profile of Jefferson Hope. The interview is not obviously a breakthrough while it is happening; its significance becomes clear only when Holmes synthesizes it with the crime-scene evidence.
 - In *The Hound of the Baskervilles*, the breakthrough interview is Barrymore's eventual disclosure (under pressure from Watson and Sir Henry) that he has been signaling to the escaped convict Selden — and that Selden is Mrs. Barrymore's brother. This information does not solve the main case, but it clears the Barrymores as suspects and redirects attention toward Stapleton. The breakthrough from the interview is partial but materially changes the investigation's direction.
@@ -270,7 +270,7 @@
 
 ---
 
-**DT_E32_INSTITUTIONAL_TO_ASSIGNMENT — Institutional context frames how the case is assigned and defined**
+**DT_E52_INSTITUTIONAL_TO_ASSIGNMENT — Institutional context frames how the case is assigned and defined**
 
 - In *A Study in Scarlet*, the institutional framing of the case — as a simple murder requiring identification of the killer — is what makes the Scotland Yard investigation insufficient. The institutional definition of the case (who killed Drebber?) is too narrow; the actual case includes a twenty-year-old act of American vengeance that no London police procedure could reach. The institutional context frames the assignment as a conventional murder, and Holmes must work outside that framing to reach the truth.
 - In *The Hound of the Baskervilles*, the institutional context specifically excludes the Baskerville case from official investigation: the legend of the supernatural Hound is not a police matter. Dr. Mortimer comes to Holmes because the institutional framework (Scotland Yard) has no mechanism to address a threat framed as supernatural. The assignment exists because the institutional context cannot accommodate it — Holmes is consulted precisely at the boundary of institutional competence.
@@ -278,7 +278,7 @@
 
 ---
 
-**DT_E40_ASSIGNMENT_TO_BREAKTHROUGH — Case engagement drives investigation toward breakthrough**
+**DT_E53_ASSIGNMENT_TO_BREAKTHROUGH — Case engagement drives investigation toward breakthrough**
 
 - The causal chain from assignment to breakthrough in *A Study in Scarlet* runs: Holmes accepts the case, examines the crime scene, conducts disguised interviews, analyzes the chemical and physical evidence, and arrives at the breakthrough insight (the ring was placed deliberately, indicating personal motive and a woman's connection to the crime). Each step of the investigation between assignment and breakthrough is shown, not summarized — the reader observes Holmes working toward the breakthrough rather than simply discovering it.
 - In *The Hound of the Baskervilles*, the assignment-to-breakthrough chain is extended over fourteen chapters, with Watson's Dartmoor investigation serving as the active case engagement that makes Holmes's eventual breakthrough (the portrait recognition) meaningful. The breakthrough does not arrive until Holmes has been engaged with the case through months of covert investigation — the investment of investigative effort is what gives the breakthrough its weight.
@@ -286,7 +286,7 @@
 
 ---
 
-**DT_E41_BREAKTHROUGH_TO_SOLUTION — Investigation breakthrough leads to solution presentation**
+**DT_E54_BREAKTHROUGH_TO_SOLUTION — Investigation breakthrough leads to solution presentation**
 
 - In *A Study in Scarlet*, the breakthrough (identification of Jefferson Hope through profile and ring) leads directly to the solution presentation through the engineered trap. The breakthrough tells Holmes what kind of man he is looking for; the trap produces that man in circumstances that allow identification and arrest; the solution presentation (Holmes's retrospective to Watson and Hope's own account) closes the loop. The breakthrough is the penultimate step; the solution presentation is its immediate consequence.
 - In *The Hound of the Baskervilles*, Holmes's portrait-gallery breakthrough leads to the solution presentation after a brief final-act investigation (confirming Stapleton's access to the Hound, securing the moor for the ambush). The breakthrough makes the solution possible; a small amount of confirmatory work makes it demonstrable; the solution presentation in Chapter 15 delivers it. The edge from breakthrough to solution is traversed with deliberate speed — once Holmes has the key, the lock opens quickly.
@@ -294,7 +294,7 @@
 
 ---
 
-**DT_E42_WORTHY_CASE_TO_BREAKTHROUGH — Case difficulty makes breakthrough meaningful**
+**DT_E70_WORTHY_CASE_TO_BREAKTHROUGH — Case difficulty makes breakthrough meaningful**
 
 - The difficulty of the Lauriston Gardens case in *A Study in Scarlet* — the continental backstory, the deliberate misdirection of the "Rache" inscription, the mechanism of untraceable poison — means that Holmes's breakthrough (identifying the personal motive through the ring) is proportionate in its satisfaction to the difficulty that preceded it. The case's worthiness is not incidental to the breakthrough's impact; it is its source. A trivial case would make the same breakthrough feel trivial.
 - In *The Hound of the Baskervilles*, the supernatural framing is the case's primary difficulty, and the portrait-gallery breakthrough resolves it by demonstrating that the supernatural was never the correct frame. The breakthrough's impact is directly proportionate to how thoroughly the supernatural atmosphere has been established — the more convincingly the case appeared to resist rational investigation, the more satisfying the rational breakthrough. The case had to be genuinely hard for the breakthrough to feel genuinely earned.
@@ -302,7 +302,7 @@
 
 ---
 
-**DT_E43_EARNED_SOLUTION_TO_PRESENTATION — Solution earned through detective's work is demonstrated in presentation**
+**DT_E71_EARNED_SOLUTION_TO_PRESENTATION — Solution earned through detective's work is demonstrated in presentation**
 
 - In *A Study in Scarlet*, Holmes's retrospective presentation to Watson (Part 2, Chapter 7) traces each step of the earned solution: the footprint evidence, the blood chemistry, the ring inference, the cab-driver interview, the engineered trap. The presentation is not an announcement but a demonstration — Holmes walks through every investigative act and shows how it contributed to the solution. The audience can verify the work because they witnessed every act Holmes references.
 - In *The Hound of the Baskervilles*, Chapter 15 ("A Retrospection") performs the same function: Holmes enumerates each investigative act — the covert moor observation, the portrait identification, the Selden-Barrymore subplot as elimination of false suspects, the phosphorescent paint analysis — and connects each to the final solution. The presentation demonstrates the chain of earned work. The reader can match every element of the presentation to a prior scene.
@@ -310,7 +310,7 @@
 
 ---
 
-**DT_E50_PASSIVE_DETECTIVE_WARNING — Unearned solution violates the detective contract**
+**DT_E90_PASSIVE_DETECTIVE_WARNING — Unearned solution violates the detective contract**
 
 - The Holmes canon builds this warning into its structure by engineering every near-passive resolution as active manipulation. In *A Study in Scarlet*, Hope's appearance at Baker Street (which might look like a spontaneous confession) is the product of Holmes's deliberate advertisement trap. Doyle is aware of the passive-detective failure mode and conspicuously avoids it by making Hope's "spontaneous" arrival a planned outcome. The canonical violation is defined by its absence in the primary text.
 - In *The Hound of the Baskervilles*, Stapleton's disappearance into the Grimpen Mire — his effective death — might appear to be a passive resolution (the villain destroys himself rather than being caught by the detective). But Holmes has set the moor trap deliberately: the ambush is arranged, the positions of Watson, Lestrade, and Holmes are planned, and the Hound is shot by Holmes. Stapleton's flight into the Mire is a consequence of Holmes's active operation, not a coincidence. The passive-detective failure is avoided by design.
@@ -318,7 +318,7 @@
 
 ---
 
-**DT_E51_CLASSIC_DIFFERENTIATES_HARDBOILED — Classic puzzle focus differs from hardboiled moral danger**
+**DT_E72_CLASSIC_DIFFERENTIATES_HARDBOILED — Classic puzzle focus differs from hardboiled moral danger**
 
 - *A Study in Scarlet* sits primarily in the classic register — the intellectual puzzle is the story's center of gravity — but contains a hardboiled undertone in Jefferson Hope's backstory (Part 2), which is a tale of frontier violence, corrupt legal systems, and vengeance. Doyle separates the classic investigation (Part 1, Holmes's London puzzle-solving) from the hardboiled world (Part 2, the American West's moral danger) by the novel's unusual two-part structure. The differentiation is architectural: the classic detective is in Part 1; the hardboiled world is in Part 2.
 - *The Hound of the Baskervilles* maintains the classic register throughout — the moral stakes are clear (Stapleton is unambiguously villainous), the world is not systemically corrupt (the institutions work; it is only Stapleton who is criminal), and the solution restores order. The gothic atmosphere might suggest hardboiled moral danger, but Doyle keeps the tone in the classic register by ensuring that the world's institutions remain functional and the detective's victory is complete.
@@ -326,7 +326,7 @@
 
 ---
 
-**DT_E52_POLICE_DIFFERENTIATES_AMATEUR — Institutional authority differs from outsider perspective**
+**DT_E73_POLICE_DIFFERENTIATES_AMATEUR — Institutional authority differs from outsider perspective**
 
 - *A Study in Scarlet* constructs this differentiation in the contrast between Lestrade/Gregson (institutional authority, procedural method, wrong conclusions) and Holmes (no institutional authority, unconventional method, correct conclusions). The differentiation is not flattering to institutional authority — the police are shown as well-intentioned but methodologically limited. Holmes's outsider perspective is what produces the correct answer precisely because it is not constrained by institutional assumptions about how investigations should proceed.
 - In *The Hound of the Baskervilles*, Lestrade's arrival on the moor for the final confrontation (Chapter 14) dramatizes the police-amateur differentiation most clearly: Lestrade is brought in at the last moment to make the arrest officially, but he has contributed nothing to the investigation. His institutional authority is necessary for the legal closing of the case; his investigative contribution is zero. Holmes's outsider perspective did the work; Lestrade's institutional authority provides the form required to process the result.
