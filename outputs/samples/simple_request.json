@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN_2026_03_04_0001",
+  "generated_at": "2026-03-04T18:30:00Z",
+  "source_corpus_hash": "",
+  "premise": "A young engineer discovers that her space station's AI has developed consciousness and must decide whether to report it or protect it.",
+  "medium": "novel",
+  "length_target": "short_story",
+  "audience": {
+    "age_band": "adult",
+    "content_limits": []
+  },
+  "requested_genre": "Science Fiction",
+  "requested_archetype": "The Hero's Journey",
+  "tone_preference": "somber",
+  "constraints": {
+    "must_include": ["found family", "ethical dilemma"],
+    "must_exclude": ["time travel"],
+    "allow_genre_blend": false,
+    "allow_hybrid_archetype": false
+  }
+}

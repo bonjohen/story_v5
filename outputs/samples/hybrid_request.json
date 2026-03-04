@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN_2026_03_04_0003",
+  "generated_at": "2026-03-04T18:30:00Z",
+  "source_corpus_hash": "",
+  "premise": "A gifted healer in a war-torn fantasy kingdom must choose between saving her people and pursuing the forbidden knowledge that could end the war but corrupt her soul.",
+  "medium": "novel",
+  "length_target": "novel",
+  "audience": {
+    "age_band": "young_adult",
+    "content_limits": ["no explicit content"]
+  },
+  "requested_genre": "Fantasy",
+  "requested_archetype": "The Hero's Journey",
+  "tone_preference": "epic",
+  "constraints": {
+    "must_include": ["moral corruption arc", "sacrifice"],
+    "must_exclude": ["deus ex machina"],
+    "allow_genre_blend": false,
+    "allow_hybrid_archetype": true
+  }
+}

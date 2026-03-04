@@ -240,7 +240,67 @@ npm run build        # Production build
 npm run preview      # Preview production build
 npm run lint         # ESLint with type-aware rules
 npm run format       # Prettier formatting
-npm run test         # Run Vitest test suite (43 tests)
+npm run test         # Run Vitest test suite (146 tests)
+```
+
+## Story Generation System
+
+An agentic pipeline that consumes the corpus data to generate constraint-correct stories. Built with the same TypeScript codebase as the viewer — no code duplication.
+
+### Architecture
+
+```
+StoryRequest → Selection → Contract → Plan → Write → Validate → Repair → Trace
+                 Engine     Compiler   (LLM)  (LLM)   Engine     (LLM)   Engine
+```
+
+### CLI Usage
+
+```bash
+# Contract-only mode (no LLM required)
+npx tsx app/scripts/generate_story.ts --request outputs/samples/simple_request.json --mode contract-only --no-llm
+
+# Outline mode (LLM enhances summaries)
+npx tsx app/scripts/generate_story.ts --request outputs/samples/simple_request.json --mode outline
+
+# Full draft mode
+npx tsx app/scripts/generate_story.ts --request outputs/samples/simple_request.json --mode draft
+
+# Options:
+#   --request <file>     Path to story_request.json (required)
+#   --out <dir>          Output directory (default: outputs/runs/{run_id}/)
+#   --mode <mode>        draft | outline | contract-only (default: draft)
+#   --model <model>      LLM model (default: claude-sonnet-4-20250514)
+#   --max-repairs <n>    Max repair attempts per scene (default: 2)
+#   --no-llm             Run without LLM (deterministic only)
+```
+
+### Pipeline Modules
+
+| Module | File | Purpose |
+|--------|------|---------|
+| Corpus Loader | `engine/corpusLoader.ts` | Loads all 42 graphs + cross-references |
+| Selection Engine | `engine/selectionEngine.ts` | Scores genre-archetype combinations |
+| Contract Compiler | `engine/contractCompiler.ts` | Builds enforceable story contract |
+| Planner | `engine/planner.ts` | Beat scaffolding + scene assignment |
+| Writer Agent | `agents/writerAgent.ts` | LLM-backed scene prose generation |
+| Validator | `validators/validationEngine.ts` | Heuristic + LLM constraint checking |
+| Repair Engine | `engine/repairEngine.ts` | Targeted edit or full rewrite |
+| Trace Engine | `engine/traceEngine.ts` | Audit trail + compliance report |
+| Orchestrator | `engine/orchestrator.ts` | State machine wiring everything together |
+
+### Configuration
+
+See `generation_config.json` at project root:
+
+```json
+{
+  "signals_policy": { "mode": "warn", "min_fraction": 0.5 },
+  "tone_policy": { "mode": "warn" },
+  "repair_policy": { "max_attempts_per_scene": 2, "full_rewrite_threshold": 3 },
+  "coverage_targets": { "hard_constraints_min_coverage": 1.0, "soft_constraints_min_coverage": 0.6 },
+  "composition_defaults": { "allow_blend": true, "allow_hybrid": false }
+}
 ```
 
 ## Tech Stack

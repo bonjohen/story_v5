@@ -303,28 +303,28 @@ This file is maintained by the coding agent so that [ ] means not started, [~] m
 **Goal:** Enable headless generation via CLI and finalize shared infrastructure.
 
 ### 8.1 CLI runner
-- [ ] Create `app/scripts/generate_story.ts`
-- [ ] Flags: `--request`, `--out`, `--mode` (draft|outline|contract-only), `--model`, `--max-repairs-per-scene`
-- [ ] Shares all engine modules with UI (no code duplication)
-- [ ] Outputs to `outputs/runs/{run_id}/` matching UI structure
+- [X] Create `app/scripts/generate_story.ts`
+- [X] Flags: `--request`, `--out`, `--mode` (draft|outline|contract-only), `--model`, `--max-repairs-per-scene`
+- [X] Shares all engine modules with UI (no code duplication)
+- [X] Outputs to `outputs/runs/{run_id}/` matching UI structure
 
 ### 8.2 Contract-only and outline modes
-- [ ] `--mode contract-only`: Stop after contract compilation (no LLM needed)
-- [ ] `--mode outline`: Stop after planning (LLM for summaries only)
-- [ ] `--mode draft`: Full pipeline (default)
+- [X] `--mode contract-only`: Stop after contract compilation (no LLM needed)
+- [X] `--mode outline`: Stop after planning (LLM for summaries only)
+- [X] `--mode draft`: Full pipeline (default)
 
 ### 8.3 Sample request files
-- [ ] Create 2–3 sample `story_request.json` files in `outputs/samples/`
-- [ ] Cover: simple request (one archetype + genre), blend request, hybrid request
+- [X] Create 2–3 sample `story_request.json` files in `outputs/samples/`
+- [X] Cover: simple request (one archetype + genre), blend request, hybrid request
 
 ### 8.4 Documentation
-- [ ] Update `app/README.md` with generation system section
-- [ ] Document CLI usage and flags
-- [ ] Document generation_config.json options
+- [X] Update `app/README.md` with generation system section
+- [X] Document CLI usage and flags
+- [X] Document generation_config.json options
 
 ### 8.5 Final tests
-- [ ] End-to-end CLI test: sample request → all artifacts produced
-- [ ] Verify CLI and UI produce identical artifacts from same input
+- [X] End-to-end CLI test: sample request → all artifacts produced
+- [X] Verify CLI and UI produce identical artifacts from same input
 
 **Verification:** CLI produces valid run output. Contract-only mode works without LLM. UI and CLI outputs are structurally identical.
 
