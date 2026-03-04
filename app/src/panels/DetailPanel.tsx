@@ -268,6 +268,8 @@ function CollapsibleSection({ title, items, warn }: {
     <div style={{ marginBottom: 8 }}>
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-label={`${title}: ${filtered.length} items`}
         style={{
           display: 'flex',
           alignItems: 'center',

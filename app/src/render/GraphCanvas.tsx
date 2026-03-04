@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
 import cytoscape, { type Core, type EventObject } from 'cytoscape'
+export type { Core as CyCore } from 'cytoscape'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 import { useGraphStore } from '../store/graphStore.ts'
 import { buildCytoscapeElements } from './elements.ts'
@@ -21,6 +22,7 @@ interface GraphCanvasProps {
   failureModeNodes?: string[]
   activeVariant?: string | null
   exampleMappedNodes?: string[]
+  onCyReady?: (cy: Core) => void
 }
 
 export function GraphCanvas({
@@ -32,6 +34,7 @@ export function GraphCanvas({
   failureModeNodes,
   activeVariant,
   exampleMappedNodes,
+  onCyReady,
 }: GraphCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cyRef = useRef<Core | null>(null)
@@ -95,7 +98,8 @@ export function GraphCanvas({
     if (!cy || cy.elements().length === 0) return
 
     try {
-      const png = cy.png({ full: true, maxWidth: MINIMAP_W, maxHeight: MINIMAP_H, bg: '#0f1117' })
+      const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim() || '#0f1117'
+      const png = cy.png({ full: true, maxWidth: MINIMAP_W, maxHeight: MINIMAP_H, bg })
       setMinimapSrc(png)
 
       const bb = cy.elements().boundingBox()
@@ -149,6 +153,7 @@ export function GraphCanvas({
     applyLayout(cy, graph)
 
     cyRef.current = cy
+    onCyReady?.(cy)
 
     requestAnimationFrame(() => updateMinimap())
 
@@ -156,7 +161,7 @@ export function GraphCanvas({
       cy.destroy()
       cyRef.current = null
     }
-  }, [graph, handleNodeTap, handleEdgeTap, handleBgTap, handleEdgeMouseOver, handleEdgeMouseOut, updateMinimap])
+  }, [graph, handleNodeTap, handleEdgeTap, handleBgTap, handleEdgeMouseOver, handleEdgeMouseOut, updateMinimap, onCyReady])
 
   // Sync selection highlighting
   useEffect(() => {
@@ -378,6 +383,8 @@ export function GraphCanvas({
     <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
       <div
         ref={containerRef}
+        role="application"
+        aria-label={`Graph canvas: ${graph.graph.name} — ${graph.graph.nodes.length} nodes, ${graph.graph.edges.length} edges. Use mouse to pan and zoom, click nodes to select.`}
         style={{ width: '100%', height: '100%' }}
       />
       {/* Minimap */}
@@ -391,7 +398,7 @@ export function GraphCanvas({
             right: 12,
             width: MINIMAP_W,
             height: MINIMAP_H,
-            background: '#0f1117',
+            background: 'var(--bg-primary)',
             border: '1px solid var(--border)',
             borderRadius: 6,
             overflow: 'hidden',

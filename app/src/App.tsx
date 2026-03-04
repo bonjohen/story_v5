@@ -9,8 +9,12 @@ import { ExampleOverlay } from './panels/ExampleOverlay.tsx'
 import { GraphStats } from './panels/GraphStats.tsx'
 import { CrossIndexPanel } from './panels/CrossIndex.tsx'
 import { GraphSearch } from './components/GraphSearch.tsx'
+import { SettingsPanel } from './components/SettingsPanel.tsx'
+import { ExportPanel } from './panels/ExportPanel.tsx'
+import type { CyCore } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSimulationStore } from './store/simulationStore.ts'
+import { useSettingsStore } from './store/settingsStore.ts'
 import type { GraphEdge } from './types/graph.ts'
 import type { DataManifest } from './types/graph.ts'
 
@@ -48,6 +52,10 @@ function App() {
   const simAvailableEdges = useSimulationStore((s) => s.availableEdges)
   const resetSimulation = useSimulationStore((s) => s.resetSimulation)
 
+  // Settings
+  const settingsOpen = useSettingsStore((s) => s.settingsOpen)
+  const toggleSettings = useSettingsStore((s) => s.toggleSettings)
+
   // Edge hover tooltip state
   const [hoveredEdge, setHoveredEdge] = useState<{ edge: GraphEdge; x: number; y: number } | null>(null)
   // Trace direction state
@@ -61,6 +69,13 @@ function App() {
   const [exampleMappedNodes, setExampleMappedNodes] = useState<string[]>([])
   // Right panel mode
   const [rightPanel, setRightPanel] = useState<'detail' | 'stats' | 'crossindex' | null>(null)
+  // Export panel
+  const [showExport, setShowExport] = useState(false)
+  const cyInstanceRef = useRef<CyCore | null>(null)
+
+  const handleCyReady = useCallback((cy: CyCore) => {
+    cyInstanceRef.current = cy
+  }, [])
 
   const handleExampleHighlight = useCallback((nodeIds: string[]) => {
     setExampleMappedNodes(nodeIds)
@@ -224,7 +239,7 @@ function App() {
       overflow: 'hidden',
     }}>
       {/* Top bar */}
-      <header style={{
+      <header role="banner" aria-label="Application toolbar" style={{
         display: 'flex',
         alignItems: 'center',
         gap: 12,
@@ -359,6 +374,46 @@ function App() {
           <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
         )}
 
+        {/* Export button */}
+        {currentGraph && (
+          <button
+            onClick={() => setShowExport((v) => !v)}
+            aria-label="Export graph"
+            title="Export graph"
+            style={{
+              fontSize: 11,
+              padding: '3px 8px',
+              borderRadius: 4,
+              border: '1px solid',
+              borderColor: showExport ? 'var(--accent)' : 'var(--border)',
+              background: showExport ? 'rgba(59,130,246,0.15)' : 'transparent',
+              color: showExport ? 'var(--accent)' : 'var(--text-muted)',
+              cursor: 'pointer',
+              transition: 'all 0.15s',
+            }}
+          >
+            Export
+          </button>
+        )}
+
+        {/* Settings gear */}
+        <button
+          onClick={toggleSettings}
+          aria-label="Settings"
+          title="Settings"
+          style={{
+            fontSize: 16,
+            padding: '4px 6px',
+            color: settingsOpen ? 'var(--accent)' : 'var(--text-muted)',
+            borderRadius: 4,
+            transition: 'color 0.15s',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'}
+          onMouseLeave={(e) => { if (!settingsOpen) e.currentTarget.style.color = 'var(--text-muted)' }}
+        >
+          {'\u2699'}
+        </button>
+
         {/* Loading / error indicators */}
         {loading && (
           <span style={{ fontSize: 11, color: 'var(--accent)', animation: 'pulse 1.5s infinite' }}>
@@ -370,10 +425,22 @@ function App() {
         )}
       </header>
 
+      {/* Settings panel overlay */}
+      {settingsOpen && <SettingsPanel />}
+
+      {/* Export panel overlay */}
+      {showExport && currentGraph && (
+        <ExportPanel
+          graph={currentGraph}
+          cyInstance={cyInstanceRef.current}
+          onClose={() => setShowExport(false)}
+        />
+      )}
+
       {/* Main content area */}
       <div style={{ flex: 1, display: 'flex', position: 'relative', overflow: 'hidden' }}>
         {/* Left sidebar */}
-        <aside style={{
+        <aside aria-label="Graph selector sidebar" style={{
           width: sidebarOpen ? 260 : 0,
           minWidth: sidebarOpen ? 260 : 0,
           background: 'var(--bg-surface)',
@@ -432,6 +499,7 @@ function App() {
                   failureModeNodes={failureModeNodes}
                   activeVariant={activeVariant}
                   exampleMappedNodes={exampleMappedNodes.length > 0 ? exampleMappedNodes : undefined}
+                  onCyReady={handleCyReady}
                 />
               </div>
             ) : (
@@ -466,7 +534,7 @@ function App() {
 
         {/* Right panel (tabbed: Detail / Stats / Cross-Index) */}
         {(hasDetailPanel || rightPanel) && currentGraph && (
-          <aside style={{
+          <aside aria-label="Detail and analysis panel" style={{
             width: 320,
             background: 'var(--bg-surface)',
             borderLeft: '1px solid var(--border)',
@@ -523,6 +591,19 @@ function App() {
       {hoveredEdge && (
         <EdgeTooltip edge={hoveredEdge.edge} position={{ x: hoveredEdge.x, y: hoveredEdge.y }} />
       )}
+
+      {/* Screen-reader announcements */}
+      <div aria-live="polite" className="sr-only" style={{
+        position: 'absolute',
+        width: 1,
+        height: 1,
+        overflow: 'hidden',
+        clip: 'rect(0,0,0,0)',
+        whiteSpace: 'nowrap',
+      }}>
+        {selectedNode && `Selected node: ${selectedNode.label}, role: ${selectedNode.role}, ${(currentGraph?.adjacency.get(selectedNode.node_id) ?? []).length} outgoing connections`}
+        {selectedEdge && `Selected edge: ${selectedEdge.label}, meaning: ${selectedEdge.meaning}, from ${selectedEdge.from} to ${selectedEdge.to}`}
+      </div>
     </div>
   )
 }

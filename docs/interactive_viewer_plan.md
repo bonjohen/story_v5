@@ -239,34 +239,34 @@ Stage, commit, and push, then continue working.
 
 **Goal**: Achieve the design spec's quality bar — "intellectually serious, technically elegant, and visually compelling."
 
-- [ ] Refine **dark-first UI** (design spec §7.1):
+- [X] Refine **dark-first UI** (design spec §7.1):
   - Soft gradients across time/depth
   - Subtle motion and transitions (not distracting)
   - Minimalist typography
   - Zero visual clutter audit
-- [ ] Implement **high-contrast mode** (design spec §11):
+- [X] Implement **high-contrast mode** (design spec §11):
   - Alternative color scheme for accessibility
   - User toggle in settings
-- [ ] Implement **reduced-motion mode** (design spec §11):
+- [X] Implement **reduced-motion mode** (design spec §11):
   - Disable animations and transitions
   - User toggle or auto-detect from OS preference
-- [ ] Add **screen-reader metadata** (design spec §11):
+- [X] Add **screen-reader metadata** (design spec §11):
   - ARIA labels on all nodes and edges
   - Announce node role, label, and connection count
   - Panel content is screen-reader navigable
-- [ ] **Performance optimization** (design spec §8):
+- [X] **Performance optimization** (design spec §8):
   - Verify 60fps interaction for graphs up to 200 nodes
   - Lazy-load expanded metadata (don't parse examples.md until needed)
   - Consider WebGL upgrade path (Sigma.js) if Canvas performance is insufficient
-- [ ] Add **settings panel**:
+- [X] Add **settings panel**:
   - Layout preferences (horizontal/vertical override)
   - Color scheme (dark/light/high-contrast)
   - Motion preferences
   - Default panel position
-- [ ] Add **export/share features**:
+- [X] Add **export/share features**:
   - Export current graph view as PNG/SVG
   - Copy shareable URL to clipboard
-- [ ] Add **export to standard graph formats** (v-next #25 — alongside PNG/SVG export, add DOT/Graphviz, Mermaid, and GraphML export; the graph model is already in memory, so serializing to these formats is incremental)
+- [X] Add **export to standard graph formats** (v-next #25 — alongside PNG/SVG export, add DOT/Graphviz, Mermaid, and GraphML export; the graph model is already in memory, so serializing to these formats is incremental)
 
 **Deliverable**: Production-quality visual interface meeting all accessibility requirements and performance targets, with multi-format export.
 
