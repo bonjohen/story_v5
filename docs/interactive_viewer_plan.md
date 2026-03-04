@@ -20,19 +20,31 @@ This plan breaks the interactive viewer specification into 8 implementation phas
 
 ## Phase 1 — Project Scaffolding and Data Layer
 
-**Goal**: Initialize the application, define types, and build the data pipeline from JSON files to an in-memory graph model.
+**Goal**: Initialize the application, define types, and build the data pipeline from JSON files to an in-memory graph model. Also resolve data-layer housekeeping items from v-next.md that are nearly free to do while building the normalizer and data index.
 
 - [ ] Initialize React + TypeScript project with Vite
 - [ ] Configure ESLint, Prettier, and project structure per design spec §10
 - [ ] Define TypeScript interfaces for archetype graph nodes and edges (matching `v0_plan.md` §1.1–1.2 schema)
 - [ ] Define TypeScript interfaces for genre graph nodes and edges (same schema, genre-specific roles)
+- [ ] Create a **JSON Schema** file for graph.json validation (v-next #16 — the schema is the same shape as the TS interfaces, so producing both is trivial)
 - [ ] Build the Graph Normalizer: load archetype or genre `graph.json`, validate structure, produce a unified internal graph model
+- [ ] Add **graph-narrative ID validation** to the normalizer (v-next #10 — check that all node/edge IDs referenced in narrative.md and examples.md exist in graph.json; report mismatches)
+- [ ] Add **vocabulary usage audit** to the normalizer (v-next #2, #8 — count usage of each controlled vocabulary term across all graphs; flag unused terms)
 - [ ] Set up Zustand store for application state (current graph, selected node, active mode, UI panel state)
 - [ ] Create a graph data index: enumerate all 15 archetypes and 27 genres with metadata (name, type, node count, edge count) from the JSON files
-- [ ] Write unit tests for the normalizer and data index
+- [ ] Persist the data index as a **data manifest file** (v-next #24 — write the computed index to a JSON file for use by dashboards and automated checks)
+- [ ] Write unit tests for the normalizer, validator, and data index
 - [ ] Copy `data/archetypes/` and `data/genres/` graph.json files into the app's public data directory (or configure path aliasing)
 
-**Deliverable**: App loads, parses any graph.json, and logs a validated graph model to the console. No visual rendering yet.
+### Data housekeeping (v-next items, done as part of Phase 1 setup):
+
+- [ ] **Fix `archtypes.json` filename** (v-next #13 — rename to `archetypes.json` and update all references in CLAUDE.md, cross-indices, and matrix; must be done before the normalizer references it)
+- [ ] **Fix stale paths in goal_1.md** (v-next #3 — find-replace `docs/archetypes/` → `data/archetypes/`, or mark as historical)
+- [ ] **Standardize cross_archetype_index.json naming** (v-next #5 — match archetype names to `archetypes.json` exactly while building the parser)
+- [ ] **Co-locate cross-cutting index files** (v-next #15 — move `genre_archetype_matrix.json` and `cross_genre_constraint_index.json` to a consistent location, either both at `data/` root or both in `data/indices/`)
+- [ ] **Mark v-next #14 as done** (CLAUDE.md has been updated)
+
+**Deliverable**: App loads, parses any graph.json, and logs a validated graph model to the console. JSON Schema, validation script, and data manifest are produced as artifacts. Data housekeeping items resolved.
 
 ---
 
@@ -125,8 +137,9 @@ This plan breaks the interactive viewer specification into 8 implementation phas
   - Arrow keys to move between connected nodes
   - Enter to open detail panel
   - Escape to close panel
+- [ ] Add **constraint checklist generator** (v-next #26 — given the current genre + selected subgenre path, extract all applicable constraints and produce a printable/exportable checklist; the detail panel already surfaces this data, so adding a "Generate Checklist" button is incremental)
 
-**Deliverable**: Click any node to see full details; hover any edge for metadata; trace causality chains; search the graph. The app is now a functional, useful graph explorer.
+**Deliverable**: Click any node to see full details; hover any edge for metadata; trace causality chains; search the graph; generate a constraint checklist for any genre path. The app is now a functional, useful graph explorer.
 
 ---
 
@@ -152,8 +165,9 @@ This plan breaks the interactive viewer specification into 8 implementation phas
 - [ ] Add **failure mode path** visualization:
   - Highlight anti-pattern nodes and the edges that lead to them
   - Show as a "what not to do" overlay
+- [ ] Add **constraint sheet export** for genre depth selector (v-next #30 — after walking a genre path through simulation, export the accumulated constraints as a tailored writing guide; the constraint narrowing meter already tracks this state)
 
-**Deliverable**: Walk through any graph step by step; toggle between canonical and variant paths; see which structural elements have been covered.
+**Deliverable**: Walk through any graph step by step; toggle between canonical and variant paths; see which structural elements have been covered; export a constraint sheet for any genre path.
 
 ---
 
@@ -211,8 +225,11 @@ This plan breaks the interactive viewer specification into 8 implementation phas
   - Edge count by meaning
   - Branching factor analysis
   - Depth/length metrics
+- [ ] Add **multi-archetype overlay** (v-next #37 — comparative mode already renders two graphs side by side; extend to support two archetypes aligned by narrative time, showing overlap and divergence)
+- [ ] Add **genre-archetype tension analysis** (v-next #38 — overlay mode already identifies tension points; formalize into a panel showing specific constraint conflicts, e.g., Comedy's "recoverable stakes" vs. Tragedy's "irreversible consequences")
+- [ ] Add **failure mode cross-reference** to cross-index integration (v-next #42 — the cross-index queries already surface shared patterns; add failure modes as a searchable category, showing which anti-patterns recur across archetypes/genres)
 
-**Deliverable**: Overlay archetype and genre graphs to see structural tension; compare any two graphs side by side; explore cross-cutting patterns.
+**Deliverable**: Overlay archetype and genre graphs to see structural tension; compare any two graphs (including two archetypes) side by side; explore cross-cutting patterns including shared failure modes; see formalized tension analysis for archetype-genre pairs.
 
 ---
 
@@ -247,8 +264,9 @@ This plan breaks the interactive viewer specification into 8 implementation phas
 - [ ] Add **export/share features**:
   - Export current graph view as PNG/SVG
   - Copy shareable URL to clipboard
+- [ ] Add **export to standard graph formats** (v-next #25 — alongside PNG/SVG export, add DOT/Graphviz, Mermaid, and GraphML export; the graph model is already in memory, so serializing to these formats is incremental)
 
-**Deliverable**: Production-quality visual interface meeting all accessibility requirements and performance targets.
+**Deliverable**: Production-quality visual interface meeting all accessibility requirements and performance targets, with multi-format export.
 
 ---
 
@@ -262,6 +280,34 @@ These are explicitly deferred from the initial build:
 - [ ] **Constraint heatmap visualization** — Color-code nodes by usage frequency across example works
 - [ ] **Interactive "What if?" experimentation** — Drag nodes to restructure a graph and see consequences
 - [ ] **AI-powered draft analysis overlay** — Upload a draft; AI maps it to the graph automatically
+
+---
+
+## v-next Items Addressed by This Plan
+
+The following v-next items are resolved as part of viewer implementation work:
+
+| v-next # | Item | Phase | Notes |
+|----------|------|-------|-------|
+| 2 | Unused archetype vocabulary terms | 1 | Vocab audit in normalizer |
+| 3 | Stale goal_1.md paths | 1 | Housekeeping during setup |
+| 5 | cross_archetype_index naming | 1 | Fixed while building parser |
+| 8 | Unused genre edge vocabulary terms | 1 | Vocab audit in normalizer |
+| 10 | No automated validation script | 1 | ID validation in normalizer |
+| 13 | `archtypes.json` typo | 1 | Rename before normalizer references it |
+| 14 | CLAUDE.md stale | 1 | Already fixed, mark done |
+| 15 | Matrix placement inconsistent | 1 | Co-locate during data setup |
+| 16 | No JSON schema | 1 | Produced alongside TS interfaces |
+| 21 | Graph visualization tooling | 2 | Subsumed by the viewer itself |
+| 24 | Data manifest file | 1 | Persisted from data index |
+| 25 | Export to standard graph formats | 8 | Alongside PNG/SVG export |
+| 26 | Constraint checklist generator | 4 | Button in detail panel |
+| 28 | Interactive story planner | 5–7 | Subsumed by simulation + overlay |
+| 30 | Genre depth selector | 5 | Constraint sheet export |
+| 37 | Multi-archetype overlay | 7 | Extension of comparative mode |
+| 38 | Genre-archetype tension analysis | 7 | Formalized overlay panel |
+| 39 | Interactive visual graph interface | All | This plan IS item #39 |
+| 42 | Failure mode cross-reference | 7 | Added to cross-index queries |
 
 ---
 
