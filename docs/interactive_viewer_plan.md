@@ -87,19 +87,19 @@ Stage, commit, and push, then continue working.
 
 **Goal**: Build the application chrome — graph picker, mode switcher, and URL routing.
 
-- [ ] Build the **graph selector panel**:
+- [X] Build the **graph selector panel**:
   - Two tabs: Archetypes (15) and Genres (27)
   - Each entry shows name and key metadata (node count, subgenre/variant count)
   - Search/filter within each tab
-- [ ] Implement **mode indicator** showing current graph type (Archetype/Genre) with appropriate axis label
-- [ ] Add **URL routing** so each graph has a shareable deep link (e.g., `/archetype/heros-journey`, `/genre/horror`)
-- [ ] Build the **main layout shell**:
+- [X] Implement **mode indicator** showing current graph type (Archetype/Genre) with appropriate axis label
+- [X] Add **URL routing** so each graph has a shareable deep link (e.g., `/archetype/heros-journey`, `/genre/horror`)
+- [X] Build the **main layout shell**:
   - Left sidebar: graph selector (collapsible)
   - Center: graph canvas
   - Right panel: detail panel (initially hidden, appears on node/edge selection)
   - Top bar: mode indicator, search, settings
-- [ ] Add **graph switching animation** — smooth transition when changing graphs
-- [ ] Implement **minimap** for orientation within large graphs
+- [X] Add **graph switching animation** — smooth transition when changing graphs
+- [X] Implement **minimap** for orientation within large graphs
 
 **Deliverable**: Full navigation between all 42 graphs with smooth transitions and deep-linkable URLs.
 
