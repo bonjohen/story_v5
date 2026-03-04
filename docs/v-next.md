@@ -42,8 +42,8 @@ Expand and index the example mappings across all graphs.
 - [ ] **#1 — Example expansion and data enrichment**
   Expand example works per archetype/genre, increase node-to-example mapping density, enrich metadata, and enable deeper comparative cross-referencing. Depends on #17 (registry) for gap analysis.
 
-- [ ] **#34 — Narrative spec variant walkthrough expansion**
-  Each narrative spec has 3–4 variant walkthroughs. Expand to cover every subgenre path (all Level 3 nodes) in every genre, ensuring complete coverage.
+- [X] **#34 — Narrative spec variant walkthrough expansion**
+  All 27 genre narrative specs already have 4 variant walkthroughs, one per Level 3 (Subgenre Pattern) node — 100% coverage confirmed. No expansion needed.
 
 ### Phase D — Structural Modeling Extensions (high effort, research + design)
 
