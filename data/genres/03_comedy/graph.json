@@ -24,6 +24,11 @@
       "mandates element": 3,
       "requires payoff": 1,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 22,
+      "soft": 13,
+      "total": 35
     }
   },
   "nodes": [
@@ -52,7 +57,8 @@
       "signals_in_text": [
         "Tone is inviting and playful from the opening",
         "Characters and situations contain visible incongruities"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N10_HUMOR_ENGINE",
@@ -79,7 +85,8 @@
       "signals_in_text": [
         "Most scenes contain at least one comic beat",
         "Audience response is primarily amusement"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N11_INCONGRUITY",
@@ -107,7 +114,8 @@
       "signals_in_text": [
         "Gap between what characters believe and what audience knows",
         "Social expectations subverted"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N12_STAKES_RECOVERABLE",
@@ -134,7 +142,8 @@
       "signals_in_text": [
         "Characters face consequences that feel urgent in the moment",
         "Audience senses a safety net even during tension"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N13_RESOLUTION_POSITIVE",
@@ -161,7 +170,8 @@
       "signals_in_text": [
         "Final scenes include reunion, celebration, or shared laughter",
         "Conflicts that drove the comedy are resolved"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N20_SCREWBALL",
@@ -189,7 +199,8 @@
         "Rapid-fire dialogue",
         "Verbal one-upmanship",
         "Physical comedy alongside wit"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CM_N21_FARCE",
@@ -218,7 +229,8 @@
         "Characters maintaining increasingly difficult deceptions",
         "Near-misses and close calls",
         "Physical comedy driven by panic"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CM_N22_DARK_COMEDY",
@@ -246,7 +258,8 @@
       "signals_in_text": [
         "Juxtaposition of serious situations with absurd reactions",
         "Characters treating terrible situations with inappropriate normalcy"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CM_N23_FISH_OUT_OF_WATER",
@@ -275,7 +288,8 @@
         "Character misreads social cues",
         "Basic tasks become comic challenges",
         "Gradual understanding between character and new environment"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CM_N40_SOCIAL_SETTING",
@@ -303,7 +317,8 @@
       "signals_in_text": [
         "Characters thrown together by circumstance",
         "Social expectations create pressure that generates humor"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N41_RULES_TO_BREAK",
@@ -330,7 +345,8 @@
       "signals_in_text": [
         "Characters aware of what they 'should' do vs. what they actually do",
         "Authority figures or social gatekeepers whose expectations are defied"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N42_TIMING_MECHANISM",
@@ -357,7 +373,8 @@
         "References to impending event",
         "Characters racing against time",
         "Pacing accelerates as deadline approaches"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CM_N60_COMIC_SETUP",
@@ -384,7 +401,8 @@
       "signals_in_text": [
         "Audience recognizes the gap between what characters believe and what's true",
         "First major laugh is generated"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N61_ESCALATION_SCENE",
@@ -411,7 +429,8 @@
       "signals_in_text": [
         "Each new complication makes the prior solution worse",
         "Characters' stress increases while audience amusement increases"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N62_COMIC_CLIMAX",
@@ -439,7 +458,8 @@
         "Maximum number of characters in one scene",
         "Multiple reveals happening simultaneously",
         "Biggest laugh of the story"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CM_N80_PLAYFUL_TONE",
@@ -466,7 +486,8 @@
       "signals_in_text": [
         "Narrative voice has lightness even in tense moments",
         "Characters' suffering is temporary and acknowledged with empathy"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CM_N90_CRUELTY_COMEDY",
@@ -491,7 +512,8 @@
       "signals_in_text": [
         "Audience feels guilty laughing",
         "Character suffering persists into the resolution"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -511,7 +533,8 @@
       ],
       "anti_patterns": [
         "Humor is incidental to a non-comic story"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E02_PROMISE_TO_INCONGRUITY",
@@ -529,7 +552,8 @@
       ],
       "anti_patterns": [
         "Everything is as expected — no comic gap"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E03_PROMISE_TO_RECOVERABLE",
@@ -547,7 +571,8 @@
       ],
       "anti_patterns": [
         "Permanent tragedy in a comedy — audience feels betrayed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E04_PROMISE_TO_RESOLUTION",
@@ -565,7 +590,8 @@
       ],
       "anti_patterns": [
         "Bleak or punishing ending that betrays the comic contract"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E05_PROMISE_TO_TONE",
@@ -583,7 +609,8 @@
       ],
       "anti_patterns": [
         "Mean-spirited or grim tone sustained throughout"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E10_INCONGRUITY_TO_SCREWBALL",
@@ -603,7 +630,8 @@
       ],
       "anti_patterns": [
         "Sparring is one-sided or humorless"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CM_E11_INCONGRUITY_TO_FARCE",
@@ -623,7 +651,8 @@
       ],
       "anti_patterns": [
         "Misunderstanding is small and easily cleared up"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CM_E12_INCONGRUITY_TO_DARK",
@@ -643,7 +672,8 @@
       ],
       "anti_patterns": [
         "Dark material overwhelms the comedy — becomes straightforward drama"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CM_E13_INCONGRUITY_TO_FISH",
@@ -663,7 +693,8 @@
       ],
       "anti_patterns": [
         "Character is merely clumsy — no genuine cultural collision"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CM_E30_SCREWBALL_TO_SOCIAL",
@@ -683,7 +714,8 @@
       ],
       "anti_patterns": [
         "Characters spar in isolation with no social context"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E31_FARCE_TO_RULES",
@@ -703,7 +735,8 @@
       ],
       "anti_patterns": [
         "No norms exist to violate — chaos without contrast"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E32_FARCE_TO_TIMING",
@@ -723,7 +756,8 @@
       ],
       "anti_patterns": [
         "No time pressure — characters can untangle mess at leisure"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CM_E33_FISH_TO_SOCIAL",
@@ -744,7 +778,8 @@
       ],
       "anti_patterns": [
         "Character already understands the new environment"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E50_SOCIAL_TO_SETUP",
@@ -762,7 +797,8 @@
       ],
       "anti_patterns": [
         "Disruption occurs in social vacuum with no witnesses or consequences"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E51_RULES_TO_ESCALATION",
@@ -782,7 +818,8 @@
       ],
       "anti_patterns": [
         "Rule violation has no consequences — nothing escalates"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CM_E52_TIMING_TO_CLIMAX",
@@ -801,7 +838,8 @@
       ],
       "anti_patterns": [
         "Deadline arrives but nothing is resolved"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CM_E53_ESCALATION_TO_CLIMAX",
@@ -821,7 +859,8 @@
       ],
       "anti_patterns": [
         "Complications resolve one by one without a climactic convergence"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CM_E90_CRUELTY_WARNING",
@@ -837,7 +876,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

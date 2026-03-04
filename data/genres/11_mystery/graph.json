@@ -24,6 +24,11 @@
       "requires payoff": 2,
       "restricts resolution": 1,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 27,
+      "soft": 10,
+      "total": 37
     }
   },
   "nodes": [
@@ -54,7 +59,8 @@
         "A crime or puzzle is introduced early that demands explanation",
         "Protagonist is positioned as investigator or questioner",
         "Audience is implicitly invited to solve alongside the story"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N10_CENTRAL_QUESTION",
@@ -83,7 +89,8 @@
         "Characters voice the question explicitly",
         "Every scene moves toward or away from the answer",
         "The audience tracks clues against the question"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N11_FAIR_CLUEING",
@@ -112,7 +119,8 @@
         "Investigator draws attention to seemingly minor details",
         "Objects or statements are described with unusual specificity",
         "Reader/viewer can mentally re-examine earlier scenes after the reveal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N12_FAIR_PLAY_CONTRACT",
@@ -140,7 +148,8 @@
         "Red herrings are traceable to a non-criminal cause upon re-read",
         "The culprit has been present and active throughout",
         "Every element of the solution was knowable in advance"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N13_SATISFYING_RESOLUTION",
@@ -169,7 +178,8 @@
         "Investigator re-traces the logic step by step",
         "Earlier scenes are explicitly re-contextualized",
         "All suspects are cleared or implicated with reasoning"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N20_COZY",
@@ -201,7 +211,8 @@
         "Protagonist is charming and socially integrated",
         "Humor and warmth coexist with the central crime",
         "Suspects are neighbors, friends, or regulars"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "MY_N21_HARDBOILED",
@@ -234,7 +245,8 @@
         "Urban squalor and institutional corruption",
         "Protagonist operates alone and is threatened or compromised",
         "Violence and moral ambiguity are present without glamorization"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "MY_N22_PROCEDURAL",
@@ -266,7 +278,8 @@
         "Chain of evidence and protocol are referenced",
         "Team members have distinct roles and specializations",
         "Bureaucratic and legal constraints shape what is possible"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "MY_N23_LOCKED_ROOM",
@@ -297,7 +310,8 @@
         "Investigator explicitly names and describes the impossible conditions",
         "Physical environment is mapped in unusual detail",
         "Multiple failed solutions are proposed and eliminated before the true one"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "MY_N40_CLOSED_CIRCLE",
@@ -327,7 +341,8 @@
         "Early scene establishes who was present or who had access",
         "Investigator explicitly maps the suspect field",
         "Each suspect is given motive and opportunity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "MY_N41_PHYSICAL_EVIDENCE",
@@ -357,7 +372,8 @@
         "Descriptive passages include specific physical details",
         "Investigator handles or examines objects carefully",
         "Dialogue contains information that can be evaluated for truthfulness"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N42_SOCIAL_DYNAMICS",
@@ -387,7 +403,8 @@
         "Exposition establishes who owes what to whom",
         "Investigator probes relationships as much as events",
         "Reveals recontextualize relationships, not just facts"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N60_DISCOVERY_SCENE",
@@ -418,7 +435,8 @@
         "Scene is given structural prominence — often chapter-opening or Act One climax",
         "Investigator or surrogate character voices the question",
         "Physical scene of the crime is described in detail sufficient to support later clue-retrieval"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N61_INVESTIGATION_PIVOT",
@@ -451,7 +469,8 @@
         "Investigator explicitly states that everything must be re-examined",
         "Scene pauses the forward momentum for recalculation",
         "Audience is shown the reinterpretation of an earlier clue in real time"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N62_REVEAL_SCENE",
@@ -485,7 +504,8 @@
         "Investigator speaks at length, re-tracing the investigation",
         "Earlier scenes are explicitly recalled and recontextualized",
         "Culprit's behavior, opportunity, and motive are all accounted for"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N80_INTELLECTUAL_CURIOSITY",
@@ -515,7 +535,8 @@
         "Investigator's enthusiasm for the puzzle is visible and contagious",
         "Clue-discovery scenes are given weight and savored",
         "Scene-endings frequently pose new questions rather than providing answers"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "MY_N90_WITHHELD_CLUES",
@@ -542,7 +563,8 @@
         "Audience cannot reconstruct the solution from material presented before the reveal",
         "Investigator says 'I knew all along' without the narrative having shown it",
         "Resolution requires accepting facts that contradict prior scene-level presentation"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -562,7 +584,8 @@
       ],
       "anti_patterns": [
         "Story proceeds without a clearly posed question — events accumulate but nothing is being solved"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E02_PROMISE_TO_FAIR_CLUEING",
@@ -580,7 +603,8 @@
       ],
       "anti_patterns": [
         "Clues exist only in the detective's head and are revealed only at the resolution"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E03_PROMISE_TO_FAIR_PLAY",
@@ -599,7 +623,8 @@
       ],
       "anti_patterns": [
         "Red herrings that rely on objective narrative falsehood rather than character deception"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E04_PROMISE_TO_RESOLUTION",
@@ -618,7 +643,8 @@
       "anti_patterns": [
         "Culprit confesses without explanation of method",
         "Resolution names who but not how or why"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E05_PROMISE_TO_CURIOSITY",
@@ -636,7 +662,8 @@
       ],
       "anti_patterns": [
         "Action sequences substitute for intellectual investigation — the mystery becomes an adventure story"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E10_QUESTION_TO_COZY",
@@ -657,7 +684,8 @@
       ],
       "anti_patterns": [
         "Cozy setting with graphic violence or nihilistic resolution that destroys community warmth"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "MY_E11_QUESTION_TO_HARDBOILED",
@@ -679,7 +707,8 @@
       ],
       "anti_patterns": [
         "Hardboiled aesthetic without moral weight — grit as costume only"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "MY_E12_QUESTION_TO_PROCEDURAL",
@@ -700,7 +729,8 @@
       ],
       "anti_patterns": [
         "Procedure is invoked when convenient and ignored when inconvenient"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "MY_E13_QUESTION_TO_LOCKED_ROOM",
@@ -721,7 +751,8 @@
       ],
       "anti_patterns": [
         "Impossible crime is resolved by supernatural explanation or narrative coincidence"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "MY_E30_COZY_TO_CLOSED_CIRCLE",
@@ -742,7 +773,8 @@
       ],
       "anti_patterns": [
         "Cozy set in an open environment where an unknown outsider is the culprit"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "MY_E31_HARDBOILED_TO_SOCIAL_DYNAMICS",
@@ -762,7 +794,8 @@
       ],
       "anti_patterns": [
         "Hardboiled world where characters' motivations are transparent and uncomplicated by relationship"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E32_PROCEDURAL_TO_PHYSICAL_EVIDENCE",
@@ -782,7 +815,8 @@
       ],
       "anti_patterns": [
         "Procedural where investigators act on intuition without gathering or presenting evidence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E33_LOCKED_ROOM_TO_PHYSICAL_EVIDENCE",
@@ -802,7 +836,8 @@
       ],
       "anti_patterns": [
         "Impossible crime resolved by a mechanism not physically present in the story world"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E50_CLOSED_CIRCLE_TO_DISCOVERY",
@@ -821,7 +856,8 @@
       ],
       "anti_patterns": [
         "Discovery occurs in open environment with no defined suspect pool"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E51_PHYSICAL_EVIDENCE_TO_PIVOT",
@@ -842,7 +878,8 @@
       ],
       "anti_patterns": [
         "Investigation pivots on intuition or coincidence rather than evidence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E52_SOCIAL_DYNAMICS_TO_PIVOT",
@@ -863,7 +900,8 @@
       ],
       "anti_patterns": [
         "Relational revelation that was not planted in prior characterization"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E53_PIVOT_TO_REVEAL",
@@ -882,7 +920,8 @@
       ],
       "anti_patterns": [
         "Reveal occurs without a prior pivot — investigator knew all along and withheld the knowledge from the audience"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E54_DISCOVERY_TO_PIVOT",
@@ -901,7 +940,8 @@
       ],
       "anti_patterns": [
         "Investigation proceeds from discovery to reveal without significant reorientation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E70_REVEAL_RESTRICTS_RESOLUTION",
@@ -921,7 +961,8 @@
       ],
       "anti_patterns": [
         "Reveal that names a culprit who cannot or does not explain themselves, leaving the logic gap for the audience to fill"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "MY_E90_WITHHELD_CLUES_WARNING",
@@ -937,7 +978,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes the genre violation to avoid at all costs"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 2,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 26,
+      "soft": 10,
+      "total": 36
     }
   },
   "nodes": [
@@ -53,7 +58,8 @@
         "Exaggeration that illuminates rather than merely distorts",
         "Audience recognizes the real-world parallel from the opening",
         "Tone signals that laughter is directed at something specific"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N10_TARGET",
@@ -83,7 +89,8 @@
         "Specific absurdity tied to a recognizable real-world referent",
         "Exaggerated behavior that points clearly at a known dysfunction",
         "Audience can name the thing being mocked"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N11_HUMOR_SERVES_CRITIQUE",
@@ -112,7 +119,8 @@
         "Each laugh is at the target's expense in a pointed way",
         "Removing the comic element would also remove the argument",
         "Audience amusement and audience understanding of the critique occur simultaneously"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N12_EXAGGERATION_REVEALS_TRUTH",
@@ -141,7 +149,8 @@
         "Audience experiences recognition alongside absurdity — 'this is ridiculous, and also exactly right'",
         "Exaggeration follows the internal logic of the target's real dysfunction",
         "The more extreme the exaggeration, the more clearly it identifies the underlying truth"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N13_REAL_WORLD_PARALLEL",
@@ -170,7 +179,8 @@
         "Audience knows immediately or very quickly what is being critiqued",
         "Fictional details have clear real-world counterparts",
         "The story's argument would be understood by a reasonably informed reader with no supplementary material"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N20_POLITICAL",
@@ -201,7 +211,8 @@
         "Political mechanisms are rendered absurd to expose their actual dysfunction",
         "Rhetoric is taken literally to show its hollowness",
         "Power is shown operating exactly as it claims not to"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SA_N21_SOCIAL",
@@ -232,7 +243,8 @@
         "Social rituals shown to be hollow or self-defeating",
         "Characters enforce norms they privately violate",
         "The thing the social world values most is revealed to be worthless or harmful"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SA_N22_INSTITUTIONAL",
@@ -263,7 +275,8 @@
         "Rules exist to perpetuate rules rather than to serve any purpose",
         "The institution actively harms the people it exists to help",
         "Characters who follow the rules perfectly produce the worst outcomes"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SA_N23_MEDIA_CULTURAL",
@@ -294,7 +307,8 @@
         "The media form's own conventions are used to expose its dysfunction",
         "What the industry claims to value is shown to be what it destroys",
         "Audience recognizes their own consumption habits in the critique"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SA_N40_MIRROR_SETTING",
@@ -323,7 +337,8 @@
         "Each invented rule or custom has a clear real-world counterpart",
         "Audience maps the story's world onto the real world without effort",
         "The most absurd elements of the setting are also the most recognizable"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N41_CHARACTERS_EMBODY_TARGET",
@@ -352,7 +367,8 @@
         "Characters' dialogue and behavior are consistent with the satirical world's logic even in extreme situations",
         "Characters' self-justifications are the target's actual rhetoric",
         "Characters do not question the system's premises — they are the system"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N42_LOGICAL_ABSURDITY",
@@ -380,7 +396,8 @@
         "Each new development follows from the preceding one by the satirical world's own logic",
         "Audience can predict where the logic will go next — and it goes there",
         "The most extreme outcomes feel inevitable rather than arbitrary"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SA_N60_ESTABLISH_ABSURD_NORM",
@@ -409,7 +426,8 @@
         "Characters behave as if the ridiculous is entirely sensible",
         "Audience recognizes the real-world target immediately but the story treats it as normal",
         "No character questions the premise — they are fully inside the satirical world's logic"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N61_ESCALATION_TO_BREAKING",
@@ -438,7 +456,8 @@
         "Each escalation step follows directly from the previous one",
         "Characters become more committed to the system as it produces worse outcomes",
         "Audience recognition of the real-world parallel intensifies as the absurdity grows"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N62_MOMENT_OF_CLARITY",
@@ -467,7 +486,8 @@
         "The satirical argument is visible without requiring the author to state it explicitly",
         "At least one character — or the audience — achieves recognition of the system's true nature",
         "The final image or beat contains the critique in concentrated form"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N80_SHARP_WIT_TONE",
@@ -497,7 +517,8 @@
         "Every sentence that amuses also advances the critique",
         "The narrative voice maintains its angle on the target consistently",
         "Humor never comes at the expense of the argument"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SA_N90_MOCKERY_WITHOUT_POINT",
@@ -524,7 +545,8 @@
         "Audience laughs but cannot articulate what the story argued",
         "Target is mocked for how they appear rather than what they do or represent",
         "Story could be enjoyed by someone who agrees with the target — the critique is toothless"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -544,7 +566,8 @@
       ],
       "anti_patterns": [
         "Satire without a legible target — generalized mockery of 'the way things are'"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E02_PROMISE_TO_HUMOR",
@@ -562,7 +585,8 @@
       ],
       "anti_patterns": [
         "Humor that exists independently of the critique"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E03_PROMISE_TO_EXAGGERATION",
@@ -580,7 +604,8 @@
       ],
       "anti_patterns": [
         "Exaggeration so extreme the target is unrecognizable — critique dissolves into absurdism"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E04_PROMISE_TO_PARALLEL",
@@ -600,7 +625,8 @@
       ],
       "anti_patterns": [
         "Parallel so obscure the critique is invisible to the intended audience"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E05_PROMISE_TO_TONE",
@@ -618,7 +644,8 @@
       ],
       "anti_patterns": [
         "Wit without moral purpose — clever but directionless mockery"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E10_TARGET_TO_POLITICAL",
@@ -638,7 +665,8 @@
       ],
       "anti_patterns": [
         "Personal attacks on political figures without structural critique"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SA_E11_TARGET_TO_SOCIAL",
@@ -658,7 +686,8 @@
       ],
       "anti_patterns": [
         "Punching down at less powerful groups without critiquing the structure that enables them"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SA_E12_TARGET_TO_INSTITUTIONAL",
@@ -678,7 +707,8 @@
       ],
       "anti_patterns": [
         "Ridiculing individual workers rather than the system that produces their behavior"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SA_E13_TARGET_TO_MEDIA",
@@ -698,7 +728,8 @@
       ],
       "anti_patterns": [
         "Meta-commentary on media without structural critique of the industry"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SA_E30_POLITICAL_TO_MIRROR",
@@ -718,7 +749,8 @@
       ],
       "anti_patterns": [
         "Political setting that has no correspondence to any real political system"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E31_SOCIAL_TO_CHARACTERS",
@@ -736,7 +768,8 @@
       ],
       "anti_patterns": [
         "Characters are too individualized to function as social types — satirical argument is lost"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E32_INSTITUTIONAL_TO_LOGICAL",
@@ -756,7 +789,8 @@
       ],
       "anti_patterns": [
         "Institutional rules applied selectively — destroys the satirical premise"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SA_E33_MEDIA_TO_MIRROR",
@@ -777,7 +811,8 @@
       ],
       "anti_patterns": [
         "Media setting that has no correspondence to any real media industry"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E50_MIRROR_TO_ESTABLISH",
@@ -796,7 +831,8 @@
       ],
       "anti_patterns": [
         "Escalation begins before the norm is established — audience lacks baseline for measuring absurdity"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E51_CHARACTERS_TO_ESTABLISH",
@@ -816,7 +852,8 @@
       ],
       "anti_patterns": [
         "Characters signal ironic distance from the norm — breaking the satirical frame before it is established"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E52_LOGICAL_TO_ESCALATION",
@@ -835,7 +872,8 @@
       ],
       "anti_patterns": [
         "Escalation is driven by external events rather than the system's own logic"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E53_ESTABLISH_TO_ESCALATION",
@@ -854,7 +892,8 @@
       ],
       "anti_patterns": [
         "Escalation has no baseline — audience cannot track how far the satire has traveled"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E54_ESCALATION_TO_CLARITY",
@@ -874,7 +913,8 @@
       ],
       "anti_patterns": [
         "Escalation reaches breaking point but story ends without a moment of clarity — critique remains implicit and deniable"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SA_E90_MOCKERY_WARNING",
@@ -890,7 +930,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

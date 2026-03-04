@@ -24,6 +24,11 @@
       "mandates element": 3,
       "requires payoff": 3,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 32,
+      "soft": 8,
+      "total": 40
     }
   },
   "nodes": [
@@ -53,7 +58,8 @@
       "signals_in_text": [
         "Opening establishes unease or anomaly before full threat is revealed",
         "Audience or reader feels the world is unsafe from the first pages or scenes"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N10_THREAT_ESCALATES",
@@ -81,7 +87,8 @@
         "Each act raises the cost of confronting the threat",
         "Characters suffer real harm or loss as threat advances",
         "Protagonist's options narrow as threat escalates"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N11_PROTAGONIST_VULNERABLE",
@@ -110,7 +117,8 @@
         "Protagonist fails or is injured in confrontations",
         "Plans and escapes fall apart under pressure",
         "Resources and allies are limited or unreliable"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N12_ATMOSPHERE_DREAD",
@@ -139,7 +147,8 @@
         "Environmental details are ominous even in quiet scenes",
         "Characters are watchful, tense, or psychologically worn down",
         "Silence and stillness carry as much threat as action"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N13_THREAT_LOGIC",
@@ -168,7 +177,8 @@
         "Characters attempt to understand threat logic and sometimes succeed partially",
         "Threat's behavior, once observed, creates dread of specific triggers",
         "Rules, even unknown, make the threat feel real rather than arbitrary"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N20_SUPERNATURAL",
@@ -198,7 +208,8 @@
         "Phenomena occur that violate physical laws",
         "Characters must confront the limits of rational explanation",
         "Religious, folkloric, or occult frameworks become relevant"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HR_N21_SLASHER",
@@ -228,7 +239,8 @@
         "Victims are eliminated progressively, reducing the group",
         "Escape routes are blocked or exhausted",
         "Physical confrontation with threat is depicted as extremely dangerous"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HR_N22_COSMIC",
@@ -258,7 +270,8 @@
         "Characters experience breakdown of meaning or sanity, not just fear",
         "Knowledge of the threat makes things worse, not better",
         "Resolution — if it comes — is temporary or pyrrhic"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HR_N23_PSYCHOLOGICAL",
@@ -288,7 +301,8 @@
         "Protagonist doubts their own perceptions and memories",
         "Reality and hallucination are indistinguishable at key moments",
         "Resolution does not fully restore stability — the damage persists"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HR_N40_ISOLATION",
@@ -318,7 +332,8 @@
         "Attempts to reach help fail or are blocked",
         "Characters explicitly note they are alone",
         "Setting is described in terms of distance from safety"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N41_UNCANNY",
@@ -347,7 +362,8 @@
         "Protagonist interacts with once-safe spaces with new wariness",
         "Familiar objects or routines take on sinister significance",
         "Readers/viewers experience the dissonance between what should be safe and what is now dangerous"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N42_CONCEALMENT",
@@ -376,7 +392,8 @@
         "Threat is described obliquely, through sound, shadow, or effect rather than direct depiction",
         "Characters' attempts to see or understand the threat are frustrated",
         "Partial revelation increases rather than resolves fear"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N60_FIRST_ANOMALY",
@@ -406,7 +423,8 @@
         "Protagonist's reaction signals that this is not ordinary",
         "Tone shifts perceptibly from establishment to unease",
         "The anomaly is specific and concrete enough to stay with the audience"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N61_ESCALATION",
@@ -436,7 +454,8 @@
         "Characters explicitly acknowledge that the threat is real and dangerous",
         "Attempts to escape or neutralize the threat have failed",
         "The cost of the threat is now visible and personal — not just abstract danger"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N62_FINAL_CONFRONTATION",
@@ -467,7 +486,8 @@
         "Highest intensity and danger in the story",
         "Protagonist uses knowledge or experience earned through prior horror",
         "Resolution — even survival — carries weight and consequence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N80_DREAD_ATMOSPHERE",
@@ -497,7 +517,8 @@
         "Environmental and sensory details carry ominous weight",
         "Characters' emotional states reflect sustained fear rather than episodic fright",
         "Pacing and prose style create tension independent of plot events"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HR_N90_CONSEQUENCE_FREE_SCARES",
@@ -524,7 +545,8 @@
         "Audience stops reacting to threat moments",
         "Characters behave as if prior scares had no cost or meaning",
         "Threat is frequently invoked but never lands"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -545,7 +567,8 @@
       "anti_patterns": [
         "Threat is mentioned but does not demonstrably escalate",
         "Danger plateaus after the first act"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E02_PROMISE_TO_VULNERABLE",
@@ -564,7 +587,8 @@
       "anti_patterns": [
         "Protagonist is too capable — threat never feels real",
         "Easy access to tools or knowledge that neutralize the threat"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E03_PROMISE_TO_DREAD",
@@ -583,7 +607,8 @@
       "anti_patterns": [
         "Dread exists only in isolated scare scenes",
         "Comic relief or comfort stretches undercut the atmosphere"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E04_PROMISE_TO_LOGIC",
@@ -602,7 +627,8 @@
       "anti_patterns": [
         "Threat behaves randomly based on plot convenience",
         "Rules are stated and then ignored"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E05_PROMISE_TO_TONE",
@@ -624,7 +650,8 @@
       "anti_patterns": [
         "Extended safe and comfortable stretches",
         "Tone inconsistency between horror and non-horror registers"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E10_THREAT_TO_SUPERNATURAL",
@@ -644,7 +671,8 @@
       ],
       "anti_patterns": [
         "Supernatural nature is claimed but threat behaves like a mundane physical danger"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HR_E11_THREAT_TO_SLASHER",
@@ -665,7 +693,8 @@
       "anti_patterns": [
         "Threat is too easily defeated",
         "Victim behavior is implausibly stupid"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HR_E12_THREAT_TO_COSMIC",
@@ -685,7 +714,8 @@
       ],
       "anti_patterns": [
         "Cosmic threat is reduced to a manageable, defeatable antagonist"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HR_E13_VULNERABLE_TO_PSYCHOLOGICAL",
@@ -706,7 +736,8 @@
       "anti_patterns": [
         "Psychological dimension resolves into a purely external threat",
         "Ambiguity used as cop-out rather than source of dread"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HR_E30_SUPERNATURAL_TO_ISOLATION",
@@ -724,7 +755,8 @@
       ],
       "anti_patterns": [
         "Protagonist has immediate access to supernatural experts who resolve the threat easily"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E31_SUPERNATURAL_TO_UNCANNY",
@@ -744,7 +776,8 @@
       ],
       "anti_patterns": [
         "Supernatural manifests only in clearly alien or marked spaces — uncanny quality absent"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E32_SLASHER_TO_ISOLATION",
@@ -764,7 +797,8 @@
       ],
       "anti_patterns": [
         "Help is readily available and protagonist simply doesn't call for implausible reasons"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E33_SLASHER_TO_CONCEALMENT",
@@ -784,7 +818,8 @@
       ],
       "anti_patterns": [
         "Threat operates only in clearly visible conditions — concealment absent"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E34_COSMIC_TO_CONCEALMENT",
@@ -804,7 +839,8 @@
       ],
       "anti_patterns": [
         "Cosmic threat is fully depicted and understood — scale and dread collapse"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E35_PSYCHOLOGICAL_TO_UNCANNY",
@@ -824,7 +860,8 @@
       ],
       "anti_patterns": [
         "Psychological threat is confined to abstract internal states with no uncanny external manifestation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E50_ISOLATION_TO_ANOMALY",
@@ -844,7 +881,8 @@
       ],
       "anti_patterns": [
         "Anomaly occurs while protagonist has easy access to help who dismisses it — different dynamic"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E51_UNCANNY_TO_ANOMALY",
@@ -865,7 +903,8 @@
       ],
       "anti_patterns": [
         "First anomaly occurs in an already-alien or clearly threatening space — no uncanny contrast"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E52_CONCEALMENT_TO_ANOMALY",
@@ -885,7 +924,8 @@
       ],
       "anti_patterns": [
         "First anomaly is a full, clear reveal of the threat — concealment principle violated"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E53_ANOMALY_TO_ESCALATION",
@@ -905,7 +945,8 @@
       "anti_patterns": [
         "Anomaly is isolated — never leads to escalating threat pattern",
         "Anomaly is explained away and the story moves on without escalation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E54_ESCALATION_TO_CONFRONTATION",
@@ -927,7 +968,8 @@
       "anti_patterns": [
         "Escalation does not lead to confrontation — story ends before the reckoning",
         "Confrontation occurs before full escalation — stakes feel lower than they should"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E70_THREAT_LOGIC_TO_ESCALATION",
@@ -947,7 +989,8 @@
       ],
       "anti_patterns": [
         "Escalation is arbitrary — threat simply gets worse without logical cause"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E71_THREAT_LOGIC_TO_CONFRONTATION",
@@ -967,7 +1010,8 @@
       ],
       "anti_patterns": [
         "Final confrontation ignores established threat logic — protagonist wins through a rule that was never established"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HR_E90_CONSEQUENCE_FREE_WARNING",
@@ -983,7 +1027,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what must be avoided to maintain the horror contract"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

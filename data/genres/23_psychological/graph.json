@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 2,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 24,
+      "soft": 12,
+      "total": 36
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
       "signals_in_text": [
         "Opening establishes the character's inner world as unstable or under pressure",
         "Reader/viewer is drawn into the character's subjective experience from the start"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N10_INTERNAL_CONFLICT",
@@ -79,7 +85,8 @@
         "Character's choices are driven by psychological need rather than rational strategy",
         "The same internal pattern recurs in escalating forms",
         "Danger and safety both originate from within the character"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N11_CONTESTED_REALITY",
@@ -107,7 +114,8 @@
         "Scenes that retroactively recontextualize earlier events",
         "Contradictions between character's account and physical evidence",
         "Other characters dispute the protagonist's perception directly"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N12_PRESSURE_ESCALATION",
@@ -135,7 +143,8 @@
         "Character's coping mechanisms visibly fail in sequence",
         "Sleep, appetite, and routine deteriorate as markers of internal collapse",
         "The same fear or obsession appears in more extreme form each time"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N13_PSYCHOLOGY_AS_SOURCE",
@@ -163,7 +172,8 @@
         "Climax requires the character to face their own mind directly",
         "Resolution changes the character's relationship to their own psychology",
         "The antagonist force and the saving force are revealed as the same thing"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N20_PSYCH_THRILLER",
@@ -192,7 +202,8 @@
         "Protagonist doubts their own perception while also fearing real external threat",
         "Other characters' behavior is readable as both benign and sinister simultaneously",
         "Plot momentum is driven by psychological deterioration"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PS_N21_PSYCH_DRAMA",
@@ -221,7 +232,8 @@
         "Scenes of introspection, therapy, or memory carry the same weight as plot events",
         "Progress is measured in psychological rather than external terms",
         "The character may not 'win' in conventional narrative terms"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PS_N22_PSYCH_HORROR",
@@ -250,7 +262,8 @@
         "Horror elements cannot be cleanly attributed to external or internal cause",
         "The character's own mind is the most threatening space in the story",
         "Dread accumulates through psychological detail rather than supernatural imagery"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PS_N23_IDENTITY_DISSOCIATION",
@@ -279,7 +292,8 @@
         "The character relates differently to their own history across scenes",
         "Other characters perceive the protagonist as radically different people",
         "The question 'who is this person really' remains genuinely open"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PS_N40_SUBJECTIVE_DOMINANCE",
@@ -307,7 +321,8 @@
         "Scene details are slightly inconsistent across the narrative",
         "Physical descriptions carry psychological weight — the room feels smaller, the light feels wrong",
         "The audience is aware of not being given enough information to adjudicate reality"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N41_CONFINED_SPACES",
@@ -335,7 +350,8 @@
         "Space is described in terms of how it feels to the character, not just how it appears",
         "Characters cannot easily leave spaces even when physically able to",
         "Environmental details intensify as psychological pressure intensifies"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PS_N42_RELATIONAL_MIRRORS",
@@ -363,7 +379,8 @@
         "Protagonist interprets others through the lens of their own psychology",
         "Relationships trigger or amplify psychological symptoms",
         "The most important other character is in some way a reflection of the protagonist's inner state"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N60_REALITY_QUESTIONING",
@@ -391,7 +408,8 @@
         "Character explicitly or implicitly questions their own mind",
         "Scene ends on uncertainty rather than restored stability",
         "The audience is equally uncertain about what has happened"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PS_N61_OBSESSION_BREAKDOWN",
@@ -420,7 +438,8 @@
         "Scene is more intense than anything that has preceded it",
         "Character's behavior is genuinely alarming to witnesses",
         "The audience recognizes this as a point of no return"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N62_REVELATION_CONFRONTATION",
@@ -450,7 +469,8 @@
         "Scene has the quality of something long-avoided finally arriving",
         "Character's prior understanding of themselves is visibly destroyed",
         "Resolution — whatever its nature — is internal before it is external"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N80_UNSETTLING_INTERIORITY",
@@ -478,7 +498,8 @@
         "Prose or scene construction stays uncomfortably close to the character's perception",
         "Quiet scenes feel more threatening than conventionally dramatic ones",
         "The reader or viewer experiences something analogous to the character's psychological state"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PS_N90_SURFACE_CRAZINESS",
@@ -505,7 +526,8 @@
         "Audience cannot identify the psychological logic beneath the behavior",
         "Mental distress is aestheticized without being understood",
         "The character's instability serves the plot's needs rather than emerging from their own interior life"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -527,7 +549,8 @@
       ],
       "anti_patterns": [
         "External antagonist drives the plot while inner life remains stable"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E02_PROMISE_TO_REALITY",
@@ -548,7 +571,8 @@
       ],
       "anti_patterns": [
         "Stable objective reality confirmed throughout — character may be troubled but perceives accurately"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E03_PROMISE_TO_PRESSURE",
@@ -568,7 +592,8 @@
       ],
       "anti_patterns": [
         "Pressure is consistent throughout with no escalation toward breakdown"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E04_PROMISE_TO_SOURCE",
@@ -587,7 +612,8 @@
       ],
       "anti_patterns": [
         "Danger from psychology resolved by external rescue or circumstance"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E05_PROMISE_TO_TONE",
@@ -607,7 +633,8 @@
       ],
       "anti_patterns": [
         "Comfortable external perspective offered as relief from interiority"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E10_REALITY_TO_THRILLER",
@@ -627,7 +654,8 @@
       ],
       "anti_patterns": [
         "Perceptual instability without any accompanying threat or danger"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PS_E11_INTERNAL_TO_DRAMA",
@@ -647,7 +675,8 @@
       ],
       "anti_patterns": [
         "Internal conflict treated as backstory while external plot drives the narrative"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PS_E12_PRESSURE_TO_HORROR",
@@ -667,7 +696,8 @@
       ],
       "anti_patterns": [
         "Horror is clearly external — psychological framing is incidental"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PS_E13_SOURCE_TO_IDENTITY",
@@ -687,7 +717,8 @@
       ],
       "anti_patterns": [
         "Identity fragmentation as plot twist without genuine psychological exploration"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PS_E30_THRILLER_TO_SUBJECTIVE",
@@ -707,7 +738,8 @@
       ],
       "anti_patterns": [
         "Objective confirmation of reality available through secondary characters or narration"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E31_DRAMA_TO_CONFINED",
@@ -727,7 +759,8 @@
       ],
       "anti_patterns": [
         "Open, expansive settings used throughout psychological drama without ironic function"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PS_E32_HORROR_TO_RELATIONAL",
@@ -747,7 +780,8 @@
       ],
       "anti_patterns": [
         "Horror is entirely atmospheric — no relational channel for the psychological content"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E33_IDENTITY_TO_SUBJECTIVE",
@@ -766,7 +800,8 @@
       ],
       "anti_patterns": [
         "One identity state is definitively privileged as real by narrative structure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E50_SUBJECTIVE_TO_REALITY_SCENE",
@@ -786,7 +821,8 @@
       ],
       "anti_patterns": [
         "Reality question is immediately resolved — perceptual crisis is short-circuited"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PS_E51_CONFINED_TO_OBSESSION",
@@ -805,7 +841,8 @@
       ],
       "anti_patterns": [
         "Character escapes the confined space before breakdown — pressure dissipates externally"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E52_RELATIONAL_TO_REVELATION",
@@ -825,7 +862,8 @@
       ],
       "anti_patterns": [
         "Revelation occurs in isolation from the relational structure that enabled the denial"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E60_REALITY_TO_OBSESSION",
@@ -844,7 +882,8 @@
       ],
       "anti_patterns": [
         "Reality questioning has no psychological consequence — character stabilizes and continues as before"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E61_OBSESSION_TO_REVELATION",
@@ -863,7 +902,8 @@
       ],
       "anti_patterns": [
         "Breakdown is resolved without producing the confrontation — character rebuilds prior defenses"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PS_E90_SURFACE_CRAZINESS_WARNING",
@@ -879,7 +919,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

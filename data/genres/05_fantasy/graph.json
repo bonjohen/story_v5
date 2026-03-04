@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 1,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 22,
+      "soft": 13,
+      "total": 35
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
       "signals_in_text": [
         "Early introduction of a world that operates differently from reality",
         "Sense of wonder or awe at the impossible"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N10_MAGIC_SYSTEM",
@@ -79,7 +85,8 @@
         "Characters reference costs or conditions of magic",
         "Magic fails or has unintended consequences",
         "Audience can predict what magic will and won't do"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N11_WORLDBUILDING_COHERENT",
@@ -108,7 +115,8 @@
         "Details reinforce each other",
         "Characters behave consistently with their culture",
         "Consequences of magic are visible in daily life"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N12_MYTHIC_STAKES",
@@ -136,7 +144,8 @@
         "Prophecies, ancient evils, or cosmic forces referenced",
         "Character's journey has significance beyond the personal",
         "The world itself may change based on the outcome"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N13_WONDER",
@@ -165,7 +174,8 @@
         "Descriptive passages that invite the reader to see and feel the impossible",
         "Characters (especially newcomers) react with awe",
         "Moments of beauty or terror that could only exist in this world"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N20_EPIC",
@@ -194,7 +204,8 @@
         "Maps, multiple cultures, deep history",
         "Large cast with diverse motivations",
         "Fate of nations or worlds hangs in the balance"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FN_N21_URBAN",
@@ -223,7 +234,8 @@
         "Familiar city landmarks alongside magical elements",
         "Characters navigate both mundane and magical rules",
         "Technology and magic interact or conflict"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FN_N22_DARK",
@@ -252,7 +264,8 @@
         "Magic has terrible costs",
         "Moral choices are genuinely difficult",
         "Beauty and horror coexist"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FN_N23_MYTHIC",
@@ -281,7 +294,8 @@
         "Threes, quests, transformations",
         "Symbolic landscapes (dark forest, crystal tower)",
         "Characters represent archetypes"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FN_N40_MAGIC_COST",
@@ -309,7 +323,8 @@
         "Characters weigh whether to use magic",
         "Aftermath of magic use shows the price",
         "Powerful magic requires proportionally greater cost"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N41_SECONDARY_WORLD_LOGIC",
@@ -337,7 +352,8 @@
         "Institutions reference magic in their structure",
         "Characters use magic in daily life, not just in crises",
         "Economic and political systems reflect magical capabilities"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N42_BOUNDARY",
@@ -365,7 +381,8 @@
         "Crossing moments where characters enter or leave the magical space",
         "Rules change when boundary is crossed",
         "Characters from different sides of the boundary clash"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FN_N60_WORLD_ENTRY",
@@ -393,7 +410,8 @@
         "Descriptive richness increases",
         "Character reacts with awe or fear",
         "Rules of the ordinary world visibly change"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N61_MAGIC_TEST",
@@ -422,7 +440,8 @@
         "Character pays a visible price for magic use",
         "Outcome depends on established magical rules",
         "Stakes are high enough that magic's limitations matter"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N62_MYTHIC_CLIMAX",
@@ -450,7 +469,8 @@
         "Maximum magical intensity",
         "Everything established comes together",
         "World or protagonist is permanently altered"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FN_N80_WONDER_TONE",
@@ -478,7 +498,8 @@
         "Rich descriptive language for magical elements",
         "Scale and age of the world conveyed through detail",
         "Emotional responses to the impossible"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FN_N90_DEUS_EX_MAGIC",
@@ -503,7 +524,8 @@
       "signals_in_text": [
         "Audience's reaction is 'where did that come from?' rather than 'of course!'",
         "Solution contradicts established magical rules"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -523,7 +545,8 @@
       ],
       "anti_patterns": [
         "Magic with no discernible rules or consistency"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E02_PROMISE_TO_WORLD",
@@ -541,7 +564,8 @@
       ],
       "anti_patterns": [
         "World is a collection of unrelated cool ideas"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E03_PROMISE_TO_STAKES",
@@ -559,7 +583,8 @@
       ],
       "anti_patterns": [
         "Mundane stakes in a magical world"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E04_PROMISE_TO_WONDER",
@@ -577,7 +602,8 @@
       ],
       "anti_patterns": [
         "Magical world feels ordinary and unimpressive"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E05_PROMISE_TO_TONE",
@@ -595,7 +621,8 @@
       ],
       "anti_patterns": [
         "Flat, utilitarian prose for a magical world"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E10_MAGIC_TO_EPIC",
@@ -615,7 +642,8 @@
       ],
       "anti_patterns": [
         "Grand scope but magic is trivial"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FN_E11_MAGIC_TO_URBAN",
@@ -635,7 +663,8 @@
       ],
       "anti_patterns": [
         "Modern setting but magic has no interaction with modernity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FN_E12_MAGIC_TO_DARK",
@@ -655,7 +684,8 @@
       ],
       "anti_patterns": [
         "Dark aesthetic but magic is safe and consequence-free"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FN_E13_MAGIC_TO_MYTHIC",
@@ -675,7 +705,8 @@
       ],
       "anti_patterns": [
         "Uses mythic trappings but lacks mythic logic"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FN_E30_EPIC_TO_WORLD",
@@ -695,7 +726,8 @@
       ],
       "anti_patterns": [
         "Epic scope but generic medieval Europe setting"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E31_URBAN_TO_BOUNDARY",
@@ -715,7 +747,8 @@
       ],
       "anti_patterns": [
         "No boundary — magic is openly known in the modern world without consequence"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FN_E32_DARK_TO_COST",
@@ -736,7 +769,8 @@
       ],
       "anti_patterns": [
         "Dark aesthetic but magic is free and safe"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E33_MYTHIC_TO_BOUNDARY",
@@ -757,7 +791,8 @@
       ],
       "anti_patterns": [
         "Mythic elements but no threshold or transformation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FN_E50_BOUNDARY_TO_ENTRY",
@@ -777,7 +812,8 @@
       ],
       "anti_patterns": [
         "Boundary crossed without any sense of wonder or change"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E51_COST_TO_TEST",
@@ -797,7 +833,8 @@
       ],
       "anti_patterns": [
         "Magic used freely without any visible cost"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E52_WORLD_TO_TEST",
@@ -817,7 +854,8 @@
       ],
       "anti_patterns": [
         "Magic used outside the world's established logic"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FN_E53_TEST_TO_CLIMAX",
@@ -837,7 +875,8 @@
       ],
       "anti_patterns": [
         "Climax resolved without engaging the magic system"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FN_E90_DEUS_EX_WARNING",
@@ -853,7 +892,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 2,
       "prohibits element": 2
+    },
+    "severityCounts": {
+      "hard": 22,
+      "soft": 17,
+      "total": 39
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
         "Tone is grounded and serious",
         "Characters face situations with real emotional cost",
         "Outcomes feel consequential rather than arbitrary"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N10_EMOTIONAL_STAKES",
@@ -77,7 +83,8 @@
       "signals_in_text": [
         "Early scenes establish what the character values most",
         "Threats are directed at those valued things"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N11_CONSEQUENTIAL_CHOICE",
@@ -103,7 +110,8 @@
       "signals_in_text": [
         "Scenes built around decision moments",
         "Aftermath scenes showing consequences of choices"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N12_PLAUSIBLE_HUMAN",
@@ -129,7 +137,8 @@
       "signals_in_text": [
         "Behavior tracks to established character psychology",
         "Social context influences character choices realistically"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N13_CONFLICT_INTERPERSONAL",
@@ -155,7 +164,8 @@
       "signals_in_text": [
         "Key scenes are conversations or confrontations between characters",
         "Tension is visible in what characters say and don't say to each other"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N20_DOMESTIC",
@@ -182,7 +192,8 @@
       "signals_in_text": [
         "Scenes set in homes, family gatherings, private spaces",
         "Dialogue reveals family history and unspoken tensions"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DR_N21_SOCIAL",
@@ -209,7 +220,8 @@
       "signals_in_text": [
         "Characters reference or struggle with institutional rules",
         "Power dynamics are visible in who speaks and who is silenced"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DR_N22_COURTROOM",
@@ -236,7 +248,8 @@
       "signals_in_text": [
         "Courtroom scenes as set pieces",
         "Evidence and testimony reveal character rather than just facts"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DR_N23_TRAGEDY_INFLECTED",
@@ -263,7 +276,8 @@
       "signals_in_text": [
         "Early hints of the flaw or impossible circumstance",
         "Moments where a different choice could have changed the outcome"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DR_N40_CONFINED_SETTING",
@@ -291,7 +305,8 @@
         "Repeated locations",
         "Characters cannot easily escape each other",
         "Physical proximity drives confrontation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DR_N41_TIME_PRESSURE",
@@ -318,7 +333,8 @@
         "References to time remaining",
         "Characters aware they must act now",
         "Pacing accelerates as deadline approaches"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DR_N42_SOCIAL_RULES",
@@ -346,7 +362,8 @@
         "Characters modify behavior based on who is watching",
         "Private vs. public selves diverge",
         "Punishment or ostracism for rule-breaking"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N60_CONFRONTATION",
@@ -374,7 +391,8 @@
         "Long dialogue scene with high emotional charge",
         "Subtext carries more weight than surface words",
         "Physical staging reflects power dynamics"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N61_CHOICE_SCENE",
@@ -402,7 +420,8 @@
       "signals_in_text": [
         "Character visibly weighs options",
         "Scene ends with a door closed â€” literally or figuratively"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N62_AFTERMATH",
@@ -429,7 +448,8 @@
         "Tone shifts to reflective",
         "Daily life details show what has changed",
         "Echoes of earlier scenes with altered meaning"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DR_N80_SERIOUS_TONE",
@@ -455,7 +475,8 @@
       "signals_in_text": [
         "Prose or cinematography favors stillness over spectacle",
         "Humor, if present, is character-driven and situational rather than gag-based"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N90_MELODRAMA",
@@ -480,7 +501,8 @@
       "signals_in_text": [
         "Emotional peaks feel unconnected to prior scenes",
         "Audience is told to feel rather than shown why"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DR_N91_PASSIVE_PROTAGONIST",
@@ -505,7 +527,8 @@
       "signals_in_text": [
         "Key turning points happen without protagonist input",
         "Other characters make all the decisions"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -525,7 +548,8 @@
       ],
       "anti_patterns": [
         "Stakes announced but never tested"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E02_PROMISE_TO_CHOICE",
@@ -543,7 +567,8 @@
       ],
       "anti_patterns": [
         "Plot resolved by coincidence or external force"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E03_PROMISE_TO_PLAUSIBLE",
@@ -561,7 +586,8 @@
       ],
       "anti_patterns": [
         "Characters act as mouthpieces for theme rather than as people"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E04_PROMISE_TO_INTERPERSONAL",
@@ -579,7 +605,8 @@
       ],
       "anti_patterns": [
         "Conflict is purely external (disaster, war) with no interpersonal dimension"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E05_PROMISE_TO_TONE",
@@ -597,7 +624,8 @@
       ],
       "anti_patterns": [
         "Serious subject matter treated flippantly throughout"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E10_STAKES_TO_DOMESTIC",
@@ -616,7 +644,8 @@
       ],
       "anti_patterns": [
         "Family setting present but family relationships irrelevant to conflict"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E11_STAKES_TO_SOCIAL",
@@ -635,7 +664,8 @@
       ],
       "anti_patterns": [
         "Social setting present but system has no effect on characters"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E12_STAKES_TO_COURTROOM",
@@ -654,7 +684,8 @@
       ],
       "anti_patterns": [
         "Legal procedure present but verdict has no emotional weight"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E13_STAKES_TO_TRAGEDY",
@@ -673,7 +704,8 @@
       ],
       "anti_patterns": [
         "Tragedy is random rather than connected to character"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E30_DOMESTIC_TO_CONFINED",
@@ -691,7 +723,8 @@
       ],
       "anti_patterns": [
         "Characters in a domestic story never share physical space"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E31_SOCIAL_TO_RULES",
@@ -709,7 +742,8 @@
       ],
       "anti_patterns": [
         "Social system is referenced but never constrains any character"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E32_COURTROOM_TO_CONFINED",
@@ -727,7 +761,8 @@
       ],
       "anti_patterns": [
         "Courtroom drama that never shows the courtroom"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E33_COURTROOM_TO_TIME",
@@ -745,7 +780,8 @@
       ],
       "anti_patterns": [
         "Trial has no time pressure â€” proceedings feel endless"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E34_TRAGEDY_TO_TIME",
@@ -763,7 +799,8 @@
       ],
       "anti_patterns": [
         "Tragic arc with no sense of approaching reckoning"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E50_CONFINED_TO_CONFRONTATION",
@@ -781,7 +818,8 @@
       ],
       "anti_patterns": [
         "Characters confined together but conflict never surfaces"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E51_TIME_TO_CHOICE",
@@ -799,7 +837,8 @@
       ],
       "anti_patterns": [
         "Deadline passes with no decision required"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E52_RULES_TO_CHOICE",
@@ -817,7 +856,8 @@
       ],
       "anti_patterns": [
         "Social rules present but character faces no difficult choice about them"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E53_CONFRONTATION_TO_AFTERMATH",
@@ -835,7 +875,8 @@
       ],
       "anti_patterns": [
         "Confrontation occurs but nothing changes"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E54_CHOICE_TO_AFTERMATH",
@@ -853,7 +894,8 @@
       ],
       "anti_patterns": [
         "Choice is made but consequences are never shown"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DR_E90_MELODRAMA_WARNING",
@@ -869,7 +911,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DR_E91_PASSIVE_WARNING",
@@ -885,7 +928,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

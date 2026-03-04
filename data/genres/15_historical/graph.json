@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 2,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 25,
+      "soft": 11,
+      "total": 36
     }
   },
   "nodes": [
@@ -53,7 +58,8 @@
         "Opening establishes date, place, and social conditions with specificity",
         "First conflict arises from period conditions rather than universal character psychology alone",
         "Narrative voice treats historical context as constitutive, not incidental"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N10_SPECIFIC_PERIOD",
@@ -81,7 +87,8 @@
         "Dates, place names, or event names are used",
         "Characters know their world's rules with period-accurate literacy",
         "Anachronistic language or technology is absent"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N11_CONTEXT_GENERATES_CONFLICT",
@@ -111,7 +118,8 @@
         "Characters reference historical conditions as the source of their problem",
         "Plot turning points are triggered by historical events",
         "Resolution is shaped by how history resolves, not just how characters choose"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N12_PERIOD_CONSTRAINTS_ENFORCED",
@@ -141,7 +149,8 @@
         "Characters modify behavior in response to social rules",
         "Failed transgressions result in punishment, ostracism, or loss",
         "Other characters enforce period norms through pressure or consequence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N13_PERIOD_WORLDVIEW",
@@ -169,7 +178,8 @@
         "Interiority reflects period frameworks for self-understanding",
         "Character's assumptions about the world are legible as period-specific",
         "Moments of moral complexity arise from period constraints on moral vocabulary, not from modern ambivalence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N20_PERIOD_DRAMA",
@@ -199,7 +209,8 @@
         "Settings are domestic — estates, households, market towns",
         "Social calls, letters, and rituals structure daily life",
         "Private choices are constrained by public period codes"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HI_N21_HISTORICAL_EPIC",
@@ -230,7 +241,8 @@
         "Significant passage of time within the narrative",
         "Historical events punctuate and restructure the human plot",
         "Multiple point-of-view characters reflecting different positions within the historical situation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HI_N22_BIOGRAPHICAL_HISTORICAL",
@@ -260,7 +272,8 @@
         "Historical figure named, with documented facts woven into the narrative",
         "Reader's prior knowledge of the figure creates irony",
         "Narrative focuses on moments underdocumented by the historical record"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HI_N23_REVISIONIST_HISTORY",
@@ -290,7 +303,8 @@
         "Narrative explicitly positions against a received account",
         "Foregrounded perspective is one the standard history marginalizes or erases",
         "Historical divergence is marked and thematized rather than hidden"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HI_N40_MATERIAL_CULTURE",
@@ -320,7 +334,8 @@
         "Transport, communication, and medicine function at period capacity",
         "Characters' options are visibly limited by what their period provides",
         "Physical details are specific enough to place the reader in the period without becoming a catalog"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N41_SOCIAL_HIERARCHY",
@@ -350,7 +365,8 @@
         "Characters use period-appropriate forms of address and deference",
         "Violations of hierarchy result in period-accurate consequences",
         "Characters' ambitions are calibrated to what their position permits"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N42_HISTORICAL_EVENTS_STRUCTURE",
@@ -380,7 +396,8 @@
         "Characters track historical events because their lives depend on them",
         "Plot turning points coincide with historical turning points",
         "Characters' plans are disrupted or enabled by historical events they did not control"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N60_PERIOD_ESTABLISHMENT",
@@ -409,7 +426,8 @@
         "Specific sensory details anchor the reader in time and place",
         "A transaction, ritual, or interaction reveals who has power and who does not",
         "Characters' behavior is legibly shaped by period expectations without authorial explanation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N61_DESIRE_VS_CONSTRAINT",
@@ -439,7 +457,8 @@
         "Scene turns on a specific period rule that the character cannot get around",
         "Emotional stakes are made concrete by the historical specificity of what is forbidden",
         "Character's response — compliance, resistance, or evasion — reveals character within period conditions"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N62_HISTORICAL_CONSEQUENCE",
@@ -469,7 +488,8 @@
         "Scene pivot is triggered by historical event, not by character decision",
         "Characters express helplessness or urgency in response to forces outside their control",
         "Aftermath of the scene is a permanently altered situation that the rest of the story must navigate"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HI_N80_PERIOD_ATMOSPHERE",
@@ -500,7 +520,8 @@
         "Sensory details are specific to the period rather than generically 'old'",
         "Narrator's attitude toward the past is consistent and purposeful",
         "Social texture — who speaks, how, to whom, with what deference — is period-calibrated"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HI_N90_ANACHRONISTIC_CHARACTER",
@@ -528,7 +549,8 @@
         "Period social constraints are treated as external impositions characters can simply decide to ignore",
         "Dialogue sounds contemporary despite period setting",
         "Characters have no blind spots that reflect their period's ideology"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -548,7 +570,8 @@
       ],
       "anti_patterns": [
         "Vague historical setting that functions as fantasy without genre accountability"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E02_PROMISE_TO_CONTEXT_GENERATES",
@@ -566,7 +589,8 @@
       ],
       "anti_patterns": [
         "Period setting that could be swapped for any other setting without affecting the plot"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E03_PROMISE_TO_CONSTRAINTS_ENFORCED",
@@ -584,7 +608,8 @@
       ],
       "anti_patterns": [
         "Characters in period setting who face no period-specific limits"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E04_PROMISE_TO_WORLDVIEW",
@@ -602,7 +627,8 @@
       ],
       "anti_patterns": [
         "Contemporary moral vocabulary spoken by historical characters without narrative acknowledgment"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E05_PROMISE_TO_TONE",
@@ -620,7 +646,8 @@
       ],
       "anti_patterns": [
         "Generic 'old-timey' atmosphere that gestures at period without committing to it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E10_SPECIFIC_TO_PERIOD_DRAMA",
@@ -639,7 +666,8 @@
       ],
       "anti_patterns": [
         "Period drama that uses historical setting as costume for a universal romance or family story"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HI_E11_CONTEXT_TO_EPIC",
@@ -658,7 +686,8 @@
       ],
       "anti_patterns": [
         "Epic scale claimed but only one character's personal story is actually told"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HI_E12_WORLDVIEW_TO_BIOGRAPHICAL",
@@ -677,7 +706,8 @@
       ],
       "anti_patterns": [
         "Biographical historical where the figure is simply a vehicle for the author's contemporary views"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HI_E13_CONSTRAINTS_TO_REVISIONIST",
@@ -696,7 +726,8 @@
       ],
       "anti_patterns": [
         "Revisionist history that changes the record for wish-fulfillment rather than critical illumination"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HI_E30_PERIOD_DRAMA_TO_MATERIAL",
@@ -714,7 +745,8 @@
       ],
       "anti_patterns": [
         "Period drama with anachronistic technology that removes period-specific constraints"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E31_EPIC_TO_EVENTS_STRUCTURE",
@@ -732,7 +764,8 @@
       ],
       "anti_patterns": [
         "Historical epic where the named historical events are ambient rather than structurally operative"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E32_BIOGRAPHICAL_TO_SOCIAL_HIERARCHY",
@@ -751,7 +784,8 @@
       ],
       "anti_patterns": [
         "Biographical historical that treats the subject as exempt from their period's social structure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E33_REVISIONIST_TO_SOCIAL_HIERARCHY",
@@ -769,7 +803,8 @@
       ],
       "anti_patterns": [
         "Revisionist history that displaces the dominant narrative without engaging the hierarchy that produced it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E50_MATERIAL_TO_PERIOD_ESTABLISHMENT",
@@ -787,7 +822,8 @@
       ],
       "anti_patterns": [
         "Period establishment scene that narrates history rather than inhabiting the period's material texture"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E51_SOCIAL_HIERARCHY_TO_DESIRE_CONSTRAINT",
@@ -806,7 +842,8 @@
       ],
       "anti_patterns": [
         "Desire-versus-constraint scene where the constraint is merely personal rather than period-specific"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E52_EVENTS_TO_HISTORICAL_CONSEQUENCE",
@@ -824,7 +861,8 @@
       ],
       "anti_patterns": [
         "Historical events referenced but delivering no concrete consequence to any character in a scene"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HI_E53_PERIOD_ESTABLISHMENT_TO_DESIRE_CONSTRAINT",
@@ -842,7 +880,8 @@
       ],
       "anti_patterns": [
         "Period establishment with no subsequent collision between desire and the period's rules"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HI_E54_DESIRE_CONSTRAINT_TO_HISTORICAL_CONSEQUENCE",
@@ -860,7 +899,8 @@
       ],
       "anti_patterns": [
         "Personal collision with period constraint that resolves without any historical dimension"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HI_E90_ANACHRONISM_WARNING",
@@ -876,7 +916,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what the constraint exists to prevent"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

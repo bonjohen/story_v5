@@ -24,6 +24,11 @@
       "requires payoff": 3,
       "differentiates from": 3,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 28,
+      "soft": 12,
+      "total": 40
     }
   },
   "nodes": [
@@ -54,7 +59,8 @@
         "Opening establishes a case that demands investigation",
         "Detective's presence immediately signals the application of method to mystery",
         "Reader/viewer is invited to observe and deduce alongside the investigator"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N10_CENTRAL_INVESTIGATOR",
@@ -83,7 +89,8 @@
         "Scenes are anchored to the investigator's perspective or actions",
         "Case briefings and discoveries are filtered through the investigator",
         "Other characters defer to or challenge the investigator specifically"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N11_VISIBLE_METHOD",
@@ -114,7 +121,8 @@
         "Detective explains reasoning to a partner or observer",
         "Scenes show the detective noticing what others miss",
         "Method becomes a character trait that creates both advantages and blind spots"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N12_WORTHY_CASE",
@@ -143,7 +151,8 @@
         "Detective encounters setbacks or dead ends",
         "Initial conclusions prove wrong and must be revised",
         "Audience is genuinely uncertain about the solution until the reveal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N13_EARNED_SOLUTION",
@@ -174,7 +183,8 @@
         "Detective can trace each step of their reasoning chain",
         "Final revelation connects directly to earlier scenes of investigation",
         "Other characters recognize the detective's work as the cause of resolution"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N20_CLASSIC_GOLDEN_AGE",
@@ -205,7 +215,8 @@
         "Detective delivers formal solution presentation",
         "Social world is a closed system of suspects",
         "Tone is controlled, mannered, or playful despite serious crime"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DT_N21_HARDBOILED",
@@ -237,7 +248,8 @@
         "Physical danger to the detective is real and recurring",
         "Clients are morally compromised or dishonest",
         "World resists clean resolution"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DT_N22_POLICE_DETECTIVE",
@@ -268,7 +280,8 @@
         "Team dynamics and hierarchy affect decisions",
         "Detective must justify methods to superiors or partners",
         "Institutional resources both help and constrain the investigation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DT_N23_AMATEUR_CONSULTING",
@@ -299,7 +312,8 @@
         "Official investigators are wrong in ways only the outsider can see",
         "Unconventional methods or observations provide the key insight",
         "Tension between official and unofficial investigation is dramatized"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DT_N40_CRIME_SCENE_EVIDENCE",
@@ -329,7 +343,8 @@
         "Detective moves through space with deliberate, observational attention",
         "Details of the environment are noted by the investigator and prove significant",
         "Scene reconstruction — what happened here — is dramatized through the detective's analysis"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N41_INTERVIEW_DYNAMICS",
@@ -360,7 +375,8 @@
         "Detective notices what a subject doesn't say as much as what they do say",
         "Interview scenes have stakes — the subject's cooperation or evasion affects the case",
         "Contradictions between accounts are identified and exploited"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N42_INSTITUTIONAL_CONTEXT",
@@ -390,7 +406,8 @@
         "Institutional rules force the detective to choose between the letter of procedure and the truth",
         "Social position of suspects or witnesses affects how aggressively they can be pursued",
         "System creates obstacles that must be worked around or through"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "DT_N60_CASE_ASSIGNMENT",
@@ -421,7 +438,8 @@
         "Detective's decision to take the case is dramatized, not skipped",
         "Initial information about the mystery is provided, along with what remains unknown",
         "Tone of the case is established — stakes, danger level, personal relevance"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N61_INVESTIGATION_BREAKTHROUGH",
@@ -452,7 +470,8 @@
         "Previously gathered evidence is recontextualized by the new discovery",
         "Investigation accelerates in a new direction after the breakthrough",
         "Audience shares the moment of insight with the detective"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N62_SOLUTION_PRESENTATION",
@@ -484,7 +503,8 @@
         "Earlier scenes are retrospectively recontextualized — clues that seemed irrelevant now click into place",
         "Culprit's response — denial, anger, confession — validates the revelation",
         "Audience experiences the double pleasure of surprise and retrospective inevitability"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N80_INTELLECTUAL_RIGOR",
@@ -514,7 +534,8 @@
         "Attention to evidence — physical, testimonial, behavioral — is modeled as meaningful",
         "Other characters recognize the investigator's method as distinct and valuable",
         "Resolution confirms that the method worked — the case was solvable through diligence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "DT_N90_PASSIVE_DETECTIVE",
@@ -542,7 +563,8 @@
         "Solution speech references information not gathered through investigative scenes",
         "Audience cannot trace a causal link from the detective's actions to the resolution",
         "Detective seems surprised by a solution they should have been driving toward"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -562,7 +584,8 @@
       ],
       "anti_patterns": [
         "No clear investigator — case resolved by diffuse ensemble action"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E02_PROMISE_TO_METHOD",
@@ -580,7 +603,8 @@
       ],
       "anti_patterns": [
         "Method is asserted in description but never dramatized in practice"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E03_PROMISE_TO_WORTHY_CASE",
@@ -598,7 +622,8 @@
       ],
       "anti_patterns": [
         "Trivial case resolved without meaningful effort or misdirection"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E04_PROMISE_TO_EARNED_SOLUTION",
@@ -616,7 +641,8 @@
       ],
       "anti_patterns": [
         "Coincidental resolution, spontaneous confession, or solution delivered by a secondary character"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E05_PROMISE_TO_TONE",
@@ -634,7 +660,8 @@
       ],
       "anti_patterns": [
         "Tone communicates that investigation is futile or that method is irrelevant to outcome"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E10_METHOD_TO_CLASSIC",
@@ -655,7 +682,8 @@
       "anti_patterns": [
         "Genius detective applied to a trivially simple puzzle",
         "Deduction scenes that rely on information the audience was not given"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DT_E11_METHOD_TO_HARDBOILED",
@@ -677,7 +705,8 @@
       "anti_patterns": [
         "Hardboiled detective in a safe, honest world",
         "Personal code that is never genuinely tested"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DT_E12_METHOD_TO_POLICE",
@@ -699,7 +728,8 @@
       "anti_patterns": [
         "Police label without procedural substance",
         "Institutional context that never creates real constraints on the investigation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DT_E13_METHOD_TO_AMATEUR",
@@ -720,7 +750,8 @@
       ],
       "anti_patterns": [
         "Amateur detective with full institutional access and no outsider friction"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DT_E30_CLASSIC_TO_CRIME_SCENE",
@@ -740,7 +771,8 @@
       ],
       "anti_patterns": [
         "Golden-age puzzle with no physical evidence — testimony-only mystery"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E31_HARDBOILED_TO_INTERVIEW",
@@ -760,7 +792,8 @@
       ],
       "anti_patterns": [
         "Hardboiled detective who gets full cooperation from every subject with no friction"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E32_POLICE_TO_INSTITUTIONAL",
@@ -780,7 +813,8 @@
       ],
       "anti_patterns": [
         "Police detective who operates without any institutional accountability or constraint"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DT_E33_AMATEUR_TO_INTERVIEW",
@@ -800,7 +834,8 @@
       ],
       "anti_patterns": [
         "Amateur detective who obtains all information without any social effort or skill"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E50_CRIME_SCENE_TO_ASSIGNMENT",
@@ -820,7 +855,8 @@
       ],
       "anti_patterns": [
         "Case begins without any scene establishing the crime or its initial evidence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E51_INTERVIEW_TO_BREAKTHROUGH",
@@ -840,7 +876,8 @@
       ],
       "anti_patterns": [
         "All investigation advances through physical evidence — human interaction contributes nothing"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E52_INSTITUTIONAL_TO_ASSIGNMENT",
@@ -858,7 +895,8 @@
       ],
       "anti_patterns": [
         "Case assigned without any institutional context affecting how it is framed or constrained"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E53_ASSIGNMENT_TO_BREAKTHROUGH",
@@ -876,7 +914,8 @@
       ],
       "anti_patterns": [
         "Breakthrough arrives without prior investigative work that makes it feel earned"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E54_BREAKTHROUGH_TO_SOLUTION",
@@ -895,7 +934,8 @@
       ],
       "anti_patterns": [
         "Breakthrough leads nowhere — solution presentation ignores what the breakthrough revealed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E70_WORTHY_CASE_TO_BREAKTHROUGH",
@@ -913,7 +953,8 @@
       ],
       "anti_patterns": [
         "Easy case where breakthrough requires no real insight or effort"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E71_EARNED_SOLUTION_TO_PRESENTATION",
@@ -931,7 +972,8 @@
       ],
       "anti_patterns": [
         "Solution announced without the detective's reasoning being demonstrated — audience cannot verify the work"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "DT_E72_CLASSIC_DIFFERENTIATES_HARDBOILED",
@@ -950,7 +992,8 @@
       "anti_patterns": [
         "Classic puzzle applied to a genuinely dangerous, morally corrupt world without adjustment",
         "Hardboiled tone without any real danger or moral compromise"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DT_E73_POLICE_DIFFERENTIATES_AMATEUR",
@@ -969,7 +1012,8 @@
       "anti_patterns": [
         "Police detective with no institutional accountability",
         "Amateur detective with full institutional resources and authority"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "DT_E90_PASSIVE_DETECTIVE_WARNING",
@@ -985,7 +1029,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

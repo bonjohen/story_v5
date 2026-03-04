@@ -24,6 +24,11 @@
       "requires payoff": 2,
       "inherits constraint": 1,
       "prohibits element": 2
+    },
+    "severityCounts": {
+      "hard": 29,
+      "soft": 10,
+      "total": 39
     }
   },
   "nodes": [
@@ -53,7 +58,8 @@
         "Opening establishes the approaching holiday as a felt presence",
         "Characters' emotional states are explicitly tied to the seasonal occasion",
         "Holiday traditions and rituals are introduced early as load-bearing story elements"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N10_DEADLINE",
@@ -82,7 +88,8 @@
         "Characters count down to the holiday explicitly or implicitly",
         "Pacing accelerates as the holiday approaches",
         "Key decisions are framed in terms of what is possible before the holiday versus after"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N11_RECONNECTION",
@@ -111,7 +118,8 @@
         "Early scenes establish what has been lost or broken",
         "Characters visibly resist or long for connection",
         "Holiday traditions serve as the medium through which reconnection is attempted"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N12_TRANSFORMATION",
@@ -141,7 +149,8 @@
         "Opening scenes clearly establish the character's emotional wound or defensive posture",
         "Middle scenes show the holiday applying increasing pressure on that posture",
         "Closing scenes show the character acting in ways that would have been impossible at the story's opening"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N13_SEASONAL_ESSENTIAL",
@@ -170,7 +179,8 @@
         "Weather, light, and seasonal imagery are integrated into emotional scenes",
         "Characters' internal states are described through seasonal metaphors",
         "Seasonal traditions and their cultural meanings are explicitly or implicitly active in the plot"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N20_CHRISTMAS_WINTER",
@@ -200,7 +210,8 @@
         "Decorations, carols, gift-giving, and seasonal gatherings appear as load-bearing story elements",
         "Cold and darkness outside contrast with warmth and light inside, mirroring the character's inner journey",
         "Christmas morning or Christmas Eve functions as the climactic moment"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HL_N21_HALLOWEEN_SPOOKY",
@@ -229,7 +240,8 @@
         "Death, memory of the dead, and confronting fears are central themes",
         "Halloween rituals carry thematic weight beyond atmosphere",
         "Transformation involves naming or facing something that was denied or buried"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HL_N22_VALENTINE_ROMANCE",
@@ -259,7 +271,8 @@
         "Valentine's Day expectations and pressures are explicitly active in characters' minds",
         "Romantic tension is directly tied to what the holiday demands or reveals",
         "Declaration or reunion occurs at the holiday's climactic moment"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HL_N23_THANKSGIVING_GRATITUDE",
@@ -289,7 +302,8 @@
         "The family table and the meal preparation are load-bearing narrative elements",
         "Characters cannot escape each other once the gathering begins",
         "Dialogue around the table carries the weight of everything unsaid all year"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HL_N40_TRAPPINGS_LOAD_BEARING",
@@ -318,7 +332,8 @@
         "Narrative attention dwells on specific holiday objects with emotional charge",
         "Characters' reactions to holiday elements reveal their internal states",
         "The presence or absence of traditional elements marks the story's emotional arc"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N41_GATHERING_REQUIRED",
@@ -347,7 +362,8 @@
         "Scene with multiple characters in shared space where exit would be socially costly",
         "Conversations at the gathering carry double meanings or suppressed history",
         "Physical proximity forces revelations or confrontations that would not occur in separate spaces"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N42_TICKING_CLOCK",
@@ -376,7 +392,8 @@
         "Explicit or implicit countdown to the holiday's key moment",
         "Characters aware they must act now or miss the window",
         "Scene transitions that compress time as the holiday approaches"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N60_BROKEN_TRADITION",
@@ -406,7 +423,8 @@
         "Scene has a palpable quality of wrongness â€” the holiday failing to feel like a holiday",
         "Characters' faces and silences carry the weight of what the scene represents",
         "The broken element (the empty chair, the failed meal, the undecorated tree) becomes a symbol the story returns to"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N61_RECONNECTION_MOMENT",
@@ -439,7 +457,8 @@
         "Physical gesture carries the weight of the verbal content",
         "Both characters visibly changed by the exchange",
         "Holiday imagery present in the scene amplifies the emotional content"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N62_CELEBRATION_RESTORED",
@@ -469,7 +488,8 @@
         "Holiday elements from the opening reappear, but with altered meaning",
         "Characters' emotional presence in the celebration contrasts visibly with their earlier state",
         "Tone shifts to earned warmth â€” not easy sentimentality but hard-won joy"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "HL_N80_WARM_NOSTALGIC",
@@ -497,7 +517,8 @@
         "Warm scenes follow and therefore earn their warmth from preceding cold or hard scenes",
         "Nostalgic imagery carries both pleasure and pain",
         "Characters are allowed to feel joy only after they have paid for it in honest emotion"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N90_CYNICISM_PUNISHED",
@@ -523,7 +544,8 @@
         "Climactic transformation scene relies on external event or pressure rather than internal choice",
         "Character's final warm behavior could be explained by compliance rather than genuine change",
         "Story cannot identify what specifically changed in the character's interior"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "HL_N91_HOLIDAY_AS_BACKDROP",
@@ -549,7 +571,8 @@
         "Holiday references can be removed from scenes without affecting their meaning",
         "Characters do not think or speak about the holiday in emotionally meaningful ways",
         "The story's resolution would occur at the same time and in the same way regardless of the seasonal occasion"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -569,7 +592,8 @@
       ],
       "anti_patterns": [
         "Holiday arrives with no narrative urgency â€” characters are not racing against it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E02_PROMISE_TO_RECONNECTION",
@@ -587,7 +611,8 @@
       ],
       "anti_patterns": [
         "Story has no meaningful rupture â€” characters are fine and the holiday merely adds cheer"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E03_PROMISE_TO_TRANSFORMATION",
@@ -605,7 +630,8 @@
       ],
       "anti_patterns": [
         "Story resolves external conflict but no character changes internally"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E04_PROMISE_TO_SEASONAL",
@@ -623,7 +649,8 @@
       ],
       "anti_patterns": [
         "Seasonal details are present but purely decorative â€” the story has no seasonal soul"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E05_PROMISE_TO_TONE",
@@ -641,7 +668,8 @@
       ],
       "anti_patterns": [
         "Warmth is the story's default register from the opening â€” there is nowhere to go emotionally"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E10_DEADLINE_TO_CHRISTMAS",
@@ -659,7 +687,8 @@
       ],
       "anti_patterns": [
         "Christmas is the setting but no specific Christmas deadline creates urgency"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HL_E11_RECONNECTION_TO_HALLOWEEN",
@@ -677,7 +706,8 @@
       ],
       "anti_patterns": [
         "Halloween story in which the dead and the scary are purely external threats with no connection to the protagonist's interior life"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HL_E12_DEADLINE_TO_VALENTINE",
@@ -695,7 +725,8 @@
       ],
       "anti_patterns": [
         "Valentine's Day is the setting but characters are not in any way pressured by the holiday's romantic expectations"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HL_E13_GATHERING_TO_THANKSGIVING",
@@ -713,7 +744,8 @@
       ],
       "anti_patterns": [
         "Characters skip the Thanksgiving gathering and the story does not treat this avoidance as a significant failure or choice"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HL_E30_CHRISTMAS_TO_TRAPPINGS",
@@ -731,7 +763,8 @@
       ],
       "anti_patterns": [
         "Christmas decorations are described extensively but none of them connect to any character's emotional experience"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E31_HALLOWEEN_TO_TRAPPINGS",
@@ -749,7 +782,8 @@
       ],
       "anti_patterns": [
         "Halloween imagery is atmospheric but never connected to character psychology or story theme"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E32_VALENTINE_TO_TICKING",
@@ -767,7 +801,8 @@
       ],
       "anti_patterns": [
         "Valentine's Day passes without the characters acknowledging the deadline it imposed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E33_THANKSGIVING_TO_GATHERING",
@@ -785,7 +820,8 @@
       ],
       "anti_patterns": [
         "Thanksgiving story where the gathering is optional and several key characters simply don't attend without consequence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E50_TRAPPINGS_TO_BROKEN_TRADITION",
@@ -803,7 +839,8 @@
       ],
       "anti_patterns": [
         "Tradition is disrupted but the story has not done the work of establishing why it mattered, so the disruption lands without weight"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E51_GATHERING_TO_BROKEN_TRADITION",
@@ -821,7 +858,8 @@
       ],
       "anti_patterns": [
         "Gathering occurs but celebration proceeds smoothly with no disruption or tension"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E52_TICKING_TO_RECONNECTION",
@@ -839,7 +877,8 @@
       ],
       "anti_patterns": [
         "Deadline is near but characters reconnect casually, without any sense that time was a factor"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E53_BROKEN_TO_RECONNECTION",
@@ -857,7 +896,8 @@
       ],
       "anti_patterns": [
         "Broken tradition occurs but characters immediately reconnect without the disruption having any effect on their choice"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E54_RECONNECTION_TO_RESTORED",
@@ -875,7 +915,8 @@
       ],
       "anti_patterns": [
         "Celebration is restored but it looks identical to what it would have been if nothing had happened â€” the transformation leaves no visible mark"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "HL_E70_TRANSFORMATION_TO_RECONNECTION",
@@ -893,7 +934,8 @@
       ],
       "anti_patterns": [
         "Characters reconnect but neither has changed â€” the same dynamic that produced the estrangement is still intact"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E90_CYNICISM_WARNING",
@@ -909,7 +951,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "HL_E91_BACKDROP_WARNING",
@@ -925,7 +968,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

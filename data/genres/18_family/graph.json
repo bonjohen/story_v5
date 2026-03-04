@@ -24,6 +24,11 @@
       "mandates element": 3,
       "requires payoff": 3,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 24,
+      "soft": 14,
+      "total": 38
     }
   },
   "nodes": [
@@ -52,7 +57,8 @@
       "signals_in_text": [
         "Family relationships are introduced early and established as the source of central conflict",
         "Tone invites emotional engagement across age groups"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N10_FAMILY_ENGINE",
@@ -79,7 +85,8 @@
       "signals_in_text": [
         "Scene outcomes change the state of at least one family relationship",
         "Characters' decisions are motivated by their roles within the family"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N11_AGE_ACCESSIBLE",
@@ -107,7 +114,8 @@
         "Dialogue and stakes work on at least two registers simultaneously",
         "Humor is not exclusively childish nor exclusively adult",
         "Emotional truth is present without graphic or age-inappropriate content"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N12_BELONGING_STAKES",
@@ -134,7 +142,8 @@
       "signals_in_text": [
         "Characters' deepest fears and hopes are tied to family acceptance or loss",
         "The worst imaginable outcome for the protagonist involves family rupture, not just physical harm"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N13_RESOLUTION_CONNECTION",
@@ -162,7 +171,8 @@
       "signals_in_text": [
         "Final scenes show a tangible shift in how family members relate to each other",
         "The emotional need identified at the story's start is addressed at the end"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N20_ANIMATED_ADVENTURE",
@@ -191,7 +201,8 @@
       "signals_in_text": [
         "The adventure's climax requires the protagonist to make a choice rooted in their family relationship",
         "Visual spectacle is paired with emotional beats throughout, not just at the end"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FA_N21_MULTIGENERATIONAL_DRAMA",
@@ -220,7 +231,8 @@
       "signals_in_text": [
         "Characters explicitly or implicitly echo or invert their parents' choices",
         "Scenes in the past or references to family history illuminate present conflict"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FA_N22_FAMILY_COMEDY",
@@ -249,7 +261,8 @@
       "signals_in_text": [
         "Laughs arise from character-specific family dynamics",
         "Even at peak comic conflict, affection is legible beneath the friction"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FA_N23_COMING_OF_AGE",
@@ -277,7 +290,8 @@
       "signals_in_text": [
         "Protagonist's internal growth is mirrored in a changed family dynamic at the resolution",
         "The specific history and texture of this family shapes the protagonist's particular path to maturity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FA_N40_HOME_SPACES",
@@ -304,7 +318,8 @@
       "signals_in_text": [
         "Description of domestic spaces includes emotional or memory-laden details",
         "Characters' behavior in family spaces reflects their relationship to their family history"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N41_RITUALS_TRADITIONS",
@@ -331,7 +346,8 @@
       "signals_in_text": [
         "Anticipation or dread of the family event is established before it occurs",
         "The ritual's outcome differs from its normal performance, marking a turning point in family dynamics"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N42_GENERATIONAL_INTERACTION",
@@ -358,7 +374,8 @@
       "signals_in_text": [
         "Characters of different generations hold meaningfully different perspectives on the family's history and future",
         "Scenes explicitly show the gap between what one generation assumes and what another experiences"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FA_N60_GATHERING_DISRUPTION",
@@ -386,7 +403,8 @@
       "signals_in_text": [
         "Multiple family members are present and their relationships to each other are established in a short span",
         "The disruption's nature reveals something about the family that was previously unspoken or suppressed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N61_GENERATIONAL_CLASH",
@@ -416,7 +434,8 @@
         "Scene shows the interiority or emotional logic of both parties even when only one is present",
         "The clash is rooted in love or care, not mere antagonism",
         "Audience feels the tragedy of two people who love each other failing to connect"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N62_RECONCILIATION_REUNION",
@@ -447,7 +466,8 @@
         "The specific wound or misunderstanding driving the conflict is addressed, not talked around",
         "Characters' behavior toward each other after reconciliation is visibly different from before",
         "Emotional release (tears, laughter, silence) is earned rather than manufactured"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "FA_N80_WARMTH_TONE",
@@ -476,7 +496,8 @@
         "Emotional scenes are given space and pace",
         "Characters are rendered with affection even at their worst moments",
         "Humor and warmth are present in the fabric of the story, not reserved only for the resolution"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "FA_N90_SACCHARINE",
@@ -503,7 +524,8 @@
         "Audience feels manipulated into emotion rather than genuinely moved",
         "The difficulty of the conflict is understated relative to the warmth of the resolution",
         "Characters accept resolution too readily — no residue of prior hurt or misunderstanding"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -523,7 +545,8 @@
       ],
       "anti_patterns": [
         "External plot drives the story with family as incidental backdrop"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E02_PROMISE_TO_AGE",
@@ -541,7 +564,8 @@
       ],
       "anti_patterns": [
         "Content exclusive to one age group — either purely juvenile or adult-only in theme and tone"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E03_PROMISE_TO_BELONGING",
@@ -559,7 +583,8 @@
       ],
       "anti_patterns": [
         "Characters fight for survival or material goals with no relational dimension to the stakes"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E04_PROMISE_TO_RESOLUTION",
@@ -577,7 +602,8 @@
       ],
       "anti_patterns": [
         "Resolution leaves family more fractured than they began — no movement toward connection"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E05_PROMISE_TO_TONE",
@@ -595,7 +621,8 @@
       ],
       "anti_patterns": [
         "Cynical or coldly ironic tone that holds the family story at arm's length"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E10_ENGINE_TO_ANIMATED",
@@ -615,7 +642,8 @@
       ],
       "anti_patterns": [
         "Adventure is primary and family relationship is secondary or decorative"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E11_ENGINE_TO_DRAMA",
@@ -635,7 +663,8 @@
       ],
       "anti_patterns": [
         "Drama is set in a family context but generational dynamics are not active in the conflict"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E12_ENGINE_TO_COMEDY",
@@ -655,7 +684,8 @@
       ],
       "anti_patterns": [
         "Humor is disconnected from family dynamics — any group of people could generate the same comedy"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E13_ENGINE_TO_COMING_OF_AGE",
@@ -675,7 +705,8 @@
       ],
       "anti_patterns": [
         "Coming-of-age is purely external — protagonist grows through peer relationships or adventure without family as the primary arena"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E30_ANIMATED_TO_HOME",
@@ -694,7 +725,8 @@
       ],
       "anti_patterns": [
         "Home is generic — adventure begins in a setting with no emotional weight"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E31_DRAMA_TO_RITUALS",
@@ -712,7 +744,8 @@
       ],
       "anti_patterns": [
         "Drama unfolds without organizing family occasions — characters interact without ritual pressure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E32_COMEDY_TO_GENERATIONAL",
@@ -730,7 +763,8 @@
       ],
       "anti_patterns": [
         "Comedy is generated by a single generation without family dynamic friction"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E33_COMING_TO_HOME",
@@ -748,7 +782,8 @@
       ],
       "anti_patterns": [
         "Protagonist's coming-of-age occurs entirely outside family space with no return or reckoning"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E34_DRAMA_TO_GENERATIONAL",
@@ -766,7 +801,8 @@
       ],
       "anti_patterns": [
         "Only one generation is dramatically active — others are passive observers or symbols"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E50_HOME_TO_GATHERING",
@@ -784,7 +820,8 @@
       ],
       "anti_patterns": [
         "Gathering and disruption occur in a neutral space with no emotional dimension"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E51_RITUALS_TO_GATHERING",
@@ -802,7 +839,8 @@
       ],
       "anti_patterns": [
         "Ritual occurs without disruption — family performs it without the fracture that makes it dramatically alive"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E52_GENERATIONAL_TO_CLASH",
@@ -820,7 +858,8 @@
       ],
       "anti_patterns": [
         "Generations interact without genuine friction — they understand each other too easily"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E53_GATHERING_TO_CLASH",
@@ -838,7 +877,8 @@
       ],
       "anti_patterns": [
         "Disruption is resolved before it can escalate into genuine generational confrontation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "FA_E54_CLASH_TO_RECONCILIATION",
@@ -857,7 +897,8 @@
       ],
       "anti_patterns": [
         "Reconciliation occurs before the clash is fully dramatized — resolution is cheap because conflict was not costly"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E70_BELONGING_TO_RECONCILIATION",
@@ -876,7 +917,8 @@
       ],
       "anti_patterns": [
         "Reconciliation resolves plot without addressing the belonging need — characters make up without the emotional wound being touched"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "FA_E90_SACCHARINE_WARNING",
@@ -892,7 +934,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

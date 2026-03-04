@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 4,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 28,
+      "soft": 12,
+      "total": 40
     }
   },
   "nodes": [
@@ -52,7 +57,8 @@
         "Armed conflict is introduced early and drives plot",
         "Human stakes of violence are established from the outset",
         "Protagonist is embedded in a military or wartime structure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N10_ARMED_CONFLICT_CENTRAL",
@@ -80,7 +86,8 @@
         "Combat operations drive plot decisions",
         "Opposing forces are defined and active",
         "Outcome of the war shapes the story's resolution"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N11_HUMAN_COST_VISIBLE",
@@ -110,7 +117,8 @@
         "Named characters die and are mourned",
         "Violence leaves visible physical and psychological marks",
         "Collateral damage is shown, not glossed over"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N12_DUTY_VS_SURVIVAL",
@@ -139,7 +147,8 @@
         "Characters debate or internally wrestle with orders",
         "Scenes where following orders risks death",
         "Consequences for those who refuse or desert"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N13_BROTHERHOOD_UNIT_COHESION",
@@ -169,7 +178,8 @@
         "Named comrades with distinct roles and personalities",
         "Interpersonal conflict and reconciliation within the unit",
         "Death of a comrade registers as significant loss"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N20_COMBAT_FRONTLINE",
@@ -199,7 +209,8 @@
         "Scene-level tactical detail of engagements",
         "Sensory immediacy of combat — noise, confusion, fear, chaos",
         "Protagonist makes life-and-death decisions under fire"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WR_N21_HOME_FRONT",
@@ -228,7 +239,8 @@
         "War's material effects on daily life are shown",
         "Protagonist makes dangerous choices because of the war's demands",
         "Loss arrives through news, casualties, or direct violence"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WR_N22_ANTI_WAR",
@@ -257,7 +269,8 @@
         "Institutional authority is shown as indifferent or corrupt",
         "Heroism is undercut by futility or senselessness",
         "Survivors carry wounds that make victory feel like defeat"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WR_N23_MILITARY_STRATEGY",
@@ -286,7 +299,8 @@
         "Protagonist sees the map but not always the battlefield",
         "Decisions made in this node have consequences shown in combat nodes",
         "Moral burden of command is dramatized"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WR_N40_BATTLEFIELD_GEOGRAPHY",
@@ -315,7 +329,8 @@
         "Terrain is described with tactical implication",
         "Characters use or are constrained by landscape features",
         "Weather and ground conditions affect mission outcomes"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N41_CHAIN_OF_COMMAND",
@@ -344,7 +359,8 @@
         "Orders are issued and the drama of compliance or refusal follows",
         "Rank and authority shape who speaks and who obeys",
         "Consequences for disobedience or command failure are shown"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N42_SCARCITY_AND_DANGER",
@@ -374,7 +390,8 @@
         "Characters track remaining ammunition or supplies",
         "Medical treatment is improvised or delayed",
         "Characters make errors due to exhaustion or incomplete information"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N60_INTO_COMBAT",
@@ -404,7 +421,8 @@
         "Sensory detail of combat — sound, smell, confusion, physical fear",
         "Protagonist's interiority during first engagement",
         "Cost of the scene — someone is hurt or killed, something is lost"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N61_LOSS_COST_OF_WAR",
@@ -435,7 +453,8 @@
         "Narrative slows to register the moment of loss",
         "Protagonist's grief, guilt, or horror is given space",
         "Loss changes something permanently — the unit, the protagonist's worldview, the mission"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N62_MISSION_CLIMAX",
@@ -466,7 +485,8 @@
         "Maximum danger and resource depletion",
         "Every prior element — skills, relationships, moral choices — is brought to bear",
         "Outcome is earned by prior development, not convenience"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WR_N80_GRAVITY_INTENSITY",
@@ -495,7 +515,8 @@
         "Combat is described with physical specificity, not abstraction",
         "Aftermath of violence receives narrative attention",
         "Characters' interior responses to war are shown, not suppressed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WR_N90_GLORIFIED_VIOLENCE",
@@ -523,7 +544,8 @@
         "Protagonist experiences no lasting psychological effect from killing",
         "Casualties are numerical, not personal",
         "Battle scenes are exciting but no one is diminished by them"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -543,7 +565,8 @@
       ],
       "anti_patterns": [
         "War as backdrop — story could exist without it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E02_PROMISE_TO_HUMAN_COST",
@@ -561,7 +584,8 @@
       ],
       "anti_patterns": [
         "Violence is spectacular but consequence-free"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E03_PROMISE_TO_DUTY",
@@ -579,7 +603,8 @@
       ],
       "anti_patterns": [
         "Duty and survival never conflict — war is convenient and safe for the protagonist"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E04_PROMISE_TO_BROTHERHOOD",
@@ -597,7 +622,8 @@
       ],
       "anti_patterns": [
         "Soldiers are unnamed and fungible — no bonds formed or broken"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E05_PROMISE_TO_GRAVITY",
@@ -615,7 +641,8 @@
       ],
       "anti_patterns": [
         "Consistently light or adventure-serial tone that treats war as fun"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E10_CONFLICT_TO_FRONTLINE",
@@ -636,7 +663,8 @@
       ],
       "anti_patterns": [
         "Front-line setting but protagonist is never in real danger or combat"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WR_E11_CONFLICT_TO_HOMEFRONT",
@@ -657,7 +685,8 @@
       ],
       "anti_patterns": [
         "Home front is insulated from war's consequences"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WR_E12_CONFLICT_TO_ANTIWAR",
@@ -678,7 +707,8 @@
       ],
       "anti_patterns": [
         "Anti-war stance stated but story structure still glorifies combat"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WR_E13_CONFLICT_TO_STRATEGY",
@@ -699,7 +729,8 @@
       ],
       "anti_patterns": [
         "Command decisions made without visible human cost to those who execute them"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WR_E30_FRONTLINE_TO_GEOGRAPHY",
@@ -720,7 +751,8 @@
       ],
       "anti_patterns": [
         "Combat in featureless space — terrain never described or used"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E31_FRONTLINE_TO_CHAIN",
@@ -738,7 +770,8 @@
       ],
       "anti_patterns": [
         "Soldiers act with total autonomy regardless of military structure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E32_HOMEFRONT_TO_SCARCITY",
@@ -758,7 +791,8 @@
       ],
       "anti_patterns": [
         "Home front civilian life is comfortable and undisrupted by the war"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E33_ANTIWAR_TO_CHAIN",
@@ -777,7 +811,8 @@
       ],
       "anti_patterns": [
         "Anti-war narrative where military authority is wise and just — futility has no institutional cause"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E34_STRATEGY_TO_CHAIN",
@@ -797,7 +832,8 @@
       ],
       "anti_patterns": [
         "Commander has total autonomy with no accountability upward or downward"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E35_FRONTLINE_TO_SCARCITY",
@@ -816,7 +852,8 @@
       ],
       "anti_patterns": [
         "Unlimited ammunition and supplies — characters never make resource decisions under fire"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E50_GEOGRAPHY_TO_INTO_COMBAT",
@@ -837,7 +874,8 @@
       ],
       "anti_patterns": [
         "First combat occurs in generic, non-specific space with no terrain logic"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E51_CHAIN_TO_INTO_COMBAT",
@@ -855,7 +893,8 @@
       ],
       "anti_patterns": [
         "Protagonist chooses to enter first combat entirely of their own volition with no institutional context"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E52_SCARCITY_TO_LOSS",
@@ -875,7 +914,8 @@
       ],
       "anti_patterns": [
         "Danger is constant but nobody is ever actually harmed in a way that matters"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E53_INTO_COMBAT_TO_LOSS",
@@ -895,7 +935,8 @@
       ],
       "anti_patterns": [
         "Combat scenes occur but nobody significant is lost or damaged — the war has no cost for the protagonist"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WR_E56_LOSS_TO_MISSION_CLIMAX",
@@ -915,7 +956,8 @@
       ],
       "anti_patterns": [
         "Mission climax proceeds as if prior losses never occurred — no emotional or moral continuity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WR_E70_DUTY_TO_MISSION_CLIMAX",
@@ -935,7 +977,8 @@
       ],
       "anti_patterns": [
         "Mission climax resolves without the duty-vs-survival tension being engaged"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WR_E71_BROTHERHOOD_TO_MISSION_CLIMAX",
@@ -955,7 +998,8 @@
       ],
       "anti_patterns": [
         "Mission climax occurs without any meaningful engagement of unit relationships"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WR_E90_HUMAN_COST_TO_ANTIPATTERN",
@@ -971,7 +1015,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

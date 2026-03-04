@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 2,
       "prohibits element": 2
+    },
+    "severityCounts": {
+      "hard": 27,
+      "soft": 12,
+      "total": 39
     }
   },
   "nodes": [
@@ -52,7 +57,8 @@
         "Prose style is deliberately crafted rather than transparent",
         "Character consciousness receives sustained attention",
         "Thematic questions are posed but not answered didactically"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N10_INTERIORITY",
@@ -81,7 +87,8 @@
         "Long passages of thought, memory, or perception",
         "External events are filtered through character consciousness",
         "The gap between what a character thinks and what they do is visible and significant"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N11_LANGUAGE",
@@ -110,7 +117,8 @@
         "Metaphors that recur and evolve across the text",
         "Sentence structure that enacts emotional states",
         "Prose that cannot be paraphrased without loss"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N12_THEMATIC_COMPLEXITY",
@@ -138,7 +146,8 @@
         "The reader can articulate the story's central question but not the story's answer",
         "Characters who are wrong about themselves in interesting ways",
         "Scenes that can be read as supporting opposite interpretations"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N13_AMBIGUITY",
@@ -167,7 +176,8 @@
         "Key events are rendered from angles that prevent certainty",
         "The narrator's reliability is subtly questioned",
         "Readers leave the text still working on it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N20_PSYCHOLOGICAL_REALISM",
@@ -196,7 +206,8 @@
         "Characters believe things that are demonstrably false about themselves",
         "Memory and perception are shown as selective and constructed",
         "Behavior is rooted in prior psychology that has been established"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "LF_N21_EXPERIMENTAL",
@@ -227,7 +238,8 @@
         "Structural patterns that the reader must assemble",
         "Narrative voice that calls attention to its own construction",
         "Gaps and absences that are purposeful and loaded"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "LF_N22_DOMESTIC_LITERARY",
@@ -257,7 +269,8 @@
         "Recurring domestic objects or rituals that accumulate meaning",
         "Small exchanges that carry disproportionate emotional weight",
         "The familiar made unfamiliar through the precision of the attention paid to it"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "LF_N23_SOCIAL_POLITICAL_LITERARY",
@@ -287,7 +300,8 @@
         "Ideological language infiltrates character's own self-understanding",
         "Systemic forces are felt in the body and the daily life, not only described",
         "The political is revealed through private moments rather than public declarations"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "LF_N40_SYMBOLIC_MUNDANE",
@@ -315,7 +329,8 @@
         "Descriptions of settings that exceed what narrative economy would require",
         "Objects recur with accumulating significance",
         "The setting changes in ways that track with interior transformation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N41_NONLINEAR_TIME",
@@ -343,7 +358,8 @@
         "Present-tense scenes interrupted by memories that are rendered with equal vividness",
         "The reader understands an earlier scene differently in light of a later revelation",
         "Time markers are absent or unstable â€” when exactly is 'now' is uncertain"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "LF_N42_INTERIOR_EXTERIOR",
@@ -371,7 +387,8 @@
         "Prose slows down or expands during moments of heightened perception",
         "Sensory detail is filtered through and transformed by character consciousness",
         "Free indirect discourse blurs the boundary between narrator and character voice"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N60_INTERIORITY_SCENE",
@@ -400,7 +417,8 @@
         "Syntax and diction shift to track thought rather than action",
         "Associative leaps that the character does not explain",
         "The character notices things that reveal what they are actually thinking about"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N61_EPIPHANY_SCENE",
@@ -429,7 +447,8 @@
         "A moment in which prose slows and something seen or heard is processed differently",
         "A repetition of an earlier image or phrase that now carries different weight",
         "The character does something small that signals the shift without explaining it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N62_AMBIGUOUS_ENDING",
@@ -460,7 +479,8 @@
         "The last scene is quieter and more condensed than what precedes it",
         "A single concrete detail carries disproportionate weight",
         "The prose in the final passage achieves a different register â€” more open, more still"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "LF_N80_CONTEMPLATIVE_TONE",
@@ -488,7 +508,8 @@
         "The prose creates space for the reader to feel rather than instructing them what to feel",
         "Pacing is deliberate â€” scenes have room to breathe",
         "Emotional weight is carried by concrete particulars, not abstract assertions"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N90_STYLE_WITHOUT_SUBSTANCE",
@@ -514,7 +535,8 @@
         "Sentences can be appreciated in isolation but do not accumulate",
         "No character emerges with interior life despite extensive prose",
         "The reader can admire the writing without being moved by or interested in anything happening in the story"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "LF_N91_PLOTTED_INTERIORITY",
@@ -540,7 +562,8 @@
         "Interiority is absent from scenes that are not plot-critical",
         "Characters' inner lives are coherent and purposive rather than contradictory and associative",
         "The story's structure is determined by its events rather than by its consciousness"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -560,7 +583,8 @@
       ],
       "anti_patterns": [
         "Interiority treated as backstory that explains plot rather than as the story itself"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E02_PROMISE_TO_LANGUAGE",
@@ -578,7 +602,8 @@
       ],
       "anti_patterns": [
         "Prose style is interchangeable â€” could be replaced by simpler language without loss"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E03_PROMISE_TO_THEMATIC",
@@ -596,7 +621,8 @@
       ],
       "anti_patterns": [
         "Every element of the story illustrates the same clear moral position"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E04_PROMISE_TO_AMBIGUITY",
@@ -614,7 +640,8 @@
       ],
       "anti_patterns": [
         "Ambiguity introduced early is resolved completely by the ending"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E05_PROMISE_TO_TONE",
@@ -632,7 +659,8 @@
       ],
       "anti_patterns": [
         "Tone is urgent and plot-driven rather than reflective and precise"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E10_INTERIORITY_TO_PSYCHOLOGICAL",
@@ -652,7 +680,8 @@
       ],
       "anti_patterns": [
         "Psychology is labeled but not rendered â€” characters are described as damaged without the damage being shown"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "LF_E11_LANGUAGE_TO_EXPERIMENTAL",
@@ -672,7 +701,8 @@
       ],
       "anti_patterns": [
         "Formal experimentation that is purely aesthetic â€” structure does not carry meaning"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "LF_E12_INTERIORITY_TO_DOMESTIC",
@@ -692,7 +722,8 @@
       ],
       "anti_patterns": [
         "Domestic setting used as mere backdrop without symbolic or thematic function"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "LF_E13_THEMATIC_TO_SOCIAL",
@@ -712,7 +743,8 @@
       ],
       "anti_patterns": [
         "Social forces described but never internalized â€” characters are outside history rather than inside it"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "LF_E30_PSYCHOLOGICAL_TO_SYMBOLIC",
@@ -730,7 +762,8 @@
       ],
       "anti_patterns": [
         "Settings are described accurately but perceived identically by all characters â€” no filtering through psychology"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E31_PSYCHOLOGICAL_TO_INTERIOR",
@@ -748,7 +781,8 @@
       ],
       "anti_patterns": [
         "Interior life is gestured at through summary while exterior events are rendered fully"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E32_EXPERIMENTAL_TO_NONLINEAR",
@@ -766,7 +800,8 @@
       ],
       "anti_patterns": [
         "Non-linearity that is decorative â€” the chronological story would be identical"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "LF_E33_DOMESTIC_TO_SYMBOLIC",
@@ -784,7 +819,8 @@
       ],
       "anti_patterns": [
         "Domestic objects and routines accumulate without any of them acquiring resonance"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E34_SOCIAL_TO_INTERIOR",
@@ -802,7 +838,8 @@
       ],
       "anti_patterns": [
         "Social and political forces are described from outside rather than lived from inside"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E50_SYMBOLIC_TO_INTERIORITY_SCENE",
@@ -820,7 +857,8 @@
       ],
       "anti_patterns": [
         "Symbolic setting is described but no character perceives or responds to it with interiority"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E51_NONLINEAR_TO_INTERIORITY_SCENE",
@@ -838,7 +876,8 @@
       ],
       "anti_patterns": [
         "Non-linear structure in which the temporal jumps are plot-motivated rather than consciousness-motivated"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E52_INTERIOR_TO_INTERIORITY_SCENE",
@@ -856,7 +895,8 @@
       ],
       "anti_patterns": [
         "Interior life exists only in scenes where a character is physically still â€” missing from scenes of action or dialogue"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E53_INTERIORITY_SCENE_TO_EPIPHANY",
@@ -875,7 +915,8 @@
       ],
       "anti_patterns": [
         "Epiphany occurs without the prior interior work that would make it earned"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E54_EPIPHANY_TO_AMBIGUOUS_ENDING",
@@ -893,7 +934,8 @@
       ],
       "anti_patterns": [
         "Epiphany is followed by resolution that closes all ambiguity â€” the ending explains what the epiphany meant"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "LF_E90_STYLE_WITHOUT_SUBSTANCE_WARNING",
@@ -909,7 +951,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "LF_E91_PLOTTED_INTERIORITY_WARNING",
@@ -925,7 +968,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

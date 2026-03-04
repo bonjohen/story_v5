@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 1,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 22,
+      "soft": 13,
+      "total": 35
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
       "signals_in_text": [
         "Early promise of a destination, goal, or unknown territory",
         "Sense of anticipation and possibility"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N10_JOURNEY",
@@ -79,7 +85,8 @@
         "Changing settings",
         "Progress toward a destination",
         "New environments introduce new challenges"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N11_DISCOVERY",
@@ -106,7 +113,8 @@
       "signals_in_text": [
         "Characters react with wonder, fear, or curiosity to new things",
         "Audience learns about the world alongside the characters"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N12_ESCALATING_OBSTACLES",
@@ -134,7 +142,8 @@
         "Characters comment on increasing difficulty",
         "Resources deplete",
         "Failures become more costly"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N13_CLEAR_GOAL",
@@ -162,7 +171,8 @@
         "Goal stated early and referenced throughout",
         "Progress toward goal is measurable",
         "Setbacks are defined in relation to the goal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N20_TREASURE_HUNT",
@@ -191,7 +201,8 @@
         "Maps, riddles, or historical research",
         "Rival seekers",
         "Traps or guardians protecting the prize"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AV_N21_EXPLORATION",
@@ -220,7 +231,8 @@
         "Awe and wonder at new environments",
         "Scientific or cultural curiosity",
         "Mapping and documentation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AV_N22_RESCUE",
@@ -249,7 +261,8 @@
         "Urgency driven by the person's condition",
         "Journey toward a known or discovered location",
         "Extraction complications"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AV_N23_SURVIVAL_EXPEDITION",
@@ -279,7 +292,8 @@
         "Environmental hazards",
         "Physical toll on characters",
         "Improvised solutions"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AV_N40_VARIED_ENVIRONMENTS",
@@ -307,7 +321,8 @@
         "Descriptive richness for each new environment",
         "Different challenges arise from different settings",
         "Characters must adapt their approach to each environment"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N41_ENVIRONMENT_AS_CHARACTER",
@@ -335,7 +350,8 @@
         "Environment creates obstacles independent of villains",
         "Characters must read and respond to environmental cues",
         "Setting-specific solutions required"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N42_RESOURCE_SCARCITY",
@@ -363,7 +379,8 @@
         "Characters discuss remaining supplies",
         "Rationing decisions",
         "Creative solutions to scarcity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AV_N60_DEPARTURE_SCENE",
@@ -392,7 +409,8 @@
         "Clear 'point of departure' moment",
         "Characters look back at what they're leaving",
         "Anticipation of what lies ahead"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N61_DISCOVERY_SCENE",
@@ -420,7 +438,8 @@
         "Characters reassess their plan",
         "New information changes the approach",
         "Emotional response to discovery (wonder, fear, disappointment)"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N62_FINAL_APPROACH",
@@ -448,7 +467,8 @@
         "Everything learned on the journey is needed here",
         "Maximum danger and stakes",
         "Definitive resolution of the quest"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AV_N80_EXCITEMENT_WONDER",
@@ -476,7 +496,8 @@
         "Active, dynamic prose",
         "Characters express enthusiasm or determination despite obstacles",
         "New environments are described with energy"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AV_N90_STATIC_JOURNEY",
@@ -503,7 +524,8 @@
         "Reader feels bored or lost",
         "No sense of progress toward the goal",
         "Environments blur together"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -523,7 +545,8 @@
       ],
       "anti_patterns": [
         "Characters stay in one location throughout"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E02_PROMISE_TO_DISCOVERY",
@@ -541,7 +564,8 @@
       ],
       "anti_patterns": [
         "Nothing new is encountered on the journey"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E03_PROMISE_TO_OBSTACLES",
@@ -559,7 +583,8 @@
       ],
       "anti_patterns": [
         "All obstacles are equal difficulty"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E04_PROMISE_TO_GOAL",
@@ -577,7 +602,8 @@
       ],
       "anti_patterns": [
         "Aimless wandering with no destination"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E05_PROMISE_TO_TONE",
@@ -595,7 +621,8 @@
       ],
       "anti_patterns": [
         "Joyless, grim tone despite adventure setting"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E10_GOAL_TO_TREASURE",
@@ -615,7 +642,8 @@
       ],
       "anti_patterns": [
         "Object is found without meaningful challenge"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AV_E11_GOAL_TO_EXPLORATION",
@@ -635,7 +663,8 @@
       ],
       "anti_patterns": [
         "Unknown territory is dull or generic"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AV_E12_GOAL_TO_RESCUE",
@@ -655,7 +684,8 @@
       ],
       "anti_patterns": [
         "Person is rescued without the journey mattering"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AV_E13_GOAL_TO_SURVIVAL",
@@ -675,7 +705,8 @@
       ],
       "anti_patterns": [
         "Survival is easy — no genuine scarcity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AV_E30_TREASURE_TO_ENVIRONMENTS",
@@ -695,7 +726,8 @@
       ],
       "anti_patterns": [
         "Entire treasure hunt in one location"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E31_EXPLORATION_TO_ENVIRONMENT",
@@ -716,7 +748,8 @@
       ],
       "anti_patterns": [
         "Environment is passive backdrop"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E32_RESCUE_TO_ENVIRONMENTS",
@@ -736,7 +769,8 @@
       ],
       "anti_patterns": [
         "Straight line to the rescue with no environmental challenge"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E33_SURVIVAL_TO_RESOURCES",
@@ -756,7 +790,8 @@
       ],
       "anti_patterns": [
         "Unlimited supplies in a survival scenario"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AV_E50_ENVIRONMENTS_TO_DEPARTURE",
@@ -776,7 +811,8 @@
       ],
       "anti_patterns": [
         "Journey starts without a departure moment"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E51_ACTIVE_ENV_TO_DISCOVERY",
@@ -796,7 +832,8 @@
       ],
       "anti_patterns": [
         "Environment has no surprises"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AV_E52_RESOURCES_TO_FINAL",
@@ -816,7 +853,8 @@
       ],
       "anti_patterns": [
         "Characters fully stocked for the final challenge"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AV_E53_DISCOVERY_TO_FINAL",
@@ -836,7 +874,8 @@
       ],
       "anti_patterns": [
         "Mid-journey discoveries are irrelevant to the climax"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AV_E90_STATIC_WARNING",
@@ -852,7 +891,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

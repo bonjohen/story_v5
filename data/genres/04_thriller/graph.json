@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 1,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 25,
+      "soft": 10,
+      "total": 35
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
       "signals_in_text": [
         "Opening creates unease or establishes a threat",
         "Reader/viewer feels the need to keep watching"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N10_SUSTAINED_SUSPENSE",
@@ -77,7 +83,8 @@
       "signals_in_text": [
         "Scene endings create questions or threats",
         "Characters are aware of danger even in quiet moments"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N11_INFORMATION_ASYMMETRY",
@@ -105,7 +112,8 @@
         "Protagonist asks questions that aren't answered",
         "Multiple possible explanations for events",
         "Trust is tested repeatedly"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N12_ESCALATING_DANGER",
@@ -133,7 +141,8 @@
         "Each setback is worse than the last",
         "Protagonist's options narrow visibly",
         "Body count or stakes increase"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N13_PROTAGONIST_VULNERABLE",
@@ -161,7 +170,8 @@
         "Protagonist struggles and fails at points",
         "Resources are limited",
         "Help is unreliable or unavailable"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N20_PSYCHOLOGICAL",
@@ -190,7 +200,8 @@
         "Protagonist doubts their own perception",
         "Reality is contested between characters",
         "Mental state deteriorates under pressure"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "TH_N21_CONSPIRACY",
@@ -219,7 +230,8 @@
         "Small clues lead to larger revelations",
         "Trusted figures turn out to be compromised",
         "Protagonist becomes a target as they learn more"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "TH_N22_CAT_AND_MOUSE",
@@ -248,7 +260,8 @@
         "Move and countermove structure",
         "Both sides demonstrate intelligence",
         "Lead changes hands"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "TH_N23_TICKING_CLOCK",
@@ -277,7 +290,8 @@
         "Time references in dialogue and narration",
         "Pacing accelerates as deadline approaches",
         "Characters make riskier choices as time runs out"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "TH_N40_INFORMATION_CONTROL",
@@ -304,7 +318,8 @@
       "signals_in_text": [
         "Characters actively seek, hide, or destroy information",
         "Scenes involve decoding, surveillance, or interrogation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N41_ISOLATION",
@@ -331,7 +346,8 @@
       "signals_in_text": [
         "Attempts to get help fail or backfire",
         "Allies are unavailable, compromised, or disbelieved"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "TH_N42_TRUST_ENVIRONMENT",
@@ -359,7 +375,8 @@
         "Protagonist hesitates before sharing information",
         "Reveals that trusted figures are compromised",
         "Audience questions character motivations"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N60_INCITING_THREAT",
@@ -386,7 +403,8 @@
       "signals_in_text": [
         "Tone shifts from normalcy to unease",
         "Protagonist's routine is disrupted by danger"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N61_REVERSAL",
@@ -413,7 +431,8 @@
       "signals_in_text": [
         "Protagonist's reaction shows genuine shock and recalculation",
         "Prior scenes are recontextualized by the revelation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N62_CLIMACTIC_CONFRONTATION",
@@ -442,7 +461,8 @@
         "Highest tension in the story",
         "Protagonist uses hard-won knowledge from earlier",
         "Resolution feels earned through accumulated struggle"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N80_DREAD_ATMOSPHERE",
@@ -470,7 +490,8 @@
         "Environmental details suggest threat",
         "Characters are watchful and on edge",
         "Silence and stillness feel dangerous"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "TH_N90_CHEAP_TENSION",
@@ -495,7 +516,8 @@
       "signals_in_text": [
         "Audience feels manipulated rather than genuinely scared",
         "Tension resets to zero after each fake-out"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -515,7 +537,8 @@
       ],
       "anti_patterns": [
         "Suspense only in isolated scenes with comfortable stretches between"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E02_PROMISE_TO_INFORMATION",
@@ -533,7 +556,8 @@
       ],
       "anti_patterns": [
         "All information available from the start"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E03_PROMISE_TO_ESCALATION",
@@ -551,7 +575,8 @@
       ],
       "anti_patterns": [
         "Flat threat level throughout"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E04_PROMISE_TO_VULNERABLE",
@@ -569,7 +594,8 @@
       ],
       "anti_patterns": [
         "Invincible protagonist removes all suspense"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E05_PROMISE_TO_DREAD",
@@ -587,7 +613,8 @@
       ],
       "anti_patterns": [
         "Comfortable, safe-feeling stretches between danger"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E10_INFO_TO_PSYCHOLOGICAL",
@@ -607,7 +634,8 @@
       ],
       "anti_patterns": [
         "Manipulation is too obvious to be threatening"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "TH_E11_INFO_TO_CONSPIRACY",
@@ -627,7 +655,8 @@
       ],
       "anti_patterns": [
         "Conspiracy revealed all at once"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "TH_E12_DANGER_TO_CAT_MOUSE",
@@ -647,7 +676,8 @@
       ],
       "anti_patterns": [
         "One side is passive — no real game"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "TH_E13_DANGER_TO_TICKING",
@@ -667,7 +697,8 @@
       ],
       "anti_patterns": [
         "Deadline is extended whenever convenient"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "TH_E30_PSYCH_TO_TRUST",
@@ -687,7 +718,8 @@
       ],
       "anti_patterns": [
         "Trusted figures are all genuinely trustworthy"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E31_CONSPIRACY_TO_INFO",
@@ -707,7 +739,8 @@
       ],
       "anti_patterns": [
         "Conspirators leave evidence freely accessible"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E32_CAT_TO_ISOLATION",
@@ -727,7 +760,8 @@
       ],
       "anti_patterns": [
         "Protagonist has a full support team throughout"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "TH_E33_TICKING_TO_INFO",
@@ -747,7 +781,8 @@
       ],
       "anti_patterns": [
         "All needed information is immediately available"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E50_INFO_TO_INCITING",
@@ -767,7 +802,8 @@
       ],
       "anti_patterns": [
         "Threat is fully explained from the start"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E51_TRUST_TO_REVERSAL",
@@ -787,7 +823,8 @@
       ],
       "anti_patterns": [
         "All initial assumptions prove correct — no reversal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E52_ISOLATION_TO_CLIMAX",
@@ -806,7 +843,8 @@
       ],
       "anti_patterns": [
         "Cavalry arrives to save the day"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E53_REVERSAL_TO_CLIMAX",
@@ -825,7 +863,8 @@
       ],
       "anti_patterns": [
         "Reversal has no impact on the climactic confrontation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "TH_E90_CHEAP_TENSION_WARNING",
@@ -841,7 +880,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

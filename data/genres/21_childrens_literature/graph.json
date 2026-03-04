@@ -24,6 +24,11 @@
       "mandates element": 3,
       "requires payoff": 3,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 24,
+      "soft": 14,
+      "total": 38
     }
   },
   "nodes": [
@@ -53,7 +58,8 @@
       "signals_in_text": [
         "Protagonist is established as a child with a child's scale of concern and capacity for wonder",
         "Tone invites the audience into a world seen freshly rather than already known"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N10_CHILD_PROTAGONIST",
@@ -81,7 +87,8 @@
       "signals_in_text": [
         "Protagonist's observations are fresh, curious, and scaled to a child's frame of reference",
         "Decisions the protagonist makes arise from child logic — fairness, loyalty, curiosity, fear of the unknown — not adult strategy"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N11_AGE_APPROPRIATE_STAKES",
@@ -110,7 +117,8 @@
         "The threat to the protagonist is real enough to generate suspense but scaled to a world a child inhabits",
         "The child's emotional response to the stakes is legible and proportionate to their experience",
         "Resolution requires the child to genuinely earn it — the stakes have not been trivial"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N12_WONDER_CENTRAL",
@@ -139,7 +147,8 @@
         "Descriptions of the world carry sensory immediacy and surprise",
         "The child protagonist's encounter with wonder drives plot or character development, not just mood",
         "Readers are invited to experience the world as the child does — freshly, with genuine curiosity"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N13_MORAL_EMOTIONAL_TAKEAWAY",
@@ -170,7 +179,8 @@
         "The child protagonist arrives at the insight through their own actions and reflection, not through instruction",
         "The lesson is embodied in a specific scene or gesture rather than stated in abstract terms",
         "A child reader could articulate the lesson in their own words after finishing the story"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N20_PICTURE_BOOK",
@@ -202,7 +212,8 @@
         "Each sentence is load-bearing — no filler",
         "Emotional truth is present even in very simple language",
         "The story functions as read-aloud text — rhythm and repetition serve the experience"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CL_N21_MIDDLE_GRADE",
@@ -233,7 +244,8 @@
         "The protagonist makes pivotal decisions that change the course of the adventure",
         "The adventure's outcome reflects the protagonist's growth — they succeed because of who they have become, not just what they have done",
         "Danger is real and sustained, but the frame holds — readers trust that the child can survive and grow"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CL_N22_ANIMAL_ALLEGORY",
@@ -265,7 +277,8 @@
         "The animal protagonist's behavior is rooted in the logic of their nature as well as their emotional state",
         "Child readers can inhabit the animal perspective without needing to consciously decode the allegory",
         "The fantastical world is rendered with enough detail and internal consistency to be believed on its own terms"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CL_N23_EDUCATIONAL_FABLE",
@@ -297,7 +310,8 @@
         "The narrative events themselves carry the weight of the lesson — what happens is the argument",
         "Characters have enough texture to be believed as characters, even within the fable's brief scope",
         "Child readers can identify the lesson without being told — the story teaches by showing"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CL_N40_CHILDS_EYE_WORLD",
@@ -326,7 +340,8 @@
         "Description foregrounds sensory details significant to the child protagonist",
         "Scale relationships in the setting reflect the child's experience — small spaces are intimate and safe or confining, large spaces are awe-inspiring or threatening",
         "The adult world is present at the margins but the child's world is the stage"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N41_SAFE_ENOUGH_FRAME",
@@ -356,7 +371,8 @@
         "Threatening elements are rendered with appropriate intensity but structured so that child action can affect outcomes",
         "Even in the darkest moments, there is a path through — not announced, but available",
         "Resolution feels earned and proportionate, not arbitrary — the child reader can feel that the danger was real and the survival was real"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N42_ADULT_FIGURES_PRESENT",
@@ -385,7 +401,8 @@
         "The pivotal actions in the story are taken by the child protagonist, not facilitated by adults",
         "Adults are recognizably present in the story's world as authority figures and safety, even when they are not present in the immediate scene",
         "The child's success is their own — adults may support but cannot provide the key action or insight"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CL_N60_WONDER_DISCOVERY",
@@ -415,7 +432,8 @@
         "The scene slows — description expands, sensory detail increases, pace gives way to immersion",
         "The child protagonist's response to the wonder is rendered in full — their surprise, curiosity, and dawning understanding",
         "The wonder opens a narrative question rather than closing one — it invites the story forward"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N61_CHALLENGE_SCENE",
@@ -446,7 +464,8 @@
         "The child protagonist's fear or doubt is present and legible — this is not easy",
         "The child acts from their own choice and understanding, not from external instruction",
         "The scene's outcome represents a genuine change in the child's situation and inner state — something real has been risked and something real has been gained or lost"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N62_EARNED_RESOLUTION",
@@ -478,7 +497,8 @@
         "The child protagonist's behavior or perspective is visibly different from how they began the story",
         "The specific challenge or fear that drove the story is addressed at the resolution, not talked around",
         "The emotional note of the ending is warm and genuine — neither forced happiness nor unresolved sorrow, but something that feels true to what the child has lived through"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CL_N80_CLARITY_WARMTH_WONDER",
@@ -507,7 +527,8 @@
         "Language has a texture and rhythm that rewards attention",
         "The narrative voice is consistent and has a recognizable character — it is someone who believes in this story",
         "Difficult moments are rendered with care rather than dismissed or rushed past"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CL_N90_CONDESCENSION",
@@ -534,7 +555,8 @@
         "Narrative voice addresses the child reader from a position of knowing superiority rather than imaginative invitation",
         "Child protagonist's value is their receptivity — they are defined by what they learn rather than by who they are",
         "The story would serve adults equally well as children — no genuine child perspective distinguishes it"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -554,7 +576,8 @@
       ],
       "anti_patterns": [
         "Adult character as primary focalizer in a story marketed as children's literature"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E02_PROMISE_TO_STAKES",
@@ -572,7 +595,8 @@
       ],
       "anti_patterns": [
         "Adult-scale stakes (mortality as primary driver, existential horror, romantic loss) imported into a child's story without calibration"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E03_PROMISE_TO_WONDER",
@@ -590,7 +614,8 @@
       ],
       "anti_patterns": [
         "World rendered as already-known and familiar — no capacity for surprise or fresh discovery"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E04_PROMISE_TO_TAKEAWAY",
@@ -608,7 +633,8 @@
       ],
       "anti_patterns": [
         "Lesson is stated by adult character or narrative voice rather than earned by child protagonist's experience"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E05_PROMISE_TO_TONE",
@@ -626,7 +652,8 @@
       ],
       "anti_patterns": [
         "Condescending, ironic, or coldly competent tone that communicates distance from the child's experience"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E10_CHILD_TO_PICTURE_BOOK",
@@ -648,7 +675,8 @@
       ],
       "anti_patterns": [
         "Verbose or analytically complex picture book that defeats the form's essential compression"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E11_CHILD_TO_MIDDLE_GRADE",
@@ -670,7 +698,8 @@
       ],
       "anti_patterns": [
         "Child protagonist is passive — swept through adventure by adults or circumstances rather than driving it by their own choices"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E12_WONDER_TO_ANIMAL_ALLEGORY",
@@ -692,7 +721,8 @@
       ],
       "anti_patterns": [
         "Animal characters are merely humans in costume with no genuine non-human perspective or logic"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E13_TAKEAWAY_TO_FABLE",
@@ -714,7 +744,8 @@
       ],
       "anti_patterns": [
         "Lesson is the story's entire content — no genuine narrative, only illustrated instruction"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E30_PICTURE_BOOK_TO_CHILDS_EYE",
@@ -732,7 +763,8 @@
       ],
       "anti_patterns": [
         "Picture book setting described from adult perspective — architecturally or geographically precise rather than emotionally vivid"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E31_MIDDLE_GRADE_TO_SAFE_FRAME",
@@ -750,7 +782,8 @@
       ],
       "anti_patterns": [
         "Middle grade adventure crosses into genuinely traumatic territory — violence, death, despair — that overwhelms the safe-enough frame"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E32_ANIMAL_ALLEGORY_TO_CHILDS_EYE",
@@ -768,7 +801,8 @@
       ],
       "anti_patterns": [
         "Animal world is rendered with adult naturalistic precision rather than the selective, emotionally weighted attention of the child's-eye frame"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E33_FABLE_TO_ADULT_FIGURES",
@@ -786,7 +820,8 @@
       ],
       "anti_patterns": [
         "Wise adult or elder delivers the lesson directly to a passive protagonist who simply receives and accepts it"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E34_MIDDLE_GRADE_TO_ADULT_FIGURES",
@@ -804,7 +839,8 @@
       ],
       "anti_patterns": [
         "Adults either solve the adventure's central challenge or are so completely absent that the safe-enough frame collapses"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E50_CHILDS_EYE_TO_WONDER",
@@ -822,7 +858,8 @@
       ],
       "anti_patterns": [
         "Wonder scene arrives in a world already rendered as adult-familiar — the discovery has no one in the story to be astonished by it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E51_SAFE_FRAME_TO_CHALLENGE",
@@ -840,7 +877,8 @@
       ],
       "anti_patterns": [
         "Challenge arrives in a story where the safe-enough frame has not been established — danger is raw rather than productive"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E52_ADULT_FIGURES_TO_CHALLENGE",
@@ -858,7 +896,8 @@
       ],
       "anti_patterns": [
         "Adult figure steps in at the challenge scene's climax and resolves the central problem, removing the child's agency at the moment of payoff"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E53_WONDER_TO_CHALLENGE",
@@ -876,7 +915,8 @@
       ],
       "anti_patterns": [
         "Wonder scene and challenge scene are disconnected — what was discovered plays no role in how the challenge is faced"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CL_E54_CHALLENGE_TO_RESOLUTION",
@@ -895,7 +935,8 @@
       ],
       "anti_patterns": [
         "Resolution arrives before the challenge is fully dramatized — the insight is cheap because the difficulty was not real"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E70_TAKEAWAY_TO_RESOLUTION",
@@ -914,7 +955,8 @@
       ],
       "anti_patterns": [
         "Takeaway is delivered outside the resolution — stated by an adult character before the child has earned it through experience"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CL_E90_CONDESCENSION_WARNING",
@@ -930,7 +972,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

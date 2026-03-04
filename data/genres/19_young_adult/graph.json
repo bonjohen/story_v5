@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 3,
       "prohibits element": 2
+    },
+    "severityCounts": {
+      "hard": 30,
+      "soft": 11,
+      "total": 41
     }
   },
   "nodes": [
@@ -52,7 +57,8 @@
         "Protagonist is demonstrably in the process of becoming",
         "Stakes are framed in terms of who the protagonist is and will be",
         "Emotional intensity is treated as valid rather than excessive"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N10_IDENTITY_FORMATION",
@@ -79,7 +85,8 @@
         "Protagonist questions assumptions about themselves in early scenes",
         "Key scenes hinge on who the protagonist decides to be rather than what they decide to do",
         "Internal monologue or close-third narration tracks the instability of self-perception"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N11_FIRST_EXPERIENCES",
@@ -106,7 +113,8 @@
         "Narrative slows and expands around first-experience scenes",
         "Protagonist's body and senses are foregrounded â€” physical specificity signals emotional intensity",
         "The experience is described as if nothing like it has happened before, because for this character nothing has"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N12_AUTHORITY_VISIBLE",
@@ -134,7 +142,8 @@
         "Adult characters have agendas that conflict with the protagonist's",
         "Rules are enforced with real consequences",
         "Protagonist must decide whether a given authority deserves compliance or resistance"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N13_WORLD_DEFINING_CHOICES",
@@ -162,7 +171,8 @@
         "Interiority around choices is expansive and emotionally saturated",
         "Time slows in decision moments",
         "Consequences are framed in terms of identity, not just outcome"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N20_CONTEMPORARY_REALISM",
@@ -190,7 +200,8 @@
       "signals_in_text": [
         "Specific, named social textures â€” school lunch tables, texts, social media dynamics, family dinner conversations",
         "Conflict rooted in who knows what about whom and who belongs where"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "YA_N21_DYSTOPIAN_SPECULATIVE",
@@ -218,7 +229,8 @@
         "The system's rules directly constrain the protagonist's self-determination",
         "Resistance to the system is simultaneously self-discovery",
         "Other characters represent different responses to the same systemic pressure"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "YA_N22_ROMANCE",
@@ -246,7 +258,8 @@
         "Romantic scenes are also scenes of self-revelation",
         "Vulnerability in romance tracks to vulnerability in the protagonist's broader identity formation",
         "Obstacles are rooted in the protagonist's unresolved identity questions, not just external circumstance"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "YA_N23_ADVENTURE_FANTASY",
@@ -274,7 +287,8 @@
         "Physical challenges mirror internal stakes",
         "Companions reflect different possible selves the protagonist could become",
         "The climactic confrontation requires the protagonist to commit to a version of themselves"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "YA_N40_SCHOOL_SOCIAL_HIERARCHY",
@@ -301,7 +315,8 @@
         "Scenes establish who sits where, who speaks to whom, who is visibly excluded",
         "Protagonist's position in the hierarchy shifts as a consequence of identity choices",
         "Status gains and losses are felt and registered by other characters"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "YA_N41_PEER_RELATIONSHIPS",
@@ -328,7 +343,8 @@
         "Peer conversations carry more narrative weight than family or authority conversations",
         "Friend-group dynamics shift visibly across the story",
         "The protagonist's standing among peers is a live emotional barometer"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N42_ADULT_WORLD_SHELTER_CAGE",
@@ -355,7 +371,8 @@
         "Adult characters have legible and sometimes sympathetic reasons for their constraints",
         "Protagonist benefits from adult relationships while also chafing against them",
         "The tension is not 'adults bad' but 'how much of the adult world do I accept as my own'"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N60_IDENTITY_CHOICE_SCENE",
@@ -385,7 +402,8 @@
         "Scene is given expanded narrative time and interiority",
         "Physical and emotional details accumulate around the moment of choice",
         "Other characters witness or are affected by the choice, making it concrete"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N61_FIRST_THRESHOLD_SCENE",
@@ -416,7 +434,8 @@
         "Sensory detail is heightened",
         "Interior language shifts â€” syntax or diction becomes more charged than baseline narration",
         "A before and after is visible in how the protagonist carries themselves in subsequent scenes"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N62_AUTHORITY_CONFRONTATION_SCENE",
@@ -446,7 +465,8 @@
         "Power differential is visible in staging and dialogue",
         "Protagonist must pay a real cost for resistance or confrontation",
         "The authority figure responds in a way that reveals their own complexity or limitation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N80_EMOTIONAL_INTENSITY_TONE",
@@ -475,7 +495,8 @@
         "Interiority is expansive around emotionally charged events",
         "Prose or dialogue does not pre-ironize the protagonist's feelings",
         "Even painful or embarrassing emotions are treated with dignity within the narrative frame"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N90_CONDESCENSION",
@@ -501,7 +522,8 @@
         "Narratorial voice shifts to a wiser, older register at emotional peaks",
         "Protagonist's intense feelings are contextualized away rather than honored",
         "The reader is positioned above the protagonist's experience rather than inside it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "YA_N91_ABSENT_FORMATION",
@@ -527,7 +549,8 @@
         "Protagonist's self-description at the end of the story matches their self-description at the beginning",
         "No scenes hinge on who the protagonist is â€” only on what they do",
         "Other characters do not respond to the protagonist differently as the story progresses"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -547,7 +570,8 @@
       ],
       "anti_patterns": [
         "Protagonist is fully formed adult-in-miniature â€” genre promise is broken from the first page"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E02_PROMISE_TO_FIRSTS",
@@ -565,7 +589,8 @@
       ],
       "anti_patterns": [
         "Firsts are underwritten because the author has been there before and forgets the reader's proxy hasn't"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E03_PROMISE_TO_AUTHORITY",
@@ -583,7 +608,8 @@
       ],
       "anti_patterns": [
         "Authority is invisible â€” protagonist faces no external pressure, making their choices purely internal and untested"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E04_PROMISE_TO_WORLD_DEFINING",
@@ -601,7 +627,8 @@
       ],
       "anti_patterns": [
         "Narrator contextualizes choices as 'not that big a deal' â€” deflates genre promise"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E05_PROMISE_TO_TONE",
@@ -619,7 +646,8 @@
       ],
       "anti_patterns": [
         "Detached, ironic narrator treats teen experience as entertainment rather than genuine lived reality"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E10_IDENTITY_TO_CONTEMPORARY",
@@ -639,7 +667,8 @@
       ],
       "anti_patterns": [
         "Contemporary setting present but social reality has no texture or specificity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "YA_E11_AUTHORITY_TO_DYSTOPIAN",
@@ -659,7 +688,8 @@
       ],
       "anti_patterns": [
         "Dystopian system is present but protagonist's identity is not meaningfully shaped or tested by it"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "YA_E12_FIRSTS_TO_ROMANCE",
@@ -678,7 +708,8 @@
       ],
       "anti_patterns": [
         "Romance present but does not produce genuine self-knowledge â€” protagonist is the same after as before"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "YA_E13_WORLD_DEFINING_TO_ADVENTURE",
@@ -697,7 +728,8 @@
       ],
       "anti_patterns": [
         "Adventure plot is resolved by external power rather than by who the protagonist commits to being"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "YA_E30_CONTEMPORARY_TO_SCHOOL_HIERARCHY",
@@ -715,7 +747,8 @@
       ],
       "anti_patterns": [
         "School setting present but social hierarchy has no effect on protagonist's options or experience"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "YA_E31_CONTEMPORARY_TO_PEER",
@@ -733,7 +766,8 @@
       ],
       "anti_patterns": [
         "Protagonist navigates major life events without engaging meaningfully with any peers"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E32_DYSTOPIAN_TO_SCHOOL_HIERARCHY",
@@ -751,7 +785,8 @@
       ],
       "anti_patterns": [
         "Dystopian hierarchy is defeated externally rather than being meaningfully engaged with as an identity-shaping force"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "YA_E33_ROMANCE_TO_PEER",
@@ -769,7 +804,8 @@
       ],
       "anti_patterns": [
         "Romance occurs in social vacuum with no peer response, consequence, or observation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E34_ADVENTURE_TO_ADULT_SHELTER",
@@ -787,7 +823,8 @@
       ],
       "anti_patterns": [
         "Adventure is completed through adult guidance with no genuine self-determination by the protagonist"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E50_SCHOOL_TO_IDENTITY_CHOICE",
@@ -805,7 +842,8 @@
       ],
       "anti_patterns": [
         "Hierarchy is present but protagonist faces no choice that tests their relationship to it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E51_PEER_TO_FIRST_THRESHOLD",
@@ -823,7 +861,8 @@
       ],
       "anti_patterns": [
         "First experiences happen entirely offstage or are reported rather than dramatized"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E52_ADULT_SHELTER_TO_AUTHORITY_CONFRONTATION",
@@ -841,7 +880,8 @@
       ],
       "anti_patterns": [
         "Protagonist resists authority only internally â€” no external confrontation ever occurs"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E53_IDENTITY_CHOICE_TO_FIRST_THRESHOLD",
@@ -859,7 +899,8 @@
       ],
       "anti_patterns": [
         "Identity choice is made but no threshold is crossed â€” everything remains theoretically reversible"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E54_FIRST_THRESHOLD_TO_AUTHORITY_CONFRONTATION",
@@ -877,7 +918,8 @@
       ],
       "anti_patterns": [
         "Threshold is crossed but authority takes no notice and no confrontation results"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E55_AUTHORITY_CONFRONTATION_PAYOFF",
@@ -895,7 +937,8 @@
       ],
       "anti_patterns": [
         "Confrontation resolves without producing any crystallization of the protagonist's identity"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E70_ALL_TO_ADULT_SHELTER",
@@ -913,7 +956,8 @@
       ],
       "anti_patterns": [
         "Authority is either pure villain or pure helper â€” protagonist's navigation is too easy in either direction"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E90_CONDESCENSION_WARNING",
@@ -929,7 +973,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "YA_E91_FORMATION_WARNING",
@@ -945,7 +990,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

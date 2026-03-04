@@ -23,6 +23,11 @@
       "requires payoff": 2,
       "mandates element": 3,
       "prohibits element": 2
+    },
+    "severityCounts": {
+      "hard": 25,
+      "soft": 13,
+      "total": 38
     }
   },
   "nodes": [
@@ -52,7 +57,8 @@
         "Selective focus on formative rather than comprehensive events",
         "Private scenes that illuminate public persona",
         "Narrative voice that interprets rather than merely recounts"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N10_REAL_PERSON",
@@ -80,7 +86,8 @@
         "Events correspond to documented history",
         "Real relationships are rendered with fidelity to known character",
         "Period detail is accurate to the subject's actual world"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N11_FORMATIVE_SELECTION",
@@ -108,7 +115,8 @@
         "Earlier scenes are explicitly echoed in later ones",
         "Some famous events are omitted because they do not serve the character argument",
         "The narrative pauses at certain events to give them disproportionate time and attention"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N12_CHARACTER_ARC_FROM_FACTS",
@@ -137,7 +145,8 @@
         "The subject's language, behavior, and relationships visibly shift across the narrative",
         "Changes can be attributed to specific scenes that preceded them",
         "The arc illuminates why the historical record turned out as it did"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N13_FIDELITY_VS_DRAMA",
@@ -166,7 +175,8 @@
         "Author's note acknowledges what is invented and what is documented",
         "Invented scenes feel psychologically consistent with the documented record",
         "The dramatic shape illuminates rather than contradicts historical understanding"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N20_RISE_AND_FALL",
@@ -196,7 +206,8 @@
         "Early virtues are shown to carry the seeds of later vices",
         "The peak moment is dramatized with full weight",
         "The fall is shown as the logical consequence of the rise, not an accident"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "BI_N21_PORTRAIT_STUDY",
@@ -226,7 +237,8 @@
         "Private scenes carry more narrative weight than public events",
         "The same character quality is shown from multiple angles and contexts",
         "The narrative resists simple judgment of the subject"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "BI_N22_PERIOD_OF_LIFE",
@@ -256,7 +268,8 @@
         "Explicit or implicit framing of why this period matters",
         "The period has a beginning, middle, and end that function dramatically",
         "Events before and after the period are referenced to establish context"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "BI_N23_AUTHORIZED_VS_CRITICAL",
@@ -285,7 +298,8 @@
         "Uncomfortable truths are included rather than elided",
         "The narrative voice maintains a consistent evaluative posture toward the subject",
         "The subject's own account of their life is presented but not automatically endorsed"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "BI_N40_HISTORICAL_CONTEXT",
@@ -314,7 +328,8 @@
         "The subject's choices are intelligible given the period's actual constraints",
         "Period-specific language, concepts, and frames of reference appear in the narrative",
         "Historical events are shown to impinge directly on the subject's life"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N41_REAL_RELATIONSHIPS",
@@ -343,7 +358,8 @@
         "Key figures in the subject's life appear as fully rendered characters, not instruments",
         "The subject's behavior changes in the presence of different people",
         "Documented conflicts, alliances, and affections are dramatized rather than summarized"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N42_PUBLIC_VS_PRIVATE",
@@ -372,7 +388,8 @@
         "Private scenes explicitly contrast with or complicate public scenes",
         "The subject modifies their behavior, language, or affect in different social contexts",
         "Moments of unguarded authenticity occur in private that are suppressed in public settings"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "BI_N60_DEFINING_MOMENT",
@@ -402,7 +419,8 @@
         "The scene receives disproportionate time, detail, and emotional attention",
         "The narrative slows down for this scene relative to surrounding material",
         "Later events in the story explicitly echo or reference this moment"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N61_CRUCIBLE_SCENE",
@@ -432,7 +450,8 @@
         "Scene is structurally positioned at a point of maximum narrative tension",
         "Subject's behavior in this scene differs from or confirms behavior in earlier scenes in revealing ways",
         "Other characters observe and react to how the subject handles the pressure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N62_LEGACY_SUMMATION",
@@ -462,7 +481,8 @@
         "The scene echoes or reverses the defining moment scene",
         "Language and imagery from throughout the narrative return in altered form",
         "The narrative voice, if present, speaks with earned authority rather than journalistic distance"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "BI_N80_INTIMATE_GRAVITY",
@@ -491,7 +511,8 @@
         "Private scenes are written with emotional closeness and sensory specificity",
         "Public and historical scenes are framed to show their larger stakes",
         "The narrative voice maintains awareness of both the personal and the historical simultaneously"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N90_WIKIPEDIA_PAGE",
@@ -517,7 +538,8 @@
         "Each life event receives roughly equal narrative space",
         "Events are connected by 'and then' rather than 'because of'",
         "The subject's inner experience is never accessed â€” only their public actions are recorded"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "BI_N91_HAGIOGRAPHIC_DISTORTION",
@@ -543,7 +565,8 @@
         "All adversity the subject faces is externally caused",
         "The subject never makes a genuinely wrong or morally compromised choice",
         "Contradictions in the historical record are elided rather than examined"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -563,7 +586,8 @@
       ],
       "anti_patterns": [
         "Using a real person's name and life while inventing consequential events"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E02_PROMISE_TO_SELECTION",
@@ -581,7 +605,8 @@
       ],
       "anti_patterns": [
         "Treating all documented events as equally worthy of inclusion"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E03_PROMISE_TO_ARC",
@@ -599,7 +624,8 @@
       ],
       "anti_patterns": [
         "Arc is imposed on events rather than discovered within them"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E04_PROMISE_TO_FIDELITY_BALANCE",
@@ -617,7 +643,8 @@
       ],
       "anti_patterns": [
         "Dramatic shape imposed at the cost of misrepresenting the subject"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E05_PROMISE_TO_TONE",
@@ -635,7 +662,8 @@
       ],
       "anti_patterns": [
         "Pure academic distance or pure personal gossip without the other dimension"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E10_REAL_PERSON_TO_RISE_FALL",
@@ -654,7 +682,8 @@
       ],
       "anti_patterns": [
         "Rise-and-fall structure applied to a life that does not actually support it"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "BI_E11_SELECTION_TO_PORTRAIT",
@@ -673,7 +702,8 @@
       ],
       "anti_patterns": [
         "Portrait study that remains surface â€” action without interiority"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "BI_E12_ARC_TO_PERIOD",
@@ -692,7 +722,8 @@
       ],
       "anti_patterns": [
         "Period selected arbitrarily without argument for why this chapter is decisive"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "BI_E13_FIDELITY_TO_AUTHORIZED",
@@ -710,7 +741,8 @@
       ],
       "anti_patterns": [
         "Mode is inconsistent or undeclared, leaving the audience uncertain about the narrative's relationship to truth"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "BI_E30_RISE_FALL_TO_HISTORICAL",
@@ -728,7 +760,8 @@
       ],
       "anti_patterns": [
         "Rise and fall treated as purely personal without the historical forces that shaped them"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E31_PORTRAIT_TO_REAL_RELATIONSHIPS",
@@ -746,7 +779,8 @@
       ],
       "anti_patterns": [
         "Portrait study that renders the subject in isolation without the real relationships that defined them"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E32_PERIOD_TO_PUBLIC_PRIVATE",
@@ -764,7 +798,8 @@
       ],
       "anti_patterns": [
         "Period-of-life biography that remains in public view throughout, never accessing the private self"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "BI_E33_AUTHORIZED_TO_REAL_RELATIONSHIPS",
@@ -782,7 +817,8 @@
       ],
       "anti_patterns": [
         "All biographies sanitize relationships regardless of mode â€” hagiographic failure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E50_DEFINING_TO_CRUCIBLE",
@@ -800,7 +836,8 @@
       ],
       "anti_patterns": [
         "Crucible that tests qualities never established by prior character work"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E51_CRUCIBLE_TO_LEGACY",
@@ -818,7 +855,8 @@
       ],
       "anti_patterns": [
         "Legacy summation that does not connect to how the subject handled their central test"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "BI_E52_HISTORICAL_TO_DEFINING_MOMENT",
@@ -837,7 +875,8 @@
       ],
       "anti_patterns": [
         "Defining moment presented without the historical context that gives it meaning"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E53_RELATIONSHIPS_TO_CRUCIBLE",
@@ -855,7 +894,8 @@
       ],
       "anti_patterns": [
         "Crucible scene that is purely abstract without the grounding of real relationships"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E54_PUBLIC_PRIVATE_TO_LEGACY",
@@ -873,7 +913,8 @@
       ],
       "anti_patterns": [
         "Legacy scene that addresses only public achievement without acknowledging the private life's complexity"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "BI_E90_WIKIPEDIA_WARNING",
@@ -889,7 +930,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "BI_E91_HAGIOGRAPHY_WARNING",
@@ -905,7 +947,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

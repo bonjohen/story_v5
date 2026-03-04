@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 2,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 24,
+      "soft": 13,
+      "total": 37
     }
   },
   "nodes": [
@@ -53,7 +58,8 @@
         "Opening pages or scenes establish one or both leads with an unmet emotional need",
         "The potential relationship is felt as significant from the first encounter",
         "Narrative attention â€” scene time, interiority, sensory detail â€” is concentrated on the emotional dynamic between the leads"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N10_CENTRAL_ENGINE",
@@ -81,7 +87,8 @@
         "Chapter and scene breaks frequently end on relationship beats, not plot beats",
         "Characters' internal monologue returns to the other person even when separated",
         "The question 'will they be together?' creates the primary narrative suspense"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N11_MUTUAL_VULNERABILITY",
@@ -110,7 +117,8 @@
         "Scenes where a character reveals more than they intended to",
         "Moments of internal resistance â€” characters pulling back from closeness even when they want it",
         "Physical or verbal tells that betray emotion the character is trying to conceal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N12_GENUINE_OBSTACLES",
@@ -140,7 +148,8 @@
         "Characters make choices that increase distance even when closeness is available â€” and we understand why",
         "Third parties or circumstances intervene in ways that have genuine stakes",
         "Resolution of the obstacle requires one or both characters to change, risk, or sacrifice something real"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N13_EARNED_OUTCOME",
@@ -171,7 +180,8 @@
         "Climactic scene requires at least one character to act against their own fear or established pattern",
         "The final choice is made with full knowledge of what it costs",
         "Resolution scene feels proportionate to the difficulty of the journey"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N20_CONTEMPORARY",
@@ -203,7 +213,8 @@
         "Characters reference or are shaped by contemporary social contexts",
         "Communication technology affects how characters connect and misconnect",
         "Dialogue and interiority reflect modern emotional vocabulary and expectations"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "RO_N21_HISTORICAL",
@@ -234,7 +245,8 @@
         "Period-appropriate social constraints create real obstacles for the central relationship",
         "Characters navigate â€” resist, comply with, or subvert â€” the rules of their world with period-specific vocabulary",
         "Physical world details (clothing, transport, domestic life) are sensory and specific"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "RO_N22_PARANORMAL_FANTASY",
@@ -265,7 +277,8 @@
         "The fantastical element creates a specific obstacle or intimacy that has no mundane equivalent",
         "Supernatural rules generate consequences that directly affect the relationship's progression",
         "The love interest's otherness is part of the attraction and part of the danger â€” held in tension, not resolved early"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "RO_N23_ROMANTIC_SUSPENSE",
@@ -296,7 +309,8 @@
         "External threat and emotional resistance escalate in parallel â€” when danger peaks, so does romantic tension",
         "Life-or-death situations force revelations the characters would not have made in safety",
         "Resolution of the suspense plot changes the conditions of the relationship in a way both characters must actively navigate"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "RO_N40_FORCED_PROXIMITY",
@@ -326,7 +340,8 @@
         "Setting geography or social architecture makes separation difficult or costly",
         "Characters reference the unavoidability of contact â€” and sometimes resent it",
         "Intimacy develops in the gaps and textures of repeated shared experience, not in grand set pieces alone"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "RO_N41_VISIBLE_BARRIERS",
@@ -357,7 +372,8 @@
         "Third parties respond to the leads' proximity with concern, disapproval, or interference",
         "Characters modify their behavior in public in ways that reflect awareness of the barrier",
         "The cost of crossing the barrier is established concretely before the characters pay it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N42_PRIVATE_VS_PUBLIC",
@@ -387,7 +403,8 @@
         "Scene transitions from public to private spaces are marked with shifts in character register and dialogue style",
         "Characters notice differences between the love interest's public and private behavior",
         "Private scenes carry disproportionate emotional weight relative to their length"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N60_MEET_SCENE",
@@ -421,7 +438,8 @@
         "Internal monologue betrays awareness the character is trying to suppress",
         "Dialogue carries double meaning â€” surface meaning and charged subtext operate simultaneously",
         "Scene ends with both leads affected, though they may not admit it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N61_INTIMACY_BREAKTHROUGH",
@@ -456,7 +474,8 @@
         "Both characters' interiority registers the significance of what has happened",
         "Aftermath of the scene is treated with as much care as the event itself â€” how characters handle the morning after",
         "Reader can point to this scene as the moment the story's emotional stakes became personal and specific"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N62_GRAND_GESTURE",
@@ -493,7 +512,8 @@
         "Dialogue in the gesture scene is stripped of deflection â€” characters finally say what they mean",
         "Physical contact, if it occurs, is described with intensity proportionate to the emotional journey that preceded it",
         "Final lines of the scene carry the full emotional weight of everything that came before"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "RO_N80_EMOTIONAL_INTENSITY",
@@ -524,7 +544,8 @@
         "Pacing slows during scenes of genuine intimacy, as though the narrative itself is reluctant to leave",
         "Internal monologue treats the emotional experience with full seriousness regardless of whether the character wants to",
         "Even mundane scenes between the leads â€” making coffee, arguing over nothing â€” carry an undertow of significance"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "RO_N90_TOO_EASY_LOVE",
@@ -552,7 +573,8 @@
         "The midpoint crisis is mild â€” a bump rather than a break",
         "Resolution scene lacks weight because nothing was truly at stake to resolve",
         "Characters express love easily and early with no visible cost to doing so"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -573,7 +595,8 @@
       "anti_patterns": [
         "External plot resolves independently of the relationship status",
         "Relationship is awarded as a prize for completing a non-romantic goal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E02_PROMISE_TO_VULNERABILITY",
@@ -593,7 +616,8 @@
       "anti_patterns": [
         "Love interest exists as fantasy fulfillment with no interior life",
         "One character's feelings are presented as absolute while the other's remain permanently uncertain"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E03_PROMISE_TO_OBSTACLES",
@@ -613,7 +637,8 @@
       "anti_patterns": [
         "Single-conversation-soluble misunderstanding as the primary obstacle",
         "Obstacles that vanish without being overcome"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E04_PROMISE_TO_EARNED",
@@ -633,7 +658,8 @@
       "anti_patterns": [
         "Coincidence resolves the final obstacle",
         "Resolution occurs before both characters have actively chosen each other"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E05_PROMISE_TO_TONE",
@@ -652,7 +678,8 @@
       "anti_patterns": [
         "Ironic narrative distance that prevents the reader from investing",
         "Flat emotional register that narrates feeling without evoking it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E10_CONSTRAINTS_TO_CONTEMPORARY",
@@ -673,7 +700,8 @@
       ],
       "anti_patterns": [
         "Contemporary setting with no effect on the emotional dynamic â€” might as well be any era"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "RO_E11_CONSTRAINTS_TO_HISTORICAL",
@@ -694,7 +722,8 @@
       "anti_patterns": [
         "Historical setting as decoration with no effect on the romantic arc",
         "Anachronistic characterization without narrative tension"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "RO_E12_CONSTRAINTS_TO_PARANORMAL",
@@ -715,7 +744,8 @@
       "anti_patterns": [
         "Paranormal element is irrelevant to the romantic arc",
         "Supernatural power resolves emotional problems that should require growth"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "RO_E13_CONSTRAINTS_TO_SUSPENSE",
@@ -736,7 +766,8 @@
       "anti_patterns": [
         "Suspense plot resolves and romance is simply appended",
         "Danger is so constant that space for emotional intimacy is destroyed"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "RO_E30_CONTEMPORARY_TO_PROXIMITY",
@@ -754,7 +785,8 @@
       ],
       "anti_patterns": [
         "Characters in a shared workplace or community setting who somehow never interact"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "RO_E31_CONTEMPORARY_TO_BARRIERS",
@@ -772,7 +804,8 @@
       ],
       "anti_patterns": [
         "Social barriers referenced in backstory but never shown to affect a single present-tense scene"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E32_HISTORICAL_TO_BARRIERS",
@@ -792,7 +825,8 @@
       "anti_patterns": [
         "Historical setting with no period-appropriate social constraints on the relationship",
         "Characters speak and think as modern people without any friction"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E33_HISTORICAL_TO_PRIVATE_PUBLIC",
@@ -811,7 +845,8 @@
       "anti_patterns": [
         "Historical setting where characters behave identically in ballrooms and bedrooms",
         "No distinction made between what characters perform for society and what they reveal in private"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E34_PARANORMAL_TO_PROXIMITY",
@@ -829,7 +864,8 @@
       ],
       "anti_patterns": [
         "Paranormal bond resolves all resistance â€” characters are compelled together without any choice, removing the emotional agency that makes romance meaningful"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "RO_E50_PROXIMITY_TO_MEET",
@@ -847,7 +883,8 @@
       ],
       "anti_patterns": [
         "First meeting is inert â€” no chemistry, no friction, no sense that these people will matter to each other"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E51_BARRIERS_TO_INTIMACY",
@@ -865,7 +902,8 @@
       ],
       "anti_patterns": [
         "Intimacy breakthrough occurs but social barriers have been so nominal that it costs nothing"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E52_PRIVATE_PUBLIC_TO_INTIMACY",
@@ -884,7 +922,8 @@
       ],
       "anti_patterns": [
         "Intimacy breakthrough occurs but the scene is not private â€” characters perform the breakthrough for an audience, which changes its meaning"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E53_MEET_TO_INTIMACY",
@@ -902,7 +941,8 @@
       ],
       "anti_patterns": [
         "Breakthrough has no relationship to the obstacle established at the meeting â€” feels disconnected from the emotional logic of the story"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "RO_E54_INTIMACY_TO_GRAND_GESTURE",
@@ -923,7 +963,8 @@
       "anti_patterns": [
         "Grand gesture occurs without a prior genuine intimacy â€” it has no specific emotional target because we never saw what these characters truly revealed to each other",
         "Gesture is made but receiving character is entirely passive"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "RO_E90_EASY_LOVE_WARNING",
@@ -939,7 +980,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern â€” it describes exactly what Romance must not do"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

@@ -24,6 +24,11 @@
       "narrows scope": 1,
       "mandates element": 3,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 25,
+      "soft": 12,
+      "total": 37
     }
   },
   "nodes": [
@@ -54,7 +59,8 @@
         "Opening establishes a criminal world or a criminal act as the central subject",
         "Tone signals that law and morality are under pressure",
         "Reader/viewer understands this world operates by different rules"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N10_CRIMINAL_CENTRALITY",
@@ -83,7 +89,8 @@
         "Scenes revolve around criminal acts, their planning, or their fallout",
         "Characters are defined by their relationship to the crime",
         "Narrative momentum driven by criminal activity or its detection"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N11_REAL_CONSEQUENCES",
@@ -112,7 +119,8 @@
         "Characters suffer loss or diminishment as a direct result of criminal activity",
         "The criminal act damages something that cannot be fully repaired",
         "Secondary characters bear the cost of protagonist's choices"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N12_MORAL_AMBIGUITY",
@@ -142,7 +150,8 @@
         "Authority figures are shown to be compromised",
         "Characters justify their crimes with internally coherent logic",
         "The legitimate world is shown to be built on the same mechanisms as the criminal one"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N13_POWER_DYNAMICS",
@@ -172,7 +181,8 @@
         "Decisions are made based on loyalty, leverage, or control",
         "Scenes establish who gives orders and who obeys",
         "Power shifts are felt as the story's major turning points"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N20_ORGANIZED_CRIME",
@@ -204,7 +214,8 @@
         "Loyalty and betrayal are central moral currencies",
         "The organization's rules and codes are treated as law",
         "Characters define themselves through their rank and affiliation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CR_N21_HEIST",
@@ -237,7 +248,8 @@
         "Ensemble of specialists with distinct roles",
         "Execution scenes where established plans deviate",
         "Complications arise from character flaws or overlooked variables"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CR_N22_NOIR",
@@ -269,7 +281,8 @@
         "Settings — rain-soaked streets, dim interiors, decaying institutions — mirror the moral state",
         "Protagonist is drawn further into the criminal world despite resistance",
         "Resolution is ambiguous or pyrrhic"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CR_N23_TRUE_CRIME",
@@ -302,7 +315,8 @@
         "Documentary techniques — archival footage, testimony framing, timeline reconstruction",
         "Institutional process given serious weight",
         "Unresolved questions are acknowledged rather than papered over"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CR_N40_CRIMINAL_ECOSYSTEM",
@@ -333,7 +347,8 @@
         "Violations of the code trigger predictable consequences",
         "Economic logic of the criminal enterprise is visible",
         "Characters navigate the underworld as a known social system"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N41_LAW_ENFORCEMENT",
@@ -364,7 +379,8 @@
         "Characters make decisions based on law enforcement presence or likelihood of detection",
         "Law enforcement figures have their own arc and motivations",
         "Legal consequences loom over criminal activity"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N42_TERRITORY_AND_POWER",
@@ -395,7 +411,8 @@
         "Movement between spaces requires permission, negotiation, or risk",
         "Settings are described in terms of who belongs there",
         "Violation of territorial boundaries triggers conflict"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CR_N60_CRIME_SCENE",
@@ -426,7 +443,8 @@
         "Audience can picture the crime and its immediate consequences",
         "Emotional and material stakes are established concretely",
         "The crime's specific nature shapes all subsequent events"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N61_MORAL_COMPROMISE",
@@ -459,7 +477,8 @@
         "The choice is not easily reversible",
         "Other characters or the narrative register the moral significance",
         "Character's relationship to themselves shifts after the scene"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "CR_N62_RECKONING",
@@ -492,7 +511,8 @@
         "Character cannot escape or bargain their way out",
         "Loss or damage is concrete and permanent",
         "Tone signals finality — the world has changed and will not be restored"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N80_MORAL_WEIGHT",
@@ -523,7 +543,8 @@
         "Characters show the psychological cost of their choices",
         "Institutional processes are rendered with specificity and friction",
         "Victims are rendered as full human beings, not plot devices"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "CR_N90_GLAMORIZED_CRIME",
@@ -552,7 +573,8 @@
         "Characters accumulate rewards of crime without corresponding loss",
         "Victims are invisible or treated as deserving",
         "Ending rewards criminal success"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -572,7 +594,8 @@
       ],
       "anti_patterns": [
         "Crime as backdrop to a story primarily about something else"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E02_PROMISE_TO_CONSEQUENCES",
@@ -590,7 +613,8 @@
       ],
       "anti_patterns": [
         "Criminal acts that are costless or easily undone"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E03_PROMISE_TO_AMBIGUITY",
@@ -608,7 +632,8 @@
       ],
       "anti_patterns": [
         "Clear moral binary where the right side wins cleanly"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E04_PROMISE_TO_POWER",
@@ -626,7 +651,8 @@
       ],
       "anti_patterns": [
         "Conflict that is purely personal without structural power dimension"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E05_PROMISE_TO_TONE",
@@ -644,7 +670,8 @@
       ],
       "anti_patterns": [
         "Criminal world rendered as pure entertainment spectacle without gravity"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E10_POWER_TO_ORGANIZED",
@@ -664,7 +691,8 @@
       ],
       "anti_patterns": [
         "Organization exists but its hierarchy has no bearing on the story"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CR_E11_CENTRALITY_TO_HEIST",
@@ -684,7 +712,8 @@
       ],
       "anti_patterns": [
         "Crime is improvised and unplanned — the heist structure requires deliberate architecture"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CR_E12_AMBIGUITY_TO_NOIR",
@@ -704,7 +733,8 @@
       ],
       "anti_patterns": [
         "Noir atmosphere without fatalistic structure — protagonist escapes cleanly"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CR_E13_CONSEQUENCES_TO_TRUE_CRIME",
@@ -724,7 +754,8 @@
       ],
       "anti_patterns": [
         "True crime aesthetic without documentary integrity — fictionalization that obscures rather than illuminates"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CR_E30_ORGANIZED_TO_ECOSYSTEM",
@@ -742,7 +773,8 @@
       ],
       "anti_patterns": [
         "Criminal organization with no internal logic or rules"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E31_HEIST_TO_TERRITORY",
@@ -762,7 +794,8 @@
       ],
       "anti_patterns": [
         "Physical space of the heist target is irrelevant to planning and execution"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CR_E32_NOIR_TO_ECOSYSTEM",
@@ -782,7 +815,8 @@
       ],
       "anti_patterns": [
         "Noir world where the protagonist can find clean ground to operate from"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E33_TRUE_CRIME_TO_LAW",
@@ -803,7 +837,8 @@
       ],
       "anti_patterns": [
         "True crime story where law enforcement is invisible or irrelevant"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E50_CRIME_SCENE_TO_RECKONING",
@@ -823,7 +858,8 @@
       ],
       "anti_patterns": [
         "Crime scene is detailed and concrete but the reckoning is vague or avoided"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E51_MORAL_COMPROMISE_TO_RECKONING",
@@ -844,7 +880,8 @@
       ],
       "anti_patterns": [
         "Character undergoes serious moral compromise but faces no meaningful internal or external reckoning"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E52_MORAL_COMPROMISE_TO_CRIME_SCENE",
@@ -864,7 +901,8 @@
       ],
       "anti_patterns": [
         "Moral compromise is entirely disconnected from the central criminal act"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E53_ECOSYSTEM_TO_CRIME_SCENE",
@@ -882,7 +920,8 @@
       ],
       "anti_patterns": [
         "Crime scene exists in isolation from the world that produced it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E54_LAW_TO_RECKONING",
@@ -902,7 +941,8 @@
       ],
       "anti_patterns": [
         "Law enforcement is present throughout but plays no role in the reckoning"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "CR_E55_TERRITORY_TO_MORAL_COMPROMISE",
@@ -922,7 +962,8 @@
       ],
       "anti_patterns": [
         "Character accumulates power and territory without any moral cost"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "CR_E90_GLAMORIZED_WARNING",
@@ -938,7 +979,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid when consequences fail"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

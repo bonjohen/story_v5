@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 1,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 23,
+      "soft": 12,
+      "total": 35
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
       "signals_in_text": [
         "Early introduction of the speculative premise",
         "World visibly differs from ours in specific, logical ways"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N10_SPECULATIVE_PREMISE",
@@ -79,7 +85,8 @@
         "Characters grapple with the premise's implications",
         "Plot events are consequences of the premise",
         "Conflict arises from the premise itself"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N11_INTERNAL_CONSISTENCY",
@@ -105,7 +112,8 @@
       "signals_in_text": [
         "Characters understand and reference technological limitations",
         "Audience can predict what technology will and won't do"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N12_CONSEQUENCES",
@@ -133,7 +141,8 @@
         "Characters debate the implications",
         "Society has adapted (or failed to adapt) to the premise",
         "Moral questions arise directly from the speculative element"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N13_PLAUSIBILITY",
@@ -161,7 +170,8 @@
         "Technical or social details that ground the premise",
         "Characters take the premise seriously",
         "Worldbuilding supports the plausibility"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N20_HARD_SF",
@@ -190,7 +200,8 @@
         "Technical detail in descriptions",
         "Characters solve problems through scientific reasoning",
         "Real physics and engineering constrain the plot"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SF_N21_SOCIAL_SF",
@@ -219,7 +230,8 @@
         "Characters navigating altered social norms",
         "Political and cultural institutions shaped by the premise",
         "Interpersonal relationships affected by the speculative change"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SF_N22_SPACE_OPERA",
@@ -248,7 +260,8 @@
         "Multiple star systems or civilizations",
         "Fleet battles or diplomatic crises",
         "Individual characters against civilizational backdrop"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SF_N23_DYSTOPIAN",
@@ -277,7 +290,8 @@
         "Detailed mechanisms of social control or collapse",
         "Characters constrained by systemic oppression or scarcity",
         "Memory of what was lost"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SF_N40_TECH_RULES",
@@ -304,7 +318,8 @@
         "Characters reference limitations",
         "Technology fails in predictable ways",
         "Solutions work within established constraints"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N41_SOCIETY_ADAPTED",
@@ -332,7 +347,8 @@
         "Background details reflect the premise",
         "Characters' occupations, relationships, and routines differ from ours",
         "Institutions have adapted to the speculative reality"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N42_EXTRAPOLATION_ANCHOR",
@@ -358,7 +374,8 @@
       "signals_in_text": [
         "Characters express recognizable desires, fears, and attachments",
         "Interpersonal dynamics feel real despite speculative setting"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SF_N60_PREMISE_REVEAL",
@@ -386,7 +403,8 @@
         "Show-don't-tell demonstration of the premise",
         "Character interaction with speculative elements",
         "Audience immediately sees how this world is different"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N61_CONSEQUENCE_SCENE",
@@ -414,7 +432,8 @@
         "Character must make a choice that requires the speculative context",
         "Emotional weight comes directly from the premise",
         "Audience thinks about what they would do in this situation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N62_RESOLUTION_SCENE",
@@ -442,7 +461,8 @@
         "Resolution uses established rules creatively",
         "Outcome could not happen in our world",
         "Premise's full implications are realized"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "SF_N80_INTELLECTUAL_ENGAGEMENT",
@@ -470,7 +490,8 @@
         "Characters think about implications",
         "Audience is invited to consider the 'what if'",
         "Technical or social details reward attention"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "SF_N90_TECH_MAGIC",
@@ -495,7 +516,8 @@
       "signals_in_text": [
         "Technology capabilities surprise the audience without setup",
         "No consistent rules govern what technology can do"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -515,7 +537,8 @@
       ],
       "anti_patterns": [
         "No clear speculative premise — just set in the future"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E02_PROMISE_TO_CONSISTENCY",
@@ -533,7 +556,8 @@
       ],
       "anti_patterns": [
         "Rules change based on plot needs"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E03_PROMISE_TO_CONSEQUENCES",
@@ -551,7 +575,8 @@
       ],
       "anti_patterns": [
         "Premise exists but its effects on people are never shown"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E04_PROMISE_TO_PLAUSIBILITY",
@@ -569,7 +594,8 @@
       ],
       "anti_patterns": [
         "Premise is arbitrary with no attempt at grounding"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E05_PROMISE_TO_TONE",
@@ -587,7 +613,8 @@
       ],
       "anti_patterns": [
         "No intellectual dimension — speculative setting is purely decorative"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E10_PREMISE_TO_HARD",
@@ -607,7 +634,8 @@
       ],
       "anti_patterns": [
         "Claims scientific rigor but physics are wrong"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SF_E11_PREMISE_TO_SOCIAL",
@@ -627,7 +655,8 @@
       ],
       "anti_patterns": [
         "Social commentary without narrative engagement"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SF_E12_PREMISE_TO_OPERA",
@@ -647,7 +676,8 @@
       ],
       "anti_patterns": [
         "Scale without substance"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SF_E13_PREMISE_TO_DYSTOPIAN",
@@ -667,7 +697,8 @@
       ],
       "anti_patterns": [
         "Dystopian aesthetic without mechanisms of oppression"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SF_E30_HARD_TO_TECH",
@@ -687,7 +718,8 @@
       ],
       "anti_patterns": [
         "Technology has no defined limits despite claims of scientific rigor"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E31_SOCIAL_TO_SOCIETY",
@@ -707,7 +739,8 @@
       ],
       "anti_patterns": [
         "Modern society with one speculative element and no adaptation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E32_OPERA_TO_ANCHOR",
@@ -726,7 +759,8 @@
       ],
       "anti_patterns": [
         "Characters are as alien as their setting — no emotional connection"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SF_E33_DYSTOPIAN_TO_SOCIETY",
@@ -747,7 +781,8 @@
       ],
       "anti_patterns": [
         "Dystopia is aesthetic — no mechanisms of control shown"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E50_TECH_TO_PREMISE",
@@ -767,7 +802,8 @@
       ],
       "anti_patterns": [
         "Technology explained through exposition dump rather than scene"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E51_SOCIETY_TO_CONSEQUENCE",
@@ -787,7 +823,8 @@
       ],
       "anti_patterns": [
         "Dilemma is generic and could exist in any setting"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E52_ANCHOR_TO_CONSEQUENCE",
@@ -807,7 +844,8 @@
       ],
       "anti_patterns": [
         "Consequences are abstract and impersonal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "SF_E53_CONSEQUENCE_TO_RESOLUTION",
@@ -828,7 +866,8 @@
       ],
       "anti_patterns": [
         "Resolution ignores the speculative premise"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "SF_E90_TECH_MAGIC_WARNING",
@@ -844,7 +883,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

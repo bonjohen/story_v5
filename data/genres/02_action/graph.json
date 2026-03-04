@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 1,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 25,
+      "soft": 10,
+      "total": 35
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
       "signals_in_text": [
         "Opening establishes the physical world and its dangers",
         "Protagonist's physical capability is demonstrated early"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N10_PHYSICAL_CONFLICT",
@@ -78,7 +84,8 @@
       "signals_in_text": [
         "Climactic scene involves physical confrontation",
         "Victory or defeat depends on what characters physically do"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N11_ESCALATING_STAKES",
@@ -104,7 +111,8 @@
       "signals_in_text": [
         "Each set piece introduces a new complication or higher danger",
         "Protagonist takes more damage or risk in each encounter"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N12_CLEAR_ANTAGONIST",
@@ -131,7 +139,8 @@
       "signals_in_text": [
         "Antagonist demonstrated as formidable early",
         "Direct confrontations between protagonist and antagonist"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N13_PROTAGONIST_CAPABILITY",
@@ -158,7 +167,8 @@
       "signals_in_text": [
         "Early scene demonstrating competence",
         "Physical skills shown, not just told"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N20_MILITARY",
@@ -186,7 +196,8 @@
         "Military terminology",
         "Group coordination in action scenes",
         "Chain of command creates tension"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AC_N21_CHASE",
@@ -215,7 +226,8 @@
         "Movement through changing environments",
         "Lead changes hands",
         "Vehicles, terrain, and obstacles are key"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AC_N22_HEIST",
@@ -244,7 +256,8 @@
         "Briefing/planning scenes",
         "Specialties assigned to team members",
         "Plan goes wrong and adaptation is required"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AC_N23_SURVIVAL",
@@ -273,7 +286,8 @@
         "Resource management",
         "Injuries accumulate",
         "Environment is actively hostile"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AC_N40_DANGEROUS_ENVIRONMENT",
@@ -301,7 +315,8 @@
         "Characters interact with environment during fights",
         "Terrain changes the tactical situation",
         "Environmental hazards create additional stakes"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N41_PHYSICAL_RULES",
@@ -328,7 +343,8 @@
         "Injuries carry forward",
         "Physical limitations are established and respected",
         "Audience can predict what actions will succeed or fail"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N42_WEAPON_TOOL",
@@ -356,7 +372,8 @@
         "Tools shown before they're needed",
         "Limitations of equipment create tension",
         "Creative use of established tools"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "AC_N60_OPENING_ACTION",
@@ -382,7 +399,8 @@
       "signals_in_text": [
         "Physical action in the first 10-15% of the story",
         "Protagonist's skills demonstrated through doing"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N61_ESCALATION_SEQUENCE",
@@ -409,7 +427,8 @@
         "Protagonist takes real damage or loss",
         "New complications introduced mid-sequence",
         "Audience awareness of increased danger"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N62_CLIMACTIC_CONFRONTATION",
@@ -437,7 +456,8 @@
         "Highest danger level",
         "Protagonist uses everything established earlier",
         "Decisive physical outcome"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N80_KINETIC_ENERGY",
@@ -464,7 +484,8 @@
         "Short scenes and chapters",
         "Active verbs dominate",
         "Sensory detail emphasizes impact and movement"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "AC_N90_CONSEQUENCE_FREE",
@@ -490,7 +511,8 @@
         "Protagonist takes no damage despite intense combat",
         "No one mourns casualties",
         "Property destruction has no aftermath"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -510,7 +532,8 @@
       ],
       "anti_patterns": [
         "Conflict resolved entirely through negotiation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E02_PROMISE_TO_ESCALATION",
@@ -528,7 +551,8 @@
       ],
       "anti_patterns": [
         "Flat action — same level of danger throughout"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E03_PROMISE_TO_ANTAGONIST",
@@ -546,7 +570,8 @@
       ],
       "anti_patterns": [
         "No visible opposition — protagonist fights nothing in particular"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E04_PROMISE_TO_CAPABILITY",
@@ -564,7 +589,8 @@
       ],
       "anti_patterns": [
         "Protagonist is helpless throughout — survival is pure luck"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E05_PROMISE_TO_KINETIC",
@@ -582,7 +608,8 @@
       ],
       "anti_patterns": [
         "Story is static and contemplative with rare physical activity"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E10_PHYSICAL_TO_MILITARY",
@@ -602,7 +629,8 @@
       ],
       "anti_patterns": [
         "Military setting but action is purely individual"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AC_E11_PHYSICAL_TO_CHASE",
@@ -622,7 +650,8 @@
       ],
       "anti_patterns": [
         "Chase is brief and resolved without real tension"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AC_E12_PHYSICAL_TO_HEIST",
@@ -642,7 +671,8 @@
       ],
       "anti_patterns": [
         "Heist executes perfectly with no physical complications"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AC_E13_PHYSICAL_TO_SURVIVAL",
@@ -662,7 +692,8 @@
       ],
       "anti_patterns": [
         "Protagonist has ample resources and safety nets"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AC_E30_MILITARY_TO_ENVIRONMENT",
@@ -682,7 +713,8 @@
       ],
       "anti_patterns": [
         "Military action in a featureless, non-threatening environment"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E31_CHASE_TO_ENVIRONMENT",
@@ -702,7 +734,8 @@
       ],
       "anti_patterns": [
         "Chase on an empty, straight road with no obstacles"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E32_HEIST_TO_TOOLS",
@@ -722,7 +755,8 @@
       ],
       "anti_patterns": [
         "Unlimited resources remove all tension from the heist"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "AC_E33_SURVIVAL_TO_RULES",
@@ -741,7 +775,8 @@
       ],
       "anti_patterns": [
         "Physics bend whenever protagonist needs to survive"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E50_ENVIRONMENT_TO_OPENING",
@@ -759,7 +794,8 @@
       ],
       "anti_patterns": [
         "Story opens with extended non-action exposition"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E51_RULES_TO_ESCALATION",
@@ -778,7 +814,8 @@
       ],
       "anti_patterns": [
         "Escalation achieved by breaking previously established rules"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E52_TOOLS_TO_ESCALATION",
@@ -798,7 +835,8 @@
       ],
       "anti_patterns": [
         "Same tools used the same way in every sequence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E53_ESCALATION_TO_CLIMAX",
@@ -816,7 +854,8 @@
       ],
       "anti_patterns": [
         "Climax is lower intensity than mid-story escalation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "AC_E90_CONSEQUENCE_FREE_WARNING",
@@ -832,7 +871,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes what to avoid"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

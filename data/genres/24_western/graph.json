@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 3,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 28,
+      "soft": 10,
+      "total": 38
     }
   },
   "nodes": [
@@ -53,7 +58,8 @@
         "Frontier landscape is introduced as a shaping force, not decoration",
         "Protagonist's competence and code are established early",
         "The absence or failure of institutional law is made clear"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N10_FRONTIER_SETTING",
@@ -81,7 +87,8 @@
         "Characters make decisions based on landscape reality — distance, water, terrain",
         "Weather and environment create plot complications",
         "The land's indifference to human survival is felt throughout"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N11_MORAL_CODE",
@@ -111,7 +118,8 @@
         "Protagonist makes a costly choice based on principle rather than self-interest",
         "Code is revealed through what the protagonist refuses to do as much as what they do",
         "Other characters recognize and respond to the protagonist's code — it has social reality"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N12_PHYSICAL_COMPETENCE",
@@ -141,7 +149,8 @@
         "Specific skills are shown, not just claimed — training, demonstration, or display under pressure",
         "Incompetence carries consequences — injury, capture, death",
         "The climactic confrontation requires and reveals the protagonist's mastery"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N13_LAW_ABSENT_WEAK",
@@ -169,7 +178,8 @@
         "Protagonist explicitly cannot or does not rely on legal authority to solve the problem",
         "Antagonist operates with impunity because law cannot or will not stop them",
         "The resolution of the central conflict is achieved by individual action, not institutional process"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N20_CLASSIC_WESTERN",
@@ -200,7 +210,8 @@
         "Protagonist's moral superiority is established through behavior, not just words",
         "Antagonist's threat is credible and has already inflicted real harm before the climax",
         "Showdown is the story's dramatic culmination, not an interruption of it"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WE_N21_REVISIONIST_WESTERN",
@@ -231,7 +242,8 @@
         "The genre's heroic conventions are invoked and then complicated or betrayed",
         "Violence has consequences that the Classic Western would absorb without comment",
         "Protagonist's code is shown to be self-serving, insufficient, or implicated in injustice"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WE_N22_FRONTIER_SETTLER",
@@ -261,7 +273,8 @@
         "Physical labor of survival and settlement is shown, not summarized",
         "Community members are individuated and their relationships matter",
         "The land resists settlement — it is not easily domesticated"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WE_N23_NEO_WESTERN",
@@ -291,7 +304,8 @@
         "Modern landscape functions as frontier — isolated, hostile, beyond reliable law",
         "Protagonist's code operates in the absence of institutional moral authority",
         "Physical competence or toughness is a real determinant of survival"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WE_N40_LANDSCAPE_AS_CHARACTER",
@@ -321,7 +335,8 @@
         "Specific landscape features — a dry riverbed, a mountain pass, a canyon — determine tactical options",
         "Characters carry, ration, or run out of resources tied to the landscape",
         "Journey scenes include the actual difficulty of frontier travel"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N41_LIMITED_RESOURCES_ISOLATION",
@@ -351,7 +366,8 @@
         "Characters explicitly acknowledge the absence of external help and plan accordingly",
         "Resource scarcity creates decision pressure — what to use now versus what to save",
         "Distance and time are treated as real constraints, not narrative conveniences"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N42_CODE_OF_THE_FRONTIER",
@@ -381,7 +397,8 @@
         "Characters make costly gestures of hospitality or fair dealing without explanation — the code is just understood",
         "Violation of the code is recognized and named by other characters",
         "The antagonist's villainy is established partly through code violation, not just raw violence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N60_SHOWDOWN",
@@ -412,7 +429,8 @@
         "Scene is built up through anticipation — both parties know it is coming",
         "Physical space and terms of the confrontation are established before it begins",
         "Protagonist's choice to face rather than flee is made explicit or strongly implied"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N61_ARRIVAL_DEPARTURE",
@@ -441,7 +459,8 @@
         "Other characters observe and respond to the arrival — something shifts in the community",
         "The landscape is present in the arrival or departure — the journey is not elided",
         "Departure scene acknowledges what is being left — not necessarily in dialogue, but in what the protagonist takes a last look at"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N62_LANDSCAPE_STAKES",
@@ -471,7 +490,8 @@
         "Characters speak or act toward the landscape as if it matters — as an adversary, a home, a prize",
         "The scene's purpose is to make the land felt, not just seen",
         "What happens in the landscape scene changes what the characters want or what they understand about their situation"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "WE_N80_STOIC_SPARE",
@@ -500,7 +520,8 @@
         "Dialogue is direct and minimal — characters do not over-explain",
         "Significant moments are handled with restraint; the camera or narrative does not linger to tell us how to feel",
         "Physical action carries emotional meaning that is not subsequently explicated in dialogue or narration"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "WE_N90_ROMANTICIZED_VIOLENCE",
@@ -528,7 +549,8 @@
         "Protagonist draws and fires without hesitation, doubt, or aftermath across the whole narrative",
         "Body count is high but the audience is never asked to feel it",
         "Violence is staged for excitement rather than meaning — tempo is fast, consequences are absent"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -548,7 +570,8 @@
       ],
       "anti_patterns": [
         "Frontier as decorative backdrop — characters never shaped or constrained by it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E02_PROMISE_TO_CODE",
@@ -566,7 +589,8 @@
       ],
       "anti_patterns": [
         "Protagonist has no code — acts on pure opportunism without moral structure"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E03_PROMISE_TO_COMPETENCE",
@@ -584,7 +608,8 @@
       ],
       "anti_patterns": [
         "Physical competence is irrelevant — the story's outcomes depend on luck or information, not capability"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E04_PROMISE_TO_LAW",
@@ -602,7 +627,8 @@
       ],
       "anti_patterns": [
         "Functioning legal institutions resolve the central conflict — the Western's moral architecture is bypassed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E05_PROMISE_TO_TONE",
@@ -620,7 +646,8 @@
       ],
       "anti_patterns": [
         "Lush, ornamental, or melodramatic tone that sentimentalizes the frontier or inflates its violence"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E10_LAW_TO_CLASSIC",
@@ -641,7 +668,8 @@
       ],
       "anti_patterns": [
         "Classic form without genuine moral test — the hero is never in doubt, never costs"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WE_E11_CODE_TO_REVISIONIST",
@@ -662,7 +690,8 @@
       ],
       "anti_patterns": [
         "Revisionist tone without structural interrogation — just a darker Classic Western"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WE_E12_FRONTIER_TO_SETTLER",
@@ -683,7 +712,8 @@
       ],
       "anti_patterns": [
         "Settler setting but no genuine stake in the land — protagonist can leave without loss"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WE_E13_CONSTRAINT_TO_NEO",
@@ -704,7 +734,8 @@
       ],
       "anti_patterns": [
         "Western aesthetic in a contemporary setting but frontier constraints are absent — law functions, institutions help, competence is irrelevant"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WE_E30_CLASSIC_TO_LANDSCAPE",
@@ -724,7 +755,8 @@
       ],
       "anti_patterns": [
         "Classic Western in which landscape is decorative — the hero moves through it without being shaped by it"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E31_CLASSIC_TO_ISOLATION",
@@ -743,7 +775,8 @@
       ],
       "anti_patterns": [
         "Reinforcements arrive to solve the conflict — the protagonist's isolation was illusory"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E32_SETTLER_TO_ISOLATION",
@@ -762,7 +795,8 @@
       ],
       "anti_patterns": [
         "Settlement story where supply lines are reliable and help arrives whenever needed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E33_REVISIONIST_TO_CODE",
@@ -781,7 +815,8 @@
       ],
       "anti_patterns": [
         "Revisionist Western that deconstructs everything except the code — the protagonist's personal ethics are exempted from interrogation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E34_NEO_TO_LANDSCAPE",
@@ -801,7 +836,8 @@
       ],
       "anti_patterns": [
         "Neo-Western set in environments that are easily traversed and resourced — the frontier condition is absent"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E50_LANDSCAPE_TO_SHOWDOWN",
@@ -822,7 +858,8 @@
       ],
       "anti_patterns": [
         "Showdown location is arbitrary — the landscape has no bearing on the confrontation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E51_ISOLATION_TO_SHOWDOWN",
@@ -840,7 +877,8 @@
       ],
       "anti_patterns": [
         "Showdown is avoided because help arrives at the last moment — the isolation was false"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E53_FRONTIER_CODE_TO_ARRIVAL",
@@ -859,7 +897,8 @@
       ],
       "anti_patterns": [
         "Arrival and departure are logistical with no social reading — the code is not present in these transitions"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E54_LANDSCAPE_TO_STAKES_SCENE",
@@ -879,7 +918,8 @@
       ],
       "anti_patterns": [
         "Landscape is never the object of feeling — it is only ever the background of action"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "WE_E70_CODE_TO_SHOWDOWN",
@@ -899,7 +939,8 @@
       ],
       "anti_patterns": [
         "Showdown is won through a code violation — protagonist shoots first without warning, shoots in the back, uses deception that contravenes their established principles"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E71_COMPETENCE_TO_SHOWDOWN",
@@ -919,7 +960,8 @@
       ],
       "anti_patterns": [
         "Showdown won by luck, by the antagonist's mistake, or by a newly introduced resource — protagonist's established competence is irrelevant to the resolution"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "WE_E90_CODE_TO_ANTIPATTERN",
@@ -935,7 +977,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes the genre's central failure mode"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }

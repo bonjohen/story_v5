@@ -23,6 +23,11 @@
       "mandates element": 3,
       "requires payoff": 2,
       "prohibits element": 1
+    },
+    "severityCounts": {
+      "hard": 25,
+      "soft": 11,
+      "total": 36
     }
   },
   "nodes": [
@@ -51,7 +56,8 @@
       "signals_in_text": [
         "Opening establishes a power structure that the protagonist must navigate, contest, or survive",
         "Stakes are framed in terms of collective consequence from the first act"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N10_LEGIBLE_POWER",
@@ -80,7 +86,8 @@
         "Characters explicitly discuss what moves are available and why certain options are foreclosed",
         "Institutional rules constrain protagonist choices in ways that feel specific rather than arbitrary",
         "The audience understands why a particular person or faction controls a particular resource or decision"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N11_COLLECTIVE_STAKES",
@@ -109,7 +116,8 @@
         "Scene-level choices carry both 'what does this mean for my career' and 'what does this mean for the people I govern'",
         "Secondary characters exist as representatives of the populations affected by power decisions",
         "The story does not allow the protagonist to win privately while the public loses without registering this as significant"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N12_COMPROMISE_AND_STRATEGY",
@@ -138,7 +146,8 @@
         "Characters explicitly identify what they want and what they are willing to give to get it",
         "Negotiations have visible give-and-take where both parties lose something",
         "The protagonist's strategy is legible to the audience even when concealed from other characters"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N13_INSTITUTIONAL_MECHANICS",
@@ -167,7 +176,8 @@
         "Characters' actions are constrained and enabled by specific procedural rules",
         "Deadlines tied to institutional process create the story's urgency",
         "Knowledge of how institutions work is itself a form of power in the story"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N20_POLITICAL_THRILLER",
@@ -197,7 +207,8 @@
         "Danger is traceable to specific actors with institutional power to harm",
         "Clock is running against an institutional deadline or an irreversible political event",
         "Protagonist's best weapons are information and institutional knowledge, not physical capability"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PL_N21_POLITICAL_DRAMA",
@@ -227,7 +238,8 @@
         "Scenes of procedural negotiation are also scenes of moral reckoning",
         "The protagonist's relationships change in direct proportion to their acquisition or exercise of power",
         "The audience holds a running account of what has been given up in exchange for what has been gained"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PL_N22_DYSTOPIAN_POLITICAL",
@@ -257,7 +269,8 @@
         "The specific ideology or interest that benefits from the oppressive order is identifiable",
         "Enforcement mechanisms are institutional rather than purely personal",
         "Resistance, when it succeeds, does so through political means that parallel the genre's core constraints"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PL_N23_CAMPAIGN_ELECTION",
@@ -287,7 +300,8 @@
         "Characters discuss specific strategic problems with specific proposed solutions",
         "The campaign's resource constraints and coalition pressures shape character choices",
         "The election functions as both plot climax and moral verdict on the choices made to get there"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PL_N40_INSTITUTIONAL_REALISM",
@@ -316,7 +330,8 @@
         "Characters identify specific procedural options and their costs before taking action",
         "Institutional rules are weaponized by antagonists in ways that constrain the protagonist's responses",
         "The most powerful characters are also the most constrained by institutional expectations and dependencies"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N41_COMPETING_FACTIONS",
@@ -345,7 +360,8 @@
         "The audience can articulate what each major faction wants and why",
         "Faction behavior is consistent with their stated interests even when it creates problems for the protagonist",
         "Coalition possibilities and incompatibilities are part of the story's strategic landscape"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N42_PUBLIC_PRIVATE_FACE",
@@ -374,7 +390,8 @@
         "Scenes are constructed to show the same character behaving differently across public and private contexts",
         "The audience holds information that specific other characters do not, creating sustained dramatic irony",
         "Characters explicitly manage what can be said where and to whom"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N60_NEGOTIATION_DEAL",
@@ -404,7 +421,8 @@
         "Each party's position and their bottom line are legible before and during the scene",
         "The deal struck is not the deal either party wanted — it reflects genuine compromise",
         "The cost of the deal is registered in the scene, not deferred"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N61_BETRAYAL_REALIGNMENT",
@@ -433,7 +451,8 @@
         "The betrayer's political calculus is legible to the audience even if not to the protagonist",
         "The moment of betrayal is staged as a political event, not just an emotional one",
         "The realignment changes the visible power balance in ways that constrain subsequent options"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "node_id": "PL_N62_PUBLIC_SPEECH_PERSUASION",
@@ -463,7 +482,8 @@
         "The specific argument being made is legible and contested, not simply inspirational",
         "The audience's response is differentiated — some persuaded, some resistant, some unmoved",
         "The outcome of the persuasion attempt changes something concrete in the story's power configuration"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N80_CALCULATED_AMBIGUITY",
@@ -492,7 +512,8 @@
         "Characters can articulate the best version of the opposing position",
         "The audience is not told whom to root for through tone or framing — they must decide based on the choices depicted",
         "Victories and losses are registered in moral as well as political terms"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "node_id": "PL_N90_NAIVE_IDEALISM",
@@ -519,7 +540,8 @@
         "Political opposition dissolves in response to the protagonist's sincerity rather than their strategy",
         "No genuine cost is paid for maintaining idealism in a system that punishes it",
         "The gap between the protagonist's good intentions and the actual mechanics of political change is never acknowledged as a problem"
-      ]
+      ],
+      "severity": "hard"
     }
   ],
   "edges": [
@@ -542,7 +564,8 @@
       ],
       "anti_patterns": [
         "Power operates as mysterious individual authority with no structural logic the audience can follow"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E02_PROMISE_TO_COLLECTIVE_STAKES",
@@ -561,7 +584,8 @@
       ],
       "anti_patterns": [
         "Political setting is used only as backdrop for a story whose stakes are entirely personal"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E03_PROMISE_TO_COMPROMISE",
@@ -580,7 +604,8 @@
       ],
       "anti_patterns": [
         "Protagonist achieves political goals through personal moral force without strategic calculation"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E04_PROMISE_TO_INSTITUTIONAL",
@@ -600,7 +625,8 @@
       ],
       "anti_patterns": [
         "Plot turns depend entirely on character will with no institutional constraints shaping available options"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E05_PROMISE_TO_TONE",
@@ -619,7 +645,8 @@
       ],
       "anti_patterns": [
         "Tone collapses to simple heroism at the climax — protagonist's virtue triumphs without political cost"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E10_LEGIBLE_TO_THRILLER",
@@ -639,7 +666,8 @@
       ],
       "anti_patterns": [
         "Conspiracy is so opaque that the audience cannot identify who benefits or what levers they control"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PL_E11_COMPROMISE_TO_DRAMA",
@@ -659,7 +687,8 @@
       ],
       "anti_patterns": [
         "Strategic compromise occurs but its moral cost is never dramatized or registered"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PL_E12_COLLECTIVE_TO_DYSTOPIAN",
@@ -679,7 +708,8 @@
       ],
       "anti_patterns": [
         "Dystopia is atmospheric without specific political mechanisms — resistance is purely personal escape"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PL_E13_INSTITUTIONAL_TO_CAMPAIGN",
@@ -699,7 +729,8 @@
       ],
       "anti_patterns": [
         "Campaign mechanics are decorative — the election outcome is never genuinely in doubt and creates no real narrative tension"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PL_E30_THRILLER_TO_INSTITUTIONAL_REALISM",
@@ -718,7 +749,8 @@
       ],
       "anti_patterns": [
         "Danger is generic — any powerful antagonist could pose this threat regardless of specific institutional context"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E31_DRAMA_TO_COMPETING_FACTIONS",
@@ -737,7 +769,8 @@
       ],
       "anti_patterns": [
         "Opposition reduces to simple villainy without comprehensible interest — negotiation is impossible by design"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E32_DYSTOPIAN_TO_PUBLIC_PRIVATE",
@@ -756,7 +789,8 @@
       ],
       "anti_patterns": [
         "Dystopian regime is transparently evil even to its own agents — no gap between its public ideology and private reality"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E33_CAMPAIGN_TO_COMPETING_FACTIONS",
@@ -775,7 +809,8 @@
       ],
       "anti_patterns": [
         "Campaign is fought against an undifferentiated general electorate with no factional structure — strategy is purely about messaging to a monolithic audience"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E50_INSTITUTIONAL_TO_NEGOTIATION",
@@ -794,7 +829,8 @@
       ],
       "anti_patterns": [
         "Negotiation scene is staged without either party operating under institutional constraints — they simply agree or disagree"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E51_FACTIONS_TO_BETRAYAL",
@@ -813,7 +849,8 @@
       ],
       "anti_patterns": [
         "Betrayal is purely personal and has no lasting political consequence — protagonist recovers without cost"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PL_E52_PUBLIC_PRIVATE_TO_SPEECH",
@@ -832,7 +869,8 @@
       ],
       "anti_patterns": [
         "Speech scene presents public statement as simply identical with private conviction — the performance dimension is eliminated"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E70_NEGOTIATION_TO_BETRAYAL",
@@ -851,7 +889,8 @@
       ],
       "anti_patterns": [
         "Deal is violated without political consequence — the betrayer faces no cost and the protagonist recovers without adjustment"
-      ]
+      ],
+      "severity": "soft"
     },
     {
       "edge_id": "PL_E71_BETRAYAL_TO_SPEECH",
@@ -870,7 +909,8 @@
       ],
       "anti_patterns": [
         "Betrayal has no bearing on the subsequent speech scene — protagonist performs as if nothing has changed"
-      ]
+      ],
+      "severity": "hard"
     },
     {
       "edge_id": "PL_E90_IDEALISM_WARNING",
@@ -886,7 +926,8 @@
       "common_alternatives": [],
       "anti_patterns": [
         "This edge IS the anti-pattern — it describes the failure mode of allowing moral virtue to substitute for political strategy without cost"
-      ]
+      ],
+      "severity": "hard"
     }
   ]
 }
