@@ -633,6 +633,241 @@ export interface VocabularyFile {
 }
 
 // ---------------------------------------------------------------------------
+// Template Pack (backbone synthesis stage 1)
+// ---------------------------------------------------------------------------
+
+export interface ArchetypeNodeTemplate {
+  node_id: string
+  role: string
+  label: string
+  beat_summary_template: string
+  scene_obligations: string[]
+  required_elements: string[]
+  signals_to_include: string[]
+  failure_modes_to_avoid: string[]
+  entry_conditions?: string[]
+  exit_conditions?: string[]
+}
+
+export interface GenreLevelTemplate {
+  node_id: string
+  level: number | null
+  label: string
+  severity: Severity
+  node_type?: 'spine' | 'tone_marker' | 'anti_pattern'
+  constraint_template: string
+  binding_rules: string[]
+  anti_patterns_to_block?: string[]
+}
+
+export interface ToneGuidance {
+  tone_marker_id: string
+  tone_description: string
+  directives: string[]
+}
+
+export interface AntiPatternGuidance {
+  node_id: string
+  label: string
+  description: string
+}
+
+export interface TemplatePack extends RunMetadata {
+  archetype_id: string
+  genre_id: string
+  archetype_node_templates: Record<string, ArchetypeNodeTemplate>
+  genre_level_templates: Record<string, GenreLevelTemplate>
+  tone_guidance?: ToneGuidance
+  anti_pattern_guidance?: AntiPatternGuidance[]
+}
+
+// ---------------------------------------------------------------------------
+// Story Backbone (backbone synthesis stage 2)
+// ---------------------------------------------------------------------------
+
+export interface BackboneSlot {
+  slot_name: string
+  category: 'character' | 'place' | 'object' | 'concept'
+  required: boolean
+  description?: string
+  bound_value?: string
+}
+
+export type SlotMap = Record<string, BackboneSlot>
+
+export interface BackboneMomentStub {
+  archetype_node: string
+  participant_roles: string[]
+  expected_transitions: string[]
+}
+
+export interface BackboneSceneObligation {
+  node_id: string
+  severity: Severity
+  label?: string
+}
+
+export interface BackboneScene {
+  scene_id: string
+  scene_goal: string
+  genre_obligations: BackboneSceneObligation[]
+  moment_stub?: BackboneMomentStub
+  slots: SlotMap
+  style_overrides?: Record<string, string>
+}
+
+export interface BackboneBeat {
+  beat_id: string
+  archetype_node_id: string
+  label: string
+  role?: string
+  definition?: string
+  scenes: BackboneScene[]
+}
+
+export interface ChapterPartitionEntry {
+  chapter_id: string
+  title?: string
+  beat_ids: string[]
+  tone_goal?: string
+  pace_directive?: string
+}
+
+export interface LexiconDirectives {
+  canonical_terms?: Record<string, string>
+  prohibited_synonyms?: string[]
+  naming_rules?: string[]
+}
+
+export interface StyleDirectives {
+  global_voice?: string
+  global_pacing?: string
+  feature_pack_ids?: string[]
+  lexicon?: LexiconDirectives
+}
+
+export interface CoveragePlan {
+  hard_constraints_assigned: number
+  hard_constraints_total: number
+  soft_constraints_assigned: number
+  soft_constraints_total: number
+}
+
+export interface StoryBackbone extends RunMetadata {
+  archetype_id: string
+  genre_id: string
+  beats: BackboneBeat[]
+  chapter_partition: ChapterPartitionEntry[]
+  style_directives: StyleDirectives
+  coverage_plan?: CoveragePlan
+}
+
+// ---------------------------------------------------------------------------
+// Story Detail Bindings (backbone synthesis stage 3)
+// ---------------------------------------------------------------------------
+
+export interface DetailCharacter {
+  id: string
+  name: string
+  role: string
+  traits?: string[]
+  motivations?: string[]
+  backstory?: string
+}
+
+export interface DetailPlace {
+  id: string
+  name: string
+  type: string
+  features?: string[]
+  atmosphere?: string
+}
+
+export interface DetailObject {
+  id: string
+  name: string
+  type: string
+  significance?: string
+  properties?: string[]
+}
+
+export interface EntityRegistry {
+  characters: DetailCharacter[]
+  places: DetailPlace[]
+  objects: DetailObject[]
+}
+
+export interface SlotBinding {
+  slot_name: string
+  bound_entity_id: string
+  bound_value?: string
+  rationale?: string
+}
+
+export interface OpenMystery {
+  id: string
+  description: string
+  planted_at_beat?: string
+  resolved_at_beat?: string
+}
+
+export interface NarrativePromise {
+  id: string
+  description: string
+  made_at_beat?: string
+}
+
+export interface NarrativePayoff {
+  id: string
+  promise_id: string
+  description: string
+  delivered_at_beat?: string
+}
+
+export interface UnresolvedTodo {
+  slot_name: string
+  reason: string
+  suggested_resolution?: string
+}
+
+export interface StoryDetailBindings extends RunMetadata {
+  entity_registry: EntityRegistry
+  slot_bindings: Record<string, SlotBinding>
+  open_mysteries?: OpenMystery[]
+  promises?: NarrativePromise[]
+  payoffs?: NarrativePayoff[]
+  unresolved_todos?: UnresolvedTodo[]
+}
+
+// ---------------------------------------------------------------------------
+// Chapter Manifest (backbone synthesis stage 4)
+// ---------------------------------------------------------------------------
+
+export interface EditorialConstraints {
+  voice_consistency?: string
+  recap_policy?: 'none' | 'light' | 'explicit'
+  transition_style?: string
+  max_word_count?: number
+  min_word_count?: number
+}
+
+export interface ChapterEntry {
+  chapter_id: string
+  title: string
+  scene_ids: string[]
+  tone_goals?: string
+  pace_directive?: string
+  editorial_constraints?: EditorialConstraints
+  file_path?: string
+}
+
+export interface ChapterManifest extends RunMetadata {
+  chapters: ChapterEntry[]
+  total_scene_count?: number
+  total_chapter_count?: number
+}
+
+// ---------------------------------------------------------------------------
 // Loaded Corpus (aggregate type for the full corpus in memory)
 // ---------------------------------------------------------------------------
 

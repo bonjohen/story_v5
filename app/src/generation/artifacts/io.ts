@@ -11,6 +11,10 @@ import storyContractSchema from './schema/story_contract.schema.json'
 import storyPlanSchema from './schema/story_plan.schema.json'
 import validationResultsSchema from './schema/validation_results.schema.json'
 import storyTraceSchema from './schema/story_trace.schema.json'
+import templatePackSchema from './schema/template_pack.schema.json'
+import storyBackboneSchema from './schema/story_backbone.schema.json'
+import storyDetailBindingsSchema from './schema/story_detail_bindings.schema.json'
+import chaptersManifestSchema from './schema/chapters_manifest.schema.json'
 
 // ---------------------------------------------------------------------------
 // Schema registry
@@ -26,6 +30,10 @@ const schemas = {
   story_plan: ajv.compile(storyPlanSchema),
   validation_results: ajv.compile(validationResultsSchema),
   story_trace: ajv.compile(storyTraceSchema),
+  template_pack: ajv.compile(templatePackSchema),
+  story_backbone: ajv.compile(storyBackboneSchema),
+  story_detail_bindings: ajv.compile(storyDetailBindingsSchema),
+  chapters_manifest: ajv.compile(chaptersManifestSchema),
 } as const
 
 export type ArtifactName = keyof typeof schemas

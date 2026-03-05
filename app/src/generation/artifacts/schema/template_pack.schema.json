@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TemplatePack",
+  "description": "Compiled template bundle derived deterministically from the corpus for a given archetype + genre selection",
+  "type": "object",
+  "required": [
+    "schema_version", "run_id", "generated_at", "source_corpus_hash",
+    "archetype_id", "genre_id",
+    "archetype_node_templates", "genre_level_templates"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "run_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "source_corpus_hash": { "type": "string" },
+    "archetype_id": { "type": "string" },
+    "genre_id": { "type": "string" },
+    "archetype_node_templates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "node_id", "role", "label",
+          "beat_summary_template", "scene_obligations",
+          "required_elements", "signals_to_include", "failure_modes_to_avoid"
+        ],
+        "properties": {
+          "node_id": { "type": "string" },
+          "role": { "type": "string" },
+          "label": { "type": "string" },
+          "beat_summary_template": { "type": "string" },
+          "scene_obligations": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "required_elements": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "signals_to_include": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "failure_modes_to_avoid": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "entry_conditions": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "exit_conditions": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "genre_level_templates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "node_id", "level", "label", "severity",
+          "constraint_template", "binding_rules"
+        ],
+        "properties": {
+          "node_id": { "type": "string" },
+          "level": {
+            "oneOf": [
+              { "type": "integer", "minimum": 1, "maximum": 5 },
+              { "type": "null" }
+            ]
+          },
+          "label": { "type": "string" },
+          "severity": { "enum": ["hard", "soft"] },
+          "node_type": {
+            "enum": ["spine", "tone_marker", "anti_pattern"]
+          },
+          "constraint_template": { "type": "string" },
+          "binding_rules": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "anti_patterns_to_block": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "tone_guidance": {
+      "type": "object",
+      "properties": {
+        "tone_marker_id": { "type": "string" },
+        "tone_description": { "type": "string" },
+        "directives": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "anti_pattern_guidance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["node_id", "label", "description"],
+        "properties": {
+          "node_id": { "type": "string" },
+          "label": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

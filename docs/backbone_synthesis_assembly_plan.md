@@ -40,23 +40,23 @@ Treat this document as a work queue, and update the status of individual tasks a
 
 ### Tasks
 
-- [ ] 1.1 Create `template_pack.schema.json` in `app/src/generation/artifacts/schema/`
+- [X] 1.1 Create `template_pack.schema.json` in `app/src/generation/artifacts/schema/`
   - Fields: `schema_version`, `run_id`, `generated_at`, `source_corpus_hash`, `archetype_node_templates{}`, `genre_level_templates{}`
   - Archetype node template shape: `beat_summary_template`, `scene_obligations[]`, `required_elements[]`, `signals_to_include[]`, `failure_modes_to_avoid[]`
   - Genre level template shape: `scene_obligation_template`, `hard_constraint_binding_rules[]`, `anti_patterns_to_block[]`
-- [ ] 1.2 Create `story_backbone.schema.json`
+- [X] 1.2 Create `story_backbone.schema.json`
   - Fields: `schema_version`, `run_id`, `archetype_id`, `genre_id`, `beats[]`, `chapter_partition[]`, `style_directives{}`
   - Beat shape: `beat_id`, `archetype_node_id`, `label`, `scenes[]`, each scene having `scene_id`, `genre_obligations[]`, `moment_stub{}`, `slots{}`, `style_overrides{}`
-- [ ] 1.3 Create `story_detail_bindings.schema.json`
+- [X] 1.3 Create `story_detail_bindings.schema.json`
   - Fields: `schema_version`, `run_id`, `entity_registry{}` (characters, places, objects), `slot_bindings{}`, `open_mysteries[]`, `promises[]`, `payoffs[]`, `unresolved_todos[]`
-- [ ] 1.4 Create `chapters_manifest.schema.json`
+- [X] 1.4 Create `chapters_manifest.schema.json`
   - Fields: `schema_version`, `run_id`, `chapters[]` with `chapter_id`, `title`, `scene_ids[]`, `tone_goals`, `pace_directive`, `editorial_constraints{}`
-- [ ] 1.5 Add TypeScript interfaces to `app/src/generation/artifacts/types.ts`
+- [X] 1.5 Add TypeScript interfaces to `app/src/generation/artifacts/types.ts`
   - `TemplatePack`, `ArchetypeNodeTemplate`, `GenreLevelTemplate`
   - `StoryBackbone`, `BackboneBeat`, `BackboneScene`, `MomentStub`, `SlotMap`
   - `StoryDetailBindings`, `EntityRegistry`, `SlotBinding`
   - `ChapterManifest`, `ChapterEntry`
-- [ ] 1.6 Add schema validation helpers in `app/src/generation/artifacts/io.ts`
+- [X] 1.6 Add schema validation helpers in `app/src/generation/artifacts/io.ts`
   - `loadTemplatePack()`, `saveTemplatePack()`
   - `loadBackbone()`, `saveBackbone()`
   - `loadDetailBindings()`, `saveDetailBindings()`
