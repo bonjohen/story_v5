@@ -7,11 +7,12 @@ import { useSettingsStore } from '../../store/settingsStore.ts'
 import type { ScriptMeta } from '../types.ts'
 
 const CATEGORY_ORDER = [
-  'Getting Started',
-  'Core Concepts',
-  'Story Generation',
-  'Viewer & Tools',
-  'Chapter Stories',
+  'Introduction',
+  'Foundations of Story Structure',
+  'The Data Model',
+  'What This Enables',
+  'Using the System',
+  'Examples',
 ]
 
 function groupByCategory(scripts: ScriptMeta[]): [string, ScriptMeta[]][] {
