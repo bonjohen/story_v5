@@ -146,3 +146,13 @@ export {
   type BibleValidationInput,
   type BibleValidationResults,
 } from './bibleValidator.ts'
+
+// Episode orchestrator
+export {
+  orchestrateEpisode,
+  canonizeEpisodeFromDisk,
+  type EpisodeOrchestratorState,
+  type EpisodeOrchestratorEvent,
+  type EpisodeGenerationResult,
+  type EpisodeOrchestratorOptions,
+} from './episodeOrchestrator.ts'
