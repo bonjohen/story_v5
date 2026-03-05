@@ -147,6 +147,34 @@ export {
   type BibleValidationResults,
 } from './bibleValidator.ts'
 
+// Series manager
+export {
+  // Thread lifecycle
+  computeThreadAges,
+  proposeUrgencyEscalations,
+  applyUrgencyEscalations,
+  computeThreadHealth,
+  suggestThreadPriorities,
+  type ThreadAgeInfo,
+  type EscalationConfig,
+  type ThreadHealthMetrics,
+  // Arc advancement
+  suggestArcAdvancement,
+  getNextArcPhase,
+  isArcComplete,
+  episodesInCurrentPhase,
+  type ArcAdvancementSuggestion,
+  // Genre accent
+  getCompatibleAccents,
+  isAccentCompatible,
+  type AccentOption,
+  // Slot management
+  createEpisodeSlot,
+  getOrCreateNextSlot,
+  getSeriesStatus,
+  type SeriesStatusSummary,
+} from './seriesManager.ts'
+
 // Episode orchestrator
 export {
   orchestrateEpisode,
