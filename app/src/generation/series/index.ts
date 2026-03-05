@@ -189,3 +189,46 @@ export {
 export { BibleViewerPanel, type BibleViewerPanelProps } from './panels/BibleViewerPanel.tsx'
 export { ArcVisualizerPanel, type ArcVisualizerPanelProps } from './panels/ArcVisualizerPanel.tsx'
 export { ThreadTrackerPanel, type ThreadTrackerPanelProps } from './panels/ThreadTrackerPanel.tsx'
+
+// Branch manager
+export {
+  createBranch,
+  generateBranchId,
+  listBranchIds,
+  getBranchDivergenceSlot,
+  computeBibleDiff,
+  isBranchDivergent,
+  type CreateBranchInput,
+  type BibleDiffSummary,
+} from './branchManager.ts'
+
+// Series exporter
+export {
+  exportSeriesToMarkdown,
+  exportEpisodeToMarkdown,
+  exportBibleToMarkdown,
+  exportTimelineToMarkdown,
+  type SeriesExportOptions,
+} from './seriesExporter.ts'
+
+// Series analytics
+export {
+  computeSeriesOverview,
+  computeArcProgress,
+  computeCharacterStats,
+  computeThreadStats,
+  computeSlotStats,
+  type SeriesOverviewStats,
+  type ArcProgressStats,
+  type CharacterStats,
+  type ThreadStats,
+  type SlotStats,
+} from './seriesAnalytics.ts'
+
+// Standalone importer
+export {
+  buildSeriesConfigFromRun,
+  buildInitialBibleFromRun,
+  buildEpisodeFromRun,
+  type StandaloneRunData,
+} from './standaloneImporter.ts'
