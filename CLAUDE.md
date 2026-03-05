@@ -12,6 +12,8 @@ This is a **data and content project** that models storytelling structures as fo
 
 3. **Interactive Visual Graph Interface** — a web-based narrative structure exploration engine built with React 19, TypeScript, Vite, Cytoscape.js, and Zustand. All 8 implementation phases are complete. See `docs/interactive_viewer_design.md` (specification) and `docs/interactive_viewer_plan.md` (implementation plan, all phases `[X]`).
 
+4. **Backbone Synthesis & Assembly** — a new generation pipeline stage that templatizes corpus knowledge, assembles story backbones with explicit slots, synthesizes story-specific details via LLM, and stitches scenes into chapter documents. See `docs/backbone_synthesis_assembly.md` (design) and `docs/backbone_synthesis_assembly_plan.md` (8-phase implementation plan).
+
 ## Repository Structure
 
 ```
@@ -22,6 +24,8 @@ docs/                              ← Planning, specs, and task tracking
   v-next.md                        ← Deferred items: issues, suggestions, enhancements
   interactive_viewer_design.md     ← UI/UX spec for interactive graph viewer
   interactive_viewer_plan.md       ← 8-phase implementation plan for the viewer
+  backbone_synthesis_assembly.md   ← Design doc: template, backbone, detail, chapter stages
+  backbone_synthesis_assembly_plan.md ← 8-phase implementation plan for backbone synthesis
   archetypes.json                   ← 15 archetypes: descriptions, examples, genres
   genres.json                      ← 27 genres: descriptions, examples, popularity
 
@@ -45,6 +49,10 @@ data/                              ← Deliverable outputs
       graph.json
       narrative.md
       examples.md
+  scripts/                           ← Walkthrough scripts for TTS-enabled reader
+    manifest.json                    ← Script metadata and ordering
+    *.md                             ← Individual walkthrough scripts
+  features/                          ← Voice, style, and pacing feature packs (planned)
   cross_references/                  ← Cross-referencing datasets and corpus metadata
     index.md                         ← Description of all files in this folder
     manifest.json                    ← Data manifest (file listing and checksums)
@@ -69,6 +77,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
     store/                         ← Zustand stores (graphStore, simulationStore, settingsStore)
     layout/                        ← Graph layout algorithms
     types/                         ← TypeScript interfaces
+    scripts/                       ← Walkthrough script pages, store, TTS engine
   public/data/                     ← Copied graph JSON data served by Vite
 ```
 
@@ -77,6 +86,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 1 — Archetype Graphs**: Complete. All 15 graph JSONs, 15 narrative specs, 15 example mappings, cross-archetype index, and validation done.
 - **Goal 2 — Genre Depth Graphs**: Complete. All 27 graph JSONs, 27 narrative specs, 27 example mappings, cross-genre constraint index, genre × archetype compatibility matrix, and validation done.
 - **Goal 3 — Interactive Viewer**: Complete. All 8 phases implemented (scaffolding, core rendering, navigation, detail panels, simulation, examples, analytics, polish/accessibility/export).
+- **Goal 4 — Backbone Synthesis & Assembly**: Planned. 8-phase implementation plan ready. Adds TemplateCompiler, BackboneAssembler, DetailSynthesizer, ChapterAssembler to the generation pipeline.
 
 ## Key Conventions
 
