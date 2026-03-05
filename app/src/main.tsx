@@ -6,6 +6,8 @@ import App from './App.tsx'
 import { ErrorBoundary } from './components/ErrorBoundary.tsx'
 import { ScriptBrowserPage } from './scripts/pages/ScriptBrowserPage.tsx'
 import { ScriptReaderPage } from './scripts/pages/ScriptReaderPage.tsx'
+import { SeriesBrowserPage } from './generation/series/pages/SeriesBrowserPage.tsx'
+import { SeriesDashboardPage } from './generation/series/pages/SeriesDashboardPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,6 +16,8 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/scripts" element={<ScriptBrowserPage />} />
           <Route path="/scripts/:slug" element={<ScriptReaderPage />} />
+          <Route path="/series" element={<SeriesBrowserPage />} />
+          <Route path="/series/:seriesId" element={<SeriesDashboardPage />} />
           <Route path="/*" element={<App />} />
         </Routes>
       </BrowserRouter>
