@@ -9,11 +9,7 @@
 import type {
   Series,
   StoryLore,
-  Episode,
   LoreCharacter,
-  PlotThread,
-  OverarchingArc,
-  CanonTimeline,
 } from './types.ts'
 
 // ---------------------------------------------------------------------------
@@ -175,7 +171,6 @@ export function computeThreadStats(lore: StoryLore): ThreadStats {
   const resolved = threads.filter((t) => t.status === 'resolved').length
   const abandoned = threads.filter((t) => t.status === 'abandoned').length
 
-  const closedThreads = threads.filter((t) => t.status === 'resolved' || t.status === 'abandoned')
   const resolution_rate = total > 0 ? resolved / total : 0
 
   // Average lifespan (number of episodes a thread was active)

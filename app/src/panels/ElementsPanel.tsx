@@ -143,14 +143,14 @@ function ArchetypeElementsView({
         <ToggleButton label="All" active={viewMode === 'all'} onClick={() => setViewMode('all')} />
       </div>
 
-      {viewMode === 'node' && !selectedNodeId && (
+      {viewMode === 'node' && !selectedNodeId ? (
         <div style={{ fontSize: 11, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 10 }}>
           Select a node to see elements at that phase.
         </div>
-      )}
+      ) : null}
 
       {/* Example work title */}
-      {examples && (examples as Record<string, unknown>).story_title && (
+      {examples && !!(examples as unknown as Record<string, unknown>).story_title && (
         <div style={{
           fontSize: 10,
           color: 'var(--text-muted)',
@@ -159,7 +159,7 @@ function ArchetypeElementsView({
           background: 'rgba(59,130,246,0.08)',
           borderRadius: 3,
         }}>
-          Example: {(examples as Record<string, unknown>).story_title as string}
+          Example: {String((examples as unknown as Record<string, unknown>).story_title)}
         </div>
       )}
 

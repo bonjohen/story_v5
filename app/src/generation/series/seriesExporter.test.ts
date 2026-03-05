@@ -5,7 +5,7 @@ import {
   exportLoreToMarkdown,
   exportTimelineToMarkdown,
 } from './seriesExporter.ts'
-import type { Series, StoryLore, Episode } from './types.ts'
+import type { Series, StoryLore } from './types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers

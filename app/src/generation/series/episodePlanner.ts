@@ -16,14 +16,11 @@ import type {
   Beat,
   Scene,
   SceneElement,
-  PlanMoment,
   ElementRoster,
   RosterEntry,
   LoadedCorpus,
   GenerationConfig,
   SelectionResult,
-  ContractLoreConstraints,
-  ContractThreadObligation,
 } from '../artifacts/types.ts'
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import { buildPlan } from '../engine/planner.ts'
@@ -33,7 +30,6 @@ import type {
   LoreCharacter,
   LorePlace,
   LoreObject,
-  PlotThread,
 } from './types.ts'
 
 // ---------------------------------------------------------------------------
@@ -344,7 +340,7 @@ function repopulateScenesWithLoreElements(
  */
 function weaveThreadsIntoScenes(
   scenes: Scene[],
-  beats: Beat[],
+  _beats: Beat[],
   episodeContext: EpisodeArcContext,
 ): void {
   const obligations = episodeContext.thread_priorities
@@ -418,7 +414,7 @@ function weaveThreadsIntoScenes(
  */
 function enrichSceneGoalsWithArcContext(
   scenes: Scene[],
-  beats: Beat[],
+  _beats: Beat[],
   episodeContext: EpisodeArcContext,
 ): void {
   const phaseGuidelines = episodeContext.overarching_phase_guidelines

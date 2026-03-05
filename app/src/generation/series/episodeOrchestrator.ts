@@ -4,13 +4,12 @@
  * state extraction, and curation.
  *
  * Extends the standard orchestrator pattern with new states:
- *   LOADING_BIBLE → SELECTED → CONTRACT_READY → PLANNED →
+ *   LOADING_LORE → SELECTED → CONTRACT_READY → PLANNED →
  *   GENERATING_SCENE → VALIDATING_SCENE → REPAIRING_SCENE →
  *   EXTRACTING_DELTAS → AWAITING_CURATION → COMPLETED | FAILED
  */
 
 import type {
-  OrchestratorState,
   SelectionResult,
   StoryContract,
   StoryPlan,
@@ -53,14 +52,10 @@ import {
 import type {
   Series,
   StoryLore,
-  StateSnapshot,
   Episode,
   EpisodeRequest,
   EpisodeArcContext,
   StateDelta,
-  EpisodeSlot,
-  OverarchingArc,
-  CanonTimeline,
 } from './types.ts'
 import type { LoreValidationResults } from './loreValidator.ts'
 
@@ -70,7 +65,7 @@ import type { LoreValidationResults } from './loreValidator.ts'
 
 export type EpisodeOrchestratorState =
   | 'IDLE'
-  | 'LOADING_BIBLE'
+  | 'LOADING_LORE'
   | 'LOADED_CORPUS'
   | 'SELECTED'
   | 'CONTRACT_READY'
@@ -78,7 +73,7 @@ export type EpisodeOrchestratorState =
   | 'GENERATING_SCENE'
   | 'VALIDATING_SCENE'
   | 'REPAIRING_SCENE'
-  | 'BIBLE_VALIDATING'
+  | 'LORE_VALIDATING'
   | 'EXTRACTING_DELTAS'
   | 'AWAITING_CURATION'
   | 'CANONIZING'
@@ -126,16 +121,16 @@ export interface EpisodeOrchestratorOptions {
 // ---------------------------------------------------------------------------
 
 const VALID_TRANSITIONS: Record<EpisodeOrchestratorState, EpisodeOrchestratorState[]> = {
-  IDLE: ['LOADING_BIBLE'],
-  LOADING_BIBLE: ['LOADED_CORPUS', 'FAILED'],
+  IDLE: ['LOADING_LORE'],
+  LOADING_LORE: ['LOADED_CORPUS', 'FAILED'],
   LOADED_CORPUS: ['SELECTED', 'FAILED'],
   SELECTED: ['CONTRACT_READY', 'FAILED'],
   CONTRACT_READY: ['PLANNED', 'COMPLETED', 'FAILED'],
-  PLANNED: ['GENERATING_SCENE', 'BIBLE_VALIDATING', 'COMPLETED', 'FAILED'],
+  PLANNED: ['GENERATING_SCENE', 'LORE_VALIDATING', 'COMPLETED', 'FAILED'],
   GENERATING_SCENE: ['VALIDATING_SCENE', 'FAILED'],
-  VALIDATING_SCENE: ['REPAIRING_SCENE', 'GENERATING_SCENE', 'BIBLE_VALIDATING', 'FAILED'],
-  REPAIRING_SCENE: ['VALIDATING_SCENE', 'BIBLE_VALIDATING', 'FAILED'],
-  BIBLE_VALIDATING: ['EXTRACTING_DELTAS', 'FAILED'],
+  VALIDATING_SCENE: ['REPAIRING_SCENE', 'GENERATING_SCENE', 'LORE_VALIDATING', 'FAILED'],
+  REPAIRING_SCENE: ['VALIDATING_SCENE', 'LORE_VALIDATING', 'FAILED'],
+  LORE_VALIDATING: ['EXTRACTING_DELTAS', 'FAILED'],
   EXTRACTING_DELTAS: ['AWAITING_CURATION', 'COMPLETED', 'FAILED'],
   AWAITING_CURATION: ['CANONIZING', 'COMPLETED', 'FAILED'],
   CANONIZING: ['COMPLETED', 'FAILED'],
@@ -181,11 +176,11 @@ export async function orchestrateEpisode(
 
   try {
     // 1. Load lore and corpus
-    transition('LOADING_BIBLE', `Loading series ${request.series_id}`)
+    transition('LOADING_LORE', `Loading series ${request.series_id}`)
 
     const series = await loadSeries(baseDir, request.series_id)
     const lore = await loadLore(baseDir, request.series_id)
-    const latestSnapshot = await loadLatestSnapshot(baseDir, request.series_id)
+    await loadLatestSnapshot(baseDir, request.series_id)
     const corpus = await loadCorpus(provider)
 
     transition('LOADED_CORPUS', 'Lore and corpus loaded')
@@ -314,7 +309,7 @@ export async function orchestrateEpisode(
     result.validation = finalValidation
 
     // 10. Lore validation
-    transition('BIBLE_VALIDATING', 'Running lore consistency checks')
+    transition('LORE_VALIDATING', 'Running lore consistency checks')
     const loreValidation = validateAgainstLore({
       plan,
       lore,
@@ -573,14 +568,7 @@ function updateSeriesWithCandidate(series: Series, episode: Episode): void {
     (e) => e.episode_id === episode.episode_id,
   )
   if (!exists) {
-    series.episode_index.episodes.push({
-      episode_id: episode.episode_id,
-      slot_number: episode.slot_number,
-      candidate_label: episode.candidate_label,
-      canon_status: episode.canon_status,
-      title: episode.title,
-      created_at: episode.created_at,
-    })
+    series.episode_index.episodes.push(episode)
   }
 
   // Update or create slot

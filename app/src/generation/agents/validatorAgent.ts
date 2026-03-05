@@ -24,7 +24,7 @@ import type {
 export async function validateSceneWithLLM(
   content: string,
   scene: Scene,
-  beat: Beat | null,
+  _beat: Beat | null,
   contract: StoryContract,
   llm: LLMAdapter,
 ): Promise<ValidationCheck[]> {

@@ -22,7 +22,6 @@ import type {
   StoryLore,
   EpisodeArcContext,
   LoreCharacter,
-  PlotThread,
   CanonTimeline,
 } from './types.ts'
 
@@ -83,7 +82,7 @@ function buildLoreContextBlock(
   canonTimeline: CanonTimeline,
   maxRecentEpisodes: number,
 ): string {
-  const sections: string[] = ['=== SERIES BIBLE CONTEXT ===']
+  const sections: string[] = ['=== SERIES LORE CONTEXT ===']
 
   // 1. Overarching arc context
   sections.push(buildArcSection(episodeContext))
@@ -103,7 +102,7 @@ function buildLoreContextBlock(
   // 6. Continuity notes
   sections.push(buildContinuitySection(lore))
 
-  sections.push('=== END BIBLE CONTEXT ===')
+  sections.push('=== END LORE CONTEXT ===')
 
   return sections.join('\n\n')
 }

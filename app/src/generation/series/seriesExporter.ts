@@ -12,9 +12,7 @@ import type {
   Series,
   StoryLore,
   Episode,
-  CanonTimeline,
   LoreCharacter,
-  PlotThread,
 } from './types.ts'
 
 // ---------------------------------------------------------------------------

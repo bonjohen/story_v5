@@ -186,9 +186,9 @@ export {
 } from './episodeOrchestrator.ts'
 
 // Viewer panels
-export { LoreViewerPanel, type LoreViewerPanelProps } from './panels/LoreViewerPanel.tsx'
-export { ArcVisualizerPanel, type ArcVisualizerPanelProps } from './panels/ArcVisualizerPanel.tsx'
-export { ThreadTrackerPanel, type ThreadTrackerPanelProps } from './panels/ThreadTrackerPanel.tsx'
+export { LoreViewerPanel } from './panels/LoreViewerPanel.tsx'
+export { ArcVisualizerPanel } from './panels/ArcVisualizerPanel.tsx'
+export { ThreadTrackerPanel } from './panels/ThreadTrackerPanel.tsx'
 
 // Branch manager
 export {

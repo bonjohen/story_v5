@@ -18,13 +18,16 @@ function makeGraph(nodes: Array<{ node_id: string; role: string }>): NormalizedG
         typical_variants: '',
         failure_modes: '',
         signals_in_text: '',
+        level: 1,
+        severity: 'hard',
       })),
       edges: [],
     },
+    validation: { valid: true, issues: [], stats: { nodeCount: 0, edgeCount: 0, startNodes: 0, terminalNodes: 0 } },
+    nodeIndex: new Map(),
+    edgeIndex: new Map(),
     adjacency: new Map(),
     reverseAdjacency: new Map(),
-    startNodes: [],
-    terminalNodes: [],
   }
 }
 

@@ -4,7 +4,7 @@
  * highlighted, remaining dimmed.
  */
 
-import type { OverarchingArc, CanonTimeline, ArcPhaseEntry } from '../types.ts'
+import type { OverarchingArc, CanonTimeline } from '../types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers

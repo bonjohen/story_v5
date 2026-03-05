@@ -3,7 +3,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import { extractStateDelta } from './stateExtractor.ts'
-import type { StoryPlan, Scene, RosterEntry, ElementRoster } from '../artifacts/types.ts'
+import type { StoryPlan, Scene, ElementRoster } from '../artifacts/types.ts'
 import type { StoryLore } from './types.ts'
 
 // ---------------------------------------------------------------------------

@@ -209,8 +209,8 @@ export interface ContractElementRule {
   testable_condition: string
 }
 
-/** A bible character reference for the contract (existing character the episode must respect). */
-export interface ContractBibleCharacter {
+/** A lore character reference for the contract (existing character the episode must respect). */
+export interface ContractLoreCharacter {
   id: string
   name: string
   role: string
@@ -247,10 +247,10 @@ export interface ContractArcPhaseContext {
   advancement_target?: string
 }
 
-/** Bible-derived constraints that constrain episode generation. */
-export interface ContractBibleConstraints {
-  /** Characters from the bible that must appear or must not appear. */
-  characters: ContractBibleCharacter[]
+/** Lore-derived constraints that constrain episode generation. */
+export interface ContractLoreConstraints {
+  /** Characters from the lore that must appear or must not appear. */
+  characters: ContractLoreCharacter[]
   /** World rules that cannot be contradicted. */
   world_rules: ContractWorldRule[]
   /** Plot thread obligations for this episode. */
@@ -273,8 +273,8 @@ export interface StoryContract extends RunMetadata {
   element_constraints?: ContractElementConstraint[]
   /** Element rules from genre element_constraints.json (when present). */
   element_rules?: ContractElementRule[]
-  /** Bible-derived constraints for series-mode episodes. */
-  bible_constraints?: ContractBibleConstraints
+  /** Lore-derived constraints for series-mode episodes. */
+  lore_constraints?: ContractLoreConstraints
 }
 
 // ---------------------------------------------------------------------------
@@ -462,7 +462,7 @@ export interface StoryTrace extends RunMetadata {
 // ---------------------------------------------------------------------------
 
 export interface SignalsPolicy {
-  mode: 'warn' | 'block'
+  mode: 'warn' | 'block' | 'off'
   min_fraction: number            // e.g. 0.5
 }
 

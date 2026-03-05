@@ -135,7 +135,7 @@ describe('buildEpisodeWriterPrompt', () => {
 
     expect(messages).toHaveLength(2)
     expect(messages[0].role).toBe('system')
-    expect(messages[0].content).toContain('SERIES BIBLE CONTEXT')
+    expect(messages[0].content).toContain('SERIES LORE CONTEXT')
     expect(messages[1].role).toBe('user')
   })
 

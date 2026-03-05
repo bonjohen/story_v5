@@ -6,17 +6,10 @@
 import { create } from 'zustand'
 import type {
   Series,
-  StoryLore,
-  Episode,
   EpisodeSlot,
-  StateSnapshot,
-  CanonTimeline,
-  OverarchingArc,
-  PlotThread,
-  SeriesConfig,
 } from '../types.ts'
-import type { SeriesStatusSummary, ThreadHealthMetrics, ArcAdvancementSuggestion, ThreadAgeInfo } from '../seriesManager.ts'
-import { getSeriesStatus, computeThreadHealth, computeThreadAges, suggestThreadPriorities, suggestArcAdvancement } from '../seriesManager.ts'
+import type { SeriesStatusSummary, ThreadHealthMetrics, ThreadAgeInfo } from '../seriesManager.ts'
+import { getSeriesStatus, computeThreadHealth, computeThreadAges } from '../seriesManager.ts'
 
 // ---------------------------------------------------------------------------
 // Types

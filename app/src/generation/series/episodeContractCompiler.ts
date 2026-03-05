@@ -23,8 +23,6 @@ import type {
   EpisodeRequest,
   StoryLore,
   EpisodeArcContext,
-  LoreCharacter,
-  PlotThread,
   OverarchingArc,
 } from './types.ts'
 
@@ -147,7 +145,7 @@ function buildThreadObligations(
 
 function buildArcPhaseContext(
   episodeContext: EpisodeArcContext,
-  overarchingArc: OverarchingArc,
+  _overarchingArc: OverarchingArc,
 ): ContractArcPhaseContext {
   const guidelines = episodeContext.overarching_phase_guidelines
   return {

@@ -5,11 +5,11 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
-import { orchestrateEpisode, canonizeEpisodeFromDisk } from './episodeOrchestrator.ts'
-import type { EpisodeOrchestratorOptions, EpisodeOrchestratorEvent } from './episodeOrchestrator.ts'
+import { orchestrateEpisode } from './episodeOrchestrator.ts'
+import type { EpisodeOrchestratorEvent } from './episodeOrchestrator.ts'
 import { createSeries } from './io.ts'
 import type { SeriesConfig, EpisodeRequest } from './types.ts'
-import type { GenerationConfig, LoadedCorpus } from '../artifacts/types.ts'
+import type { GenerationConfig } from '../artifacts/types.ts'
 import type { DataProvider } from '../engine/corpusLoader.ts'
 
 // ---------------------------------------------------------------------------
@@ -125,6 +125,7 @@ function makeSeriesConfig(): SeriesConfig {
     style_notes: [],
     advancement_mode: 'hybrid',
     corpus_hash: 'test_hash',
+    initial_lore: {},
     archetype_spine_nodes: ['HJ_N01_ORDINARY_WORLD', 'HJ_N02_CALL'],
   }
 }
@@ -179,7 +180,7 @@ describe('episodeOrchestrator', () => {
     expect(result.state).toBe('COMPLETED')
     expect(result.contract).toBeDefined()
     expect(result.contract!.lore_constraints).toBeDefined()
-    expect(events.some((e) => e.state === 'LOADING_BIBLE')).toBe(true)
+    expect(events.some((e) => e.state === 'LOADING_LORE')).toBe(true)
     expect(events.some((e) => e.state === 'CONTRACT_READY')).toBe(true)
   })
 

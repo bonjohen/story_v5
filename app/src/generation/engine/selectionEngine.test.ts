@@ -114,6 +114,8 @@ function makeTestCorpus(): LoadedCorpus {
     genreEdgeMeanings: { title: '', description: '' },
     manifest: { generated: '', archetypes: [], genres: [], totals: { archetypes: 3, genres: 2, totalNodes: 0, totalEdges: 0 } },
     corpusHash: 'test',
+    archetypeElements: new Map(),
+    genreElementConstraints: new Map(),
   }
 }
 

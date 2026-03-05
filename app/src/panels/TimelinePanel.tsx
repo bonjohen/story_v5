@@ -14,23 +14,7 @@ const TRACK_COLORS = [
   '#06b6d4', '#f97316', '#ec4899', '#14b8a6', '#a855f7',
 ]
 
-/** Change type icons */
-const CHANGE_ICONS: Record<string, string> = {
-  learns: '\u{1F4A1}',       // light bulb (fallback below)
-  gains: '+',
-  loses: '-',
-  transforms: '\u21BB',
-  arrives: '\u2192',
-  departs: '\u2190',
-  bonds: '\u2661',
-  breaks: '\u2718',
-  dies: '\u2620',
-  reveals: '\u25C9',
-  decides: '\u2696',
-  establishes_baseline: '\u25B6',
-}
-
-// Fallback to simple text if emoji not available
+// Change type labels
 const CHANGE_LABELS: Record<string, string> = {
   learns: 'L',
   gains: '+',

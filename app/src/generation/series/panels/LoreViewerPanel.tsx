@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react'
-import type { StoryLore, LoreCharacter, LorePlace, LoreObject, PlotThread } from '../types.ts'
+import type { StoryLore, LoreCharacter, LorePlace, LoreObject } from '../types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers

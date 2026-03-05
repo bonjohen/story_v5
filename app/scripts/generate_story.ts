@@ -19,7 +19,6 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
 import { resolve, join } from 'path'
 import { parseGraphJson } from '../src/graph-engine/normalizer.ts'
-import { ARCHETYPE_DIRS, GENRE_DIRS } from '../src/graph-engine/dataIndex.ts'
 import { orchestrate } from '../src/generation/engine/orchestrator.ts'
 import { AnthropicAdapter } from '../src/generation/agents/anthropicAdapter.ts'
 import type { DataProvider } from '../src/generation/engine/corpusLoader.ts'
@@ -28,7 +27,6 @@ import type {
   GenerationConfig,
   GenerationMode,
 } from '../src/generation/artifacts/types.ts'
-import type { StoryGraph } from '../src/types/graph.ts'
 
 // ---------------------------------------------------------------------------
 // Parse CLI args

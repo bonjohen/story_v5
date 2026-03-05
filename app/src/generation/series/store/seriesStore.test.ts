@@ -3,7 +3,7 @@
  */
 import { describe, it, expect, beforeEach } from 'vitest'
 import { useSeriesStore } from './seriesStore.ts'
-import type { Series, StoryLore, OverarchingArc, CanonTimeline } from '../types.ts'
+import type { Series } from '../types.ts'
 
 // ---------------------------------------------------------------------------
 // Fixtures

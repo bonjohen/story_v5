@@ -37,7 +37,10 @@ export interface DataProvider {
  * Loads JSON from the Vite-served /data/ directory.
  */
 export class FetchDataProvider implements DataProvider {
-  constructor(private baseUrl: string = '/data') {}
+  baseUrl: string
+  constructor(baseUrl: string = '/data') {
+    this.baseUrl = baseUrl
+  }
 
   async loadJson(relativePath: string): Promise<unknown> {
     const url = `${this.baseUrl}/${relativePath}`
@@ -211,7 +214,7 @@ async function loadVariantGraphs(
       const wrapped = {
         id: `${dir}_variants`,
         name: `${(raw.parent_graph as string) ?? dir} variants`,
-        type: 'archetype' as const,
+        type: 'archetype',
         description: (raw.description as string) ?? '',
         nodes: raw.nodes ?? [],
         edges: raw.edges ?? [],

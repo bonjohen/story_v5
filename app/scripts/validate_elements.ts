@@ -59,7 +59,7 @@ for (const dir of dirs) {
 
   const elem = JSON.parse(readFileSync(elemPath, 'utf-8'))
   const graph = JSON.parse(readFileSync(graphPath, 'utf-8'))
-  const graphNodeIds = new Set(graph.nodes.map((n: { node_id: string }) => n.node_id))
+  const graphNodeIds = new Set<string>(graph.nodes.map((n: { node_id: string }) => n.node_id))
 
   // 1. Vocabulary compliance
   let vocabOk = true

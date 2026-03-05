@@ -10,7 +10,6 @@ import type {
   BeatHybridInfo,
   Scene,
   SceneElement,
-  PlanMoment,
   EmotionalScores,
   CoverageTargets,
   ElementRoster,

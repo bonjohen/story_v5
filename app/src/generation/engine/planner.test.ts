@@ -110,6 +110,7 @@ function makeCorpus(): LoadedCorpus {
             { node_id: 'HJ_N02_CALL', position: 0.15, tension: 0.4, hope: 0.5, fear: 0.3, resolution: 0.0 },
             { node_id: 'HJ_N03_MENTOR', position: 0.25, tension: 0.3, hope: 0.7, fear: 0.2, resolution: 0.0 },
           ],
+          variant_profiles: [],
           arc_shape: 'U-curve',
           dominant_emotion: 'hope',
           emotional_range: 0.85,
@@ -125,6 +126,8 @@ function makeCorpus(): LoadedCorpus {
     genreEdgeMeanings: { title: '', description: '' },
     manifest: { generated: '', archetypes: [], genres: [], totals: { archetypes: 0, genres: 0, totalNodes: 0, totalEdges: 0 } },
     corpusHash: 'test',
+    archetypeElements: new Map(),
+    genreElementConstraints: new Map(),
   }
 }
 

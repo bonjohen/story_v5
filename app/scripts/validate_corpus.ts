@@ -116,6 +116,8 @@ try {
     genreEdgeMeanings,
     manifest,
     corpusHash: 'validation-run',
+    archetypeElements: new Map(),
+    genreElementConstraints: new Map(),
   }
 
   console.log('\nRunning validation checks...\n')

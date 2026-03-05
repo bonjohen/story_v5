@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { validateCorpus } from './normalizer.ts'
 import type { LoadedCorpus } from '../artifacts/types.ts'
-import type { StoryGraph } from '../../types/graph.ts'
+import type { StoryGraph, GenreGraph } from '../../types/graph.ts'
 
 // Minimal valid structures
 function makeArchetypeGraph(dir: string): StoryGraph {
@@ -9,7 +9,7 @@ function makeArchetypeGraph(dir: string): StoryGraph {
   return {
     id: dir,
     name: `Test ${dir}`,
-    type: 'archetype' as const,
+    type: 'archetype',
     description: 'Test',
     nodes: [
       { node_id: `${prefix}_N01_START`, label: 'Start', role: 'Origin', definition: 'd', entry_conditions: [], exit_conditions: [], typical_variants: [], failure_modes: [], signals_in_text: [] },
@@ -21,23 +21,23 @@ function makeArchetypeGraph(dir: string): StoryGraph {
   }
 }
 
-function makeGenreGraph(dir: string): StoryGraph {
+function makeGenreGraph(dir: string): GenreGraph {
   const prefix = dir.slice(3, 5).toUpperCase().padEnd(2, 'X')
   return {
     id: dir,
     name: `Test ${dir}`,
-    type: 'genre' as const,
+    type: 'genre',
     description: 'Test',
     nodes: [
       { node_id: `${prefix}_N01_PROMISE`, label: 'Promise', role: 'Genre Promise', level: 1, definition: 'd', entry_conditions: [], exit_conditions: [], typical_variants: [], failure_modes: [], signals_in_text: [], severity: 'hard' },
       { node_id: `${prefix}_N10_CORE`, label: 'Core', role: 'Core Constraint', level: 2, definition: 'd', entry_conditions: [], exit_conditions: [], typical_variants: [], failure_modes: [], signals_in_text: [], severity: 'hard' },
       { node_id: `${prefix}_N80_TONE`, label: 'Tone', role: 'Tone Marker', level: null, definition: 'd', entry_conditions: [], exit_conditions: [], typical_variants: [], failure_modes: [], signals_in_text: [], severity: 'hard' },
       { node_id: `${prefix}_N90_ANTI`, label: 'Anti', role: 'Anti-Pattern', level: null, definition: 'd', entry_conditions: [], exit_conditions: [], typical_variants: [], failure_modes: [], signals_in_text: [], severity: 'hard' },
-    ],
+    ] as any,
     edges: [
       { edge_id: `${prefix}_E01_SPEC`, from: `${prefix}_N01_PROMISE`, to: `${prefix}_N10_CORE`, label: 'Spec', meaning: 'specifies constraint', preconditions: [], effects_on_stakes: [], effects_on_character: [], common_alternatives: [], anti_patterns: [], severity: 'hard' },
       { edge_id: `${prefix}_E02_TONE`, from: `${prefix}_N01_PROMISE`, to: `${prefix}_N80_TONE`, label: 'Tone', meaning: 'sets tone', preconditions: [], effects_on_stakes: [], effects_on_character: [], common_alternatives: [], anti_patterns: [], severity: 'hard' },
-    ],
+    ] as any,
   }
 }
 
@@ -66,6 +66,8 @@ function makeMinimalCorpus(): LoadedCorpus {
     genreEdgeMeanings: { title: 't', description: 'd' },
     manifest: { generated: '', archetypes: [], genres: [], totals: { archetypes: 15, genres: 27, totalNodes: 0, totalEdges: 0 } },
     corpusHash: 'test',
+    archetypeElements: new Map(),
+    genreElementConstraints: new Map(),
   }
 }
 
@@ -82,7 +84,7 @@ describe('generation normalizer', () => {
     const corpus = makeMinimalCorpus()
     const genreGraph = corpus.genreGraphs.get('01_drama')!
     // Remove severity from first node
-    delete (genreGraph.nodes[0] as Record<string, unknown>).severity
+    delete (genreGraph.nodes[0] as any).severity
     const result = validateCorpus(corpus)
     expect(result.issues.some((i) => i.message.includes('missing severity'))).toBe(true)
   })
@@ -99,7 +101,7 @@ describe('generation normalizer', () => {
     const corpus = makeMinimalCorpus()
     const genreGraph = corpus.genreGraphs.get('01_drama')!
     // Change level 1 to level 2
-    ;(genreGraph.nodes[0] as Record<string, unknown>).level = 2
+    ;(genreGraph.nodes[0] as any).level = 2
     const result = validateCorpus(corpus)
     expect(result.issues.some((i) => i.message.includes('Level 1'))).toBe(true)
   })
@@ -124,7 +126,7 @@ describe('generation normalizer', () => {
     const corpus = makeMinimalCorpus()
     const genreGraph = corpus.genreGraphs.get('01_drama')!
     // Make edge severity differ from target node
-    ;(genreGraph.edges[0] as Record<string, unknown>).severity = 'soft'
+    ;(genreGraph.edges[0] as any).severity = 'soft'
     const result = validateCorpus(corpus)
     expect(result.issues.some((i) => i.message.includes('severity') && i.message.includes('differs'))).toBe(true)
   })

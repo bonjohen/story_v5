@@ -11,7 +11,6 @@ import type {
   StoryLore,
   StateSnapshot,
   CanonTimeline,
-  OverarchingArc,
 } from './types.ts'
 
 // ---------------------------------------------------------------------------

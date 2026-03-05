@@ -17,17 +17,12 @@
 
 import type {
   StoryPlan,
-  Scene,
   CheckStatus,
-  ValidationCheck,
-  ValidationCheckType,
 } from '../artifacts/types.ts'
 import type {
   StoryLore,
   EpisodeArcContext,
   OverarchingArc,
-  LoreCharacter,
-  PlotThread,
 } from './types.ts'
 
 // ---------------------------------------------------------------------------
@@ -224,7 +219,7 @@ function checkLoreCustody(plan: StoryPlan, lore: StoryLore): LoreValidationCheck
  * LLM-backed validation could enhance this significantly.
  */
 function checkLoreWorldRules(
-  plan: StoryPlan,
+  _plan: StoryPlan,
   lore: StoryLore,
   sceneDrafts?: Map<string, string>,
 ): LoreValidationCheck {

@@ -6,16 +6,11 @@ import {
   mergeDeltaIntoLore,
   validateLore,
   validateDeltaAgainstLore,
-  canonizeEpisode,
-  deCanonizeEpisode,
 } from './loreMerge.ts'
 import type {
   StoryLore,
   StateDelta,
   LoreCharacter,
-  Series,
-  Episode,
-  StateSnapshot,
 } from './types.ts'
 
 // ---------------------------------------------------------------------------

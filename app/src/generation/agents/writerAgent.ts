@@ -428,7 +428,7 @@ function buildCharacterParagraph(
   return pick(rng, intros)
 }
 
-function buildObjectParagraph(objNames: string[], roster: RosterEntry[], rng: () => number): string {
+function buildObjectParagraph(objNames: string[], _roster: RosterEntry[], rng: () => number): string {
   const nameList = objNames.join(', ')
   const paras = [
     `Woven through the scene: ${nameList}. In a well-constructed narrative, objects are never merely present — they carry meaning, and their presence here is deliberate.`,

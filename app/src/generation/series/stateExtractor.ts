@@ -8,14 +8,13 @@
  * introduced by an episode, ready to be merged into the Story Lore.
  */
 
-import type { StoryPlan, Scene, RosterEntry, ElementRoster } from '../artifacts/types.ts'
+import type { StoryPlan, Scene, RosterEntry } from '../artifacts/types.ts'
 import type { ChangeType } from '../../types/timeline.ts'
 import type {
   StateDelta,
   LoreCharacter,
   LorePlace,
   LoreObject,
-  LoreFaction,
   PlotThread,
   CharacterUpdate,
   PlaceUpdate,
@@ -259,7 +258,7 @@ function buildCharacterUpdate(
 
 function processPlaces(
   rosterPlaces: RosterEntry[],
-  transitions: CollectedTransition[],
+  _transitions: CollectedTransition[],
   existingIds: Set<string>,
   episodeId: string,
   scenes: Scene[],

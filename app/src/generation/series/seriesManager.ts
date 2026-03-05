@@ -14,11 +14,9 @@ import type {
   ThreadPriority,
   EpisodeSlot,
   CanonTimeline,
-  ThemeToneAnchor,
 } from './types.ts'
 import type { StoryGraph } from '../../types/graph.ts'
 import type {
-  GenreBlendingModel,
   LoadedCorpus,
 } from '../artifacts/types.ts'
 

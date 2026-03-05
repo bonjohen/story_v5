@@ -54,7 +54,6 @@ let filesFound = 0
 
 for (const dir of dirs) {
   const exPath = join(archetypeDir, dir, 'examples_elements.json')
-  const elemPath = join(archetypeDir, dir, 'elements.json')
   const graphPath = join(archetypeDir, dir, 'graph.json')
 
   if (!existsSync(exPath)) continue
@@ -63,7 +62,6 @@ for (const dir of dirs) {
   console.log(`--- ${dir}: ${JSON.parse(readFileSync(exPath, 'utf-8')).story_title} ---`)
 
   const ex = JSON.parse(readFileSync(exPath, 'utf-8'))
-  const elem = JSON.parse(readFileSync(elemPath, 'utf-8'))
   const graph = JSON.parse(readFileSync(graphPath, 'utf-8'))
   const graphNodeIds = new Set(graph.nodes.map((n: { node_id: string }) => n.node_id))
 
@@ -74,10 +72,6 @@ for (const dir of dirs) {
   const allIds = new Set([...charIds, ...placeIds, ...objIds])
 
   // Template roles/types for matching
-  const templateRoles = new Set(elem.element_templates.characters.map((c: { role: string }) => c.role))
-  const templatePlaces = new Set(elem.element_templates.places.map((p: { type: string }) => p.type))
-  const templateObjects = new Set(elem.element_templates.objects.map((o: { type: string }) => o.type))
-
   // 1. Character roles match template + vocabulary
   let rolesOk = true
   for (const c of ex.characters) {

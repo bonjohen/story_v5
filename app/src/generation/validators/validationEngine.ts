@@ -222,8 +222,8 @@ function checkEntryExit(
 }
 
 function checkSignals(
-  content: string,
-  beat: Beat,
+  _content: string,
+  _beat: Beat,
   config: GenerationConfig,
 ): ValidationCheck {
   // Signals check is based on config policy

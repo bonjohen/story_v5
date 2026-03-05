@@ -3,7 +3,6 @@
  */
 import { describe, it, expect } from 'vitest'
 import { validateAgainstLore } from './loreValidator.ts'
-import type { LoreValidationInput } from './loreValidator.ts'
 import type { StoryLore, EpisodeArcContext, OverarchingArc } from './types.ts'
 import type { StoryPlan, Scene, PhaseGuideline } from '../artifacts/types.ts'
 

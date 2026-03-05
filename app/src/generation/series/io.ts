@@ -29,8 +29,6 @@ import type {
   ThemeToneAnchor,
   SeriesConfig,
   OverarchingArc,
-  CanonTimeline,
-  EpisodeIndex,
 } from './types.ts'
 
 // ---------------------------------------------------------------------------

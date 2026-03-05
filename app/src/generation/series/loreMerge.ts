@@ -20,14 +20,11 @@ import type {
   CharacterUpdate,
   PlaceUpdate,
   ObjectUpdate,
-  FactionUpdate,
   ThreadUpdate,
-  LoreEvent,
   StateSnapshot,
   OverarchingArc,
   Episode,
   Series,
-  CanonTimelineEntry,
 } from './types.ts'
 import { generateSnapshotId } from './io.ts'
 

@@ -14,9 +14,10 @@ import type {
   LoreCharacter,
   LorePlace,
   LoreObject,
-  StateDelta,
   SeriesConfig,
 } from './types.ts'
+import type { CharacterRole } from '../../types/elements.ts'
+import type { PlaceType, ObjectType } from '../../types/elements.ts'
 
 // ---------------------------------------------------------------------------
 // Run metadata (minimal shape of what we expect from a standalone run)
@@ -117,11 +118,11 @@ export function buildInitialLoreFromRun(
   const characters: LoreCharacter[] = run.characters.map((c) => ({
     id: c.id,
     name: c.name,
-    role: c.role,
+    role: c.role as CharacterRole,
     description: c.description,
     traits: c.traits ?? [],
     motivations: c.motivations ?? [],
-    arc_type: c.arc_type ?? null,
+    arc_type: (c.arc_type ?? null) as LoreCharacter['arc_type'],
     relationships: [],
     status: 'alive' as const,
     introduced_in: episodeId,
@@ -134,7 +135,7 @@ export function buildInitialLoreFromRun(
   const places: LorePlace[] = run.places.map((p) => ({
     id: p.id,
     name: p.name,
-    type: p.type,
+    type: p.type as PlaceType,
     description: p.description ?? '',
     introduced_in: episodeId,
     last_featured_in: episodeId,
@@ -145,7 +146,7 @@ export function buildInitialLoreFromRun(
   const objects: LoreObject[] = run.objects.map((o) => ({
     id: o.id,
     name: o.name,
-    type: o.type,
+    type: o.type as ObjectType,
     significance: o.significance ?? '',
     introduced_in: episodeId,
     status: 'intact' as const,
