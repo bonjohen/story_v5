@@ -9,6 +9,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useSeriesStore } from '../store/seriesStore.ts'
 import type { SeriesStatusSummary, ThreadAgeInfo, ThreadHealthMetrics } from '../seriesManager.ts'
 import type { Series, PlotThread, BibleCharacter, EpisodeSlot, CanonTimelineEntry } from '../types.ts'
+import { BibleViewerPanel } from '../panels/BibleViewerPanel.tsx'
+import { ArcVisualizerPanel } from '../panels/ArcVisualizerPanel.tsx'
+import { ThreadTrackerPanel } from '../panels/ThreadTrackerPanel.tsx'
 
 // ---------------------------------------------------------------------------
 // Status badge
@@ -404,6 +407,62 @@ function DashboardToolbar({ series }: { series: Series | null }) {
 }
 
 // ---------------------------------------------------------------------------
+// Detail panels (tabbed view of Bible, Arc, Threads)
+// ---------------------------------------------------------------------------
+
+type DetailTab = 'bible' | 'arc' | 'threads'
+
+function DetailPanels({ series, threadAges }: { series: Series; threadAges: ThreadAgeInfo[] }) {
+  const [activeTab, setActiveTab] = useState<DetailTab>('bible')
+
+  const tabs: { key: DetailTab; label: string }[] = [
+    { key: 'bible', label: 'Story Bible' },
+    { key: 'arc', label: 'Arc Progress' },
+    { key: 'threads', label: 'Thread Tracker' },
+  ]
+
+  return (
+    <Card style={{ marginTop: 16 }}>
+      <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--border)', marginBottom: 12 }}>
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            style={{
+              padding: '8px 16px',
+              fontSize: 11,
+              fontWeight: activeTab === tab.key ? 600 : 400,
+              color: activeTab === tab.key ? 'var(--accent, #8b5cf6)' : 'var(--text-muted)',
+              borderBottom: activeTab === tab.key ? '2px solid var(--accent, #8b5cf6)' : '2px solid transparent',
+              background: 'transparent',
+              border: 'none',
+              borderBottomWidth: 2,
+              borderBottomStyle: 'solid',
+              borderBottomColor: activeTab === tab.key ? 'var(--accent, #8b5cf6)' : 'transparent',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px',
+            }}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <div style={{ minHeight: 300 }}>
+        {activeTab === 'bible' && <BibleViewerPanel bible={series.bible} />}
+        {activeTab === 'arc' && (
+          <ArcVisualizerPanel arc={series.overarching_arc} timeline={series.canon_timeline} />
+        )}
+        {activeTab === 'threads' && (
+          <ThreadTrackerPanel threads={series.bible.plot_threads} threadAges={threadAges} />
+        )}
+      </div>
+    </Card>
+  )
+}
+
+// ---------------------------------------------------------------------------
 // Main page component
 // ---------------------------------------------------------------------------
 
@@ -466,6 +525,9 @@ export function SeriesDashboardPage() {
               <TimelineSection series={currentSeries} />
               <SlotsSection series={currentSeries} />
             </div>
+
+            {/* Detailed panels */}
+            <DetailPanels series={currentSeries} threadAges={threadAges} />
           </div>
         )}
       </div>

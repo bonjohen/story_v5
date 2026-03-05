@@ -114,6 +114,7 @@ Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 - Echo banners for task/phase transitions
 - Don't stop between phases — continue to the next
 - Only mark the single active task as `[~]`
+- Do not prefix bash commands with `cd /c/Projects/story_v5` — the working directory is already set to the project root
 
 ### Quality Standards
 

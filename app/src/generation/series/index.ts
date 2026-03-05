@@ -184,3 +184,8 @@ export {
   type EpisodeGenerationResult,
   type EpisodeOrchestratorOptions,
 } from './episodeOrchestrator.ts'
+
+// Viewer panels
+export { BibleViewerPanel, type BibleViewerPanelProps } from './panels/BibleViewerPanel.tsx'
+export { ArcVisualizerPanel, type ArcVisualizerPanelProps } from './panels/ArcVisualizerPanel.tsx'
+export { ThreadTrackerPanel, type ThreadTrackerPanelProps } from './panels/ThreadTrackerPanel.tsx'
