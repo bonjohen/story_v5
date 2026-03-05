@@ -38,8 +38,10 @@ jobs:
         working-directory: app
         run: npm run build:scripts
 
-      - name: Copy 404.html for SPA routing
-        run: cp app/dist-scripts/scripts-site.html app/dist-scripts/404.html
+      - name: Copy index.html and 404.html for SPA routing
+        run: |
+          cp app/dist-scripts/scripts-site.html app/dist-scripts/index.html
+          cp app/dist-scripts/scripts-site.html app/dist-scripts/404.html
 
       - uses: actions/configure-pages@v4
 

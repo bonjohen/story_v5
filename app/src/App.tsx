@@ -22,6 +22,7 @@ import { ContractPanel } from './generation/panels/ContractPanel.tsx'
 import { PlanPanel } from './generation/panels/PlanPanel.tsx'
 import { TracePanel } from './generation/panels/TracePanel.tsx'
 import { CompliancePanel } from './generation/panels/CompliancePanel.tsx'
+import { StoryPanel } from './generation/panels/StoryPanel.tsx'
 import type { CyCore, GenerationOverlay } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSimulationStore } from './store/simulationStore.ts'
@@ -79,6 +80,7 @@ export default function App() {
   const genPlan = useGenerationStore((s) => s.plan)
   const genTrace = useGenerationStore((s) => s.trace)
   const genValidation = useGenerationStore((s) => s.validation)
+  const genSceneDrafts = useGenerationStore((s) => s.sceneDrafts)
   // Edge hover tooltip state
   const [hoveredEdge, setHoveredEdge] = useState<{ edge: GraphEdge; x: number; y: number } | null>(null)
   // Variant toggle state
@@ -94,7 +96,7 @@ export default function App() {
   const [showExport, setShowExport] = useState(false)
   // Generation panel
   const [showGeneration, setShowGeneration] = useState(false)
-  const [genTab, setGenTab] = useState<'run' | 'contract' | 'plan' | 'trace' | 'compliance'>('run')
+  const [genTab, setGenTab] = useState<'run' | 'contract' | 'plan' | 'trace' | 'compliance' | 'story'>('run')
   // Generation overlay nodes for highlighting
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
   // Manifest error
@@ -112,6 +114,13 @@ export default function App() {
   const handleExampleClearHighlight = useCallback(() => {
     setExampleMappedNodes([])
   }, [])
+
+  // Auto-switch to Story tab when draft generation completes
+  useEffect(() => {
+    if (genStatus === 'COMPLETED' && genSceneDrafts.size > 0 && genTab === 'run') {
+      setGenTab('story')
+    }
+  }, [genStatus, genSceneDrafts.size, genTab])
 
   // Load manifest once at startup
   useEffect(() => {
@@ -506,6 +515,7 @@ export default function App() {
             <GenTab label="Plan" active={genTab === 'plan'} onClick={() => setGenTab('plan')} badge={!!genPlan} />
             <GenTab label="Trace" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge={!!genTrace} />
             <GenTab label="Valid" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge={!!genValidation} />
+            <GenTab label="Story" active={genTab === 'story'} onClick={() => setGenTab('story')} badge={genSceneDrafts.size > 0} />
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
             {genTab === 'run' && (
@@ -522,6 +532,9 @@ export default function App() {
             )}
             {genTab === 'compliance' && (
               <CompliancePanel />
+            )}
+            {genTab === 'story' && (
+              <StoryPanel onHighlightNodes={setGenHighlightNodes} />
             )}
           </div>
         </div>

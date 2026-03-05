@@ -79,7 +79,7 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
   const [premise, setPremise] = useState('A young engineer discovers that her space station\'s AI has developed consciousness and must decide whether to report it or protect it.')
   const [archetype, setArchetype] = useState('The Hero\'s Journey')
   const [genre, setGenre] = useState('Science Fiction')
-  const [mode, setMode] = useState<GenerationMode>('contract-only')
+  const [mode, setMode] = useState<GenerationMode>('draft')
   const [tone, setTone] = useState('somber')
   const [allowBlend, setAllowBlend] = useState(false)
   const [allowHybrid, setAllowHybrid] = useState(false)
