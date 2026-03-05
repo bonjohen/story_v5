@@ -1,18 +1,18 @@
 /**
- * Tests for bible merge logic and canonization.
+ * Tests for lore merge logic and canonization.
  */
 import { describe, it, expect } from 'vitest'
 import {
-  mergeDeltaIntoBible,
-  validateBible,
-  validateDeltaAgainstBible,
+  mergeDeltaIntoLore,
+  validateLore,
+  validateDeltaAgainstLore,
   canonizeEpisode,
   deCanonizeEpisode,
-} from './bibleMerge.ts'
+} from './loreMerge.ts'
 import type {
-  StoryBible,
+  StoryLore,
   StateDelta,
-  BibleCharacter,
+  LoreCharacter,
   Series,
   Episode,
   StateSnapshot,
@@ -22,7 +22,7 @@ import type {
 // Helpers
 // ---------------------------------------------------------------------------
 
-function emptyBible(): StoryBible {
+function emptyLore(): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2026-01-01T00:00:00Z',
@@ -37,7 +37,7 @@ function emptyBible(): StoryBible {
   }
 }
 
-function makeCharacter(overrides: Partial<BibleCharacter> = {}): BibleCharacter {
+function makeCharacter(overrides: Partial<LoreCharacter> = {}): LoreCharacter {
   return {
     id: 'char_hero',
     name: 'Arion',
@@ -72,16 +72,16 @@ function emptyDelta(episodeId: string): StateDelta {
 }
 
 // ---------------------------------------------------------------------------
-// mergeDeltaIntoBible
+// mergeDeltaIntoLore
 // ---------------------------------------------------------------------------
 
-describe('mergeDeltaIntoBible', () => {
-  it('adds introduced characters to the bible', () => {
-    const bible = emptyBible()
+describe('mergeDeltaIntoLore', () => {
+  it('adds introduced characters to the lore', () => {
+    const lore = emptyLore()
     const delta = emptyDelta('EP_001_a')
     delta.characters_introduced = [makeCharacter()]
 
-    const result = mergeDeltaIntoBible(bible, delta)
+    const result = mergeDeltaIntoLore(lore, delta)
 
     expect(result.characters).toHaveLength(1)
     expect(result.characters[0].id).toBe('char_hero')
@@ -89,19 +89,19 @@ describe('mergeDeltaIntoBible', () => {
   })
 
   it('does not duplicate existing characters when introduced', () => {
-    const bible = emptyBible()
-    bible.characters.push(makeCharacter())
+    const lore = emptyLore()
+    lore.characters.push(makeCharacter())
 
     const delta = emptyDelta('EP_002_a')
     delta.characters_introduced = [makeCharacter({ id: 'char_hero' })]
 
-    const result = mergeDeltaIntoBible(bible, delta)
+    const result = mergeDeltaIntoLore(lore, delta)
     expect(result.characters).toHaveLength(1)
   })
 
   it('applies character updates', () => {
-    const bible = emptyBible()
-    bible.characters.push(makeCharacter())
+    const lore = emptyLore()
+    lore.characters.push(makeCharacter())
 
     const delta = emptyDelta('EP_002_a')
     delta.character_updates = [{
@@ -116,7 +116,7 @@ describe('mergeDeltaIntoBible', () => {
       ],
     }]
 
-    const result = mergeDeltaIntoBible(bible, delta)
+    const result = mergeDeltaIntoLore(lore, delta)
 
     expect(result.characters[0].last_appeared_in).toBe('EP_002_a')
     expect(result.characters[0].current_location).toBe('place_forest')
@@ -126,8 +126,8 @@ describe('mergeDeltaIntoBible', () => {
   })
 
   it('handles character death updates', () => {
-    const bible = emptyBible()
-    bible.characters.push(makeCharacter())
+    const lore = emptyLore()
+    lore.characters.push(makeCharacter())
 
     const delta = emptyDelta('EP_005_a')
     delta.character_updates = [{
@@ -142,7 +142,7 @@ describe('mergeDeltaIntoBible', () => {
       ],
     }]
 
-    const result = mergeDeltaIntoBible(bible, delta)
+    const result = mergeDeltaIntoLore(lore, delta)
 
     expect(result.characters[0].status).toBe('dead')
     expect(result.characters[0].died_in).toBe('EP_005_a')
@@ -151,7 +151,7 @@ describe('mergeDeltaIntoBible', () => {
   })
 
   it('adds introduced places', () => {
-    const bible = emptyBible()
+    const lore = emptyLore()
     const delta = emptyDelta('EP_001_a')
     delta.places_introduced = [{
       id: 'place_castle',
@@ -164,14 +164,14 @@ describe('mergeDeltaIntoBible', () => {
       events_here: [],
     }]
 
-    const result = mergeDeltaIntoBible(bible, delta)
+    const result = mergeDeltaIntoLore(lore, delta)
     expect(result.places).toHaveLength(1)
     expect(result.places[0].name).toBe('Castle Dread')
   })
 
   it('merges plot threads', () => {
-    const bible = emptyBible()
-    bible.plot_threads.push({
+    const lore = emptyLore()
+    lore.plot_threads.push({
       id: 'PT_001_mystery',
       title: 'The Missing Artifact',
       description: 'Where is the ancient relic?',
@@ -189,45 +189,45 @@ describe('mergeDeltaIntoBible', () => {
       description: 'A clue is found',
     }]
 
-    const result = mergeDeltaIntoBible(bible, delta)
+    const result = mergeDeltaIntoLore(lore, delta)
     expect(result.plot_threads[0].status).toBe('progressing')
     expect(result.plot_threads[0].progressed_in).toContain('EP_002_a')
   })
 
-  it('does not mutate the input bible', () => {
-    const bible = emptyBible()
+  it('does not mutate the input lore', () => {
+    const lore = emptyLore()
     const delta = emptyDelta('EP_001_a')
     delta.characters_introduced = [makeCharacter()]
 
-    const result = mergeDeltaIntoBible(bible, delta)
-    expect(bible.characters).toHaveLength(0)
+    const result = mergeDeltaIntoLore(lore, delta)
+    expect(lore.characters).toHaveLength(0)
     expect(result.characters).toHaveLength(1)
   })
 })
 
 // ---------------------------------------------------------------------------
-// validateBible
+// validateLore
 // ---------------------------------------------------------------------------
 
-describe('validateBible', () => {
-  it('passes for an empty bible', () => {
-    const result = validateBible(emptyBible())
+describe('validateLore', () => {
+  it('passes for an empty lore', () => {
+    const result = validateLore(emptyLore())
     expect(result.valid).toBe(true)
     expect(result.errors).toHaveLength(0)
   })
 
   it('fails when dead character has no died_in', () => {
-    const bible = emptyBible()
-    bible.characters.push(makeCharacter({ status: 'dead' }))
+    const lore = emptyLore()
+    lore.characters.push(makeCharacter({ status: 'dead' }))
 
-    const result = validateBible(bible)
+    const result = validateLore(lore)
     expect(result.valid).toBe(false)
     expect(result.errors.length).toBeGreaterThan(0)
   })
 
   it('warns about critical open threads', () => {
-    const bible = emptyBible()
-    bible.plot_threads.push({
+    const lore = emptyLore()
+    lore.plot_threads.push({
       id: 'PT_001_crisis',
       title: 'The Crisis',
       description: 'Everything is on fire',
@@ -238,20 +238,20 @@ describe('validateBible', () => {
       related_characters: [],
     })
 
-    const result = validateBible(bible)
+    const result = validateLore(lore)
     expect(result.warnings.length).toBeGreaterThan(0)
     expect(result.warnings.some((w) => w.includes('critical'))).toBe(true)
   })
 })
 
 // ---------------------------------------------------------------------------
-// validateDeltaAgainstBible
+// validateDeltaAgainstLore
 // ---------------------------------------------------------------------------
 
-describe('validateDeltaAgainstBible', () => {
+describe('validateDeltaAgainstLore', () => {
   it('fails when updating a dead character without reveal', () => {
-    const bible = emptyBible()
-    bible.characters.push(makeCharacter({ status: 'dead', died_in: 'EP_003_a' }))
+    const lore = emptyLore()
+    lore.characters.push(makeCharacter({ status: 'dead', died_in: 'EP_003_a' }))
 
     const delta = emptyDelta('EP_004_a')
     delta.character_updates = [{
@@ -262,13 +262,13 @@ describe('validateDeltaAgainstBible', () => {
       ],
     }]
 
-    const result = validateDeltaAgainstBible(bible, delta)
+    const result = validateDeltaAgainstLore(lore, delta)
     expect(result.valid).toBe(false)
   })
 
   it('passes when updating a dead character with a reveal', () => {
-    const bible = emptyBible()
-    bible.characters.push(makeCharacter({ status: 'dead', died_in: 'EP_003_a' }))
+    const lore = emptyLore()
+    lore.characters.push(makeCharacter({ status: 'dead', died_in: 'EP_003_a' }))
 
     const delta = emptyDelta('EP_004_a')
     delta.character_updates = [{
@@ -279,24 +279,24 @@ describe('validateDeltaAgainstBible', () => {
       ],
     }]
 
-    const result = validateDeltaAgainstBible(bible, delta)
+    const result = validateDeltaAgainstLore(lore, delta)
     expect(result.valid).toBe(true)
   })
 
   it('fails when introducing a character that already exists', () => {
-    const bible = emptyBible()
-    bible.characters.push(makeCharacter())
+    const lore = emptyLore()
+    lore.characters.push(makeCharacter())
 
     const delta = emptyDelta('EP_002_a')
     delta.characters_introduced = [makeCharacter()]
 
-    const result = validateDeltaAgainstBible(bible, delta)
+    const result = validateDeltaAgainstLore(lore, delta)
     expect(result.valid).toBe(false)
   })
 
   it('fails when reopening a resolved thread', () => {
-    const bible = emptyBible()
-    bible.plot_threads.push({
+    const lore = emptyLore()
+    lore.plot_threads.push({
       id: 'PT_001_mystery',
       title: 'The Missing Artifact',
       description: 'Resolved mystery',
@@ -314,7 +314,7 @@ describe('validateDeltaAgainstBible', () => {
       status_change: 'open',
     }]
 
-    const result = validateDeltaAgainstBible(bible, delta)
+    const result = validateDeltaAgainstLore(lore, delta)
     expect(result.valid).toBe(false)
   })
 })

@@ -1,28 +1,28 @@
 /**
- * Bible Merge: applies a StateDelta to a StoryBible, producing an updated bible.
+ * Lore Merge: applies a StateDelta to a StoryLore, producing an updated lore.
  *
  * This is the core canonization logic. When an episode is canonized:
  * 1. Its StateDelta is extracted (see stateExtractor.ts)
- * 2. This module merges the delta into the bible
+ * 2. This module merges the delta into the lore
  * 3. A snapshot is created at the episode boundary
  *
- * The merge is deterministic and immutable — it returns a new bible object.
+ * The merge is deterministic and immutable — it returns a new lore object.
  */
 
 import type {
-  StoryBible,
+  StoryLore,
   StateDelta,
-  BibleCharacter,
-  BiblePlace,
-  BibleObject,
-  BibleFaction,
+  LoreCharacter,
+  LorePlace,
+  LoreObject,
+  LoreFaction,
   PlotThread,
   CharacterUpdate,
   PlaceUpdate,
   ObjectUpdate,
   FactionUpdate,
   ThreadUpdate,
-  BibleEvent,
+  LoreEvent,
   StateSnapshot,
   OverarchingArc,
   Episode,
@@ -36,28 +36,28 @@ import { generateSnapshotId } from './io.ts'
 // ---------------------------------------------------------------------------
 
 /**
- * Merge a StateDelta into a StoryBible, returning a new bible.
- * Does not mutate the input bible.
+ * Merge a StateDelta into a StoryLore, returning a new lore.
+ * Does not mutate the input lore.
  */
-export function mergeDeltaIntoBible(
-  bible: StoryBible,
+export function mergeDeltaIntoLore(
+  lore: StoryLore,
   delta: StateDelta,
-): StoryBible {
+): StoryLore {
   const now = new Date().toISOString()
 
   // Start with a deep copy
-  const updated: StoryBible = {
-    schema_version: bible.schema_version,
+  const updated: StoryLore = {
+    schema_version: lore.schema_version,
     last_updated: now,
     last_updated_by: delta.episode_id,
 
-    characters: mergeCharacters(bible.characters, delta),
-    places: mergePlaces(bible.places, delta),
-    objects: mergeObjects(bible.objects, delta),
-    factions: mergeFactions(bible.factions, delta),
-    plot_threads: mergeThreads(bible.plot_threads, delta),
-    world_rules: [...bible.world_rules],
-    event_log: [...bible.event_log],
+    characters: mergeCharacters(lore.characters, delta),
+    places: mergePlaces(lore.places, delta),
+    objects: mergeObjects(lore.objects, delta),
+    factions: mergeFactions(lore.factions, delta),
+    plot_threads: mergeThreads(lore.plot_threads, delta),
+    world_rules: [...lore.world_rules],
+    event_log: [...lore.event_log],
   }
 
   return updated
@@ -69,21 +69,21 @@ export function mergeDeltaIntoBible(
 export function createSnapshot(
   episodeSlot: number,
   episodeId: string,
-  bible: StoryBible,
+  lore: StoryLore,
   arc: OverarchingArc,
 ): StateSnapshot {
   return {
     snapshot_id: generateSnapshotId(episodeSlot),
     after_episode: episodeId,
     created_at: new Date().toISOString(),
-    bible: structuredClone(bible),
+    lore: structuredClone(lore),
     overarching_arc: structuredClone(arc),
   }
 }
 
 /**
- * Canonize an episode: merge its delta into the bible, update the series,
- * and return the updated bible and snapshot.
+ * Canonize an episode: merge its delta into the lore, update the series,
+ * and return the updated lore and snapshot.
  *
  * This is the high-level canonization entry point.
  */
@@ -91,9 +91,9 @@ export function canonizeEpisode(
   series: Series,
   episode: Episode,
   delta: StateDelta,
-): { bible: StoryBible; snapshot: StateSnapshot; series: Series } {
-  // 1. Merge delta into bible
-  const updatedBible = mergeDeltaIntoBible(series.bible, delta)
+): { lore: StoryLore; snapshot: StateSnapshot; series: Series } {
+  // 1. Merge delta into lore
+  const updatedLore = mergeDeltaIntoLore(series.lore, delta)
 
   // 2. Handle arc phase change if present
   let updatedArc = { ...series.overarching_arc }
@@ -102,7 +102,7 @@ export function canonizeEpisode(
   }
 
   // 3. Create snapshot
-  const snapshot = createSnapshot(episode.slot_number, episode.episode_id, updatedBible, updatedArc)
+  const snapshot = createSnapshot(episode.slot_number, episode.episode_id, updatedLore, updatedArc)
 
   // 4. Update episode status
   episode.canon_status = 'canon'
@@ -111,7 +111,7 @@ export function canonizeEpisode(
   // 5. Update series
   const updatedSeries: Series = {
     ...series,
-    bible: updatedBible,
+    lore: updatedLore,
     overarching_arc: updatedArc,
     updated_at: new Date().toISOString(),
     episode_count: series.episode_count + 1,
@@ -149,11 +149,11 @@ export function canonizeEpisode(
     },
   }
 
-  return { bible: updatedBible, snapshot, series: updatedSeries }
+  return { lore: updatedLore, snapshot, series: updatedSeries }
 }
 
 /**
- * De-canonize an episode: revert the bible to a prior snapshot.
+ * De-canonize an episode: revert the lore to a prior snapshot.
  *
  * Returns the list of subsequent canon episodes that may be invalidated.
  */
@@ -174,10 +174,10 @@ export function deCanonizeEpisode(
     .filter((e) => e.slot > slot)
     .map((e) => e.episode_id)
 
-  // Revert bible and arc to snapshot
+  // Revert lore and arc to snapshot
   const updatedSeries: Series = {
     ...series,
-    bible: structuredClone(priorSnapshot.bible),
+    lore: structuredClone(priorSnapshot.lore),
     overarching_arc: structuredClone(priorSnapshot.overarching_arc),
     updated_at: new Date().toISOString(),
     episode_count: series.episode_count - 1,
@@ -209,9 +209,9 @@ export function deCanonizeEpisode(
 // ---------------------------------------------------------------------------
 
 function mergeCharacters(
-  existing: BibleCharacter[],
+  existing: LoreCharacter[],
   delta: StateDelta,
-): BibleCharacter[] {
+): LoreCharacter[] {
   const result = existing.map((char) => {
     const update = delta.character_updates.find((u) => u.character_id === char.id)
     if (!update) return char
@@ -229,10 +229,10 @@ function mergeCharacters(
 }
 
 function applyCharacterUpdate(
-  char: BibleCharacter,
+  char: LoreCharacter,
   update: CharacterUpdate,
   episodeId: string,
-): BibleCharacter {
+): LoreCharacter {
   const updated = { ...char }
 
   // Apply explicit changes
@@ -277,7 +277,7 @@ function applyCharacterUpdate(
 // Place merge
 // ---------------------------------------------------------------------------
 
-function mergePlaces(existing: BiblePlace[], delta: StateDelta): BiblePlace[] {
+function mergePlaces(existing: LorePlace[], delta: StateDelta): LorePlace[] {
   const result = existing.map((place) => {
     const update = delta.place_updates.find((u) => u.place_id === place.id)
     if (!update) return place
@@ -293,7 +293,7 @@ function mergePlaces(existing: BiblePlace[], delta: StateDelta): BiblePlace[] {
   return result
 }
 
-function applyPlaceUpdate(place: BiblePlace, update: PlaceUpdate): BiblePlace {
+function applyPlaceUpdate(place: LorePlace, update: PlaceUpdate): LorePlace {
   return {
     ...place,
     ...update.changes,
@@ -308,7 +308,7 @@ function applyPlaceUpdate(place: BiblePlace, update: PlaceUpdate): BiblePlace {
 // Object merge
 // ---------------------------------------------------------------------------
 
-function mergeObjects(existing: BibleObject[], delta: StateDelta): BibleObject[] {
+function mergeObjects(existing: LoreObject[], delta: StateDelta): LoreObject[] {
   const result = existing.map((obj) => {
     const update = delta.object_updates.find((u) => u.object_id === obj.id)
     if (!update) return obj
@@ -324,7 +324,7 @@ function mergeObjects(existing: BibleObject[], delta: StateDelta): BibleObject[]
   return result
 }
 
-function applyObjectUpdate(obj: BibleObject, update: ObjectUpdate): BibleObject {
+function applyObjectUpdate(obj: LoreObject, update: ObjectUpdate): LoreObject {
   return {
     ...obj,
     ...update.changes,
@@ -339,7 +339,7 @@ function applyObjectUpdate(obj: BibleObject, update: ObjectUpdate): BibleObject 
 // Faction merge
 // ---------------------------------------------------------------------------
 
-function mergeFactions(existing: BibleFaction[], delta: StateDelta): BibleFaction[] {
+function mergeFactions(existing: LoreFaction[], delta: StateDelta): LoreFaction[] {
   const result = existing.map((faction) => {
     const update = delta.faction_updates?.find((u) => u.faction_id === faction.id)
     if (!update) return faction
@@ -429,25 +429,25 @@ function advanceArc(
 }
 
 // ---------------------------------------------------------------------------
-// Bible validation (consistency checks)
+// Lore validation (consistency checks)
 // ---------------------------------------------------------------------------
 
-export interface BibleValidationResult {
+export interface LoreValidationResult {
   valid: boolean
   errors: string[]
   warnings: string[]
 }
 
 /**
- * Validate a bible for internal consistency.
+ * Validate a lore for internal consistency.
  * Run after merging a delta, before creating a snapshot.
  */
-export function validateBible(bible: StoryBible): BibleValidationResult {
+export function validateLore(lore: StoryLore): LoreValidationResult {
   const errors: string[] = []
   const warnings: string[] = []
 
   // 1. No character dies twice
-  const deadChars = bible.characters.filter((c) => c.status === 'dead')
+  const deadChars = lore.characters.filter((c) => c.status === 'dead')
   for (const char of deadChars) {
     if (!char.died_in) {
       errors.push(`Character '${char.name}' (${char.id}) is dead but has no died_in episode`)
@@ -455,37 +455,37 @@ export function validateBible(bible: StoryBible): BibleValidationResult {
   }
 
   // 2. Dead characters should not have 'alive' status
-  for (const char of bible.characters) {
+  for (const char of lore.characters) {
     if (char.died_in && char.status !== 'dead') {
       errors.push(`Character '${char.name}' (${char.id}) has died_in=${char.died_in} but status=${char.status}`)
     }
   }
 
   // 3. Object custody: holder must exist
-  for (const obj of bible.objects) {
+  for (const obj of lore.objects) {
     if (obj.current_holder) {
-      const holderIsChar = bible.characters.some((c) => c.id === obj.current_holder)
-      const holderIsPlace = bible.places.some((p) => p.id === obj.current_holder)
+      const holderIsChar = lore.characters.some((c) => c.id === obj.current_holder)
+      const holderIsPlace = lore.places.some((p) => p.id === obj.current_holder)
       if (!holderIsChar && !holderIsPlace) {
-        warnings.push(`Object '${obj.name}' (${obj.id}) holder '${obj.current_holder}' not found in bible`)
+        warnings.push(`Object '${obj.name}' (${obj.id}) holder '${obj.current_holder}' not found in lore`)
       }
     }
   }
 
   // 4. Character location: location must exist as a place
-  for (const char of bible.characters) {
+  for (const char of lore.characters) {
     if (char.current_location) {
-      const placeExists = bible.places.some((p) => p.id === char.current_location)
+      const placeExists = lore.places.some((p) => p.id === char.current_location)
       if (!placeExists) {
-        warnings.push(`Character '${char.name}' location '${char.current_location}' not found in bible places`)
+        warnings.push(`Character '${char.name}' location '${char.current_location}' not found in lore places`)
       }
     }
   }
 
   // 5. Relationship targets must exist
-  for (const char of bible.characters) {
+  for (const char of lore.characters) {
     for (const rel of char.relationships) {
-      const targetExists = bible.characters.some((c) => c.id === rel.target_id)
+      const targetExists = lore.characters.some((c) => c.id === rel.target_id)
       if (!targetExists) {
         warnings.push(`Character '${char.name}' has relationship to unknown target '${rel.target_id}'`)
       }
@@ -493,14 +493,14 @@ export function validateBible(bible: StoryBible): BibleValidationResult {
   }
 
   // 6. Plot threads: resolved threads should have resolved_in
-  for (const thread of bible.plot_threads) {
+  for (const thread of lore.plot_threads) {
     if (thread.status === 'resolved' && !thread.resolved_in) {
       warnings.push(`Plot thread '${thread.title}' (${thread.id}) is resolved but has no resolved_in episode`)
     }
   }
 
   // 7. Critical urgency threads check
-  const criticalOpen = bible.plot_threads.filter(
+  const criticalOpen = lore.plot_threads.filter(
     (t) => t.urgency === 'critical' && t.status === 'open',
   )
   if (criticalOpen.length > 0) {
@@ -517,25 +517,25 @@ export function validateBible(bible: StoryBible): BibleValidationResult {
 }
 
 /**
- * Validate that an episode's delta is consistent with the current bible.
+ * Validate that an episode's delta is consistent with the current lore.
  * Run before canonization to catch contradictions.
  */
-export function validateDeltaAgainstBible(
-  bible: StoryBible,
+export function validateDeltaAgainstLore(
+  lore: StoryLore,
   delta: StateDelta,
-): BibleValidationResult {
+): LoreValidationResult {
   const errors: string[] = []
   const warnings: string[] = []
 
-  // 1. Mortality: characters marked dead in bible should not appear in updates
+  // 1. Mortality: characters marked dead in lore should not appear in updates
   //    (unless the update is adding a 'reveals' transition — e.g., faked death)
   for (const update of delta.character_updates) {
-    const bibleChar = bible.characters.find((c) => c.id === update.character_id)
-    if (bibleChar && bibleChar.status === 'dead') {
+    const loreChar = lore.characters.find((c) => c.id === update.character_id)
+    if (loreChar && loreChar.status === 'dead') {
       const hasReveal = update.transitions.some((t) => t.change === 'reveals')
       if (!hasReveal) {
         errors.push(
-          `Character '${bibleChar.name}' (${update.character_id}) is dead in the bible but appears with transitions in episode ${delta.episode_id}`,
+          `Character '${loreChar.name}' (${update.character_id}) is dead in the lore but appears with transitions in episode ${delta.episode_id}`,
         )
       }
     }
@@ -543,35 +543,35 @@ export function validateDeltaAgainstBible(
 
   // 2. Introduced characters must not already exist
   for (const newChar of delta.characters_introduced) {
-    if (bible.characters.some((c) => c.id === newChar.id)) {
+    if (lore.characters.some((c) => c.id === newChar.id)) {
       errors.push(
-        `Character '${newChar.name}' (${newChar.id}) is listed as newly introduced but already exists in the bible`,
+        `Character '${newChar.name}' (${newChar.id}) is listed as newly introduced but already exists in the lore`,
       )
     }
   }
 
   // 3. Updated entities must exist
   for (const update of delta.character_updates) {
-    if (!bible.characters.some((c) => c.id === update.character_id)) {
+    if (!lore.characters.some((c) => c.id === update.character_id)) {
       errors.push(`Character update references unknown character '${update.character_id}'`)
     }
   }
 
   for (const update of delta.place_updates) {
-    if (!bible.places.some((p) => p.id === update.place_id)) {
+    if (!lore.places.some((p) => p.id === update.place_id)) {
       errors.push(`Place update references unknown place '${update.place_id}'`)
     }
   }
 
   for (const update of delta.object_updates) {
-    if (!bible.objects.some((o) => o.id === update.object_id)) {
+    if (!lore.objects.some((o) => o.id === update.object_id)) {
       errors.push(`Object update references unknown object '${update.object_id}'`)
     }
   }
 
   // 4. Resolved threads should not be reopened
   for (const update of delta.thread_updates) {
-    const thread = bible.plot_threads.find((t) => t.id === update.thread_id)
+    const thread = lore.plot_threads.find((t) => t.id === update.thread_id)
     if (thread && thread.status === 'resolved' && update.status_change === 'open') {
       errors.push(
         `Plot thread '${thread.title}' (${update.thread_id}) was resolved but delta tries to reopen it`,

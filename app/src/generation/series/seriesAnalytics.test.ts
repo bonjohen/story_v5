@@ -6,13 +6,13 @@ import {
   computeThreadStats,
   computeSlotStats,
 } from './seriesAnalytics.ts'
-import type { Series, StoryBible, BibleCharacter, PlotThread } from './types.ts'
+import type { Series, StoryLore, LoreCharacter, PlotThread } from './types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makeBible(overrides: Partial<StoryBible> = {}): StoryBible {
+function makeLore(overrides: Partial<StoryLore> = {}): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2025-01-01T00:00:00Z',
@@ -28,7 +28,7 @@ function makeBible(overrides: Partial<StoryBible> = {}): StoryBible {
   }
 }
 
-function makeCharacter(id: string, overrides: Partial<BibleCharacter> = {}): BibleCharacter {
+function makeCharacter(id: string, overrides: Partial<LoreCharacter> = {}): LoreCharacter {
   return {
     id,
     name: `Char_${id}`,
@@ -84,7 +84,7 @@ function makeSeries(overrides: Partial<Series> = {}): Series {
       remaining_phases: ['HJ_N04', 'HJ_N05'],
       advancement_mode: 'hybrid',
     },
-    bible: makeBible(),
+    lore: makeLore(),
     canon_timeline: {
       episodes: [
         { slot: 1, episode_id: 'EP_001_a', title: 'Ep 1', canonized_at: '2025-01-01T00:00:00Z', overarching_phase: 'HJ_N01', snapshot_id: 'SNAP_EP001' },
@@ -128,9 +128,9 @@ describe('seriesAnalytics', () => {
       expect(stats.total_candidates_generated).toBe(4)
     })
 
-    it('counts bible entities', () => {
+    it('counts lore entities', () => {
       const series = makeSeries({
-        bible: makeBible({
+        lore: makeLore({
           characters: [makeCharacter('c1'), makeCharacter('c2', { status: 'dead' })],
           places: [{ id: 'p1', name: 'Town', type: 'ordinary_world', description: '', introduced_in: 'EP_001_a', last_featured_in: 'EP_001_a', status: 'extant', events_here: [] }],
           plot_threads: [
@@ -172,10 +172,10 @@ describe('seriesAnalytics', () => {
 
   describe('computeCharacterStats', () => {
     it('computes stats for each character', () => {
-      const bible = makeBible({
+      const lore = makeLore({
         characters: [makeCharacter('c1'), makeCharacter('c2', { status: 'dead', arc_milestones: [] })],
       })
-      const stats = computeCharacterStats(bible)
+      const stats = computeCharacterStats(lore)
 
       expect(stats).toHaveLength(2)
       expect(stats[0].character_id).toBe('c1')
@@ -187,14 +187,14 @@ describe('seriesAnalytics', () => {
 
   describe('computeThreadStats', () => {
     it('computes thread statistics', () => {
-      const bible = makeBible({
+      const lore = makeLore({
         plot_threads: [
           makeThread('t1', { status: 'open', progressed_in: ['EP_002_a'] }),
           makeThread('t2', { status: 'resolved', progressed_in: ['EP_001_a', 'EP_002_a'], resolved_in: 'EP_003_a' }),
           makeThread('t3', { status: 'progressing', progressed_in: ['EP_001_a', 'EP_002_a', 'EP_003_a'] }),
         ],
       })
-      const stats = computeThreadStats(bible)
+      const stats = computeThreadStats(lore)
 
       expect(stats.total).toBe(3)
       expect(stats.open).toBe(1)
@@ -204,13 +204,13 @@ describe('seriesAnalytics', () => {
     })
 
     it('identifies longest running thread', () => {
-      const bible = makeBible({
+      const lore = makeLore({
         plot_threads: [
           makeThread('t1', { status: 'open', progressed_in: ['EP_002_a'] }),
           makeThread('t2', { status: 'progressing', progressed_in: ['EP_001_a', 'EP_002_a', 'EP_003_a'] }),
         ],
       })
-      const stats = computeThreadStats(bible)
+      const stats = computeThreadStats(lore)
 
       expect(stats.longest_running_thread?.id).toBe('t2')
       expect(stats.longest_running_thread?.episodes).toBe(4) // 3 progressions + 1

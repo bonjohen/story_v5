@@ -1,10 +1,10 @@
 /**
- * Tests for the bible-aware episode writer prompt builder.
+ * Tests for the lore-aware episode writer prompt builder.
  */
 import { describe, it, expect } from 'vitest'
 import { buildEpisodeWriterPrompt } from './episodeWriter.ts'
 import type { EpisodeWriterContext } from './episodeWriter.ts'
-import type { StoryBible, EpisodeArcContext, CanonTimeline } from './types.ts'
+import type { StoryLore, EpisodeArcContext, CanonTimeline } from './types.ts'
 import type { StoryContract, Scene, Beat, PhaseGuideline } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
@@ -48,7 +48,7 @@ function makeContract(): StoryContract {
   }
 }
 
-function makeBible(): StoryBible {
+function makeLore(): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2026-01-01T00:00:00Z',
@@ -124,9 +124,9 @@ function makeCanonTimeline(): CanonTimeline {
 // ---------------------------------------------------------------------------
 
 describe('buildEpisodeWriterPrompt', () => {
-  it('includes bible context in the system message', () => {
+  it('includes lore context in the system message', () => {
     const ctx: EpisodeWriterContext = {
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       canonTimeline: makeCanonTimeline(),
     }
@@ -139,9 +139,9 @@ describe('buildEpisodeWriterPrompt', () => {
     expect(messages[1].role).toBe('user')
   })
 
-  it('includes character details in bible context', () => {
+  it('includes character details in lore context', () => {
     const ctx: EpisodeWriterContext = {
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       canonTimeline: makeCanonTimeline(),
     }
@@ -157,7 +157,7 @@ describe('buildEpisodeWriterPrompt', () => {
 
   it('lists dead characters', () => {
     const ctx: EpisodeWriterContext = {
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       canonTimeline: makeCanonTimeline(),
     }
@@ -169,7 +169,7 @@ describe('buildEpisodeWriterPrompt', () => {
 
   it('includes world rules', () => {
     const ctx: EpisodeWriterContext = {
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       canonTimeline: makeCanonTimeline(),
     }
@@ -180,7 +180,7 @@ describe('buildEpisodeWriterPrompt', () => {
 
   it('includes canon history recap', () => {
     const ctx: EpisodeWriterContext = {
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       canonTimeline: makeCanonTimeline(),
     }
@@ -193,7 +193,7 @@ describe('buildEpisodeWriterPrompt', () => {
 
   it('includes plot thread priorities', () => {
     const ctx: EpisodeWriterContext = {
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       canonTimeline: makeCanonTimeline(),
     }
@@ -205,7 +205,7 @@ describe('buildEpisodeWriterPrompt', () => {
 
   it('includes overarching arc context', () => {
     const ctx: EpisodeWriterContext = {
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       canonTimeline: makeCanonTimeline(),
     }

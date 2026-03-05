@@ -8,9 +8,9 @@
 
 import type {
   Series,
-  StoryBible,
+  StoryLore,
   Episode,
-  BibleCharacter,
+  LoreCharacter,
   PlotThread,
   OverarchingArc,
   CanonTimeline,
@@ -41,7 +41,7 @@ export interface SeriesOverviewStats {
 }
 
 export function computeSeriesOverview(series: Series): SeriesOverviewStats {
-  const bible = series.bible
+  const lore = series.lore
   const episodes = series.episode_index.episodes
 
   return {
@@ -50,18 +50,18 @@ export function computeSeriesOverview(series: Series): SeriesOverviewStats {
     canon_episodes: episodes.filter((e) => e.canon_status === 'canon').length,
     alternate_episodes: episodes.filter((e) => e.canon_status === 'alternate').length,
     draft_episodes: episodes.filter((e) => e.canon_status === 'draft').length,
-    total_characters: bible.characters.length,
-    alive_characters: bible.characters.filter((c) => c.status === 'alive').length,
-    dead_characters: bible.characters.filter((c) => c.status === 'dead').length,
-    total_places: bible.places.length,
-    total_objects: bible.objects.length,
-    total_factions: bible.factions.length,
-    total_plot_threads: bible.plot_threads.length,
-    open_threads: bible.plot_threads.filter((t) => t.status === 'open' || t.status === 'progressing').length,
-    resolved_threads: bible.plot_threads.filter((t) => t.status === 'resolved').length,
-    abandoned_threads: bible.plot_threads.filter((t) => t.status === 'abandoned').length,
-    world_rules_count: bible.world_rules.length,
-    event_count: bible.event_log.length,
+    total_characters: lore.characters.length,
+    alive_characters: lore.characters.filter((c) => c.status === 'alive').length,
+    dead_characters: lore.characters.filter((c) => c.status === 'dead').length,
+    total_places: lore.places.length,
+    total_objects: lore.objects.length,
+    total_factions: lore.factions.length,
+    total_plot_threads: lore.plot_threads.length,
+    open_threads: lore.plot_threads.filter((t) => t.status === 'open' || t.status === 'progressing').length,
+    resolved_threads: lore.plot_threads.filter((t) => t.status === 'resolved').length,
+    abandoned_threads: lore.plot_threads.filter((t) => t.status === 'abandoned').length,
+    world_rules_count: lore.world_rules.length,
+    event_count: lore.event_log.length,
   }
 }
 
@@ -126,8 +126,8 @@ export interface CharacterStats {
   possessions: number
 }
 
-export function computeCharacterStats(bible: StoryBible): CharacterStats[] {
-  return bible.characters.map((c) => ({
+export function computeCharacterStats(lore: StoryLore): CharacterStats[] {
+  return lore.characters.map((c) => ({
     character_id: c.id,
     name: c.name,
     role: c.role,
@@ -140,7 +140,7 @@ export function computeCharacterStats(bible: StoryBible): CharacterStats[] {
   }))
 }
 
-function countCharacterAppearances(c: BibleCharacter): number {
+function countCharacterAppearances(c: LoreCharacter): number {
   // Count unique episodes from introduced + milestones
   const episodes = new Set<string>()
   episodes.add(c.introduced_in)
@@ -167,8 +167,8 @@ export interface ThreadStats {
   most_progressed_thread: { id: string; title: string; progressions: number } | null
 }
 
-export function computeThreadStats(bible: StoryBible): ThreadStats {
-  const threads = bible.plot_threads
+export function computeThreadStats(lore: StoryLore): ThreadStats {
+  const threads = lore.plot_threads
   const total = threads.length
   const open = threads.filter((t) => t.status === 'open').length
   const progressing = threads.filter((t) => t.status === 'progressing').length

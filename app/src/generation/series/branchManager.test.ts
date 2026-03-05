@@ -3,16 +3,16 @@ import {
   createBranch,
   generateBranchId,
   getBranchDivergenceSlot,
-  computeBibleDiff,
+  computeLoreDiff,
   isBranchDivergent,
 } from './branchManager.ts'
-import type { Series, StateSnapshot, StoryBible, Branch } from './types.ts'
+import type { Series, StateSnapshot, StoryLore, Branch } from './types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makeBible(overrides: Partial<StoryBible> = {}): StoryBible {
+function makeLore(overrides: Partial<StoryLore> = {}): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2025-01-01T00:00:00Z',
@@ -55,7 +55,7 @@ function makeSeries(overrides: Partial<Series> = {}): Series {
       remaining_phases: ['HJ_N04', 'HJ_N05'],
       advancement_mode: 'hybrid',
     },
-    bible: makeBible(),
+    lore: makeLore(),
     canon_timeline: {
       episodes: [
         { slot: 1, episode_id: 'EP_001_a', title: 'Episode 1', canonized_at: '2025-01-01T00:00:00Z', overarching_phase: 'HJ_N01', snapshot_id: 'SNAP_EP001' },
@@ -72,12 +72,12 @@ function makeSeries(overrides: Partial<Series> = {}): Series {
   }
 }
 
-function makeSnapshot(afterEpisode: string, bible?: StoryBible): StateSnapshot {
+function makeSnapshot(afterEpisode: string, lore?: StoryLore): StateSnapshot {
   return {
     snapshot_id: `SNAP_${afterEpisode}`,
     after_episode: afterEpisode,
     created_at: '2025-01-01T00:00:00Z',
-    bible: bible ?? makeBible(),
+    lore: lore ?? makeLore(),
     overarching_arc: {
       archetype_id: 'a1',
       archetype_name: "Hero's Journey",
@@ -131,8 +131,8 @@ describe('branchManager', () => {
       ).toThrow('Fork episode EP_999_a not found')
     })
 
-    it('deep copies the bible from the snapshot', () => {
-      const bible = makeBible({
+    it('deep copies the lore from the snapshot', () => {
+      const lore = makeLore({
         characters: [
           {
             id: 'c1', name: 'Hero', role: 'protagonist', traits: [], motivations: [],
@@ -143,7 +143,7 @@ describe('branchManager', () => {
         ],
       })
       const series = makeSeries()
-      const snapshot = makeSnapshot('EP_001_a', bible)
+      const snapshot = makeSnapshot('EP_001_a', lore)
 
       const branch = createBranch(series, {
         name: 'Test',
@@ -152,9 +152,9 @@ describe('branchManager', () => {
         fork_snapshot: snapshot,
       })
 
-      // Mutating the branch bible should not affect the snapshot
-      branch.bible.characters[0].status = 'dead'
-      expect(snapshot.bible.characters[0].status).toBe('alive')
+      // Mutating the branch lore should not affect the snapshot
+      branch.lore.characters[0].status = 'dead'
+      expect(snapshot.lore.characters[0].status).toBe('alive')
     })
   })
 
@@ -176,7 +176,7 @@ describe('branchManager', () => {
         fork_point: 'EP_002_a',
         fork_snapshot_id: 'SNAP_EP002',
         canon_timeline: { episodes: [] },
-        bible: makeBible(),
+        lore: makeLore(),
       }
 
       expect(getBranchDivergenceSlot(series, branch)).toBe(2)
@@ -191,16 +191,16 @@ describe('branchManager', () => {
         fork_point: 'EP_999_a',
         fork_snapshot_id: 'SNAP_EP999',
         canon_timeline: { episodes: [] },
-        bible: makeBible(),
+        lore: makeLore(),
       }
 
       expect(getBranchDivergenceSlot(series, branch)).toBe(0)
     })
   })
 
-  describe('computeBibleDiff', () => {
+  describe('computeLoreDiff', () => {
     it('detects added and removed characters', () => {
-      const main = makeBible({
+      const main = makeLore({
         characters: [
           { id: 'c1', name: 'Hero', role: 'protagonist', traits: [], motivations: [],
             arc_type: null, relationships: [], status: 'alive',
@@ -208,7 +208,7 @@ describe('branchManager', () => {
             knowledge: [], possessions: [], arc_milestones: [] },
         ],
       })
-      const branch = makeBible({
+      const branch = makeLore({
         characters: [
           { id: 'c2', name: 'Villain', role: 'antagonist', traits: [], motivations: [],
             arc_type: null, relationships: [], status: 'alive',
@@ -217,13 +217,13 @@ describe('branchManager', () => {
         ],
       })
 
-      const diff = computeBibleDiff(main, branch)
+      const diff = computeLoreDiff(main, branch)
       expect(diff.characters_added).toEqual(['c2'])
       expect(diff.characters_removed).toEqual(['c1'])
     })
 
     it('detects changed character status', () => {
-      const main = makeBible({
+      const main = makeLore({
         characters: [
           { id: 'c1', name: 'Hero', role: 'protagonist', traits: [], motivations: [],
             arc_type: null, relationships: [], status: 'alive',
@@ -231,7 +231,7 @@ describe('branchManager', () => {
             knowledge: [], possessions: [], arc_milestones: [] },
         ],
       })
-      const branch = makeBible({
+      const branch = makeLore({
         characters: [
           { id: 'c1', name: 'Hero', role: 'protagonist', traits: [], motivations: [],
             arc_type: null, relationships: [], status: 'dead',
@@ -240,18 +240,18 @@ describe('branchManager', () => {
         ],
       })
 
-      const diff = computeBibleDiff(main, branch)
+      const diff = computeLoreDiff(main, branch)
       expect(diff.characters_changed).toEqual(['c1'])
     })
 
     it('detects thread changes', () => {
-      const main = makeBible({
+      const main = makeLore({
         plot_threads: [
           { id: 'pt1', title: 'Thread', description: '', status: 'open', urgency: 'medium',
             introduced_in: 'EP_001_a', progressed_in: [], related_characters: [] },
         ],
       })
-      const branch = makeBible({
+      const branch = makeLore({
         plot_threads: [
           { id: 'pt1', title: 'Thread', description: '', status: 'resolved', urgency: 'medium',
             introduced_in: 'EP_001_a', progressed_in: ['EP_002_a'], resolved_in: 'EP_002_a',
@@ -259,7 +259,7 @@ describe('branchManager', () => {
         ],
       })
 
-      const diff = computeBibleDiff(main, branch)
+      const diff = computeLoreDiff(main, branch)
       expect(diff.threads_changed).toEqual(['pt1'])
     })
   })
@@ -274,7 +274,7 @@ describe('branchManager', () => {
         fork_point: 'EP_001_a',
         fork_snapshot_id: 'SNAP_EP001',
         canon_timeline: { episodes: [] },
-        bible: makeBible(),
+        lore: makeLore(),
       }
 
       expect(isBranchDivergent(series, branch)).toBe(true)
@@ -289,7 +289,7 @@ describe('branchManager', () => {
         fork_point: 'EP_003_a', // Last canon episode
         fork_snapshot_id: 'SNAP_EP003',
         canon_timeline: { episodes: [] },
-        bible: makeBible(),
+        lore: makeLore(),
       }
 
       expect(isBranchDivergent(series, branch)).toBe(false)

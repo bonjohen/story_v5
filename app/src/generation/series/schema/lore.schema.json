@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "StoryBible",
+  "title": "StoryLore",
   "description": "Persistent, evolving truth of the series world — characters, places, objects, factions, plot threads, world rules, and event log.",
   "type": "object",
   "required": [
@@ -14,19 +14,19 @@
     "last_updated_by": { "type": "string" },
     "characters": {
       "type": "array",
-      "items": { "$ref": "#/$defs/BibleCharacter" }
+      "items": { "$ref": "#/$defs/LoreCharacter" }
     },
     "places": {
       "type": "array",
-      "items": { "$ref": "#/$defs/BiblePlace" }
+      "items": { "$ref": "#/$defs/LorePlace" }
     },
     "objects": {
       "type": "array",
-      "items": { "$ref": "#/$defs/BibleObject" }
+      "items": { "$ref": "#/$defs/LoreObject" }
     },
     "factions": {
       "type": "array",
-      "items": { "$ref": "#/$defs/BibleFaction" }
+      "items": { "$ref": "#/$defs/LoreFaction" }
     },
     "plot_threads": {
       "type": "array",
@@ -64,7 +64,7 @@
   },
   "additionalProperties": false,
   "$defs": {
-    "BibleRelationship": {
+    "LoreRelationship": {
       "type": "object",
       "required": ["target_id", "type", "description", "established_in", "current_state"],
       "properties": {
@@ -77,7 +77,7 @@
       },
       "additionalProperties": false
     },
-    "BibleCharacter": {
+    "LoreCharacter": {
       "type": "object",
       "required": [
         "id", "name", "role", "traits", "motivations", "arc_type",
@@ -93,7 +93,7 @@
         "traits": { "type": "array", "items": { "type": "string" } },
         "motivations": { "type": "array", "items": { "type": "string" } },
         "arc_type": { "type": ["string", "null"] },
-        "relationships": { "type": "array", "items": { "$ref": "#/$defs/BibleRelationship" } },
+        "relationships": { "type": "array", "items": { "$ref": "#/$defs/LoreRelationship" } },
         "status": { "type": "string", "enum": ["alive", "dead", "unknown", "transformed"] },
         "introduced_in": { "type": "string" },
         "died_in": { "type": "string" },
@@ -117,7 +117,7 @@
       },
       "additionalProperties": false
     },
-    "BiblePlace": {
+    "LorePlace": {
       "type": "object",
       "required": ["id", "name", "type", "description", "introduced_in", "last_featured_in", "status", "events_here"],
       "properties": {
@@ -148,7 +148,7 @@
       },
       "additionalProperties": false
     },
-    "BibleObject": {
+    "LoreObject": {
       "type": "object",
       "required": ["id", "name", "type", "significance", "custody_history", "introduced_in", "status"],
       "properties": {
@@ -180,7 +180,7 @@
       },
       "additionalProperties": false
     },
-    "BibleFaction": {
+    "LoreFaction": {
       "type": "object",
       "required": ["id", "name", "type", "description", "goals", "members", "relationships", "introduced_in", "status"],
       "properties": {

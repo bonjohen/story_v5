@@ -1,14 +1,14 @@
 /**
- * Bible Validator: cross-episode consistency validation checks.
+ * Lore Validator: cross-episode consistency validation checks.
  *
- * Extends the within-episode checks in validationEngine.ts with bible
+ * Extends the within-episode checks in validationEngine.ts with lore
  * boundary checks that ensure an episode does not contradict the
  * accumulated canon state.
  *
  * Checks:
  * 1. Mortality consistency — dead characters must not appear alive
- * 2. Location consistency — characters start where the bible says
- * 3. Custody consistency — objects are held by who the bible says
+ * 2. Location consistency — characters start where the lore says
+ * 3. Custody consistency — objects are held by who the lore says
  * 4. World rule consistency — no established facts contradicted
  * 5. Plot thread consistency — resolved threads not reopened,
  *    critical threads not ignored
@@ -23,10 +23,10 @@ import type {
   ValidationCheckType,
 } from '../artifacts/types.ts'
 import type {
-  StoryBible,
+  StoryLore,
   EpisodeArcContext,
   OverarchingArc,
-  BibleCharacter,
+  LoreCharacter,
   PlotThread,
 } from './types.ts'
 
@@ -34,48 +34,48 @@ import type {
 // Public API
 // ---------------------------------------------------------------------------
 
-/** Extended check types for bible validation. */
-export type BibleValidationCheckType =
-  | 'bible_mortality'
-  | 'bible_location'
-  | 'bible_custody'
-  | 'bible_world_rules'
-  | 'bible_thread_consistency'
-  | 'bible_arc_progress'
+/** Extended check types for lore validation. */
+export type LoreValidationCheckType =
+  | 'lore_mortality'
+  | 'lore_location'
+  | 'lore_custody'
+  | 'lore_world_rules'
+  | 'lore_thread_consistency'
+  | 'lore_arc_progress'
 
-export interface BibleValidationCheck {
-  type: BibleValidationCheckType
+export interface LoreValidationCheck {
+  type: LoreValidationCheckType
   status: CheckStatus
   details: string[]
 }
 
-export interface BibleValidationInput {
+export interface LoreValidationInput {
   plan: StoryPlan
-  bible: StoryBible
+  lore: StoryLore
   episodeContext: EpisodeArcContext
   overarchingArc: OverarchingArc
   sceneDrafts?: Map<string, string>
 }
 
-export interface BibleValidationResults {
-  checks: BibleValidationCheck[]
+export interface LoreValidationResults {
+  checks: LoreValidationCheck[]
   overall_status: CheckStatus
 }
 
 /**
- * Run all bible consistency checks against an episode plan.
+ * Run all lore consistency checks against an episode plan.
  * Returns per-check results and an overall status.
  */
-export function validateAgainstBible(input: BibleValidationInput): BibleValidationResults {
-  const { plan, bible, episodeContext, overarchingArc, sceneDrafts } = input
+export function validateAgainstLore(input: LoreValidationInput): LoreValidationResults {
+  const { plan, lore, episodeContext, overarchingArc, sceneDrafts } = input
 
-  const checks: BibleValidationCheck[] = [
-    checkBibleMortality(plan, bible),
-    checkBibleLocation(plan, bible),
-    checkBibleCustody(plan, bible),
-    checkBibleWorldRules(plan, bible, sceneDrafts),
-    checkBibleThreadConsistency(plan, bible, episodeContext),
-    checkBibleArcProgress(episodeContext, overarchingArc),
+  const checks: LoreValidationCheck[] = [
+    checkLoreMortality(plan, lore),
+    checkLoreLocation(plan, lore),
+    checkLoreCustody(plan, lore),
+    checkLoreWorldRules(plan, lore, sceneDrafts),
+    checkLoreThreadConsistency(plan, lore, episodeContext),
+    checkLoreArcProgress(episodeContext, overarchingArc),
   ]
 
   const hasFail = checks.some((c) => c.status === 'fail')
@@ -92,16 +92,16 @@ export function validateAgainstBible(input: BibleValidationInput): BibleValidati
 // ---------------------------------------------------------------------------
 
 /**
- * Check that dead characters from the bible do not appear as living
+ * Check that dead characters from the lore do not appear as living
  * participants in any scene.
  */
-function checkBibleMortality(plan: StoryPlan, bible: StoryBible): BibleValidationCheck {
+function checkLoreMortality(plan: StoryPlan, lore: StoryLore): LoreValidationCheck {
   const deadIds = new Set(
-    bible.characters.filter((c) => c.status === 'dead').map((c) => c.id),
+    lore.characters.filter((c) => c.status === 'dead').map((c) => c.id),
   )
 
   if (deadIds.size === 0) {
-    return { type: 'bible_mortality', status: 'pass', details: ['No dead characters in bible'] }
+    return { type: 'lore_mortality', status: 'pass', details: ['No dead characters in lore'] }
   }
 
   const violations: string[] = []
@@ -111,7 +111,7 @@ function checkBibleMortality(plan: StoryPlan, bible: StoryBible): BibleValidatio
 
     for (const charId of scene.moment.participants.characters) {
       if (deadIds.has(charId)) {
-        const char = bible.characters.find((c) => c.id === charId)
+        const char = lore.characters.find((c) => c.id === charId)
         violations.push(
           `Scene ${scene.scene_id}: Dead character '${char?.name ?? charId}' appears as participant (died in ${char?.died_in ?? 'unknown'})`,
         )
@@ -120,7 +120,7 @@ function checkBibleMortality(plan: StoryPlan, bible: StoryBible): BibleValidatio
   }
 
   return {
-    type: 'bible_mortality',
+    type: 'lore_mortality',
     status: violations.length > 0 ? 'fail' : 'pass',
     details: violations.length > 0 ? violations : ['No dead characters reappear'],
   }
@@ -131,41 +131,41 @@ function checkBibleMortality(plan: StoryPlan, bible: StoryBible): BibleValidatio
 // ---------------------------------------------------------------------------
 
 /**
- * Check that characters start the episode at the location the bible
+ * Check that characters start the episode at the location the lore
  * says they're at, or that a travel transition is provided.
  */
-function checkBibleLocation(plan: StoryPlan, bible: StoryBible): BibleValidationCheck {
+function checkLoreLocation(plan: StoryPlan, lore: StoryLore): LoreValidationCheck {
   if (plan.scenes.length === 0) {
-    return { type: 'bible_location', status: 'pass', details: ['No scenes to check'] }
+    return { type: 'lore_location', status: 'pass', details: ['No scenes to check'] }
   }
 
   const warnings: string[] = []
   const firstScene = plan.scenes[0]
 
   if (!firstScene.moment) {
-    return { type: 'bible_location', status: 'pass', details: ['No moment data in first scene'] }
+    return { type: 'lore_location', status: 'pass', details: ['No moment data in first scene'] }
   }
 
   for (const charId of firstScene.moment.participants.characters) {
-    const bibleChar = bible.characters.find((c) => c.id === charId)
-    if (!bibleChar?.current_location) continue
+    const loreChar = lore.characters.find((c) => c.id === charId)
+    if (!loreChar?.current_location) continue
 
     const scenePlaces = firstScene.moment.participants.places
-    if (scenePlaces.length > 0 && !scenePlaces.includes(bibleChar.current_location)) {
+    if (scenePlaces.length > 0 && !scenePlaces.includes(loreChar.current_location)) {
       // Check if there's an 'arrives' transition
       const hasTravel = firstScene.moment.expected_transitions.some(
         (t) => t.entity_id === charId && t.change === 'arrives',
       )
       if (!hasTravel) {
         warnings.push(
-          `${bibleChar.name} (${charId}) starts at '${scenePlaces[0]}' but bible says they're at '${bibleChar.current_location}' (no travel transition provided)`,
+          `${loreChar.name} (${charId}) starts at '${scenePlaces[0]}' but lore says they're at '${loreChar.current_location}' (no travel transition provided)`,
         )
       }
     }
   }
 
   return {
-    type: 'bible_location',
+    type: 'lore_location',
     status: warnings.length > 0 ? 'warn' : 'pass',
     details: warnings.length > 0 ? warnings : ['Character locations are consistent'],
   }
@@ -176,20 +176,20 @@ function checkBibleLocation(plan: StoryPlan, bible: StoryBible): BibleValidation
 // ---------------------------------------------------------------------------
 
 /**
- * Check that objects used in the episode are held by who the bible says.
+ * Check that objects used in the episode are held by who the lore says.
  */
-function checkBibleCustody(plan: StoryPlan, bible: StoryBible): BibleValidationCheck {
+function checkLoreCustody(plan: StoryPlan, lore: StoryLore): LoreValidationCheck {
   const warnings: string[] = []
 
   for (const scene of plan.scenes) {
     if (!scene.moment) continue
 
     for (const objId of scene.moment.participants.objects) {
-      const bibleObj = bible.objects.find((o) => o.id === objId)
-      if (!bibleObj?.current_holder) continue
+      const loreObj = lore.objects.find((o) => o.id === objId)
+      if (!loreObj?.current_holder) continue
 
       // Check if the holder is in this scene
-      if (!scene.moment.participants.characters.includes(bibleObj.current_holder)) {
+      if (!scene.moment.participants.characters.includes(loreObj.current_holder)) {
         // Check if there's a custody transfer in prior scenes
         const hasTransfer = plan.scenes.some((s) =>
           s.moment?.expected_transitions.some(
@@ -200,7 +200,7 @@ function checkBibleCustody(plan: StoryPlan, bible: StoryBible): BibleValidationC
         )
         if (!hasTransfer) {
           warnings.push(
-            `Scene ${scene.scene_id}: Object '${bibleObj.name}' (${objId}) is held by '${bibleObj.current_holder}' per bible, but holder is not in scene and no custody transfer exists`,
+            `Scene ${scene.scene_id}: Object '${loreObj.name}' (${objId}) is held by '${loreObj.current_holder}' per lore, but holder is not in scene and no custody transfer exists`,
           )
         }
       }
@@ -208,7 +208,7 @@ function checkBibleCustody(plan: StoryPlan, bible: StoryBible): BibleValidationC
   }
 
   return {
-    type: 'bible_custody',
+    type: 'lore_custody',
     status: warnings.length > 0 ? 'warn' : 'pass',
     details: warnings.length > 0 ? warnings : ['Object custody is consistent'],
   }
@@ -223,32 +223,32 @@ function checkBibleCustody(plan: StoryPlan, bible: StoryBible): BibleValidationC
  * This is a heuristic check — world rules are checked via keyword matching.
  * LLM-backed validation could enhance this significantly.
  */
-function checkBibleWorldRules(
+function checkLoreWorldRules(
   plan: StoryPlan,
-  bible: StoryBible,
+  lore: StoryLore,
   sceneDrafts?: Map<string, string>,
-): BibleValidationCheck {
-  if (bible.world_rules.length === 0) {
-    return { type: 'bible_world_rules', status: 'pass', details: ['No world rules established'] }
+): LoreValidationCheck {
+  if (lore.world_rules.length === 0) {
+    return { type: 'lore_world_rules', status: 'pass', details: ['No world rules established'] }
   }
 
   if (!sceneDrafts || sceneDrafts.size === 0) {
     return {
-      type: 'bible_world_rules',
+      type: 'lore_world_rules',
       status: 'pass',
-      details: [`${bible.world_rules.length} world rule(s) established — prose validation deferred (no scene drafts)`],
+      details: [`${lore.world_rules.length} world rule(s) established — prose validation deferred (no scene drafts)`],
     }
   }
 
   // For now, just note the rules exist. Full semantic checking requires LLM.
   const details = [
-    `${bible.world_rules.length} world rule(s) established:`,
-    ...bible.world_rules.map((r) => `  - ${r.rule}`),
+    `${lore.world_rules.length} world rule(s) established:`,
+    ...lore.world_rules.map((r) => `  - ${r.rule}`),
     'Heuristic check passed. Full semantic validation requires LLM.',
   ]
 
   return {
-    type: 'bible_world_rules',
+    type: 'lore_world_rules',
     status: 'pass',
     details,
   }
@@ -264,17 +264,17 @@ function checkBibleWorldRules(
  * - Critical threads are not ignored (more than 2 episodes without progression)
  * - Thread priorities are respected in the plan
  */
-function checkBibleThreadConsistency(
+function checkLoreThreadConsistency(
   plan: StoryPlan,
-  bible: StoryBible,
+  lore: StoryLore,
   episodeContext: EpisodeArcContext,
-): BibleValidationCheck {
+): LoreValidationCheck {
   const details: string[] = []
   let status: CheckStatus = 'pass'
 
   // Check if any scene references a resolved thread
   const resolvedThreadIds = new Set(
-    bible.plot_threads
+    lore.plot_threads
       .filter((t) => t.status === 'resolved')
       .map((t) => t.id),
   )
@@ -291,7 +291,7 @@ function checkBibleThreadConsistency(
   }
 
   // Check critical thread urgency
-  const criticalThreads = bible.plot_threads.filter(
+  const criticalThreads = lore.plot_threads.filter(
     (t) => t.urgency === 'critical' && (t.status === 'open' || t.status === 'progressing'),
   )
 
@@ -310,7 +310,7 @@ function checkBibleThreadConsistency(
   // Check that 'resolve' priorities have corresponding thread transitions possible
   for (const tp of episodeContext.thread_priorities) {
     if (tp.action === 'resolve') {
-      const thread = bible.plot_threads.find((t) => t.id === tp.thread_id)
+      const thread = lore.plot_threads.find((t) => t.id === tp.thread_id)
       if (thread && thread.resolution_conditions && thread.resolution_conditions.length > 0) {
         details.push(
           `Thread '${thread.title}' targeted for resolution. Conditions: ${thread.resolution_conditions.join('; ')}`,
@@ -323,7 +323,7 @@ function checkBibleThreadConsistency(
     details.push('Plot thread consistency maintained')
   }
 
-  return { type: 'bible_thread_consistency', status, details }
+  return { type: 'lore_thread_consistency', status, details }
 }
 
 // ---------------------------------------------------------------------------
@@ -336,10 +336,10 @@ function checkBibleThreadConsistency(
  * - No arc phases are skipped
  * - Arc regression is flagged
  */
-function checkBibleArcProgress(
+function checkLoreArcProgress(
   episodeContext: EpisodeArcContext,
   overarchingArc: OverarchingArc,
-): BibleValidationCheck {
+): LoreValidationCheck {
   const details: string[] = []
   let status: CheckStatus = 'pass'
 
@@ -386,5 +386,5 @@ function checkBibleArcProgress(
     details.push('Arc progress is valid')
   }
 
-  return { type: 'bible_arc_progress', status, details }
+  return { type: 'lore_arc_progress', status, details }
 }

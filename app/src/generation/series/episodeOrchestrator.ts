@@ -1,6 +1,6 @@
 /**
- * Episode Orchestrator: manages the full bible-aware episode generation
- * pipeline, from bible loading through scene generation, validation,
+ * Episode Orchestrator: manages the full lore-aware episode generation
+ * pipeline, from lore loading through scene generation, validation,
  * state extraction, and curation.
  *
  * Extends the standard orchestrator pattern with new states:
@@ -30,18 +30,18 @@ import { buildTrace, generateComplianceReport } from '../engine/traceEngine.ts'
 
 import { compileEpisodeContract } from './episodeContractCompiler.ts'
 import { buildEpisodePlan } from './episodePlanner.ts'
-import { validateAgainstBible } from './bibleValidator.ts'
+import { validateAgainstLore } from './loreValidator.ts'
 import { extractStateDelta } from './stateExtractor.ts'
 import {
   canonizeEpisode as applyCanonicalization,
-  validateDeltaAgainstBible,
-  validateBible,
-} from './bibleMerge.ts'
+  validateDeltaAgainstLore,
+  validateLore,
+} from './loreMerge.ts'
 import {
   loadSeries,
   saveSeries,
-  loadBible,
-  saveBible,
+  loadLore,
+  saveLore,
   loadLatestSnapshot,
   saveSnapshot,
   saveEpisode,
@@ -52,7 +52,7 @@ import {
 
 import type {
   Series,
-  StoryBible,
+  StoryLore,
   StateSnapshot,
   Episode,
   EpisodeRequest,
@@ -62,7 +62,7 @@ import type {
   OverarchingArc,
   CanonTimeline,
 } from './types.ts'
-import type { BibleValidationResults } from './bibleValidator.ts'
+import type { LoreValidationResults } from './loreValidator.ts'
 
 // ---------------------------------------------------------------------------
 // Episode orchestrator states (extends base states)
@@ -103,7 +103,7 @@ export interface EpisodeGenerationResult {
   plan?: StoryPlan
   sceneDrafts?: Map<string, string>
   validation?: ValidationResults
-  bibleValidation?: BibleValidationResults
+  loreValidation?: LoreValidationResults
   stateDelta?: StateDelta
   trace?: StoryTrace
   complianceReport?: string
@@ -151,8 +151,8 @@ const VALID_TRANSITIONS: Record<EpisodeOrchestratorState, EpisodeOrchestratorSta
  * Run the full episode generation pipeline for a series.
  *
  * This is the series-mode equivalent of the standard orchestrate() function.
- * It loads the bible, generates a bible-aware contract and plan, writes
- * scenes, validates against both the contract and bible, extracts state
+ * It loads the lore, generates a lore-aware contract and plan, writes
+ * scenes, validates against both the contract and lore, extracts state
  * deltas, and prepares the episode for curation.
  */
 export async function orchestrateEpisode(
@@ -180,36 +180,36 @@ export async function orchestrateEpisode(
   }
 
   try {
-    // 1. Load bible and corpus
+    // 1. Load lore and corpus
     transition('LOADING_BIBLE', `Loading series ${request.series_id}`)
 
     const series = await loadSeries(baseDir, request.series_id)
-    const bible = await loadBible(baseDir, request.series_id)
+    const lore = await loadLore(baseDir, request.series_id)
     const latestSnapshot = await loadLatestSnapshot(baseDir, request.series_id)
     const corpus = await loadCorpus(provider)
 
-    transition('LOADED_CORPUS', 'Bible and corpus loaded')
+    transition('LOADED_CORPUS', 'Lore and corpus loaded')
 
     // 2. Build episode arc context
-    const episodeContext = buildEpisodeArcContext(series, bible, request)
+    const episodeContext = buildEpisodeArcContext(series, lore, request)
 
     // 3. Selection
     const { selection } = runSelection(request, corpus)
     result.selection = selection
     transition('SELECTED', `Selected ${selection.primary_archetype} × ${selection.primary_genre}`)
 
-    // 4. Bible-aware contract
+    // 4. Lore-aware contract
     const contract = compileEpisodeContract({
       selection,
       request,
       corpus,
       config,
-      bible,
+      lore,
       episodeContext,
       overarchingArc: series.overarching_arc,
     })
     result.contract = contract
-    transition('CONTRACT_READY', `Episode contract compiled with ${contract.bible_constraints?.continuity_locks.length ?? 0} continuity locks`)
+    transition('CONTRACT_READY', `Episode contract compiled with ${contract.lore_constraints?.continuity_locks.length ?? 0} continuity locks`)
 
     if (mode === 'contract-only') {
       transition('COMPLETED', 'Contract-only mode — stopping')
@@ -217,14 +217,14 @@ export async function orchestrateEpisode(
       return result
     }
 
-    // 5. Bible-aware plan
+    // 5. Lore-aware plan
     const plan = await buildEpisodePlan({
       contract,
       corpus,
       config,
       llm,
       selection,
-      bible,
+      lore,
       episodeContext,
     })
     result.plan = plan
@@ -313,22 +313,22 @@ export async function orchestrateEpisode(
     })
     result.validation = finalValidation
 
-    // 10. Bible validation
-    transition('BIBLE_VALIDATING', 'Running bible consistency checks')
-    const bibleValidation = validateAgainstBible({
+    // 10. Lore validation
+    transition('BIBLE_VALIDATING', 'Running lore consistency checks')
+    const loreValidation = validateAgainstLore({
       plan,
-      bible,
+      lore,
       episodeContext,
       overarchingArc: series.overarching_arc,
       sceneDrafts,
     })
-    result.bibleValidation = bibleValidation
+    result.loreValidation = loreValidation
 
-    if (bibleValidation.overall_status === 'fail') {
-      // Bible validation failures are logged but don't block — user curates
+    if (loreValidation.overall_status === 'fail') {
+      // Lore validation failures are logged but don't block — user curates
       events.push({
         state,
-        message: `Bible validation failed: ${bibleValidation.checks.filter((c) => c.status === 'fail').map((c) => c.type).join(', ')}`,
+        message: `Lore validation failed: ${loreValidation.checks.filter((c) => c.status === 'fail').map((c) => c.type).join(', ')}`,
         timestamp: new Date().toISOString(),
       })
     }
@@ -338,7 +338,7 @@ export async function orchestrateEpisode(
     const stateDelta = extractStateDelta({
       plan,
       episodeId: generateEpisodeId(request.slot_number, request.candidate_label),
-      bible,
+      lore,
     })
     result.stateDelta = stateDelta
 
@@ -440,7 +440,7 @@ export async function orchestrateEpisode(
 // ---------------------------------------------------------------------------
 
 /**
- * Canonize an episode: validate its delta against the bible, merge it in,
+ * Canonize an episode: validate its delta against the lore, merge it in,
  * create a snapshot, and update the series.
  *
  * This is called after the user selects a candidate for a slot.
@@ -452,7 +452,7 @@ export async function canonizeEpisodeFromDisk(
   candidateLabel: string,
 ): Promise<{ success: boolean; errors: string[]; warnings: string[] }> {
   const series = await loadSeries(baseDir, seriesId)
-  const bible = await loadBible(baseDir, seriesId)
+  const lore = await loadLore(baseDir, seriesId)
 
   // Load the episode
   const episodeId = generateEpisodeId(slotNumber, candidateLabel)
@@ -472,8 +472,8 @@ export async function canonizeEpisodeFromDisk(
     return { success: false, errors: [`Could not load state delta for ${episodeId}`], warnings: [] }
   }
 
-  // Validate delta against bible
-  const deltaValidation = validateDeltaAgainstBible(bible, stateDelta)
+  // Validate delta against lore
+  const deltaValidation = validateDeltaAgainstLore(lore, stateDelta)
   if (!deltaValidation.valid) {
     return {
       success: false,
@@ -509,22 +509,22 @@ export async function canonizeEpisodeFromDisk(
   }
 
   // Apply canonization
-  const { bible: updatedBible, snapshot, series: updatedSeries } =
+  const { lore: updatedLore, snapshot, series: updatedSeries } =
     applyCanonicalization(series, episode, stateDelta)
 
-  // Validate updated bible
-  const bibleValidation = validateBible(updatedBible)
+  // Validate updated lore
+  const loreValidation = validateLore(updatedLore)
 
   // Persist everything
-  await saveBible(baseDir, seriesId, updatedBible)
+  await saveLore(baseDir, seriesId, updatedLore)
   await saveSnapshot(baseDir, seriesId, snapshot)
   await saveSeries(baseDir, updatedSeries)
   await saveEpisode(baseDir, seriesId, episode)
 
   return {
     success: true,
-    errors: bibleValidation.errors,
-    warnings: [...deltaValidation.warnings, ...bibleValidation.warnings],
+    errors: loreValidation.errors,
+    warnings: [...deltaValidation.warnings, ...loreValidation.warnings],
   }
 }
 
@@ -534,7 +534,7 @@ export async function canonizeEpisodeFromDisk(
 
 function buildEpisodeArcContext(
   series: Series,
-  bible: StoryBible,
+  lore: StoryLore,
   request: EpisodeRequest,
 ): EpisodeArcContext {
   const arc = series.overarching_arc
@@ -553,7 +553,7 @@ function buildEpisodeArcContext(
   }
 
   // Collect open threads
-  const openThreads = bible.plot_threads.filter(
+  const openThreads = lore.plot_threads.filter(
     (t) => t.status === 'open' || t.status === 'progressing',
   )
 

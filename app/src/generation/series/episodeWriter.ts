@@ -1,9 +1,9 @@
 /**
- * Episode Writer: extends the standard writer prompt with bible context
+ * Episode Writer: extends the standard writer prompt with lore context
  * for series-mode episode generation.
  *
  * Adds to the writer prompt:
- * - Bible context block: key characters, their current state, relationships, knowledge
+ * - Lore context block: key characters, their current state, relationships, knowledge
  * - Canon history summary: brief recap of recent canon episodes
  * - Plot thread context: active threads and their last status
  * - World rules: established facts the writer must respect
@@ -19,9 +19,9 @@ import type {
 } from '../artifacts/types.ts'
 import { buildWriterPrompt } from '../agents/writerAgent.ts'
 import type {
-  StoryBible,
+  StoryLore,
   EpisodeArcContext,
-  BibleCharacter,
+  LoreCharacter,
   PlotThread,
   CanonTimeline,
 } from './types.ts'
@@ -31,7 +31,7 @@ import type {
 // ---------------------------------------------------------------------------
 
 export interface EpisodeWriterContext {
-  bible: StoryBible
+  lore: StoryLore
   episodeContext: EpisodeArcContext
   canonTimeline: CanonTimeline
   /** Maximum number of recent episodes to include in the recap. */
@@ -39,9 +39,9 @@ export interface EpisodeWriterContext {
 }
 
 /**
- * Build a bible-aware writer prompt for an episode scene.
+ * Build a lore-aware writer prompt for an episode scene.
  *
- * Extends the standard prompt with bible context injected between
+ * Extends the standard prompt with lore context injected between
  * the system message and user message.
  */
 export function buildEpisodeWriterPrompt(
@@ -52,33 +52,33 @@ export function buildEpisodeWriterPrompt(
   plan?: StoryPlan | null,
   priorScenes?: Scene[],
 ): LLMMessage[] {
-  const { bible, episodeContext, canonTimeline, maxRecentEpisodes = 5 } = episodeWriterContext
+  const { lore, episodeContext, canonTimeline, maxRecentEpisodes = 5 } = episodeWriterContext
 
   // 1. Get the standard prompt
   const baseMessages = buildWriterPrompt(scene, beat, contract, plan, priorScenes)
 
-  // 2. Build the bible context block
-  const bibleBlock = buildBibleContextBlock(bible, episodeContext, canonTimeline, maxRecentEpisodes)
+  // 2. Build the lore context block
+  const loreBlock = buildLoreContextBlock(lore, episodeContext, canonTimeline, maxRecentEpisodes)
 
-  // 3. Insert bible context as a system message between the existing system and user messages
+  // 3. Insert lore context as a system message between the existing system and user messages
   const systemMsg = baseMessages[0]  // system
   const userMsg = baseMessages[1]    // user
 
   return [
     {
       ...systemMsg,
-      content: systemMsg.content + '\n\n' + bibleBlock,
+      content: systemMsg.content + '\n\n' + loreBlock,
     },
     userMsg,
   ]
 }
 
 // ---------------------------------------------------------------------------
-// Bible context block
+// Lore context block
 // ---------------------------------------------------------------------------
 
-function buildBibleContextBlock(
-  bible: StoryBible,
+function buildLoreContextBlock(
+  lore: StoryLore,
   episodeContext: EpisodeArcContext,
   canonTimeline: CanonTimeline,
   maxRecentEpisodes: number,
@@ -92,16 +92,16 @@ function buildBibleContextBlock(
   sections.push(buildCanonRecap(canonTimeline, maxRecentEpisodes))
 
   // 3. Key characters
-  sections.push(buildCharacterSection(bible))
+  sections.push(buildCharacterSection(lore))
 
   // 4. Active plot threads
   sections.push(buildThreadSection(episodeContext))
 
   // 5. World rules
-  sections.push(buildWorldRulesSection(bible))
+  sections.push(buildWorldRulesSection(lore))
 
   // 6. Continuity notes
-  sections.push(buildContinuitySection(bible))
+  sections.push(buildContinuitySection(lore))
 
   sections.push('=== END BIBLE CONTEXT ===')
 
@@ -143,14 +143,14 @@ function buildCanonRecap(canonTimeline: CanonTimeline, maxRecent: number): strin
   return lines.join('\n')
 }
 
-function buildCharacterSection(bible: StoryBible): string {
-  if (bible.characters.length === 0) {
+function buildCharacterSection(lore: StoryLore): string {
+  if (lore.characters.length === 0) {
     return '--- Characters ---\nNo established characters.'
   }
 
   const lines = ['--- Characters ---']
-  const living = bible.characters.filter((c) => c.status === 'alive')
-  const dead = bible.characters.filter((c) => c.status === 'dead')
+  const living = lore.characters.filter((c) => c.status === 'alive')
+  const dead = lore.characters.filter((c) => c.status === 'dead')
 
   for (const char of living) {
     lines.push(formatCharacter(char))
@@ -163,7 +163,7 @@ function buildCharacterSection(bible: StoryBible): string {
   return lines.join('\n')
 }
 
-function formatCharacter(char: BibleCharacter): string {
+function formatCharacter(char: LoreCharacter): string {
   const parts = [`  ${char.name} [${char.role}] — ${char.description ?? 'no description'}`]
 
   if (char.traits.length > 0) {
@@ -223,35 +223,35 @@ function buildThreadSection(episodeContext: EpisodeArcContext): string {
   return lines.join('\n')
 }
 
-function buildWorldRulesSection(bible: StoryBible): string {
-  if (bible.world_rules.length === 0) {
+function buildWorldRulesSection(lore: StoryLore): string {
+  if (lore.world_rules.length === 0) {
     return '--- World Rules ---\nNo established world rules.'
   }
 
   const lines = ['--- World Rules (MUST NOT violate) ---']
-  for (const rule of bible.world_rules) {
+  for (const rule of lore.world_rules) {
     lines.push(`  - ${rule.rule}`)
   }
   return lines.join('\n')
 }
 
-function buildContinuitySection(bible: StoryBible): string {
+function buildContinuitySection(lore: StoryLore): string {
   const notes: string[] = []
 
   // Dead characters
-  const dead = bible.characters.filter((c) => c.status === 'dead')
+  const dead = lore.characters.filter((c) => c.status === 'dead')
   if (dead.length > 0) {
     notes.push(`DEAD (cannot appear alive): ${dead.map((c) => c.name).join(', ')}`)
   }
 
   // Destroyed places
-  const destroyed = bible.places.filter((p) => p.status === 'destroyed')
+  const destroyed = lore.places.filter((p) => p.status === 'destroyed')
   if (destroyed.length > 0) {
     notes.push(`DESTROYED (cannot be used as settings): ${destroyed.map((p) => p.name).join(', ')}`)
   }
 
   // Resolved threads
-  const resolved = bible.plot_threads.filter((t) => t.status === 'resolved')
+  const resolved = lore.plot_threads.filter((t) => t.status === 'resolved')
   if (resolved.length > 0) {
     notes.push(`RESOLVED (cannot be reopened): ${resolved.map((t) => t.title).join(', ')}`)
   }

@@ -1,10 +1,10 @@
 /**
- * Bible Viewer Panel — displays the current state of the Story Bible:
+ * Lore Viewer Panel — displays the current state of the Story Lore:
  * characters (alive/dead), places, objects, factions, world rules.
  */
 
 import { useState } from 'react'
-import type { StoryBible, BibleCharacter, BiblePlace, BibleObject, PlotThread } from '../types.ts'
+import type { StoryLore, LoreCharacter, LorePlace, LoreObject, PlotThread } from '../types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -51,7 +51,7 @@ function SectionHeader({ title, count, tab, activeTab, onSelect }: {
 // Character list
 // ---------------------------------------------------------------------------
 
-function CharacterList({ characters }: { characters: BibleCharacter[] }) {
+function CharacterList({ characters }: { characters: LoreCharacter[] }) {
   const alive = characters.filter((c) => c.status === 'alive')
   const other = characters.filter((c) => c.status !== 'alive')
 
@@ -68,7 +68,7 @@ function CharacterList({ characters }: { characters: BibleCharacter[] }) {
   )
 }
 
-function CharacterRow({ character: c }: { character: BibleCharacter }) {
+function CharacterRow({ character: c }: { character: LoreCharacter }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -113,7 +113,7 @@ function CharacterRow({ character: c }: { character: BibleCharacter }) {
 // Place list
 // ---------------------------------------------------------------------------
 
-function PlaceList({ places }: { places: BiblePlace[] }) {
+function PlaceList({ places }: { places: LorePlace[] }) {
   return (
     <div>
       {places.map((p) => (
@@ -139,7 +139,7 @@ function PlaceList({ places }: { places: BiblePlace[] }) {
 // Object list
 // ---------------------------------------------------------------------------
 
-function ObjectList({ objects }: { objects: BibleObject[] }) {
+function ObjectList({ objects }: { objects: LoreObject[] }) {
   return (
     <div>
       {objects.map((o) => (
@@ -168,7 +168,7 @@ function ObjectList({ objects }: { objects: BibleObject[] }) {
 // World rules
 // ---------------------------------------------------------------------------
 
-function WorldRulesList({ rules }: { rules: StoryBible['world_rules'] }) {
+function WorldRulesList({ rules }: { rules: StoryLore['world_rules'] }) {
   return (
     <div>
       {rules.map((r) => (
@@ -188,29 +188,29 @@ function WorldRulesList({ rules }: { rules: StoryBible['world_rules'] }) {
 // Main panel
 // ---------------------------------------------------------------------------
 
-interface BibleViewerPanelProps {
-  bible: StoryBible
+interface LoreViewerPanelProps {
+  lore: StoryLore
 }
 
-export function BibleViewerPanel({ bible }: BibleViewerPanelProps) {
+export function LoreViewerPanel({ lore }: LoreViewerPanelProps) {
   const [activeTab, setActiveTab] = useState('characters')
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Tab bar */}
       <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', flexShrink: 0, overflowX: 'auto' }}>
-        <SectionHeader title="Characters" count={bible.characters.length} tab="characters" activeTab={activeTab} onSelect={setActiveTab} />
-        <SectionHeader title="Places" count={bible.places.length} tab="places" activeTab={activeTab} onSelect={setActiveTab} />
-        <SectionHeader title="Objects" count={bible.objects.length} tab="objects" activeTab={activeTab} onSelect={setActiveTab} />
-        <SectionHeader title="Rules" count={bible.world_rules.length} tab="rules" activeTab={activeTab} onSelect={setActiveTab} />
+        <SectionHeader title="Characters" count={lore.characters.length} tab="characters" activeTab={activeTab} onSelect={setActiveTab} />
+        <SectionHeader title="Places" count={lore.places.length} tab="places" activeTab={activeTab} onSelect={setActiveTab} />
+        <SectionHeader title="Objects" count={lore.objects.length} tab="objects" activeTab={activeTab} onSelect={setActiveTab} />
+        <SectionHeader title="Rules" count={lore.world_rules.length} tab="rules" activeTab={activeTab} onSelect={setActiveTab} />
       </div>
 
       {/* Content */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '12px 14px' }}>
-        {activeTab === 'characters' && <CharacterList characters={bible.characters} />}
-        {activeTab === 'places' && <PlaceList places={bible.places} />}
-        {activeTab === 'objects' && <ObjectList objects={bible.objects} />}
-        {activeTab === 'rules' && <WorldRulesList rules={bible.world_rules} />}
+        {activeTab === 'characters' && <CharacterList characters={lore.characters} />}
+        {activeTab === 'places' && <PlaceList places={lore.places} />}
+        {activeTab === 'objects' && <ObjectList objects={lore.objects} />}
+        {activeTab === 'rules' && <WorldRulesList rules={lore.world_rules} />}
       </div>
     </div>
   )

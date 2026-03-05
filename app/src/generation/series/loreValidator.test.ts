@@ -1,17 +1,17 @@
 /**
- * Tests for the bible consistency validator.
+ * Tests for the lore consistency validator.
  */
 import { describe, it, expect } from 'vitest'
-import { validateAgainstBible } from './bibleValidator.ts'
-import type { BibleValidationInput } from './bibleValidator.ts'
-import type { StoryBible, EpisodeArcContext, OverarchingArc } from './types.ts'
+import { validateAgainstLore } from './loreValidator.ts'
+import type { LoreValidationInput } from './loreValidator.ts'
+import type { StoryLore, EpisodeArcContext, OverarchingArc } from './types.ts'
 import type { StoryPlan, Scene, PhaseGuideline } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
 // Fixtures
 // ---------------------------------------------------------------------------
 
-function makeBible(): StoryBible {
+function makeLore(): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2026-01-01T00:00:00Z',
@@ -136,7 +136,7 @@ function makeScene(overrides: Partial<Scene> = {}): Scene {
 // Tests
 // ---------------------------------------------------------------------------
 
-describe('validateAgainstBible', () => {
+describe('validateAgainstLore', () => {
   it('passes when no violations exist', () => {
     const scene = makeScene({
       moment: {
@@ -147,9 +147,9 @@ describe('validateAgainstBible', () => {
       },
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([scene]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     })
@@ -167,14 +167,14 @@ describe('validateAgainstBible', () => {
       },
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([scene]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     })
 
-    const mortalityCheck = result.checks.find((c) => c.type === 'bible_mortality')
+    const mortalityCheck = result.checks.find((c) => c.type === 'lore_mortality')
     expect(mortalityCheck!.status).toBe('fail')
     expect(result.overall_status).toBe('fail')
   })
@@ -189,14 +189,14 @@ describe('validateAgainstBible', () => {
       },
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([scene]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     })
 
-    const locationCheck = result.checks.find((c) => c.type === 'bible_location')
+    const locationCheck = result.checks.find((c) => c.type === 'lore_location')
     expect(locationCheck!.status).toBe('warn')
   })
 
@@ -212,14 +212,14 @@ describe('validateAgainstBible', () => {
       },
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([scene]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     })
 
-    const locationCheck = result.checks.find((c) => c.type === 'bible_location')
+    const locationCheck = result.checks.find((c) => c.type === 'lore_location')
     expect(locationCheck!.status).toBe('pass')
   })
 
@@ -233,14 +233,14 @@ describe('validateAgainstBible', () => {
       },
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([scene]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     })
 
-    const custodyCheck = result.checks.find((c) => c.type === 'bible_custody')
+    const custodyCheck = result.checks.find((c) => c.type === 'lore_custody')
     expect(custodyCheck!.status).toBe('warn')
   })
 
@@ -249,14 +249,14 @@ describe('validateAgainstBible', () => {
       thread_priorities: [],  // No priorities at all
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([makeScene()]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: ctx,
       overarchingArc: makeOverarchingArc(),
     })
 
-    const threadCheck = result.checks.find((c) => c.type === 'bible_thread_consistency')
+    const threadCheck = result.checks.find((c) => c.type === 'lore_thread_consistency')
     expect(threadCheck!.status).toBe('warn')
     expect(threadCheck!.details.some((d) => d.includes('Critical Crisis'))).toBe(true)
   })
@@ -266,14 +266,14 @@ describe('validateAgainstBible', () => {
       arc_advancement_target: 'HJ_N04_THRESHOLD',  // skips HJ_N03_MENTOR
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([makeScene()]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: ctx,
       overarchingArc: makeOverarchingArc(),
     })
 
-    const arcCheck = result.checks.find((c) => c.type === 'bible_arc_progress')
+    const arcCheck = result.checks.find((c) => c.type === 'lore_arc_progress')
     expect(arcCheck!.status).toBe('warn')
     expect(arcCheck!.details.some((d) => d.includes('skip'))).toBe(true)
   })
@@ -283,14 +283,14 @@ describe('validateAgainstBible', () => {
       arc_advancement_target: 'HJ_N99_UNKNOWN',
     })
 
-    const result = validateAgainstBible({
+    const result = validateAgainstLore({
       plan: makePlan([makeScene()]),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: ctx,
       overarchingArc: makeOverarchingArc(),
     })
 
-    const arcCheck = result.checks.find((c) => c.type === 'bible_arc_progress')
+    const arcCheck = result.checks.find((c) => c.type === 'lore_arc_progress')
     expect(arcCheck!.status).toBe('fail')
   })
 })

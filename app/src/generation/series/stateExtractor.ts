@@ -5,22 +5,22 @@
  * Extends the logic of `computeElementState` from validationEngine.ts to
  * produce a full StateDelta rather than an internal snapshot. The delta
  * captures all character, place, object, faction, and plot thread changes
- * introduced by an episode, ready to be merged into the Story Bible.
+ * introduced by an episode, ready to be merged into the Story Lore.
  */
 
 import type { StoryPlan, Scene, RosterEntry, ElementRoster } from '../artifacts/types.ts'
 import type { ChangeType } from '../../types/timeline.ts'
 import type {
   StateDelta,
-  BibleCharacter,
-  BiblePlace,
-  BibleObject,
-  BibleFaction,
+  LoreCharacter,
+  LorePlace,
+  LoreObject,
+  LoreFaction,
   PlotThread,
   CharacterUpdate,
   PlaceUpdate,
   ObjectUpdate,
-  StoryBible,
+  StoryLore,
   CharacterArcMilestone,
 } from './types.ts'
 import type { CharacterRole, PlaceType, ObjectType, ArcType } from '../../types/elements.ts'
@@ -34,8 +34,8 @@ export interface ExtractionInput {
   plan: StoryPlan
   /** The episode ID this delta belongs to. */
   episodeId: string
-  /** The current bible state (to distinguish new vs. existing entities). */
-  bible: StoryBible
+  /** The current lore state (to distinguish new vs. existing entities). */
+  lore: StoryLore
   /** Scene drafts (scene_id → prose), used for future LLM-based extraction. */
   sceneDrafts?: Map<string, string>
 }
@@ -49,7 +49,7 @@ export interface ExtractionInput {
  * extraction path could enhance this with semantic analysis of prose.
  */
 export function extractStateDelta(input: ExtractionInput): StateDelta {
-  const { plan, episodeId, bible } = input
+  const { plan, episodeId, lore } = input
   const now = new Date().toISOString()
 
   const roster = plan.element_roster
@@ -61,9 +61,9 @@ export function extractStateDelta(input: ExtractionInput): StateDelta {
   const allTransitions = collectTransitions(plan.scenes)
 
   // Determine which entities are new vs. existing
-  const existingCharIds = new Set(bible.characters.map((c) => c.id))
-  const existingPlaceIds = new Set(bible.places.map((p) => p.id))
-  const existingObjectIds = new Set(bible.objects.map((o) => o.id))
+  const existingCharIds = new Set(lore.characters.map((c) => c.id))
+  const existingPlaceIds = new Set(lore.places.map((p) => p.id))
+  const existingObjectIds = new Set(lore.objects.map((o) => o.id))
 
   // Process characters
   const { introduced: charsIntro, updates: charUpdates } = processCharacters(
@@ -152,17 +152,17 @@ function processCharacters(
   existingIds: Set<string>,
   episodeId: string,
   scenes: Scene[],
-): { introduced: BibleCharacter[]; updates: CharacterUpdate[] } {
-  const introduced: BibleCharacter[] = []
+): { introduced: LoreCharacter[]; updates: CharacterUpdate[] } {
+  const introduced: LoreCharacter[] = []
   const updates: CharacterUpdate[] = []
 
   for (const entry of rosterChars) {
     const entityTransitions = transitions.filter((t) => t.entity_id === entry.id)
 
     if (!existingIds.has(entry.id)) {
-      // New character — create a full BibleCharacter
-      const bibleChar = rosterEntryToBibleCharacter(entry, episodeId, entityTransitions, scenes)
-      introduced.push(bibleChar)
+      // New character — create a full LoreCharacter
+      const loreChar = rosterEntryToLoreCharacter(entry, episodeId, entityTransitions, scenes)
+      introduced.push(loreChar)
     } else if (entityTransitions.length > 0) {
       // Existing character with transitions — create an update
       const update = buildCharacterUpdate(entry.id, entityTransitions, episodeId, scenes)
@@ -173,12 +173,12 @@ function processCharacters(
   return { introduced, updates }
 }
 
-function rosterEntryToBibleCharacter(
+function rosterEntryToLoreCharacter(
   entry: RosterEntry,
   episodeId: string,
   transitions: CollectedTransition[],
   scenes: Scene[],
-): BibleCharacter {
+): LoreCharacter {
   const isDead = transitions.some((t) => t.change === 'dies')
   const knowledge = transitions
     .filter((t) => t.change === 'learns')
@@ -222,7 +222,7 @@ function buildCharacterUpdate(
   episodeId: string,
   scenes: Scene[],
 ): CharacterUpdate {
-  const changes: Partial<BibleCharacter> = {
+  const changes: Partial<LoreCharacter> = {
     last_appeared_in: episodeId,
   }
 
@@ -263,8 +263,8 @@ function processPlaces(
   existingIds: Set<string>,
   episodeId: string,
   scenes: Scene[],
-): { introduced: BiblePlace[]; updates: PlaceUpdate[] } {
-  const introduced: BiblePlace[] = []
+): { introduced: LorePlace[]; updates: PlaceUpdate[] } {
+  const introduced: LorePlace[] = []
   const updates: PlaceUpdate[] = []
 
   for (const entry of rosterPlaces) {
@@ -306,8 +306,8 @@ function processObjects(
   existingIds: Set<string>,
   episodeId: string,
   _scenes: Scene[],
-): { introduced: BibleObject[]; updates: ObjectUpdate[] } {
-  const introduced: BibleObject[] = []
+): { introduced: LoreObject[]; updates: ObjectUpdate[] } {
+  const introduced: LoreObject[] = []
   const updates: ObjectUpdate[] = []
 
   for (const entry of rosterObjects) {
@@ -339,7 +339,7 @@ function processObjects(
       // Existing object with custody changes
       const lastGain = [...objectTransitions].reverse().find((t) => t.change === 'gains')
       const lastLose = [...objectTransitions].reverse().find((t) => t.change === 'loses')
-      const changes: Partial<BibleObject> = {}
+      const changes: Partial<LoreObject> = {}
 
       if (lastGain && (!lastLose || lastGain.scene_index > lastLose.scene_index)) {
         changes.current_holder = lastGain.entity_id

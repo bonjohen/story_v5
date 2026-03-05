@@ -2,16 +2,16 @@ import { describe, it, expect } from 'vitest'
 import {
   exportSeriesToMarkdown,
   exportEpisodeToMarkdown,
-  exportBibleToMarkdown,
+  exportLoreToMarkdown,
   exportTimelineToMarkdown,
 } from './seriesExporter.ts'
-import type { Series, StoryBible, Episode } from './types.ts'
+import type { Series, StoryLore, Episode } from './types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-function makeBible(overrides: Partial<StoryBible> = {}): StoryBible {
+function makeLore(overrides: Partial<StoryLore> = {}): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2025-01-01T00:00:00Z',
@@ -47,7 +47,7 @@ function makeSeries(overrides: Partial<Series> = {}): Series {
       remaining_phases: ['HJ_N03'],
       advancement_mode: 'hybrid',
     },
-    bible: makeBible({
+    lore: makeLore({
       characters: [
         {
           id: 'c1', name: 'Hero', role: 'protagonist', traits: ['brave'], motivations: ['justice'],
@@ -117,11 +117,11 @@ describe('seriesExporter', () => {
       expect(md).toContain("Hero's Journey")
     })
 
-    it('includes bible summary when enabled', () => {
+    it('includes lore summary when enabled', () => {
       const series = makeSeries()
-      const md = exportSeriesToMarkdown(series, new Map(), { includeBibleSummary: true })
+      const md = exportSeriesToMarkdown(series, new Map(), { includeLoreSummary: true })
 
-      expect(md).toContain('## Story Bible Summary')
+      expect(md).toContain('## Story Lore Summary')
       expect(md).toContain('Hero')
     })
 
@@ -165,9 +165,9 @@ describe('seriesExporter', () => {
     })
   })
 
-  describe('exportBibleToMarkdown', () => {
+  describe('exportLoreToMarkdown', () => {
     it('formats characters correctly', () => {
-      const bible = makeBible({
+      const lore = makeLore({
         characters: [
           {
             id: 'c1', name: 'Hero', role: 'protagonist', traits: ['brave'],
@@ -177,27 +177,27 @@ describe('seriesExporter', () => {
           },
         ],
       })
-      const md = exportBibleToMarkdown(bible)
+      const md = exportLoreToMarkdown(lore)
 
       expect(md).toContain('**Hero** (protagonist) [alive]')
       expect(md).toContain('brave')
     })
 
-    it('handles empty bible', () => {
-      const bible = makeBible()
-      const md = exportBibleToMarkdown(bible)
+    it('handles empty lore', () => {
+      const lore = makeLore()
+      const md = exportLoreToMarkdown(lore)
 
       expect(md).toContain('No characters recorded')
       expect(md).toContain('No places recorded')
     })
 
     it('includes world rules', () => {
-      const bible = makeBible({
+      const lore = makeLore({
         world_rules: [
           { id: 'r1', rule: 'Magic requires sacrifice', established_in: 'EP_001_a', source: 'narrative' },
         ],
       })
-      const md = exportBibleToMarkdown(bible)
+      const md = exportLoreToMarkdown(lore)
 
       expect(md).toContain('Magic requires sacrifice')
     })

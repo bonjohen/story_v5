@@ -8,7 +8,7 @@
 
 import type {
   Series,
-  StoryBible,
+  StoryLore,
   PlotThread,
   OverarchingArc,
   ThreadPriority,
@@ -60,13 +60,13 @@ const DEFAULT_ESCALATION: EscalationConfig = {
  * Compute age and staleness info for all open/progressing threads.
  */
 export function computeThreadAges(
-  bible: StoryBible,
+  lore: StoryLore,
   canonTimeline: CanonTimeline,
 ): ThreadAgeInfo[] {
   const canonEpisodeIds = canonTimeline.episodes.map((e) => e.episode_id)
   const totalCanon = canonEpisodeIds.length
 
-  return bible.plot_threads
+  return lore.plot_threads
     .filter((t) => t.status === 'open' || t.status === 'progressing')
     .map((thread) => {
       // Age: episodes since introduction
@@ -107,11 +107,11 @@ export function computeThreadAges(
  * without progression. Does not mutate — returns proposed changes.
  */
 export function proposeUrgencyEscalations(
-  bible: StoryBible,
+  lore: StoryLore,
   canonTimeline: CanonTimeline,
   config: EscalationConfig = DEFAULT_ESCALATION,
 ): Array<{ thread_id: string; current_urgency: PlotThread['urgency']; proposed_urgency: PlotThread['urgency'] }> {
-  const ages = computeThreadAges(bible, canonTimeline)
+  const ages = computeThreadAges(lore, canonTimeline)
   const escalations: Array<{
     thread_id: string
     current_urgency: PlotThread['urgency']
@@ -143,20 +143,20 @@ export function proposeUrgencyEscalations(
 }
 
 /**
- * Apply urgency escalations to the bible's plot threads.
- * Returns a new bible (immutable).
+ * Apply urgency escalations to the lore's plot threads.
+ * Returns a new lore (immutable).
  */
 export function applyUrgencyEscalations(
-  bible: StoryBible,
+  lore: StoryLore,
   escalations: Array<{ thread_id: string; proposed_urgency: PlotThread['urgency'] }>,
-): StoryBible {
-  if (escalations.length === 0) return bible
+): StoryLore {
+  if (escalations.length === 0) return lore
 
   const escalationMap = new Map(escalations.map((e) => [e.thread_id, e.proposed_urgency]))
 
   return {
-    ...bible,
-    plot_threads: bible.plot_threads.map((t) => {
+    ...lore,
+    plot_threads: lore.plot_threads.map((t) => {
       const proposed = escalationMap.get(t.id)
       if (proposed) return { ...t, urgency: proposed }
       return t
@@ -180,10 +180,10 @@ export interface ThreadHealthMetrics {
  * Compute thread health metrics for the series.
  */
 export function computeThreadHealth(
-  bible: StoryBible,
+  lore: StoryLore,
   canonTimeline: CanonTimeline,
 ): ThreadHealthMetrics {
-  const ages = computeThreadAges(bible, canonTimeline)
+  const ages = computeThreadAges(lore, canonTimeline)
   const totalOpen = ages.length
   if (totalOpen === 0) {
     return { total_open: 0, recently_progressed: 0, stalled_count: 0, critical_count: 0, health_ratio: 1.0, status: 'healthy' }
@@ -220,11 +220,11 @@ export function computeThreadHealth(
  * urgency, staleness, and arc phase.
  */
 export function suggestThreadPriorities(
-  bible: StoryBible,
+  lore: StoryLore,
   canonTimeline: CanonTimeline,
   maxThreads: number = 4,
 ): ThreadPriority[] {
-  const ages = computeThreadAges(bible, canonTimeline)
+  const ages = computeThreadAges(lore, canonTimeline)
   const priorities: ThreadPriority[] = []
 
   // Sort by urgency (critical first), then by staleness
@@ -276,7 +276,7 @@ export function suggestArcAdvancement(
   archetypeGraph: StoryGraph,
 ): ArcAdvancementSuggestion {
   const arc = series.overarching_arc
-  const { bible, canon_timeline } = series
+  const { lore, canon_timeline } = series
 
   // Find the current phase node in the archetype graph
   const currentNode = archetypeGraph.nodes.find((n) => n.node_id === arc.current_phase)
@@ -314,7 +314,7 @@ export function suggestArcAdvancement(
     }
 
     // Check thread resolutions as milestone indicators
-    const resolvedInPhase = bible.plot_threads.filter((t) => {
+    const resolvedInPhase = lore.plot_threads.filter((t) => {
       if (t.status !== 'resolved' || !t.resolved_in) return false
       return canon_timeline.episodes.some(
         (e) => e.episode_id === t.resolved_in && e.overarching_phase === arc.current_phase,
@@ -326,7 +326,7 @@ export function suggestArcAdvancement(
     }
 
     // Check character arc milestones
-    const milestonesInPhase = bible.characters.flatMap((c) =>
+    const milestonesInPhase = lore.characters.flatMap((c) =>
       c.arc_milestones.filter((m) =>
         canon_timeline.episodes.some(
           (e) => e.episode_id === m.episode_id && e.overarching_phase === arc.current_phase,
@@ -343,7 +343,7 @@ export function suggestArcAdvancement(
   if (nextNode && nextNode.entry_conditions.length > 0) {
     totalConditions += nextNode.entry_conditions.length
     // Basic heuristic: if there are alive characters and open threads, we can proceed
-    const aliveChars = bible.characters.filter((c) => c.status === 'alive').length
+    const aliveChars = lore.characters.filter((c) => c.status === 'alive').length
     if (aliveChars > 0) {
       conditionsMet++
       reasons.push(`${aliveChars} alive character(s) can carry the arc forward`)
@@ -546,7 +546,7 @@ export function getSeriesStatus(series: Series): SeriesStatusSummary {
   const completedPhases = arc.phase_history.filter((p) => p.exited_at_episode).length
   const arcProgress = totalPhases > 0 ? completedPhases / totalPhases : 0
 
-  const threadHealth = computeThreadHealth(series.bible, series.canon_timeline)
+  const threadHealth = computeThreadHealth(series.lore, series.canon_timeline)
 
   const nextSlot = series.slots.length > 0
     ? Math.max(...series.slots.map((s) => s.slot_number)) + 1

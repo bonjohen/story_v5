@@ -3,7 +3,7 @@
  */
 import { describe, it, expect, beforeEach } from 'vitest'
 import { useSeriesStore } from './seriesStore.ts'
-import type { Series, StoryBible, OverarchingArc, CanonTimeline } from '../types.ts'
+import type { Series, StoryLore, OverarchingArc, CanonTimeline } from '../types.ts'
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -32,7 +32,7 @@ function makeSeries(): Series {
       remaining_phases: ['HJ_N03_MENTOR'],
       advancement_mode: 'hybrid',
     },
-    bible: {
+    lore: {
       schema_version: '1.0.0',
       last_updated: '2026-01-03T00:00:00Z',
       last_updated_by: 'EP_003_a',

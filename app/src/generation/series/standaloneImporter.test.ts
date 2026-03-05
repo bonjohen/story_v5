@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   buildSeriesConfigFromRun,
-  buildInitialBibleFromRun,
+  buildInitialLoreFromRun,
   buildEpisodeFromRun,
   type StandaloneRunData,
 } from './standaloneImporter.ts'
@@ -65,47 +65,47 @@ describe('standaloneImporter', () => {
       expect(config.description).toBe('Custom description')
     })
 
-    it('includes initial bible from run', () => {
+    it('includes initial lore from run', () => {
       const run = makeRunData()
       const config = buildSeriesConfigFromRun(run, {
         archetype_spine_nodes: ['HJ_N01'],
       })
 
-      expect(config.initial_bible).toBeDefined()
-      expect(config.initial_bible!.characters).toHaveLength(2)
-      expect(config.initial_bible!.places).toHaveLength(2)
-      expect(config.initial_bible!.objects).toHaveLength(1)
+      expect(config.initial_lore).toBeDefined()
+      expect(config.initial_lore!.characters).toHaveLength(2)
+      expect(config.initial_lore!.places).toHaveLength(2)
+      expect(config.initial_lore!.objects).toHaveLength(1)
     })
   })
 
-  describe('buildInitialBibleFromRun', () => {
-    it('converts run characters to bible characters', () => {
+  describe('buildInitialLoreFromRun', () => {
+    it('converts run characters to lore characters', () => {
       const run = makeRunData()
-      const bible = buildInitialBibleFromRun(run)
+      const lore = buildInitialLoreFromRun(run)
 
-      expect(bible.characters).toHaveLength(2)
-      expect(bible.characters![0].name).toBe('Arin')
-      expect(bible.characters![0].status).toBe('alive')
-      expect(bible.characters![0].introduced_in).toBe('EP_001_a')
-      expect(bible.characters![0].traits).toEqual(['brave', 'curious'])
+      expect(lore.characters).toHaveLength(2)
+      expect(lore.characters![0].name).toBe('Arin')
+      expect(lore.characters![0].status).toBe('alive')
+      expect(lore.characters![0].introduced_in).toBe('EP_001_a')
+      expect(lore.characters![0].traits).toEqual(['brave', 'curious'])
     })
 
-    it('converts run places to bible places', () => {
+    it('converts run places to lore places', () => {
       const run = makeRunData()
-      const bible = buildInitialBibleFromRun(run)
+      const lore = buildInitialLoreFromRun(run)
 
-      expect(bible.places).toHaveLength(2)
-      expect(bible.places![0].name).toBe('Village of Thane')
-      expect(bible.places![0].status).toBe('extant')
+      expect(lore.places).toHaveLength(2)
+      expect(lore.places![0].name).toBe('Village of Thane')
+      expect(lore.places![0].status).toBe('extant')
     })
 
-    it('converts run objects to bible objects', () => {
+    it('converts run objects to lore objects', () => {
       const run = makeRunData()
-      const bible = buildInitialBibleFromRun(run)
+      const lore = buildInitialLoreFromRun(run)
 
-      expect(bible.objects).toHaveLength(1)
-      expect(bible.objects![0].name).toBe('Starstone')
-      expect(bible.objects![0].status).toBe('intact')
+      expect(lore.objects).toHaveLength(1)
+      expect(lore.objects![0].name).toBe('Starstone')
+      expect(lore.objects![0].status).toBe('intact')
     })
 
     it('handles empty arrays in run characters', () => {
@@ -114,10 +114,10 @@ describe('standaloneImporter', () => {
           { id: 'c1', name: 'Simple', role: 'protagonist' },
         ],
       })
-      const bible = buildInitialBibleFromRun(run)
+      const lore = buildInitialLoreFromRun(run)
 
-      expect(bible.characters![0].traits).toEqual([])
-      expect(bible.characters![0].motivations).toEqual([])
+      expect(lore.characters![0].traits).toEqual([])
+      expect(lore.characters![0].motivations).toEqual([])
     })
   })
 

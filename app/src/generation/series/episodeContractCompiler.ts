@@ -1,8 +1,8 @@
 /**
  * Episode Contract Compiler: extends the standard contract compiler with
- * bible awareness for series-mode episode generation.
+ * lore awareness for series-mode episode generation.
  *
- * Wraps the existing compileContract() and adds bible-derived constraint
+ * Wraps the existing compileContract() and adds lore-derived constraint
  * sections: existing characters, world rules, plot thread obligations,
  * arc phase constraints, and continuity locks.
  */
@@ -12,18 +12,18 @@ import type {
   StoryContract,
   LoadedCorpus,
   GenerationConfig,
-  ContractBibleCharacter,
+  ContractLoreCharacter,
   ContractWorldRule,
   ContractThreadObligation,
   ContractArcPhaseContext,
-  ContractBibleConstraints,
+  ContractLoreConstraints,
 } from '../artifacts/types.ts'
 import { compileContract } from '../engine/contractCompiler.ts'
 import type {
   EpisodeRequest,
-  StoryBible,
+  StoryLore,
   EpisodeArcContext,
-  BibleCharacter,
+  LoreCharacter,
   PlotThread,
   OverarchingArc,
 } from './types.ts'
@@ -37,61 +37,61 @@ export interface EpisodeContractInput {
   request: EpisodeRequest
   corpus: LoadedCorpus
   config: GenerationConfig
-  bible: StoryBible
+  lore: StoryLore
   episodeContext: EpisodeArcContext
   overarchingArc: OverarchingArc
 }
 
 /**
- * Compile a bible-aware StoryContract for an episode.
+ * Compile a lore-aware StoryContract for an episode.
  *
  * Delegates to the standard compileContract for base sections, then
- * overlays bible-derived constraints.
+ * overlays lore-derived constraints.
  */
 export function compileEpisodeContract(input: EpisodeContractInput): StoryContract {
-  const { selection, request, corpus, config, bible, episodeContext, overarchingArc } = input
+  const { selection, request, corpus, config, lore, episodeContext, overarchingArc } = input
 
   // 1. Build the standard contract
   const baseContract = compileContract(selection, request, corpus, config)
 
-  // 2. Build bible constraints
-  const bibleConstraints = buildBibleConstraints(bible, episodeContext, overarchingArc)
+  // 2. Build lore constraints
+  const loreConstraints = buildLoreConstraints(lore, episodeContext, overarchingArc)
 
-  // 3. Extend global boundaries with bible-derived musts/must_nots
+  // 3. Extend global boundaries with lore-derived musts/must_nots
   const extendedBoundaries = {
     ...baseContract.global_boundaries,
     musts: [
       ...baseContract.global_boundaries.musts,
-      ...buildBibleMusts(bible, episodeContext),
+      ...buildLoreMusts(lore, episodeContext),
     ],
     must_nots: [
       ...baseContract.global_boundaries.must_nots,
-      ...buildBibleMustNots(bible),
+      ...buildLoreMustNots(lore),
     ],
   }
 
   return {
     ...baseContract,
     global_boundaries: extendedBoundaries,
-    bible_constraints: bibleConstraints,
+    lore_constraints: loreConstraints,
   }
 }
 
 // ---------------------------------------------------------------------------
-// Bible constraints builder
+// Lore constraints builder
 // ---------------------------------------------------------------------------
 
-function buildBibleConstraints(
-  bible: StoryBible,
+function buildLoreConstraints(
+  lore: StoryLore,
   episodeContext: EpisodeArcContext,
   overarchingArc: OverarchingArc,
-): ContractBibleConstraints {
+): ContractLoreConstraints {
   return {
-    characters: buildCharacterConstraints(bible),
-    world_rules: buildWorldRuleConstraints(bible),
+    characters: buildCharacterConstraints(lore),
+    world_rules: buildWorldRuleConstraints(lore),
     thread_obligations: buildThreadObligations(episodeContext),
     arc_phase: buildArcPhaseContext(episodeContext, overarchingArc),
-    continuity_locks: buildContinuityLocks(bible),
+    continuity_locks: buildContinuityLocks(lore),
   }
 }
 
@@ -99,8 +99,8 @@ function buildBibleConstraints(
 // Character constraints
 // ---------------------------------------------------------------------------
 
-function buildCharacterConstraints(bible: StoryBible): ContractBibleCharacter[] {
-  return bible.characters.map((char) => ({
+function buildCharacterConstraints(lore: StoryLore): ContractLoreCharacter[] {
+  return lore.characters.map((char) => ({
     id: char.id,
     name: char.name,
     role: char.role,
@@ -115,8 +115,8 @@ function buildCharacterConstraints(bible: StoryBible): ContractBibleCharacter[] 
 // World rules
 // ---------------------------------------------------------------------------
 
-function buildWorldRuleConstraints(bible: StoryBible): ContractWorldRule[] {
-  return bible.world_rules.map((rule) => ({
+function buildWorldRuleConstraints(lore: StoryLore): ContractWorldRule[] {
+  return lore.world_rules.map((rule) => ({
     id: rule.id,
     rule: rule.rule,
     source: rule.source,
@@ -164,32 +164,32 @@ function buildArcPhaseContext(
 // Continuity locks
 // ---------------------------------------------------------------------------
 
-function buildContinuityLocks(bible: StoryBible): string[] {
+function buildContinuityLocks(lore: StoryLore): string[] {
   const locks: string[] = []
 
   // Dead characters are locked
-  for (const char of bible.characters) {
+  for (const char of lore.characters) {
     if (char.status === 'dead') {
       locks.push(`Character '${char.name}' (${char.id}) is dead — cannot appear alive`)
     }
   }
 
   // Destroyed places are locked
-  for (const place of bible.places) {
+  for (const place of lore.places) {
     if (place.status === 'destroyed') {
       locks.push(`Place '${place.name}' (${place.id}) is destroyed — cannot be used as active setting`)
     }
   }
 
   // Destroyed objects are locked
-  for (const obj of bible.objects) {
+  for (const obj of lore.objects) {
     if (obj.status === 'destroyed') {
       locks.push(`Object '${obj.name}' (${obj.id}) is destroyed — cannot be used`)
     }
   }
 
   // Resolved threads are locked
-  for (const thread of bible.plot_threads) {
+  for (const thread of lore.plot_threads) {
     if (thread.status === 'resolved') {
       locks.push(`Plot thread '${thread.title}' (${thread.id}) is resolved — cannot be reopened`)
     }
@@ -199,11 +199,11 @@ function buildContinuityLocks(bible: StoryBible): string[] {
 }
 
 // ---------------------------------------------------------------------------
-// Bible-derived boundary extensions
+// Lore-derived boundary extensions
 // ---------------------------------------------------------------------------
 
-function buildBibleMusts(
-  bible: StoryBible,
+function buildLoreMusts(
+  lore: StoryLore,
   episodeContext: EpisodeArcContext,
 ): string[] {
   const musts: string[] = []
@@ -224,25 +224,25 @@ function buildBibleMusts(
   }
 
   // World rules
-  for (const rule of bible.world_rules) {
+  for (const rule of lore.world_rules) {
     musts.push(`World rule: ${rule.rule}`)
   }
 
   return musts
 }
 
-function buildBibleMustNots(bible: StoryBible): string[] {
+function buildLoreMustNots(lore: StoryLore): string[] {
   const mustNots: string[] = []
 
   // Dead characters cannot appear alive
-  for (const char of bible.characters) {
+  for (const char of lore.characters) {
     if (char.status === 'dead') {
       mustNots.push(`Dead character '${char.name}' must not appear as a living participant`)
     }
   }
 
   // Destroyed places cannot be active settings
-  for (const place of bible.places) {
+  for (const place of lore.places) {
     if (place.status === 'destroyed') {
       mustNots.push(`Destroyed place '${place.name}' must not be used as an active setting`)
     }

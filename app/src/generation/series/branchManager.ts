@@ -2,13 +2,13 @@
  * Branch Manager — creation, loading, and management of alternative continuations.
  *
  * A branch forks from a canon timeline at a specific episode, capturing
- * the bible state at that point and allowing independent episode generation.
+ * the lore state at that point and allowing independent episode generation.
  */
 
 import type {
   Branch,
   Series,
-  StoryBible,
+  StoryLore,
   StateSnapshot,
   CanonTimeline,
   OverarchingArc,
@@ -30,7 +30,7 @@ export interface CreateBranchInput {
 /**
  * Create a new branch forking from a specific point in the canon timeline.
  *
- * The branch receives a copy of the bible from the fork snapshot,
+ * The branch receives a copy of the lore from the fork snapshot,
  * and a copy of the canon timeline up to and including the fork episode.
  */
 export function createBranch(
@@ -65,7 +65,7 @@ export function createBranch(
     fork_point: fork_after_episode,
     fork_snapshot_id: fork_snapshot.snapshot_id,
     canon_timeline: branchTimeline,
-    bible: structuredClone(fork_snapshot.bible),
+    lore: structuredClone(fork_snapshot.lore),
   }
 }
 
@@ -112,9 +112,9 @@ export function getBranchDivergenceSlot(
 }
 
 /**
- * Compute a diff summary between the main bible and a branch's bible.
+ * Compute a diff summary between the main lore and a branch's lore.
  */
-export interface BibleDiffSummary {
+export interface LoreDiffSummary {
   characters_added: string[]
   characters_removed: string[]
   characters_changed: string[]
@@ -127,18 +127,18 @@ export interface BibleDiffSummary {
   threads_changed: string[]
 }
 
-export function computeBibleDiff(
-  mainBible: StoryBible,
-  branchBible: StoryBible,
-): BibleDiffSummary {
-  const mainCharIds = new Set(mainBible.characters.map((c) => c.id))
-  const branchCharIds = new Set(branchBible.characters.map((c) => c.id))
-  const mainPlaceIds = new Set(mainBible.places.map((p) => p.id))
-  const branchPlaceIds = new Set(branchBible.places.map((p) => p.id))
-  const mainObjIds = new Set(mainBible.objects.map((o) => o.id))
-  const branchObjIds = new Set(branchBible.objects.map((o) => o.id))
-  const mainThreadIds = new Set(mainBible.plot_threads.map((t) => t.id))
-  const branchThreadIds = new Set(branchBible.plot_threads.map((t) => t.id))
+export function computeLoreDiff(
+  mainLore: StoryLore,
+  branchLore: StoryLore,
+): LoreDiffSummary {
+  const mainCharIds = new Set(mainLore.characters.map((c) => c.id))
+  const branchCharIds = new Set(branchLore.characters.map((c) => c.id))
+  const mainPlaceIds = new Set(mainLore.places.map((p) => p.id))
+  const branchPlaceIds = new Set(branchLore.places.map((p) => p.id))
+  const mainObjIds = new Set(mainLore.objects.map((o) => o.id))
+  const branchObjIds = new Set(branchLore.objects.map((o) => o.id))
+  const mainThreadIds = new Set(mainLore.plot_threads.map((t) => t.id))
+  const branchThreadIds = new Set(branchLore.plot_threads.map((t) => t.id))
 
   // Characters
   const characters_added = [...branchCharIds].filter((id) => !mainCharIds.has(id))
@@ -146,8 +146,8 @@ export function computeBibleDiff(
   const characters_changed: string[] = []
   for (const id of mainCharIds) {
     if (!branchCharIds.has(id)) continue
-    const mainChar = mainBible.characters.find((c) => c.id === id)!
-    const branchChar = branchBible.characters.find((c) => c.id === id)!
+    const mainChar = mainLore.characters.find((c) => c.id === id)!
+    const branchChar = branchLore.characters.find((c) => c.id === id)!
     if (mainChar.status !== branchChar.status || mainChar.current_location !== branchChar.current_location) {
       characters_changed.push(id)
     }
@@ -167,8 +167,8 @@ export function computeBibleDiff(
   const threads_changed: string[] = []
   for (const id of mainThreadIds) {
     if (!branchThreadIds.has(id)) continue
-    const mainThread = mainBible.plot_threads.find((t) => t.id === id)!
-    const branchThread = branchBible.plot_threads.find((t) => t.id === id)!
+    const mainThread = mainLore.plot_threads.find((t) => t.id === id)!
+    const branchThread = branchLore.plot_threads.find((t) => t.id === id)!
     if (mainThread.status !== branchThread.status || mainThread.urgency !== branchThread.urgency) {
       threads_changed.push(id)
     }

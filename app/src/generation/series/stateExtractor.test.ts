@@ -4,13 +4,13 @@
 import { describe, it, expect } from 'vitest'
 import { extractStateDelta } from './stateExtractor.ts'
 import type { StoryPlan, Scene, RosterEntry, ElementRoster } from '../artifacts/types.ts'
-import type { StoryBible } from './types.ts'
+import type { StoryLore } from './types.ts'
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-function emptyBible(): StoryBible {
+function emptyLore(): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2026-01-01T00:00:00Z',
@@ -74,7 +74,7 @@ describe('extractStateDelta', () => {
     const delta = extractStateDelta({
       plan,
       episodeId: 'EP_001_a',
-      bible: emptyBible(),
+      lore: emptyLore(),
     })
 
     expect(delta.episode_id).toBe('EP_001_a')
@@ -104,7 +104,7 @@ describe('extractStateDelta', () => {
     const delta = extractStateDelta({
       plan: makePlan(roster, [scene]),
       episodeId: 'EP_001_a',
-      bible: emptyBible(),
+      lore: emptyLore(),
     })
 
     expect(delta.characters_introduced).toHaveLength(2)
@@ -116,8 +116,8 @@ describe('extractStateDelta', () => {
   })
 
   it('creates updates for existing characters with transitions', () => {
-    const bible = emptyBible()
-    bible.characters.push({
+    const lore = emptyLore()
+    lore.characters.push({
       id: 'char_hero',
       name: 'Arion',
       role: 'protagonist',
@@ -156,7 +156,7 @@ describe('extractStateDelta', () => {
     const delta = extractStateDelta({
       plan: makePlan(roster, [scene]),
       episodeId: 'EP_002_a',
-      bible,
+      lore,
     })
 
     expect(delta.characters_introduced).toHaveLength(0)
@@ -189,7 +189,7 @@ describe('extractStateDelta', () => {
     const delta = extractStateDelta({
       plan: makePlan(roster, [scene]),
       episodeId: 'EP_001_a',
-      bible: emptyBible(),
+      lore: emptyLore(),
     })
 
     expect(delta.characters_introduced).toHaveLength(1)
@@ -209,7 +209,7 @@ describe('extractStateDelta', () => {
     const delta = extractStateDelta({
       plan: makePlan(roster, [makeScene()]),
       episodeId: 'EP_001_a',
-      bible: emptyBible(),
+      lore: emptyLore(),
     })
 
     expect(delta.places_introduced).toHaveLength(1)
@@ -242,7 +242,7 @@ describe('extractStateDelta', () => {
     const delta = extractStateDelta({
       plan: makePlan(roster, [scene]),
       episodeId: 'EP_001_a',
-      bible: emptyBible(),
+      lore: emptyLore(),
     })
 
     expect(delta.objects_introduced).toHaveLength(1)
@@ -274,7 +274,7 @@ describe('extractStateDelta', () => {
     const delta = extractStateDelta({
       plan: makePlan(roster, [scene]),
       episodeId: 'EP_001_a',
-      bible: emptyBible(),
+      lore: emptyLore(),
     })
 
     expect(delta.threads_introduced.length).toBeGreaterThan(0)

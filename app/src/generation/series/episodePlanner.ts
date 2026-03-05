@@ -1,11 +1,11 @@
 /**
- * Episode Planner: extends the standard planner with bible awareness
+ * Episode Planner: extends the standard planner with lore awareness
  * for series-mode episode generation.
  *
  * Key differences from standard planning:
- * 1. Element roster is populated from the bible (not built from scratch)
+ * 1. Element roster is populated from the lore (not built from scratch)
  * 2. New characters are only added when the episode template calls for
- *    a role not yet filled in the bible
+ *    a role not yet filled in the lore
  * 3. Plot thread advancement is woven into beat planning
  * 4. Overarching arc context informs scene goals
  */
@@ -22,17 +22,17 @@ import type {
   LoadedCorpus,
   GenerationConfig,
   SelectionResult,
-  ContractBibleConstraints,
+  ContractLoreConstraints,
   ContractThreadObligation,
 } from '../artifacts/types.ts'
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import { buildPlan } from '../engine/planner.ts'
 import type {
-  StoryBible,
+  StoryLore,
   EpisodeArcContext,
-  BibleCharacter,
-  BiblePlace,
-  BibleObject,
+  LoreCharacter,
+  LorePlace,
+  LoreObject,
   PlotThread,
 } from './types.ts'
 
@@ -46,27 +46,27 @@ export interface EpisodePlannerOptions {
   config: GenerationConfig
   llm?: LLMAdapter | null
   selection?: SelectionResult | null
-  bible: StoryBible
+  lore: StoryLore
   episodeContext: EpisodeArcContext
 }
 
 /**
- * Build a bible-aware StoryPlan for an episode.
+ * Build a lore-aware StoryPlan for an episode.
  *
- * Uses the standard planner as the base, then overlays bible-derived
+ * Uses the standard planner as the base, then overlays lore-derived
  * element assignments, thread obligations, and arc context.
  */
 export async function buildEpisodePlan(options: EpisodePlannerOptions): Promise<StoryPlan> {
-  const { contract, corpus, config, llm, selection, bible, episodeContext } = options
+  const { contract, corpus, config, llm, selection, lore, episodeContext } = options
 
   // 1. Build the standard plan (beats, scenes, element roster from templates)
   const basePlan = await buildPlan({ contract, corpus, config, llm, selection })
 
-  // 2. Replace the element roster with a bible-sourced one
-  const bibleRoster = buildBibleRoster(bible, contract, basePlan.element_roster)
+  // 2. Replace the element roster with a lore-sourced one
+  const loreRoster = buildLoreRoster(lore, contract, basePlan.element_roster)
 
-  // 3. Re-populate scenes with bible element assignments
-  repopulateScenesWithBibleElements(basePlan.scenes, contract, bibleRoster, bible)
+  // 3. Re-populate scenes with lore element assignments
+  repopulateScenesWithLoreElements(basePlan.scenes, contract, loreRoster, lore)
 
   // 4. Weave plot thread obligations into scenes
   weaveThreadsIntoScenes(basePlan.scenes, basePlan.beats, episodeContext)
@@ -76,59 +76,59 @@ export async function buildEpisodePlan(options: EpisodePlannerOptions): Promise<
 
   return {
     ...basePlan,
-    element_roster: bibleRoster,
+    element_roster: loreRoster,
   }
 }
 
 // ---------------------------------------------------------------------------
-// Bible-sourced element roster
+// Lore-sourced element roster
 // ---------------------------------------------------------------------------
 
 /**
- * Build an element roster from the bible, supplementing with template
+ * Build an element roster from the lore, supplementing with template
  * entries for roles not yet filled.
  *
- * Characters/places/objects that exist in the bible are used directly.
- * Only roles from the archetype template that have no bible match get
+ * Characters/places/objects that exist in the lore are used directly.
+ * Only roles from the archetype template that have no lore match get
  * new placeholder entries (same as the standard planner would create).
  */
-function buildBibleRoster(
-  bible: StoryBible,
+function buildLoreRoster(
+  lore: StoryLore,
   contract: StoryContract,
   templateRoster?: ElementRoster,
 ): ElementRoster {
   const requirements = contract.element_requirements ?? []
 
-  // Collect bible characters keyed by role
-  const bibleCharsByRole = new Map<string, BibleCharacter>()
-  for (const char of bible.characters) {
+  // Collect lore characters keyed by role
+  const loreCharsByRole = new Map<string, LoreCharacter>()
+  for (const char of lore.characters) {
     if (char.status !== 'dead') {
       // Use the first living character for each role
-      if (!bibleCharsByRole.has(char.role)) {
-        bibleCharsByRole.set(char.role, char)
+      if (!loreCharsByRole.has(char.role)) {
+        loreCharsByRole.set(char.role, char)
       }
     }
   }
 
-  // Build character roster: prefer bible entries, fall back to template
+  // Build character roster: prefer lore entries, fall back to template
   const characters: RosterEntry[] = []
-  const usedBibleCharIds = new Set<string>()
+  const usedLoreCharIds = new Set<string>()
 
   for (const req of requirements.filter((r) => r.category === 'character')) {
-    const bibleChar = bibleCharsByRole.get(req.role_or_type)
-    if (bibleChar && !usedBibleCharIds.has(bibleChar.id)) {
+    const loreChar = loreCharsByRole.get(req.role_or_type)
+    if (loreChar && !usedLoreCharIds.has(loreChar.id)) {
       characters.push({
-        id: bibleChar.id,
-        name: bibleChar.name,
+        id: loreChar.id,
+        name: loreChar.name,
         category: 'character',
-        role_or_type: bibleChar.role,
-        description: bibleChar.description,
-        traits: bibleChar.traits,
-        motivations: bibleChar.motivations,
+        role_or_type: loreChar.role,
+        description: loreChar.description,
+        traits: loreChar.traits,
+        motivations: loreChar.motivations,
       })
-      usedBibleCharIds.add(bibleChar.id)
+      usedLoreCharIds.add(loreChar.id)
     } else {
-      // No bible match — use template placeholder
+      // No lore match — use template placeholder
       const templateEntry = templateRoster?.characters.find(
         (c) => c.role_or_type === req.role_or_type,
       )
@@ -146,53 +146,53 @@ function buildBibleRoster(
     }
   }
 
-  // Also include any bible characters involved in thread obligations
+  // Also include any lore characters involved in thread obligations
   // who aren't already in the roster
-  const bibleConstraints = contract.bible_constraints
-  if (bibleConstraints) {
-    for (const obligation of bibleConstraints.thread_obligations) {
+  const loreConstraints = contract.lore_constraints
+  if (loreConstraints) {
+    for (const obligation of loreConstraints.thread_obligations) {
       // Find characters related to the thread
-      const thread = bible.plot_threads.find((t) => t.id === obligation.thread_id)
+      const thread = lore.plot_threads.find((t) => t.id === obligation.thread_id)
       if (!thread) continue
       for (const charId of thread.related_characters) {
-        if (usedBibleCharIds.has(charId)) continue
-        const bibleChar = bible.characters.find((c) => c.id === charId)
-        if (bibleChar && bibleChar.status !== 'dead') {
+        if (usedLoreCharIds.has(charId)) continue
+        const loreChar = lore.characters.find((c) => c.id === charId)
+        if (loreChar && loreChar.status !== 'dead') {
           characters.push({
-            id: bibleChar.id,
-            name: bibleChar.name,
+            id: loreChar.id,
+            name: loreChar.name,
             category: 'character',
-            role_or_type: bibleChar.role,
-            description: bibleChar.description,
-            traits: bibleChar.traits,
-            motivations: bibleChar.motivations,
+            role_or_type: loreChar.role,
+            description: loreChar.description,
+            traits: loreChar.traits,
+            motivations: loreChar.motivations,
           })
-          usedBibleCharIds.add(bibleChar.id)
+          usedLoreCharIds.add(loreChar.id)
         }
       }
     }
   }
 
-  // Build place roster from bible
-  const biblePlacesByType = new Map<string, BiblePlace>()
-  for (const place of bible.places) {
+  // Build place roster from lore
+  const lorePlacesByType = new Map<string, LorePlace>()
+  for (const place of lore.places) {
     if (place.status !== 'destroyed') {
-      if (!biblePlacesByType.has(place.type)) {
-        biblePlacesByType.set(place.type, place)
+      if (!lorePlacesByType.has(place.type)) {
+        lorePlacesByType.set(place.type, place)
       }
     }
   }
 
   const places: RosterEntry[] = []
   for (const req of requirements.filter((r) => r.category === 'place')) {
-    const biblePlace = biblePlacesByType.get(req.role_or_type)
-    if (biblePlace) {
+    const lorePlace = lorePlacesByType.get(req.role_or_type)
+    if (lorePlace) {
       places.push({
-        id: biblePlace.id,
-        name: biblePlace.name,
+        id: lorePlace.id,
+        name: lorePlace.name,
         category: 'place',
-        role_or_type: biblePlace.type,
-        description: biblePlace.description,
+        role_or_type: lorePlace.type,
+        description: lorePlace.description,
       })
     } else {
       const templateEntry = templateRoster?.places.find(
@@ -208,26 +208,26 @@ function buildBibleRoster(
     }
   }
 
-  // Build object roster from bible
-  const bibleObjectsByType = new Map<string, BibleObject>()
-  for (const obj of bible.objects) {
+  // Build object roster from lore
+  const loreObjectsByType = new Map<string, LoreObject>()
+  for (const obj of lore.objects) {
     if (obj.status !== 'destroyed') {
-      if (!bibleObjectsByType.has(obj.type)) {
-        bibleObjectsByType.set(obj.type, obj)
+      if (!loreObjectsByType.has(obj.type)) {
+        loreObjectsByType.set(obj.type, obj)
       }
     }
   }
 
   const objects: RosterEntry[] = []
   for (const req of requirements.filter((r) => r.category === 'object')) {
-    const bibleObj = bibleObjectsByType.get(req.role_or_type)
-    if (bibleObj) {
+    const loreObj = loreObjectsByType.get(req.role_or_type)
+    if (loreObj) {
       objects.push({
-        id: bibleObj.id,
-        name: bibleObj.name,
+        id: loreObj.id,
+        name: loreObj.name,
         category: 'object',
-        role_or_type: bibleObj.type,
-        description: bibleObj.description,
+        role_or_type: loreObj.type,
+        description: loreObj.description,
       })
     } else {
       const templateEntry = templateRoster?.objects.find(
@@ -251,15 +251,15 @@ function buildBibleRoster(
 // ---------------------------------------------------------------------------
 
 /**
- * Re-populate scene elements using the bible roster instead of template entries.
+ * Re-populate scene elements using the lore roster instead of template entries.
  * Uses the same archetype node → requirement mapping as the standard planner,
- * but resolves against bible-sourced IDs.
+ * but resolves against lore-sourced IDs.
  */
-function repopulateScenesWithBibleElements(
+function repopulateScenesWithLoreElements(
   scenes: Scene[],
   contract: StoryContract,
   roster: ElementRoster,
-  bible: StoryBible,
+  lore: StoryLore,
 ): void {
   const requirements = contract.element_requirements ?? []
 
@@ -294,8 +294,8 @@ function repopulateScenesWithBibleElements(
 
       // Skip dead characters
       if (req.category === 'character') {
-        const bibleChar = bible.characters.find((c) => c.id === entry.id)
-        if (bibleChar && bibleChar.status === 'dead') continue
+        const loreChar = lore.characters.find((c) => c.id === entry.id)
+        if (loreChar && loreChar.status === 'dead') continue
       }
 
       sceneElements.push({
@@ -316,7 +316,7 @@ function repopulateScenesWithBibleElements(
       scene.setting = placeIds[0]
     }
 
-    // Update moment with bible element IDs
+    // Update moment with lore element IDs
     const momentId = `M${String(momentIndex).padStart(2, '0')}`
     scene.moment = {
       moment_id: momentId,

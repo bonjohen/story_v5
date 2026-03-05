@@ -4,7 +4,7 @@
  * All series data lives under outputs/series/{series_id}/.
  * Directory structure:
  *   series.json          — Series metadata, arc state, timeline
- *   bible.json           — Current bible state
+ *   lore.json           — Current lore state
  *   theme_tone.json      — Creative direction anchor
  *   snapshots/           — State snapshots at episode boundaries
  *   episodes/            — Episode slots and candidates
@@ -16,13 +16,13 @@ import path from 'node:path'
 import Ajv2020 from 'ajv/dist/2020.js'
 import addFormats from 'ajv-formats'
 import seriesSchema from './schema/series.schema.json'
-import bibleSchema from './schema/bible.schema.json'
+import loreSchema from './schema/lore.schema.json'
 import episodeSchema from './schema/episode.schema.json'
 import stateSnapshotSchema from './schema/state_snapshot.schema.json'
 
 import type {
   Series,
-  StoryBible,
+  StoryLore,
   Episode,
   StateSnapshot,
   StateDelta,
@@ -42,7 +42,7 @@ addFormats(ajv)
 
 const schemas = {
   series: ajv.compile(seriesSchema),
-  bible: ajv.compile(bibleSchema),
+  lore: ajv.compile(loreSchema),
   episode: ajv.compile(episodeSchema),
   state_snapshot: ajv.compile(stateSnapshotSchema),
 } as const
@@ -164,7 +164,7 @@ async function pathExists(p: string): Promise<boolean> {
 
 /**
  * Create a new series on disk from a SeriesConfig.
- * Initializes empty bible, canon timeline, and episode index.
+ * Initializes empty lore, canon timeline, and episode index.
  */
 export async function createSeries(
   baseDir: string,
@@ -193,7 +193,7 @@ export async function createSeries(
     advancement_mode: config.advancement_mode,
   }
 
-  const emptyBible: StoryBible = {
+  const emptyLore: StoryLore = {
     schema_version: '1.0.0',
     last_updated: now,
     last_updated_by: 'series_creation',
@@ -204,7 +204,7 @@ export async function createSeries(
     plot_threads: [],
     world_rules: [],
     event_log: [],
-    ...(config.initial_bible ?? {}),
+    ...(config.initial_lore ?? {}),
   }
 
   const series: Series = {
@@ -215,7 +215,7 @@ export async function createSeries(
     updated_at: now,
     theme_tone: themeTone,
     overarching_arc: overarchingArc,
-    bible: emptyBible,
+    lore: emptyLore,
     canon_timeline: { episodes: [] },
     episode_index: { episodes: [] },
     slots: [],
@@ -232,7 +232,7 @@ export async function createSeries(
   await fs.mkdir(branchesDir(baseDir, seriesId), { recursive: true })
 
   await writeJSON(path.join(sDir, 'series.json'), series)
-  await writeJSON(path.join(sDir, 'bible.json'), emptyBible)
+  await writeJSON(path.join(sDir, 'lore.json'), emptyLore)
   await writeJSON(path.join(sDir, 'theme_tone.json'), themeTone)
 
   // Write initial snapshot (SNAP_EP000 — before any episodes)
@@ -240,7 +240,7 @@ export async function createSeries(
     snapshot_id: 'SNAP_EP000',
     after_episode: 'none',
     created_at: now,
-    bible: emptyBible,
+    lore: emptyLore,
     overarching_arc: overarchingArc,
   }
   await writeJSON(
@@ -281,23 +281,23 @@ export async function listSeries(baseDir: string): Promise<string[]> {
 }
 
 // ---------------------------------------------------------------------------
-// Bible CRUD
+// Lore CRUD
 // ---------------------------------------------------------------------------
 
 /**
- * Load the current bible for a series.
+ * Load the current lore for a series.
  */
-export async function loadBible(baseDir: string, seriesId: string): Promise<StoryBible> {
+export async function loadLore(baseDir: string, seriesId: string): Promise<StoryLore> {
   const sDir = seriesDir(baseDir, seriesId)
-  return readJSON<StoryBible>(path.join(sDir, 'bible.json'))
+  return readJSON<StoryLore>(path.join(sDir, 'lore.json'))
 }
 
 /**
- * Save the bible for a series.
+ * Save the lore for a series.
  */
-export async function saveBible(baseDir: string, seriesId: string, bible: StoryBible): Promise<void> {
+export async function saveLore(baseDir: string, seriesId: string, lore: StoryLore): Promise<void> {
   const sDir = seriesDir(baseDir, seriesId)
-  await writeJSON(path.join(sDir, 'bible.json'), bible)
+  await writeJSON(path.join(sDir, 'lore.json'), lore)
 }
 
 // ---------------------------------------------------------------------------

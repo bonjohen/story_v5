@@ -1,12 +1,12 @@
 /**
  * Zustand store for series management UI.
- * Manages series list, current series, bible state, and episode candidates.
+ * Manages series list, current series, lore state, and episode candidates.
  */
 
 import { create } from 'zustand'
 import type {
   Series,
-  StoryBible,
+  StoryLore,
   Episode,
   EpisodeSlot,
   StateSnapshot,
@@ -114,8 +114,8 @@ export const useSeriesStore = create<SeriesStoreState>((set, get) => ({
 
   setCurrentSeries: (series: Series) => {
     const statusSummary = getSeriesStatus(series)
-    const threadHealth = computeThreadHealth(series.bible, series.canon_timeline)
-    const threadAges = computeThreadAges(series.bible, series.canon_timeline)
+    const threadHealth = computeThreadHealth(series.lore, series.canon_timeline)
+    const threadAges = computeThreadAges(series.lore, series.canon_timeline)
 
     set({
       currentSeries: series,

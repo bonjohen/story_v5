@@ -1,10 +1,10 @@
 /**
- * Tests for the bible-aware episode planner.
+ * Tests for the lore-aware episode planner.
  */
 import { describe, it, expect } from 'vitest'
 import { buildEpisodePlan } from './episodePlanner.ts'
 import type { EpisodePlannerOptions } from './episodePlanner.ts'
-import type { StoryBible, EpisodeArcContext } from './types.ts'
+import type { StoryLore, EpisodeArcContext } from './types.ts'
 import type { LoadedCorpus, GenerationConfig, SelectionResult, PhaseGuideline } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
@@ -82,7 +82,7 @@ function makeConfig(): GenerationConfig {
   }
 }
 
-function makeBibleWithHero(): StoryBible {
+function makeLoreWithHero(): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2026-01-01T00:00:00Z',
@@ -188,7 +188,7 @@ function makeEpisodeContext(): EpisodeArcContext {
 // ---------------------------------------------------------------------------
 
 describe('buildEpisodePlan', () => {
-  it('produces a plan with bible-sourced element roster', async () => {
+  it('produces a plan with lore-sourced element roster', async () => {
     const contract = {
       schema_version: '1.0.0',
       run_id: 'RUN_2026_01_01_0001',
@@ -228,13 +228,13 @@ describe('buildEpisodePlan', () => {
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
       selection: makeSelection(),
-      bible: makeBibleWithHero(),
+      lore: makeLoreWithHero(),
       episodeContext: makeEpisodeContext(),
     }
 
     const plan = await buildEpisodePlan(options)
 
-    // Should use bible character 'Arion' for protagonist
+    // Should use lore character 'Arion' for protagonist
     expect(plan.element_roster).toBeDefined()
     const protagonist = plan.element_roster!.characters.find((c) => c.role_or_type === 'protagonist')
     expect(protagonist).toBeDefined()
@@ -242,7 +242,7 @@ describe('buildEpisodePlan', () => {
     expect(protagonist!.name).toBe('Arion')
   })
 
-  it('uses bible places for roster', async () => {
+  it('uses lore places for roster', async () => {
     const contract = {
       schema_version: '1.0.0',
       run_id: 'RUN_2026_01_01_0001',
@@ -280,7 +280,7 @@ describe('buildEpisodePlan', () => {
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
       selection: makeSelection(),
-      bible: makeBibleWithHero(),
+      lore: makeLoreWithHero(),
       episodeContext: makeEpisodeContext(),
     })
 
@@ -325,7 +325,7 @@ describe('buildEpisodePlan', () => {
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
       selection: makeSelection(),
-      bible: makeBibleWithHero(),
+      lore: makeLoreWithHero(),
       episodeContext: makeEpisodeContext(),
     })
 
@@ -369,7 +369,7 @@ describe('buildEpisodePlan', () => {
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
       selection: makeSelection(),
-      bible: makeBibleWithHero(),
+      lore: makeLoreWithHero(),
       episodeContext: makeEpisodeContext(),
     })
 

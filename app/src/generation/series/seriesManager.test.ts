@@ -19,7 +19,7 @@ import {
   getOrCreateNextSlot,
   getSeriesStatus,
 } from './seriesManager.ts'
-import type { StoryBible, CanonTimeline, OverarchingArc, Series, PlotThread } from './types.ts'
+import type { StoryLore, CanonTimeline, OverarchingArc, Series, PlotThread } from './types.ts'
 import type { LoadedCorpus } from '../artifacts/types.ts'
 import type { StoryGraph } from '../../types/graph.ts'
 
@@ -54,7 +54,7 @@ function makeThread(overrides: Partial<PlotThread> = {}): PlotThread {
   }
 }
 
-function makeBible(threads: PlotThread[] = []): StoryBible {
+function makeLore(threads: PlotThread[] = []): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2026-01-01T00:00:00Z',
@@ -93,7 +93,7 @@ function makeArc(overrides: Partial<OverarchingArc> = {}): OverarchingArc {
 }
 
 function makeSeries(overrides: Partial<Series> = {}): Series {
-  const bible = makeBible([
+  const lore = makeLore([
     makeThread({ id: 'PT_001', title: 'Main Quest', urgency: 'high', status: 'open', introduced_in: 'EP_001_a', progressed_in: ['EP_002_a'] }),
     makeThread({ id: 'PT_002', title: 'Side Quest', urgency: 'low', status: 'open', introduced_in: 'EP_002_a', progressed_in: [] }),
   ])
@@ -115,7 +115,7 @@ function makeSeries(overrides: Partial<Series> = {}): Series {
       content_limits: [], style_notes: [],
     },
     overarching_arc: makeArc(),
-    bible,
+    lore,
     canon_timeline: timeline,
     episode_index: { episodes: [] },
     slots: [
@@ -224,14 +224,14 @@ describe('thread lifecycle', () => {
       { id: 'EP_002_a', phase: 'HJ_N01' },
       { id: 'EP_003_a', phase: 'HJ_N02' },
     ])
-    const bible = makeBible([
+    const lore = makeLore([
       makeThread({
         id: 'PT_001', introduced_in: 'EP_001_a',
         progressed_in: ['EP_002_a'],
       }),
     ])
 
-    const ages = computeThreadAges(bible, timeline)
+    const ages = computeThreadAges(lore, timeline)
     expect(ages).toHaveLength(1)
     expect(ages[0].age_in_episodes).toBe(3)
     expect(ages[0].episodes_since_progression).toBe(1)
@@ -245,14 +245,14 @@ describe('thread lifecycle', () => {
       { id: 'EP_003_a', phase: 'HJ_N02' },
       { id: 'EP_004_a', phase: 'HJ_N02' },
     ])
-    const bible = makeBible([
+    const lore = makeLore([
       makeThread({
         id: 'PT_001', urgency: 'high',
         introduced_in: 'EP_001_a', progressed_in: ['EP_001_a'],
       }),
     ])
 
-    const ages = computeThreadAges(bible, timeline)
+    const ages = computeThreadAges(lore, timeline)
     expect(ages[0].stalled).toBe(true)
     expect(ages[0].episodes_since_progression).toBe(3)
   })
@@ -264,14 +264,14 @@ describe('thread lifecycle', () => {
       { id: 'EP_003_a', phase: 'P' },
       { id: 'EP_004_a', phase: 'P' },
     ])
-    const bible = makeBible([
+    const lore = makeLore([
       makeThread({
         id: 'PT_001', urgency: 'low',
         introduced_in: 'EP_001_a', progressed_in: [],
       }),
     ])
 
-    const escalations = proposeUrgencyEscalations(bible, timeline, {
+    const escalations = proposeUrgencyEscalations(lore, timeline, {
       low_to_medium: 3, medium_to_high: 2, high_to_critical: 2,
     })
 
@@ -281,16 +281,16 @@ describe('thread lifecycle', () => {
   })
 
   it('applies escalations immutably', () => {
-    const bible = makeBible([
+    const lore = makeLore([
       makeThread({ id: 'PT_001', urgency: 'low' }),
     ])
 
-    const updated = applyUrgencyEscalations(bible, [
+    const updated = applyUrgencyEscalations(lore, [
       { thread_id: 'PT_001', proposed_urgency: 'medium' },
     ])
 
     expect(updated.plot_threads[0].urgency).toBe('medium')
-    expect(bible.plot_threads[0].urgency).toBe('low') // original unchanged
+    expect(lore.plot_threads[0].urgency).toBe('low') // original unchanged
   })
 
   it('computes thread health metrics', () => {
@@ -299,12 +299,12 @@ describe('thread lifecycle', () => {
       { id: 'EP_002_a', phase: 'P' },
       { id: 'EP_003_a', phase: 'P' },
     ])
-    const bible = makeBible([
+    const lore = makeLore([
       makeThread({ id: 'PT_001', urgency: 'critical', introduced_in: 'EP_001_a', progressed_in: [] }),
       makeThread({ id: 'PT_002', urgency: 'medium', introduced_in: 'EP_001_a', progressed_in: ['EP_003_a'] }),
     ])
 
-    const health = computeThreadHealth(bible, timeline)
+    const health = computeThreadHealth(lore, timeline)
     expect(health.total_open).toBe(2)
     expect(health.critical_count).toBe(1)
     expect(health.recently_progressed).toBe(1) // PT_002 progressed in last episode
@@ -316,12 +316,12 @@ describe('thread lifecycle', () => {
       { id: 'EP_001_a', phase: 'P' },
       { id: 'EP_002_a', phase: 'P' },
     ])
-    const bible = makeBible([
+    const lore = makeLore([
       makeThread({ id: 'PT_001', urgency: 'low', introduced_in: 'EP_001_a', progressed_in: [] }),
       makeThread({ id: 'PT_002', urgency: 'critical', introduced_in: 'EP_001_a', progressed_in: [] }),
     ])
 
-    const priorities = suggestThreadPriorities(bible, timeline)
+    const priorities = suggestThreadPriorities(lore, timeline)
     expect(priorities[0].thread_id).toBe('PT_002')
     expect(priorities[0].action).toBe('advance')
   })

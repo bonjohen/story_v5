@@ -146,7 +146,7 @@ function makeEpisodeRequest(seriesId: string): EpisodeRequest {
     series_id: seriesId,
     slot_number: 1,
     candidate_label: 'a',
-    bible_snapshot_id: 'SNAP_EP000',
+    lore_snapshot_id: 'SNAP_EP000',
     overarching_phase: 'HJ_N01_ORDINARY_WORLD',
     thread_priorities: [],
   }
@@ -178,12 +178,12 @@ describe('episodeOrchestrator', () => {
 
     expect(result.state).toBe('COMPLETED')
     expect(result.contract).toBeDefined()
-    expect(result.contract!.bible_constraints).toBeDefined()
+    expect(result.contract!.lore_constraints).toBeDefined()
     expect(events.some((e) => e.state === 'LOADING_BIBLE')).toBe(true)
     expect(events.some((e) => e.state === 'CONTRACT_READY')).toBe(true)
   })
 
-  it('completes outline mode with bible-aware plan', async () => {
+  it('completes outline mode with lore-aware plan', async () => {
     const series = await createSeries(tmpDir, makeSeriesConfig())
 
     const result = await orchestrateEpisode({
@@ -215,7 +215,7 @@ describe('episodeOrchestrator', () => {
     expect(result.episode!.canon_status).toBe('draft')
     expect(result.stateDelta).toBeDefined()
     expect(result.sceneDrafts).toBeDefined()
-    expect(result.bibleValidation).toBeDefined()
+    expect(result.loreValidation).toBeDefined()
   })
 
   it('persists episode to disk', async () => {

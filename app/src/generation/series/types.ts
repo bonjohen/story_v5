@@ -29,10 +29,10 @@ import type { StoryRequest, PhaseGuideline } from '../artifacts/types.ts'
 export type CanonStatus = 'draft' | 'canon' | 'alternate'
 
 // ---------------------------------------------------------------------------
-// Bible: Character
+// Lore: Character
 // ---------------------------------------------------------------------------
 
-export interface BibleRelationship {
+export interface LoreRelationship {
   target_id: string
   type: RelationshipType
   description: string
@@ -47,7 +47,7 @@ export interface CharacterArcMilestone {
   description: string
 }
 
-export interface BibleCharacter {
+export interface LoreCharacter {
   // Core identity (mirrors CharacterInstance)
   id: string
   name: string
@@ -57,7 +57,7 @@ export interface BibleCharacter {
   traits: string[]
   motivations: string[]
   arc_type: ArcType
-  relationships: BibleRelationship[]
+  relationships: LoreRelationship[]
 
   // Lifecycle tracking
   status: 'alive' | 'dead' | 'unknown' | 'transformed'
@@ -77,15 +77,15 @@ export interface BibleCharacter {
 }
 
 // ---------------------------------------------------------------------------
-// Bible: Place
+// Lore: Place
 // ---------------------------------------------------------------------------
 
-export interface BiblePlaceConnection {
+export interface LorePlaceConnection {
   target_id: string
   type: PlaceConnectionType
 }
 
-export interface BiblePlace {
+export interface LorePlace {
   id: string
   name: string
   aliases?: string[]
@@ -93,7 +93,7 @@ export interface BiblePlace {
   description: string
   rules?: string[]
   atmosphere?: string
-  connections?: BiblePlaceConnection[]
+  connections?: LorePlaceConnection[]
 
   // Lifecycle
   introduced_in: string
@@ -106,7 +106,7 @@ export interface BiblePlace {
 }
 
 // ---------------------------------------------------------------------------
-// Bible: Object
+// Lore: Object
 // ---------------------------------------------------------------------------
 
 export interface ObjectCustodyEntry {
@@ -116,7 +116,7 @@ export interface ObjectCustodyEntry {
   how: 'gained' | 'stolen' | 'given' | 'found' | 'inherited'
 }
 
-export interface BibleObject {
+export interface LoreObject {
   id: string
   name: string
   aliases?: string[]
@@ -136,10 +136,10 @@ export interface BibleObject {
 }
 
 // ---------------------------------------------------------------------------
-// Bible: Faction
+// Lore: Faction
 // ---------------------------------------------------------------------------
 
-export interface BibleFaction {
+export interface LoreFaction {
   id: string
   name: string
   aliases?: string[]
@@ -210,7 +210,7 @@ export interface WorldRule {
 // Event Log
 // ---------------------------------------------------------------------------
 
-export interface BibleEvent {
+export interface LoreEvent {
   event_id: string
   episode_id: string
   description: string
@@ -219,22 +219,22 @@ export interface BibleEvent {
 }
 
 // ---------------------------------------------------------------------------
-// Story Bible
+// Story Lore
 // ---------------------------------------------------------------------------
 
-export interface StoryBible {
+export interface StoryLore {
   schema_version: string
   last_updated: string               // ISO 8601
   last_updated_by: string            // episode_id that last changed it
 
-  characters: BibleCharacter[]
-  places: BiblePlace[]
-  objects: BibleObject[]
-  factions: BibleFaction[]
+  characters: LoreCharacter[]
+  places: LorePlace[]
+  objects: LoreObject[]
+  factions: LoreFaction[]
   plot_threads: PlotThread[]
 
   world_rules: WorldRule[]
-  event_log: BibleEvent[]
+  event_log: LoreEvent[]
 }
 
 // ---------------------------------------------------------------------------
@@ -301,7 +301,7 @@ export interface StateSnapshot {
   snapshot_id: string
   after_episode: string              // episode_id this follows
   created_at: string                 // ISO 8601
-  bible: StoryBible
+  lore: StoryLore
   overarching_arc: OverarchingArc
 }
 
@@ -311,7 +311,7 @@ export interface StateSnapshot {
 
 export interface CharacterUpdate {
   character_id: string
-  changes: Partial<BibleCharacter>
+  changes: Partial<LoreCharacter>
   transitions: Array<{
     change: ChangeType
     target?: string
@@ -321,17 +321,17 @@ export interface CharacterUpdate {
 
 export interface PlaceUpdate {
   place_id: string
-  changes: Partial<BiblePlace>
+  changes: Partial<LorePlace>
 }
 
 export interface ObjectUpdate {
   object_id: string
-  changes: Partial<BibleObject>
+  changes: Partial<LoreObject>
 }
 
 export interface FactionUpdate {
   faction_id: string
-  changes: Partial<BibleFaction>
+  changes: Partial<LoreFaction>
 }
 
 export interface ThreadUpdate {
@@ -350,19 +350,19 @@ export interface StateDelta {
   extracted_at: string               // ISO 8601
 
   // Character changes
-  characters_introduced: BibleCharacter[]
+  characters_introduced: LoreCharacter[]
   character_updates: CharacterUpdate[]
 
   // Place changes
-  places_introduced: BiblePlace[]
+  places_introduced: LorePlace[]
   place_updates: PlaceUpdate[]
 
   // Object changes
-  objects_introduced: BibleObject[]
+  objects_introduced: LoreObject[]
   object_updates: ObjectUpdate[]
 
   // Faction changes
-  factions_introduced?: BibleFaction[]
+  factions_introduced?: LoreFaction[]
   faction_updates?: FactionUpdate[]
 
   // Plot thread changes
@@ -446,7 +446,7 @@ export interface EpisodeRequest extends StoryRequest {
   slot_number: number
   candidate_label: string
 
-  bible_snapshot_id: string
+  lore_snapshot_id: string
   overarching_phase: string
   arc_advancement_target?: string
 
@@ -473,7 +473,7 @@ export interface Branch {
   fork_point: string                 // episode_id after which this diverges
   fork_snapshot_id: string
   canon_timeline: CanonTimeline
-  bible: StoryBible
+  lore: StoryLore
 }
 
 // ---------------------------------------------------------------------------
@@ -493,8 +493,8 @@ export interface Series {
   // Arcs
   overarching_arc: OverarchingArc
 
-  // Bible
-  bible: StoryBible
+  // Lore
+  lore: StoryLore
 
   // Canon timeline
   canon_timeline: CanonTimeline
@@ -530,8 +530,8 @@ export interface SeriesConfig {
   style_notes: string[]
   advancement_mode: ArcAdvancementMode
   corpus_hash: string
-  /** Optional initial bible seed (for manual seeding). */
-  initial_bible?: Partial<StoryBible>
+  /** Optional initial lore seed (for manual seeding). */
+  initial_lore: Partial<StoryLore>
   /** Archetype spine node IDs in order (for overarching arc). */
   archetype_spine_nodes: string[]
 }

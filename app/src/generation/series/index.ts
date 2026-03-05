@@ -2,31 +2,31 @@
  * Chapter Stories (Series) module — public API.
  *
  * This module provides:
- * - Types for Series, StoryBible, Episode, StateDelta, StateSnapshot, etc.
+ * - Types for Series, StoryLore, Episode, StateDelta, StateSnapshot, etc.
  * - File I/O for reading/writing series data to outputs/series/
  * - State extraction from episode plans
- * - Bible merge logic for canonization
- * - Bible validation for consistency checks
+ * - Lore merge logic for canonization
+ * - Lore validation for consistency checks
  */
 
 // Types
 export type {
   // Canon
   CanonStatus,
-  // Bible entities
-  BibleRelationship,
+  // Lore entities
+  LoreRelationship,
   CharacterArcMilestone,
-  BibleCharacter,
-  BiblePlaceConnection,
-  BiblePlace,
+  LoreCharacter,
+  LorePlaceConnection,
+  LorePlace,
   ObjectCustodyEntry,
-  BibleObject,
-  BibleFaction,
+  LoreObject,
+  LoreFaction,
   PlotThread,
   ThemeToneAnchor,
   WorldRule,
-  BibleEvent,
-  StoryBible,
+  LoreEvent,
+  StoryLore,
   // Arc
   ArcPhaseEntry,
   ArcAdvancementMode,
@@ -77,9 +77,9 @@ export {
   loadSeries,
   saveSeries,
   listSeries,
-  // Bible CRUD
-  loadBible,
-  saveBible,
+  // Lore CRUD
+  loadLore,
+  saveLore,
   // Snapshot CRUD
   saveSnapshot,
   loadSnapshot,
@@ -109,16 +109,16 @@ export {
   type ExtractionInput,
 } from './stateExtractor.ts'
 
-// Bible merge
+// Lore merge
 export {
-  mergeDeltaIntoBible,
+  mergeDeltaIntoLore,
   createSnapshot,
   canonizeEpisode,
   deCanonizeEpisode,
-  validateBible,
-  validateDeltaAgainstBible,
-  type BibleValidationResult,
-} from './bibleMerge.ts'
+  validateLore,
+  validateDeltaAgainstLore,
+  type LoreValidationResult,
+} from './loreMerge.ts'
 
 // Episode contract compiler
 export {
@@ -138,14 +138,14 @@ export {
   type EpisodeWriterContext,
 } from './episodeWriter.ts'
 
-// Bible validator
+// Lore validator
 export {
-  validateAgainstBible,
-  type BibleValidationCheck,
-  type BibleValidationCheckType,
-  type BibleValidationInput,
-  type BibleValidationResults,
-} from './bibleValidator.ts'
+  validateAgainstLore,
+  type LoreValidationCheck,
+  type LoreValidationCheckType,
+  type LoreValidationInput,
+  type LoreValidationResults,
+} from './loreValidator.ts'
 
 // Series manager
 export {
@@ -186,7 +186,7 @@ export {
 } from './episodeOrchestrator.ts'
 
 // Viewer panels
-export { BibleViewerPanel, type BibleViewerPanelProps } from './panels/BibleViewerPanel.tsx'
+export { LoreViewerPanel, type LoreViewerPanelProps } from './panels/LoreViewerPanel.tsx'
 export { ArcVisualizerPanel, type ArcVisualizerPanelProps } from './panels/ArcVisualizerPanel.tsx'
 export { ThreadTrackerPanel, type ThreadTrackerPanelProps } from './panels/ThreadTrackerPanel.tsx'
 
@@ -196,17 +196,17 @@ export {
   generateBranchId,
   listBranchIds,
   getBranchDivergenceSlot,
-  computeBibleDiff,
+  computeLoreDiff,
   isBranchDivergent,
   type CreateBranchInput,
-  type BibleDiffSummary,
+  type LoreDiffSummary,
 } from './branchManager.ts'
 
 // Series exporter
 export {
   exportSeriesToMarkdown,
   exportEpisodeToMarkdown,
-  exportBibleToMarkdown,
+  exportLoreToMarkdown,
   exportTimelineToMarkdown,
   type SeriesExportOptions,
 } from './seriesExporter.ts'
@@ -228,7 +228,7 @@ export {
 // Standalone importer
 export {
   buildSeriesConfigFromRun,
-  buildInitialBibleFromRun,
+  buildInitialLoreFromRun,
   buildEpisodeFromRun,
   type StandaloneRunData,
 } from './standaloneImporter.ts'

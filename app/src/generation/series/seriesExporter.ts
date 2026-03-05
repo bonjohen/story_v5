@@ -4,16 +4,16 @@
  * Supports exporting:
  * - Full series as a combined markdown document
  * - Individual episodes as standalone documents
- * - Series bible as a reference document
+ * - Series lore as a reference document
  * - Canon timeline as a summary document
  */
 
 import type {
   Series,
-  StoryBible,
+  StoryLore,
   Episode,
   CanonTimeline,
-  BibleCharacter,
+  LoreCharacter,
   PlotThread,
 } from './types.ts'
 
@@ -22,8 +22,8 @@ import type {
 // ---------------------------------------------------------------------------
 
 export interface SeriesExportOptions {
-  /** Include bible summary at the beginning */
-  includeBibleSummary?: boolean
+  /** Include lore summary at the beginning */
+  includeLoreSummary?: boolean
   /** Include plot thread status */
   includeThreadStatus?: boolean
   /** Include arc progress overview */
@@ -42,7 +42,7 @@ export function exportSeriesToMarkdown(
   options: SeriesExportOptions = {},
 ): string {
   const {
-    includeBibleSummary = true,
+    includeLoreSummary = true,
     includeThreadStatus = true,
     includeArcProgress = true,
     maxEpisodes = 0,
@@ -79,18 +79,18 @@ export function exportSeriesToMarkdown(
     lines.push('')
   }
 
-  // Bible summary
-  if (includeBibleSummary) {
-    lines.push('## Story Bible Summary')
+  // Lore summary
+  if (includeLoreSummary) {
+    lines.push('## Story Lore Summary')
     lines.push('')
-    lines.push(exportBibleToMarkdown(series.bible))
+    lines.push(exportLoreToMarkdown(series.lore))
     lines.push('---')
     lines.push('')
   }
 
   // Thread status
   if (includeThreadStatus) {
-    const activeThreads = series.bible.plot_threads.filter(
+    const activeThreads = series.lore.plot_threads.filter(
       (t) => t.status === 'open' || t.status === 'progressing',
     )
     if (activeThreads.length > 0) {
@@ -197,23 +197,23 @@ export function exportEpisodeToMarkdown(
 }
 
 // ---------------------------------------------------------------------------
-// Bible export
+// Lore export
 // ---------------------------------------------------------------------------
 
 /**
- * Export the story bible as a markdown reference document.
+ * Export the story lore as a markdown reference document.
  */
-export function exportBibleToMarkdown(bible: StoryBible): string {
+export function exportLoreToMarkdown(lore: StoryLore): string {
   const lines: string[] = []
 
   // Characters
   lines.push('### Characters')
   lines.push('')
-  if (bible.characters.length === 0) {
+  if (lore.characters.length === 0) {
     lines.push('*No characters recorded.*')
   } else {
-    const alive = bible.characters.filter((c) => c.status === 'alive')
-    const other = bible.characters.filter((c) => c.status !== 'alive')
+    const alive = lore.characters.filter((c) => c.status === 'alive')
+    const other = lore.characters.filter((c) => c.status !== 'alive')
     for (const c of alive) {
       lines.push(formatCharacterEntry(c))
     }
@@ -230,10 +230,10 @@ export function exportBibleToMarkdown(bible: StoryBible): string {
   // Places
   lines.push('### Places')
   lines.push('')
-  if (bible.places.length === 0) {
+  if (lore.places.length === 0) {
     lines.push('*No places recorded.*')
   } else {
-    for (const p of bible.places) {
+    for (const p of lore.places) {
       lines.push(`- **${p.name}** (${p.type}) [${p.status}] — ${p.description || 'No description'}`)
     }
   }
@@ -242,10 +242,10 @@ export function exportBibleToMarkdown(bible: StoryBible): string {
   // Objects
   lines.push('### Objects')
   lines.push('')
-  if (bible.objects.length === 0) {
+  if (lore.objects.length === 0) {
     lines.push('*No objects recorded.*')
   } else {
-    for (const o of bible.objects) {
+    for (const o of lore.objects) {
       const holder = o.current_holder ? ` (held by: ${o.current_holder})` : ''
       lines.push(`- **${o.name}** (${o.type}) [${o.status}]${holder} — ${o.significance}`)
     }
@@ -253,10 +253,10 @@ export function exportBibleToMarkdown(bible: StoryBible): string {
   lines.push('')
 
   // World rules
-  if (bible.world_rules.length > 0) {
+  if (lore.world_rules.length > 0) {
     lines.push('### World Rules')
     lines.push('')
-    for (const r of bible.world_rules) {
+    for (const r of lore.world_rules) {
       lines.push(`- ${r.rule} *(${r.source}, established in ${r.established_in})*`)
     }
     lines.push('')
@@ -265,7 +265,7 @@ export function exportBibleToMarkdown(bible: StoryBible): string {
   return lines.join('\n')
 }
 
-function formatCharacterEntry(c: BibleCharacter): string {
+function formatCharacterEntry(c: LoreCharacter): string {
   const location = c.current_location ? ` @ ${c.current_location}` : ''
   const traits = c.traits.length > 0 ? ` — ${c.traits.join(', ')}` : ''
   return `- **${c.name}** (${c.role}) [${c.status}]${location}${traits}`

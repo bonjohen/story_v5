@@ -1,5 +1,5 @@
 /**
- * Series Dashboard Page — shows arc progress, bible summary, thread overview,
+ * Series Dashboard Page — shows arc progress, lore summary, thread overview,
  * and episode timeline for a specific series.
  * Route: /series/:seriesId
  */
@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSeriesStore } from '../store/seriesStore.ts'
 import type { SeriesStatusSummary, ThreadAgeInfo, ThreadHealthMetrics } from '../seriesManager.ts'
-import type { Series, PlotThread, BibleCharacter, EpisodeSlot, CanonTimelineEntry } from '../types.ts'
-import { BibleViewerPanel } from '../panels/BibleViewerPanel.tsx'
+import type { Series, PlotThread, LoreCharacter, EpisodeSlot, CanonTimelineEntry } from '../types.ts'
+import { LoreViewerPanel } from '../panels/LoreViewerPanel.tsx'
 import { ArcVisualizerPanel } from '../panels/ArcVisualizerPanel.tsx'
 import { ThreadTrackerPanel } from '../panels/ThreadTrackerPanel.tsx'
 
@@ -154,7 +154,7 @@ function ThreadOverview({ series, threadAges, threadHealth }: {
   threadAges: ThreadAgeInfo[]
   threadHealth: ThreadHealthMetrics | null
 }) {
-  const openThreads = series.bible.plot_threads.filter(
+  const openThreads = series.lore.plot_threads.filter(
     (t) => t.status === 'open' || t.status === 'progressing',
   )
 
@@ -209,23 +209,23 @@ function ThreadOverview({ series, threadAges, threadHealth }: {
 }
 
 // ---------------------------------------------------------------------------
-// Bible Summary
+// Lore Summary
 // ---------------------------------------------------------------------------
 
-function BibleSummary({ series }: { series: Series }) {
-  const bible = series.bible
-  const alive = bible.characters.filter((c) => c.status === 'alive')
-  const dead = bible.characters.filter((c) => c.status === 'dead')
+function LoreSummary({ series }: { series: Series }) {
+  const lore = series.lore
+  const alive = lore.characters.filter((c) => c.status === 'alive')
+  const dead = lore.characters.filter((c) => c.status === 'dead')
 
   return (
     <Card>
-      <SectionHeader title="Story Bible" />
+      <SectionHeader title="Story Lore" />
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
-        <StatBox label="Characters" value={bible.characters.length} detail={`${alive.length} alive, ${dead.length} dead`} />
-        <StatBox label="Places" value={bible.places.length} />
-        <StatBox label="Objects" value={bible.objects.length} />
-        <StatBox label="World Rules" value={bible.world_rules.length} />
+        <StatBox label="Characters" value={lore.characters.length} detail={`${alive.length} alive, ${dead.length} dead`} />
+        <StatBox label="Places" value={lore.places.length} />
+        <StatBox label="Objects" value={lore.objects.length} />
+        <StatBox label="World Rules" value={lore.world_rules.length} />
       </div>
 
       {alive.length > 0 && (
@@ -407,16 +407,16 @@ function DashboardToolbar({ series }: { series: Series | null }) {
 }
 
 // ---------------------------------------------------------------------------
-// Detail panels (tabbed view of Bible, Arc, Threads)
+// Detail panels (tabbed view of Lore, Arc, Threads)
 // ---------------------------------------------------------------------------
 
-type DetailTab = 'bible' | 'arc' | 'threads'
+type DetailTab = 'lore' | 'arc' | 'threads'
 
 function DetailPanels({ series, threadAges }: { series: Series; threadAges: ThreadAgeInfo[] }) {
-  const [activeTab, setActiveTab] = useState<DetailTab>('bible')
+  const [activeTab, setActiveTab] = useState<DetailTab>('lore')
 
   const tabs: { key: DetailTab; label: string }[] = [
-    { key: 'bible', label: 'Story Bible' },
+    { key: 'lore', label: 'Story Lore' },
     { key: 'arc', label: 'Arc Progress' },
     { key: 'threads', label: 'Thread Tracker' },
   ]
@@ -450,12 +450,12 @@ function DetailPanels({ series, threadAges }: { series: Series; threadAges: Thre
       </div>
 
       <div style={{ minHeight: 300 }}>
-        {activeTab === 'bible' && <BibleViewerPanel bible={series.bible} />}
+        {activeTab === 'lore' && <LoreViewerPanel lore={series.lore} />}
         {activeTab === 'arc' && (
           <ArcVisualizerPanel arc={series.overarching_arc} timeline={series.canon_timeline} />
         )}
         {activeTab === 'threads' && (
-          <ThreadTrackerPanel threads={series.bible.plot_threads} threadAges={threadAges} />
+          <ThreadTrackerPanel threads={series.lore.plot_threads} threadAges={threadAges} />
         )}
       </div>
     </Card>
@@ -517,8 +517,8 @@ export function SeriesDashboardPage() {
               <ThreadOverview series={currentSeries} threadAges={threadAges} threadHealth={threadHealth} />
             </div>
 
-            {/* Bible summary */}
-            <BibleSummary series={currentSeries} />
+            {/* Lore summary */}
+            <LoreSummary series={currentSeries} />
 
             {/* Timeline and slots */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>

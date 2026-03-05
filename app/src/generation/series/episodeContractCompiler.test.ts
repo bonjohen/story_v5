@@ -1,10 +1,10 @@
 /**
- * Tests for the bible-aware episode contract compiler.
+ * Tests for the lore-aware episode contract compiler.
  */
 import { describe, it, expect } from 'vitest'
 import { compileEpisodeContract } from './episodeContractCompiler.ts'
 import type { EpisodeContractInput } from './episodeContractCompiler.ts'
-import type { StoryBible, EpisodeArcContext, EpisodeRequest, OverarchingArc } from './types.ts'
+import type { StoryLore, EpisodeArcContext, EpisodeRequest, OverarchingArc } from './types.ts'
 import type { SelectionResult, LoadedCorpus, GenerationConfig, PhaseGuideline } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
@@ -71,7 +71,7 @@ function makeConfig(): GenerationConfig {
   }
 }
 
-function makeBible(): StoryBible {
+function makeLore(): StoryLore {
   return {
     schema_version: '1.0.0',
     last_updated: '2026-01-01T00:00:00Z',
@@ -196,7 +196,7 @@ function makeRequest(): EpisodeRequest {
     series_id: 'SER_test',
     slot_number: 3,
     candidate_label: 'a',
-    bible_snapshot_id: 'SNAP_EP002',
+    lore_snapshot_id: 'SNAP_EP002',
     overarching_phase: 'HJ_N01_ORDINARY_WORLD',
     thread_priorities: [{ thread_id: 'PT_002_quest', action: 'advance' }],
   }
@@ -218,24 +218,24 @@ function makeOverarchingArc(): OverarchingArc {
 // ---------------------------------------------------------------------------
 
 describe('compileEpisodeContract', () => {
-  it('produces a contract with bible_constraints', () => {
+  it('produces a contract with lore_constraints', () => {
     const input: EpisodeContractInput = {
       selection: makeSelection(),
       request: makeRequest(),
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     }
 
     const contract = compileEpisodeContract(input)
 
-    expect(contract.bible_constraints).toBeDefined()
-    expect(contract.bible_constraints!.characters).toHaveLength(2)
-    expect(contract.bible_constraints!.world_rules).toHaveLength(1)
-    expect(contract.bible_constraints!.thread_obligations).toHaveLength(1)
-    expect(contract.bible_constraints!.arc_phase).toBeDefined()
+    expect(contract.lore_constraints).toBeDefined()
+    expect(contract.lore_constraints!.characters).toHaveLength(2)
+    expect(contract.lore_constraints!.world_rules).toHaveLength(1)
+    expect(contract.lore_constraints!.thread_obligations).toHaveLength(1)
+    expect(contract.lore_constraints!.arc_phase).toBeDefined()
   })
 
   it('marks dead characters as must_not_appear', () => {
@@ -244,14 +244,14 @@ describe('compileEpisodeContract', () => {
       request: makeRequest(),
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     }
 
     const contract = compileEpisodeContract(input)
 
-    const deadChar = contract.bible_constraints!.characters.find((c) => c.id === 'char_dead')
+    const deadChar = contract.lore_constraints!.characters.find((c) => c.id === 'char_dead')
     expect(deadChar).toBeDefined()
     expect(deadChar!.must_not_appear).toBe(true)
   })
@@ -262,25 +262,25 @@ describe('compileEpisodeContract', () => {
       request: makeRequest(),
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     }
 
     const contract = compileEpisodeContract(input)
 
-    expect(contract.bible_constraints!.continuity_locks.some((l) => l.includes('Fallen Warrior'))).toBe(true)
-    expect(contract.bible_constraints!.continuity_locks.some((l) => l.includes('Castle Dread'))).toBe(true)
-    expect(contract.bible_constraints!.continuity_locks.some((l) => l.includes('Missing Artifact'))).toBe(true)
+    expect(contract.lore_constraints!.continuity_locks.some((l) => l.includes('Fallen Warrior'))).toBe(true)
+    expect(contract.lore_constraints!.continuity_locks.some((l) => l.includes('Castle Dread'))).toBe(true)
+    expect(contract.lore_constraints!.continuity_locks.some((l) => l.includes('Missing Artifact'))).toBe(true)
   })
 
-  it('extends global boundaries with bible musts and must_nots', () => {
+  it('extends global boundaries with lore musts and must_nots', () => {
     const input: EpisodeContractInput = {
       selection: makeSelection(),
       request: makeRequest(),
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     }
@@ -303,14 +303,14 @@ describe('compileEpisodeContract', () => {
       request: makeRequest(),
       corpus: makeMinimalCorpus(),
       config: makeConfig(),
-      bible: makeBible(),
+      lore: makeLore(),
       episodeContext: makeEpisodeContext(),
       overarchingArc: makeOverarchingArc(),
     }
 
     const contract = compileEpisodeContract(input)
 
-    expect(contract.bible_constraints!.arc_phase!.current_phase_node_id).toBe('HJ_N01_ORDINARY_WORLD')
-    expect(contract.bible_constraints!.arc_phase!.current_phase_role).toBe('Departure')
+    expect(contract.lore_constraints!.arc_phase!.current_phase_node_id).toBe('HJ_N01_ORDINARY_WORLD')
+    expect(contract.lore_constraints!.arc_phase!.current_phase_role).toBe('Departure')
   })
 })

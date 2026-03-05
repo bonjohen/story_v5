@@ -2,7 +2,7 @@
  * Standalone Importer — import a standalone story run as Episode 1 of a new series.
  *
  * Takes the output of a single-run generation (from outputs/runs/) and
- * adapts it into the series Episode format, extracting an initial bible
+ * adapts it into the series Episode format, extracting an initial lore
  * from the story plan's element roster.
  */
 
@@ -10,10 +10,10 @@ import type {
   Episode,
   EpisodeArtifacts,
   EpisodeSummary,
-  StoryBible,
-  BibleCharacter,
-  BiblePlace,
-  BibleObject,
+  StoryLore,
+  LoreCharacter,
+  LorePlace,
+  LoreObject,
   StateDelta,
   SeriesConfig,
 } from './types.ts'
@@ -102,19 +102,19 @@ export function buildSeriesConfigFromRun(
     style_notes: [],
     advancement_mode: overrides.advancement_mode ?? 'hybrid',
     corpus_hash: '',
-    initial_bible: buildInitialBibleFromRun(run),
+    initial_lore: buildInitialLoreFromRun(run),
   }
 }
 
 /**
- * Build an initial StoryBible from a standalone run's element roster.
+ * Build an initial StoryLore from a standalone run's element roster.
  */
-export function buildInitialBibleFromRun(
+export function buildInitialLoreFromRun(
   run: StandaloneRunData,
-): Partial<StoryBible> {
+): Partial<StoryLore> {
   const episodeId = 'EP_001_a'
 
-  const characters: BibleCharacter[] = run.characters.map((c) => ({
+  const characters: LoreCharacter[] = run.characters.map((c) => ({
     id: c.id,
     name: c.name,
     role: c.role,
@@ -131,7 +131,7 @@ export function buildInitialBibleFromRun(
     arc_milestones: [],
   }))
 
-  const places: BiblePlace[] = run.places.map((p) => ({
+  const places: LorePlace[] = run.places.map((p) => ({
     id: p.id,
     name: p.name,
     type: p.type,
@@ -142,7 +142,7 @@ export function buildInitialBibleFromRun(
     events_here: [],
   }))
 
-  const objects: BibleObject[] = run.objects.map((o) => ({
+  const objects: LoreObject[] = run.objects.map((o) => ({
     id: o.id,
     name: o.name,
     type: o.type,
