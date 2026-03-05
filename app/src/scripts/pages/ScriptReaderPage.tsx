@@ -5,11 +5,11 @@ import { useTTSStore } from '../store/ttsStore.ts'
 import { ScriptToolbar } from '../components/ScriptToolbar.tsx'
 import { MarkdownRenderer } from '../components/MarkdownRenderer.tsx'
 import { TTSControlBar } from '../components/TTSControlBar.tsx'
-import { ProgressBar } from '../components/ProgressBar.tsx'
 import { SettingsPanel } from '../../components/SettingsPanel.tsx'
 import { useSettingsStore } from '../../store/settingsStore.ts'
 import { useTTSKeyboard } from '../hooks/useTTSKeyboard.ts'
 import { useAutoScroll } from '../hooks/useAutoScroll.ts'
+import { useAudioKeepAlive } from '../hooks/useAudioKeepAlive.ts'
 
 export function ScriptReaderPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -28,6 +28,7 @@ export function ScriptReaderPage() {
 
   useTTSKeyboard()
   useAutoScroll(currentSegmentIndex, contentRef)
+  useAudioKeepAlive()
 
   useEffect(() => {
     if (slug) void loadScript(slug)
@@ -71,10 +72,7 @@ export function ScriptReaderPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      <ScriptToolbar
-        scriptTitle={currentScript?.meta.title}
-        rightSlot={<TTSControlBar />}
-      />
+      <ScriptToolbar scriptTitle={currentScript?.meta.title} />
       {settingsOpen && <SettingsPanel />}
 
       {!ttsSupported && (
@@ -90,14 +88,12 @@ export function ScriptReaderPage() {
         </div>
       )}
 
-      <ProgressBar />
-
       <div
         ref={contentRef}
         style={{
           flex: 1,
           overflowY: 'auto',
-          padding: '24px 24px 80px',
+          padding: '24px 24px 24px',
         }}
       >
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
@@ -135,6 +131,9 @@ export function ScriptReaderPage() {
           )}
         </div>
       </div>
+
+      {/* Bottom-docked TTS player */}
+      <TTSControlBar />
 
       {/* Screen-reader: announce current section */}
       <CurrentSectionAnnouncer
