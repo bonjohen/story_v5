@@ -131,3 +131,18 @@ export {
   buildEpisodePlan,
   type EpisodePlannerOptions,
 } from './episodePlanner.ts'
+
+// Episode writer
+export {
+  buildEpisodeWriterPrompt,
+  type EpisodeWriterContext,
+} from './episodeWriter.ts'
+
+// Bible validator
+export {
+  validateAgainstBible,
+  type BibleValidationCheck,
+  type BibleValidationCheckType,
+  type BibleValidationInput,
+  type BibleValidationResults,
+} from './bibleValidator.ts'
