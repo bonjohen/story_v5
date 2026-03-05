@@ -98,7 +98,7 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
     })
 
     try {
-      const provider = new FetchDataProvider('../data')
+      const provider = new FetchDataProvider(`${import.meta.env.BASE_URL}data`)
       const result = await orchestrate({
         request,
         provider,

@@ -75,7 +75,7 @@ export const useElementStore = create<ElementStoreState>((set, get) => ({
 
     try {
       // Load elements.json
-      const elemUrl = `../data/archetypes/${dir}/elements.json`
+      const elemUrl = `${import.meta.env.BASE_URL}data/archetypes/${dir}/elements.json`
       const elemResponse = await fetch(elemUrl)
       if (elemResponse.ok) {
         const elemData = await elemResponse.json() as ArchetypeElements & { template_timeline?: unknown }
@@ -96,7 +96,7 @@ export const useElementStore = create<ElementStoreState>((set, get) => ({
       }
 
       // Try to load examples_elements.json (optional)
-      const exUrl = `../data/archetypes/${dir}/examples_elements.json`
+      const exUrl = `${import.meta.env.BASE_URL}data/archetypes/${dir}/examples_elements.json`
       const exResponse = await fetch(exUrl)
       if (exResponse.ok) {
         const exData = await exResponse.json() as ExampleElements & { story_title?: string; timeline?: unknown }
@@ -123,7 +123,7 @@ export const useElementStore = create<ElementStoreState>((set, get) => ({
     set({ loadingConstraints: true, constraintError: null })
 
     try {
-      const url = `../data/genres/${dir}/element_constraints.json`
+      const url = `${import.meta.env.BASE_URL}data/genres/${dir}/element_constraints.json`
       const response = await fetch(url)
       if (response.ok) {
         const data = await response.json() as GenreElementConstraints
@@ -147,7 +147,7 @@ export const useElementStore = create<ElementStoreState>((set, get) => ({
     if (get().emotionalArcsLoaded) return
 
     try {
-      const url = '../data/cross_references/archetype_emotional_arcs.json'
+      const url = `${import.meta.env.BASE_URL}data/cross_references/archetype_emotional_arcs.json`
       const response = await fetch(url)
       if (response.ok) {
         const data = await response.json() as { archetypes: ArchetypeEmotionalArc[] }

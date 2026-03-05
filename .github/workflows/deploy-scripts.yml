@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Copy script data to public
-        run: cp -r data/scripts app/public/data/scripts
+        run: mkdir -p app/public/data && cp -r data/scripts app/public/data/scripts
 
       - name: Build scripts site
         working-directory: app

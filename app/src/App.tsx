@@ -117,7 +117,7 @@ export default function App() {
   useEffect(() => {
     if (manifestLoaded.current) return
     manifestLoaded.current = true
-    fetch('../data/cross_references/manifest.json')
+    fetch(`${import.meta.env.BASE_URL}data/cross_references/manifest.json`)
       .then((res) => {
         if (!res.ok) throw new Error(`Manifest load failed: ${res.status}`)
         return res.json()

@@ -99,7 +99,7 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
     try {
       const basePath =
         type === 'archetype' ? `archetypes/${dir}` : `genres/${dir}`
-      const url = `../data/${basePath}/graph.json`
+      const url = `${import.meta.env.BASE_URL}data/${basePath}/graph.json`
       const response = await fetch(url)
       if (!response.ok) throw new Error(`Failed to load: ${response.status}`)
       const contentType = response.headers.get('content-type') ?? ''

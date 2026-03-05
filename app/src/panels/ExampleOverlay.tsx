@@ -38,7 +38,7 @@ export function ExampleOverlay({ graph, onHighlightNodes, onClearHighlight }: Ex
     const basePath = graph.graph.type === 'archetype'
       ? `archetypes/${graph.graph.id.replace('archetype_', '')}`
       : `genres/${graph.graph.id.replace('genre_', '')}`
-    const url = `../data/${basePath}/examples.md`
+    const url = `${import.meta.env.BASE_URL}data/${basePath}/examples.md`
 
     fetch(url)
       .then((res) => {
