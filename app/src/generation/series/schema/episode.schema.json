@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Episode",
+  "description": "A single episode within a chapter story series — metadata, arc context, artifacts, state delta, and summary.",
+  "type": "object",
+  "required": [
+    "episode_id", "series_id", "slot_number", "candidate_label",
+    "title", "synopsis", "created_at",
+    "canon_status", "overarching_phase", "episodic_archetype_id",
+    "artifacts", "summary"
+  ],
+  "properties": {
+    "episode_id": { "type": "string", "pattern": "^EP_\\d{3}_[a-z]$" },
+    "series_id": { "type": "string", "pattern": "^SER_" },
+    "slot_number": { "type": "integer", "minimum": 1 },
+    "candidate_label": { "type": "string", "pattern": "^[a-z]$" },
+    "title": { "type": "string", "minLength": 1 },
+    "synopsis": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "canonized_at": { "type": "string", "format": "date-time" },
+    "edited_at": { "type": "string", "format": "date-time" },
+    "canon_status": { "type": "string", "enum": ["draft", "canon", "alternate"] },
+    "overarching_phase": { "type": "string" },
+    "episodic_archetype_id": { "type": "string" },
+    "genre_accent": { "type": "string" },
+    "artifacts": {
+      "type": "object",
+      "required": [
+        "request", "selection_result", "story_contract", "story_plan",
+        "scene_drafts", "validation_results", "story_trace", "compliance_report"
+      ],
+      "properties": {
+        "request": { "type": "string" },
+        "selection_result": { "type": "string" },
+        "story_contract": { "type": "string" },
+        "story_plan": { "type": "string" },
+        "scene_drafts": { "type": "array", "items": { "type": "string" } },
+        "validation_results": { "type": "string" },
+        "story_trace": { "type": "string" },
+        "compliance_report": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "state_delta": { "$ref": "#/$defs/StateDelta" },
+    "summary": {
+      "type": "object",
+      "required": ["characters_featured", "plot_threads_advanced", "key_events"],
+      "properties": {
+        "characters_featured": { "type": "array", "items": { "type": "string" } },
+        "plot_threads_advanced": { "type": "array", "items": { "type": "string" } },
+        "key_events": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "StateDelta": {
+      "type": "object",
+      "required": [
+        "episode_id", "extracted_at",
+        "characters_introduced", "character_updates",
+        "places_introduced", "place_updates",
+        "objects_introduced", "object_updates",
+        "threads_introduced", "thread_updates"
+      ],
+      "properties": {
+        "episode_id": { "type": "string" },
+        "extracted_at": { "type": "string", "format": "date-time" },
+        "characters_introduced": { "type": "array" },
+        "character_updates": { "type": "array" },
+        "places_introduced": { "type": "array" },
+        "place_updates": { "type": "array" },
+        "objects_introduced": { "type": "array" },
+        "object_updates": { "type": "array" },
+        "factions_introduced": { "type": "array" },
+        "faction_updates": { "type": "array" },
+        "threads_introduced": { "type": "array" },
+        "thread_updates": { "type": "array" },
+        "arc_phase_change": {
+          "type": "object",
+          "required": ["from_phase", "to_phase"],
+          "properties": {
+            "from_phase": { "type": "string" },
+            "to_phase": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

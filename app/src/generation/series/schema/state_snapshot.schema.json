@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StateSnapshot",
+  "description": "Complete bible and arc state captured at an episode boundary, enabling efficient loading, retcon support, and branching.",
+  "type": "object",
+  "required": ["snapshot_id", "after_episode", "created_at", "bible", "overarching_arc"],
+  "properties": {
+    "snapshot_id": { "type": "string", "pattern": "^SNAP_EP\\d{3}$" },
+    "after_episode": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "bible": { "type": "object" },
+    "overarching_arc": { "type": "object" }
+  },
+  "additionalProperties": false
+}

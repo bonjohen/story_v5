@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoryBible",
+  "description": "Persistent, evolving truth of the series world — characters, places, objects, factions, plot threads, world rules, and event log.",
+  "type": "object",
+  "required": [
+    "schema_version", "last_updated", "last_updated_by",
+    "characters", "places", "objects", "factions", "plot_threads",
+    "world_rules", "event_log"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "last_updated": { "type": "string", "format": "date-time" },
+    "last_updated_by": { "type": "string" },
+    "characters": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/BibleCharacter" }
+    },
+    "places": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/BiblePlace" }
+    },
+    "objects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/BibleObject" }
+    },
+    "factions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/BibleFaction" }
+    },
+    "plot_threads": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/PlotThread" }
+    },
+    "world_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule", "established_in", "source"],
+        "properties": {
+          "id": { "type": "string" },
+          "rule": { "type": "string" },
+          "established_in": { "type": "string" },
+          "source": { "type": "string", "enum": ["genre", "user", "narrative"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "event_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event_id", "episode_id", "description", "participants", "consequences"],
+        "properties": {
+          "event_id": { "type": "string" },
+          "episode_id": { "type": "string" },
+          "description": { "type": "string" },
+          "participants": { "type": "array", "items": { "type": "string" } },
+          "consequences": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "BibleRelationship": {
+      "type": "object",
+      "required": ["target_id", "type", "description", "established_in", "current_state"],
+      "properties": {
+        "target_id": { "type": "string" },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "established_in": { "type": "string" },
+        "evolved_in": { "type": "array", "items": { "type": "string" } },
+        "current_state": { "type": "string", "enum": ["active", "broken", "severed"] }
+      },
+      "additionalProperties": false
+    },
+    "BibleCharacter": {
+      "type": "object",
+      "required": [
+        "id", "name", "role", "traits", "motivations", "arc_type",
+        "relationships", "status", "introduced_in", "last_appeared_in",
+        "knowledge", "possessions", "arc_milestones"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "role": { "type": "string" },
+        "description": { "type": "string" },
+        "traits": { "type": "array", "items": { "type": "string" } },
+        "motivations": { "type": "array", "items": { "type": "string" } },
+        "arc_type": { "type": ["string", "null"] },
+        "relationships": { "type": "array", "items": { "$ref": "#/$defs/BibleRelationship" } },
+        "status": { "type": "string", "enum": ["alive", "dead", "unknown", "transformed"] },
+        "introduced_in": { "type": "string" },
+        "died_in": { "type": "string" },
+        "last_appeared_in": { "type": "string" },
+        "current_location": { "type": "string" },
+        "knowledge": { "type": "array", "items": { "type": "string" } },
+        "possessions": { "type": "array", "items": { "type": "string" } },
+        "arc_milestones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["episode_id", "change_type", "description"],
+            "properties": {
+              "episode_id": { "type": "string" },
+              "change_type": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "BiblePlace": {
+      "type": "object",
+      "required": ["id", "name", "type", "description", "introduced_in", "last_featured_in", "status", "events_here"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "rules": { "type": "array", "items": { "type": "string" } },
+        "atmosphere": { "type": "string" },
+        "connections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["target_id", "type"],
+            "properties": {
+              "target_id": { "type": "string" },
+              "type": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "introduced_in": { "type": "string" },
+        "last_featured_in": { "type": "string" },
+        "status": { "type": "string", "enum": ["extant", "destroyed", "transformed"] },
+        "destroyed_in": { "type": "string" },
+        "events_here": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "BibleObject": {
+      "type": "object",
+      "required": ["id", "name", "type", "significance", "custody_history", "introduced_in", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "significance": { "type": "string" },
+        "rules": { "type": "array", "items": { "type": "string" } },
+        "current_holder": { "type": "string" },
+        "custody_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["holder_id", "acquired_in", "how"],
+            "properties": {
+              "holder_id": { "type": "string" },
+              "acquired_in": { "type": "string" },
+              "lost_in": { "type": "string" },
+              "how": { "type": "string", "enum": ["gained", "stolen", "given", "found", "inherited"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "introduced_in": { "type": "string" },
+        "status": { "type": "string", "enum": ["intact", "destroyed", "transformed", "lost"] },
+        "destroyed_in": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "BibleFaction": {
+      "type": "object",
+      "required": ["id", "name", "type", "description", "goals", "members", "relationships", "introduced_in", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "goals": { "type": "array", "items": { "type": "string" } },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["character_id"],
+            "properties": {
+              "character_id": { "type": "string" },
+              "rank": { "type": "string" },
+              "role_in_faction": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["target_id", "type"],
+            "properties": {
+              "target_id": { "type": "string" },
+              "type": { "type": "string", "enum": ["allied", "hostile", "vassal", "rival", "neutral"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "introduced_in": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "disbanded", "destroyed"] }
+      },
+      "additionalProperties": false
+    },
+    "PlotThread": {
+      "type": "object",
+      "required": ["id", "title", "description", "status", "urgency", "introduced_in", "progressed_in", "related_characters"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["open", "progressing", "resolved", "abandoned"] },
+        "urgency": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "introduced_in": { "type": "string" },
+        "progressed_in": { "type": "array", "items": { "type": "string" } },
+        "resolved_in": { "type": "string" },
+        "related_characters": { "type": "array", "items": { "type": "string" } },
+        "related_places": { "type": "array", "items": { "type": "string" } },
+        "related_objects": { "type": "array", "items": { "type": "string" } },
+        "overarching_arc_phase": { "type": "string" },
+        "resolution_conditions": { "type": "array", "items": { "type": "string" } },
+        "anti_patterns": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  }
+}

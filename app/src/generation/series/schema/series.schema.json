@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Series",
+  "description": "Top-level container for a chapter story series — metadata, arc state, timeline, episode index, and slot management.",
+  "type": "object",
+  "required": [
+    "series_id", "title", "description", "created_at", "updated_at",
+    "theme_tone", "overarching_arc",
+    "canon_timeline", "episode_index", "slots",
+    "episode_count", "total_candidates_generated", "corpus_hash"
+  ],
+  "properties": {
+    "series_id": { "type": "string", "pattern": "^SER_" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "theme_tone": { "$ref": "#/$defs/ThemeToneAnchor" },
+    "overarching_arc": { "$ref": "#/$defs/OverarchingArc" },
+    "canon_timeline": {
+      "type": "object",
+      "required": ["episodes"],
+      "properties": {
+        "episodes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/CanonTimelineEntry" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "episode_index": {
+      "type": "object",
+      "required": ["episodes"],
+      "properties": {
+        "episodes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/EpisodeStub" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "slots": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/EpisodeSlot" }
+    },
+    "episode_count": { "type": "integer", "minimum": 0 },
+    "total_candidates_generated": { "type": "integer", "minimum": 0 },
+    "corpus_hash": { "type": "string" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ThemeToneAnchor": {
+      "type": "object",
+      "required": ["genre_id", "genre_name", "tone_marker", "themes", "mood", "content_limits", "style_notes"],
+      "properties": {
+        "genre_id": { "type": "string" },
+        "genre_name": { "type": "string" },
+        "secondary_genre_id": { "type": "string" },
+        "tone_marker": { "type": "string" },
+        "themes": { "type": "array", "items": { "type": "string" } },
+        "mood": { "type": "string" },
+        "content_limits": { "type": "array", "items": { "type": "string" } },
+        "style_notes": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "OverarchingArc": {
+      "type": "object",
+      "required": ["archetype_id", "archetype_name", "current_phase", "phase_history", "remaining_phases", "advancement_mode"],
+      "properties": {
+        "archetype_id": { "type": "string" },
+        "archetype_name": { "type": "string" },
+        "current_phase": { "type": "string" },
+        "phase_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["node_id", "entered_at_episode"],
+            "properties": {
+              "node_id": { "type": "string" },
+              "entered_at_episode": { "type": "string" },
+              "exited_at_episode": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "remaining_phases": { "type": "array", "items": { "type": "string" } },
+        "advancement_mode": { "type": "string", "enum": ["user_directed", "auto_milestone", "hybrid"] }
+      },
+      "additionalProperties": false
+    },
+    "CanonTimelineEntry": {
+      "type": "object",
+      "required": ["slot", "episode_id", "title", "canonized_at", "overarching_phase", "snapshot_id"],
+      "properties": {
+        "slot": { "type": "integer", "minimum": 1 },
+        "episode_id": { "type": "string" },
+        "title": { "type": "string" },
+        "canonized_at": { "type": "string", "format": "date-time" },
+        "overarching_phase": { "type": "string" },
+        "snapshot_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "EpisodeStub": {
+      "type": "object",
+      "required": ["episode_id", "slot_number", "canon_status", "title"],
+      "properties": {
+        "episode_id": { "type": "string" },
+        "slot_number": { "type": "integer" },
+        "candidate_label": { "type": "string" },
+        "canon_status": { "type": "string", "enum": ["draft", "canon", "alternate"] },
+        "title": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "EpisodeSlot": {
+      "type": "object",
+      "required": ["slot_number", "target_arc_phase", "candidates", "status"],
+      "properties": {
+        "slot_number": { "type": "integer", "minimum": 1 },
+        "target_arc_phase": { "type": "string" },
+        "candidates": { "type": "array", "items": { "type": "string" } },
+        "canon_episode": { "type": "string" },
+        "status": { "type": "string", "enum": ["generating", "reviewing", "canonized"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}
