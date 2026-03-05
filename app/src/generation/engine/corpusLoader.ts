@@ -56,7 +56,10 @@ export class FetchDataProvider implements DataProvider {
     try {
       const url = `${this.baseUrl}/${relativePath}`
       const response = await fetch(url, { method: 'HEAD' })
-      return response.ok
+      if (!response.ok) return false
+      // SPA fallbacks return 200 with text/html for missing files
+      const contentType = response.headers.get('content-type') ?? ''
+      return contentType.includes('json')
     } catch {
       return false
     }
