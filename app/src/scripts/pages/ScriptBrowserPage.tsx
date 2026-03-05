@@ -73,7 +73,7 @@ export function ScriptBrowserPage() {
               marginBottom: 8,
             }}
           >
-            Audio Scripts
+            Walkthrough Scripts
           </h1>
           <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 20 }}>
             Audio-friendly walkthrough scripts for the story structure corpus. Click to read, or
@@ -135,9 +135,9 @@ export function ScriptBrowserPage() {
               >
                 <h2
                   style={{
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: 'var(--text-secondary)',
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
                     textTransform: 'uppercase',
                     letterSpacing: '0.04em',
                     margin: 0,
@@ -200,7 +200,7 @@ export function ScriptBrowserPage() {
                     <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-primary)' }}>
                       {script.title}
                     </span>
-                    <span style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                    <span style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                       {script.subtitle}
                     </span>
                     <span
