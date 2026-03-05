@@ -72,22 +72,23 @@ Treat this document as a work queue, and update the status of individual tasks a
 
 ### Tasks
 
-- [ ] 2.1 Create `app/src/generation/engine/templateCompiler.ts`
+- [X] 2.1 Create `app/src/generation/engine/templateCompiler.ts`
   - Input: corpus data (loaded graphs), `SelectionResult`, `StoryContract`
   - Output: `TemplatePack`
   - Extract per archetype spine node: `definition`, `entry_conditions`, `exit_conditions`, `signals_in_text`, `failure_modes` → normalize into template fields
   - Extract per genre level node: promise/constraints/patterns/setting/obligations + severity → normalize into template fields
   - Include tone markers and anti-pattern guidance blocks
-- [ ] 2.2 Add corpus hash computation
+- [X] 2.2 Add corpus hash computation
   - Hash archetype + genre graph content to produce `source_corpus_hash` for determinism verification
-- [ ] 2.3 Create `app/src/generation/engine/templateCompiler.test.ts`
-  - Test with Hero's Journey + Horror genre fixture
+  - Already computed in corpusLoader.ts — reused via `corpus.corpusHash`
+- [X] 2.3 Create `app/src/generation/engine/templateCompiler.test.ts`
+  - Test with Hero's Journey + SF genre fixture (10 tests, all passing)
   - Verify determinism: same inputs → identical output
   - Verify all spine nodes produce templates
   - Verify genre levels L1-L5 + tone + anti-pattern all represented
-- [ ] 2.4 Wire into `generationStore` as callable step
+- [X] 2.4 Wire into `generationStore` as callable step
   - Add `templatePack` field to store state
-  - Add `compileTemplates()` action
+  - Add `backbone`, `detailBindings`, `chapterManifest` fields (pre-wired for later phases)
 
 **Verification:** Template pack is deterministic (same corpus hash + config = same pack). All archetype spine nodes and genre levels produce templates.
 

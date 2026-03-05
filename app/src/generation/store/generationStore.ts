@@ -14,6 +14,10 @@ import type {
   StoryTrace,
   GenerationMode,
   GenerationConfig,
+  TemplatePack,
+  StoryBackbone,
+  StoryDetailBindings,
+  ChapterManifest,
 } from '../artifacts/types.ts'
 import type { OrchestratorEvent, OrchestratorResult } from '../engine/orchestrator.ts'
 import { orchestrate } from '../engine/orchestrator.ts'
@@ -34,11 +38,15 @@ export interface GenerationStoreState {
   request: StoryRequest | null
   selection: SelectionResult | null
   contract: StoryContract | null
+  templatePack: TemplatePack | null
+  backbone: StoryBackbone | null
+  detailBindings: StoryDetailBindings | null
   plan: StoryPlan | null
   sceneDrafts: Map<string, string>
   validation: ValidationResults | null
   trace: StoryTrace | null
   complianceReport: string | null
+  chapterManifest: ChapterManifest | null
 
   // Event log
   events: OrchestratorEvent[]
@@ -68,11 +76,15 @@ const INITIAL_STATE = {
   request: null as StoryRequest | null,
   selection: null as SelectionResult | null,
   contract: null as StoryContract | null,
+  templatePack: null as TemplatePack | null,
+  backbone: null as StoryBackbone | null,
+  detailBindings: null as StoryDetailBindings | null,
   plan: null as StoryPlan | null,
   sceneDrafts: new Map<string, string>(),
   validation: null as ValidationResults | null,
   trace: null as StoryTrace | null,
   complianceReport: null as string | null,
+  chapterManifest: null as ChapterManifest | null,
   events: [] as OrchestratorEvent[],
   selectedSceneId: null as string | null,
   error: null as string | null,
