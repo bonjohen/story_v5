@@ -209,6 +209,58 @@ export interface ContractElementRule {
   testable_condition: string
 }
 
+/** A bible character reference for the contract (existing character the episode must respect). */
+export interface ContractBibleCharacter {
+  id: string
+  name: string
+  role: string
+  status: 'alive' | 'dead' | 'unknown' | 'transformed'
+  current_location?: string
+  /** Whether this character must appear in this episode. */
+  must_appear: boolean
+  /** Whether this character must NOT appear (e.g., dead). */
+  must_not_appear: boolean
+}
+
+/** A world rule that the episode must not contradict. */
+export interface ContractWorldRule {
+  id: string
+  rule: string
+  source: 'genre' | 'user' | 'narrative'
+}
+
+/** A plot thread obligation for the episode. */
+export interface ContractThreadObligation {
+  thread_id: string
+  title: string
+  action: 'advance' | 'resolve' | 'introduce' | 'maintain'
+  urgency: 'low' | 'medium' | 'high' | 'critical'
+}
+
+/** Overarching arc phase context for the episode contract. */
+export interface ContractArcPhaseContext {
+  current_phase_node_id: string
+  current_phase_role: string
+  current_phase_definition: string
+  entry_conditions: string[]
+  exit_conditions: string[]
+  advancement_target?: string
+}
+
+/** Bible-derived constraints that constrain episode generation. */
+export interface ContractBibleConstraints {
+  /** Characters from the bible that must appear or must not appear. */
+  characters: ContractBibleCharacter[]
+  /** World rules that cannot be contradicted. */
+  world_rules: ContractWorldRule[]
+  /** Plot thread obligations for this episode. */
+  thread_obligations: ContractThreadObligation[]
+  /** Overarching arc phase context. */
+  arc_phase?: ContractArcPhaseContext
+  /** Locked facts (continuity boundaries). */
+  continuity_locks: string[]
+}
+
 export interface StoryContract extends RunMetadata {
   archetype: ContractArchetype
   genre: ContractGenre
@@ -221,6 +273,8 @@ export interface StoryContract extends RunMetadata {
   element_constraints?: ContractElementConstraint[]
   /** Element rules from genre element_constraints.json (when present). */
   element_rules?: ContractElementRule[]
+  /** Bible-derived constraints for series-mode episodes. */
+  bible_constraints?: ContractBibleConstraints
 }
 
 // ---------------------------------------------------------------------------

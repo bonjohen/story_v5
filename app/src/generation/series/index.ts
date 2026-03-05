@@ -119,3 +119,15 @@ export {
   validateDeltaAgainstBible,
   type BibleValidationResult,
 } from './bibleMerge.ts'
+
+// Episode contract compiler
+export {
+  compileEpisodeContract,
+  type EpisodeContractInput,
+} from './episodeContractCompiler.ts'
+
+// Episode planner
+export {
+  buildEpisodePlan,
+  type EpisodePlannerOptions,
+} from './episodePlanner.ts'
