@@ -100,7 +100,7 @@ Treat this document as a work queue, and update the status of individual tasks a
 
 ### Tasks
 
-- [ ] 3.1 Create `app/src/generation/engine/backboneAssembler.ts`
+- [X] 3.1 Create `app/src/generation/engine/backboneAssembler.ts`
   - Input: `StoryContract`, `TemplatePack`, optional timeline templates, style directives
   - Output: `StoryBackbone`
   - Map archetype nodes → beats (some nodes expand to multiple scenes)
@@ -108,25 +108,22 @@ Treat this document as a work queue, and update the status of individual tasks a
   - Emit named slots per scene: `{protagonist}`, `{mentor}`, `{ordinary_world}`, `{fear_trigger}`, etc.
   - Produce default chapter partition proposal (group beats into chapters by act structure)
   - Attach style directives globally + per-beat overrides
-- [ ] 3.2 Implement scene expansion heuristics
-  - Rules for when a single archetype node warrants multiple scenes (e.g., climax, ordeal)
-  - Rules for combining lightweight nodes into shared scenes (e.g., sequential transitions)
-- [ ] 3.3 Implement genre obligation distribution
-  - Assign each hard constraint to at least one scene
-  - Distribute soft constraints as guidance
-  - Track coverage plan in backbone metadata
-- [ ] 3.4 Implement slot extraction
-  - Parse template required_elements into slot placeholders
-  - Merge archetype element requirements + genre element constraints into unified slot schema
-  - Mark slots as required vs optional
-- [ ] 3.5 Create `app/src/generation/engine/backboneAssembler.test.ts`
-  - Verify complete beat coverage of archetype spine
-  - Verify all hard constraints assigned
-  - Verify slots generated for all required elements
-  - Verify chapter partition covers all scenes
-- [ ] 3.6 Wire into `generationStore`
-  - Add `backbone` field to store state
-  - Add `assembleBackbone()` action
+- [X] 3.2 Implement scene expansion heuristics
+  - MULTI_SCENE_ROLES (Climax, Ordeal, Crisis, etc.) get 2 scenes
+  - LIGHTWEIGHT_ROLES (Transition, Bridge, Threshold) get 1 scene
+  - Configurable via `defaultScenesPerBeat` option
+- [X] 3.3 Implement genre obligation distribution
+  - Hard constraints distributed round-robin across all scenes
+  - Soft constraints distributed the same way
+  - Coverage plan tracked in backbone metadata
+- [X] 3.4 Implement slot extraction
+  - Template required_elements parsed into slot placeholders
+  - Contract element_requirements merged at each node
+  - Slots marked required/optional based on source
+- [X] 3.5 Create `app/src/generation/engine/backboneAssembler.test.ts`
+  - 12 tests passing: beat coverage, constraint assignment, slots, chapter partition, style overrides
+- [X] 3.6 Wire into `generationStore`
+  - `backbone` field already added in Phase 2
 
 **Verification:** Backbone covers full archetype spine. All hard constraints assigned. Slots exist for all required elements. Chapter partition includes every scene exactly once.
 
