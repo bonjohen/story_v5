@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useRef, useState, useMemo, memo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
-import { computeFailureModeNodes } from './graph-engine/index.ts'
+import type { NormalizedGraph } from './graph-engine/index.ts'
 import { DetailPanel } from './panels/DetailPanel.tsx'
 import { GraphStats } from './panels/GraphStats.tsx'
 import { CrossIndexPanel } from './panels/CrossIndex.tsx'
@@ -54,7 +54,6 @@ export default function App() {
   const genreGraph = useGraphStore((s) => s.genreGraph)
   const genreDir = useGraphStore((s) => s.genreDir)
   const currentGraph = useGraphStore((s) => s.currentGraph)
-  const graphId = useGraphStore((s) => s.graphId)
   const viewMode = useGraphStore((s) => s.viewMode)
   const loading = useGraphStore((s) => s.loading)
   const error = useGraphStore((s) => s.error)
@@ -116,10 +115,7 @@ export default function App() {
   }, [genSelection, manifest])
 
   // UI state
-  const [activeVariant, setActiveVariant] = useState<string | null>(null)
-  const [showFailureModes, setShowFailureModes] = useState(false)
 
-  const [exampleMappedNodes] = useState<string[]>([])
   const [showExport, setShowExport] = useState(false)
   const [genTab, setGenTab] = useState<'run' | 'contract' | 'plan' | 'trace' | 'compliance' | 'story'>('run')
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
@@ -224,12 +220,6 @@ export default function App() {
     }
   }, [location.pathname, loadGraph])
 
-  // Reset overlays when active graph changes
-  useEffect(() => {
-    setActiveVariant(null)
-    setShowFailureModes(false)
-  }, [graphId])
-
   // Auto-select first node when archetype graph loads
   const prevArchDir = useRef<string | null>(null)
   useEffect(() => {
@@ -277,10 +267,6 @@ export default function App() {
     }
   }, [selectedNodeId, selectedEdgeId])
 
-  // Failure mode nodes
-  const failureModeNodes = currentGraph && showFailureModes
-    ? computeFailureModeNodes(currentGraph)
-    : []
 
 
   // Generation overlay
@@ -456,7 +442,7 @@ export default function App() {
             <GenTab label="Story" active={genTab === 'story'} onClick={() => setGenTab('story')} badge={genSceneDrafts.size > 0} />
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
-            {genTab === 'run' && <GenerationPanel onClose={() => setGenTab('run')} />}
+            {genTab === 'run' && <GenerationPanel />}
             {genTab === 'contract' && <ContractPanel onHighlightNodes={setGenHighlightNodes} />}
             {genTab === 'plan' && <PlanPanel onHighlightNodes={setGenHighlightNodes} />}
             {genTab === 'trace' && <TracePanel onHighlightNodes={setGenHighlightNodes} />}
@@ -640,9 +626,6 @@ export default function App() {
               onFocus={handleArchFocus}
               isActive={viewMode === 'archetype'}
               highlightedPath={viewMode === 'archetype' ? highlightedPath : undefined}
-              failureModeNodes={viewMode === 'archetype' ? failureModeNodes : undefined}
-              activeVariant={activeVariant}
-              exampleMappedNodes={exampleMappedNodes.length > 0 ? exampleMappedNodes : undefined}
               generationOverlay={generationOverlay}
             />
 
@@ -690,15 +673,12 @@ interface GraphDocumentProps {
   label: string
   color: string
   graphName: string | null
-  graph: import('./graph-engine/index.ts').NormalizedGraph | null
+  graph: NormalizedGraph | null
   graphId?: string
   onCyReady: (cy: CyCore) => void
   onFocus: () => void
   isActive: boolean
   highlightedPath?: string[]
-  failureModeNodes?: string[]
-  activeVariant?: string | null
-  exampleMappedNodes?: string[]
   generationOverlay?: GenerationOverlay
 }
 
@@ -712,9 +692,6 @@ const GraphDocument = memo(function GraphDocument({
   onFocus,
   isActive,
   highlightedPath,
-  failureModeNodes,
-  activeVariant,
-  exampleMappedNodes,
   generationOverlay,
 }: GraphDocumentProps) {
   return (
@@ -775,10 +752,6 @@ const GraphDocument = memo(function GraphDocument({
               graph={graph}
               graphId={graphId}
               highlightedPath={highlightedPath}
-
-              failureModeNodes={failureModeNodes}
-              activeVariant={activeVariant}
-              exampleMappedNodes={exampleMappedNodes}
               generationOverlay={generationOverlay}
               onCyReady={onCyReady}
               onFocus={onFocus}

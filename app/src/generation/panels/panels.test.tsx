@@ -156,7 +156,7 @@ function mockValidation(): ValidationResults {
 
 describe('GenerationPanel', () => {
   it('renders with form controls', () => {
-    render(<GenerationPanel onClose={() => {}} />)
+    render(<GenerationPanel />)
     expect(screen.getByText('Story Generation')).toBeInTheDocument()
     expect(screen.getByText('Generate')).toBeInTheDocument()
     expect(screen.getByText('Idle')).toBeInTheDocument()

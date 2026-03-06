@@ -53,7 +53,6 @@ export function compileTemplatePack(
 
   const toneGuidance = buildToneGuidance(
     genreGraph.nodes as GenreNode[],
-    selection,
   )
 
   const antiPatternGuidance = buildAntiPatternGuidance(
@@ -202,7 +201,6 @@ function buildGenreLevelTemplates(
 
 function buildToneGuidance(
   nodes: GenreNode[],
-  _selection: SelectionResult,
 ): ToneGuidance | undefined {
   const toneNode = nodes.find((n) => n.role === 'Tone Marker')
   if (!toneNode) return undefined

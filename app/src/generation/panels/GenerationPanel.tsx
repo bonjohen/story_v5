@@ -94,10 +94,6 @@ const INPUT: React.CSSProperties = {
   borderRadius: 4,
 }
 
-interface GenerationPanelProps {
-  onClose: () => void
-}
-
 /** Map a display name to a manifest directory. */
 function nameToDir(name: string, items: { name: string; filePath: string }[]): string | null {
   const entry = items.find((m) =>
@@ -110,7 +106,7 @@ function nameToDir(name: string, items: { name: string; filePath: string }[]): s
 
 export { ARCHETYPE_OPTIONS, GENRE_OPTIONS }
 
-export function GenerationPanel({ onClose: _onClose }: GenerationPanelProps) {
+export function GenerationPanel() {
   const status = useGenerationStore((s) => s.status)
   const running = useGenerationStore((s) => s.running)
   const events = useGenerationStore((s) => s.events)

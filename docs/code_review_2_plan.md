@@ -74,12 +74,12 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** If `genSelection` updates before `manifest` is loaded, directory IDs fall back to raw strings (e.g., `06_science_fiction`) shown in the dropdown. The effect won't re-run when manifest later loads because `genSelection` hasn't changed.
 - **Fix:** Add a second effect that reconciles raw IDs when manifest transitions from null.
 
-#### [ ] 1.10 `exampleMappedNodes` state is declared but never updated
+#### [X] 1.10 `exampleMappedNodes` state is declared but never updated
 - **File:** `app/src/App.tsx:122`
 - **Description:** `const [exampleMappedNodes] = useState<string[]>([])` — setter discarded, state always empty array. Dead code from when example overlays existed.
 - **Fix:** Remove the state and prop passing.
 
-#### [ ] 1.11 `GenerationPanel.onClose` prop is unused
+#### [X] 1.11 `GenerationPanel.onClose` prop is unused
 - **File:** `app/src/generation/panels/GenerationPanel.tsx:98,113`
 - **Description:** Destructured as `_onClose`, never called. Caller in App.tsx:441 passes a callback that never fires.
 - **Fix:** Remove from interface and caller.
@@ -99,14 +99,14 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** Lists use `key={i}` instead of stable unique IDs. Causes identity issues if items reorder, and component state (expanded/collapsed) gets tied to position.
 - **Fix:** Use item IDs where available.
 
-#### [ ] 1.15 Graph document header uses inline `import()` type
+#### [X] 1.15 Graph document header uses inline `import()` type
 - **File:** `app/src/App.tsx:673`
 - **Description:** `graph: import('./graph-engine/index.ts').NormalizedGraph | null` — inconsistent with the rest of the codebase.
 - **Fix:** Import `NormalizedGraph` at the top.
 
 ### Low
 
-#### [ ] 1.16 `activeVariant` and `showFailureModes` states never set from UI
+#### [X] 1.16 `activeVariant` and `showFailureModes` states never set from UI
 - **File:** `app/src/App.tsx:119-120`
 - **Description:** Both states are only reset in the graph-change effect. No UI control sets them to non-null/true. Dead code.
 - **Fix:** Remove or re-add the controls.
@@ -208,7 +208,7 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** When a user specifies a preferred blend/hybrid that has no matching pattern, the code silently returns hardcoded defaults (`conditionally_stable`). No log or warning.
 - **Fix:** Add console.warn for pattern-less selections.
 
-#### [ ] 2.16 Unused `_selection` parameter in template compiler
+#### [X] 2.16 Unused `_selection` parameter in template compiler
 - **File:** `app/src/generation/engine/templateCompiler.ts:203-206`
 - **Description:** `buildToneGuidance` accepts `_selection` but never uses it. Dead parameter.
 - **Fix:** Remove or implement.
@@ -309,11 +309,11 @@ Fix orchestrator bugs that can cause runtime failures:
 
 Reduce App.tsx complexity and remove dead code:
 
-- [ ] **1.11** Remove unused `onClose` prop from `GenerationPanel`
-- [ ] **1.10** Remove `exampleMappedNodes` dead state
-- [ ] **1.16** Remove `activeVariant` and `showFailureModes` dead state
-- [ ] **1.15** Replace inline `import()` type with proper import
-- [ ] **2.16** Remove unused `_selection` parameter
+- [X] **1.11** Remove unused `onClose` prop from `GenerationPanel`
+- [X] **1.10** Remove `exampleMappedNodes` dead state
+- [X] **1.16** Remove `activeVariant` and `showFailureModes` dead state
+- [X] **1.15** Replace inline `import()` type with proper import
+- [X] **2.16** Remove unused `_selection` parameter
 
 ### Phase 4 — Selection & Sync Robustness (1 session)
 
