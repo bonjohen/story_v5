@@ -240,16 +240,16 @@ export function TemplatesPanel() {
                 {isExpanded && (
                   <div style={{ padding: '4px 8px 8px 22px', fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                     <div style={{ marginBottom: 4 }}>{tmpl.beat_summary_template}</div>
-                    {tmpl.entry_conditions.length > 0 && (
+                    {(tmpl.entry_conditions?.length ?? 0) > 0 && (
                       <div style={{ marginBottom: 3 }}>
                         <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Entry: </span>
-                        {tmpl.entry_conditions.join('; ')}
+                        {tmpl.entry_conditions!.join('; ')}
                       </div>
                     )}
-                    {tmpl.exit_conditions.length > 0 && (
+                    {(tmpl.exit_conditions?.length ?? 0) > 0 && (
                       <div style={{ marginBottom: 3 }}>
                         <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Exit: </span>
-                        {tmpl.exit_conditions.join('; ')}
+                        {tmpl.exit_conditions!.join('; ')}
                       </div>
                     )}
                     {tmpl.signals_to_include.length > 0 && (

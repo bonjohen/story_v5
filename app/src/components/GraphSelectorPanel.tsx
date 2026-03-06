@@ -17,8 +17,8 @@ export function GraphSelectorPanel({ onSelect }: GraphSelectorPanelProps) {
 
   const manifest = useGraphStore((s) => s.manifest)
   const graphId = useGraphStore((s) => s.graphId)
-  const selectedArchetypeDir = useGraphStore((s) => s.selectedArchetypeDir)
-  const selectedGenreDir = useGraphStore((s) => s.selectedGenreDir)
+  const selectedArchetypeDir = useGraphStore((s) => s.archetypeDir)
+  const selectedGenreDir = useGraphStore((s) => s.genreDir)
 
   const archetypes = useMemo(() => {
     const list = manifest?.archetypes ?? []

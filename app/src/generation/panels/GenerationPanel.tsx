@@ -110,7 +110,7 @@ function nameToDir(name: string, items: { name: string; filePath: string }[]): s
 
 export { ARCHETYPE_OPTIONS, GENRE_OPTIONS }
 
-export function GenerationPanel({ onClose }: GenerationPanelProps) {
+export function GenerationPanel({ onClose: _onClose }: GenerationPanelProps) {
   const status = useGenerationStore((s) => s.status)
   const running = useGenerationStore((s) => s.running)
   const events = useGenerationStore((s) => s.events)

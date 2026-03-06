@@ -18,7 +18,6 @@ import type {
   StoryBackbone,
   ChapterManifest,
   ChapterEntry,
-  StyleDirectives,
 } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------

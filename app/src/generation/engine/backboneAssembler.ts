@@ -13,8 +13,6 @@ import type {
   StoryBackbone,
   BackboneBeat,
   BackboneScene,
-  BackboneSceneObligation,
-  BackboneSlot,
   SlotMap,
   ChapterPartitionEntry,
   StyleDirectives,
@@ -355,7 +353,7 @@ function buildChapterPartition(beats: BackboneBeat[]): ChapterPartitionEntry[] {
 // ---------------------------------------------------------------------------
 
 function buildStyleDirectives(
-  contract: StoryContract,
+  _contract: StoryContract,
   options: BackboneAssemblerOptions,
 ): StyleDirectives {
   const overrides = options.styleDirectives ?? {}

@@ -202,7 +202,7 @@ function buildGenreLevelTemplates(
 
 function buildToneGuidance(
   nodes: GenreNode[],
-  selection: SelectionResult,
+  _selection: SelectionResult,
 ): ToneGuidance | undefined {
   const toneNode = nodes.find((n) => n.role === 'Tone Marker')
   if (!toneNode) return undefined

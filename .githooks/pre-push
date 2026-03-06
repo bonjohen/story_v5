@@ -1,0 +1,16 @@
+#!/bin/bash
+# Pre-push hook: run TypeScript type check before pushing
+# This prevents pushing code that will fail CI build
+
+echo "Running TypeScript type check..."
+cd app && npx tsc -b
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+  echo ""
+  echo "ERROR: TypeScript type check failed. Push aborted."
+  echo "Fix the errors above, then try again."
+  exit 1
+fi
+
+echo "Type check passed."

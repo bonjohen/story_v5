@@ -40,11 +40,6 @@ function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: strin
   return { type: match[1] as 'archetype' | 'genre', dir: match[2] }
 }
 
-/** Extract directory name from filePath like "archetypes/01_heros_journey" */
-function dirFromPath(filePath: string): string {
-  const parts = filePath.split('/')
-  return parts[parts.length - 1]
-}
 
 export default function App() {
   const location = useLocation()
@@ -61,8 +56,6 @@ export default function App() {
   const viewMode = useGraphStore((s) => s.viewMode)
   const loading = useGraphStore((s) => s.loading)
   const error = useGraphStore((s) => s.error)
-  const loadArchetypeGraph = useGraphStore((s) => s.loadArchetypeGraph)
-  const loadGenreGraph = useGraphStore((s) => s.loadGenreGraph)
   const activateGraph = useGraphStore((s) => s.activateGraph)
   const loadGraph = useGraphStore((s) => s.loadGraph)
   const setManifest = useGraphStore((s) => s.setManifest)
@@ -80,7 +73,6 @@ export default function App() {
 
   // Generation state
   const genStatus = useGenerationStore((s) => s.status)
-  const genRunning = useGenerationStore((s) => s.running)
   const genContract = useGenerationStore((s) => s.contract)
   const genPlan = useGenerationStore((s) => s.plan)
   const genTrace = useGenerationStore((s) => s.trace)

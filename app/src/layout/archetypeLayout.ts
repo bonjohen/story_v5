@@ -59,12 +59,10 @@ export function layoutArchetype(cy: Core, normalized: NormalizedGraph) {
     const parents = reverseAdjacency.get(id) ?? []
     // Find the parent's grid position
     let parentCol = 0
-    let parentRow = rows - 1
     if (parents.length > 0) {
       const parentIdx = mainNodes.indexOf(parents[0])
       if (parentIdx >= 0) {
         parentCol = parentIdx % cols
-        parentRow = Math.floor(parentIdx / cols)
       }
     }
 

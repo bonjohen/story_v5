@@ -9,7 +9,6 @@ import type {
   StoryRequest,
   StoryBackbone,
   StoryDetailBindings,
-  BackboneBeat,
   BackboneSlot,
 } from '../artifacts/types.ts'
 
