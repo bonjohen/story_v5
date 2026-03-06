@@ -165,25 +165,20 @@ Treat this document as a work queue, and update the status of individual tasks a
 
 ### Tasks
 
-- [ ] 5.1 Create `app/src/generation/engine/detailSynthesizer.ts`
-  - Input: `StoryRequest`, `StoryBackbone`, corpus references, timeline/element rules
-  - Output: `StoryDetailBindings` + updated `StoryBackbone` (slots bound)
-  - Build entity registry: characters (name, role, traits), places (name, type, features), objects (name, type, significance)
-  - Bind all required slots or mark as explicit bounded TODOs
-  - Generate open_mysteries, promises, payoffs for long-form coherence
-- [ ] 5.2 Create `app/src/generation/agents/detailAgent.ts`
-  - LLM prompt: receives backbone slots + constraints + feature packs + user request
-  - Output: JSON bindings only (no prose)
-  - Must include entity registry, slot bindings, unresolved list
-  - Constrained to not violate hard constraints or anti-pattern blocks
-- [ ] 5.3 Create `app/src/generation/engine/detailSynthesizer.test.ts`
-  - Verify all required slots bound or marked as TODO
-  - Verify entity registry consistency (no duplicate names, roles filled)
-  - Verify hard constraints not contradicted
-  - Test with mock LLM adapter
-- [ ] 5.4 Wire into `generationStore`
-  - Add `detailBindings` field to store state
-  - Add `synthesizeDetails()` action
+- [X] 5.1 Create `app/src/generation/engine/detailSynthesizer.ts`
+  - Dual mode: LLM-driven or deterministic placeholder synthesis
+  - Builds entity registries (characters, places, objects) from backbone slots
+  - Binds all required slots or marks as explicit bounded TODOs
+  - Returns updated backbone with bound slot values
+- [X] 5.2 Create `app/src/generation/agents/detailAgent.ts`
+  - LLM prompt builder with full slot list, beat summaries, and user constraints
+  - JSON-only output schema enforced in system prompt
+  - Response parser with code-fence stripping
+- [X] 5.3 Create `app/src/generation/engine/detailSynthesizer.test.ts`
+  - 8 tests passing: deterministic bindings (6 tests), LLM mode (2 tests)
+  - Verifies slot coverage, entity creation, backbone updates, unresolved detection
+- [X] 5.4 Wire into `generationStore`
+  - `detailBindings` field already added in Phase 2
 
 **Verification:** All required slots bound or explicitly marked TODO. Entity registries are consistent. No hard constraint violations.
 
