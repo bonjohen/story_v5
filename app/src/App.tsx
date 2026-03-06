@@ -30,7 +30,9 @@ import type { DataManifest } from './types/graph.ts'
 
 // Layout constants
 const TOOLBAR_HEIGHT = 42
-const INFO_PANEL_HEIGHT = 260
+const INFO_PANEL_DEFAULT_HEIGHT = 260
+const INFO_PANEL_MIN_HEIGHT = 80
+const INFO_PANEL_MAX_HEIGHT = 600
 const GEN_PANEL_WIDTH = 340
 
 /** Parse the URL pathname into a graph type and directory slug. */
@@ -124,12 +126,41 @@ export default function App() {
   const [manifestError, setManifestError] = useState<string | null>(null)
   const [infoPanel, setInfoPanel] = useState<string>('pairing')
   const [infoPanelOpen, setInfoPanelOpen] = useState(true)
+  const [infoPanelHeight, setInfoPanelHeight] = useState(INFO_PANEL_DEFAULT_HEIGHT)
 
   const cyArchRef = useRef<CyCore | null>(null)
   const cyGenreRef = useRef<CyCore | null>(null)
 
   const handleArchCyReady = useCallback((cy: CyCore) => { cyArchRef.current = cy }, [])
   const handleGenreCyReady = useCallback((cy: CyCore) => { cyGenreRef.current = cy }, [])
+
+  // Draggable separator between info panel and graph area
+  const dragRef = useRef<{ startY: number; startHeight: number } | null>(null)
+  const [draggingSep, setDraggingSep] = useState(false)
+
+  const handleSepPointerDown = useCallback((e: React.PointerEvent) => {
+    e.preventDefault()
+    dragRef.current = { startY: e.clientY, startHeight: infoPanelHeight }
+    setDraggingSep(true)
+    ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+  }, [infoPanelHeight])
+
+  const handleSepPointerMove = useCallback((e: React.PointerEvent) => {
+    if (!dragRef.current) return
+    const delta = e.clientY - dragRef.current.startY
+    const next = Math.max(INFO_PANEL_MIN_HEIGHT, Math.min(INFO_PANEL_MAX_HEIGHT, dragRef.current.startHeight + delta))
+    setInfoPanelHeight(next)
+  }, [])
+
+  const handleSepPointerUp = useCallback(() => {
+    dragRef.current = null
+    setDraggingSep(false)
+    // Trigger Cytoscape resize after drag ends
+    cyArchRef.current?.resize()
+    cyArchRef.current?.fit(undefined, 30)
+    cyGenreRef.current?.resize()
+    cyGenreRef.current?.fit(undefined, 30)
+  }, [])
 
   // Auto-switch to Story tab once when draft generation completes
   const autoSwitchedToStory = useRef(false)
@@ -420,14 +451,13 @@ export default function App() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
           {/* Top info panel */}
           <div style={{
-            height: infoPanelOpen ? INFO_PANEL_HEIGHT : 28,
-            borderBottom: '1px solid var(--border)',
+            height: infoPanelOpen ? infoPanelHeight : 28,
             background: 'var(--bg-surface)',
             flexShrink: 0,
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            transition: 'height 0.2s ease',
+            transition: draggingSep ? 'none' : 'height 0.2s ease',
           }}>
             <div style={{
               display: 'flex',
@@ -549,6 +579,33 @@ export default function App() {
               </div>
             )}
           </div>
+
+          {/* Draggable separator */}
+          {infoPanelOpen && (
+            <div
+              onPointerDown={handleSepPointerDown}
+              onPointerMove={handleSepPointerMove}
+              onPointerUp={handleSepPointerUp}
+              style={{
+                height: 6,
+                flexShrink: 0,
+                cursor: 'row-resize',
+                background: 'var(--border)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                touchAction: 'none',
+              }}
+            >
+              <div style={{
+                width: 32,
+                height: 2,
+                borderRadius: 1,
+                background: 'var(--text-muted)',
+                opacity: 0.5,
+              }} />
+            </div>
+          )}
 
           {/* Two graph documents side by side */}
           <div style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
