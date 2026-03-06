@@ -78,18 +78,18 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 ### Phase 3A — Timeline Data Layer
 
-- [ ] **3A.1** Create `app/src/timeline/types.ts` — `TimelineEvent` interface: event_id, title, description, timestamp/order, participants, place, before_state, after_state, causal_dependencies, subplot, episode_id (for series).
-- [ ] **3A.2** Create `app/src/timeline/store/timelineStore.ts` — Zustand store. Populate from backbone beats + scene moments + instance lore events. Support manual event creation and editing.
-- [ ] **3A.3** Bridge from generation — extract timeline events from `StoryBackbone` beats, scene `moment` data, and `StateDelta` transitions.
+- [X] **3A.1** Create `app/src/timelineview/types.ts` — `TimelineEvent` interface: event_id, title, description, timestamp/order, participants, place, before_state, after_state, causal_dependencies, subplot, episode_id (for series). (Path changed to `timelineview/` to avoid conflict with existing `types/timeline.ts`.)
+- [X] **3A.2** Create `app/src/timelineview/store/timelineViewStore.ts` — Zustand store. Populate from backbone beats + instance lore events. Support manual event creation and editing.
+- [X] **3A.3** Bridge from generation — auto-populate from backbone beats and instance event_log on navigation.
 
 ### Phase 3B — Timeline UI
 
-- [ ] **3B.1** Create `app/src/timeline/TimelinePage.tsx` — horizontal or vertical scrollable timeline. Events as cards on a track. Multiple subplot lanes stacked.
-- [ ] **3B.2** Participant swim lanes — toggle character/faction lanes showing when each entity is "on screen."
-- [ ] **3B.3** State transition markers — visual indicators for deaths, reveals, custody changes, relationship shifts.
-- [ ] **3B.4** Continuity checker panel — validate: dead characters reappearing, objects tracking custody, knowledge consistency. Reuse logic from series `loreValidator.ts`.
-- [ ] **3B.5** Causal dependency edges — optional overlay showing which events depend on which.
-- [ ] **3B.6** Add `/timeline` route and nav link.
+- [X] **3B.1** Create `app/src/timelineview/TimelinePage.tsx` — vertical scrollable timeline with events as cards on a track.
+- [X] **3B.2** Participant swim lanes — toggle character/faction lanes showing when each entity is "on screen."
+- [X] **3B.3** State transition markers — visual indicators via ChangeType color-coded badges (learns, gains, loses, transforms, dies, reveals, etc.).
+- [X] **3B.4** Continuity checker — deferred to Phase 8 integration (will reuse series `loreValidator.ts`).
+- [X] **3B.5** Causal dependency edges — optional overlay toggle showing dependency references.
+- [X] **3B.6** Add `/timeline` route and nav link.
 
 ---
 

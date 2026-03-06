@@ -363,6 +363,15 @@ export default function App() {
           Scenes
         </button>
 
+        {/* Timeline link */}
+        <button
+          onClick={() => void navigate('/timeline')}
+          aria-label="Timeline view"
+          style={toolbarButtonStyle(false, '#06b6d4')}
+        >
+          Timeline
+        </button>
+
         {/* Scripts link */}
         <button
           onClick={() => void navigate('/scripts')}
