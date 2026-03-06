@@ -582,6 +582,23 @@ export default function App() {
           {/* Draggable separator */}
           {infoPanelOpen && (
             <div
+              role="separator"
+              aria-orientation="horizontal"
+              aria-label="Resize info panel"
+              aria-valuenow={infoPanelHeight}
+              aria-valuemin={INFO_PANEL_MIN_HEIGHT}
+              aria-valuemax={INFO_PANEL_MAX_HEIGHT}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                const step = 20
+                if (e.key === 'ArrowUp') {
+                  e.preventDefault()
+                  setInfoPanelHeight((h) => Math.max(INFO_PANEL_MIN_HEIGHT, h - step))
+                } else if (e.key === 'ArrowDown') {
+                  e.preventDefault()
+                  setInfoPanelHeight((h) => Math.min(INFO_PANEL_MAX_HEIGHT, h + step))
+                }
+              }}
               onPointerDown={handleSepPointerDown}
               onPointerMove={handleSepPointerMove}
               onPointerUp={handleSepPointerUp}

@@ -52,7 +52,6 @@ data/                              ← Deliverable outputs
   scripts/                           ← Walkthrough scripts for TTS-enabled reader
     manifest.json                    ← Script metadata and ordering
     *.md                             ← Individual walkthrough scripts
-  features/                          ← Voice, style, and pacing feature packs (planned)
   cross_references/                  ← Cross-referencing datasets and corpus metadata
     index.md                         ← Description of all files in this folder
     manifest.json                    ← Data manifest (file listing and checksums)

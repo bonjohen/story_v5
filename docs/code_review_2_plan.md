@@ -111,15 +111,15 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** Both states are only reset in the graph-change effect. No UI control sets them to non-null/true. Dead code.
 - **Fix:** Remove or re-add the controls.
 
-#### [ ] 1.17 Separator drag handle has no ARIA attributes
+#### [X] 1.17 Separator drag handle has no ARIA attributes
 - **File:** `app/src/App.tsx:584-608`
 - **Description:** No `role`, `aria-label`, `tabIndex`, or keyboard handler. Inaccessible to screen readers and keyboard users.
 - **Fix:** Add `role="separator"`, `aria-orientation="horizontal"`, `tabIndex={0}`, keyboard handlers.
 
-#### [ ] 1.18 `genSceneDrafts.size` reactivity concern
+#### [X] 1.18 `genSceneDrafts.size` reactivity concern
 - **File:** `app/src/App.tsx:175,313`
 - **Description:** `genSceneDrafts` is a Map from Zustand. Using `.size` in deps works for count changes but `useMemo` may miss content changes at same size.
-- **Fix:** Use a dedicated count selector or stable key.
+- **Resolution:** Reviewed — scene drafts only grow (new scenes added), so `.size` changes on every meaningful update. Content edits at same size don't occur in current architecture. No change needed.
 
 ---
 
@@ -203,7 +203,7 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 
 ### Low
 
-#### [ ] 2.15 Silent fallback for unknown blend/hybrid patterns
+#### [X] 2.15 Silent fallback for unknown blend/hybrid patterns
 - **File:** `app/src/generation/engine/selectionEngine.ts:246,308`
 - **Description:** When a user specifies a preferred blend/hybrid that has no matching pattern, the code silently returns hardcoded defaults (`conditionally_stable`). No log or warning.
 - **Fix:** Add console.warn for pattern-less selections.
@@ -213,9 +213,10 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** `buildToneGuidance` accepts `_selection` but never uses it. Dead parameter.
 - **Fix:** Remove or implement.
 
-#### [ ] 2.17 Tone marker array access without bounds check
+#### [X] 2.17 Tone marker array access without bounds check
 - **File:** `app/src/generation/engine/traceEngine.ts:73`
 - **Description:** `contract.genre.tone_marker[0] ?? ''` — handled by `??` but masks data integrity issues if array is empty.
+- **Resolution:** The `?? ''` fallback is correct defensive coding. No change needed.
 
 ---
 
@@ -247,19 +248,19 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 
 ### Low
 
-#### [ ] 3.5 `data/features/` directory referenced in CLAUDE.md but doesn't exist
+#### [X] 3.5 `data/features/` directory referenced in CLAUDE.md but doesn't exist
 - **File:** `CLAUDE.md`
 - **Description:** Repository structure lists `data/features/` as "Voice, style, and pacing feature packs (planned)" but the directory doesn't exist. Feature pack logic is embedded in the template compiler.
 
-#### [ ] 3.6 No root `.gitignore`
+#### [X] 3.6 No root `.gitignore`
 - **File:** Project root
 - **Description:** Only `app/.gitignore` exists. Root-level artifacts like `bash.exe.stackdump` aren't ignored.
 - **Fix:** Add root `.gitignore`.
 
-#### [ ] 3.7 All JSON data files valid — PASS
+#### [X] 3.7 All JSON data files valid — PASS
 - No syntax errors found in any data JSON files.
 
-#### [ ] 3.8 Scripts manifest matches files — PASS
+#### [X] 3.8 Scripts manifest matches files — PASS
 - All 32 slugs in `manifest.json` have corresponding `.md` files.
 
 ---
@@ -336,13 +337,13 @@ Fix high-severity generation issues:
 
 ### Phase 6 — Accessibility, Polish & Cleanup (1 session)
 
-- [ ] **1.17** Add ARIA attributes and keyboard support to drag separator
+- [X] **1.17** Add ARIA attributes and keyboard support to drag separator
 - [X] **1.13** Guard graph info in DetailPanel with `graph &&` check
 - [X] **1.14** Replace index-based keys with stable IDs where possible
 - [X] **1.6** Explicitly unbind Cytoscape events in cleanup
 - [X] **3.2** Add local dev setup instructions to README
 - [X] **3.3** Remove orphaned components (VariantToggle, SimulationPanel, ExampleOverlay)
-- [ ] **3.6** Add root `.gitignore`
+- [X] **3.6** Add root `.gitignore`
 
 ### Phase 7 — Security & Robustness (future)
 

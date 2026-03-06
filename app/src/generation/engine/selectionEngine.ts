@@ -258,6 +258,7 @@ function selectGenreBlend(
       }
     }
     // Preferred genre has no blend pattern — return it anyway with defaults
+    console.warn(`[selectionEngine] No blend pattern found for ${primaryGenreId} + ${prefId}, using defaults`)
     return {
       enabled: true,
       secondary_genre: prefId,
@@ -325,6 +326,7 @@ function selectHybridArchetype(
       }
     }
     // Preferred archetype has no hybrid pattern — return it with defaults
+    console.warn(`[selectionEngine] No hybrid pattern found for ${primaryArchetypeId} + ${prefId}, using defaults`)
     return {
       enabled: true,
       secondary_archetype: prefId,
