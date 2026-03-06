@@ -10,11 +10,11 @@ import { PlaceEditor } from '../panels/PlaceEditor.tsx'
 import { ObjectEditor } from '../panels/ObjectEditor.tsx'
 import { FactionEditor } from '../panels/FactionEditor.tsx'
 import { PlotThreadTracker } from '../panels/PlotThreadTracker.tsx'
-import { RelationshipMap } from '../panels/RelationshipMap.tsx'
+import { SystemMap } from '../panels/SystemMap.tsx'
 import type { StoryInstance } from '../types.ts'
 import { BTN, BADGE_STYLE, INPUT } from '../panels/shared.ts'
 
-type Tab = 'characters' | 'places' | 'objects' | 'factions' | 'threads' | 'relationships'
+type Tab = 'characters' | 'places' | 'objects' | 'factions' | 'threads' | 'maps'
 
 const TABS: { id: Tab; label: string; color: string }[] = [
   { id: 'characters', label: 'Characters', color: '#3b82f6' },
@@ -22,7 +22,7 @@ const TABS: { id: Tab; label: string; color: string }[] = [
   { id: 'objects', label: 'Objects', color: '#f59e0b' },
   { id: 'factions', label: 'Factions', color: '#8b5cf6' },
   { id: 'threads', label: 'Threads', color: '#ef4444' },
-  { id: 'relationships', label: 'Relationships', color: '#06b6d4' },
+  { id: 'maps', label: 'Maps', color: '#06b6d4' },
 ]
 
 const TOOLBAR_HEIGHT = 42
@@ -83,7 +83,7 @@ export function StoryWorkspace() {
     objects: lore.objects.length,
     factions: lore.factions.length,
     threads: lore.plot_threads.length,
-    relationships: lore.characters.reduce((n, c) => n + c.relationships.length, 0),
+    maps: lore.characters.reduce((n, c) => n + c.relationships.length, 0) + lore.factions.reduce((n, f) => n + f.relationships.length, 0),
   } : null
 
   return (
@@ -218,7 +218,7 @@ export function StoryWorkspace() {
             {activeTab === 'objects' && <ObjectEditor />}
             {activeTab === 'factions' && <FactionEditor />}
             {activeTab === 'threads' && <PlotThreadTracker />}
-            {activeTab === 'relationships' && <RelationshipMap />}
+            {activeTab === 'maps' && <SystemMap />}
           </div>
         </>
       )}

@@ -138,11 +138,11 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 **Goal:** Campfire-style visual maps for relationships, political structures, family trees, and world systems — backed by instance data, not standalone drawings.
 
-- [ ] **6.1** Create `app/src/instance/panels/SystemMap.tsx` — reusable graph visualization component (Cytoscape) for typed entity relationships. Configurable node types and edge types.
-- [ ] **6.2** Family tree view mode — filter relationships to parent_child, sibling, romantic. Hierarchical layout.
-- [ ] **6.3** Political/faction map mode — nodes = factions + key characters, edges = faction relationships + memberships.
-- [ ] **6.4** Knowledge/secret web mode — nodes = characters, edges = "knows about" relationships. Useful for mystery/thriller genres.
-- [ ] **6.5** Add as a tab within the Story Workspace (`/story`) rather than a separate route.
+- [X] **6.1** Create `app/src/instance/panels/SystemMap.tsx` — reusable graph visualization component (Cytoscape) for typed entity relationships. Configurable node types and edge types.
+- [X] **6.2** Family tree view mode — filter relationships to parent_child, sibling, romantic. Hierarchical layout.
+- [X] **6.3** Political/faction map mode — nodes = factions + key characters, edges = faction relationships + memberships.
+- [X] **6.4** Knowledge/secret web mode — nodes = characters, edges = "knows about" relationships. Useful for mystery/thriller genres.
+- [X] **6.5** Add as a tab within the Story Workspace (`/story`) rather than a separate route.
 
 ---
 
