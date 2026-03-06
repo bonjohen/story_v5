@@ -142,15 +142,15 @@ This is the engine that loads, parses, and validates graph data.
 
 ### app/src/store — state management
 
-Four Zustand stores manage the application state.
+Several Zustand stores manage the application state.
 
-**graphStore.ts** is the main store — which graph is loaded, the normalized graph data, search state, and selected elements.
-
-**simulationStore.ts** manages the step-through simulation mode — current node, visited path, available transitions.
+**graphStore.ts** is the main store — which graphs are loaded (both archetype and genre simultaneously), the normalized graph data, search state, and selected elements. It manages dual graph display where both graphs render side by side with a `currentGraph` pointer tracking which was last interacted with.
 
 **settingsStore.ts** handles user preferences — layout algorithm, color scheme, label visibility, animation settings. Persisted to local storage.
 
 **elementStore.ts** manages story element data — loaded archetype templates, example instances, template timelines, genre element constraints, and emotional arc profiles. Data is loaded lazily when an archetype or genre is viewed and cached for subsequent access.
+
+**requestStore.ts** (in the generation folder) maintains persistent form state for the generation sidebar — premise, archetype, genre, mode, tone, blend/hybrid settings, and slot overrides. These values survive tab switches and panel navigation.
 
 ### app/src/render — the graph canvas
 
@@ -158,7 +158,7 @@ Four Zustand stores manage the application state.
 
 **elements.ts** transforms StoryGraph nodes and edges into Cytoscape element definitions.
 
-**styles.ts** defines all the visual styling rules — node colors by role, edge colors by meaning, selection highlights, simulation highlights, generation overlay colors.
+**styles.ts** defines all the visual styling rules — node colors by role, edge colors by meaning, selection highlights, trace highlights, and generation overlay colors.
 
 ### app/src/layout — layout algorithms
 
@@ -184,7 +184,7 @@ Four Zustand stores manage the application state.
 
 **DetailPanel.tsx** shows full metadata for a selected node or edge — definition, conditions, failure modes, signals in text.
 
-**SimulationPanel.tsx** lets you step through a graph node by node, choosing transitions at each step. It's like playing the story structure as a game.
+**PairingPanel.tsx** displays the genre-archetype compatibility analysis from the cross-reference matrix, showing how well the currently loaded archetype and genre work together.
 
 **ExampleOverlay.tsx** highlights which nodes map to scenes in real works — so you can see Star Wars painted onto the Hero's Journey graph.
 
@@ -234,7 +234,7 @@ This is the engine that turns a story request into a finished story with full co
 
 **store/generationStore.ts** is the Zustand store for the generation UI — run status, loaded artifacts, selected scene, and actions to start, load, select, and clear runs.
 
-**panels/** contains the five generation UI panels — GenerationPanel for controls, ContractPanel for the compiled rules, PlanPanel for the beat sheet, TracePanel for the scene-to-node mapping, and CompliancePanel for the validation dashboard.
+**panels/** contains the generation UI panels — GenerationPanel for controls, ContractPanel for the compiled rules, TemplatesPanel for character role profiles and slot bindings, PlanPanel for the beat sheet, StoryPanel for the generated prose, TracePanel for the scene-to-node mapping, and CompliancePanel for the validation dashboard.
 
 ### app/scripts — data processing tools
 

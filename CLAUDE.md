@@ -10,7 +10,7 @@ This is a **data and content project** that models storytelling structures as fo
 
 2. **Genre Depth Graphs** — model genre constraints at increasing levels of detail (Genre Promise → Core Constraints → Subgenre Pattern → World/Setting Rules → Scene Obligations) for 27 genres. Edges represent refinement steps that narrow creative degrees of freedom.
 
-3. **Interactive Visual Graph Interface** — a web-based narrative structure exploration engine built with React 19, TypeScript, Vite, Cytoscape.js, and Zustand. All 8 implementation phases are complete. See `docs/interactive_viewer_design.md` (specification) and `docs/interactive_viewer_plan.md` (implementation plan, all phases `[X]`).
+3. **Interactive Visual Graph Interface** — a web-based narrative structure exploration engine built with React 19, TypeScript, Vite, Cytoscape.js, and Zustand. All 8 implementation phases are complete, plus post-phase UI updates (info panel moved to top, simulation removed, Templates panel added, persistent form state via requestStore, character role profiles, blend/hybrid selection UI). Deployed to GitHub Pages at `/story_v5/`. See `docs/interactive_viewer_design.md` (specification) and `docs/interactive_viewer_plan.md` (implementation plan).
 
 4. **Backbone Synthesis & Assembly** — a new generation pipeline stage that templatizes corpus knowledge, assembles story backbones with explicit slots, synthesizes story-specific details via LLM, and stitches scenes into chapter documents. See `docs/backbone_synthesis_assembly.md` (design) and `docs/backbone_synthesis_assembly_plan.md` (8-phase implementation plan).
 
@@ -71,17 +71,17 @@ data/                              ← Deliverable outputs
 app/                               ← Interactive viewer (React + TypeScript + Vite)
   src/
     components/                    ← Reusable UI components (GraphSearch, SettingsPanel, etc.)
-    panels/                        ← Side panels (DetailPanel, SimulationPanel, ExportPanel, etc.)
+    panels/                        ← Side panels (DetailPanel, PairingPanel, ExportPanel, etc.)
     render/                        ← Cytoscape canvas, styles, element builders
     graph-engine/                  ← Normalizer, validator, data index, example parser
     generation/                    ← Story generation pipeline
       engine/                      ← Core engines (templateCompiler, backboneAssembler, detailSynthesizer, chapterAssembler, orchestrator, etc.)
       agents/                      ← LLM agent prompts (detailAgent, editorialAgent, plannerAgent, writerAgent, etc.)
       artifacts/                   ← Types, JSON schemas, I/O helpers
-      panels/                      ← Generation UI panels (GenerationPanel, ContractPanel, etc.)
-      store/                       ← Generation Zustand store
+      panels/                      ← Generation UI panels (GenerationPanel, ContractPanel, TemplatesPanel, etc.)
+      store/                       ← Generation Zustand stores (generationStore, requestStore)
       series/                      ← Series/episode generation subsystem
-    store/                         ← Zustand stores (graphStore, simulationStore, settingsStore)
+    store/                         ← Zustand stores (graphStore, settingsStore)
     layout/                        ← Graph layout algorithms
     types/                         ← TypeScript interfaces
     scripts/                       ← Walkthrough script pages, store, TTS engine
@@ -92,7 +92,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 
 - **Goal 1 — Archetype Graphs**: Complete. All 15 graph JSONs, 15 narrative specs, 15 example mappings, cross-archetype index, and validation done.
 - **Goal 2 — Genre Depth Graphs**: Complete. All 27 graph JSONs, 27 narrative specs, 27 example mappings, cross-genre constraint index, genre × archetype compatibility matrix, and validation done.
-- **Goal 3 — Interactive Viewer**: Complete. All 8 phases implemented (scaffolding, core rendering, navigation, detail panels, simulation, examples, analytics, polish/accessibility/export).
+- **Goal 3 — Interactive Viewer**: Complete. All 8 phases implemented plus post-phase updates: info panel moved to top, simulation removed, Templates panel and requestStore added, character role profiles, blend/hybrid selection, GitHub Pages deployment.
 - **Goal 4 — Backbone Synthesis & Assembly**: Complete. All 8 phases implemented (schemas, TemplateCompiler, BackboneAssembler, feature packs, DetailSynthesizer, ChapterAssembler, orchestrator integration, documentation/scripts).
 
 ## Key Conventions
@@ -132,6 +132,15 @@ Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 - Don't stop between phases — continue to the next
 - Only mark the single active task as `[~]`
 - Do not prefix bash commands with `cd /c/Projects/story_v5` — the working directory is already set to the project root
+
+### Deployment
+
+- **GitHub Pages**: App is deployed to `https://bonjohen.github.io/story_v5/` via `.github/workflows/deploy-scripts.yml`
+- **Base path**: Vite `base` is set to `/story_v5/` in `app/vite.config.ts`
+- **Data**: `app/public/data` is a symlink to `../../data/` (gitignored); CI copies `data/` into `app/public/data/` before build
+- **Pre-push hook**: `.githooks/pre-push` runs `tsc -b` before every push to prevent broken builds
+- **Build**: `cd app && npm run build` runs `tsc -b && vite build`
+- **Typecheck only**: `cd app && npm run typecheck`
 
 ### Quality Standards
 

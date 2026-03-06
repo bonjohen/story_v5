@@ -348,6 +348,35 @@ Phases 7 and 8 are independent of each other and can run in parallel once Phase 
 
 ---
 
+## Post-Phase 8 Updates
+
+The following enhancements were made after the initial 8 phases:
+
+### Persistent Form State (requestStore)
+- New Zustand store `app/src/generation/store/requestStore.ts` maintains all generation form values (premise, archetype, genre, mode, tone, blend/hybrid settings, slot overrides) across tab switches
+- GenerationPanel reads from and writes to this store instead of local `useState`
+
+### Blend and Hybrid Selection
+- Selection engine updated to accept `preferred_blend_genre` and `preferred_hybrid_archetype` from request constraints
+- UI provides dropdown selectors for specific secondary genre and hybrid archetype (not just enable/disable checkboxes)
+
+### Templates Panel
+- New `TemplatesPanel.tsx` with three sub-views: Slots (character cards + non-character slots), Archetype Templates (node templates with beat summary, entry/exit conditions, signals, failure modes), Genre Templates (constraint templates with severity/level, binding rules, anti-patterns)
+- Character cards show expandable detail: archetype_function, traits, motivations, flaw, arc_direction, backstory, relationships, distinguishing_feature
+
+### Character Role Profiles
+- `detailSynthesizer.ts` enhanced with 9 `CHARACTER_ROLE_PROFILES` (protagonist, mentor, antagonist, ally, love_interest, threshold_guardian, shapeshifter, trickster, herald)
+- Each profile provides genre-aware and tone-aware template generation so characters are distinguishable from metadata alone
+
+### Enriched Backbone Beats
+- `backboneAssembler.ts` enriches beat definitions with genre obligation links and text signals from archetype templates
+- UI displays role tag, full definition, scene count, obligation count, and slot names
+
+### Simulation Removed
+- All simulation code removed from the app (SimulationPanel, simulationStore, related UI elements)
+
+---
+
 ## Commit Strategy
 
 Commit and push after each phase. Mark tasks `[X]` as completed. Each phase should be a working, testable increment:

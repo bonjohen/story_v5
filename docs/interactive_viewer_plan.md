@@ -272,6 +272,32 @@ Stage, commit, and push, then continue working.
 
 ---
 
+## Post-Phase 8 Updates
+
+The following changes were made after the initial 8 phases were complete:
+
+### UI Layout Changes
+- **Info panel moved to top**: The tabbed info panel (Detail, Stats, X-Index, Pairing, Elements, Timeline, Arcs, Templates, Contract, Backbone, Plan, Story, Checks) moved from below the graphs to above them, with slide open/close animation
+- **Simulation removed**: SimulationPanel, simulationStore, and all simulation-related code removed from the app entirely
+- **Dual graph display**: Both archetype and genre graphs render side by side; `currentGraph` pointer tracks which was last interacted with for panel compatibility
+
+### New Panels and Stores
+- **TemplatesPanel**: Three sub-views (Slots, Archetype Templates, Genre Templates) showing character cards with expandable detail, archetype node templates, and genre constraint templates
+- **PairingPanel**: Displays genre-archetype compatibility analysis from the cross-reference matrix
+- **requestStore**: New Zustand store for persistent form state — premise, archetype, genre, mode, tone, blend/hybrid settings, and slot overrides survive tab switches
+
+### Generation Form Enhancements
+- **Blend genre selection**: Users can specify a preferred secondary genre (not just enable/disable)
+- **Hybrid archetype selection**: Users can specify a preferred hybrid archetype
+- **Character role profiles**: 9 archetype role profiles (protagonist, mentor, antagonist, ally, love_interest, threshold_guardian, shapeshifter, trickster, herald) with genre-aware and tone-aware template generation for distinguishable characters
+- **Enriched backbone beats**: Beat display includes role tag, full definition with genre obligations and text signals, scene count, obligation count, and slot names
+
+### Deployment
+- **GitHub Pages**: Full app deployed to `https://bonjohen.github.io/story_v5/`
+- **Pre-push hook**: `.githooks/pre-push` runs `tsc -b` before every push to catch type errors before CI
+
+---
+
 ## Future Phases (Stretch Goals, from design spec §6.1 and §14)
 
 These are explicitly deferred from the initial build:

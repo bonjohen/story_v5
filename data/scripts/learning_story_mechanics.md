@@ -38,13 +38,15 @@ This is especially useful for understanding why certain genre conventions exist.
 
 ---
 
-## The simulation panel as study tool
+## The viewer as study tool
 
-The viewer's Simulation panel lets you walk through any graph interactively. For archetype graphs, this means stepping through the story phase by phase, watching how entry conditions from one node create exit conditions that set up the next. For genre graphs, it means descending through the constraint hierarchy level by level, watching how broad promises generate specific requirements.
+The interactive viewer renders any graph as a clickable node-link diagram. For archetype graphs, the nodes flow left to right following narrative time. For genre graphs, the hierarchy descends from genre promise to scene obligations. Both archetype and genre graphs display side by side, so you can see temporal structure alongside constraint depth simultaneously.
 
-The simulation highlights the current node, shows its definition and conditions, and makes the edges visible — including their causal meanings. This animated walkthrough is a more intuitive way to learn graph structure than reading the raw JSON. You can pause at any node, read the failure modes, check the anti-patterns on the incoming and outgoing edges, and develop an intuition for how the structure creates its effects.
+Click any node to open its detail panel — definition, entry and exit conditions, failure modes, signals in text. Use the Trace Forward and Trace Backward buttons to highlight all nodes reachable from a selected node, dimming unrelated paths. This reveals the causal chains that connect story phases — how the Threshold's exit conditions set up the Trials, and how the Trials create the conditions for the Ordeal.
 
-The simulation also supports example overlays. When you walk through the Hero's Journey with the Star Wars example overlay active, each node shows which specific scenes from the film correspond to that structural phase. This grounds the abstract structure in a concrete work you likely already know, making the mapping between theory and practice immediate.
+The example overlay mode grounds abstract structure in concrete works. Activate it and each node shows which scenes from a real work — Star Wars painted onto the Hero's Journey, or Macbeth onto Tragedy — correspond to that structural phase. Comparing two works against the same graph reveals which structural elements are essential and which are variable.
+
+The Templates panel adds another dimension. It shows the character role profiles, archetype node templates, and genre constraint templates that the generation pipeline uses. Browsing the templates for a given archetype-genre combination reveals the structural expectations in detail — what characters are needed, what constraints must be met, and what failure modes to watch for.
 
 ---
 

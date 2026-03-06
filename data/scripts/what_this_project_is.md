@@ -28,9 +28,9 @@ The corpus has three major components.
 
 ## The interactive viewer
 
-The corpus also includes a web-based viewer built with React, TypeScript, and Cytoscape.js. The viewer renders any graph as an interactive node-link diagram. You can click nodes to see their definitions, entry conditions, and failure modes. You can run simulations that walk through a graph phase by phase, showing how a story progresses. You can explore cross-references — click an archetype and see which genres it pairs well with, or click a genre and see its blending stability with other genres.
+The corpus also includes a web-based viewer built with React, TypeScript, and Cytoscape.js, deployed at GitHub Pages. The viewer renders any graph as an interactive node-link diagram with both archetype and genre graphs displayed side by side. You can click nodes to see their definitions, entry conditions, and failure modes. You can explore cross-references — click an archetype and see which genres it pairs well with, or click a genre and see its blending stability with other genres.
 
-The viewer also includes story generation capabilities. You can select an archetype, a genre, and a tone, and the system will compile a story contract — the complete set of structural rules your combination must follow. It will then generate a beat-by-beat plan, populate it with characters and settings drawn from element templates, and produce a compliance trace showing which rules are satisfied and which are at risk.
+The viewer also includes story generation capabilities. A persistent sidebar lets you select an archetype, a genre, a tone, and optionally a blend genre or hybrid archetype. The system compiles a story contract — the complete set of structural rules your combination must follow. It then generates a beat-by-beat plan, populates it with characters and settings drawn from element templates, and produces a compliance trace showing which rules are satisfied and which are at risk. A Templates panel shows the character role profiles — each character gets genre-aware traits, motivations, flaws, and distinguishing features so that characters are clearly differentiated from their metadata alone.
 
 ---
 
@@ -42,7 +42,7 @@ The viewer also includes story generation capabilities. You can select an archet
 
 **Researchers** interested in narrative theory can use the cross-reference datasets for comparative analysis. The cross-archetype index shows how the same structural roles — Origin, Crisis, Transformation — manifest differently across fifteen plot structures. The genre blending model documents the constraint conflicts that arise when genres are mixed, and classifies each blend as stable, conditionally stable, or unstable.
 
-**Educators** can use the walkthrough scripts, the simulation panel, and the example mappings to teach story structure through interactive exploration rather than static diagrams.
+**Educators** can use the walkthrough scripts, the graph viewer, and the example mappings to teach story structure through interactive exploration rather than static diagrams.
 
 ---
 
@@ -50,4 +50,4 @@ The viewer also includes story generation capabilities. You can select an archet
 
 This project does not claim that all stories reduce to fifteen archetypes or twenty-seven genres. The corpus is a model — a useful simplification that captures enough structure to be productive without pretending to be exhaustive. Real stories blend, subvert, and transcend these categories. The value is in making the underlying patterns explicit enough to reason about, not in imposing rigid templates.
 
-The generation pipeline produces structural plans, not finished prose. It tells you that your Hero's Journey / Science Fiction story needs a Threshold crossing where the protagonist commits to the special world, and that your Fantasy genre contract requires a magic system with costs. It does not write the scenes. The creative work remains yours.
+The generation pipeline produces structural plans, not finished prose. It tells you that your Hero's Journey / Science Fiction story needs a Threshold crossing where the protagonist commits to the special world, and that your Fantasy genre contract requires a magic system with costs. With an LLM connected, it can generate scene prose and validate it against the contract. Without an LLM, it still produces the full structural blueprint — contract, templates, backbone, and plan — that you can write from yourself.

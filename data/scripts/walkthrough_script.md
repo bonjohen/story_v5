@@ -28,7 +28,9 @@ Now the structural choices. **Requested genre** is the primary genre — Science
 
 **Tone preference** is a single word or short phrase — somber, dark, epic, playful, whatever mood you're going for. The system matches this against the genre's tone marker node and checks whether it reinforces or contrasts with the archetype's emotional arc.
 
-Finally, there's a **constraints** block with four fields. **Must include** is a list of elements your story needs — things like "found family" or "ethical dilemma." **Must exclude** is the opposite — things like "time travel" or "deus ex machina." These become hard boundaries in the contract. **Allow genre blend** lets the system pull in a secondary genre if it helps — so your Sci-Fi story might pick up Mystery constraints too. **Allow hybrid archetype** lets the system layer two archetypes — so your Hero's Journey might also track a Tragedy arc simultaneously.
+Finally, there's a **constraints** block. **Must include** is a list of elements your story needs — things like "found family" or "ethical dilemma." **Must exclude** is the opposite — things like "time travel" or "deus ex machina." These become hard boundaries in the contract.
+
+**Allow genre blend** lets the system pull in a secondary genre. When enabled, you can specify which genre to blend with — so your Sci-Fi story might pick up Mystery constraints. If you leave the choice blank, the selection engine auto-picks the best complement. **Allow hybrid archetype** lets the system layer two archetypes — so your Hero's Journey might also track a Tragedy arc. Again, you can specify the hybrid or let the engine choose.
 
 Here's what a minimal request looks like. Create a file — call it my_request.json:
 
@@ -140,11 +142,15 @@ cd app
 npm run dev
 ```
 
-Open localhost 5173. You'll see the graph viewer. In the top toolbar there's a Generate button. Click it and a sidebar opens with tabs.
+Open localhost 5173 — or visit the deployed site at the project's GitHub Pages URL. You'll see two graph canvases side by side — archetype on the left, genre on the right. A generation sidebar is on the left side of the screen.
 
-The **Generate** tab has the same fields as the JSON request — archetype picker, genre picker, premise text area, tone, mode selector, and composition toggles. Fill it in and hit Run. The event log at the bottom scrolls as the pipeline progresses.
+The **Run** tab has the same fields as the JSON request — archetype picker, genre picker, premise text area, tone, mode selector, and blend/hybrid options. When you enable genre blending or hybrid archetypes, a dropdown appears letting you choose the specific secondary genre or hybrid archetype, or you can leave it on auto-select. All form values persist across tab switches — you won't lose your settings when you explore other panels. Fill it in and hit Generate. The event log scrolls as the pipeline progresses.
 
-Once the run completes, the other tabs activate. The **Contract** tab shows the boundaries, archetype spine, genre constraints by level, and validation policy. Clicking any constraint highlights the corresponding node on the graph canvas.
+Once the run completes, additional info panel tabs activate. The **Templates** tab has three sub-views: Slots shows character cards with expandable detail (archetype function, traits, motivations, flaw, arc direction, backstory, relationships, distinguishing feature) plus non-character slot bindings; Archetype Templates shows node templates with beat summaries, entry/exit conditions, and failure modes; Genre Templates shows constraint templates with severity levels and binding rules.
+
+The **Backbone** tab shows the story's beat structure — each beat displays its archetype role, full definition enriched with genre obligations and text signals, scene count, and slot names.
+
+The **Contract** tab shows the boundaries, archetype spine, genre constraints by level, and validation policy. Clicking any constraint highlights the corresponding node on the graph canvas.
 
 The **Plan** tab shows beats and scenes with coverage bars. The bars have target markers so you can see at a glance whether you're meeting the hard and soft constraint thresholds.
 
