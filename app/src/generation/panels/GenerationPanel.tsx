@@ -94,14 +94,22 @@ const INPUT: React.CSSProperties = {
   borderRadius: 4,
 }
 
-/** Map a display name to a manifest directory. */
+/** Map a display name to a manifest directory. Exact match first, fuzzy fallback. */
 function nameToDir(name: string, items: { name: string; filePath: string }[]): string | null {
-  const entry = items.find((m) =>
-    m.name === name || m.name.includes(name) || name.includes(m.name)
-  )
-  if (!entry) return null
-  const parts = entry.filePath.split('/')
-  return parts[parts.length - 1]
+  // Exact match first
+  const exact = items.find((m) => m.name === name)
+  if (exact) {
+    const parts = exact.filePath.split('/')
+    return parts[parts.length - 1]
+  }
+  // Case-insensitive exact match
+  const lower = name.toLowerCase()
+  const ciExact = items.find((m) => m.name.toLowerCase() === lower)
+  if (ciExact) {
+    const parts = ciExact.filePath.split('/')
+    return parts[parts.length - 1]
+  }
+  return null
 }
 
 export { ARCHETYPE_OPTIONS, GENRE_OPTIONS }

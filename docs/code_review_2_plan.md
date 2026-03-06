@@ -59,12 +59,12 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 
 ### Medium
 
-#### [ ] 1.7 `nameToDir` uses fuzzy matching — can match wrong items
+#### [X] 1.7 `nameToDir` uses fuzzy matching — can match wrong items
 - **File:** `app/src/generation/panels/GenerationPanel.tsx:102-109`
 - **Description:** `m.name.includes(name) || name.includes(m.name)` can match "Mystery" to "The Mystery Unveiled" or "Comedy" to "Romantic Comedy".
 - **Fix:** Exact match first, fuzzy fallback only if needed. Better: store directory IDs in request store.
 
-#### [ ] 1.8 URL sync loads graph twice on initial navigation
+#### [X] 1.8 URL sync loads graph twice on initial navigation
 - **File:** `app/src/App.tsx:178-207`
 - **Description:** The manifest load effect (line 188) calls `loadGraph(parsed.type, parsed.dir)`. The URL sync effect (line 202) also calls `loadGraph` for the same path. Both fire on mount, loading the graph twice.
 - **Fix:** Remove the `loadGraph` call from the manifest effect.
@@ -319,10 +319,10 @@ Reduce App.tsx complexity and remove dead code:
 
 Fix name-to-directory mapping and sync issues:
 
-- [ ] **1.7** Fix `nameToDir` fuzzy matching — exact match first
+- [X] **1.7** Fix `nameToDir` fuzzy matching — exact match first
 - [ ] **1.12** Fix PairingPanel compatibility matching
 - [ ] **1.9** Handle manifest-not-yet-loaded case in blend/hybrid sync
-- [ ] **1.8** Remove duplicate `loadGraph` call on initial navigation
+- [X] **1.8** Remove duplicate `loadGraph` call on initial navigation
 
 ### Phase 5 — Generation Engine Hardening (1 session)
 

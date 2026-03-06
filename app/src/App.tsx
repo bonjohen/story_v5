@@ -199,18 +199,13 @@ export default function App() {
       })
       .then((data: DataManifest) => {
         setManifest(data)
-        const parsed = parseRoute(location.pathname)
-        if (parsed) {
-          void loadGraph(parsed.type, parsed.dir)
-        }
-        // GenerationPanel syncs its default archetype/genre selections
-        // to the graph store on mount, so no need to load index-0 here.
+        // URL sync effect handles initial graph loading
       })
       .catch((err) => {
         console.warn('Failed to load manifest:', err)
         setManifestError(err instanceof Error ? err.message : 'Failed to load manifest')
       })
-  }, [setManifest, location.pathname, loadGraph])
+  }, [setManifest])
 
   // Sync URL -> graph loading
   useEffect(() => {
