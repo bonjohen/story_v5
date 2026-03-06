@@ -14,17 +14,25 @@ import type {
   StoryTrace,
   GenerationConfig,
   GenerationMode,
+  TemplatePack,
+  StoryBackbone,
+  StoryDetailBindings,
+  ChapterManifest,
 } from '../artifacts/types.ts'
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import type { DataProvider } from './corpusLoader.ts'
 import { loadCorpus } from './corpusLoader.ts'
 import { runSelection } from './selectionEngine.ts'
 import { compileContract } from './contractCompiler.ts'
+import { compileTemplatePack } from './templateCompiler.ts'
+import { assembleBackbone } from './backboneAssembler.ts'
+import { synthesizeDetails } from './detailSynthesizer.ts'
 import { buildPlan } from './planner.ts'
 import { writeScene } from '../agents/writerAgent.ts'
 import { validateScenes } from '../validators/validationEngine.ts'
 import { repair } from './repairEngine.ts'
 import { buildTrace, generateComplianceReport } from './traceEngine.ts'
+import { assembleChapters } from './chapterAssembler.ts'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -41,11 +49,16 @@ export interface OrchestratorResult {
   run_id: string
   selection?: SelectionResult
   contract?: StoryContract
+  templatePack?: TemplatePack
+  backbone?: StoryBackbone
+  detailBindings?: StoryDetailBindings
   plan?: StoryPlan
   sceneDrafts?: Map<string, string>
   validation?: ValidationResults
   trace?: StoryTrace
   complianceReport?: string
+  chapterManifest?: ChapterManifest
+  chapterTexts?: Map<string, string>
   events: OrchestratorEvent[]
   error?: string
 }
@@ -67,11 +80,15 @@ const VALID_TRANSITIONS: Record<OrchestratorState, OrchestratorState[]> = {
   IDLE: ['LOADED_CORPUS'],
   LOADED_CORPUS: ['SELECTED', 'FAILED'],
   SELECTED: ['CONTRACT_READY', 'FAILED'],
-  CONTRACT_READY: ['PLANNED', 'COMPLETED', 'FAILED'],    // COMPLETED for contract-only mode
-  PLANNED: ['GENERATING_SCENE', 'COMPLETED', 'FAILED'],  // COMPLETED for outline mode
+  CONTRACT_READY: ['TEMPLATES_COMPILED', 'PLANNED', 'COMPLETED', 'FAILED'],
+  TEMPLATES_COMPILED: ['BACKBONE_ASSEMBLED', 'FAILED'],
+  BACKBONE_ASSEMBLED: ['DETAILS_BOUND', 'COMPLETED', 'FAILED'],  // COMPLETED for backbone mode
+  DETAILS_BOUND: ['PLANNED', 'COMPLETED', 'FAILED'],             // COMPLETED for detailed-outline mode
+  PLANNED: ['GENERATING_SCENE', 'COMPLETED', 'FAILED'],
   GENERATING_SCENE: ['VALIDATING_SCENE', 'FAILED'],
-  VALIDATING_SCENE: ['REPAIRING_SCENE', 'GENERATING_SCENE', 'COMPLETED', 'FAILED'],
+  VALIDATING_SCENE: ['REPAIRING_SCENE', 'GENERATING_SCENE', 'CHAPTERS_ASSEMBLED', 'COMPLETED', 'FAILED'],
   REPAIRING_SCENE: ['VALIDATING_SCENE', 'COMPLETED', 'FAILED'],
+  CHAPTERS_ASSEMBLED: ['COMPLETED', 'FAILED'],
   COMPLETED: [],
   FAILED: [],
 }
@@ -133,7 +150,36 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     // Stop here for contract-only mode
     if (mode === 'contract-only') {
       transition('COMPLETED', 'Contract-only mode — stopping after contract')
-      // Need to bypass PLANNED state
+      result.state = state
+      return result
+    }
+
+    // 3.5. Template compilation
+    const templatePack = compileTemplatePack(selection, contract, corpus)
+    result.templatePack = templatePack
+    transition('TEMPLATES_COMPILED', `Templates compiled: ${Object.keys(templatePack.archetype_node_templates).length} archetype, ${Object.keys(templatePack.genre_level_templates).length} genre`)
+
+    // 3.6. Backbone assembly
+    const backbone = assembleBackbone(contract, templatePack)
+    result.backbone = backbone
+    transition('BACKBONE_ASSEMBLED', `Backbone assembled: ${backbone.beats.length} beats, ${backbone.chapter_partition.length} chapters`)
+
+    // Stop here for backbone mode
+    if (mode === 'backbone') {
+      transition('COMPLETED', 'Backbone mode — stopping after backbone assembly')
+      result.state = state
+      return result
+    }
+
+    // 3.7. Detail synthesis
+    const { bindings: detailBindings, updatedBackbone } = await synthesizeDetails(request, backbone, llm)
+    result.detailBindings = detailBindings
+    result.backbone = updatedBackbone
+    transition('DETAILS_BOUND', `Details bound: ${Object.keys(detailBindings.slot_bindings).length} slots, ${detailBindings.entity_registry.characters.length} characters`)
+
+    // Stop here for detailed-outline mode
+    if (mode === 'detailed-outline') {
+      transition('COMPLETED', 'Detailed-outline mode — stopping after detail synthesis')
       result.state = state
       return result
     }
@@ -240,6 +286,14 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
 
     // 10. Compliance report
     result.complianceReport = generateComplianceReport(trace, finalValidation, contract)
+
+    // 11. Chapter assembly (for chapters mode)
+    if (mode === 'chapters') {
+      const chapterResult = await assembleChapters(updatedBackbone, sceneDrafts, llm)
+      result.chapterManifest = chapterResult.manifest
+      result.chapterTexts = chapterResult.chapters
+      transition('CHAPTERS_ASSEMBLED', `Chapters assembled: ${chapterResult.manifest.total_chapter_count} chapters`)
+    }
 
     transition('COMPLETED', 'Generation complete')
   } catch (error) {

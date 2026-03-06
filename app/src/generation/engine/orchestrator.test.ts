@@ -164,8 +164,16 @@ describe('orchestrator — state transitions', () => {
   })
 
   it('completes full draft mode with mock LLM', async () => {
-    // Mock LLM returns responses for all calls (beats, scenes, validation, etc.)
-    const llm = new MockLLMAdapter(['Mock response for generation.'])
+    // Mock LLM returns responses for all calls (beats, scenes, validation, detail synthesis, etc.)
+    const detailBindingsJson = JSON.stringify({
+      entity_registry: { characters: [], places: [], objects: [] },
+      slot_bindings: {},
+      open_mysteries: [],
+      promises: [],
+      payoffs: [],
+      unresolved_todos: [],
+    })
+    const llm = new MockLLMAdapter([detailBindingsJson, 'Mock response for generation.'])
     const result = await orchestrate({
       request: makeRequest(),
       provider: makeMockProvider(),

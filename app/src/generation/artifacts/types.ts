@@ -35,7 +35,7 @@ export type CompositionMethod =
 export type HybridFrequency = 'very_common' | 'common' | 'occasional'
 
 /** Pipeline generation mode. */
-export type GenerationMode = 'draft' | 'outline' | 'contract-only'
+export type GenerationMode = 'draft' | 'outline' | 'contract-only' | 'backbone' | 'detailed-outline' | 'chapters'
 
 /** Orchestrator states. */
 export type OrchestratorState =
@@ -43,10 +43,14 @@ export type OrchestratorState =
   | 'LOADED_CORPUS'
   | 'SELECTED'
   | 'CONTRACT_READY'
+  | 'TEMPLATES_COMPILED'
+  | 'BACKBONE_ASSEMBLED'
+  | 'DETAILS_BOUND'
   | 'PLANNED'
   | 'GENERATING_SCENE'
   | 'VALIDATING_SCENE'
   | 'REPAIRING_SCENE'
+  | 'CHAPTERS_ASSEMBLED'
   | 'COMPLETED'
   | 'FAILED'
 

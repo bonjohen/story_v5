@@ -43,9 +43,12 @@ const GENRE_OPTIONS = [
 ]
 
 const MODE_OPTIONS: { value: GenerationMode; label: string; description: string }[] = [
-  { value: 'contract-only', label: 'Contract Only', description: 'Selection + contract (no LLM)' },
-  { value: 'outline', label: 'Outline', description: 'Beats + scenes with summaries' },
-  { value: 'draft', label: 'Full Draft', description: 'Complete scene prose generation' },
+  { value: 'contract-only', label: 'Contract Only', description: 'Compile structural rules from the corpus. No AI needed.' },
+  { value: 'backbone', label: 'Backbone', description: 'Assemble story backbone with beats, slots, and chapter partition. No AI needed.' },
+  { value: 'detailed-outline', label: 'Detailed Outline', description: 'Fill backbone slots with concrete characters, places, and objects.' },
+  { value: 'outline', label: 'Outline', description: 'Generate a beat-by-beat plan with scene summaries.' },
+  { value: 'draft', label: 'Full Draft', description: 'Generate complete scene prose with compliance validation.' },
+  { value: 'chapters', label: 'Chapters', description: 'Full pipeline with chapter assembly and editorial polish.' },
 ]
 
 const STATE_LABELS: Record<string, { label: string; color: string }> = {
@@ -53,12 +56,38 @@ const STATE_LABELS: Record<string, { label: string; color: string }> = {
   LOADED_CORPUS: { label: 'Corpus Loaded', color: '#3b82f6' },
   SELECTED: { label: 'Selected', color: '#3b82f6' },
   CONTRACT_READY: { label: 'Contract Ready', color: '#f59e0b' },
+  TEMPLATES_COMPILED: { label: 'Templates Compiled', color: '#f59e0b' },
+  BACKBONE_ASSEMBLED: { label: 'Backbone Assembled', color: '#f59e0b' },
+  DETAILS_BOUND: { label: 'Details Bound', color: '#f59e0b' },
   PLANNED: { label: 'Planned', color: '#f59e0b' },
   GENERATING_SCENE: { label: 'Writing...', color: '#8b5cf6' },
   VALIDATING_SCENE: { label: 'Validating...', color: '#8b5cf6' },
   REPAIRING_SCENE: { label: 'Repairing...', color: '#f97316' },
+  CHAPTERS_ASSEMBLED: { label: 'Chapters Assembled', color: '#8b5cf6' },
   COMPLETED: { label: 'Completed', color: '#22c55e' },
   FAILED: { label: 'Failed', color: '#ef4444' },
+}
+
+/** Shared label style for form fields. */
+const LABEL: React.CSSProperties = {
+  fontSize: 11,
+  fontWeight: 600,
+  color: 'var(--text-secondary)',
+  textTransform: 'uppercase',
+  letterSpacing: '0.04em',
+}
+
+/** Shared input/select style. */
+const INPUT: React.CSSProperties = {
+  display: 'block',
+  width: '100%',
+  marginTop: 4,
+  padding: '6px 8px',
+  fontSize: 12,
+  background: 'var(--bg-primary)',
+  color: 'var(--text-primary)',
+  border: '1px solid var(--border)',
+  borderRadius: 4,
 }
 
 interface GenerationPanelProps {
@@ -153,13 +182,13 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
         borderBottom: '1px solid var(--border)',
         flexShrink: 0,
       }}>
-        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)' }}>
+        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
           Story Generation
         </span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {/* Status badge */}
           <span style={{
-            fontSize: 10,
+            fontSize: 11,
             fontWeight: 600,
             padding: '2px 8px',
             borderRadius: 3,
@@ -185,27 +214,25 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
 
       {/* Form */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '10px 12px' }}>
+        {/* Intro */}
+        <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 12 }}>
+          Choose an archetype and genre, describe your premise, then generate.
+          The pipeline compiles a structural contract from the corpus, plans
+          beats and scenes, and optionally writes full prose.
+        </p>
+
         {/* Premise */}
         <label style={{ display: 'block', marginBottom: 10 }}>
-          <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Premise
-          </span>
+          <span style={LABEL}>Premise</span>
           <textarea
             value={premise}
             onChange={(e) => setPremise(e.target.value)}
             disabled={running}
             rows={3}
+            placeholder="Describe your story idea in a sentence or two..."
             style={{
-              display: 'block',
-              width: '100%',
-              marginTop: 4,
-              padding: '6px 8px',
-              fontSize: 12,
+              ...INPUT,
               fontFamily: 'inherit',
-              background: 'var(--bg-primary)',
-              color: 'var(--text-primary)',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
               resize: 'vertical',
             }}
           />
@@ -214,24 +241,12 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
         {/* Archetype + Genre row */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
           <label style={{ flex: 1 }}>
-            <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Archetype
-            </span>
+            <span style={LABEL}>Archetype</span>
             <select
               value={archetype}
               onChange={(e) => setArchetype(e.target.value)}
               disabled={running}
-              style={{
-                display: 'block',
-                width: '100%',
-                marginTop: 4,
-                padding: '4px 6px',
-                fontSize: 11,
-                background: 'var(--bg-primary)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--border)',
-                borderRadius: 4,
-              }}
+              style={INPUT}
             >
               {ARCHETYPE_OPTIONS.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -239,24 +254,12 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
             </select>
           </label>
           <label style={{ flex: 1 }}>
-            <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Genre
-            </span>
+            <span style={LABEL}>Genre</span>
             <select
               value={genre}
               onChange={(e) => setGenre(e.target.value)}
               disabled={running}
-              style={{
-                display: 'block',
-                width: '100%',
-                marginTop: 4,
-                padding: '4px 6px',
-                fontSize: 11,
-                background: 'var(--bg-primary)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--border)',
-                borderRadius: 4,
-              }}
+              style={INPUT}
             >
               {GENRE_OPTIONS.map((g) => (
                 <option key={g} value={g}>{g}</option>
@@ -268,77 +271,75 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
         {/* Mode + Tone row */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
           <label style={{ flex: 1 }}>
-            <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Mode
-            </span>
+            <span style={LABEL}>Output</span>
             <select
               value={mode}
               onChange={(e) => setMode(e.target.value as GenerationMode)}
               disabled={running}
-              style={{
-                display: 'block',
-                width: '100%',
-                marginTop: 4,
-                padding: '4px 6px',
-                fontSize: 11,
-                background: 'var(--bg-primary)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--border)',
-                borderRadius: 4,
-              }}
+              style={INPUT}
             >
               {MODE_OPTIONS.map((m) => (
                 <option key={m.value} value={m.value}>{m.label}</option>
               ))}
             </select>
-            <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, display: 'block' }}>
+            <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
               {MODE_OPTIONS.find((m) => m.value === mode)?.description}
             </span>
           </label>
           <label style={{ flex: 1 }}>
-            <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Tone
-            </span>
+            <span style={LABEL}>Tone</span>
             <input
               type="text"
               value={tone}
               onChange={(e) => setTone(e.target.value)}
               disabled={running}
               placeholder="e.g., somber, epic, dark"
-              style={{
-                display: 'block',
-                width: '100%',
-                marginTop: 4,
-                padding: '4px 6px',
-                fontSize: 11,
-                background: 'var(--bg-primary)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--border)',
-                borderRadius: 4,
-              }}
+              style={INPUT}
             />
+            <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
+              Sets the emotional register for the story.
+            </span>
           </label>
         </div>
 
-        {/* Composition toggles */}
-        <div style={{ display: 'flex', gap: 16, marginBottom: 12 }}>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, color: 'var(--text-muted)' }}>
+        {/* Composition options */}
+        <div style={{
+          marginBottom: 12,
+          padding: '8px 10px',
+          background: 'var(--bg-primary)',
+          border: '1px solid var(--border)',
+          borderRadius: 4,
+        }}>
+          <span style={{ ...LABEL, display: 'block', marginBottom: 6 }}>Composition</span>
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)', marginBottom: 6 }}>
             <input
               type="checkbox"
               checked={allowBlend}
               onChange={(e) => setAllowBlend(e.target.checked)}
               disabled={running}
+              style={{ marginTop: 2 }}
             />
-            Genre blend
+            <span>
+              <strong>Genre blend</strong>
+              <span style={{ display: 'block', fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4, marginTop: 1 }}>
+                Mix constraints from a second genre. The pipeline resolves conflicts using the blending model.
+              </span>
+            </span>
           </label>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, color: 'var(--text-muted)' }}>
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)' }}>
             <input
               type="checkbox"
               checked={allowHybrid}
               onChange={(e) => setAllowHybrid(e.target.checked)}
               disabled={running}
+              style={{ marginTop: 2 }}
             />
-            Hybrid archetype
+            <span>
+              <strong>Hybrid archetype</strong>
+              <span style={{ display: 'block', fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4, marginTop: 1 }}>
+                Follow two archetype structures simultaneously. The pipeline merges shared phases and resolves divergence points.
+              </span>
+            </span>
           </label>
         </div>
 
@@ -349,8 +350,8 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
             disabled={running || !premise.trim()}
             style={{
               flex: 1,
-              padding: '6px 12px',
-              fontSize: 11,
+              padding: '8px 12px',
+              fontSize: 13,
               fontWeight: 600,
               borderRadius: 4,
               background: running ? 'var(--border)' : 'var(--accent)',
@@ -365,8 +366,8 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
             <button
               onClick={clearRun}
               style={{
-                padding: '6px 12px',
-                fontSize: 11,
+                padding: '8px 12px',
+                fontSize: 13,
                 borderRadius: 4,
                 border: '1px solid var(--border)',
                 color: 'var(--text-muted)',
@@ -397,7 +398,7 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
         {/* Event log */}
         {events.length > 0 && (
           <div>
-            <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <span style={LABEL}>
               Event Log
             </span>
             <div
