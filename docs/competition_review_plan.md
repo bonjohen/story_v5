@@ -29,25 +29,25 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 ### Phase 1A — Unified Instance Store
 
-- [ ] **1A.1** Create `app/src/instance/types.ts` — unified `StoryInstance` interface that works for both standalone and series stories. Wraps `StoryLore` + metadata (title, archetype, genre, creation date).
-- [ ] **1A.2** Create `app/src/instance/store/instanceStore.ts` — Zustand store for the active story instance. CRUD for characters, places, objects, factions, relationships. Persistence to localStorage with JSON export/import.
-- [ ] **1A.3** Create `app/src/instance/store/instanceBridge.ts` — bidirectional bridge: populate instance from generation pipeline `DetailBindings`/`StoryLore`, and export instance data back to the pipeline as `StoryRequest` constraints.
-- [ ] **1A.4** Wire instance creation into the generation panel — after a successful generation run, offer "Save as Story Instance" which snapshots the detail bindings + lore into the instance store.
+- [X] **1A.1** Create `app/src/instance/types.ts` — unified `StoryInstance` interface that works for both standalone and series stories. Wraps `StoryLore` + metadata (title, archetype, genre, creation date).
+- [X] **1A.2** Create `app/src/instance/store/instanceStore.ts` — Zustand store for the active story instance. CRUD for characters, places, objects, factions, relationships. Persistence to localStorage with JSON export/import.
+- [X] **1A.3** Create `app/src/instance/store/instanceBridge.ts` — bidirectional bridge: populate instance from generation pipeline `DetailBindings`/`StoryLore`, and export instance data back to the pipeline as `StoryRequest` constraints.
+- [X] **1A.4** Wire instance creation into the generation panel — after a successful generation run, offer "Save as Story Instance" which snapshots the detail bindings + lore into the instance store.
 
 ### Phase 1B — Entity Editor Panels
 
-- [ ] **1B.1** Create `app/src/instance/panels/CharacterEditor.tsx` — list/detail view for characters. Editable fields: name, role, traits, motivations, arc type, relationships, status, knowledge, possessions. Show linked archetype nodes and genre constraints.
-- [ ] **1B.2** Create `app/src/instance/panels/PlaceEditor.tsx` — list/detail for places. Editable fields: name, type, description, rules, atmosphere, connections, status.
-- [ ] **1B.3** Create `app/src/instance/panels/ObjectEditor.tsx` — list/detail for objects. Editable fields: name, type, description, significance, rules, custody chain, status.
-- [ ] **1B.4** Create `app/src/instance/panels/FactionEditor.tsx` — list/detail for factions. Editable fields: name, type, description, goals, members, relationships, status.
-- [ ] **1B.5** Create `app/src/instance/panels/RelationshipMap.tsx` — visual relationship graph using Cytoscape. Nodes = entities, edges = relationship types. Clickable to edit.
-- [ ] **1B.6** Create `app/src/instance/panels/PlotThreadTracker.tsx` — list of plot threads with status badges, urgency, linked characters/places. Reuse patterns from series `ThreadTrackerPanel`.
+- [X] **1B.1** Create `app/src/instance/panels/CharacterEditor.tsx` — list/detail view for characters. Editable fields: name, role, traits, motivations, arc type, relationships, status, knowledge, possessions. Show linked archetype nodes and genre constraints.
+- [X] **1B.2** Create `app/src/instance/panels/PlaceEditor.tsx` — list/detail for places. Editable fields: name, type, description, rules, atmosphere, connections, status.
+- [X] **1B.3** Create `app/src/instance/panels/ObjectEditor.tsx` — list/detail for objects. Editable fields: name, type, description, significance, rules, custody chain, status.
+- [X] **1B.4** Create `app/src/instance/panels/FactionEditor.tsx` — list/detail for factions. Editable fields: name, type, description, goals, members, relationships, status.
+- [X] **1B.5** Create `app/src/instance/panels/RelationshipMap.tsx` — visual relationship graph using Cytoscape. Nodes = entities, edges = relationship types. Clickable to edit.
+- [X] **1B.6** Create `app/src/instance/panels/PlotThreadTracker.tsx` — list of plot threads with status badges, urgency, linked characters/places. Reuse patterns from series `ThreadTrackerPanel`.
 
 ### Phase 1C — Instance Navigation
 
-- [ ] **1C.1** Add `/story` route and `StoryWorkspace` page — tabbed interface for editing the active story instance (Characters, Places, Objects, Factions, Threads, Relationships).
-- [ ] **1C.2** Add instance selector to the main nav — dropdown to switch between story instances or create a new one.
-- [ ] **1C.3** Add JSON export/import for story instances — download as `.story.json`, upload to restore.
+- [X] **1C.1** Add `/story` route and `StoryWorkspace` page — tabbed interface for editing the active story instance (Characters, Places, Objects, Factions, Threads, Relationships).
+- [X] **1C.2** Add instance selector to the main nav — dropdown to switch between story instances or create a new one.
+- [X] **1C.3** Add JSON export/import for story instances — download as `.story.json`, upload to restore.
 
 ---
 

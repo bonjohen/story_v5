@@ -5,10 +5,12 @@
  * All form state lives in requestStore so values persist across tab switches.
  */
 
-import { useCallback, useRef, useEffect } from 'react'
+import { useCallback, useRef, useEffect, useState } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { useRequestStore } from '../store/requestStore.ts'
 import { useGraphStore } from '../../store/graphStore.ts'
+import { useInstanceStore } from '../../instance/store/instanceStore.ts'
+import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
 import type { StoryRequest, GenerationMode, GenerationConfig } from '../artifacts/types.ts'
 
 // Default generation config matching generation_config.json
@@ -123,6 +125,12 @@ export function GenerationPanel() {
   const plan = useGenerationStore((s) => s.plan)
   const startRun = useGenerationStore((s) => s.startRun)
   const clearRun = useGenerationStore((s) => s.clearRun)
+  const detailBindings = useGenerationStore((s) => s.detailBindings)
+  const selection = useGenerationStore((s) => s.selection)
+  const request = useGenerationStore((s) => s.request)
+
+  const loadInstance = useInstanceStore((s) => s.loadInstance)
+  const [savedInstance, setSavedInstance] = useState(false)
 
   // Graph store — sync selections to load corresponding graphs
   const manifest = useGraphStore((s) => s.manifest)
@@ -222,8 +230,21 @@ export function GenerationPanel() {
     void startRun(request, config, mode)
   }, [premise, archetype, genre, mode, tone, allowBlend, blendGenre, allowHybrid, hybridArchetype, startRun])
 
+  const handleSaveInstance = useCallback(() => {
+    if (!detailBindings) return
+    const inst = instanceFromDetailBindings(detailBindings, selection ?? null, request ?? null)
+    loadInstance(inst)
+    setSavedInstance(true)
+  }, [detailBindings, selection, request, loadInstance])
+
+  // Reset saved indicator when a new run starts
+  useEffect(() => {
+    if (running) setSavedInstance(false)
+  }, [running])
+
   const stateInfo = STATE_LABELS[status] ?? { label: status, color: 'var(--text-muted)' }
   const hasResults = contract || plan
+  const canSaveInstance = !running && detailBindings != null
 
   return (
     <div
@@ -459,6 +480,29 @@ export function GenerationPanel() {
             </button>
           )}
         </div>
+
+        {/* Save as Story Instance */}
+        {canSaveInstance && (
+          <button
+            onClick={handleSaveInstance}
+            disabled={savedInstance}
+            style={{
+              width: '100%',
+              padding: '7px 12px',
+              marginBottom: 12,
+              fontSize: 12,
+              fontWeight: 600,
+              borderRadius: 4,
+              border: savedInstance ? '1px solid #22c55e40' : '1px solid var(--accent)',
+              background: savedInstance ? '#22c55e18' : 'var(--accent)18',
+              color: savedInstance ? '#22c55e' : 'var(--accent)',
+              cursor: savedInstance ? 'default' : 'pointer',
+              transition: 'all 0.15s',
+            }}
+          >
+            {savedInstance ? 'Saved to Story Instances' : 'Save as Story Instance'}
+          </button>
+        )}
 
         {/* Error display */}
         {error && (

@@ -345,6 +345,15 @@ export default function App() {
         <div style={{ width: 1, height: 20, background: 'var(--border)', flexShrink: 0 }} />
 
 
+        {/* Story workspace link */}
+        <button
+          onClick={() => void navigate('/story')}
+          aria-label="Story workspace"
+          style={toolbarButtonStyle(false, '#22c55e')}
+        >
+          Story
+        </button>
+
         {/* Scripts link */}
         <button
           onClick={() => void navigate('/scripts')}
