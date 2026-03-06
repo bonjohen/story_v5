@@ -10,6 +10,7 @@ import { ElementsPanel } from './panels/ElementsPanel.tsx'
 import { TimelinePanel } from './panels/TimelinePanel.tsx'
 import { CharacterArcPanel } from './panels/CharacterArcPanel.tsx'
 import { GraphSearch } from './components/GraphSearch.tsx'
+import { GlobalSearch } from './components/GlobalSearch.tsx'
 import { useKeyboardNav } from './hooks/useKeyboardNav.ts'
 import { useTraceNavigation } from './hooks/useTraceNavigation.ts'
 import { SettingsPanel } from './components/SettingsPanel.tsx'
@@ -372,13 +373,22 @@ export default function App() {
           Timeline
         </button>
 
-        {/* Scripts link */}
+        {/* Encyclopedia link */}
         <button
-          onClick={() => void navigate('/scripts')}
-          aria-label="Browse audio scripts"
-          style={toolbarButtonStyle(false, 'var(--accent)')}
+          onClick={() => void navigate('/encyclopedia')}
+          aria-label="Encyclopedia"
+          style={toolbarButtonStyle(false, '#14b8a6')}
         >
-          Scripts
+          Encyclopedia
+        </button>
+
+        {/* Manuscript link */}
+        <button
+          onClick={() => void navigate('/manuscript')}
+          aria-label="Manuscript workspace"
+          style={toolbarButtonStyle(false, '#14b8a6')}
+        >
+          Manuscript
         </button>
 
         {/* Notes link */}
@@ -390,10 +400,20 @@ export default function App() {
           Notes
         </button>
 
-        {/* Global search */}
+        {/* Scripts link */}
+        <button
+          onClick={() => void navigate('/scripts')}
+          aria-label="Browse audio scripts"
+          style={toolbarButtonStyle(false, 'var(--accent)')}
+        >
+          Scripts
+        </button>
+
+        {/* Graph search + global search */}
         {currentGraph && (
           <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
         )}
+        <GlobalSearch />
 
         {/* Export button */}
         {currentGraph && (

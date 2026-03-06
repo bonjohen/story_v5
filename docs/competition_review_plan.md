@@ -163,11 +163,11 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 **Goal:** Unify all new surfaces into a cohesive navigation experience.
 
-- [ ] **8.1** Redesign main navigation — persistent sidebar or top nav with sections: Structure (current graph viewer), Story (instance editor), Scene Board, Timeline, Encyclopedia, Manuscript, Notes. Active section highlighted.
-- [ ] **8.2** Context linking — clicking an archetype node in the graph viewer shows linked instance entities. Clicking a character in the encyclopedia jumps to their scenes on the scene board.
-- [ ] **8.3** Breadcrumb trail — show navigation path (e.g., Story > Characters > Elena > Scene 3).
-- [ ] **8.4** Global search — search across all entity types, notes, scenes, articles. Results grouped by type.
-- [ ] **8.5** Workspace persistence — save/restore open tabs, scroll positions, and panel states across sessions.
+- [X] **8.1** Redesign main navigation — persistent sidebar or top nav with sections: Structure (current graph viewer), Story (instance editor), Scene Board, Timeline, Encyclopedia, Manuscript, Notes. Active section highlighted.
+- [X] **8.2** Context linking — clicking an archetype node in the graph viewer shows linked instance entities. Clicking a character in the encyclopedia jumps to their scenes on the scene board.
+- [X] **8.3** Breadcrumb trail — show navigation path (e.g., Story > Characters > Elena > Scene 3).
+- [X] **8.4** Global search — search across all entity types, notes, scenes, articles. Results grouped by type.
+- [X] **8.5** Workspace persistence — save/restore open tabs, scroll positions, and panel states across sessions.
 
 ---
 

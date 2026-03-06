@@ -13,6 +13,7 @@ import { PlotThreadTracker } from '../panels/PlotThreadTracker.tsx'
 import { SystemMap } from '../panels/SystemMap.tsx'
 import type { StoryInstance } from '../types.ts'
 import { BTN, BADGE_STYLE, INPUT } from '../panels/shared.ts'
+import { useWorkspaceStore } from '../../store/workspaceStore.ts'
 
 type Tab = 'characters' | 'places' | 'objects' | 'factions' | 'threads' | 'maps'
 
@@ -28,7 +29,10 @@ const TABS: { id: Tab; label: string; color: string }[] = [
 const TOOLBAR_HEIGHT = 42
 
 export function StoryWorkspace() {
-  const [activeTab, setActiveTab] = useState<Tab>('characters')
+  const savedTab = useWorkspaceStore((s) => s.storyTab) as Tab
+  const setWorkspaceTab = useWorkspaceStore((s) => s.setStoryTab)
+  const [activeTab, setActiveTabLocal] = useState<Tab>(TABS.some((t) => t.id === savedTab) ? savedTab : 'characters')
+  const setActiveTab = (tab: Tab) => { setActiveTabLocal(tab); setWorkspaceTab(tab) }
   const index = useInstanceStore((s) => s.index)
   const activeInstanceId = useInstanceStore((s) => s.activeInstanceId)
   const instance = useInstanceStore((s) => s.activeInstanceId ? s.instances[s.activeInstanceId] : null)
