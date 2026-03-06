@@ -13,7 +13,7 @@ import { EpisodeCurationPage } from './generation/series/pages/EpisodeCurationPa
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
         <Routes>
           <Route path="/scripts" element={<ScriptBrowserPage />} />
           <Route path="/scripts/:slug" element={<ScriptReaderPage />} />

@@ -44,20 +44,8 @@ export function CharacterArcPanel({ graph, selectedNodeId, onSelectNode }: Chara
     }
   }, [dir, graphType, loadEmotionalArcs, loadArchetypeElements])
 
-  if (graphType !== 'archetype') {
-    return (
-      <div style={{ padding: 14, fontSize: 12, color: 'var(--text-muted)' }}>
-        Character arc view is available for archetype graphs only.
-      </div>
-    )
-  }
-
-  const arcData = emotionalArcs.get(dir)
-  if (!arcData) {
-    return <div style={{ padding: 14, fontSize: 12, color: 'var(--text-muted)' }}>No emotional arc data available.</div>
-  }
-
-  const timelineData = archetypeTimelines.get(dir)
+  const arcData = graphType === 'archetype' ? emotionalArcs.get(dir) : undefined
+  const timelineData = graphType === 'archetype' ? archetypeTimelines.get(dir) : undefined
 
   // Get all character roles from the template timeline
   const allRoles = useMemo(() => {
@@ -89,6 +77,18 @@ export function CharacterArcPanel({ graph, selectedNodeId, onSelectNode }: Chara
     }
     return nodes
   }, [selectedRole, timelineData])
+
+  if (graphType !== 'archetype') {
+    return (
+      <div style={{ padding: 14, fontSize: 12, color: 'var(--text-muted)' }}>
+        Character arc view is available for archetype graphs only.
+      </div>
+    )
+  }
+
+  if (!arcData) {
+    return <div style={{ padding: 14, fontSize: 12, color: 'var(--text-muted)' }}>No emotional arc data available.</div>
+  }
 
   // Filter arc points to character's nodes
   const filteredArc: EmotionalArcPoint[] = characterNodes

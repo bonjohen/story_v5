@@ -137,30 +137,48 @@ export default function App() {
   // Draggable separator between info panel and graph area
   const dragRef = useRef<{ startY: number; startHeight: number } | null>(null)
   const [draggingSep, setDraggingSep] = useState(false)
+  const infoPanelHeightRef = useRef(INFO_PANEL_DEFAULT_HEIGHT)
+  infoPanelHeightRef.current = infoPanelHeight
 
-  const handleSepPointerDown = useCallback((e: React.PointerEvent) => {
-    e.preventDefault()
-    dragRef.current = { startY: e.clientY, startHeight: infoPanelHeight }
-    setDraggingSep(true)
-    ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
-  }, [infoPanelHeight])
-
-  const handleSepPointerMove = useCallback((e: React.PointerEvent) => {
-    if (!dragRef.current) return
-    const delta = e.clientY - dragRef.current.startY
-    const next = Math.max(INFO_PANEL_MIN_HEIGHT, Math.min(INFO_PANEL_MAX_HEIGHT, dragRef.current.startHeight + delta))
-    setInfoPanelHeight(next)
-  }, [])
-
-  const handleSepPointerUp = useCallback(() => {
-    dragRef.current = null
-    setDraggingSep(false)
-    // Trigger Cytoscape resize after drag ends
+  const resizeCytoscape = useCallback(() => {
     cyArchRef.current?.resize()
     cyArchRef.current?.fit(undefined, 30)
     cyGenreRef.current?.resize()
     cyGenreRef.current?.fit(undefined, 30)
   }, [])
+
+  const handleSepPointerDown = useCallback((e: React.PointerEvent) => {
+    e.preventDefault()
+    dragRef.current = { startY: e.clientY, startHeight: infoPanelHeightRef.current }
+    setDraggingSep(true)
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+  }, [])
+
+  const resizeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const handleSepPointerMove = useCallback((e: React.PointerEvent) => {
+    if (!dragRef.current) return
+    const delta = e.clientY - dragRef.current.startY
+    const next = Math.max(INFO_PANEL_MIN_HEIGHT, Math.min(INFO_PANEL_MAX_HEIGHT, dragRef.current.startHeight + delta))
+    setInfoPanelHeight(next)
+    // Debounced resize during drag
+    if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current)
+    resizeTimerRef.current = setTimeout(() => {
+      cyArchRef.current?.resize()
+      cyGenreRef.current?.resize()
+    }, 100)
+  }, [])
+
+  const handleSepPointerUp = useCallback(() => {
+    dragRef.current = null
+    setDraggingSep(false)
+    resizeCytoscape()
+  }, [resizeCytoscape])
+
+  // Resize Cytoscape when info panel is collapsed/expanded
+  useEffect(() => {
+    const timer = setTimeout(resizeCytoscape, 250)
+    return () => clearTimeout(timer)
+  }, [infoPanelOpen, resizeCytoscape])
 
   // Auto-switch to Story tab once when draft generation completes
   const autoSwitchedToStory = useRef(false)
@@ -586,6 +604,8 @@ export default function App() {
               onPointerDown={handleSepPointerDown}
               onPointerMove={handleSepPointerMove}
               onPointerUp={handleSepPointerUp}
+              onPointerCancel={handleSepPointerUp}
+              onLostPointerCapture={handleSepPointerUp}
               style={{
                 height: 6,
                 flexShrink: 0,

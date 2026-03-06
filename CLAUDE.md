@@ -142,6 +142,11 @@ Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 - **Build**: `cd app && npm run build` runs `tsc -b && vite build`
 - **Typecheck only**: `cd app && npm run typecheck`
 
+### Bug Tracking
+
+- **Code Review 1** (`docs/code_review.md`): Full audit from 2026-03-04. All 62 items acknowledged `[X]`.
+- **Code Review 2** (`docs/code_review_2_plan.md`): Bug audit from 2026-03-06. 43 items across 7 phases. Uses `[ ]` → `[~]` → `[X]` progression. Mark active item `[~]` before working, `[X]` when done. Commit and push at each phase end.
+
 ### Quality Standards
 
 - Every edge must have causal meaning, not just "and then"
