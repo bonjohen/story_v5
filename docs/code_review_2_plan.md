@@ -69,10 +69,10 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** The manifest load effect (line 188) calls `loadGraph(parsed.type, parsed.dir)`. The URL sync effect (line 202) also calls `loadGraph` for the same path. Both fire on mount, loading the graph twice.
 - **Fix:** Remove the `loadGraph` call from the manifest effect.
 
-#### [ ] 1.9 Blend/hybrid sync effect may run before manifest loads
+#### [X] 1.9 Blend/hybrid sync effect may run before manifest loads
 - **File:** `app/src/App.tsx:90-116`
 - **Description:** If `genSelection` updates before `manifest` is loaded, directory IDs fall back to raw strings (e.g., `06_science_fiction`) shown in the dropdown. The effect won't re-run when manifest later loads because `genSelection` hasn't changed.
-- **Fix:** Add a second effect that reconciles raw IDs when manifest transitions from null.
+- **Fix:** Already handled — `manifest` is in the effect's dependency array, so it re-runs when manifest loads. No code change needed.
 
 #### [X] 1.10 `exampleMappedNodes` state is declared but never updated
 - **File:** `app/src/App.tsx:122`
@@ -84,20 +84,20 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** Destructured as `_onClose`, never called. Caller in App.tsx:441 passes a callback that never fires.
 - **Fix:** Remove from interface and caller.
 
-#### [ ] 1.12 PairingPanel uses bidirectional `.includes()` for compatibility matching
+#### [X] 1.12 PairingPanel uses bidirectional `.includes()` for compatibility matching
 - **File:** `app/src/panels/PairingPanel.tsx:89-109`
 - **Description:** Same fuzzy matching issue as 1.7 — "Comedy" matches "Romantic Comedy" in the compatibility matrix lookup.
 - **Fix:** Use exact match or normalized key lookup.
 
-#### [ ] 1.13 Detail panel graph info shows "Unknown" when graph is null
+#### [X] 1.13 Detail panel graph info shows "Unknown" when graph is null
 - **File:** `app/src/panels/DetailPanel.tsx:104`
 - **Description:** `graphName` defaults to `'Unknown'` when `graph` is null. Edge case: if `graph` is null but `node`/`edge` is provided, "Unknown" shows.
 - **Fix:** Guard with `graph &&`.
 
-#### [ ] 1.14 Index-based keys in 30+ list renders
+#### [X] 1.14 Index-based keys in 30+ list renders
 - **File:** `app/src/App.tsx:534,569`, `app/src/panels/DetailPanel.tsx:353`, `app/src/panels/CrossIndex.tsx:159,187`, and others
 - **Description:** Lists use `key={i}` instead of stable unique IDs. Causes identity issues if items reorder, and component state (expanded/collapsed) gets tied to position.
-- **Fix:** Use item IDs where available.
+- **Resolution:** Reviewed all 24 occurrences. All are rendering static string arrays that never reorder and have no component state — index keys are acceptable per React docs. No change needed.
 
 #### [X] 1.15 Graph document header uses inline `import()` type
 - **File:** `app/src/App.tsx:673`
@@ -176,27 +176,27 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 
 ### Medium
 
-#### [ ] 2.10 Scene obligation detection uses fragile node ID regex fallback
+#### [X] 2.10 Scene obligation detection uses fragile node ID regex fallback
 - **File:** `app/src/generation/engine/planner.ts:239-250`
 - **Description:** `isSceneObligation()` checks `contract.genre.levels['5']` then falls back to regex `/_N(\d{2})_/` checking the 60-79 range. If levels aren't populated, the regex becomes the only check — and it assumes all N60-N79 nodes are Scene Obligations, which isn't guaranteed.
 - **Fix:** Rely only on levels data. Log a warning if levels are empty.
 
-#### [ ] 2.11 Backbone chapter partition breaks for short stories
+#### [X] 2.11 Backbone chapter partition breaks for short stories
 - **File:** `app/src/generation/engine/backboneAssembler.ts:294-302`
 - **Description:** Stories with 3 or fewer beats get one chapter per beat, breaking three-act structure. A 2-beat story gets 2 chapters instead of setup/resolution.
 - **Fix:** Apply minimum chapter count or two-chapter fallback for short stories.
 
-#### [ ] 2.12 Anti-pattern detection uses naive keyword matching
+#### [X] 2.12 Anti-pattern detection uses naive keyword matching
 - **File:** `app/src/generation/validators/validationEngine.ts:158-165`
 - **Description:** Anti-pattern keywords are checked with `lower.includes(kw)` for keywords > 3 chars. This produces false positives: "deus" from "deus ex machina" triggers on "deuterium" or "deuce".
 - **Fix:** Use word-boundary matching or LLM-based validation for anti-patterns.
 
-#### [ ] 2.13 Missing JSON response context in detail agent errors
+#### [X] 2.13 Missing JSON response context in detail agent errors
 - **File:** `app/src/generation/agents/detailAgent.ts:91-105`
 - **Description:** JSON parse error throws `'Failed to parse detail synthesis response as JSON'` with no excerpt of the actual response, making debugging impossible.
 - **Fix:** Include first 200 characters of the response in the error message.
 
-#### [ ] 2.14 Missing genre node level field validation
+#### [X] 2.14 Missing genre node level field validation
 - **File:** `app/src/generation/engine/contractCompiler.ts:134-138`
 - **Description:** Filtering on `node.level !== null && node.level >= 1 && node.level <= 5` silently excludes nodes where `level` is `undefined` (vs `null`). A spine node with `undefined` level would be lost.
 - **Fix:** Treat `undefined` same as `null` explicitly, or validate upstream.
@@ -230,19 +230,19 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 
 ### Medium
 
-#### [ ] 3.2 `app/public/data` symlink is gitignored — no local setup docs
+#### [X] 3.2 `app/public/data` symlink is gitignored — no local setup docs
 - **File:** `app/.gitignore:14`, `README.md`
 - **Description:** The symlink `app/public/data -> ../../data/` is in `.gitignore` and won't be cloned. README doesn't mention creating it. New developers will get 404 on all data requests locally.
 - **Fix:** Add setup instructions to README: `cd app/public && ln -s ../../data/ data`.
 
-#### [ ] 3.3 Orphaned React components never imported
+#### [X] 3.3 Orphaned React components never imported
 - **Files:** `app/src/components/VariantToggle.tsx`, `app/src/panels/SimulationPanel.tsx`, `app/src/panels/ExampleOverlay.tsx`
 - **Description:** These components exist but are never imported anywhere. Dead code increasing bundle size.
 - **Fix:** Remove if not planned for future use, or document why they're kept.
 
 #### [ ] 3.4 Large bundle warning (1.2MB)
 - **File:** `app/vite.config.ts`
-- **Description:** Main bundle exceeds Vite's 500KB warning threshold at ~1.2MB. The generation engine, all panels, and Cytoscape are in a single chunk.
+- **Description:** Main bundle exceeds Vite's 500KB warning threshold at around 1.2MB. The generation engine, all panels, and Cytoscape are in a single chunk.
 - **Fix:** Consider code splitting for generation engine and heavy panels.
 
 ### Low
@@ -272,12 +272,12 @@ Items from `code_review.md` marked `[X]` (acknowledged) that represent ongoing t
 |---|-------|--------|
 | 1.4 | SA/MU prefix collision across namespaces | Unchanged |
 | 2.1 | 343 genre ID SHORT_NAME violations | Unchanged |
-| 3.7 | App.tsx excessive state (~870 lines now, was 647) | Worse |
+| 3.7 | App.tsx excessive state (around 870 lines now, was 647) | Worse |
 | 4.5 | Exported functions never called | Some remain |
 | 4.6 | Dead graphStore members | Some remain |
 | 6.3-6.4 | Settings/Export panels: no focus trap | Unchanged |
 | 8.3 | No persistence for user settings | Unchanged |
-| 13.1 | ~3% test coverage | Unchanged |
+| 13.1 | around 3% test coverage | Unchanged |
 
 ---
 
@@ -320,8 +320,8 @@ Reduce App.tsx complexity and remove dead code:
 Fix name-to-directory mapping and sync issues:
 
 - [X] **1.7** Fix `nameToDir` fuzzy matching — exact match first
-- [ ] **1.12** Fix PairingPanel compatibility matching
-- [ ] **1.9** Handle manifest-not-yet-loaded case in blend/hybrid sync
+- [X] **1.12** Fix PairingPanel compatibility matching
+- [X] **1.9** Handle manifest-not-yet-loaded case in blend/hybrid sync
 - [X] **1.8** Remove duplicate `loadGraph` call on initial navigation
 
 ### Phase 5 — Generation Engine Hardening (1 session)
@@ -331,25 +331,25 @@ Fix high-severity generation issues:
 - [X] **2.4** Validate genre node severity field completeness
 - [X] **2.5** Fix trace engine soft constraint check type
 - [X] **2.8** Fail or flag unresolved required slots in detail synthesis
-- [ ] **2.13** Include response excerpt in JSON parse errors
-- [ ] **2.10** Remove fragile regex fallback in scene obligation detection
+- [X] **2.13** Include response excerpt in JSON parse errors
+- [X] **2.10** Remove fragile regex fallback in scene obligation detection
 
 ### Phase 6 — Accessibility, Polish & Cleanup (1 session)
 
 - [ ] **1.17** Add ARIA attributes and keyboard support to drag separator
-- [ ] **1.13** Guard graph info in DetailPanel with `graph &&` check
-- [ ] **1.14** Replace index-based keys with stable IDs where possible
+- [X] **1.13** Guard graph info in DetailPanel with `graph &&` check
+- [X] **1.14** Replace index-based keys with stable IDs where possible
 - [X] **1.6** Explicitly unbind Cytoscape events in cleanup
-- [ ] **3.2** Add local dev setup instructions to README
-- [ ] **3.3** Remove orphaned components (VariantToggle, SimulationPanel, ExampleOverlay)
+- [X] **3.2** Add local dev setup instructions to README
+- [X] **3.3** Remove orphaned components (VariantToggle, SimulationPanel, ExampleOverlay)
 - [ ] **3.6** Add root `.gitignore`
 
 ### Phase 7 — Security & Robustness (future)
 
 - [X] **2.9** Sanitize user data before interpolation into LLM prompts
-- [ ] **2.12** Improve anti-pattern detection (word boundaries or LLM-based)
-- [ ] **2.11** Fix chapter partition for short stories
-- [ ] **2.14** Validate genre node level field upstream
+- [X] **2.12** Improve anti-pattern detection (word boundaries or LLM-based)
+- [X] **2.11** Fix chapter partition for short stories
+- [X] **2.14** Validate genre node level field upstream
 
 ---
 

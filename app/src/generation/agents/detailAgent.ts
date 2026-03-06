@@ -100,7 +100,8 @@ export function parseDetailResponse(
   try {
     return JSON.parse(cleaned)
   } catch {
-    throw new Error('Failed to parse detail synthesis response as JSON')
+    const excerpt = cleaned.length > 200 ? cleaned.substring(0, 200) + '...' : cleaned
+    throw new Error(`Failed to parse detail synthesis response as JSON. Response excerpt: ${excerpt}`)
   }
 }
 

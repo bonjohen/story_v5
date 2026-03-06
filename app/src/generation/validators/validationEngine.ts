@@ -151,14 +151,17 @@ function checkAntiPatterns(
   content: string,
   contract: StoryContract,
 ): ValidationCheck {
-  const lower = content.toLowerCase()
   const details: string[] = []
   let violations = 0
 
   for (const antiPatternId of contract.genre.anti_patterns) {
     const keywords = extractKeywords(antiPatternId)
-    // Anti-patterns are detected by keywords — this is a heuristic
-    const found = keywords.some((kw) => kw.length > 3 && lower.includes(kw))
+    // Use word boundary matching to avoid false positives (e.g., "deus" in "deuterium")
+    const found = keywords.some((kw) => {
+      if (kw.length <= 3) return false
+      const pattern = new RegExp(`\\b${kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i')
+      return pattern.test(content)
+    })
     if (found) {
       details.push(`Potential anti-pattern detected: ${antiPatternId}`)
       violations++

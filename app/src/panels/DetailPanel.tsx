@@ -117,27 +117,29 @@ export function DetailPanel({
         flexShrink: 0,
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{
-              fontSize: 9,
-              fontWeight: 600,
-              color: graphTypeColor,
-              background: `${graphTypeColor}18`,
-              padding: '1px 6px',
-              borderRadius: 2,
-              textTransform: 'uppercase',
-              letterSpacing: '0.04em',
-            }}>
-              {graphType}
-            </span>
-            <span style={{
-              fontSize: 11,
-              fontWeight: 600,
-              color: 'var(--text-primary)',
-            }}>
-              {graphName}
-            </span>
-          </div>
+          {graph && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{
+                fontSize: 9,
+                fontWeight: 600,
+                color: graphTypeColor,
+                background: `${graphTypeColor}18`,
+                padding: '1px 6px',
+                borderRadius: 2,
+                textTransform: 'uppercase',
+                letterSpacing: '0.04em',
+              }}>
+                {graphType}
+              </span>
+              <span style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: 'var(--text-primary)',
+              }}>
+                {graphName}
+              </span>
+            </div>
+          )}
           <span style={{
             fontSize: 10,
             textTransform: 'uppercase',

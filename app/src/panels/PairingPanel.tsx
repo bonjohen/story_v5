@@ -86,25 +86,24 @@ export function PairingPanel() {
   const compatibility = useMemo(() => {
     if (!matrix || !archetypeName || !genreName) return null
 
-    const genreEntry = matrix.genres.find((g) =>
-      genreName.toLowerCase().includes(g.genre.toLowerCase()) ||
-      g.genre.toLowerCase().includes(genreName.toLowerCase())
-    )
+    const genreLower = genreName.toLowerCase()
+    const genreEntry = matrix.genres.find((g) => g.genre.toLowerCase() === genreLower)
     if (!genreEntry) return null
 
-    // Check each tier
+    // Check each tier (case-insensitive exact match)
+    const archLower = archetypeName.toLowerCase()
     const natural = genreEntry.naturally_compatible.find((c) =>
-      archetypeName.includes(c.archetype) || c.archetype.includes(archetypeName)
+      c.archetype.toLowerCase() === archLower
     )
     if (natural) return { tier: 'naturally_compatible' as const, rationale: natural.rationale }
 
     const occasional = genreEntry.occasionally_compatible.find((c) =>
-      archetypeName.includes(c.archetype) || c.archetype.includes(archetypeName)
+      c.archetype.toLowerCase() === archLower
     )
     if (occasional) return { tier: 'occasionally_compatible' as const, rationale: occasional.rationale }
 
     const rare = genreEntry.rarely_compatible.find((c) =>
-      archetypeName.includes(c.archetype) || c.archetype.includes(archetypeName)
+      c.archetype.toLowerCase() === archLower
     )
     if (rare) return { tier: 'rarely_compatible' as const, rationale: rare.rationale }
 

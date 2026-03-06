@@ -128,13 +128,16 @@ function buildGenreSection(
 ): ContractGenre {
   const prefix = extractPrefix(graph.nodes[0]?.node_id ?? '')
 
-  // Group nodes by level
+  // Group nodes by level (treat undefined same as null — non-spine nodes)
   const levels: Record<string, string[]> = {}
   for (const node of graph.nodes) {
-    if (node.level !== null && node.level >= 1 && node.level <= 5) {
-      const key = String(node.level)
+    const level = node.level
+    if (level != null && level >= 1 && level <= 5) {
+      const key = String(level)
       if (!levels[key]) levels[key] = []
       levels[key].push(node.node_id)
+    } else if (level != null && (level < 1 || level > 5)) {
+      console.warn(`[contractCompiler] Genre node ${node.node_id} has out-of-range level: ${level}`)
     }
   }
 

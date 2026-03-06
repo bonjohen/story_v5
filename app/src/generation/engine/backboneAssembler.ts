@@ -291,14 +291,28 @@ function buildChapterPartition(beats: BackboneBeat[]): ChapterPartitionEntry[] {
 
   const totalBeats = beats.length
 
-  // For very short stories (≤3 beats), one chapter per beat
+  // For very short stories (≤3 beats), use two-chapter structure (setup/resolution)
   if (totalBeats <= 3) {
-    return beats.map((b, i) => ({
-      chapter_id: `CH_${String(i + 1).padStart(2, '0')}`,
-      title: `Chapter ${i + 1}: ${b.label}`,
-      beat_ids: [b.beat_id],
-      tone_goal: b.role,
-    }))
+    const midpoint = Math.ceil(totalBeats / 2)
+    const setupBeats = beats.slice(0, midpoint)
+    const resolutionBeats = beats.slice(midpoint)
+    const chapters: ChapterPartitionEntry[] = [
+      {
+        chapter_id: 'CH_01',
+        title: 'Chapter 1: Setup',
+        beat_ids: setupBeats.map((b) => b.beat_id),
+        tone_goal: setupBeats[0].role,
+      },
+    ]
+    if (resolutionBeats.length > 0) {
+      chapters.push({
+        chapter_id: 'CH_02',
+        title: 'Chapter 2: Resolution',
+        beat_ids: resolutionBeats.map((b) => b.beat_id),
+        tone_goal: resolutionBeats[0].role,
+      })
+    }
+    return chapters
   }
 
   // Three-act split

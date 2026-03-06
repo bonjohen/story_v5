@@ -237,17 +237,11 @@ function buildScenes(beats: Beat[], contract: StoryContract): Scene[] {
  * Check if a constraint ID belongs to a Scene Obligation (Level 5, N60-N79).
  */
 function isSceneObligation(nodeId: string, contract: StoryContract): boolean {
-  // Check if it's in levels["5"]
   const level5 = contract.genre.levels['5'] ?? []
-  if (level5.includes(nodeId)) return true
-
-  // Fallback: check node number range (60-79)
-  const match = nodeId.match(/_N(\d{2})_/)
-  if (match) {
-    const num = parseInt(match[1], 10)
-    return num >= 60 && num <= 79
+  if (level5.length === 0) {
+    console.warn('[planner] Genre contract has no level 5 nodes — scene obligation detection may be incomplete')
   }
-  return false
+  return level5.includes(nodeId)
 }
 
 // ---------------------------------------------------------------------------
