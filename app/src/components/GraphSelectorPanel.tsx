@@ -1,6 +1,6 @@
 /**
- * Graph Selector Panel — sidebar with tabbed archetype/genre lists,
- * search/filter, and metadata (node/edge counts).
+ * Graph Selector Panel — sidebar with stacked archetype + genre lists.
+ * Both selections persist as a pair. Clicking loads that graph in the canvas.
  */
 
 import { useState, useMemo } from 'react'
@@ -12,25 +12,27 @@ interface GraphSelectorPanelProps {
 }
 
 export function GraphSelectorPanel({ onSelect }: GraphSelectorPanelProps) {
-  const [activeTab, setActiveTab] = useState<'archetype' | 'genre'>('archetype')
-  const [search, setSearch] = useState('')
+  const [archSearch, setArchSearch] = useState('')
+  const [genreSearch, setGenreSearch] = useState('')
 
   const manifest = useGraphStore((s) => s.manifest)
   const graphId = useGraphStore((s) => s.graphId)
+  const selectedArchetypeDir = useGraphStore((s) => s.selectedArchetypeDir)
+  const selectedGenreDir = useGraphStore((s) => s.selectedGenreDir)
 
-  const items = useMemo(() => {
-    const list = activeTab === 'archetype'
-      ? manifest?.archetypes ?? []
-      : manifest?.genres ?? []
-
-    if (!search.trim()) return list
-
-    const q = search.toLowerCase()
+  const archetypes = useMemo(() => {
+    const list = manifest?.archetypes ?? []
+    if (!archSearch.trim()) return list
+    const q = archSearch.toLowerCase()
     return list.filter((m) => m.name.toLowerCase().includes(q))
-  }, [activeTab, manifest, search])
+  }, [manifest, archSearch])
 
-  const archetypeCount = manifest?.archetypes.length ?? 0
-  const genreCount = manifest?.genres.length ?? 0
+  const genres = useMemo(() => {
+    const list = manifest?.genres ?? []
+    if (!genreSearch.trim()) return list
+    const q = genreSearch.toLowerCase()
+    return list.filter((m) => m.name.toLowerCase().includes(q))
+  }, [manifest, genreSearch])
 
   return (
     <div style={{
@@ -39,36 +41,101 @@ export function GraphSelectorPanel({ onSelect }: GraphSelectorPanelProps) {
       height: '100%',
       overflow: 'hidden',
     }}>
-      {/* Tab bar */}
+      {/* Archetype section */}
+      <SelectorSection
+        title="Archetype"
+        count={manifest?.archetypes.length ?? 0}
+        color="#f59e0b"
+        items={archetypes}
+        search={archSearch}
+        onSearchChange={setArchSearch}
+        pairedDir={selectedArchetypeDir}
+        activeGraphId={graphId}
+        onSelect={(dir) => onSelect('archetype', dir)}
+        type="archetype"
+      />
+
+      {/* Divider */}
       <div style={{
+        height: 1,
+        background: 'var(--border)',
+        flexShrink: 0,
+      }} />
+
+      {/* Genre section */}
+      <SelectorSection
+        title="Genre"
+        count={manifest?.genres.length ?? 0}
+        color="#8b5cf6"
+        items={genres}
+        search={genreSearch}
+        onSearchChange={setGenreSearch}
+        pairedDir={selectedGenreDir}
+        activeGraphId={graphId}
+        onSelect={(dir) => onSelect('genre', dir)}
+        type="genre"
+      />
+    </div>
+  )
+}
+
+function SelectorSection({ title, count, color, items, search, onSearchChange, pairedDir, activeGraphId, onSelect, type }: {
+  title: string
+  count: number
+  color: string
+  items: GraphMetadata[]
+  search: string
+  onSearchChange: (v: string) => void
+  pairedDir: string | null
+  activeGraphId: string | null
+  onSelect: (dir: string) => void
+  type: 'archetype' | 'genre'
+}) {
+  return (
+    <div style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+      minHeight: 0,
+    }}>
+      {/* Section header */}
+      <div style={{
+        padding: '6px 10px',
         display: 'flex',
-        borderBottom: '1px solid var(--border)',
+        alignItems: 'center',
+        gap: 6,
         flexShrink: 0,
       }}>
-        <TabButton
-          active={activeTab === 'archetype'}
-          onClick={() => { setActiveTab('archetype'); setSearch('') }}
-          label={`Archetypes (${archetypeCount})`}
-        />
-        <TabButton
-          active={activeTab === 'genre'}
-          onClick={() => { setActiveTab('genre'); setSearch('') }}
-          label={`Genres (${genreCount})`}
-        />
+        <span style={{
+          fontSize: 10,
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+          color,
+        }}>
+          {title}
+        </span>
+        <span style={{
+          fontSize: 10,
+          color: 'var(--text-muted)',
+        }}>
+          ({count})
+        </span>
       </div>
 
-      {/* Search input */}
-      <div style={{ padding: '8px 10px', flexShrink: 0 }}>
+      {/* Search */}
+      <div style={{ padding: '0 10px 4px', flexShrink: 0 }}>
         <input
           type="text"
-          placeholder={`Filter ${activeTab === 'archetype' ? 'archetypes' : 'genres'}...`}
+          placeholder={`Filter ${title.toLowerCase()}s...`}
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          aria-label={`Search ${activeTab}s`}
+          onChange={(e) => onSearchChange(e.target.value)}
+          aria-label={`Search ${title.toLowerCase()}s`}
           style={{
             width: '100%',
-            padding: '6px 10px',
-            fontSize: 12,
+            padding: '4px 8px',
+            fontSize: 11,
             color: 'var(--text-primary)',
             background: 'var(--bg-primary)',
             border: '1px solid var(--border)',
@@ -78,92 +145,88 @@ export function GraphSelectorPanel({ onSelect }: GraphSelectorPanelProps) {
         />
       </div>
 
-      {/* Graph list */}
+      {/* Item list */}
       <div style={{
         flex: 1,
         overflowY: 'auto',
-        padding: '0 4px 8px',
+        padding: '0 4px 4px',
       }}>
         {items.length === 0 && (
           <div style={{
-            padding: '16px 10px',
+            padding: '12px 10px',
             color: 'var(--text-muted)',
-            fontSize: 12,
+            fontSize: 11,
             textAlign: 'center',
           }}>
-            {manifest ? 'No matches.' : 'Loading...'}
+            No matches.
           </div>
         )}
-        {items.map((meta) => (
-          <GraphEntry
-            key={meta.id}
-            meta={meta}
-            active={graphId === `${meta.type}/${dirFromPath(meta.filePath)}`}
-            onClick={() => onSelect(meta.type, dirFromPath(meta.filePath))}
-          />
-        ))}
+        {items.map((meta) => {
+          const dir = dirFromPath(meta.filePath)
+          const isActive = activeGraphId === `${type}/${dir}`
+          const isPaired = pairedDir === dir
+
+          return (
+            <GraphEntry
+              key={meta.id}
+              meta={meta}
+              isActive={isActive}
+              isPaired={isPaired}
+              color={color}
+              onClick={() => onSelect(dir)}
+            />
+          )
+        })}
       </div>
     </div>
   )
 }
 
-function TabButton({ active, onClick, label }: {
-  active: boolean
-  onClick: () => void
-  label: string
-}) {
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        flex: 1,
-        padding: '8px 4px',
-        fontSize: 12,
-        fontWeight: active ? 600 : 400,
-        color: active ? 'var(--accent)' : 'var(--text-muted)',
-        borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
-        transition: 'color 0.15s, border-color 0.15s',
-      }}
-    >
-      {label}
-    </button>
-  )
-}
-
-function GraphEntry({ meta, active, onClick }: {
+function GraphEntry({ meta, isActive, isPaired, color, onClick }: {
   meta: GraphMetadata
-  active: boolean
+  isActive: boolean
+  isPaired: boolean
+  color: string
   onClick: () => void
 }) {
   return (
     <button
       onClick={onClick}
-      aria-current={active ? 'page' : undefined}
+      aria-current={isActive ? 'page' : undefined}
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
-        padding: '8px 10px',
+        padding: '6px 10px',
         borderRadius: 4,
         textAlign: 'left',
-        background: active ? 'var(--bg-elevated)' : 'transparent',
-        borderLeft: active ? '3px solid var(--accent)' : '3px solid transparent',
+        background: isActive
+          ? `${color}18`
+          : isPaired
+            ? `${color}0a`
+            : 'transparent',
+        borderLeft: isActive
+          ? `3px solid ${color}`
+          : isPaired
+            ? `3px solid ${color}60`
+            : '3px solid transparent',
         transition: 'background 0.15s',
         cursor: 'pointer',
       }}
       onMouseEnter={(e) => {
-        if (!active) e.currentTarget.style.background = 'var(--bg-elevated)'
+        if (!isActive) e.currentTarget.style.background = 'var(--bg-elevated)'
       }}
       onMouseLeave={(e) => {
-        if (!active) e.currentTarget.style.background = 'transparent'
+        if (!isActive && !isPaired) e.currentTarget.style.background = 'transparent'
+        else if (isPaired && !isActive) e.currentTarget.style.background = `${color}0a`
       }}
     >
-      <div style={{ minWidth: 0 }}>
+      <div style={{ minWidth: 0, flex: 1 }}>
         <div style={{
-          fontSize: 13,
-          fontWeight: active ? 600 : 400,
-          color: active ? 'var(--text-primary)' : 'var(--text-primary)',
+          fontSize: 12,
+          fontWeight: isActive ? 600 : isPaired ? 500 : 400,
+          color: isActive ? color : 'var(--text-primary)',
           whiteSpace: 'nowrap',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -178,6 +241,17 @@ function GraphEntry({ meta, active, onClick }: {
           {meta.prefix} | {meta.nodeCount}N / {meta.edgeCount}E
         </div>
       </div>
+      {isPaired && !isActive && (
+        <span style={{
+          fontSize: 8,
+          color,
+          opacity: 0.7,
+          flexShrink: 0,
+          marginLeft: 4,
+        }}>
+          {'\u2713'}
+        </span>
+      )}
     </button>
   )
 }

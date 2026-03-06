@@ -258,7 +258,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)' }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
+              <div style={{ display: 'flex', gap: 8, marginBottom: 2 }}>
                 <span style={{ fontWeight: 600, fontSize: 10 }}>{pg.role}</span>
                 <span style={{ fontSize: 9, fontFamily: 'monospace', color: 'var(--text-muted)' }}>
                   {pg.node_id}
@@ -307,7 +307,7 @@ function SectionHeader({ label, expanded, onClick, count }: {
         display: 'flex',
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        gap: 6,
         padding: '6px 12px',
         borderBottom: '1px solid var(--border)',
         fontSize: 11,
@@ -331,8 +331,8 @@ function SectionHeader({ label, expanded, onClick, count }: {
 
 function PolicyRow({ label, value }: { label: string; value: string }) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '2px 0' }}>
-      <span style={{ color: 'var(--text-muted)' }}>{label}</span>
+    <div style={{ display: 'flex', gap: 8, padding: '2px 0' }}>
+      <span style={{ color: 'var(--text-muted)' }}>{label}:</span>
       <span style={{ fontWeight: 600 }}>{value}</span>
     </div>
   )

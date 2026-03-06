@@ -100,7 +100,19 @@ function buildBeats(
 
     const role = template?.role ?? guideline?.role ?? 'Unknown'
     const label = template?.label ?? spineNodeId
-    const definition = template?.beat_summary_template ?? guideline?.definition ?? ''
+    const rawDefinition = template?.beat_summary_template ?? guideline?.definition ?? ''
+
+    // Enrich definition with genre obligations and structural context
+    const genreLinks = guideline?.genre_obligation_links ?? []
+    const signals = template?.signals_to_include ?? []
+    const definitionParts = [rawDefinition]
+    if (genreLinks.length > 0) {
+      definitionParts.push(`Genre obligations: ${genreLinks.join(', ')}`)
+    }
+    if (signals.length > 0) {
+      definitionParts.push(`Signals: ${signals.slice(0, 3).join('; ')}`)
+    }
+    const definition = definitionParts.join(' | ')
 
     // Determine scene count
     const sceneCount = determineSceneCount(role, options)

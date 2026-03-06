@@ -1,14 +1,11 @@
 import { useEffect, useCallback, useRef, useState, useMemo, memo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
-import { GraphSelectorPanel } from './components/GraphSelectorPanel.tsx'
-import { VariantToggle } from './components/VariantToggle.tsx'
 import { computeFailureModeNodes } from './graph-engine/index.ts'
-import { DetailPanel, EdgeTooltip } from './panels/DetailPanel.tsx'
-import { SimulationPanel } from './panels/SimulationPanel.tsx'
-import { ExampleOverlay } from './panels/ExampleOverlay.tsx'
+import { DetailPanel } from './panels/DetailPanel.tsx'
 import { GraphStats } from './panels/GraphStats.tsx'
 import { CrossIndexPanel } from './panels/CrossIndex.tsx'
+import { PairingPanel } from './panels/PairingPanel.tsx'
 import { ElementsPanel } from './panels/ElementsPanel.tsx'
 import { TimelinePanel } from './panels/TimelinePanel.tsx'
 import { CharacterArcPanel } from './panels/CharacterArcPanel.tsx'
@@ -23,17 +20,18 @@ import { PlanPanel } from './generation/panels/PlanPanel.tsx'
 import { TracePanel } from './generation/panels/TracePanel.tsx'
 import { CompliancePanel } from './generation/panels/CompliancePanel.tsx'
 import { StoryPanel } from './generation/panels/StoryPanel.tsx'
+import { TemplatesPanel } from './generation/panels/TemplatesPanel.tsx'
 import type { CyCore, GenerationOverlay } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
-import { useSimulationStore } from './store/simulationStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
 import { useGenerationStore } from './generation/store/generationStore.ts'
-import type { GraphEdge, DataManifest } from './types/graph.ts'
+import { useRequestStore } from './generation/store/requestStore.ts'
+import type { DataManifest } from './types/graph.ts'
 
 // Layout constants
 const TOOLBAR_HEIGHT = 42
-const SIDEBAR_WIDTH = 260
-const DETAIL_PANEL_WIDTH = 320
+const INFO_PANEL_HEIGHT = 260
+const GEN_PANEL_WIDTH = 340
 
 /** Parse the URL pathname into a graph type and directory slug. */
 function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: string } | null {
@@ -42,17 +40,30 @@ function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: strin
   return { type: match[1] as 'archetype' | 'genre', dir: match[2] }
 }
 
+/** Extract directory name from filePath like "archetypes/01_heros_journey" */
+function dirFromPath(filePath: string): string {
+  const parts = filePath.split('/')
+  return parts[parts.length - 1]
+}
+
 export default function App() {
   const location = useLocation()
   const navigate = useNavigate()
   const manifestLoaded = useRef(false)
 
+  // Store state
+  const archetypeGraph = useGraphStore((s) => s.archetypeGraph)
+  const archetypeDir = useGraphStore((s) => s.archetypeDir)
+  const genreGraph = useGraphStore((s) => s.genreGraph)
+  const genreDir = useGraphStore((s) => s.genreDir)
   const currentGraph = useGraphStore((s) => s.currentGraph)
   const graphId = useGraphStore((s) => s.graphId)
+  const viewMode = useGraphStore((s) => s.viewMode)
   const loading = useGraphStore((s) => s.loading)
   const error = useGraphStore((s) => s.error)
-  const sidebarOpen = useGraphStore((s) => s.sidebarOpen)
-  const toggleSidebar = useGraphStore((s) => s.toggleSidebar)
+  const loadArchetypeGraph = useGraphStore((s) => s.loadArchetypeGraph)
+  const loadGenreGraph = useGraphStore((s) => s.loadGenreGraph)
+  const activateGraph = useGraphStore((s) => s.activateGraph)
   const loadGraph = useGraphStore((s) => s.loadGraph)
   const setManifest = useGraphStore((s) => s.setManifest)
   const selectedNodeId = useGraphStore((s) => s.selectedNodeId)
@@ -62,12 +73,6 @@ export default function App() {
   const setHighlightedPath = useGraphStore((s) => s.setHighlightedPath)
   const clearSelection = useGraphStore((s) => s.clearSelection)
 
-  // Simulation state
-  const simActive = useSimulationStore((s) => s.active)
-  const simCurrentNodeId = useSimulationStore((s) => s.currentNodeId)
-  const simVisitedNodes = useSimulationStore((s) => s.visitedNodes)
-  const simAvailableEdges = useSimulationStore((s) => s.availableEdges)
-  const resetSimulation = useSimulationStore((s) => s.resetSimulation)
 
   // Settings
   const settingsOpen = useSettingsStore((s) => s.settingsOpen)
@@ -81,46 +86,52 @@ export default function App() {
   const genTrace = useGenerationStore((s) => s.trace)
   const genValidation = useGenerationStore((s) => s.validation)
   const genSceneDrafts = useGenerationStore((s) => s.sceneDrafts)
-  // Edge hover tooltip state
-  const [hoveredEdge, setHoveredEdge] = useState<{ edge: GraphEdge; x: number; y: number } | null>(null)
-  // Variant toggle state
+  const genBackbone = useGenerationStore((s) => s.backbone)
+  const genChapterManifest = useGenerationStore((s) => s.chapterManifest)
+  const genTemplatePack = useGenerationStore((s) => s.templatePack)
+  const genSelection = useGenerationStore((s) => s.selection)
+
+  // Sync auto-selected blend/hybrid back to request store dropdowns
+  useEffect(() => {
+    if (!genSelection) return
+    const { genre_blend, hybrid_archetype } = genSelection
+    if (genre_blend?.enabled && genre_blend.secondary_genre) {
+      useRequestStore.getState().setBlendGenre(genre_blend.secondary_genre)
+    }
+    if (hybrid_archetype?.enabled && hybrid_archetype.secondary_archetype) {
+      useRequestStore.getState().setHybridArchetype(hybrid_archetype.secondary_archetype)
+    }
+  }, [genSelection])
+
+  // UI state
   const [activeVariant, setActiveVariant] = useState<string | null>(null)
   const [showFailureModes, setShowFailureModes] = useState(false)
-  // Bottom panel toggle (simulation)
-  const [showSimulation, setShowSimulation] = useState(false)
-  // Example mode
-  const [exampleMappedNodes, setExampleMappedNodes] = useState<string[]>([])
-  // Right panel mode
-  const [rightPanel, setRightPanel] = useState<'detail' | 'stats' | 'crossindex' | 'elements' | 'timeline' | 'arcs' | null>(null)
-  // Export panel
+
+  const [exampleMappedNodes] = useState<string[]>([])
   const [showExport, setShowExport] = useState(false)
-  // Generation panel
-  const [showGeneration, setShowGeneration] = useState(false)
   const [genTab, setGenTab] = useState<'run' | 'contract' | 'plan' | 'trace' | 'compliance' | 'story'>('run')
-  // Generation overlay nodes for highlighting
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
-  // Manifest error
   const [manifestError, setManifestError] = useState<string | null>(null)
-  const cyInstanceRef = useRef<CyCore | null>(null)
+  const [infoPanel, setInfoPanel] = useState<string>('pairing')
+  const [infoPanelOpen, setInfoPanelOpen] = useState(true)
 
-  const handleCyReady = useCallback((cy: CyCore) => {
-    cyInstanceRef.current = cy
-  }, [])
+  const cyArchRef = useRef<CyCore | null>(null)
+  const cyGenreRef = useRef<CyCore | null>(null)
 
-  const handleExampleHighlight = useCallback((nodeIds: string[]) => {
-    setExampleMappedNodes(nodeIds)
-  }, [])
+  const handleArchCyReady = useCallback((cy: CyCore) => { cyArchRef.current = cy }, [])
+  const handleGenreCyReady = useCallback((cy: CyCore) => { cyGenreRef.current = cy }, [])
 
-  const handleExampleClearHighlight = useCallback(() => {
-    setExampleMappedNodes([])
-  }, [])
-
-  // Auto-switch to Story tab when draft generation completes
+  // Auto-switch to Story tab once when draft generation completes
+  const autoSwitchedToStory = useRef(false)
   useEffect(() => {
-    if (genStatus === 'COMPLETED' && genSceneDrafts.size > 0 && genTab === 'run') {
+    if (genStatus === 'COMPLETED' && genSceneDrafts.size > 0 && !autoSwitchedToStory.current) {
+      autoSwitchedToStory.current = true
       setGenTab('story')
     }
-  }, [genStatus, genSceneDrafts.size, genTab])
+    if (genStatus === 'IDLE') {
+      autoSwitchedToStory.current = false
+    }
+  }, [genStatus, genSceneDrafts.size])
 
   // Load manifest once at startup
   useEffect(() => {
@@ -131,12 +142,20 @@ export default function App() {
         if (!res.ok) throw new Error(`Manifest load failed: ${res.status}`)
         return res.json()
       })
-      .then((data: DataManifest) => setManifest(data))
+      .then((data: DataManifest) => {
+        setManifest(data)
+        const parsed = parseRoute(location.pathname)
+        if (parsed) {
+          void loadGraph(parsed.type, parsed.dir)
+        }
+        // GenerationPanel syncs its default archetype/genre selections
+        // to the graph store on mount, so no need to load index-0 here.
+      })
       .catch((err) => {
         console.warn('Failed to load manifest:', err)
         setManifestError(err instanceof Error ? err.message : 'Failed to load manifest')
       })
-  }, [setManifest])
+  }, [setManifest, location.pathname, loadGraph])
 
   // Sync URL -> graph loading
   useEffect(() => {
@@ -146,74 +165,74 @@ export default function App() {
     }
   }, [location.pathname, loadGraph])
 
-  // Reset simulation and variant state when graph changes
+  // Reset overlays when active graph changes
   useEffect(() => {
-    resetSimulation()
-    setActiveVariant(null) // eslint-disable-line react-hooks/set-state-in-effect -- reset on graph change
+    setActiveVariant(null)
     setShowFailureModes(false)
-  }, [graphId, resetSimulation])
+  }, [graphId])
 
-  // Navigate when selecting a graph from the sidebar
-  const handleSelectGraph = useCallback(
-    (type: 'archetype' | 'genre', dir: string) => {
-      void navigate(`/${type}/${dir}`)
-    },
-    [navigate],
-  )
+  // Auto-select first node when archetype graph loads
+  const prevArchDir = useRef<string | null>(null)
+  useEffect(() => {
+    if (archetypeGraph && archetypeDir && archetypeDir !== prevArchDir.current) {
+      prevArchDir.current = archetypeDir
+      if (archetypeGraph.graph.nodes.length > 0) {
+        selectNode(archetypeGraph.graph.nodes[0].node_id)
+      }
+    }
+  }, [archetypeGraph, archetypeDir, selectNode])
 
-  // Edge hover handlers (called from GraphCanvas)
-  const handleEdgeHover = useCallback(
-    (edgeId: string, x: number, y: number) => {
-      if (!currentGraph) return
-      const edge = currentGraph.graph.edges.find((e) => e.edge_id === edgeId)
-      if (edge) setHoveredEdge({ edge, x, y })
-    },
-    [currentGraph],
-  )
+  const handleArchFocus = useCallback(() => {
+    activateGraph('archetype')
+  }, [activateGraph])
 
-  const handleEdgeHoverOut = useCallback(() => {
-    setHoveredEdge(null)
-  }, [])
+  const handleGenreFocus = useCallback(() => {
+    activateGraph('genre')
+  }, [activateGraph])
 
-  // Trace navigation (BFS forward/backward)
+  // Trace navigation
   const { traceDirection, handleTraceForward, handleTraceBackward, handleClearTrace } =
     useTraceNavigation(currentGraph, selectedNodeId, setHighlightedPath)
 
   // Keyboard navigation
   useKeyboardNav(currentGraph, selectedNodeId, selectNode, clearSelection, handleClearTrace)
 
-  // Navigate to a node from search
   const handleSearchSelect = useCallback((nodeId: string) => {
     selectNode(nodeId)
   }, [selectNode])
 
+  // Selected node/edge from the active graph
   const selectedNode = currentGraph
     ? currentGraph.graph.nodes.find((n) => n.node_id === selectedNodeId)
     : null
   const selectedEdge = currentGraph
     ? currentGraph.graph.edges.find((e) => e.edge_id === selectedEdgeId)
     : null
-  const hasDetailPanel = !!(selectedNode || selectedEdge)
+  const hasDetailContent = !!(selectedNode || selectedEdge)
+
+  // Auto-switch to detail tab when node/edge is selected
+  useEffect(() => {
+    if (selectedNodeId || selectedEdgeId) {
+      setInfoPanel('detail')
+      setInfoPanelOpen(true)
+    }
+  }, [selectedNodeId, selectedEdgeId])
 
   // Failure mode nodes
   const failureModeNodes = currentGraph && showFailureModes
     ? computeFailureModeNodes(currentGraph)
     : []
 
-  // Mode indicator info
-  const graphType = currentGraph?.graph.type
-  const axisLabel = graphType === 'archetype' ? 'Time' : graphType === 'genre' ? 'Depth' : null
 
   // Generation overlay
   const generationOverlay = useMemo<GenerationOverlay | undefined>(() => {
-    if (!showGeneration || genStatus === 'IDLE') return undefined
+    if (genStatus === 'IDLE') return undefined
     if (!genPlan && !genTrace) return undefined
 
     const coveredNodes: string[] = []
     const antiPatternNodes: string[] = []
     const activeSceneNodes: string[] = genHighlightNodes
 
-    // Collect covered nodes from plan scenes
     if (genPlan) {
       for (const scene of genPlan.scenes) {
         coveredNodes.push(scene.archetype_trace.node_id)
@@ -222,14 +241,37 @@ export default function App() {
         }
       }
     }
-
-    // Collect anti-pattern nodes from contract
     if (genContract) {
       antiPatternNodes.push(...genContract.genre.anti_patterns)
     }
 
     return { coveredNodes, antiPatternNodes, activeSceneNodes }
-  }, [showGeneration, genStatus, genPlan, genTrace, genContract, genHighlightNodes])
+  }, [genStatus, genPlan, genTrace, genContract, genHighlightNodes])
+
+  // Info panel tabs — progressive disclosure
+  const infoTabs = useMemo(() => {
+    const tabs: { id: string; label: string; badge?: boolean }[] = [
+      { id: 'pairing', label: 'Pairing' },
+    ]
+    if (hasDetailContent) {
+      tabs.push({ id: 'detail', label: 'Detail', badge: true })
+    }
+    tabs.push({ id: 'stats', label: 'Stats' })
+    tabs.push({ id: 'crossindex', label: 'X-Index' })
+    tabs.push({ id: 'elements', label: 'Elements' })
+    tabs.push({ id: 'timeline', label: 'Timeline' })
+    tabs.push({ id: 'arcs', label: 'Arcs' })
+    tabs.push({ id: 'templates', label: 'Templates', badge: !!(genTemplatePack || genBackbone) })
+    if (genContract) tabs.push({ id: 'gen-contract', label: 'Contract', badge: true })
+    if (genBackbone) tabs.push({ id: 'gen-backbone', label: 'Backbone', badge: true })
+    if (genPlan) tabs.push({ id: 'gen-plan', label: 'Plan', badge: true })
+    if (genSceneDrafts.size > 0) tabs.push({ id: 'gen-story', label: 'Story', badge: true })
+    if (genValidation) tabs.push({ id: 'gen-compliance', label: 'Checks', badge: true })
+    if (genChapterManifest) tabs.push({ id: 'gen-chapters', label: 'Chapters', badge: true })
+    return tabs
+  }, [hasDetailContent, genContract, genBackbone, genPlan, genSceneDrafts.size, genValidation, genChapterManifest, genTemplatePack])
+
+  const activeCyRef = viewMode === 'archetype' ? cyArchRef : cyGenreRef
 
   return (
     <div style={{
@@ -239,11 +281,11 @@ export default function App() {
       width: '100vw',
       overflow: 'hidden',
     }}>
-      {/* Top bar */}
+      {/* Toolbar — controls on the LEFT */}
       <header role="banner" aria-label="Application toolbar" style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 12,
+        gap: 10,
         padding: '6px 12px',
         background: 'var(--bg-surface)',
         borderBottom: '1px solid var(--border)',
@@ -251,25 +293,6 @@ export default function App() {
         zIndex: 10,
         height: TOOLBAR_HEIGHT,
       }}>
-        {/* Sidebar toggle */}
-        <button
-          onClick={toggleSidebar}
-          aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-          title={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-          style={{
-            padding: '4px 6px',
-            fontSize: 16,
-            color: 'var(--text-muted)',
-            borderRadius: 4,
-            transition: 'color 0.15s',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-        >
-          {'\u2630'}
-        </button>
-
-        {/* App title */}
         <span style={{
           fontWeight: 600,
           fontSize: 14,
@@ -281,142 +304,12 @@ export default function App() {
 
         <div style={{ width: 1, height: 20, background: 'var(--border)', flexShrink: 0 }} />
 
-        {/* Mode indicator */}
-        {graphType && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{
-              fontSize: 11,
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              color: graphType === 'archetype' ? '#f59e0b' : '#8b5cf6',
-              padding: '2px 8px',
-              background: graphType === 'archetype' ? 'rgba(245,158,11,0.12)' : 'rgba(139,92,246,0.12)',
-              borderRadius: 3,
-            }}>
-              {graphType === 'archetype' ? 'Archetype' : 'Genre'}
-            </span>
-            {axisLabel && (
-              <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>
-                Axis: {axisLabel} {graphType === 'archetype' ? '\u2192' : '\u2193'}
-              </span>
-            )}
-          </div>
-        )}
-
-        {currentGraph && (
-          <span style={{ color: 'var(--text-muted)', fontSize: 11 }}>
-            {currentGraph.graph.name} | {currentGraph.graph.nodes.length}N / {currentGraph.graph.edges.length}E
-          </span>
-        )}
-
-        <div style={{ flex: 1 }} />
-
-        {/* Analytical tools */}
-        {currentGraph && (
-          <>
-            <button
-              onClick={() => setRightPanel(rightPanel === 'stats' ? null : 'stats')}
-              aria-label="Toggle graph statistics panel"
-              aria-pressed={rightPanel === 'stats'}
-              style={{
-                fontSize: 11,
-                padding: '3px 8px',
-                borderRadius: 4,
-                border: '1px solid',
-                borderColor: rightPanel === 'stats' ? 'var(--accent)' : 'var(--border)',
-                background: rightPanel === 'stats' ? 'rgba(59,130,246,0.15)' : 'transparent',
-                color: rightPanel === 'stats' ? 'var(--accent)' : 'var(--text-muted)',
-                cursor: 'pointer',
-                transition: 'all 0.15s',
-              }}
-            >
-              Stats
-            </button>
-            <button
-              onClick={() => setRightPanel(rightPanel === 'crossindex' ? null : 'crossindex')}
-              aria-label="Toggle cross-index panel"
-              aria-pressed={rightPanel === 'crossindex'}
-              style={{
-                fontSize: 11,
-                padding: '3px 8px',
-                borderRadius: 4,
-                border: '1px solid',
-                borderColor: rightPanel === 'crossindex' ? 'var(--accent)' : 'var(--border)',
-                background: rightPanel === 'crossindex' ? 'rgba(59,130,246,0.15)' : 'transparent',
-                color: rightPanel === 'crossindex' ? 'var(--accent)' : 'var(--text-muted)',
-                cursor: 'pointer',
-                transition: 'all 0.15s',
-              }}
-            >
-              X-Index
-            </button>
-          </>
-        )}
-
-        {/* Simulation toggle */}
-        {currentGraph && (
-          <button
-            onClick={() => setShowSimulation((v) => !v)}
-            aria-label="Toggle simulation panel"
-            aria-pressed={showSimulation || simActive}
-            style={{
-              fontSize: 11,
-              padding: '3px 10px',
-              borderRadius: 4,
-              border: '1px solid',
-              borderColor: showSimulation || simActive ? 'var(--accent)' : 'var(--border)',
-              background: showSimulation || simActive ? 'rgba(59,130,246,0.15)' : 'transparent',
-              color: showSimulation || simActive ? 'var(--accent)' : 'var(--text-muted)',
-              cursor: 'pointer',
-              transition: 'all 0.15s',
-            }}
-          >
-            {simActive ? 'Simulating...' : 'Simulate'}
-          </button>
-        )}
-
-        {/* Generation toggle */}
-        <button
-          onClick={() => setShowGeneration((v) => !v)}
-          aria-label="Toggle generation panel"
-          aria-pressed={showGeneration}
-          style={{
-            fontSize: 11,
-            padding: '3px 10px',
-            borderRadius: 4,
-            border: '1px solid',
-            borderColor: showGeneration || genRunning ? '#22c55e' : 'var(--border)',
-            background: showGeneration ? 'rgba(34,197,94,0.15)' : 'transparent',
-            color: showGeneration || genRunning ? '#22c55e' : 'var(--text-muted)',
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-          }}
-        >
-          {genRunning ? 'Generating...' : 'Generate'}
-        </button>
 
         {/* Scripts link */}
         <button
           onClick={() => void navigate('/scripts')}
           aria-label="Browse audio scripts"
-          style={{
-            fontSize: 11,
-            padding: '3px 10px',
-            borderRadius: 4,
-            border: '1px solid var(--border)',
-            color: 'var(--text-muted)',
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = 'var(--accent)'
-            e.currentTarget.style.color = 'var(--accent)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'var(--border)'
-            e.currentTarget.style.color = 'var(--text-muted)'
-          }}
+          style={toolbarButtonStyle(false, 'var(--accent)')}
         >
           Scripts
         </button>
@@ -431,18 +324,7 @@ export default function App() {
           <button
             onClick={() => setShowExport((v) => !v)}
             aria-label="Export graph"
-            title="Export graph"
-            style={{
-              fontSize: 11,
-              padding: '3px 8px',
-              borderRadius: 4,
-              border: '1px solid',
-              borderColor: showExport ? 'var(--accent)' : 'var(--border)',
-              background: showExport ? 'rgba(59,130,246,0.15)' : 'transparent',
-              color: showExport ? 'var(--accent)' : 'var(--text-muted)',
-              cursor: 'pointer',
-              transition: 'all 0.15s',
-            }}
+            style={toolbarButtonStyle(showExport, 'var(--accent)')}
           >
             Export
           </button>
@@ -460,13 +342,28 @@ export default function App() {
             borderRadius: 4,
             transition: 'color 0.15s',
           }}
-          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'}
-          onMouseLeave={(e) => { if (!settingsOpen) e.currentTarget.style.color = 'var(--text-muted)' }}
         >
           {'\u2699'}
         </button>
 
-        {/* Loading / error indicators */}
+        <div style={{ flex: 1 }} />
+
+        {/* Status indicators on the right */}
+        {currentGraph && (
+          <span style={{
+            fontSize: 11,
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            color: viewMode === 'archetype' ? '#f59e0b' : '#8b5cf6',
+            padding: '2px 8px',
+            background: viewMode === 'archetype' ? 'rgba(245,158,11,0.12)' : 'rgba(139,92,246,0.12)',
+            borderRadius: 3,
+          }}>
+            {currentGraph.graph.name}
+          </span>
+        )}
+
         {loading && (
           <span style={{ fontSize: 11, color: 'var(--accent)', animation: 'pulse 1.5s infinite' }}>
             Loading...
@@ -484,241 +381,219 @@ export default function App() {
       {showExport && currentGraph && (
         <ExportPanel
           graph={currentGraph}
-          cyRef={cyInstanceRef}
+          cyRef={activeCyRef}
           onClose={() => setShowExport(false)}
         />
       )}
 
-      {/* Generation panel (left overlay when active) */}
-      {showGeneration && (
+      {/* Main layout: Generation panel (left) + graphs (center) */}
+      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+
+        {/* Generation panel — always visible on the left */}
         <div style={{
-          position: 'fixed',
-          top: TOOLBAR_HEIGHT,
-          left: 0,
-          bottom: 0,
-          width: 340,
-          zIndex: 20,
+          width: GEN_PANEL_WIDTH,
+          flexShrink: 0,
           background: 'var(--bg-surface)',
           borderRight: '1px solid var(--border)',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '4px 0 16px rgba(0,0,0,0.2)',
+          overflow: 'hidden',
         }}>
-          {/* Generation sub-tabs */}
+          {/* Generation sub-tabs — Run always first and prominent */}
           <div style={{
             display: 'flex',
             borderBottom: '1px solid var(--border)',
             flexShrink: 0,
           }}>
-            <GenTab label="Run" active={genTab === 'run'} onClick={() => setGenTab('run')} />
+            <GenTab label={'\u25C0 Run'} active={genTab === 'run'} onClick={() => setGenTab('run')} highlight />
             <GenTab label="Contract" active={genTab === 'contract'} onClick={() => setGenTab('contract')} badge={!!genContract} />
             <GenTab label="Plan" active={genTab === 'plan'} onClick={() => setGenTab('plan')} badge={!!genPlan} />
-            <GenTab label="Trace" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge={!!genTrace} />
-            <GenTab label="Valid" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge={!!genValidation} />
+            <GenTab label="Map" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge={!!genTrace} />
+            <GenTab label="Checks" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge={!!genValidation} />
             <GenTab label="Story" active={genTab === 'story'} onClick={() => setGenTab('story')} badge={genSceneDrafts.size > 0} />
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
-            {genTab === 'run' && (
-              <GenerationPanel onClose={() => setShowGeneration(false)} />
-            )}
-            {genTab === 'contract' && (
-              <ContractPanel onHighlightNodes={setGenHighlightNodes} />
-            )}
-            {genTab === 'plan' && (
-              <PlanPanel onHighlightNodes={setGenHighlightNodes} />
-            )}
-            {genTab === 'trace' && (
-              <TracePanel onHighlightNodes={setGenHighlightNodes} />
-            )}
-            {genTab === 'compliance' && (
-              <CompliancePanel />
-            )}
-            {genTab === 'story' && (
-              <StoryPanel onHighlightNodes={setGenHighlightNodes} />
-            )}
+            {genTab === 'run' && <GenerationPanel onClose={() => setGenTab('run')} />}
+            {genTab === 'contract' && <ContractPanel onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'plan' && <PlanPanel onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'trace' && <TracePanel onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'compliance' && <CompliancePanel />}
+            {genTab === 'story' && <StoryPanel onHighlightNodes={setGenHighlightNodes} />}
           </div>
         </div>
-      )}
 
-      {/* Main content area */}
-      <div style={{ flex: 1, display: 'flex', position: 'relative', overflow: 'hidden' }}>
-        {/* Left sidebar */}
-        <aside aria-label="Graph selector sidebar" style={{
-          width: sidebarOpen ? SIDEBAR_WIDTH : 0,
-          minWidth: sidebarOpen ? SIDEBAR_WIDTH : 0,
-          background: 'var(--bg-surface)',
-          borderRight: sidebarOpen ? '1px solid var(--border)' : 'none',
-          transition: 'width 0.2s ease, min-width 0.2s ease',
-          overflow: 'hidden',
-          flexShrink: 0,
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
-          {sidebarOpen && (
-            <>
-              <div style={{ flex: 1, overflow: 'hidden' }}>
-                <GraphSelectorPanel onSelect={handleSelectGraph} />
-              </div>
-              {/* Variant toggle (below graph selector) */}
-              {currentGraph && (
-                <VariantToggle
-                  graph={currentGraph}
-                  activeVariant={activeVariant}
-                  onToggle={setActiveVariant}
-                  showFailureModes={showFailureModes}
-                  onToggleFailureModes={() => setShowFailureModes((v) => !v)}
-                />
-              )}
-              {/* Example overlay (below variant toggle) */}
-              {currentGraph && (
-                <ExampleOverlay
-                  graph={currentGraph}
-                  onHighlightNodes={handleExampleHighlight}
-                  onClearHighlight={handleExampleClearHighlight}
-                />
-              )}
-            </>
-          )}
-        </aside>
-
-        {/* Center: graph canvas + simulation panel */}
+        {/* Info panel + graph area */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-          <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-            {currentGraph ? (
-              <div
-                key={graphId}
-                style={{ width: '100%', height: '100%', animation: 'fadeIn 0.25s ease' }}
-              >
-                <GraphCanvas
-                  graph={currentGraph}
-                  highlightedPath={highlightedPath}
-                  onEdgeHover={handleEdgeHover}
-                  onEdgeHoverOut={handleEdgeHoverOut}
-                  simulationState={simActive ? {
-                    currentNodeId: simCurrentNodeId,
-                    visitedNodes: simVisitedNodes,
-                    availableEdges: simAvailableEdges,
-                  } : undefined}
-                  failureModeNodes={failureModeNodes}
-                  activeVariant={activeVariant}
-                  exampleMappedNodes={exampleMappedNodes.length > 0 ? exampleMappedNodes : undefined}
-                  generationOverlay={generationOverlay}
-                  onCyReady={handleCyReady}
-                />
-              </div>
-            ) : (
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100%',
-                gap: 12,
-                color: 'var(--text-muted)',
-              }}>
-                <div style={{ fontSize: 32, opacity: 0.3 }}>{'\u29BB'}</div>
-                <div style={{ fontSize: 14 }}>Select a graph from the sidebar to begin.</div>
-                <div style={{ fontSize: 11 }}>15 archetypes and 27 genres available.</div>
-              </div>
-            )}
-          </div>
-
-          {/* Simulation panel (bottom of canvas area) */}
-          {currentGraph && (showSimulation || simActive) && (
-            <div style={{
-              maxHeight: 280,
-              overflowY: 'auto',
-              borderTop: '1px solid var(--border)',
-              flexShrink: 0,
-            }}>
-              <SimulationPanel graph={currentGraph} />
-            </div>
-          )}
-        </div>
-
-        {/* Right panel (tabbed: Detail / Stats / Cross-Index) */}
-        {(hasDetailPanel || rightPanel) && currentGraph && (
-          <aside aria-label="Detail and analysis panel" style={{
-            width: DETAIL_PANEL_WIDTH,
+          {/* Top info panel */}
+          <div style={{
+            height: infoPanelOpen ? INFO_PANEL_HEIGHT : 28,
+            borderBottom: '1px solid var(--border)',
             background: 'var(--bg-surface)',
-            borderLeft: '1px solid var(--border)',
             flexShrink: 0,
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
+            transition: 'height 0.2s ease',
           }}>
-            {/* Tab bar */}
             <div style={{
               display: 'flex',
-              borderBottom: '1px solid var(--border)',
+              alignItems: 'center',
+              borderBottom: infoPanelOpen ? '1px solid var(--border)' : 'none',
               flexShrink: 0,
+              overflow: 'hidden',
             }}>
-              <PanelTab
-                label="Detail"
-                active={!rightPanel || rightPanel === 'detail'}
-                onClick={() => setRightPanel(hasDetailPanel ? 'detail' : null)}
-                badge={hasDetailPanel}
-              />
-              <PanelTab
-                label="Stats"
-                active={rightPanel === 'stats'}
-                onClick={() => setRightPanel(rightPanel === 'stats' ? null : 'stats')}
-              />
-              <PanelTab
-                label="X-Index"
-                active={rightPanel === 'crossindex'}
-                onClick={() => setRightPanel(rightPanel === 'crossindex' ? null : 'crossindex')}
-              />
-              <PanelTab
-                label="Elements"
-                active={rightPanel === 'elements'}
-                onClick={() => setRightPanel(rightPanel === 'elements' ? null : 'elements')}
-              />
-              <PanelTab
-                label="Timeline"
-                active={rightPanel === 'timeline'}
-                onClick={() => setRightPanel(rightPanel === 'timeline' ? null : 'timeline')}
-              />
-              <PanelTab
-                label="Arcs"
-                active={rightPanel === 'arcs'}
-                onClick={() => setRightPanel(rightPanel === 'arcs' ? null : 'arcs')}
-              />
+              <button
+                onClick={() => setInfoPanelOpen((v) => !v)}
+                aria-label={infoPanelOpen ? 'Collapse panel' : 'Expand panel'}
+                style={{
+                  padding: '4px 8px',
+                  fontSize: 10,
+                  color: 'var(--text-muted)',
+                  flexShrink: 0,
+                }}
+              >
+                {infoPanelOpen ? '\u25B2' : '\u25BC'}
+              </button>
+
+              <div style={{
+                display: 'flex',
+                flex: 1,
+                overflowX: 'auto',
+                gap: 0,
+              }}>
+                {infoTabs.map((tab) => (
+                  <BottomTab
+                    key={tab.id}
+                    label={tab.label}
+                    active={infoPanel === tab.id}
+                    badge={tab.badge}
+                    onClick={() => {
+                      setInfoPanel(tab.id)
+                      setInfoPanelOpen(true)
+                    }}
+                  />
+                ))}
+              </div>
             </div>
 
-            {/* Panel content */}
-            <div style={{ flex: 1, overflowY: 'auto' }}>
-              {(!rightPanel || rightPanel === 'detail') && hasDetailPanel && (
-                <DetailPanel
-                  node={selectedNode}
-                  edge={selectedEdge}
-                  onTraceForward={handleTraceForward}
-                  onTraceBackward={handleTraceBackward}
-                  onClearTrace={handleClearTrace}
-                  traceActive={traceDirection}
-                  graph={currentGraph}
-                />
-              )}
-              {rightPanel === 'stats' && <GraphStats graph={currentGraph} />}
-              {rightPanel === 'crossindex' && <CrossIndexPanel graph={currentGraph} />}
-              {rightPanel === 'elements' && (
-                <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
-              )}
-              {rightPanel === 'timeline' && (
-                <TimelinePanel graph={currentGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
-              )}
-              {rightPanel === 'arcs' && (
-                <CharacterArcPanel graph={currentGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
-              )}
-            </div>
-          </aside>
-        )}
+            {infoPanelOpen && (
+              <div style={{ flex: 1, overflowY: 'auto' }}>
+                {infoPanel === 'pairing' && <PairingPanel />}
+                {infoPanel === 'detail' && hasDetailContent && currentGraph && (
+                  <DetailPanel
+                    node={selectedNode}
+                    edge={selectedEdge}
+                    onTraceForward={handleTraceForward}
+                    onTraceBackward={handleTraceBackward}
+                    onClearTrace={handleClearTrace}
+                    traceActive={traceDirection}
+                    graph={currentGraph}
+                  />
+                )}
+                {infoPanel === 'stats' && currentGraph && <GraphStats graph={currentGraph} />}
+                {infoPanel === 'crossindex' && currentGraph && <CrossIndexPanel graph={currentGraph} />}
+                {infoPanel === 'elements' && currentGraph && (
+                  <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
+                )}
+                {infoPanel === 'timeline' && archetypeGraph && (
+                  <TimelinePanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+                )}
+                {infoPanel === 'arcs' && archetypeGraph && (
+                  <CharacterArcPanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+                )}
+                {infoPanel === 'templates' && <TemplatesPanel />}
+                {infoPanel === 'gen-contract' && <ContractPanel onHighlightNodes={setGenHighlightNodes} />}
+                {infoPanel === 'gen-backbone' && genBackbone && (
+                  <div style={{ padding: '12px 14px', fontSize: 11, color: 'var(--text-primary)' }}>
+                    <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', marginBottom: 8 }}>Backbone</div>
+                    <div style={{ marginBottom: 8 }}>{genBackbone.beats.length} beats, {genBackbone.chapter_partition.length} chapters</div>
+                    {genBackbone.beats.map((beat, i) => {
+                      const slotNames = beat.scenes.flatMap((s) => Object.keys(s.slots))
+                      const uniqueSlots = [...new Set(slotNames)]
+                      const obligationCount = beat.scenes.reduce((n, s) => n + s.genre_obligations.length, 0)
+                      return (
+                        <div key={i} style={{ padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: '3px solid #f59e0b' }}>
+                          <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', marginBottom: 2 }}>
+                            <span style={{ fontWeight: 600 }}>{beat.label}</span>
+                            {beat.role && (
+                              <span style={{ fontSize: 9, fontWeight: 600, textTransform: 'uppercase', color: '#f59e0b' }}>
+                                {beat.role}
+                              </span>
+                            )}
+                          </div>
+                          {beat.definition && (
+                            <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: 3 }}>
+                              {beat.definition}
+                            </div>
+                          )}
+                          <div style={{ fontSize: 9, color: 'var(--text-muted)', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                            <span>{beat.scenes.length} scene{beat.scenes.length !== 1 ? 's' : ''}</span>
+                            {obligationCount > 0 && <span>{obligationCount} genre obligation{obligationCount !== 1 ? 's' : ''}</span>}
+                            {uniqueSlots.length > 0 && <span>Slots: {uniqueSlots.join(', ')}</span>}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+                {infoPanel === 'gen-plan' && <PlanPanel onHighlightNodes={setGenHighlightNodes} />}
+                {infoPanel === 'gen-story' && <StoryPanel onHighlightNodes={setGenHighlightNodes} />}
+                {infoPanel === 'gen-compliance' && <CompliancePanel />}
+                {infoPanel === 'gen-chapters' && genChapterManifest && (
+                  <div style={{ padding: '12px 14px', fontSize: 11, color: 'var(--text-primary)' }}>
+                    <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', marginBottom: 8 }}>Chapters</div>
+                    {genChapterManifest.chapters.map((ch, i) => (
+                      <div key={i} style={{ padding: '4px 8px', marginBottom: 3, background: 'var(--bg-elevated)', borderRadius: 3 }}>
+                        <span style={{ fontWeight: 500 }}>{ch.title}</span>
+                        <span style={{ color: 'var(--text-muted)', marginLeft: 6, fontSize: 10 }}>
+                          {ch.scene_ids.length} scenes
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Two graph documents side by side */}
+          <div style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
+            {/* Archetype document */}
+            <GraphDocument
+              label="Archetype"
+              color="#f59e0b"
+              graphName={archetypeGraph?.graph.name ?? null}
+              graph={archetypeGraph}
+              graphId={archetypeDir ? `archetype/${archetypeDir}` : undefined}
+              onCyReady={handleArchCyReady}
+              onFocus={handleArchFocus}
+              isActive={viewMode === 'archetype'}
+              highlightedPath={viewMode === 'archetype' ? highlightedPath : undefined}
+              failureModeNodes={viewMode === 'archetype' ? failureModeNodes : undefined}
+              activeVariant={activeVariant}
+              exampleMappedNodes={exampleMappedNodes.length > 0 ? exampleMappedNodes : undefined}
+              generationOverlay={generationOverlay}
+            />
+
+            <div style={{ width: 1, background: 'var(--border)', flexShrink: 0 }} />
+
+            {/* Genre document */}
+            <GraphDocument
+              label="Genre"
+              color="#8b5cf6"
+              graphName={genreGraph?.graph.name ?? null}
+              graph={genreGraph}
+              graphId={genreDir ? `genre/${genreDir}` : undefined}
+              onCyReady={handleGenreCyReady}
+              onFocus={handleGenreFocus}
+              isActive={viewMode === 'genre'}
+              highlightedPath={viewMode === 'genre' ? highlightedPath : undefined}
+            />
+          </div>
+
+
+        </div>
       </div>
-
-      {/* Edge hover tooltip (rendered at fixed position) */}
-      {hoveredEdge && (
-        <EdgeTooltip edge={hoveredEdge.edge} position={{ x: hoveredEdge.x, y: hoveredEdge.y }} />
-      )}
 
       {/* Screen-reader announcements */}
       <div aria-live="polite" className="sr-only" style={{
@@ -729,15 +604,151 @@ export default function App() {
         clip: 'rect(0,0,0,0)',
         whiteSpace: 'nowrap',
       }}>
-        {selectedNode && `Selected node: ${selectedNode.label}, role: ${selectedNode.role}, ${(currentGraph?.adjacency.get(selectedNode.node_id) ?? []).length} outgoing connections`}
-        {selectedEdge && `Selected edge: ${selectedEdge.label}, meaning: ${selectedEdge.meaning}, from ${selectedEdge.from} to ${selectedEdge.to}`}
-        {hoveredEdge && !selectedEdge && `Edge: ${hoveredEdge.edge.label}, meaning: ${hoveredEdge.edge.meaning}`}
+        {selectedNode && `Selected node: ${selectedNode.label}, role: ${selectedNode.role}`}
+        {selectedEdge && `Selected edge: ${selectedEdge.label}, meaning: ${selectedEdge.meaning}`}
       </div>
     </div>
   )
 }
 
-const PanelTab = memo(function PanelTab({ label, active, onClick, badge }: {
+// ---------------------------------------------------------------------------
+// Graph Document — label + GraphCanvas (no dropdown — driven by GenerationPanel)
+// ---------------------------------------------------------------------------
+
+interface GraphDocumentProps {
+  label: string
+  color: string
+  graphName: string | null
+  graph: import('./graph-engine/index.ts').NormalizedGraph | null
+  graphId?: string
+  onCyReady: (cy: CyCore) => void
+  onFocus: () => void
+  isActive: boolean
+  highlightedPath?: string[]
+  failureModeNodes?: string[]
+  activeVariant?: string | null
+  exampleMappedNodes?: string[]
+  generationOverlay?: GenerationOverlay
+}
+
+const GraphDocument = memo(function GraphDocument({
+  label,
+  color,
+  graphName,
+  graph,
+  graphId,
+  onCyReady,
+  onFocus,
+  isActive,
+  highlightedPath,
+  failureModeNodes,
+  activeVariant,
+  exampleMappedNodes,
+  generationOverlay,
+}: GraphDocumentProps) {
+  return (
+    <div style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+      minWidth: 0,
+      border: isActive ? `1px solid ${color}40` : '1px solid transparent',
+      transition: 'border-color 0.2s',
+    }}>
+      {/* Document header — label only, no dropdown */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        padding: '4px 10px',
+        background: `${color}08`,
+        borderBottom: `2px solid ${color}${isActive ? '80' : '30'}`,
+        flexShrink: 0,
+        minHeight: 28,
+      }}>
+        <span style={{
+          fontSize: 9,
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+          color,
+          flexShrink: 0,
+        }}>
+          {label}
+        </span>
+        {graphName && (
+          <span style={{
+            fontSize: 12,
+            fontWeight: 500,
+            color: 'var(--text-primary)',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}>
+            {graphName}
+          </span>
+        )}
+        {graph && (
+          <span style={{ fontSize: 10, color: 'var(--text-muted)', flexShrink: 0, whiteSpace: 'nowrap', marginLeft: 8 }}>
+            {graph.graph.nodes.length}N / {graph.graph.edges.length}E
+          </span>
+        )}
+      </div>
+
+      {/* Canvas */}
+      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+        {graph ? (
+          <div key={graphId} style={{ width: '100%', height: '100%', animation: 'fadeIn 0.25s ease' }}>
+            <GraphCanvas
+              graph={graph}
+              graphId={graphId}
+              highlightedPath={highlightedPath}
+
+              failureModeNodes={failureModeNodes}
+              activeVariant={activeVariant}
+              exampleMappedNodes={exampleMappedNodes}
+              generationOverlay={generationOverlay}
+              onCyReady={onCyReady}
+              onFocus={onFocus}
+            />
+          </div>
+        ) : (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+            color: 'var(--text-muted)',
+            fontSize: 12,
+          }}>
+            Select from the Generate panel
+          </div>
+        )}
+      </div>
+    </div>
+  )
+})
+
+// ---------------------------------------------------------------------------
+// Shared components
+// ---------------------------------------------------------------------------
+
+function toolbarButtonStyle(active: boolean, activeColor: string): React.CSSProperties {
+  return {
+    fontSize: 11,
+    padding: '3px 10px',
+    borderRadius: 4,
+    border: '1px solid',
+    borderColor: active ? activeColor : 'var(--border)',
+    background: active ? `${activeColor}18` : 'transparent',
+    color: active ? activeColor : 'var(--text-muted)',
+    cursor: 'pointer',
+    transition: 'all 0.15s',
+  }
+}
+
+const BottomTab = memo(function BottomTab({ label, active, onClick, badge }: {
   label: string
   active: boolean
   onClick: () => void
@@ -747,24 +758,25 @@ const PanelTab = memo(function PanelTab({ label, active, onClick, badge }: {
     <button
       onClick={onClick}
       style={{
-        flex: 1,
-        padding: '6px 4px',
+        padding: '5px 10px',
         fontSize: 10,
         fontWeight: active ? 600 : 400,
         color: active ? 'var(--accent)' : 'var(--text-muted)',
         borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
         transition: 'color 0.15s, border-color 0.15s',
         position: 'relative',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
       }}
     >
       {label}
       {badge && !active && (
         <span style={{
           position: 'absolute',
-          top: 4,
-          right: 8,
-          width: 5,
-          height: 5,
+          top: 2,
+          right: 2,
+          width: 4,
+          height: 4,
           borderRadius: '50%',
           background: 'var(--accent)',
         }} />
@@ -773,21 +785,23 @@ const PanelTab = memo(function PanelTab({ label, active, onClick, badge }: {
   )
 })
 
-const GenTab = memo(function GenTab({ label, active, onClick, badge }: {
+const GenTab = memo(function GenTab({ label, active, onClick, badge, highlight }: {
   label: string
   active: boolean
   onClick: () => void
   badge?: boolean
+  highlight?: boolean
 }) {
+  const baseColor = highlight && !active ? '#3b82f6' : '#22c55e'
   return (
     <button
       onClick={onClick}
       style={{
         flex: 1,
-        padding: '6px 4px',
-        fontSize: 9,
-        fontWeight: active ? 600 : 400,
-        color: active ? '#22c55e' : 'var(--text-muted)',
+        padding: '7px 4px',
+        fontSize: 11,
+        fontWeight: active ? 600 : highlight ? 500 : 400,
+        color: active ? '#22c55e' : highlight ? baseColor : 'var(--text-muted)',
         borderBottom: active ? '2px solid #22c55e' : '2px solid transparent',
         transition: 'color 0.15s, border-color 0.15s',
         position: 'relative',

@@ -172,7 +172,7 @@ export function PlanPanel({ onHighlightNodes }: PlanPanelProps) {
                     onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = 'var(--bg-primary)' }}
                     onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.background = 'transparent' }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                       <span style={{ fontSize: 10, fontWeight: isSelected ? 600 : 400 }}>
                         {scene.scene_goal}
                       </span>
@@ -209,7 +209,7 @@ function CoverageBar({ label, covered, total, color, target }: {
 
   return (
     <div style={{ marginBottom: 4 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, marginBottom: 2 }}>
+      <div style={{ display: 'flex', gap: 8, fontSize: 10, marginBottom: 2 }}>
         <span style={{ color }}>{label}</span>
         <span style={{ color: meetsTarget ? '#22c55e' : color }}>
           {covered}/{total} ({Math.round(pct * 100)}%)

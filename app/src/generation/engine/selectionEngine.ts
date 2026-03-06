@@ -240,6 +240,32 @@ function selectGenreBlend(
     return { enabled: false }
   }
 
+  // If the user specified a preferred blend genre, try to find it
+  const preferred = request.constraints.preferred_blend_genre
+  if (preferred) {
+    const prefId = findGenreId(preferred, corpus) ?? preferred
+    const match = corpus.blendingModel.blends.find(
+      (b) => b.genres.includes(primaryGenreId) && b.genres.includes(prefId),
+    )
+    if (match) {
+      return {
+        enabled: true,
+        secondary_genre: prefId,
+        pattern_id: match.blend_id,
+        stability: match.stability,
+        dominance: match.dominant_genre,
+        rationale: [match.resolution_strategy],
+      }
+    }
+    // Preferred genre has no blend pattern — return it anyway with defaults
+    return {
+      enabled: true,
+      secondary_genre: prefId,
+      stability: 'conditionally_stable',
+      rationale: [`User-selected blend with ${preferred}`],
+    }
+  }
+
   // Find blend patterns involving the primary genre
   const candidates = corpus.blendingModel.blends.filter(
     (b) => b.genres.includes(primaryGenreId),
@@ -274,6 +300,33 @@ function selectHybridArchetype(
 ): HybridArchetypeSelection {
   if (!request.constraints.allow_hybrid_archetype) {
     return { enabled: false }
+  }
+
+  // If the user specified a preferred hybrid archetype, try to find it
+  const preferred = request.constraints.preferred_hybrid_archetype
+  if (preferred) {
+    const prefId = findArchetypeId(preferred, corpus) ?? preferred
+    const match = corpus.hybridPatterns.hybrids.find(
+      (h) => h.archetypes.includes(primaryArchetypeId) && h.archetypes.includes(prefId),
+    )
+    if (match) {
+      return {
+        enabled: true,
+        secondary_archetype: prefId,
+        pattern_id: match.hybrid_id,
+        frequency: match.frequency,
+        shared_roles: match.shared_roles,
+        divergence_point: match.divergence_point,
+        composition_method: match.composition_method,
+      }
+    }
+    // Preferred archetype has no hybrid pattern — return it with defaults
+    return {
+      enabled: true,
+      secondary_archetype: prefId,
+      frequency: 'occasional',
+      composition_method: 'parallel_track',
+    }
   }
 
   // Find hybrid patterns involving the primary archetype
@@ -358,6 +411,13 @@ function scoreAlternatives(
 
 function findArchetypeId(name: string, corpus: LoadedCorpus): string | null {
   for (const [dir, graph] of corpus.archetypeGraphs) {
+    if (graph.name.toLowerCase() === name.toLowerCase()) return dir
+  }
+  return null
+}
+
+function findGenreId(name: string, corpus: LoadedCorpus): string | null {
+  for (const [dir, graph] of corpus.genreGraphs) {
     if (graph.name.toLowerCase() === name.toLowerCase()) return dir
   }
   return null

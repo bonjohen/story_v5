@@ -2,66 +2,84 @@ import type { Core } from 'cytoscape'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 
 /**
- * Archetype layout: horizontal left-to-right time axis.
- * Nodes are positioned by topological order (narrative sequence).
- * Variant nodes (50-79 range) are offset vertically.
+ * Archetype layout: rectangular grid approximating screen aspect ratio.
+ * Nodes are positioned in reading order (left-to-right, top-to-bottom)
+ * following topological sort. Variant nodes (50-79 range) are offset
+ * below their predecessor.
  */
 export function layoutArchetype(cy: Core, normalized: NormalizedGraph) {
   const { graph, adjacency, reverseAdjacency } = normalized
 
-  // Topological sort to determine horizontal position
+  // Topological sort to determine narrative sequence
   const order = topologicalSort(graph.nodes.map((n) => n.node_id), adjacency, reverseAdjacency)
-
-  // Assign columns based on topological order
-  const colMap = new Map<string, number>()
-  order.forEach((id, i) => colMap.set(id, i))
 
   // Separate main-path and variant nodes
   const mainNodes: string[] = []
   const variantNodes: string[] = []
 
-  for (const node of graph.nodes) {
-    if (/_(N[5-7]\d)_/.test(node.node_id)) {
-      variantNodes.push(node.node_id)
+  for (const id of order) {
+    if (/_(N[5-7]\d)_/.test(id)) {
+      variantNodes.push(id)
     } else {
-      mainNodes.push(node.node_id)
+      mainNodes.push(id)
     }
   }
 
-  const H_SPACING = 180
-  const V_SPACING = 120
-  const BASE_Y = 200
+  // Compute grid dimensions targeting ~16:9 aspect ratio
+  const n = mainNodes.length
+  // Target aspect ratio: cols/rows ~= 16/9 ~= 1.78
+  // cols * rows >= n, cols/rows ~= 1.78
+  // cols = sqrt(n * 1.78), rows = ceil(n / cols)
+  const TARGET_ASPECT = 1.78
+  let cols = Math.max(1, Math.round(Math.sqrt(n * TARGET_ASPECT)))
+  let rows = Math.ceil(n / cols)
+  // If the grid is too narrow, adjust
+  if (cols < 2 && n > 1) { cols = 2; rows = Math.ceil(n / cols) }
 
-  // Position main-path nodes along the horizontal axis
-  for (const id of mainNodes) {
-    const col = colMap.get(id) ?? 0
-    const node = cy.getElementById(id)
-    node.position({ x: col * H_SPACING + 100, y: BASE_Y })
+  const NODE_W = 140
+  const NODE_H = 140
+  const H_SPACING = NODE_W + 60
+  const V_SPACING = NODE_H + 60
+  const MARGIN = 80
+
+  // Position main-path nodes in grid reading order
+  for (let i = 0; i < mainNodes.length; i++) {
+    const col = i % cols
+    const row = Math.floor(i / cols)
+    const node = cy.getElementById(mainNodes[i])
+    node.position({
+      x: MARGIN + col * H_SPACING + NODE_W / 2,
+      y: MARGIN + row * V_SPACING + NODE_H / 2,
+    })
   }
 
-  // Position variant nodes below their predecessor
+  // Position variant nodes below their predecessor in the same column
+  const variantCountPerCol = new Map<number, number>()
   for (const id of variantNodes) {
-    const col = colMap.get(id) ?? 0
     const parents = reverseAdjacency.get(id) ?? []
-    // Find the vertical slot — offset below the main path
-    const variantIndex = variantNodes.indexOf(id)
-    const yOffset = V_SPACING * (1 + (variantIndex % 3))
-    const node = cy.getElementById(id)
-
+    // Find the parent's grid position
+    let parentCol = 0
+    let parentRow = rows - 1
     if (parents.length > 0) {
-      const parentCol = colMap.get(parents[0]) ?? col
-      // Place between parent and next main node
-      node.position({
-        x: ((parentCol + col) / 2) * H_SPACING + 100,
-        y: BASE_Y + yOffset,
-      })
-    } else {
-      node.position({ x: col * H_SPACING + 100, y: BASE_Y + yOffset })
+      const parentIdx = mainNodes.indexOf(parents[0])
+      if (parentIdx >= 0) {
+        parentCol = parentIdx % cols
+        parentRow = Math.floor(parentIdx / cols)
+      }
     }
+
+    const count = variantCountPerCol.get(parentCol) ?? 0
+    variantCountPerCol.set(parentCol, count + 1)
+
+    const node = cy.getElementById(id)
+    node.position({
+      x: MARGIN + parentCol * H_SPACING + NODE_W / 2,
+      y: MARGIN + (rows + count) * V_SPACING + NODE_H / 2,
+    })
   }
 
   // Fit to viewport with padding
-  cy.fit(undefined, 40)
+  cy.fit(undefined, 30)
 }
 
 /**

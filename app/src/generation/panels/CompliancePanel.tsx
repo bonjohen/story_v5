@@ -221,7 +221,7 @@ function SceneRow({ scene, isSelected, isExpanded, onClick }: {
         <span style={{ fontSize: 10, color: statusColor, fontWeight: 600 }}>
           {scene.status}
         </span>
-        <span style={{ fontSize: 9, color: 'var(--text-muted)', marginLeft: 'auto' }}>
+        <span style={{ fontSize: 9, color: 'var(--text-muted)', marginLeft: 8 }}>
           {scene.checks.length} checks
         </span>
         <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>
@@ -255,7 +255,7 @@ function CheckRow({ check }: { check: ValidationCheck }) {
         <span style={{ fontSize: 10, fontWeight: 600 }}>
           {check.type.replace(/_/g, ' ')}
         </span>
-        <span style={{ fontSize: 9, color, marginLeft: 'auto' }}>{check.status}</span>
+        <span style={{ fontSize: 9, color, marginLeft: 8 }}>{check.status}</span>
       </div>
       {check.details.length > 0 && (
         <div style={{ paddingLeft: 16, marginTop: 2 }}>

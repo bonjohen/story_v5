@@ -1,6 +1,10 @@
 /**
  * Zustand store for application state.
- * Manages current graph, selection, UI mode, sidebar, loading, and panel state.
+ * Manages dual graph display (archetype + genre), selection, and panel state.
+ *
+ * MDI model: both archetype and genre graphs are loaded simultaneously.
+ * `currentGraph` points to whichever graph was last interacted with,
+ * keeping existing panels compatible.
  */
 
 import { create } from 'zustand'
@@ -9,7 +13,13 @@ import type { DataManifest } from '../types/graph.ts'
 import { parseGraphJson, normalizeGraph } from '../graph-engine/index.ts'
 
 export interface GraphStoreState {
-  // Current graph
+  // Dual graphs (both loaded simultaneously)
+  archetypeGraph: NormalizedGraph | null
+  archetypeDir: string | null
+  genreGraph: NormalizedGraph | null
+  genreDir: string | null
+
+  // Active graph pointer (last interacted — for panel compatibility)
   currentGraph: NormalizedGraph | null
   viewMode: 'archetype' | 'genre'
   graphId: string | null // "archetype/01_heros_journey" format
@@ -21,13 +31,10 @@ export interface GraphStoreState {
   // Data manifest (loaded once at startup)
   manifest: DataManifest | null
 
-  // Selection
+  // Selection (shared — node IDs don't collide across graphs)
   selectedNodeId: string | null
   selectedEdgeId: string | null
   highlightedPath: string[]
-
-  // UI panels
-  sidebarOpen: boolean
 
   // Actions
   setCurrentGraph: (graph: NormalizedGraph) => void
@@ -35,12 +42,32 @@ export interface GraphStoreState {
   selectEdge: (edgeId: string | null) => void
   setHighlightedPath: (path: string[]) => void
   clearSelection: () => void
-  toggleSidebar: () => void
   setManifest: (manifest: DataManifest) => void
+  loadArchetypeGraph: (dir: string) => Promise<void>
+  loadGenreGraph: (dir: string) => Promise<void>
+  activateGraph: (type: 'archetype' | 'genre') => void
+
+  // Legacy compat
   loadGraph: (type: 'archetype' | 'genre', dir: string) => Promise<void>
 }
 
+async function fetchGraph(type: 'archetype' | 'genre', dir: string): Promise<NormalizedGraph> {
+  const basePath = type === 'archetype' ? `archetypes/${dir}` : `genres/${dir}`
+  const url = `${import.meta.env.BASE_URL}data/${basePath}/graph.json`
+  const response = await fetch(url)
+  if (!response.ok) throw new Error(`Failed to load: ${response.status}`)
+  const contentType = response.headers.get('content-type') ?? ''
+  if (!contentType.includes('json')) throw new Error(`Expected JSON but got ${contentType}`)
+  const raw: unknown = await response.json()
+  const graph = parseGraphJson(raw)
+  return normalizeGraph(graph)
+}
+
 export const useGraphStore = create<GraphStoreState>((set, get) => ({
+  archetypeGraph: null,
+  archetypeDir: null,
+  genreGraph: null,
+  genreDir: null,
   currentGraph: null,
   viewMode: 'archetype',
   graphId: null,
@@ -50,7 +77,6 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
   selectedNodeId: null,
   selectedEdgeId: null,
   highlightedPath: [],
-  sidebarOpen: true,
 
   setCurrentGraph: (graph) =>
     set({
@@ -81,35 +107,21 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
       highlightedPath: [],
     }),
 
-  toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
   setManifest: (manifest) => set({ manifest }),
 
-  loadGraph: async (type, dir) => {
-    const newId = `${type}/${dir}`
+  loadArchetypeGraph: async (dir) => {
     const current = get()
-    // Skip if already loaded
-    if (current.graphId === newId && current.currentGraph && !current.error) return
+    if (current.archetypeDir === dir && current.archetypeGraph) return
 
-    set({
-      loading: true,
-      error: null,
-      graphId: newId,
-    })
-
+    set({ loading: true, error: null })
     try {
-      const basePath =
-        type === 'archetype' ? `archetypes/${dir}` : `genres/${dir}`
-      const url = `${import.meta.env.BASE_URL}data/${basePath}/graph.json`
-      const response = await fetch(url)
-      if (!response.ok) throw new Error(`Failed to load: ${response.status}`)
-      const contentType = response.headers.get('content-type') ?? ''
-      if (!contentType.includes('json')) throw new Error(`Expected JSON but got ${contentType}`)
-      const raw: unknown = await response.json()
-      const graph = parseGraphJson(raw)
-      const normalized = normalizeGraph(graph)
+      const normalized = await fetchGraph('archetype', dir)
       set({
+        archetypeGraph: normalized,
+        archetypeDir: dir,
         currentGraph: normalized,
-        viewMode: type,
+        viewMode: 'archetype',
+        graphId: `archetype/${dir}`,
         loading: false,
         selectedNodeId: null,
         selectedEdgeId: null,
@@ -117,9 +129,61 @@ export const useGraphStore = create<GraphStoreState>((set, get) => ({
       })
     } catch (err) {
       set({
-        error: err instanceof Error ? err.message : 'Failed to load graph',
+        error: err instanceof Error ? err.message : 'Failed to load archetype',
         loading: false,
       })
+    }
+  },
+
+  loadGenreGraph: async (dir) => {
+    const current = get()
+    if (current.genreDir === dir && current.genreGraph) return
+
+    set({ loading: true, error: null })
+    try {
+      const normalized = await fetchGraph('genre', dir)
+      set({
+        genreGraph: normalized,
+        genreDir: dir,
+        currentGraph: normalized,
+        viewMode: 'genre',
+        graphId: `genre/${dir}`,
+        loading: false,
+        selectedNodeId: null,
+        selectedEdgeId: null,
+        highlightedPath: [],
+      })
+    } catch (err) {
+      set({
+        error: err instanceof Error ? err.message : 'Failed to load genre',
+        loading: false,
+      })
+    }
+  },
+
+  activateGraph: (type) => {
+    const state = get()
+    if (type === 'archetype' && state.archetypeGraph) {
+      set({
+        currentGraph: state.archetypeGraph,
+        viewMode: 'archetype',
+        graphId: `archetype/${state.archetypeDir}`,
+      })
+    } else if (type === 'genre' && state.genreGraph) {
+      set({
+        currentGraph: state.genreGraph,
+        viewMode: 'genre',
+        graphId: `genre/${state.genreDir}`,
+      })
+    }
+  },
+
+  // Legacy: dispatches to the appropriate loader
+  loadGraph: async (type, dir) => {
+    if (type === 'archetype') {
+      await get().loadArchetypeGraph(dir)
+    } else {
+      await get().loadGenreGraph(dir)
     }
   },
 }))

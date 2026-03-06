@@ -1,10 +1,14 @@
 /**
  * Generation Panel — operator console for the story generation pipeline.
  * Provides run controls, progress indicator, and event log stream.
+ *
+ * All form state lives in requestStore so values persist across tab switches.
  */
 
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useCallback, useRef, useEffect } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
+import { useRequestStore } from '../store/requestStore.ts'
+import { useGraphStore } from '../../store/graphStore.ts'
 import type { StoryRequest, GenerationMode, GenerationConfig } from '../artifacts/types.ts'
 
 // Default generation config matching generation_config.json
@@ -94,6 +98,18 @@ interface GenerationPanelProps {
   onClose: () => void
 }
 
+/** Map a display name to a manifest directory. */
+function nameToDir(name: string, items: { name: string; filePath: string }[]): string | null {
+  const entry = items.find((m) =>
+    m.name === name || m.name.includes(name) || name.includes(m.name)
+  )
+  if (!entry) return null
+  const parts = entry.filePath.split('/')
+  return parts[parts.length - 1]
+}
+
+export { ARCHETYPE_OPTIONS, GENRE_OPTIONS }
+
 export function GenerationPanel({ onClose }: GenerationPanelProps) {
   const status = useGenerationStore((s) => s.status)
   const running = useGenerationStore((s) => s.running)
@@ -104,14 +120,59 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
   const startRun = useGenerationStore((s) => s.startRun)
   const clearRun = useGenerationStore((s) => s.clearRun)
 
-  // Form state
-  const [premise, setPremise] = useState('A young engineer discovers that her space station\'s AI has developed consciousness and must decide whether to report it or protect it.')
-  const [archetype, setArchetype] = useState('The Hero\'s Journey')
-  const [genre, setGenre] = useState('Science Fiction')
-  const [mode, setMode] = useState<GenerationMode>('draft')
-  const [tone, setTone] = useState('somber')
-  const [allowBlend, setAllowBlend] = useState(false)
-  const [allowHybrid, setAllowHybrid] = useState(false)
+  // Graph store — sync selections to load corresponding graphs
+  const manifest = useGraphStore((s) => s.manifest)
+  const loadArchetypeGraph = useGraphStore((s) => s.loadArchetypeGraph)
+  const loadGenreGraph = useGraphStore((s) => s.loadGenreGraph)
+
+  // Persistent form state from request store
+  const premise = useRequestStore((s) => s.premise)
+  const archetype = useRequestStore((s) => s.archetype)
+  const genre = useRequestStore((s) => s.genre)
+  const mode = useRequestStore((s) => s.mode)
+  const tone = useRequestStore((s) => s.tone)
+  const allowBlend = useRequestStore((s) => s.allowBlend)
+  const blendGenre = useRequestStore((s) => s.blendGenre)
+  const allowHybrid = useRequestStore((s) => s.allowHybrid)
+  const hybridArchetype = useRequestStore((s) => s.hybridArchetype)
+
+  const setPremise = useRequestStore((s) => s.setPremise)
+  const setArchetype = useRequestStore((s) => s.setArchetype)
+  const setGenre = useRequestStore((s) => s.setGenre)
+  const setMode = useRequestStore((s) => s.setMode)
+  const setTone = useRequestStore((s) => s.setTone)
+  const setAllowBlend = useRequestStore((s) => s.setAllowBlend)
+  const setBlendGenre = useRequestStore((s) => s.setBlendGenre)
+  const setAllowHybrid = useRequestStore((s) => s.setAllowHybrid)
+  const setHybridArchetype = useRequestStore((s) => s.setHybridArchetype)
+
+  // Sync archetype/genre selections to graph display
+  const handleArchetypeChange = useCallback((name: string) => {
+    setArchetype(name)
+    if (manifest) {
+      const dir = nameToDir(name, manifest.archetypes)
+      if (dir) void loadArchetypeGraph(dir)
+    }
+  }, [manifest, loadArchetypeGraph, setArchetype])
+
+  const handleGenreChange = useCallback((name: string) => {
+    setGenre(name)
+    if (manifest) {
+      const dir = nameToDir(name, manifest.genres)
+      if (dir) void loadGenreGraph(dir)
+    }
+  }, [manifest, loadGenreGraph, setGenre])
+
+  // Sync default selections to graph store on mount
+  const syncedDefaults = useRef(false)
+  useEffect(() => {
+    if (syncedDefaults.current || !manifest) return
+    syncedDefaults.current = true
+    const archDir = nameToDir(archetype, manifest.archetypes)
+    if (archDir) void loadArchetypeGraph(archDir)
+    const genDir = nameToDir(genre, manifest.genres)
+    if (genDir) void loadGenreGraph(genDir)
+  }, [manifest, archetype, genre, loadArchetypeGraph, loadGenreGraph])
 
   const logRef = useRef<HTMLDivElement>(null)
 
@@ -141,6 +202,8 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
         must_exclude: [],
         allow_genre_blend: allowBlend,
         allow_hybrid_archetype: allowHybrid,
+        ...(allowBlend && blendGenre ? { preferred_blend_genre: blendGenre } : {}),
+        ...(allowHybrid && hybridArchetype ? { preferred_hybrid_archetype: hybridArchetype } : {}),
       },
     }
 
@@ -153,18 +216,13 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
     }
 
     void startRun(request, config, mode)
-  }, [premise, archetype, genre, mode, tone, allowBlend, allowHybrid, startRun])
-
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') onClose()
-  }, [onClose])
+  }, [premise, archetype, genre, mode, tone, allowBlend, blendGenre, allowHybrid, hybridArchetype, startRun])
 
   const stateInfo = STATE_LABELS[status] ?? { label: status, color: 'var(--text-muted)' }
   const hasResults = contract || plan
 
   return (
     <div
-      onKeyDown={handleKeyDown}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -197,18 +255,6 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
           }}>
             {stateInfo.label}
           </span>
-          <button
-            onClick={onClose}
-            aria-label="Close generation panel"
-            style={{
-              fontSize: 14,
-              color: 'var(--text-muted)',
-              padding: '2px 4px',
-              borderRadius: 2,
-            }}
-          >
-            {'\u2715'}
-          </button>
         </div>
       </div>
 
@@ -244,7 +290,7 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
             <span style={LABEL}>Archetype</span>
             <select
               value={archetype}
-              onChange={(e) => setArchetype(e.target.value)}
+              onChange={(e) => handleArchetypeChange(e.target.value)}
               disabled={running}
               style={INPUT}
             >
@@ -257,7 +303,7 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
             <span style={LABEL}>Genre</span>
             <select
               value={genre}
-              onChange={(e) => setGenre(e.target.value)}
+              onChange={(e) => handleGenreChange(e.target.value)}
               disabled={running}
               style={INPUT}
             >
@@ -311,7 +357,7 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
           borderRadius: 4,
         }}>
           <span style={{ ...LABEL, display: 'block', marginBottom: 6 }}>Composition</span>
-          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)', marginBottom: 6 }}>
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)', marginBottom: 4 }}>
             <input
               type="checkbox"
               checked={allowBlend}
@@ -322,11 +368,26 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
             <span>
               <strong>Genre blend</strong>
               <span style={{ display: 'block', fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4, marginTop: 1 }}>
-                Mix constraints from a second genre. The pipeline resolves conflicts using the blending model.
+                Mix constraints from a second genre.
               </span>
             </span>
           </label>
-          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)' }}>
+          {allowBlend && (
+            <div style={{ marginLeft: 22, marginBottom: 6 }}>
+              <select
+                value={blendGenre}
+                onChange={(e) => setBlendGenre(e.target.value)}
+                disabled={running}
+                style={{ ...INPUT, marginTop: 0 }}
+              >
+                <option value="">Auto-select best match</option>
+                {GENRE_OPTIONS.filter((g) => g !== genre).map((g) => (
+                  <option key={g} value={g}>{g}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)', marginBottom: 4 }}>
             <input
               type="checkbox"
               checked={allowHybrid}
@@ -337,10 +398,25 @@ export function GenerationPanel({ onClose }: GenerationPanelProps) {
             <span>
               <strong>Hybrid archetype</strong>
               <span style={{ display: 'block', fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4, marginTop: 1 }}>
-                Follow two archetype structures simultaneously. The pipeline merges shared phases and resolves divergence points.
+                Follow two archetype structures simultaneously.
               </span>
             </span>
           </label>
+          {allowHybrid && (
+            <div style={{ marginLeft: 22, marginBottom: 2 }}>
+              <select
+                value={hybridArchetype}
+                onChange={(e) => setHybridArchetype(e.target.value)}
+                disabled={running}
+                style={{ ...INPUT, marginTop: 0 }}
+              >
+                <option value="">Auto-select best match</option>
+                {ARCHETYPE_OPTIONS.filter((o) => o.value !== archetype).map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
 
         {/* Action buttons */}

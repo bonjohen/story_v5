@@ -5,6 +5,7 @@ import type { NormalizedGraph } from '../graph-engine/index.ts'
 import { useGraphStore } from '../store/graphStore.ts'
 import { buildCytoscapeElements } from './elements.ts'
 import { applyLayout } from '../layout/applyLayout.ts'
+import { savePositions } from '../layout/positionStore.ts'
 import { getCoreStyle } from './styles.ts'
 
 interface SimulationVisuals {
@@ -14,38 +15,38 @@ interface SimulationVisuals {
 }
 
 export interface GenerationOverlay {
-  /** Node IDs covered by at least one scene */
   coveredNodes: string[]
-  /** Node IDs with anti-pattern violations */
   antiPatternNodes: string[]
-  /** Currently selected scene's archetype node and genre obligation nodes */
   activeSceneNodes: string[]
 }
 
 interface GraphCanvasProps {
   graph: NormalizedGraph
+  graphId?: string
   highlightedPath?: string[]
-  onEdgeHover?: (edgeId: string, x: number, y: number) => void
-  onEdgeHoverOut?: () => void
   simulationState?: SimulationVisuals
   failureModeNodes?: string[]
   activeVariant?: string | null
   exampleMappedNodes?: string[]
   generationOverlay?: GenerationOverlay
   onCyReady?: (cy: Core) => void
+  onFocus?: () => void
 }
+
+const MINIMAP_W = 160
+const MINIMAP_H = 120
 
 export const GraphCanvas = memo(function GraphCanvas({
   graph,
+  graphId,
   highlightedPath,
-  onEdgeHover,
-  onEdgeHoverOut,
   simulationState,
   failureModeNodes,
   activeVariant,
   exampleMappedNodes,
   generationOverlay,
   onCyReady,
+  onFocus,
 }: GraphCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cyRef = useRef<Core | null>(null)
@@ -58,82 +59,94 @@ export const GraphCanvas = memo(function GraphCanvas({
 
   const handleNodeTap = useCallback(
     (evt: EventObject) => {
+      evt.stopPropagation()
+      onFocus?.()
       selectNode((evt.target as cytoscape.NodeSingular).id())
     },
-    [selectNode],
+    [selectNode, onFocus],
   )
 
   const handleEdgeTap = useCallback(
     (evt: EventObject) => {
+      evt.stopPropagation()
+      onFocus?.()
       selectEdge((evt.target as cytoscape.EdgeSingular).id())
     },
-    [selectEdge],
+    [selectEdge, onFocus],
   )
 
-  const handleBgTap = useCallback(() => {
-    clearSelection()
-  }, [clearSelection])
-
-  // Edge hover handlers
-  const handleEdgeMouseOver = useCallback(
+  // Only clear selection on actual background taps, not on node/edge taps
+  const handleBgTap = useCallback(
     (evt: EventObject) => {
-      if (!onEdgeHover) return
-      const pos = evt.renderedPosition || evt.position
-      if (pos) {
-        const container = containerRef.current
-        if (container) {
-          const rect = container.getBoundingClientRect()
-          onEdgeHover((evt.target as cytoscape.EdgeSingular).id(), rect.left + pos.x, rect.top + pos.y)
-        }
+      if (evt.target === cyRef.current) {
+        clearSelection()
       }
     },
-    [onEdgeHover],
+    [clearSelection],
   )
 
-  const handleEdgeMouseOut = useCallback(() => {
-    onEdgeHoverOut?.()
-  }, [onEdgeHoverOut])
-
-  // Minimap state
+  // --- Minimap state ---
   const [minimapSrc, setMinimapSrc] = useState<string | null>(null)
   const [viewportRect, setViewportRect] = useState<{
     x: number; y: number; w: number; h: number
   } | null>(null)
   const minimapRef = useRef<HTMLDivElement>(null)
+  const minimapBBRef = useRef<{ x1: number; y1: number; w: number; h: number } | null>(null)
 
-  const MINIMAP_W = 160
-  const MINIMAP_H = 120
-
-  const updateMinimap = useCallback(() => {
+  const renderMinimap = useCallback(() => {
     const cy = cyRef.current
     if (!cy || cy.elements().length === 0) return
 
     try {
-      const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim() || '#0f1117'
+      const bg = getComputedStyle(document.documentElement)
+        .getPropertyValue('--bg-primary').trim() || '#0f1117'
+      const bb = cy.elements().boundingBox()
+      if (bb.w <= 0 || bb.h <= 0) return
+
+      minimapBBRef.current = { x1: bb.x1, y1: bb.y1, w: bb.w, h: bb.h }
+
       const png = cy.png({ full: true, maxWidth: MINIMAP_W, maxHeight: MINIMAP_H, bg })
       setMinimapSrc(png)
+    } catch (e) {
+      console.debug('Minimap render skipped:', e)
+    }
+  }, [])
 
-      const bb = cy.elements().boundingBox()
+  const updateViewportRect = useCallback(() => {
+    const cy = cyRef.current
+    const bb = minimapBBRef.current
+    if (!cy || !bb || bb.w <= 0 || bb.h <= 0) return
+
+    try {
       const ext = cy.extent()
-      if (bb.w <= 0 || bb.h <= 0) return
 
       const scaleX = MINIMAP_W / bb.w
       const scaleY = MINIMAP_H / bb.h
       const scale = Math.min(scaleX, scaleY)
 
-      const renderedW = bb.w * scale
-      const renderedH = bb.h * scale
-      const offsetX = (MINIMAP_W - renderedW) / 2
-      const offsetY = (MINIMAP_H - renderedH) / 2
+      const graphW = bb.w * scale
+      const graphH = bb.h * scale
+      const ox = (MINIMAP_W - graphW) / 2
+      const oy = (MINIMAP_H - graphH) / 2
+
+      const vx = ox + (ext.x1 - bb.x1) * scale
+      const vy = oy + (ext.y1 - bb.y1) * scale
+      const vw = ext.w * scale
+      const vh = ext.h * scale
+
+      const clampedX = Math.max(ox, Math.min(vx, ox + graphW))
+      const clampedY = Math.max(oy, Math.min(vy, oy + graphH))
+      const clampedW = Math.min(vw, ox + graphW - clampedX)
+      const clampedH = Math.min(vh, oy + graphH - clampedY)
 
       setViewportRect({
-        x: offsetX + (ext.x1 - bb.x1) * scale,
-        y: offsetY + (ext.y1 - bb.y1) * scale,
-        w: Math.min(ext.w * scale, renderedW),
-        h: Math.min(ext.h * scale, renderedH),
+        x: clampedX,
+        y: clampedY,
+        w: Math.max(4, clampedW),
+        h: Math.max(4, clampedH),
       })
     } catch (e) {
-      console.debug('Minimap update skipped:', e)
+      console.debug('Viewport rect update skipped:', e)
     }
   }, [])
 
@@ -150,29 +163,42 @@ export const GraphCanvas = memo(function GraphCanvas({
       userZoomingEnabled: true,
       userPanningEnabled: true,
       boxSelectionEnabled: false,
-      minZoom: 0.2,
+      minZoom: 0.15,
       maxZoom: 3,
     })
 
     cy.on('tap', 'node', handleNodeTap)
     cy.on('tap', 'edge', handleEdgeTap)
     cy.on('tap', handleBgTap)
-    cy.on('mouseover', 'edge', handleEdgeMouseOver)
-    cy.on('mouseout', 'edge', handleEdgeMouseOut)
-    cy.on('viewport', updateMinimap)
+    cy.on('viewport', updateViewportRect)
 
-    applyLayout(cy, graph)
+    // Save positions after a node is dragged
+    if (graphId) {
+      cy.on('free', 'node', () => {
+        savePositions(graphId, cy)
+        renderMinimap()
+      })
+    }
+
+    applyLayout(cy, graph, graphId)
 
     cyRef.current = cy
     onCyReady?.(cy)
 
-    requestAnimationFrame(() => updateMinimap())
+    // Ensure graph is properly fitted after layout + container are settled
+    requestAnimationFrame(() => {
+      cy.fit(undefined, 30)
+      requestAnimationFrame(() => {
+        renderMinimap()
+        requestAnimationFrame(() => updateViewportRect())
+      })
+    })
 
     return () => {
       cy.destroy()
       cyRef.current = null
     }
-  }, [graph, handleNodeTap, handleEdgeTap, handleBgTap, handleEdgeMouseOver, handleEdgeMouseOut, updateMinimap, onCyReady])
+  }, [graph, graphId, handleNodeTap, handleEdgeTap, handleBgTap, renderMinimap, updateViewportRect, onCyReady])
 
   // Sync selection highlighting
   useEffect(() => {
@@ -280,7 +306,6 @@ export const GraphCanvas = memo(function GraphCanvas({
       }
     })
 
-    // Highlight edges that lead TO failure mode nodes
     cy.edges().forEach((edge) => {
       if (failSet.has(edge.target().id())) {
         edge.addClass('failure-path')
@@ -297,7 +322,6 @@ export const GraphCanvas = memo(function GraphCanvas({
 
     if (!activeVariant) return
 
-    // Find variant nodes (50-79 range)
     const isVariantNode = (id: string) => {
       const match = id.match(/_N(\d{2})_/)
       if (!match) return false
@@ -384,43 +408,26 @@ export const GraphCanvas = memo(function GraphCanvas({
     })
   }, [generationOverlay])
 
-  // Center on selected node (triggered by search or keyboard nav)
-  useEffect(() => {
-    const cy = cyRef.current
-    if (!cy || !selectedNodeId) return
-
-    const node = cy.getElementById(selectedNodeId)
-    if (node.length > 0) {
-      cy.animate({
-        center: { eles: node },
-        duration: 200,
-      })
-    }
-  }, [selectedNodeId])
-
   // Click on minimap to pan
   const handleMinimapClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const cy = cyRef.current
-    if (!cy || !minimapRef.current) return
+    const bb = minimapBBRef.current
+    if (!cy || !minimapRef.current || !bb || bb.w <= 0 || bb.h <= 0) return
 
     const rect = minimapRef.current.getBoundingClientRect()
     const clickX = e.clientX - rect.left
     const clickY = e.clientY - rect.top
 
-    const bb = cy.elements().boundingBox()
-    if (bb.w <= 0 || bb.h <= 0) return
-
     const scaleX = MINIMAP_W / bb.w
     const scaleY = MINIMAP_H / bb.h
     const scale = Math.min(scaleX, scaleY)
+    const graphW = bb.w * scale
+    const graphH = bb.h * scale
+    const ox = (MINIMAP_W - graphW) / 2
+    const oy = (MINIMAP_H - graphH) / 2
 
-    const renderedW = bb.w * scale
-    const renderedH = bb.h * scale
-    const offsetX = (MINIMAP_W - renderedW) / 2
-    const offsetY = (MINIMAP_H - renderedH) / 2
-
-    const graphX = bb.x1 + (clickX - offsetX) / scale
-    const graphY = bb.y1 + (clickY - offsetY) / scale
+    const graphX = bb.x1 + (clickX - ox) / scale
+    const graphY = bb.y1 + (clickY - oy) / scale
 
     const zoom = cy.zoom()
     cy.animate({
@@ -432,7 +439,6 @@ export const GraphCanvas = memo(function GraphCanvas({
     })
   }, [])
 
-  // Keyboard navigation on minimap (arrow keys to pan)
   const handleMinimapKeyDown = useCallback((e: React.KeyboardEvent) => {
     const cy = cyRef.current
     if (!cy) return
@@ -464,7 +470,7 @@ export const GraphCanvas = memo(function GraphCanvas({
         <div
           ref={minimapRef}
           role="img"
-          aria-label="Graph minimap — click or use arrow keys to pan"
+          aria-label="Graph minimap"
           tabIndex={0}
           onClick={handleMinimapClick}
           onKeyDown={handleMinimapKeyDown}
@@ -485,7 +491,7 @@ export const GraphCanvas = memo(function GraphCanvas({
         >
           <img
             src={minimapSrc}
-            alt="Graph minimap"
+            alt=""
             style={{
               width: MINIMAP_W,
               height: MINIMAP_H,
@@ -501,7 +507,7 @@ export const GraphCanvas = memo(function GraphCanvas({
               width: viewportRect.w,
               height: viewportRect.h,
               border: '1.5px solid var(--accent)',
-              background: 'rgba(59, 130, 246, 0.08)',
+              background: 'rgba(59, 130, 246, 0.12)',
               borderRadius: 2,
               pointerEvents: 'none',
             }} />

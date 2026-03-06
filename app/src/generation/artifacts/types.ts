@@ -79,6 +79,8 @@ export interface RequestConstraints {
   must_exclude: string[]
   allow_genre_blend: boolean
   allow_hybrid_archetype: boolean
+  preferred_blend_genre?: string
+  preferred_hybrid_archetype?: string
 }
 
 export interface StoryRequest extends RunMetadata {
@@ -795,9 +797,14 @@ export interface DetailCharacter {
   id: string
   name: string
   role: string
+  archetype_function?: string
   traits?: string[]
   motivations?: string[]
+  flaw?: string
   backstory?: string
+  arc_direction?: string
+  relationships?: string[]
+  distinguishing_feature?: string
 }
 
 export interface DetailPlace {

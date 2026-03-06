@@ -1,4 +1,4 @@
-name: Deploy Scripts Site
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -31,23 +31,18 @@ jobs:
         working-directory: app
         run: npm ci
 
-      - name: Copy script data to public
-        run: mkdir -p app/public/data && cp -r data/scripts app/public/data/scripts
-
-      - name: Build scripts site
+      - name: Build app
         working-directory: app
-        run: npm run build:scripts
+        run: npm run build
 
-      - name: Copy index.html and 404.html for SPA routing
-        run: |
-          cp app/dist-scripts/scripts-site.html app/dist-scripts/index.html
-          cp app/dist-scripts/scripts-site.html app/dist-scripts/404.html
+      - name: Add 404.html for SPA routing
+        run: cp app/dist/index.html app/dist/404.html
 
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: app/dist-scripts
+          path: app/dist
 
       - id: deployment
         uses: actions/deploy-pages@v4
