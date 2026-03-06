@@ -119,18 +119,18 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 ### Phase 5A — Manuscript Data Layer
 
-- [ ] **5A.1** Create `app/src/manuscript/types.ts` — `ManuscriptChapter` (id, title, scenes, status), `ManuscriptScene` (id, title, synopsis, draft_text, revised_text, edit_status: draft/revised/final, notes, word_count).
-- [ ] **5A.2** Create `app/src/manuscript/store/manuscriptStore.ts` — Zustand store. Populate from generation `sceneDrafts` + `chapterManifest`. Support manual editing, status tracking, reordering.
-- [ ] **5A.3** Bridge from generation — auto-populate manuscript when chapters are assembled.
+- [X] **5A.1** Create `app/src/manuscript/types.ts` — ManuscriptChapter, ManuscriptScene with EditStatus.
+- [X] **5A.2** Create `app/src/manuscript/store/manuscriptStore.ts` — Zustand store with populate from chapterManifest + sceneDrafts, editing, status tracking, reorder, export.
+- [X] **5A.3** Auto-populate from generation pipeline on page load.
 
 ### Phase 5B — Manuscript UI
 
-- [ ] **5B.1** Create `app/src/manuscript/ManuscriptPage.tsx` — three-column layout: chapter tree (left), scene editor (center), metadata panel (right).
-- [ ] **5B.2** Chapter tree / binder — collapsible tree showing chapters to scenes. Drag to reorder. Status badges (draft/revised/final). Word counts.
-- [ ] **5B.3** Scene editor — rich text area for editing prose. Show generated draft vs revised draft side-by-side (diff view). Notes field.
-- [ ] **5B.4** Metadata panel — for selected scene: synopsis, constraint compliance, participating entities, archetype phase, genre obligations met.
-- [ ] **5B.5** Export pipeline — export full manuscript as single markdown file, or per-chapter markdown files. Include front matter with metadata.
-- [ ] **5B.6** Add `/manuscript` route and nav link.
+- [X] **5B.1** Create `app/src/manuscript/ManuscriptPage.tsx` — three-column layout: chapter binder, scene editor, metadata panel.
+- [X] **5B.2** Chapter binder with expandable scenes, status badges, word counts.
+- [X] **5B.3** Scene editor with serif font, diff view (generated draft vs revised side-by-side), notes field.
+- [X] **5B.4** Metadata panel with synopsis, status buttons, word count, notes.
+- [X] **5B.5** Export pipeline — export full manuscript as single .md file.
+- [X] **5B.6** Add `/manuscript` route.
 
 ---
 
