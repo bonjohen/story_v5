@@ -5,6 +5,7 @@
   { "slug": "archetypes_overview", "title": "Archetypes", "subtitle": "An overview of the fifteen fundamental plot structures", "estimatedMinutes": 9, "category": "Foundations of Story Structure" },
   { "slug": "genres_overview", "title": "Genres", "subtitle": "An overview of the twenty-seven genre constraint hierarchies", "estimatedMinutes": 9, "category": "Foundations of Story Structure" },
   { "slug": "narrative_roles_overview", "title": "Narrative Roles", "subtitle": "A guide to the controlled vocabulary that structures every graph", "estimatedMinutes": 8, "category": "Foundations of Story Structure" },
+  { "slug": "hybrid_archetypes_overview", "title": "Hybrid Archetypes", "subtitle": "How stories follow two archetypes at once", "estimatedMinutes": 12, "category": "Foundations of Story Structure" },
   { "slug": "genre_element_constraints", "title": "Genre Element Constraints", "subtitle": "How genres shape story elements", "estimatedMinutes": 10, "category": "Foundations of Story Structure" },
   { "slug": "story_elements_and_templates", "title": "Story Elements and Templates", "subtitle": "Characters, places, and objects — the substance of storytelling", "estimatedMinutes": 12, "category": "The Data Model" },
   { "slug": "controlled_vocabulary_system", "title": "The Controlled Vocabulary System", "subtitle": "Why vocabularies exist and how they work", "estimatedMinutes": 10, "category": "The Data Model" },
@@ -20,6 +21,11 @@
   { "slug": "series_management_ui", "title": "Managing a Series: The Viewer Interface", "subtitle": "Browse, curate, branch, and export your ongoing story", "estimatedMinutes": 10, "category": "Using the System" },
   { "slug": "walkthrough_script", "title": "Story Generation Walkthrough", "subtitle": "An audio-friendly guide to the generation pipeline", "estimatedMinutes": 8, "category": "Using the System" },
   { "slug": "building_on_the_corpus", "title": "Building on the Corpus", "subtitle": "A developer guide to extending the project", "estimatedMinutes": 10, "category": "Using the System" },
+  { "slug": "backbone_pipeline_overview", "title": "The Backbone Pipeline", "subtitle": "The four new stages that bridge corpus knowledge to chapter output", "estimatedMinutes": 10, "category": "What This Enables" },
+  { "slug": "template_and_backbone_deep_dive", "title": "Templates and Backbones: A Deep Dive", "subtitle": "How corpus data becomes composable templates and story backbones", "estimatedMinutes": 12, "category": "The Data Model" },
+  { "slug": "detail_synthesis_walkthrough", "title": "Detail Synthesis: Filling the Slots", "subtitle": "How placeholders become concrete characters, places, and objects", "estimatedMinutes": 10, "category": "What This Enables" },
+  { "slug": "chapter_assembly_walkthrough", "title": "Chapter Assembly: From Scenes to Chapters", "subtitle": "Scene stitching, editorial polish, and manuscript output", "estimatedMinutes": 9, "category": "What This Enables" },
+  { "slug": "feature_packs_and_style", "title": "Feature Packs and Style", "subtitle": "Modular voice and pacing packs that shape narrative tone", "estimatedMinutes": 8, "category": "The Data Model" },
   { "slug": "example_fantasy_story", "title": "Building a Fantasy Story", "subtitle": "A worked example: from premise to compliance trace", "estimatedMinutes": 11, "category": "Examples" },
   { "slug": "example_mystery_story", "title": "Building a Mystery", "subtitle": "A worked example: fair clueing, investigation structure, and compliance", "estimatedMinutes": 11, "category": "Examples" }
 ]

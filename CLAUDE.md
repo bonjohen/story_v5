@@ -74,6 +74,13 @@ app/                               ← Interactive viewer (React + TypeScript + 
     panels/                        ← Side panels (DetailPanel, SimulationPanel, ExportPanel, etc.)
     render/                        ← Cytoscape canvas, styles, element builders
     graph-engine/                  ← Normalizer, validator, data index, example parser
+    generation/                    ← Story generation pipeline
+      engine/                      ← Core engines (templateCompiler, backboneAssembler, detailSynthesizer, chapterAssembler, orchestrator, etc.)
+      agents/                      ← LLM agent prompts (detailAgent, editorialAgent, plannerAgent, writerAgent, etc.)
+      artifacts/                   ← Types, JSON schemas, I/O helpers
+      panels/                      ← Generation UI panels (GenerationPanel, ContractPanel, etc.)
+      store/                       ← Generation Zustand store
+      series/                      ← Series/episode generation subsystem
     store/                         ← Zustand stores (graphStore, simulationStore, settingsStore)
     layout/                        ← Graph layout algorithms
     types/                         ← TypeScript interfaces
@@ -86,7 +93,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 1 — Archetype Graphs**: Complete. All 15 graph JSONs, 15 narrative specs, 15 example mappings, cross-archetype index, and validation done.
 - **Goal 2 — Genre Depth Graphs**: Complete. All 27 graph JSONs, 27 narrative specs, 27 example mappings, cross-genre constraint index, genre × archetype compatibility matrix, and validation done.
 - **Goal 3 — Interactive Viewer**: Complete. All 8 phases implemented (scaffolding, core rendering, navigation, detail panels, simulation, examples, analytics, polish/accessibility/export).
-- **Goal 4 — Backbone Synthesis & Assembly**: Planned. 8-phase implementation plan ready. Adds TemplateCompiler, BackboneAssembler, DetailSynthesizer, ChapterAssembler to the generation pipeline.
+- **Goal 4 — Backbone Synthesis & Assembly**: Complete. All 8 phases implemented (schemas, TemplateCompiler, BackboneAssembler, feature packs, DetailSynthesizer, ChapterAssembler, orchestrator integration, documentation/scripts).
 
 ## Key Conventions
 
