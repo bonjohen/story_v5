@@ -101,9 +101,13 @@ export function DetailPanel({
 
   if (!node && !edge) return null
 
+  const graphName = graph?.graph.name ?? 'Unknown'
+  const graphType = graph?.graph.type === 'genre' ? 'Genre' : 'Archetype'
+  const graphTypeColor = graph?.graph.type === 'genre' ? '#f59e0b' : '#3b82f6'
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* Header with close button */}
+      {/* Header with graph info and close button */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -112,14 +116,37 @@ export function DetailPanel({
         borderBottom: '1px solid var(--border)',
         flexShrink: 0,
       }}>
-        <span style={{
-          fontSize: 10,
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
-          color: 'var(--text-muted)',
-        }}>
-          {node ? 'Node Detail' : 'Edge Detail'}
-        </span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{
+              fontSize: 9,
+              fontWeight: 600,
+              color: graphTypeColor,
+              background: `${graphTypeColor}18`,
+              padding: '1px 6px',
+              borderRadius: 2,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+            }}>
+              {graphType}
+            </span>
+            <span style={{
+              fontSize: 11,
+              fontWeight: 600,
+              color: 'var(--text-primary)',
+            }}>
+              {graphName}
+            </span>
+          </div>
+          <span style={{
+            fontSize: 10,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: 'var(--text-muted)',
+          }}>
+            {node ? 'Node' : 'Edge'}
+          </span>
+        </div>
         <button
           onClick={clearSelection}
           aria-label="Close detail panel"

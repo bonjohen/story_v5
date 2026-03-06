@@ -84,16 +84,34 @@ export default function App() {
   const genSelection = useGenerationStore((s) => s.selection)
 
   // Sync auto-selected blend/hybrid back to request store dropdowns
+  const manifest = useGraphStore((s) => s.manifest)
   useEffect(() => {
     if (!genSelection) return
     const { genre_blend, hybrid_archetype } = genSelection
+
+    // Convert directory IDs to display names using manifest
+    const dirToGenreName = (dir: string): string => {
+      if (!manifest) return dir
+      const entry = manifest.genres.find((g) => g.filePath.endsWith(`/${dir}`) || g.filePath === dir)
+      return entry?.name ?? dir
+    }
+    const dirToArchetypeName = (dir: string): string => {
+      if (!manifest) return dir
+      const entry = manifest.archetypes.find((a) => a.filePath.endsWith(`/${dir}`) || a.filePath === dir)
+      return entry?.name ?? dir
+    }
+
     if (genre_blend?.enabled && genre_blend.secondary_genre) {
-      useRequestStore.getState().setBlendGenre(genre_blend.secondary_genre)
+      const name = dirToGenreName(genre_blend.secondary_genre)
+      useRequestStore.getState().setAllowBlend(true)
+      useRequestStore.getState().setBlendGenre(name)
     }
     if (hybrid_archetype?.enabled && hybrid_archetype.secondary_archetype) {
-      useRequestStore.getState().setHybridArchetype(hybrid_archetype.secondary_archetype)
+      const name = dirToArchetypeName(hybrid_archetype.secondary_archetype)
+      useRequestStore.getState().setAllowHybrid(true)
+      useRequestStore.getState().setHybridArchetype(name)
     }
-  }, [genSelection])
+  }, [genSelection, manifest])
 
   // UI state
   const [activeVariant, setActiveVariant] = useState<string | null>(null)
@@ -339,22 +357,6 @@ export default function App() {
         </button>
 
         <div style={{ flex: 1 }} />
-
-        {/* Status indicators on the right */}
-        {currentGraph && (
-          <span style={{
-            fontSize: 11,
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            color: viewMode === 'archetype' ? '#f59e0b' : '#8b5cf6',
-            padding: '2px 8px',
-            background: viewMode === 'archetype' ? 'rgba(245,158,11,0.12)' : 'rgba(139,92,246,0.12)',
-            borderRadius: 3,
-          }}>
-            {currentGraph.graph.name}
-          </span>
-        )}
 
         {loading && (
           <span style={{ fontSize: 11, color: 'var(--accent)', animation: 'pulse 1.5s infinite' }}>
