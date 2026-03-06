@@ -57,18 +57,18 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 ### Phase 2A — Scene Board Data Layer
 
-- [ ] **2A.1** Create `app/src/sceneboard/types.ts` — `SceneCard` interface: scene_id, beat_id, title, synopsis, archetype_node, genre_obligations (met/unmet), characters, setting, stakes_delta, status (draft/reviewed/locked), chapter assignment, position (for drag ordering).
-- [ ] **2A.2** Create `app/src/sceneboard/store/sceneboardStore.ts` — Zustand store. Populate from `StoryPlan` + `StoryBackbone`. Support reordering, manual editing of synopsis/characters, chapter reassignment.
-- [ ] **2A.3** Bridge from generation pipeline — auto-populate scene board when a plan or backbone is generated.
+- [X] **2A.1** Create `app/src/sceneboard/types.ts` — `SceneCard` interface: scene_id, beat_id, title, synopsis, archetype_node, genre_obligations (met/unmet), characters, setting, stakes_delta, status (draft/reviewed/locked), chapter assignment, position (for drag ordering).
+- [X] **2A.2** Create `app/src/sceneboard/store/sceneboardStore.ts` — Zustand store. Populate from `StoryPlan` + `StoryBackbone`. Support reordering, manual editing of synopsis/characters, chapter reassignment.
+- [X] **2A.3** Bridge from generation pipeline — auto-populate scene board when a plan or backbone is generated.
 
 ### Phase 2B — Scene Board UI
 
-- [ ] **2B.1** Create `app/src/sceneboard/SceneBoardPage.tsx` — main board view. Cards arranged in lanes (by chapter, by act, by archetype phase, by subplot). Drag-to-reorder within and between lanes.
-- [ ] **2B.2** Scene card component — compact card showing: title, archetype node badge, genre obligation coverage (green/yellow/red dots), character avatars, stakes indicator, compliance flags.
-- [ ] **2B.3** Lane selector — toggle between lane modes: Chapter, Act, Archetype Phase, POV Character, Location.
-- [ ] **2B.4** Filter bar — filter cards by: character, location, plot thread, unresolved obligation, hard-constraint coverage, status.
-- [ ] **2B.5** Scene detail flyout — click card to expand: full synopsis, constraint checklist, participating entities, timeline moment, notes field.
-- [ ] **2B.6** Add `/sceneboard` route and nav link.
+- [X] **2B.1** Create `app/src/sceneboard/SceneBoardPage.tsx` — main board view. Cards arranged in lanes (by chapter, by act, by archetype phase, by subplot). Drag-to-reorder within and between lanes.
+- [X] **2B.2** Scene card component — compact card showing: title, archetype node badge, genre obligation coverage (green/yellow/red dots), character avatars, stakes indicator, compliance flags.
+- [X] **2B.3** Lane selector — toggle between lane modes: Chapter, Act, Archetype Phase, POV Character, Location.
+- [X] **2B.4** Filter bar — filter cards by: character, location, plot thread, unresolved obligation, hard-constraint coverage, status.
+- [X] **2B.5** Scene detail flyout — click card to expand: full synopsis, constraint checklist, participating entities, timeline moment, notes field.
+- [X] **2B.6** Add `/sceneboard` route and nav link.
 
 ---
 

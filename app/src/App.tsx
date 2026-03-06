@@ -354,6 +354,15 @@ export default function App() {
           Story
         </button>
 
+        {/* Scene board link */}
+        <button
+          onClick={() => void navigate('/sceneboard')}
+          aria-label="Scene board"
+          style={toolbarButtonStyle(false, '#f59e0b')}
+        >
+          Scenes
+        </button>
+
         {/* Scripts link */}
         <button
           onClick={() => void navigate('/scripts')}

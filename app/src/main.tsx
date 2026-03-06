@@ -10,6 +10,7 @@ import { SeriesBrowserPage } from './generation/series/pages/SeriesBrowserPage.t
 import { SeriesDashboardPage } from './generation/series/pages/SeriesDashboardPage.tsx'
 import { EpisodeCurationPage } from './generation/series/pages/EpisodeCurationPage.tsx'
 import { StoryWorkspace } from './instance/pages/StoryWorkspace.tsx'
+import { SceneBoardPage } from './sceneboard/SceneBoardPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/scripts" element={<ScriptBrowserPage />} />
           <Route path="/scripts/:slug" element={<ScriptReaderPage />} />
           <Route path="/story" element={<StoryWorkspace />} />
+          <Route path="/sceneboard" element={<SceneBoardPage />} />
           <Route path="/series" element={<SeriesBrowserPage />} />
           <Route path="/series/:seriesId" element={<SeriesDashboardPage />} />
           <Route path="/series/:seriesId/slot/:slotNumber" element={<EpisodeCurationPage />} />
