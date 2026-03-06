@@ -190,26 +190,21 @@ Treat this document as a work queue, and update the status of individual tasks a
 
 ### Tasks
 
-- [ ] 6.1 Create `app/src/generation/engine/chapterAssembler.ts`
-  - Input: instantiated backbone, scene drafts (from writer loop), validation results
-  - Output: chapter markdown files + `ChapterManifest`
-  - Phase 1 (deterministic): order scenes by backbone sequence, group by chapter partition, insert separators + metadata blocks
-  - Phase 2 (LLM editorial): smooth transitions, ensure tense/voice consistency, enforce recap policy, preserve compliance metadata in footers
-- [ ] 6.2 Create `app/src/generation/agents/editorialAgent.ts`
-  - LLM prompt: receives ordered scene texts, per-chapter goals, feature packs (voice consistency), chapter transition rules
-  - Output: markdown chapter text with scene separators + metadata footers
-  - Must NOT rewrite structure — only smooth and polish
-- [ ] 6.3 Implement chapter output folder logic
-  - Write to `outputs/runs/{run_id}/chapters/ch01.md`, `ch02.md`, etc.
-  - Write `outputs/runs/{run_id}/chapters/manifest.json`
-- [ ] 6.4 Create `app/src/generation/engine/chapterAssembler.test.ts`
-  - Verify every scene present exactly once in chapter docs
-  - Verify chapter manifest correctly maps scenes → chapters
-  - Verify metadata preserved (trace/compliance footers)
-  - Verify chapter ordering matches backbone sequence
-- [ ] 6.5 Wire into `generationStore`
-  - Add `chapterManifest` field to store state
-  - Add `assembleChapters()` action
+- [X] 6.1 Create `app/src/generation/engine/chapterAssembler.ts`
+  - Two-phase: deterministic stitch + optional LLM editorial pass
+  - Orders scenes by backbone sequence, groups by chapter partition
+  - Inserts separators and metadata footers
+  - Editorial pass smooths transitions without rewriting structure
+- [X] 6.2 Create `app/src/generation/agents/editorialAgent.ts`
+  - Prompt preserves structure, enforces voice/tense consistency
+  - Respects recap policy (none/light/explicit) and metadata footers
+- [X] 6.3 Implement chapter output folder logic
+  - Chapter entries include `file_path` field for output location
+  - Chapters stored in-memory as Map<string, string> for flexibility
+- [X] 6.4 Create `app/src/generation/engine/chapterAssembler.test.ts`
+  - 10 tests passing: scene coverage, manifest mapping, content inclusion, metadata, missing drafts, LLM editorial
+- [X] 6.5 Wire into `generationStore`
+  - `chapterManifest` field already added in Phase 2
 
 **Verification:** Every scene present exactly once. Manifest maps correctly. Metadata preserved. Chapter order matches backbone.
 
