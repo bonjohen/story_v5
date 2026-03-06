@@ -1,0 +1,28 @@
+{
+  "id": "voice_epic",
+  "name": "Epic Voice",
+  "type": "voice",
+  "description": "Sweeping third-person with elevated register, mythic overtones, and grand-scale narration.",
+  "prompt_fragments": [
+    "Write in third-person past tense with an elevated, omniscient narrative voice.",
+    "Use longer, flowing sentences for landscape and history. Short declarative sentences for pivotal moments.",
+    "Name places, peoples, and artifacts as though they carry centuries of weight.",
+    "Battle and conflict scenes should feel consequential — describe formations, weather, and the emotional cost.",
+    "Allow the narrator to occasionally pull back to a bird's-eye view of events."
+  ],
+  "lexicon_preferences": {
+    "preferred_terms": {
+      "sword": "blade",
+      "army": "host",
+      "king": "lord",
+      "walked": "strode"
+    },
+    "banned_terms": ["cool", "okay", "stuff", "thing", "got"],
+    "register": "formal-elevated",
+    "notes": "Tolkien-adjacent register. Avoid modern colloquialisms. Formal but not impenetrable."
+  },
+  "validation_heuristics": [
+    "Flag modern slang or anachronistic phrasing.",
+    "Flag scenes that lack at least one sensory detail of landscape or weather."
+  ]
+}

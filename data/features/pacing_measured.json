@@ -1,0 +1,22 @@
+{
+  "id": "pacing_measured",
+  "name": "Measured Pacing",
+  "type": "pacing",
+  "description": "Balanced rhythm with natural variation between fast and slow passages. The default pacing for most stories.",
+  "prompt_fragments": [
+    "Vary paragraph length naturally — mix short punchy paragraphs with longer descriptive ones.",
+    "Match pacing to emotional content: faster in conflict, slower in reflection.",
+    "Allow breathing room between major events. Not every scene needs a cliffhanger.",
+    "Transitions between scenes should feel organic, not jarring."
+  ],
+  "lexicon_preferences": {
+    "preferred_terms": {},
+    "banned_terms": [],
+    "register": "standard",
+    "notes": "Natural prose rhythm. No artificial constraints on sentence length."
+  },
+  "validation_heuristics": [
+    "Flag three or more consecutive short paragraphs (under 20 words each) outside of dialogue.",
+    "Flag three or more consecutive long paragraphs (over 150 words each)."
+  ]
+}

@@ -633,6 +633,27 @@ export interface VocabularyFile {
 }
 
 // ---------------------------------------------------------------------------
+// Feature Pack (modular style/voice/pacing instruction pack)
+// ---------------------------------------------------------------------------
+
+export interface FeaturePackLexicon {
+  preferred_terms?: Record<string, string>
+  banned_terms?: string[]
+  register: string
+  notes?: string
+}
+
+export interface FeaturePack {
+  id: string
+  name: string
+  type: 'voice' | 'pacing' | 'motif'
+  description: string
+  prompt_fragments: string[]
+  lexicon_preferences: FeaturePackLexicon
+  validation_heuristics?: string[]
+}
+
+// ---------------------------------------------------------------------------
 // Template Pack (backbone synthesis stage 1)
 // ---------------------------------------------------------------------------
 

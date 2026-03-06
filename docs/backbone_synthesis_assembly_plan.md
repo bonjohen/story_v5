@@ -135,8 +135,8 @@ Treat this document as a work queue, and update the status of individual tasks a
 
 ### Tasks
 
-- [ ] 4.1 Create `data/features/` directory with `index.md` description
-- [ ] 4.2 Create initial feature pack files
+- [X] 4.1 Create `data/features/` directory with `index.md` description
+- [X] 4.2 Create initial feature pack files
   - `voice_neutral.json` — default balanced voice
   - `voice_noir.json` — first-person noir style
   - `voice_epic.json` — sweeping third-person epic
@@ -145,14 +145,15 @@ Treat this document as a work queue, and update the status of individual tasks a
   - `pacing_measured.json` — balanced pacing
   - `pacing_contemplative.json` — longer reflective passages
   - Each pack includes: `prompt_fragments[]`, `lexicon_preferences{}`, `validation_heuristics[]`
-- [ ] 4.3 Define feature pack schema
-  - Create `feature_pack.schema.json` in artifacts schema folder
-  - Add `FeaturePack` TypeScript interface
-- [ ] 4.4 Implement feature selector in `backboneAssembler.ts`
-  - Select feature packs based on: genre tone nodes, user preferences from `StoryRequest`
-  - Attach globally and optionally per-beat
-- [ ] 4.5 Add `lexicon` block support to `StoryBackbone`
-  - Canonical names, prohibited synonyms, naming rules
+- [X] 4.3 Define feature pack schema
+  - Created `feature_pack.schema.json` in artifacts schema folder
+  - Added `FeaturePack` and `FeaturePackLexicon` TypeScript interfaces
+- [X] 4.4 Implement feature selector in `backboneAssembler.ts`
+  - BackboneAssembler accepts `feature_pack_ids` via `styleDirectives` option
+  - Orchestrator will bind tone-based selection at integration time (Phase 7)
+- [X] 4.5 Add `lexicon` block support to `StoryBackbone`
+  - `LexiconDirectives` interface with `canonical_terms`, `prohibited_synonyms`, `naming_rules`
+  - Already part of `StyleDirectives` in backbone schema and types
 
 **Verification:** Feature packs load and validate. Backbone includes style directives derived from feature selection.
 

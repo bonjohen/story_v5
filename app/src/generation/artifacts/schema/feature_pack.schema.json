@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FeaturePack",
+  "description": "Modular style/voice/pacing instruction pack for narrative generation",
+  "type": "object",
+  "required": ["id", "name", "type", "description", "prompt_fragments", "lexicon_preferences"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "type": { "enum": ["voice", "pacing", "motif"] },
+    "description": { "type": "string" },
+    "prompt_fragments": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "lexicon_preferences": {
+      "type": "object",
+      "required": ["register"],
+      "properties": {
+        "preferred_terms": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "banned_terms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "register": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "validation_heuristics": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

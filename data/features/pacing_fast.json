@@ -1,0 +1,23 @@
+{
+  "id": "pacing_fast",
+  "name": "Fast Pacing",
+  "type": "pacing",
+  "description": "Short sentences, rapid scene cuts, and action-forward momentum. Best for thrillers, action, and climactic sequences.",
+  "prompt_fragments": [
+    "Keep sentences short — under 15 words on average during action sequences.",
+    "Cut scenes at moments of tension. Enter late, leave early.",
+    "Minimize description during action. Focus on movement, sound, and consequence.",
+    "Use sentence fragments for emphasis. One-word paragraphs are acceptable.",
+    "Dialogue should be rapid-fire. No speeches during fights."
+  ],
+  "lexicon_preferences": {
+    "preferred_terms": {},
+    "banned_terms": [],
+    "register": "action-forward",
+    "notes": "Verb-heavy prose. Active voice exclusively. Minimize adverbs."
+  },
+  "validation_heuristics": [
+    "Flag paragraphs over 100 words during action sequences.",
+    "Flag passive voice constructions."
+  ]
+}

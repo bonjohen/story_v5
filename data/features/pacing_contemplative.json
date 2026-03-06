@@ -1,0 +1,23 @@
+{
+  "id": "pacing_contemplative",
+  "name": "Contemplative Pacing",
+  "type": "pacing",
+  "description": "Longer passages with reflective depth, slow builds, and atmospheric immersion. Best for literary fiction and character studies.",
+  "prompt_fragments": [
+    "Allow scenes to develop slowly. Linger on sensory details and emotional undercurrents.",
+    "Longer paragraphs are welcome — let thoughts unspool naturally.",
+    "Silence, pauses, and what is left unsaid are as important as dialogue.",
+    "Build tension through accumulation rather than sudden reveals.",
+    "Endings of scenes should resonate rather than snap."
+  ],
+  "lexicon_preferences": {
+    "preferred_terms": {},
+    "banned_terms": ["suddenly", "without warning", "in a flash"],
+    "register": "reflective",
+    "notes": "Patience is a virtue. Let the reader inhabit the scene."
+  },
+  "validation_heuristics": [
+    "Flag scenes under 300 words as potentially too rushed for contemplative pacing.",
+    "Flag more than two exclamation marks per scene."
+  ]
+}

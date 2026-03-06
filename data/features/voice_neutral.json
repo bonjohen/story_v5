@@ -1,0 +1,22 @@
+{
+  "id": "voice_neutral",
+  "name": "Neutral Voice",
+  "type": "voice",
+  "description": "Balanced third-person past tense with clear, unadorned prose. Suitable as a default for any genre.",
+  "prompt_fragments": [
+    "Write in third-person past tense with a neutral, observational tone.",
+    "Favor clarity over ornamentation. Let actions and dialogue carry emotion.",
+    "Vary sentence length naturally but avoid extremes.",
+    "Use concrete sensory details rather than abstract summaries."
+  ],
+  "lexicon_preferences": {
+    "preferred_terms": {},
+    "banned_terms": [],
+    "register": "standard",
+    "notes": "Avoid slang, archaic language, and overly formal diction. Aim for accessible, transparent prose."
+  },
+  "validation_heuristics": [
+    "Flag sentences over 40 words as potentially overlong.",
+    "Flag paragraphs with more than 3 consecutive abstract sentences."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "voice_literary",
+  "name": "Literary Voice",
+  "type": "voice",
+  "description": "Introspective, metaphor-rich prose with close psychic distance and thematic layering.",
+  "prompt_fragments": [
+    "Write in close third-person or first-person, past or present tense as suits the scene's emotional register.",
+    "Prioritize interiority — the character's thoughts, associations, and sensory impressions matter as much as events.",
+    "Use metaphor and imagery that connects to the story's central themes. Recurring motifs are encouraged.",
+    "Allow sentences to breathe. Not every paragraph needs a plot beat.",
+    "Dialogue should reveal character psychology, not just convey information."
+  ],
+  "lexicon_preferences": {
+    "preferred_terms": {},
+    "banned_terms": ["suddenly", "very", "really", "just"],
+    "register": "literary",
+    "notes": "Aim for prose that rewards re-reading. Avoid cliche and reach for precise, surprising word choices."
+  },
+  "validation_heuristics": [
+    "Flag cliche phrases and dead metaphors.",
+    "Flag scenes with zero interiority or character reflection."
+  ]
+}

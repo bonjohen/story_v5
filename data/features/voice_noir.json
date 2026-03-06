@@ -1,0 +1,28 @@
+{
+  "id": "voice_noir",
+  "name": "Noir Voice",
+  "type": "voice",
+  "description": "First-person past tense with hard-boiled diction, world-weary narration, and sharp dialogue.",
+  "prompt_fragments": [
+    "Write in first-person past tense with a world-weary, sardonic narrator.",
+    "Use short, punchy sentences during action. Let the narrator editorialize in quieter moments.",
+    "Dialogue should be clipped and loaded with subtext. People rarely say what they mean.",
+    "Describe settings through the narrator's biased, often cynical lens.",
+    "Metaphors should be concrete and street-level, not literary or precious."
+  ],
+  "lexicon_preferences": {
+    "preferred_terms": {
+      "gun": "piece",
+      "money": "dough",
+      "police": "cops",
+      "attractive": "easy on the eyes"
+    },
+    "banned_terms": ["awesome", "amazing", "incredible", "literally"],
+    "register": "informal-hard-boiled",
+    "notes": "Channel Chandler and Hammett. Vernacular should feel period-appropriate but readable."
+  },
+  "validation_heuristics": [
+    "Flag any paragraph that opens with a weather description unless it serves mood.",
+    "Flag dialogue tags beyond 'said' and 'asked' — noir prefers minimal tags."
+  ]
+}

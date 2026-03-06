@@ -15,6 +15,7 @@ import templatePackSchema from './schema/template_pack.schema.json'
 import storyBackboneSchema from './schema/story_backbone.schema.json'
 import storyDetailBindingsSchema from './schema/story_detail_bindings.schema.json'
 import chaptersManifestSchema from './schema/chapters_manifest.schema.json'
+import featurePackSchema from './schema/feature_pack.schema.json'
 
 // ---------------------------------------------------------------------------
 // Schema registry
@@ -34,6 +35,7 @@ const schemas = {
   story_backbone: ajv.compile(storyBackboneSchema),
   story_detail_bindings: ajv.compile(storyDetailBindingsSchema),
   chapters_manifest: ajv.compile(chaptersManifestSchema),
+  feature_pack: ajv.compile(featurePackSchema),
 } as const
 
 export type ArtifactName = keyof typeof schemas
