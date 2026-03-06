@@ -150,12 +150,12 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 **Goal:** Obsidian-like lightweight notes attached to any entity, with backlinks and tag-based queries.
 
-- [ ] **7.1** Create `app/src/notes/types.ts` — `Note` interface: id, title, content (markdown), tags, linked_to (array of entity refs: `{type, id}`), created_at, updated_at.
-- [ ] **7.2** Create `app/src/notes/store/notesStore.ts` — Zustand store with CRUD, tag index, backlink computation.
-- [ ] **7.3** Create `app/src/notes/NotesPanel.tsx` — slide-out panel accessible from any page. Create/edit notes, attach to current context (selected node, entity, scene).
-- [ ] **7.4** Backlinks section — on every entity/scene/node detail view, show "Notes referencing this" with links.
-- [ ] **7.5** Query view — filter notes by tag, by linked entity type, by date range. Saved queries as bookmarks.
-- [ ] **7.6** Add `/notes` route for full-page note browser.
+- [X] **7.1** Create `app/src/notes/types.ts` — `Note` interface: id, title, content (markdown), tags, linked_to (array of entity refs: `{type, id}`), created_at, updated_at.
+- [X] **7.2** Create `app/src/notes/store/notesStore.ts` — Zustand store with CRUD, tag index, backlink computation.
+- [X] **7.3** Create `app/src/notes/NotesPanel.tsx` — slide-out panel accessible from any page. Create/edit notes, attach to current context (selected node, entity, scene).
+- [X] **7.4** Backlinks section — on every entity/scene/node detail view, show "Notes referencing this" with links.
+- [X] **7.5** Query view — filter notes by tag, by linked entity type, by date range. Saved queries as bookmarks.
+- [X] **7.6** Add `/notes` route for full-page note browser.
 
 ---
 

@@ -381,6 +381,15 @@ export default function App() {
           Scripts
         </button>
 
+        {/* Notes link */}
+        <button
+          onClick={() => void navigate('/notes')}
+          aria-label="Notes browser"
+          style={toolbarButtonStyle(false, '#a855f7')}
+        >
+          Notes
+        </button>
+
         {/* Global search */}
         {currentGraph && (
           <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />

@@ -14,6 +14,7 @@ import { SceneBoardPage } from './sceneboard/SceneBoardPage.tsx'
 import { TimelineViewPage } from './timelineview/TimelinePage.tsx'
 import { EncyclopediaPage } from './encyclopedia/EncyclopediaPage.tsx'
 import { ManuscriptPage } from './manuscript/ManuscriptPage.tsx'
+import { NotesPage } from './notes/NotesPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/timeline" element={<TimelineViewPage />} />
           <Route path="/encyclopedia" element={<EncyclopediaPage />} />
           <Route path="/manuscript" element={<ManuscriptPage />} />
+          <Route path="/notes" element={<NotesPage />} />
           <Route path="/series" element={<SeriesBrowserPage />} />
           <Route path="/series/:seriesId" element={<SeriesDashboardPage />} />
           <Route path="/series/:seriesId/slot/:slotNumber" element={<EpisodeCurationPage />} />
