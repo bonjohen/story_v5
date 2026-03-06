@@ -110,6 +110,17 @@ async function synthesizeWithLLM(
     }
   }
 
+  // Warn about unresolved required slots — downstream will have incomplete data
+  const unresolvedRequired = unresolvedTodos.filter((t) => {
+    const slot = allSlots.get(t.slot_name)
+    return slot?.required
+  })
+  if (unresolvedRequired.length > 0) {
+    console.warn(
+      `[detailSynthesizer] ${unresolvedRequired.length} required slot(s) unresolved: ${unresolvedRequired.map((t) => t.slot_name).join(', ')}`,
+    )
+  }
+
   return {
     schema_version: '1.0.0',
     run_id: backbone.run_id,

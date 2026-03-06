@@ -51,6 +51,7 @@ export interface ArchetypeGraph {
 
 export interface GenreNode extends GraphNode {
   level: number | null
+  severity?: 'hard' | 'soft'
 }
 
 export interface GenreGraph {

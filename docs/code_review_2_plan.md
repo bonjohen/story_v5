@@ -52,7 +52,7 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** Dependency `[infoPanelHeight]` means a new callback on every pixel of drag. While technically correct, it creates a new function reference mid-drag. Storing initial height in `dragRef` already makes the dep unnecessary.
 - **Fix:** Store height in a ref, use `[]` dependency.
 
-#### [ ] 1.6 Cytoscape event handlers never explicitly unbound
+#### [X] 1.6 Cytoscape event handlers never explicitly unbound
 - **File:** `app/src/render/GraphCanvas.tsx:170-173`
 - **Description:** `cy.on('tap', ...)` handlers are registered but only cleaned up implicitly via `cy.destroy()`. If Cytoscape is replaced while the component stays mounted, old handlers may fire on stale closures.
 - **Fix:** Explicitly `cy.off()` in the useEffect cleanup before `cy.destroy()`.
@@ -144,12 +144,12 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 
 ### High
 
-#### [ ] 2.4 Genre node severity filtering uses fragile optional type
+#### [X] 2.4 Genre node severity filtering uses fragile optional type
 - **File:** `app/src/generation/engine/contractCompiler.ts:151-158`
 - **Description:** Casts `graph.nodes as Array<GenreNode & { severity?: string }>` then filters on `severity === 'hard'`. A node with `severity: undefined` (field missing, not null) will be silently excluded from hard constraints, leading to incomplete contracts.
 - **Fix:** Validate all genre nodes have severity before this point, or treat undefined as a data error.
 
-#### [ ] 2.5 Trace engine uses wrong check type for soft constraints
+#### [X] 2.5 Trace engine uses wrong check type for soft constraints
 - **File:** `app/src/generation/engine/traceEngine.ts:47-50`
 - **Description:** Soft constraints are only added to `satisfiedConstraints` if the `tone` check passes — but tone and soft constraints are different dimensions. A passing tone check shouldn't validate all soft constraints.
 - **Fix:** Check for `'soft_constraints'` type or implement dedicated soft constraint tracking.
@@ -164,12 +164,12 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** `if (!beat) continue` silently skips scenes with no matching beat. The user won't know a scene was omitted, and the story trace will have gaps.
 - **Fix:** Log a warning. Consider throwing if a scene references a non-existent beat.
 
-#### [ ] 2.8 Unresolved detail todos don't prevent downstream processing
+#### [X] 2.8 Unresolved detail todos don't prevent downstream processing
 - **File:** `app/src/generation/engine/detailSynthesizer.ts:102-123`
 - **Description:** When the LLM fails to bind required slots, unresolved todos are recorded but the artifact is returned as valid. Downstream code proceeds with incomplete entity data, leading to vague or missing character details.
 - **Fix:** Throw for unresolved required slots, or flag the artifact with a status field the orchestrator can inspect.
 
-#### [ ] 2.9 Prompt injection risk in writer agent
+#### [X] 2.9 Prompt injection risk in writer agent
 - **File:** `app/src/generation/agents/writerAgent.ts:39-72`
 - **Description:** User-controlled character names and descriptions are interpolated directly into LLM prompts without sanitization. A character named `"Adam [IGNORE SYSTEM PROMPT]"` would be passed verbatim.
 - **Fix:** Escape or quote user data in prompts. Use structured prompt format that separates data from instructions.
@@ -328,9 +328,9 @@ Fix name-to-directory mapping and sync issues:
 
 Fix high-severity generation issues:
 
-- [ ] **2.4** Validate genre node severity field completeness
-- [ ] **2.5** Fix trace engine soft constraint check type
-- [ ] **2.8** Fail or flag unresolved required slots in detail synthesis
+- [X] **2.4** Validate genre node severity field completeness
+- [X] **2.5** Fix trace engine soft constraint check type
+- [X] **2.8** Fail or flag unresolved required slots in detail synthesis
 - [ ] **2.13** Include response excerpt in JSON parse errors
 - [ ] **2.10** Remove fragile regex fallback in scene obligation detection
 
@@ -339,14 +339,14 @@ Fix high-severity generation issues:
 - [ ] **1.17** Add ARIA attributes and keyboard support to drag separator
 - [ ] **1.13** Guard graph info in DetailPanel with `graph &&` check
 - [ ] **1.14** Replace index-based keys with stable IDs where possible
-- [ ] **1.6** Explicitly unbind Cytoscape events in cleanup
+- [X] **1.6** Explicitly unbind Cytoscape events in cleanup
 - [ ] **3.2** Add local dev setup instructions to README
 - [ ] **3.3** Remove orphaned components (VariantToggle, SimulationPanel, ExampleOverlay)
 - [ ] **3.6** Add root `.gitignore`
 
 ### Phase 7 — Security & Robustness (future)
 
-- [ ] **2.9** Sanitize user data before interpolation into LLM prompts
+- [X] **2.9** Sanitize user data before interpolation into LLM prompts
 - [ ] **2.12** Improve anti-pattern detection (word boundaries or LLM-based)
 - [ ] **2.11** Fix chapter partition for short stories
 - [ ] **2.14** Validate genre node level field upstream

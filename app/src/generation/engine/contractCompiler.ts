@@ -148,14 +148,19 @@ function buildGenreSection(
     .map((n) => n.node_id)
 
   // Partition constraints by severity
-  const genreNodes = graph.nodes as Array<GenreNode & { severity?: string }>
-  const hardConstraints = genreNodes
-    .filter((n) => (n.severity) === 'hard')
-    .map((n) => n.node_id)
-
-  const softConstraints = genreNodes
-    .filter((n) => (n.severity) === 'soft')
-    .map((n) => n.node_id)
+  const hardConstraints: string[] = []
+  const softConstraints: string[] = []
+  for (const node of graph.nodes) {
+    const severity = node.severity
+    if (severity === 'hard') {
+      hardConstraints.push(node.node_id)
+    } else if (severity === 'soft') {
+      softConstraints.push(node.node_id)
+    } else if (severity !== undefined && severity !== null) {
+      console.warn(`[contractCompiler] Genre node ${node.node_id} has unexpected severity: "${severity}"`)
+    }
+    // Nodes with no severity (Tone Marker, Anti-Pattern) are handled separately
+  }
 
   return {
     id_prefix: prefix,

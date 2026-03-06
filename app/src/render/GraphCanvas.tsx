@@ -195,6 +195,7 @@ export const GraphCanvas = memo(function GraphCanvas({
     })
 
     return () => {
+      cy.removeAllListeners()
       cy.destroy()
       cyRef.current = null
     }

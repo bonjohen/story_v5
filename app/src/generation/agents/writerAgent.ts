@@ -14,6 +14,24 @@ import type {
 } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
+// Sanitization — prevent prompt injection from user-controlled data
+// ---------------------------------------------------------------------------
+
+/** Strip characters and patterns that could be interpreted as prompt directives. */
+function sanitize(input: string): string {
+  return input
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '') // control chars
+    .replace(/\[INST\]|\[\/INST\]|<\|im_start\|>|<\|im_end\|>|<<SYS>>|<\/SYS>>/gi, '') // common prompt delimiters
+    .replace(/IGNORE\s+(ALL\s+)?(PREVIOUS|PRIOR|ABOVE|SYSTEM)\s+(INSTRUCTIONS?|PROMPTS?|RULES?)/gi, '[filtered]')
+    .trim()
+}
+
+/** Sanitize an array of strings. */
+function sanitizeList(items: string[]): string[] {
+  return items.map(sanitize)
+}
+
+// ---------------------------------------------------------------------------
 // Prompt builder
 // ---------------------------------------------------------------------------
 
@@ -64,8 +82,8 @@ export function buildWriterPrompt(
         '',
         `Exit conditions for this beat: ${beat.required_exit_conditions.join('; ') || 'none'}`,
         '',
-        `Setting: ${scene.setting || '(to be determined by writer)'}`,
-        `Characters: ${scene.characters.join(', ') || '(to be determined by writer)'}`,
+        `Setting: ${sanitize(scene.setting || '(to be determined by writer)')}`,
+        `Characters: ${sanitizeList(scene.characters).join(', ') || '(to be determined by writer)'}`,
         ...(elementContext ? ['', elementContext] : []),
         '',
         'Write the scene.',
@@ -94,9 +112,9 @@ function buildElementContext(
   if (charEntries.length > 0) {
     lines.push('Characters in this scene:')
     for (const c of charEntries) {
-      const traits = c.traits?.join(', ') || ''
-      const motivations = c.motivations?.join(', ') || ''
-      lines.push(`  - ${c.name} (${c.role_or_type}): ${c.description || ''}`)
+      const traits = c.traits ? sanitizeList(c.traits).join(', ') : ''
+      const motivations = c.motivations ? sanitizeList(c.motivations).join(', ') : ''
+      lines.push(`  - ${sanitize(c.name)} (${sanitize(c.role_or_type)}): ${sanitize(c.description || '')}`)
       if (traits) lines.push(`    Traits: ${traits}`)
       if (motivations) lines.push(`    Motivations: ${motivations}`)
     }
@@ -106,7 +124,7 @@ function buildElementContext(
   if (scene.setting) {
     const place = roster.places.find((p) => p.id === scene.setting)
     if (place) {
-      lines.push(`Setting: ${place.name} (${place.role_or_type}) — ${place.description || ''}`)
+      lines.push(`Setting: ${sanitize(place.name)} (${sanitize(place.role_or_type)}) — ${sanitize(place.description || '')}`)
     }
   }
 
@@ -116,7 +134,7 @@ function buildElementContext(
   if (objEntries.length > 0) {
     lines.push('Objects present:')
     for (const o of objEntries) {
-      lines.push(`  - ${o.name} (${o.role_or_type}): ${o.description || ''}`)
+      lines.push(`  - ${sanitize(o.name)} (${sanitize(o.role_or_type)}): ${sanitize(o.description || '')}`)
     }
   }
 

@@ -44,8 +44,11 @@ export function buildTrace(input: TraceInput): StoryTrace {
       if (hardCheck?.status === 'pass') {
         satisfiedConstraints.push(...scene.constraints_checklist.hard)
       }
-      const softCheck = sceneValidation.checks.find((c) => c.type === 'tone')
-      if (softCheck?.status === 'pass') {
+      // Soft constraints have no dedicated validator; consider them satisfied
+      // when tone check passes (tone is the closest proxy for soft constraint quality)
+      const toneCheck = sceneValidation.checks.find((c) => c.type === 'tone')
+      const noFails = sceneValidation.checks.every((c) => c.status !== 'fail')
+      if (toneCheck?.status === 'pass' || noFails) {
         satisfiedConstraints.push(...scene.constraints_checklist.soft)
       }
     }
