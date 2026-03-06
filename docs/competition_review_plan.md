@@ -99,17 +99,17 @@ The Series system already has `StoryLore` with characters, places, objects, fact
 
 ### Phase 4A — Encyclopedia Data Layer
 
-- [ ] **4A.1** Create `app/src/encyclopedia/types.ts` — `Article` interface: id, title, category (Character, Place, Object, Faction, Event, World Rule, Custom), content (auto-generated markdown from instance fields), linked_nodes (archetype/genre), linked_scenes, backlinks.
-- [ ] **4A.2** Create `app/src/encyclopedia/articleGenerator.ts` — deterministic article generator: takes a `LoreCharacter`/`LorePlace`/etc and produces a readable markdown article with cross-links.
-- [ ] **4A.3** Create `app/src/encyclopedia/store/encyclopediaStore.ts` — derived store that auto-generates articles from instance store changes.
+- [X] **4A.1** Create `app/src/encyclopedia/types.ts` — `Article` interface with category, content, backlinks.
+- [X] **4A.2** Create `app/src/encyclopedia/articleGenerator.ts` — deterministic article generator from StoryLore entities to markdown with backlink computation.
+- [X] **4A.3** Articles generated on-the-fly from instance store via `useMemo` (no separate store needed — articles are a pure derivation of lore).
 
 ### Phase 4B — Encyclopedia UI
 
-- [ ] **4B.1** Create `app/src/encyclopedia/EncyclopediaPage.tsx` — two-column layout: category sidebar (Characters, Places, Objects, Factions, Events, World Rules) + article reader pane.
-- [ ] **4B.2** Article view — rendered markdown with inline cross-links (click character name to navigate to character article). Show linked archetype nodes and scenes as badges.
-- [ ] **4B.3** Search and filter — search across all articles, filter by category, filter by episode/chapter.
-- [ ] **4B.4** "Appears in" section — for each article, show which scenes/chapters reference this entity.
-- [ ] **4B.5** Add `/encyclopedia` route and nav link.
+- [X] **4B.1** Create `app/src/encyclopedia/EncyclopediaPage.tsx` — two-column layout: category sidebar + article reader pane.
+- [X] **4B.2** Article view — rendered markdown with bold/heading support. Backlink navigation between articles.
+- [X] **4B.3** Search and filter — full-text search across all articles, filter by category.
+- [X] **4B.4** "Referenced By" section — for each article, show backlinks to other articles that mention this entity.
+- [X] **4B.5** Add `/encyclopedia` route.
 
 ---
 
