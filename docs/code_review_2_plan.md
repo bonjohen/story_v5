@@ -127,17 +127,17 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 
 ### Critical
 
-#### [ ] 2.1 `updatedBackbone` scope bug in orchestrator chapter mode
+#### [X] 2.1 `updatedBackbone` scope bug in orchestrator chapter mode
 - **File:** `app/src/generation/engine/orchestrator.ts:175,292`
 - **Description:** `updatedBackbone` is declared inside the detail synthesis block (line 175) but used in the chapters block (line 292). If mode is `'chapters'`, the code path requires detail synthesis to have run first, but the variable's scope is local to the synthesis block. If a future refactoring changes the control flow, `updatedBackbone` will be undefined at line 292.
 - **Fix:** Declare `let currentBackbone = backbone` at orchestrator function scope. After detail synthesis, assign `currentBackbone = updatedBackbone`. Use `currentBackbone` in chapters block.
 
-#### [ ] 2.2 Repair loop mutates validation reference directly
+#### [X] 2.2 Repair loop mutates validation reference directly
 - **File:** `app/src/generation/engine/orchestrator.ts:225-261`
 - **Description:** The repair loop holds a reference to `sceneResult = validation.scenes[0]` and mutates `sceneResult.status` and `sceneResult.checks` directly after re-validation. This corrupts the original validation array. The while-loop condition re-checks the mutated copy rather than the fresh validation result, potentially masking repair failures.
 - **Fix:** Use the fresh `validation.scenes[0]` result object in each iteration instead of mutating the initial reference.
 
-#### [ ] 2.3 Selection engine array fallback may self-reference
+#### [X] 2.3 Selection engine array fallback may self-reference
 - **File:** `app/src/generation/engine/selectionEngine.ts:284,348`
 - **Description:** In `selectGenreBlend()` and `selectHybridArchetype()`, the code does `best.genres.find(g => g !== primary) ?? best.genres[1]`. If the primary isn't in the array (shouldn't happen, but defensive), the fallback `[1]` could return the primary itself, creating a self-blend. Additionally, if the array is malformed or short, this accesses out-of-bounds.
 - **Fix:** Validate array structure before fallback. Throw if primary not found.
@@ -154,12 +154,12 @@ Usage: Always set the task to in work [~] before working on it, and to [X] when 
 - **Description:** Soft constraints are only added to `satisfiedConstraints` if the `tone` check passes — but tone and soft constraints are different dimensions. A passing tone check shouldn't validate all soft constraints.
 - **Fix:** Check for `'soft_constraints'` type or implement dedicated soft constraint tracking.
 
-#### [ ] 2.6 Chapter assembler uses non-null assertion on Map.get()
+#### [X] 2.6 Chapter assembler uses non-null assertion on Map.get()
 - **File:** `app/src/generation/engine/chapterAssembler.ts:67`
 - **Description:** `chapters.get(entry.chapter_id)!` — if the chapter wasn't added to the map, this returns undefined despite the `!` assertion. Runtime error when passed to `runEditorialAgent()`.
 - **Fix:** Replace with explicit null check and throw.
 
-#### [ ] 2.7 Scene skipping is silent in orchestrator
+#### [X] 2.7 Scene skipping is silent in orchestrator
 - **File:** `app/src/generation/engine/orchestrator.ts:201-203`
 - **Description:** `if (!beat) continue` silently skips scenes with no matching beat. The user won't know a scene was omitted, and the story trace will have gaps.
 - **Fix:** Log a warning. Consider throwing if a scene references a non-existent beat.
@@ -299,11 +299,11 @@ Fix separator bugs and deployment-breaking routing issue:
 
 Fix orchestrator bugs that can cause runtime failures:
 
-- [ ] **2.1** Hoist `updatedBackbone` to orchestrator function scope
-- [ ] **2.2** Fix repair loop to use fresh validation result per iteration
-- [ ] **2.3** Validate array structure in selection engine fallbacks
-- [ ] **2.6** Replace `!` assertion with explicit null check in chapter assembler
-- [ ] **2.7** Log warning for skipped scenes (no matching beat)
+- [X] **2.1** Hoist `updatedBackbone` to orchestrator function scope
+- [X] **2.2** Fix repair loop to use fresh validation result per iteration
+- [X] **2.3** Validate array structure in selection engine fallbacks
+- [X] **2.6** Replace `!` assertion with explicit null check in chapter assembler
+- [X] **2.7** Log warning for skipped scenes (no matching beat)
 
 ### Phase 3 — Dead Code & Props Cleanup (1 session)
 

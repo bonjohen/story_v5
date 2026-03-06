@@ -281,7 +281,11 @@ function selectGenreBlend(
   )
 
   const best = viable.length > 0 ? viable[0] : candidates[0]
-  const secondaryGenre = best.genres.find((g) => g !== primaryGenreId) ?? best.genres[1]
+  const secondaryGenre = best.genres.find((g) => g !== primaryGenreId)
+  if (!secondaryGenre) {
+    console.warn(`[selectionEngine] Genre blend pattern ${best.blend_id} has no secondary genre distinct from primary "${primaryGenreId}"`)
+    return { enabled: false }
+  }
 
   return {
     enabled: true,
@@ -345,7 +349,11 @@ function selectHybridArchetype(
   )
 
   const best = sorted[0]
-  const secondaryArchetype = best.archetypes.find((a) => a !== primaryArchetypeId) ?? best.archetypes[1]
+  const secondaryArchetype = best.archetypes.find((a) => a !== primaryArchetypeId)
+  if (!secondaryArchetype) {
+    console.warn(`[selectionEngine] Hybrid pattern ${best.hybrid_id} has no secondary archetype distinct from primary "${primaryArchetypeId}"`)
+    return { enabled: false }
+  }
 
   return {
     enabled: true,

@@ -161,6 +161,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
 
     // 3.6. Backbone assembly
     const backbone = assembleBackbone(contract, templatePack)
+    let currentBackbone = backbone
     result.backbone = backbone
     transition('BACKBONE_ASSEMBLED', `Backbone assembled: ${backbone.beats.length} beats, ${backbone.chapter_partition.length} chapters`)
 
@@ -173,8 +174,9 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
 
     // 3.7. Detail synthesis
     const { bindings: detailBindings, updatedBackbone } = await synthesizeDetails(request, backbone, llm)
+    currentBackbone = updatedBackbone
     result.detailBindings = detailBindings
-    result.backbone = updatedBackbone
+    result.backbone = currentBackbone
     transition('DETAILS_BOUND', `Details bound: ${Object.keys(detailBindings.slot_bindings).length} slots, ${detailBindings.entity_registry.characters.length} characters`)
 
     // Stop here for detailed-outline mode
@@ -200,7 +202,10 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     const sceneDrafts = new Map<string, string>()
     for (const scene of plan.scenes) {
       const beat = plan.beats.find((b) => b.beat_id === scene.beat_id)
-      if (!beat) continue
+      if (!beat) {
+        console.warn(`[orchestrator] Skipping scene ${scene.scene_id}: no matching beat "${scene.beat_id}" found in plan`)
+        continue
+      }
 
       transition('GENERATING_SCENE', `Writing scene ${scene.scene_id}`)
       const sceneIndex = plan.scenes.indexOf(scene)
@@ -222,17 +227,17 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
 
       // 7. Repair loop
       let repairAttempt = 0
-      const sceneResult = validation.scenes[0]
+      let currentSceneResult = validation.scenes[0]
       while (
-        sceneResult &&
-        sceneResult.status === 'fail' &&
+        currentSceneResult &&
+        currentSceneResult.status === 'fail' &&
         repairAttempt < config.repair_policy.max_attempts_per_scene
       ) {
         transition('REPAIRING_SCENE', `Repairing scene ${scene.scene_id} (attempt ${repairAttempt + 1})`)
         const repairResult = await repair({
           sceneId: scene.scene_id,
           originalContent: sceneDrafts.get(scene.scene_id) ?? '',
-          validation: sceneResult,
+          validation: currentSceneResult,
           scene,
           beat,
           contract,
@@ -253,11 +258,8 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
           llm,
           plan,
         })
-        // Update sceneResult reference
-        if (validation.scenes[0]) {
-          sceneResult.status = validation.scenes[0].status
-          sceneResult.checks = validation.scenes[0].checks
-        }
+        // Use fresh result from re-validation (no mutation of old reference)
+        currentSceneResult = validation.scenes[0]
       }
     }
 
@@ -289,7 +291,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
 
     // 11. Chapter assembly (for chapters mode)
     if (mode === 'chapters') {
-      const chapterResult = await assembleChapters(updatedBackbone, sceneDrafts, llm)
+      const chapterResult = await assembleChapters(currentBackbone, sceneDrafts, llm)
       result.chapterManifest = chapterResult.manifest
       result.chapterTexts = chapterResult.chapters
       transition('CHAPTERS_ASSEMBLED', `Chapters assembled: ${chapterResult.manifest.total_chapter_count} chapters`)

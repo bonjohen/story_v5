@@ -64,7 +64,10 @@ export async function assembleChapters(
   // Phase 2: Optional editorial pass
   if (llm) {
     for (const entry of chapterEntries) {
-      const rawText = chapters.get(entry.chapter_id)!
+      const rawText = chapters.get(entry.chapter_id)
+      if (!rawText) {
+        throw new Error(`Chapter "${entry.chapter_id}" not found in stitched chapters map`)
+      }
       const polished = await runEditorialAgent(
         llm,
         entry,
