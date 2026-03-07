@@ -6,6 +6,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useSceneBoardStore } from './store/sceneboardStore.ts'
 import { useGenerationStore } from '../generation/store/generationStore.ts'
+import { ReadAloud } from '../components/ReadAloud.tsx'
 import type { SceneCard, LaneMode, SceneStatus } from './types.ts'
 
 const TOOLBAR_HEIGHT = 42
@@ -112,6 +113,11 @@ export function SceneBoardPage() {
 
   const selectedCard = cards.find((c) => c.scene_id === selectedCardId)
 
+  const readAloudText = useMemo(() => {
+    if (cards.length === 0) return ''
+    return cards.map((c) => `${c.title}. ${c.synopsis}`).join(' ')
+  }, [cards])
+
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -131,6 +137,7 @@ export function SceneBoardPage() {
         </a>
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: '#f59e0b' }}>Scene Board</span>
+        <ReadAloud text={readAloudText} label="Read aloud" />
 
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
 

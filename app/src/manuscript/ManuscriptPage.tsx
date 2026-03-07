@@ -6,6 +6,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useManuscriptStore } from './store/manuscriptStore.ts'
 import { useGenerationStore } from '../generation/store/generationStore.ts'
+import { ReadAloud } from '../components/ReadAloud.tsx'
 import type { EditStatus } from './types.ts'
 
 const TOOLBAR_HEIGHT = 42
@@ -81,6 +82,7 @@ export function ManuscriptPage() {
         </a>
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: '#14b8a6' }}>Manuscript</span>
+        <ReadAloud text={selectedSceneObj ? (selectedSceneObj.revised_text ?? selectedSceneObj.draft_text) : ''} label="Read aloud" />
 
         <div style={{ flex: 1 }} />
 

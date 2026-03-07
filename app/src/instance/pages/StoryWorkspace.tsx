@@ -3,7 +3,7 @@
  * Tabs: Characters, Places, Objects, Factions, Threads, Relationships
  */
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { useInstanceStore } from '../store/instanceStore.ts'
 import { CharacterEditor } from '../panels/CharacterEditor.tsx'
 import { PlaceEditor } from '../panels/PlaceEditor.tsx'
@@ -14,6 +14,7 @@ import { SystemMap } from '../panels/SystemMap.tsx'
 import type { StoryInstance } from '../types.ts'
 import { BTN, BADGE_STYLE, INPUT } from '../panels/shared.ts'
 import { useWorkspaceStore } from '../../store/workspaceStore.ts'
+import { ReadAloud } from '../../components/ReadAloud.tsx'
 
 type Tab = 'characters' | 'places' | 'objects' | 'factions' | 'threads' | 'maps'
 
@@ -80,6 +81,17 @@ export function StoryWorkspace() {
     e.target.value = ''
   }
 
+  const readAloudText = useMemo(() => {
+    if (!instance) return ''
+    const l = instance.lore
+    const parts = [`Story instance: ${instance.metadata.title}.`]
+    if (l.characters.length) parts.push(`Characters: ${l.characters.map((c) => c.name).join(', ')}.`)
+    if (l.places.length) parts.push(`Places: ${l.places.map((p) => p.name).join(', ')}.`)
+    if (l.factions.length) parts.push(`Factions: ${l.factions.map((f) => f.name).join(', ')}.`)
+    if (l.plot_threads.length) parts.push(`Plot threads: ${l.plot_threads.map((t) => t.title).join(', ')}.`)
+    return parts.join(' ')
+  }, [instance])
+
   const lore = instance?.lore
   const counts = lore ? {
     characters: lore.characters.length,
@@ -121,6 +133,7 @@ export function StoryWorkspace() {
         </a>
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--accent)' }}>Story Workspace</span>
+        <ReadAloud text={readAloudText} label="Read aloud" />
 
         <div style={{ flex: 1 }} />
 

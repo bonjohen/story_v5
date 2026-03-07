@@ -28,6 +28,14 @@
   { "slug": "feature_packs_and_style", "title": "Feature Packs and Style", "subtitle": "Modular voice and pacing packs that shape narrative tone", "estimatedMinutes": 8, "category": "The Data Model" },
   { "slug": "templates_and_character_profiles", "title": "Templates and Character Profiles", "subtitle": "How the Templates panel works and how character role profiles make characters distinguishable", "estimatedMinutes": 10, "category": "Using the System" },
   { "slug": "blend_and_hybrid_selection", "title": "Blend and Hybrid Selection", "subtitle": "How to combine genres and layer archetypes in the generation system", "estimatedMinutes": 9, "category": "Using the System" },
+  { "slug": "story_workspace_guide", "title": "The Story Workspace", "subtitle": "Entity editors, instance management, and the bidirectional pipeline bridge", "estimatedMinutes": 9, "category": "Author Surfaces" },
+  { "slug": "scene_board_guide", "title": "The Scene Board", "subtitle": "Card-based scene planning with lanes, filters, and obligation tracking", "estimatedMinutes": 8, "category": "Author Surfaces" },
+  { "slug": "timeline_view_guide", "title": "The Timeline View", "subtitle": "Chronological events with swim lanes and dependency edges", "estimatedMinutes": 7, "category": "Author Surfaces" },
+  { "slug": "encyclopedia_guide", "title": "The Encyclopedia", "subtitle": "Auto-generated lore articles with cross-reference backlinks", "estimatedMinutes": 7, "category": "Author Surfaces" },
+  { "slug": "manuscript_workspace_guide", "title": "The Manuscript Workspace", "subtitle": "Scrivener-lite prose editing with diff view and markdown export", "estimatedMinutes": 8, "category": "Author Surfaces" },
+  { "slug": "system_maps_guide", "title": "System Maps", "subtitle": "Four visual map modes: relationships, family tree, political, and knowledge web", "estimatedMinutes": 8, "category": "Author Surfaces" },
+  { "slug": "notes_system_guide", "title": "The Notes System", "subtitle": "Tagging, entity linking, saved queries, and backlinks", "estimatedMinutes": 8, "category": "Author Surfaces" },
+  { "slug": "navigation_and_search_guide", "title": "Navigation and Global Search", "subtitle": "Cross-surface navigation, global search, and workspace persistence", "estimatedMinutes": 6, "category": "Author Surfaces" },
   { "slug": "example_fantasy_story", "title": "Building a Fantasy Story", "subtitle": "A worked example: from premise to compliance trace", "estimatedMinutes": 11, "category": "Examples" },
   { "slug": "example_mystery_story", "title": "Building a Mystery", "subtitle": "A worked example: fair clueing, investigation structure, and compliance", "estimatedMinutes": 11, "category": "Examples" }
 ]

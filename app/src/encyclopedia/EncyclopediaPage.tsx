@@ -6,6 +6,7 @@
 import { useState, useMemo } from 'react'
 import { useInstanceStore } from '../instance/store/instanceStore.ts'
 import { generateArticles } from './articleGenerator.ts'
+import { ReadAloud } from '../components/ReadAloud.tsx'
 import type { Article, ArticleCategory } from './types.ts'
 
 const TOOLBAR_HEIGHT = 42
@@ -72,6 +73,7 @@ export function EncyclopediaPage() {
         </a>
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: '#ec4899' }}>Encyclopedia</span>
+        <ReadAloud text={selectedArticle ? `${selectedArticle.title}. ${selectedArticle.content}` : ''} label="Read aloud" />
 
         <div style={{ flex: 1 }} />
 

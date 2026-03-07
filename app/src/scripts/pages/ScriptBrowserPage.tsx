@@ -12,6 +12,7 @@ const CATEGORY_ORDER = [
   'The Data Model',
   'What This Enables',
   'Using the System',
+  'Author Surfaces',
   'Examples',
 ]
 

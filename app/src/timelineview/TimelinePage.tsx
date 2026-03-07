@@ -7,6 +7,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useTimelineViewStore } from './store/timelineViewStore.ts'
 import { useGenerationStore } from '../generation/store/generationStore.ts'
 import { useInstanceStore } from '../instance/store/instanceStore.ts'
+import { ReadAloud } from '../components/ReadAloud.tsx'
 import type { TimelineEvent } from './types.ts'
 import type { ChangeType } from '../types/timeline.ts'
 
@@ -56,6 +57,11 @@ export function TimelineViewPage() {
 
   const selectedEvent = events.find((e) => e.event_id === selectedEventId)
 
+  const readAloudText = useMemo(() => {
+    if (events.length === 0) return ''
+    return events.map((e) => `${e.title}. ${e.description}`).join(' ')
+  }, [events])
+
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -74,6 +80,7 @@ export function TimelineViewPage() {
         </a>
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: '#06b6d4' }}>Timeline</span>
+        <ReadAloud text={readAloudText} label="Read aloud" />
 
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
 

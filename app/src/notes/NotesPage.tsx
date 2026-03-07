@@ -6,6 +6,7 @@
 import { useState, useMemo } from 'react'
 import { useNotesStore } from './store/notesStore.ts'
 import { useInstanceStore } from '../instance/store/instanceStore.ts'
+import { ReadAloud } from '../components/ReadAloud.tsx'
 import type { Note, EntityRef, EntityRefType, SavedQuery } from './types.ts'
 
 const TOOLBAR_HEIGHT = 42
@@ -136,6 +137,7 @@ export function NotesPage() {
         </a>
         <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: '#a855f7' }}>Notes</span>
+        <ReadAloud text={selectedNote ? `${selectedNote.title}. ${selectedNote.content}` : ''} label="Read aloud" />
 
         <div style={{ flex: 1 }} />
 
