@@ -6,6 +6,10 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { ensureDbInit, getDb, resetDb } from './index.ts'
 import { exportDatabase, importDatabase } from './export.ts'
 import { importVocabulary } from './import/vocabularyImporter.ts'
+import { VocabularyBrowser } from './panels/VocabularyBrowser.tsx'
+import { TemplateCoverage } from './panels/TemplateCoverage.tsx'
+
+type DbTab = 'status' | 'vocabulary' | 'coverage'
 
 const TOOLBAR_HEIGHT = 42
 
@@ -20,6 +24,7 @@ export function DbManagementPage() {
   const [dbSize, setDbSize] = useState<number>(0)
   const [status, setStatus] = useState<string>('Loading...')
   const [vocabStatus, setVocabStatus] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<DbTab>('status')
   const fileRef = useRef<HTMLInputElement>(null)
 
   const refreshStats = useCallback(async () => {
@@ -144,6 +149,41 @@ export function DbManagementPage() {
         <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{status}</span>
       </div>
 
+      {/* Tabs */}
+      <div style={{
+        display: 'flex', borderBottom: '1px solid var(--border)',
+        background: 'var(--bg-surface)', flexShrink: 0,
+      }}>
+        {(['status', 'vocabulary', 'coverage'] as DbTab[]).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            style={{
+              padding: '8px 16px', fontSize: 11,
+              fontWeight: activeTab === tab ? 600 : 400,
+              color: activeTab === tab ? '#22c55e' : 'var(--text-muted)',
+              borderBottom: activeTab === tab ? '2px solid #22c55e' : '2px solid transparent',
+              cursor: 'pointer', textTransform: 'capitalize',
+            }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === 'vocabulary' && (
+        <div style={{ flex: 1, overflow: 'hidden' }}>
+          <VocabularyBrowser />
+        </div>
+      )}
+
+      {activeTab === 'coverage' && (
+        <div style={{ flex: 1, overflowY: 'auto' }}>
+          <TemplateCoverage />
+        </div>
+      )}
+
+      {activeTab === 'status' && (
       <div style={{ flex: 1, overflowY: 'auto', padding: '20px 32px', maxWidth: 640 }}>
         {/* Status */}
         <Section title="Status">
@@ -175,6 +215,7 @@ export function DbManagementPage() {
           <input ref={fileRef} type="file" accept=".db" onChange={(e) => void handleImport(e)} style={{ display: 'none' }} />
         </Section>
       </div>
+      )}
     </div>
   )
 }

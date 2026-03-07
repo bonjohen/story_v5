@@ -229,14 +229,14 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Surface SQLite queries in the app UI so the database provides visible value, including vocabulary-powered views.
 
-- [ ] **9.1** Create `app/src/db/hooks.ts` — React hooks: `useDbQuery<T>(queryFn, deps)` that runs a query function against the DB and returns `{ data, loading, error }`. Handles DB not-yet-initialized gracefully.
+- [X] **9.1** Create `app/src/db/hooks.ts` — React hooks: `useDbQuery<T>(queryFn, deps)` that runs a query function against the DB and returns `{ data, loading, error }`. Handles DB not-yet-initialized gracefully.
 - [ ] **9.2** Add entity search to Story Workspace — text input that queries `entities` table by name/type, faster than scanning the full StoryLore in memory for large instances.
 - [ ] **9.3** Add "Scenes for Character" view — select a character, see all scenes they participate in (via `scene_entities` join), with chapter context. Accessible from the character editor panel.
 - [ ] **9.4** Add artifact browser — list all artifacts for the current story, grouped by type, with status badges and file path links. Accessible from a new "Artifacts" tab or panel.
 - [ ] **9.5** Add run history panel — list all generation/validation runs for the current story, with timestamps and status. Accessible from the Generation panel.
 - [ ] **9.6** Add tag-based filtering — in the entity list views, allow filtering by tags assigned via the tag system.
-- [ ] **9.7** Add vocabulary term browser — browse all imported vocabulary domains and terms. Show usage counts per term. Clicking a term shows all entities/scenes/relationships that use it across stories.
-- [ ] **9.8** Add "Template Coverage" view for a story — shows which vocabulary terms from each domain are used (e.g. "7 of 13 character roles used", "4 of 10 place types used"), highlighting gaps and suggesting unused terms that might enrich the story.
+- [X] **9.7** Add vocabulary term browser — browse all imported vocabulary domains and terms. Show usage counts per term. Clicking a term shows all entities/scenes/relationships that use it across stories.
+- [X] **9.8** Add "Template Coverage" view for a story — shows which vocabulary terms from each domain are used (e.g. "7 of 13 character roles used", "4 of 10 place types used"), highlighting gaps and suggesting unused terms that might enrich the story.
 
 ---
 
