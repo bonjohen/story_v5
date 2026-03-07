@@ -51,13 +51,13 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Set up sql.js, the migration framework, and the `schema_version` table. Verify SQLite works in the browser.
 
-- [ ] **1.1** Install `sql.js` dependency. Configure Vite to serve the sql.js WASM file from `node_modules/sql.js/dist/sql-wasm.wasm` (copy to `public/` or configure `optimizeDeps`).
-- [ ] **1.2** Create `app/src/db/connection.ts` — singleton async module that initializes sql.js, loads the DB from IndexedDB (or creates a new one), and exposes `getDb(): Database`. Include `saveDb()` to persist back to IndexedDB after writes.
-- [ ] **1.3** Create `app/src/db/migrations/index.ts` — ordered array of migration objects `{ version: number, description: string, sql: string }`. First migration creates the `schema_version` table.
-- [ ] **1.4** Create `app/src/db/migrator.ts` — `runMigrations(db)` function that reads current version from `schema_version`, applies pending migrations in order, inserts version rows.
-- [ ] **1.5** Create `app/src/db/migrations/001_schema_version.ts` — migration 1: `CREATE TABLE schema_version (version_num INTEGER PRIMARY KEY, applied_at TEXT NOT NULL, description TEXT)`.
-- [ ] **1.6** Integration smoke test — on app startup (or lazy on first DB access), initialize sql.js, run migrations, verify `schema_version` has row with version 1. Add a simple `useEffect` in `App.tsx` or a dedicated init hook.
-- [ ] **1.7** Add `PRAGMA foreign_keys = ON` to connection initialization.
+- [X] **1.1** Install `sql.js` dependency. Configure Vite to serve the sql.js WASM file from `node_modules/sql.js/dist/sql-wasm.wasm` (copy to `public/` or configure `optimizeDeps`).
+- [X] **1.2** Create `app/src/db/connection.ts` — singleton async module that initializes sql.js, loads the DB from IndexedDB (or creates a new one), and exposes `getDb(): Database`. Include `saveDb()` to persist back to IndexedDB after writes.
+- [X] **1.3** Create `app/src/db/migrations/index.ts` — ordered array of migration objects `{ version: number, description: string, sql: string }`. First migration creates the `schema_version` table.
+- [X] **1.4** Create `app/src/db/migrator.ts` — `runMigrations(db)` function that reads current version from `schema_version`, applies pending migrations in order, inserts version rows.
+- [X] **1.5** Create `app/src/db/migrations/001_schema_version.ts` — migration 1: `CREATE TABLE schema_version (version_num INTEGER PRIMARY KEY, applied_at TEXT NOT NULL, description TEXT)`.
+- [X] **1.6** Integration smoke test — on app startup (or lazy on first DB access), initialize sql.js, run migrations, verify `schema_version` has row with version 1. Add a simple `useEffect` in `App.tsx` or a dedicated init hook.
+- [X] **1.7** Add `PRAGMA foreign_keys = ON` to connection initialization.
 
 ---
 

@@ -27,6 +27,7 @@ import { useGraphStore } from './store/graphStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
 import { useGenerationStore } from './generation/store/generationStore.ts'
 import { useRequestStore } from './generation/store/requestStore.ts'
+import { useDbInit } from './db/useDbInit.ts'
 import type { DataManifest } from './types/graph.ts'
 
 // Layout constants
@@ -114,6 +115,9 @@ export default function App() {
       useRequestStore.getState().setHybridArchetype(name)
     }
   }, [genSelection, manifest])
+
+  // Database init
+  const dbStatus = useDbInit()
 
   // UI state
 
@@ -444,6 +448,12 @@ export default function App() {
 
         <div style={{ flex: 1 }} />
 
+        {dbStatus.error && (
+          <span style={{ fontSize: 9, color: '#ef4444' }} title={dbStatus.error}>DB err</span>
+        )}
+        {dbStatus.ready && (
+          <span style={{ fontSize: 9, color: '#22c55e' }} title={`SQLite v${dbStatus.schemaVersion}`}>DB</span>
+        )}
         {loading && (
           <span style={{ fontSize: 11, color: 'var(--accent)', animation: 'pulse 1.5s infinite' }}>
             Loading...
