@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
+import { WakeLockProvider } from './hooks/useWakeLock.ts'
 import { ErrorBoundary } from './components/ErrorBoundary.tsx'
 import { ScriptBrowserPage } from './scripts/pages/ScriptBrowserPage.tsx'
 import { ScriptReaderPage } from './scripts/pages/ScriptReaderPage.tsx'
@@ -20,6 +21,7 @@ import { DbManagementPage } from './db/DbManagementPage.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
+      <WakeLockProvider />
       <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
         <Routes>
           <Route path="/scripts" element={<ScriptBrowserPage />} />
