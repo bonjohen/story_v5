@@ -79,7 +79,7 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Import the controlled vocabulary items as formal template terms in the database. These terms are the building blocks used in story generation — character roles, relationship types, place types, object types, change types, and graph node/edge vocabularies. Storing them in SQLite enables queries like "which template terms does this story use" and powers templatized story section generation.
 
-- [ ] **3.1** Create `app/src/db/migrations/003_vocabulary.ts` — migration 3:
+- [X] **3.1** Create `app/src/db/migrations/003_vocabulary.ts` — migration 3:
 
   ```sql
   CREATE TABLE vocabulary_domains (
@@ -117,9 +117,9 @@ Before implementing, note what already exists and what the database augments (no
   );
   ```
 
-- [ ] **3.2** Create `app/src/db/repository/vocabularyRepo.ts` — CRUD: `createDomain`, `listDomains`, `createTerm`, `listTermsByDomain`, `getTermByKey`, `recordTermUsage`, `listUsagesForTerm`, `listUsagesForObject`, `listTermsUsedInStory`.
+- [X] **3.2** Create `app/src/db/repository/vocabularyRepo.ts` — CRUD: `createDomain`, `listDomains`, `createTerm`, `listTermsByDomain`, `getTermByKey`, `recordTermUsage`, `listUsagesForTerm`, `listUsagesForObject`, `listTermsUsedInStory`.
 
-- [ ] **3.3** Create `app/src/db/import/vocabularyImporter.ts` — `importVocabulary(db)`: reads the 8 controlled vocabulary JSON files from `data/vocabulary/` and populates `vocabulary_domains` and `vocabulary_terms`. Domain mapping:
+- [X] **3.3** Create `app/src/db/import/vocabularyImporter.ts` — `importVocabulary(db)`: reads the 8 controlled vocabulary JSON files from `data/vocabulary/` and populates `vocabulary_domains` and `vocabulary_terms`. Domain mapping:
 
   | Source File | Domain ID | Term Count |
   |---|---|---|
@@ -135,7 +135,7 @@ Before implementing, note what already exists and what the database augments (no
 
   Total: 9 domains, ~102 terms.
 
-- [ ] **3.4** Wire vocabulary import into the migration or provide a manual "Import Vocabulary" action. The importer should be idempotent (upsert by `domain_id + term_key`).
+- [X] **3.4** Wire vocabulary import into the migration or provide a manual "Import Vocabulary" action. The importer should be idempotent (upsert by `domain_id + term_key`).
 
 - [ ] **3.5** Unit tests: verify domain/term counts after import, term lookup by key, usage recording and querying.
 
@@ -145,13 +145,13 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Add structural tables that bridge narrative units to entities. Chapters contain many scenes.
 
-- [ ] **4.1** Create `app/src/db/migrations/004_chapters_scenes.ts` — migration 4: `CREATE TABLE chapters`, `CREATE TABLE scenes`, `CREATE TABLE scene_entities`. Columns from design doc sections 7.5–7.7. Key cardinality: `scenes.chapter_id` is a FK to `chapters.chapter_id`, and each chapter can have many scenes. Scenes are ordered within a chapter by `scene_number`.
+- [X] **4.1** Create `app/src/db/migrations/004_chapters_scenes.ts` — migration 4: `CREATE TABLE chapters`, `CREATE TABLE scenes`, `CREATE TABLE scene_entities`. Columns from design doc sections 7.5–7.7. Key cardinality: `scenes.chapter_id` is a FK to `chapters.chapter_id`, and each chapter can have many scenes. Scenes are ordered within a chapter by `scene_number`.
 
-- [ ] **4.2** Create `app/src/db/repository/chapterRepo.ts` — CRUD: `createChapter`, `listChaptersByStory`, `getChapter`, `updateChapter`, `deleteChapter`. Include `getChapterWithSceneCount` for summary views.
+- [X] **4.2** Create `app/src/db/repository/chapterRepo.ts` — CRUD: `createChapter`, `listChaptersByStory`, `getChapter`, `updateChapter`, `deleteChapter`. Include `getChapterWithSceneCount` for summary views.
 
-- [ ] **4.3** Create `app/src/db/repository/sceneRepo.ts` — CRUD: `createScene`, `listScenesByChapter`, `listScenesByStory`, `getScene`, `updateScene`, `deleteScene`. Support ordering by `timeline_order` and `scene_number`. Include `countScenesByChapter` for chapter summary.
+- [X] **4.3** Create `app/src/db/repository/sceneRepo.ts` — CRUD: `createScene`, `listScenesByChapter`, `listScenesByStory`, `getScene`, `updateScene`, `deleteScene`. Support ordering by `timeline_order` and `scene_number`. Include `countScenesByChapter` for chapter summary.
 
-- [ ] **4.4** Create `app/src/db/repository/sceneEntityRepo.ts` — `addEntityToScene`, `removeEntityFromScene`, `listEntitiesInScene`, `listScenesForEntity`.
+- [X] **4.4** Create `app/src/db/repository/sceneEntityRepo.ts` — `addEntityToScene`, `removeEntityFromScene`, `listEntitiesInScene`, `listScenesForEntity`.
 
 - [ ] **4.5** Unit tests for chapter/scene/scene-entity repositories. Verify many-scenes-per-chapter cardinality.
 
