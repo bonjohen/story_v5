@@ -56,7 +56,7 @@ export function ScriptBrowserPage() {
   const categories = useMemo(() => groupByCategory(filtered), [filtered])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+    <div className="page-shell" style={{ display: 'flex', flexDirection: 'column', height: '100dvh', overflow: 'hidden' }}>
       <ScriptToolbar />
       {settingsOpen && <SettingsPanel />}
 

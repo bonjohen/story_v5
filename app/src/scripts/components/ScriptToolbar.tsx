@@ -18,6 +18,7 @@ export function ScriptToolbar({ scriptTitle, rightSlot }: ScriptToolbarProps) {
     <header
       role="banner"
       aria-label="Script reader toolbar"
+      className="page-toolbar"
       style={{
         display: 'flex',
         alignItems: 'center',

@@ -71,7 +71,7 @@ export function ScriptReaderPage() {
   )
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+    <div className="page-shell" style={{ display: 'flex', flexDirection: 'column', height: '100dvh', overflow: 'hidden' }}>
       <ScriptToolbar scriptTitle={currentScript?.meta.title} />
       {settingsOpen && <SettingsPanel />}
 

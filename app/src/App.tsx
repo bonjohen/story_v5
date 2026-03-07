@@ -319,15 +319,15 @@ export default function App() {
   const activeCyRef = viewMode === 'archetype' ? cyArchRef : cyGenreRef
 
   return (
-    <div style={{
+    <div className="page-shell" style={{
       display: 'flex',
       flexDirection: 'column',
-      height: '100vh',
+      height: '100dvh',
       width: '100vw',
       overflow: 'hidden',
     }}>
       {/* Toolbar — controls on the LEFT */}
-      <header role="banner" aria-label="Application toolbar" style={{
+      <header role="banner" aria-label="Application toolbar" className="app-toolbar" style={{
         display: 'flex',
         alignItems: 'center',
         gap: 10,
@@ -486,10 +486,10 @@ export default function App() {
       )}
 
       {/* Main layout: Generation panel (left) + graphs (center) */}
-      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+      <div className="main-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
 
         {/* Generation panel — always visible on the left */}
-        <div style={{
+        <div className="gen-panel" style={{
           width: GEN_PANEL_WIDTH,
           flexShrink: 0,
           background: 'var(--bg-surface)',
@@ -553,7 +553,7 @@ export default function App() {
                 {infoPanelOpen ? '\u25B2' : '\u25BC'}
               </button>
 
-              <div style={{
+              <div className="info-tabs" style={{
                 display: 'flex',
                 flex: 1,
                 overflowX: 'auto',
@@ -701,7 +701,7 @@ export default function App() {
           )}
 
           {/* Two graph documents side by side */}
-          <div style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
+          <div className="graph-pair" style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
             {/* Archetype document */}
             <GraphDocument
               label="Archetype"

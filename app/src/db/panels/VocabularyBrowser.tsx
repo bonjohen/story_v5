@@ -22,7 +22,7 @@ export function VocabularyBrowser() {
   )
 
   return (
-    <div style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
+    <div className="vocab-browser" style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
       {/* Domain list */}
       <div style={{
         width: 200, flexShrink: 0, borderRight: '1px solid var(--border)',

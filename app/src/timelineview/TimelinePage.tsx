@@ -63,12 +63,12 @@ export function TimelineViewPage() {
   }, [events])
 
   return (
-    <div style={{
+    <div className="page-shell" style={{
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
       background: 'var(--bg-primary)', display: 'flex', flexDirection: 'column',
     }}>
       {/* Toolbar */}
-      <div style={{
+      <div className="page-toolbar" style={{
         height: TOOLBAR_HEIGHT, background: 'var(--bg-surface)',
         borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', padding: '0 14px', gap: 12,

@@ -147,7 +147,7 @@ export function StoryWorkspace() {
   } : null
 
   return (
-    <div style={{
+    <div className="page-shell" style={{
       position: 'fixed',
       top: 0,
       left: 0,
@@ -158,7 +158,7 @@ export function StoryWorkspace() {
       flexDirection: 'column',
     }}>
       {/* Toolbar */}
-      <div style={{
+      <div className="page-toolbar" style={{
         height: TOOLBAR_HEIGHT,
         background: 'var(--bg-surface)',
         borderBottom: '1px solid var(--border)',
