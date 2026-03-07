@@ -59,10 +59,6 @@ export function StoryPanel({ onHighlightNodes }: StoryPanelProps) {
       : request.premise
     : 'Untitled Story'
 
-  const getStoryText = useCallback(() => {
-    return orderedScenes.map(({ content }) => content).join('\n\n')
-  }, [orderedScenes])
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Story header */}
@@ -73,20 +69,13 @@ export function StoryPanel({ onHighlightNodes }: StoryPanelProps) {
         flexShrink: 0,
       }}>
         <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          fontSize: 13,
+          fontWeight: 700,
+          color: 'var(--text-primary)',
           marginBottom: 4,
+          lineHeight: 1.4,
         }}>
-          <span style={{
-            fontSize: 13,
-            fontWeight: 700,
-            color: 'var(--text-primary)',
-            lineHeight: 1.4,
-          }}>
-            {title}
-          </span>
-          <ReadAloudButton getText={getStoryText} />
+          {title}
         </div>
         <div style={{
           fontSize: 10,
@@ -162,6 +151,9 @@ export function StoryPanel({ onHighlightNodes }: StoryPanelProps) {
                     {beat.archetype_node_id}
                   </span>
                 )}
+                <div style={{ marginLeft: 'auto' }} onClick={(e) => e.stopPropagation()}>
+                  <ReadAloudButton getText={() => content} />
+                </div>
               </div>
 
               {/* Rendered prose */}

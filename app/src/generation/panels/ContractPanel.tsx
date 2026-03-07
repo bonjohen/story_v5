@@ -35,36 +35,6 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
 
   const { archetype, genre, global_boundaries, phase_guidelines, validation_policy } = contract
 
-  const getContractText = useCallback(() => {
-    const lines: string[] = []
-    lines.push(`Story Contract. Archetype: ${archetype.name}. Genre: ${genre.name}.`)
-    if (selection) {
-      lines.push(`Compatibility: ${selection.compatibility.matrix_classification}.`)
-    }
-    if (global_boundaries.musts.length > 0) {
-      lines.push(`Must include: ${global_boundaries.musts.join('. ')}.`)
-    }
-    if (global_boundaries.must_nots.length > 0) {
-      lines.push(`Must exclude: ${global_boundaries.must_nots.join('. ')}.`)
-    }
-    if (archetype.spine_nodes.length > 0) {
-      lines.push(`Archetype spine has ${archetype.spine_nodes.length} nodes.`)
-    }
-    if (genre.hard_constraints.length > 0) {
-      lines.push(`${genre.hard_constraints.length} hard genre constraints.`)
-    }
-    if (genre.soft_constraints.length > 0) {
-      lines.push(`${genre.soft_constraints.length} soft genre constraints.`)
-    }
-    if (phase_guidelines.length > 0) {
-      lines.push('Phase guidelines:')
-      for (const pg of phase_guidelines) {
-        lines.push(`${pg.role}: ${pg.definition}`)
-      }
-    }
-    return lines.join('\n\n')
-  }, [archetype, genre, global_boundaries, phase_guidelines, selection])
-
   return (
     <div style={{ fontSize: 11, color: 'var(--text-primary)' }}>
       {/* Header summary */}
@@ -73,10 +43,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
         borderBottom: '1px solid var(--border)',
         background: 'var(--bg-primary)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-          <span style={{ fontWeight: 600, fontSize: 12 }}>Story Contract</span>
-          <ReadAloudButton getText={getContractText} />
-        </div>
+        <div style={{ fontWeight: 600, fontSize: 12, marginBottom: 4 }}>Story Contract</div>
         <div style={{ display: 'flex', gap: 8 }}>
           <span style={{
             fontSize: 10,
@@ -114,8 +81,15 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
       />
       {expandedSection === 'boundaries' && (
         <div style={{ padding: '6px 12px' }}>
+          <ReadAloudButton getText={() => {
+            const parts: string[] = []
+            if (global_boundaries.musts.length > 0) parts.push('Must include: ' + global_boundaries.musts.join('. '))
+            if (global_boundaries.must_nots.length > 0) parts.push('Must exclude: ' + global_boundaries.must_nots.join('. '))
+            if (global_boundaries.content_limits.length > 0) parts.push('Content limits: ' + global_boundaries.content_limits.join('. '))
+            return parts.join('\n\n')
+          }} />
           {global_boundaries.musts.length > 0 && (
-            <div style={{ marginBottom: 6 }}>
+            <div style={{ marginBottom: 6, marginTop: 6 }}>
               <span style={{ fontSize: 10, fontWeight: 600, color: '#22c55e' }}>Must Include</span>
               {global_boundaries.musts.map((m, i) => (
                 <div key={i} style={{ padding: '2px 0', color: 'var(--text-muted)' }}>{m}</div>
@@ -150,6 +124,12 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
       />
       {expandedSection === 'archetype' && (
         <div style={{ padding: '6px 12px' }}>
+          <ReadAloudButton getText={() =>
+            'Archetype spine nodes: ' + archetype.spine_nodes.join(', ') +
+            (archetype.allowed_variants.length > 0
+              ? '. Allowed variants: ' + archetype.allowed_variants.join(', ')
+              : '')
+          } />
           {archetype.spine_nodes.map((nodeId) => (
             <div
               key={nodeId}
@@ -204,7 +184,14 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
       />
       {expandedSection === 'genre' && (
         <div style={{ padding: '6px 12px' }}>
-          <div style={{ marginBottom: 6 }}>
+          <ReadAloudButton getText={() => {
+            const parts: string[] = []
+            if (genre.hard_constraints.length > 0) parts.push('Hard constraints: ' + genre.hard_constraints.join(', '))
+            if (genre.soft_constraints.length > 0) parts.push('Soft constraints: ' + genre.soft_constraints.join(', '))
+            if (genre.anti_patterns.length > 0) parts.push('Anti-patterns: ' + genre.anti_patterns.join(', '))
+            return parts.join('\n\n')
+          }} />
+          <div style={{ marginBottom: 6, marginTop: 6 }}>
             <span style={{ fontSize: 10, fontWeight: 600, color: '#ef4444' }}>
               Hard ({genre.hard_constraints.length})
             </span>
@@ -276,6 +263,9 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
       />
       {expandedSection === 'phases' && (
         <div style={{ padding: '6px 12px' }}>
+          <ReadAloudButton getText={() =>
+            phase_guidelines.map((pg) => `${pg.role}: ${pg.definition}`).join('\n\n')
+          } />
           {phase_guidelines.map((pg) => (
             <div
               key={pg.node_id}
@@ -317,6 +307,13 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
       />
       {expandedSection === 'policy' && (
         <div style={{ padding: '6px 12px' }}>
+          <ReadAloudButton getText={() =>
+            `Hard constraints: ${validation_policy.hard_constraints_required ? 'Required' : 'Optional'}. ` +
+            `Anti-patterns: ${validation_policy.anti_patterns_blocking ? 'Blocking' : 'Warning'}. ` +
+            `Tone check: ${validation_policy.tone_global ? 'Global' : 'Off'}. ` +
+            `Entry and exit: ${validation_policy.entry_exit_required ? 'Required' : 'Optional'}. ` +
+            `Signals: ${validation_policy.signals_required}.`
+          } />
           <PolicyRow label="Hard constraints" value={validation_policy.hard_constraints_required ? 'Required' : 'Optional'} />
           <PolicyRow label="Anti-patterns" value={validation_policy.anti_patterns_blocking ? 'Blocking' : 'Warning'} />
           <PolicyRow label="Tone check" value={validation_policy.tone_global ? 'Global' : 'Off'} />
