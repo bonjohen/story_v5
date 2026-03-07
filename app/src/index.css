@@ -120,6 +120,16 @@ input::placeholder {
   to { transform: translateX(0); opacity: 1; }
 }
 
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -302,12 +312,20 @@ input::placeholder {
     gap: 6px !important;
   }
 
-  /* Generation panel: full-width stacked on mobile */
+  /* Generation panel: bottom sheet overlay on mobile */
   .gen-panel {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100% !important;
-    max-height: 45vh;
+    max-height: 55vh;
     border-right: none !important;
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-radius: 12px 12px 0 0;
+    z-index: 80;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+    animation: slideUp 0.25s ease;
   }
 
   /* Main layout: stack vertically on mobile */
@@ -315,9 +333,14 @@ input::placeholder {
     flex-direction: column !important;
   }
 
-  /* Graph area: stack graphs vertically */
+  /* Graph area: stack graphs vertically in split view */
   .graph-pair {
     flex-direction: column !important;
+  }
+
+  /* Hide compare toggle on mobile — single graph only */
+  .compare-toggle {
+    display: none !important;
   }
 
   /* Info panel tabs: scroll horizontally with momentum */
@@ -326,12 +349,63 @@ input::placeholder {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Ensure touch targets are at least 44px */
+  /* Ensure touch targets are at least 44px (WCAG 2.5.5) */
   .app-toolbar button,
   .page-toolbar button,
-  .page-toolbar a {
-    min-height: 36px;
-    min-width: 36px;
+  .page-toolbar a,
+  button,
+  [role="button"],
+  select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Touch-action rules for scroll containers */
+  .graph-pair {
+    touch-action: none;
+  }
+  .gen-panel,
+  .info-tabs {
+    touch-action: pan-y;
+  }
+
+  /* Increase base font size on mobile */
+  :root {
+    font-size: 15px;
+  }
+
+  /* Generation form: stack fields vertically */
+  .gen-panel select,
+  .gen-panel textarea,
+  .gen-panel input {
+    min-height: 44px;
+    font-size: 16px; /* prevents iOS zoom on focus */
+  }
+
+  /* Hide drag separator on mobile — use size toggles instead */
+  [role="separator"][aria-orientation="horizontal"] {
+    display: none !important;
+  }
+
+  /* Info panel: fixed heights via size classes */
+  .info-panel-mobile-sm { height: 120px !important; }
+  .info-panel-mobile-md { height: 35vh !important; }
+  .info-panel-mobile-lg { height: 55vh !important; }
+
+  /* Search: expand to full-width overlay on mobile when focused */
+  .graph-search:focus-within {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: var(--bg-surface);
+    padding: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .graph-search:focus-within input {
+    width: 100% !important;
+    max-width: none !important;
   }
 
   /* Page toolbar: pad for safe area */

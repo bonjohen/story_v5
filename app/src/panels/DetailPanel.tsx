@@ -3,9 +3,10 @@
  * Enhanced with role badges, collapsible sections, and trace controls.
  */
 
-import { useState, memo } from 'react'
+import { memo } from 'react'
 import { useGraphStore } from '../store/graphStore.ts'
 import { ConstraintChecklist } from './ConstraintChecklist.tsx'
+import { Disclosure } from '../components/Disclosure.tsx'
 import { toArray } from '../utils/arrays.ts'
 import type { GraphNode, GraphEdge } from '../types/graph.ts'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
@@ -315,50 +316,19 @@ function CollapsibleSection({ title, items, warn }: {
   items: string[]
   warn?: boolean
 }) {
-  const [open, setOpen] = useState(true)
   const filtered = items.filter((item) => item && item.trim())
   if (filtered.length === 0) return null
 
   return (
-    <div style={{ marginBottom: 8 }}>
-      <button
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        aria-label={`${title}: ${filtered.length} items`}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 4,
-          width: '100%',
-          textAlign: 'left',
-          fontSize: 10,
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          color: warn ? '#f59e0b' : 'var(--text-muted)',
-          marginBottom: open ? 4 : 0,
-          padding: '2px 0',
-        }}
-      >
-        <span style={{
-          fontSize: 8,
-          transition: 'transform 0.15s',
-          transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
-          display: 'inline-block',
-        }}>
-          {'\u25B6'}
-        </span>
-        {title} ({filtered.length})
-      </button>
-      {open && (
-        <ul style={{ paddingLeft: 16, margin: 0, fontSize: 12, lineHeight: 1.65 }}>
-          {filtered.map((item, i) => (
-            <li key={i} style={{ color: warn ? '#fbbf24' : 'var(--text-primary)' }}>
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <Disclosure title={title} badge={filtered.length} persistKey={`detail-${title.toLowerCase().replace(/\s+/g, '-')}`}>
+      <ul style={{ paddingLeft: 16, margin: 0, fontSize: 12, lineHeight: 1.65, padding: '0 12px 4px 28px' }}>
+        {filtered.map((item, i) => (
+          <li key={i} style={{ color: warn ? '#fbbf24' : 'var(--text-primary)' }}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </Disclosure>
   )
 }
 

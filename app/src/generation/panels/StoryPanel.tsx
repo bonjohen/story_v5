@@ -6,6 +6,7 @@
 import { useMemo, useCallback, useRef, useEffect } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { ReadAloudButton } from './ReadAloudButton.tsx'
+import { Disclosure } from '../../components/Disclosure.tsx'
 
 interface StoryPanelProps {
   onHighlightNodes?: (nodeIds: string[]) => void
@@ -109,6 +110,7 @@ export function StoryPanel({ onHighlightNodes }: StoryPanelProps) {
             scene.archetype_trace.node_id,
             ...scene.genre_obligations.map((o) => o.node_id),
           ]
+          const wordCount = content.split(/\s+/).filter(Boolean).length
 
           return (
             <div
@@ -116,54 +118,30 @@ export function StoryPanel({ onHighlightNodes }: StoryPanelProps) {
               data-scene-id={scene.scene_id}
               onClick={() => handleSceneClick(scene.scene_id, traceNodes)}
               style={{
-                padding: '12px 14px',
-                borderBottom: '1px solid var(--border)',
                 cursor: 'pointer',
                 background: isSelected ? 'rgba(59,130,246,0.04)' : 'transparent',
                 borderLeft: isSelected ? '3px solid var(--accent)' : '3px solid transparent',
                 transition: 'all 0.15s',
               }}
             >
-              {/* Scene metadata badge */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                marginBottom: 8,
-              }}>
-                <span style={{
-                  fontSize: 9,
-                  fontWeight: 700,
-                  padding: '2px 6px',
-                  borderRadius: 3,
-                  background: 'rgba(59,130,246,0.12)',
-                  color: 'var(--accent)',
-                  fontFamily: 'monospace',
-                }}>
-                  {scene.scene_id}
-                </span>
-                {beat && (
-                  <span style={{
-                    fontSize: 9,
-                    color: 'var(--text-muted)',
-                    fontFamily: 'monospace',
+              <Disclosure
+                title={`${scene.scene_id}${beat ? ` — ${beat.archetype_node_id}` : ''}`}
+                badge={`${wordCount}w`}
+                persistKey={`story-scene-${scene.scene_id}`}
+              >
+                <div style={{ padding: '4px 12px 12px' }}>
+                  <div style={{ marginBottom: 6 }} onClick={(e) => e.stopPropagation()}>
+                    <ReadAloudButton getText={() => content} />
+                  </div>
+                  <div style={{
+                    fontSize: 12,
+                    lineHeight: 1.75,
+                    color: 'var(--text-primary)',
                   }}>
-                    {beat.archetype_node_id}
-                  </span>
-                )}
-                <div style={{ marginLeft: 'auto' }} onClick={(e) => e.stopPropagation()}>
-                  <ReadAloudButton getText={() => content} />
+                    {renderMarkdown(content)}
+                  </div>
                 </div>
-              </div>
-
-              {/* Rendered prose */}
-              <div style={{
-                fontSize: 12,
-                lineHeight: 1.75,
-                color: 'var(--text-primary)',
-              }}>
-                {renderMarkdown(content)}
-              </div>
+              </Disclosure>
             </div>
           )
         })}

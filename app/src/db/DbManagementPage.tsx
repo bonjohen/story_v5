@@ -17,10 +17,9 @@ import { useDbQuery } from './hooks.ts'
 import { listStoriesInProject } from './queries.ts'
 import { listProjects } from './repository/projectRepo.ts'
 import type { StoryRow, ProjectRow } from './types.ts'
+import { AppShellBar } from '../components/AppShell.tsx'
 
 type DbTab = 'status' | 'vocabulary' | 'coverage' | 'entities' | 'scenes' | 'artifacts' | 'runs' | 'tags'
-
-const TOOLBAR_HEIGHT = 42
 
 interface TableInfo {
   name: string
@@ -150,21 +149,9 @@ export function DbManagementPage() {
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
       background: 'var(--bg-primary)', display: 'flex', flexDirection: 'column',
     }}>
-      <div className="page-toolbar" style={{
-        height: TOOLBAR_HEIGHT, background: 'var(--bg-surface)',
-        borderBottom: '1px solid var(--border)',
-        display: 'flex', alignItems: 'center', padding: '0 14px', gap: 12,
-        flexShrink: 0,
-      }}>
-        <a href={`${import.meta.env.BASE_URL}`}
-          style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
-          Story Explorer
-        </a>
-        <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
-        <span style={{ fontSize: 12, fontWeight: 600, color: '#22c55e' }}>Database</span>
-        <div style={{ flex: 1 }} />
+      <AppShellBar title="Database">
         <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{status}</span>
-      </div>
+      </AppShellBar>
 
       {/* Tabs */}
       <div style={{

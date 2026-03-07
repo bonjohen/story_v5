@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSeriesStore } from '../store/seriesStore.ts'
 import type { SeriesListEntry } from '../store/seriesStore.ts'
+import { AppShellBar } from '../../../components/AppShell.tsx'
 
 // ---------------------------------------------------------------------------
 // Status badge
@@ -103,49 +104,6 @@ function EmptyState() {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Page toolbar
-// ---------------------------------------------------------------------------
-
-function SeriesToolbar() {
-  const navigate = useNavigate()
-
-  return (
-    <div
-      style={{
-        height: 42,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 16px',
-        borderBottom: '1px solid var(--border)',
-        background: 'var(--bg-surface)',
-        flexShrink: 0,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <button
-          onClick={() => navigate('/')}
-          style={{
-            fontSize: 11,
-            padding: '3px 10px',
-            borderRadius: 4,
-            border: '1px solid var(--border)',
-            background: 'transparent',
-            color: 'var(--text-muted)',
-            cursor: 'pointer',
-          }}
-          aria-label="Back to graph viewer"
-        >
-          {'\u2190'} Graphs
-        </button>
-        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-          Series Browser
-        </span>
-      </div>
-    </div>
-  )
-}
 
 // ---------------------------------------------------------------------------
 // Main page component
@@ -163,7 +121,7 @@ export function SeriesBrowserPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      <SeriesToolbar />
+      <AppShellBar title="Series" />
 
       <div style={{ flex: 1, overflowY: 'auto', padding: '32px 24px' }}>
         <div style={{ maxWidth: 700, margin: '0 auto' }}>

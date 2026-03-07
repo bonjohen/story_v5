@@ -15,6 +15,7 @@ import type { StoryInstance } from '../types.ts'
 import { BTN, BADGE_STYLE, INPUT } from '../panels/shared.ts'
 import { useWorkspaceStore } from '../../store/workspaceStore.ts'
 import { ReadAloud } from '../../components/ReadAloud.tsx'
+import { AppShellBar, BAR_HEIGHT } from '../../components/AppShell.tsx'
 import { ensureDbInit, getDb, saveDb } from '../../db/index.ts'
 import { createProject, listProjects } from '../../db/repository/projectRepo.ts'
 import { importStoryInstance } from '../../db/import/instanceImporter.ts'
@@ -31,8 +32,6 @@ const TABS: { id: Tab; label: string; color: string }[] = [
   { id: 'threads', label: 'Threads', color: '#ef4444' },
   { id: 'maps', label: 'Maps', color: '#06b6d4' },
 ]
-
-const TOOLBAR_HEIGHT = 42
 
 export function StoryWorkspace() {
   const savedTab = useWorkspaceStore((s) => s.storyTab) as Tab
@@ -157,31 +156,8 @@ export function StoryWorkspace() {
       display: 'flex',
       flexDirection: 'column',
     }}>
-      {/* Toolbar */}
-      <div className="page-toolbar" style={{
-        height: TOOLBAR_HEIGHT,
-        background: 'var(--bg-surface)',
-        borderBottom: '1px solid var(--border)',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 14px',
-        gap: 12,
-        flexShrink: 0,
-        zIndex: 10,
-      }}>
-        <a
-          href={`${import.meta.env.BASE_URL}`}
-          style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}
-        >
-          Story Explorer
-        </a>
-        <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
-        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--accent)' }}>Story Workspace</span>
+      <AppShellBar title="Story Workspace">
         <ReadAloud text={readAloudText} label="Read aloud" />
-
-        <div style={{ flex: 1 }} />
-
-        {/* Instance selector */}
         {instance && (
           <button
             onClick={() => setShowSelector(!showSelector)}
@@ -202,7 +178,6 @@ export function StoryWorkspace() {
             {instance.metadata.title}
           </button>
         )}
-
         <button onClick={() => void handleIndexToDb()} disabled={!activeInstanceId} style={{ ...BTN, padding: '4px 10px', fontSize: 11, borderColor: '#22c55e40', color: '#22c55e' }}>
           Index to DB
         </button>
@@ -218,7 +193,7 @@ export function StoryWorkspace() {
           Import
         </button>
         <input ref={fileInputRef} type="file" accept=".json,.story.json" onChange={handleImport} style={{ display: 'none' }} />
-      </div>
+      </AppShellBar>
 
       {/* Instance selector dropdown */}
       {showSelector && (
@@ -314,7 +289,7 @@ function InstanceSelector({ index, activeId, onSelect, onCreate, onDelete, onRen
 
   return (
     <div style={{
-      position: 'absolute', top: TOOLBAR_HEIGHT, right: 0, left: 0,
+      position: 'absolute', top: BAR_HEIGHT, right: 0, left: 0,
       background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)',
       padding: '12px 14px', zIndex: 20,
       maxHeight: 400, overflowY: 'auto',

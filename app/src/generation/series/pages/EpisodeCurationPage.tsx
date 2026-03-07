@@ -5,9 +5,10 @@
  */
 
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSeriesStore } from '../store/seriesStore.ts'
-import type { Series, EpisodeSlot, Episode } from '../types.ts'
+import type { Episode } from '../types.ts'
+import { AppShellBar } from '../../../components/AppShell.tsx'
 
 // ---------------------------------------------------------------------------
 // Badge component
@@ -320,80 +321,6 @@ function ArtifactsTab({ episode }: { episode: Episode }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Curation toolbar
-// ---------------------------------------------------------------------------
-
-function CurationToolbar({
-  series,
-  slot,
-  selectedEpisodeId,
-}: {
-  series: Series | null
-  slot: EpisodeSlot | null
-  selectedEpisodeId: string | null
-}) {
-  const navigate = useNavigate()
-
-  return (
-    <div
-      style={{
-        height: 42,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 16px',
-        borderBottom: '1px solid var(--border)',
-        background: 'var(--bg-surface)',
-        flexShrink: 0,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <button
-          onClick={() => series ? navigate(`/series/${series.series_id}`) : navigate('/series')}
-          style={{
-            fontSize: 11,
-            padding: '3px 10px',
-            borderRadius: 4,
-            border: '1px solid var(--border)',
-            background: 'transparent',
-            color: 'var(--text-muted)',
-            cursor: 'pointer',
-          }}
-          aria-label="Back to series dashboard"
-        >
-          {'\u2190'} Dashboard
-        </button>
-        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-          {slot ? `Slot ${slot.slot_number} — ${slot.candidates.length} candidate${slot.candidates.length !== 1 ? 's' : ''}` : 'Episode Curation'}
-        </span>
-      </div>
-
-      <div style={{ display: 'flex', gap: 8 }}>
-        {slot && slot.status !== 'canonized' && selectedEpisodeId && (
-          <button
-            style={{
-              fontSize: 11,
-              padding: '4px 12px',
-              borderRadius: 4,
-              border: '1px solid #22c55e',
-              background: 'rgba(34, 197, 94, 0.1)',
-              color: '#22c55e',
-              cursor: 'pointer',
-              fontWeight: 600,
-            }}
-            aria-label="Canonize selected episode"
-          >
-            Canonize
-          </button>
-        )}
-        {slot && slot.status === 'canonized' && (
-          <Badge label="canonized" color="#22c55e" />
-        )}
-      </div>
-    </div>
-  )
-}
 
 // ---------------------------------------------------------------------------
 // Main page component
@@ -435,11 +362,28 @@ export function EpisodeCurationPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      <CurationToolbar
-        series={currentSeries}
-        slot={slot}
-        selectedEpisodeId={selectedCandidate}
-      />
+      <AppShellBar title={slot ? `Slot ${slot.slot_number} — ${slot.candidates.length} candidate${slot.candidates.length !== 1 ? 's' : ''}` : 'Episode Curation'}>
+        {slot && slot.status !== 'canonized' && selectedCandidate && (
+          <button
+            style={{
+              fontSize: 11,
+              padding: '4px 12px',
+              borderRadius: 4,
+              border: '1px solid #22c55e',
+              background: 'rgba(34, 197, 94, 0.1)',
+              color: '#22c55e',
+              cursor: 'pointer',
+              fontWeight: 600,
+            }}
+            aria-label="Canonize selected episode"
+          >
+            Canonize
+          </button>
+        )}
+        {slot && slot.status === 'canonized' && (
+          <Badge label="canonized" color="#22c55e" />
+        )}
+      </AppShellBar>
 
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
         {/* Left: candidate list */}

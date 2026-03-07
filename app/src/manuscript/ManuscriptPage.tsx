@@ -7,9 +7,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { useManuscriptStore } from './store/manuscriptStore.ts'
 import { useGenerationStore } from '../generation/store/generationStore.ts'
 import { ReadAloud } from '../components/ReadAloud.tsx'
+import { AppShellBar } from '../components/AppShell.tsx'
 import type { EditStatus } from './types.ts'
-
-const TOOLBAR_HEIGHT = 42
 
 const STATUS_COLORS: Record<EditStatus, string> = {
   draft: '#f59e0b',
@@ -69,19 +68,7 @@ export function ManuscriptPage() {
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
       background: 'var(--bg-primary)', display: 'flex', flexDirection: 'column',
     }}>
-      {/* Toolbar */}
-      <div className="page-toolbar" style={{
-        height: TOOLBAR_HEIGHT, background: 'var(--bg-surface)',
-        borderBottom: '1px solid var(--border)',
-        display: 'flex', alignItems: 'center', padding: '0 14px', gap: 12,
-        flexShrink: 0, zIndex: 10,
-      }}>
-        <a href={`${import.meta.env.BASE_URL}`}
-          style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
-          Story Explorer
-        </a>
-        <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
-        <span style={{ fontSize: 12, fontWeight: 600, color: '#14b8a6' }}>Manuscript</span>
+      <AppShellBar title="Manuscript">
         <ReadAloud text={selectedSceneObj ? (selectedSceneObj.revised_text ?? selectedSceneObj.draft_text) : ''} label="Read aloud" />
 
         <div style={{ flex: 1 }} />
@@ -115,7 +102,7 @@ export function ManuscriptPage() {
             Clear
           </button>
         )}
-      </div>
+      </AppShellBar>
 
       {chapters.length === 0 ? (
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12 }}>

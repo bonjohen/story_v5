@@ -88,10 +88,10 @@ describe('ScriptReaderPage', () => {
     expect(screen.getByText('Second paragraph.')).toBeInTheDocument()
   })
 
-  it('shows script title in toolbar breadcrumb', () => {
+  it('shows script title in toolbar', () => {
     useScriptStore.setState({ currentScript: mockScript })
     renderPage()
-    expect(screen.getByText('Test Script')).toBeInTheDocument()
+    expect(screen.getByText('Scripts / Test Script')).toBeInTheDocument()
   })
 
   it('renders TTS play button', () => {

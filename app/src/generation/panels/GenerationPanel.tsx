@@ -12,6 +12,7 @@ import { useGraphStore } from '../../store/graphStore.ts'
 import { useInstanceStore } from '../../instance/store/instanceStore.ts'
 import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
 import { BridgeAdapter } from '../bridge/bridgeAdapter.ts'
+import { Disclosure } from '../../components/Disclosure.tsx'
 import type { StoryRequest, GenerationMode, GenerationConfig } from '../artifacts/types.ts'
 
 // Default generation config matching generation_config.json
@@ -380,10 +381,11 @@ export function GenerationPanel() {
           </label>
         </div>
 
-        {/* LLM Backend */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+        {/* LLM Backend — collapsed by default */}
+        <Disclosure title="LLM Backend" persistKey="gen-llm-backend" defaultCollapsed={true} badge={llmBackend === 'bridge' ? 'bridge' : ''}>
+        <div style={{ display: 'flex', gap: 8, marginBottom: 10, padding: '0 12px' }}>
           <label style={{ flex: 1 }}>
-            <span style={LABEL}>LLM Backend</span>
+            <span style={LABEL}>Backend</span>
             <select
               value={llmBackend}
               onChange={(e) => setLlmBackend(e.target.value as 'none' | 'bridge')}
@@ -427,6 +429,7 @@ export function GenerationPanel() {
             </label>
           )}
         </div>
+        </Disclosure>
 
         {/* Action buttons */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>

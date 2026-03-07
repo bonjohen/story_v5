@@ -7,9 +7,9 @@ import { useState, useMemo } from 'react'
 import { useNotesStore } from './store/notesStore.ts'
 import { useInstanceStore } from '../instance/store/instanceStore.ts'
 import { ReadAloud } from '../components/ReadAloud.tsx'
+import { AppShellBar } from '../components/AppShell.tsx'
 import type { Note, EntityRef, EntityRefType, SavedQuery } from './types.ts'
 
-const TOOLBAR_HEIGHT = 42
 const ENTITY_TYPES: EntityRefType[] = ['character', 'place', 'object', 'faction', 'thread', 'scene', 'node', 'other']
 
 const TYPE_COLORS: Record<EntityRefType, string> = {
@@ -124,22 +124,8 @@ export function NotesPage() {
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
       background: 'var(--bg-primary)', display: 'flex', flexDirection: 'column',
     }}>
-      {/* Toolbar */}
-      <div className="page-toolbar" style={{
-        height: TOOLBAR_HEIGHT, background: 'var(--bg-surface)',
-        borderBottom: '1px solid var(--border)',
-        display: 'flex', alignItems: 'center', padding: '0 14px', gap: 12,
-        flexShrink: 0, zIndex: 10,
-      }}>
-        <a href={`${import.meta.env.BASE_URL}`}
-          style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', textDecoration: 'none' }}>
-          Story Explorer
-        </a>
-        <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
-        <span style={{ fontSize: 12, fontWeight: 600, color: '#a855f7' }}>Notes</span>
+      <AppShellBar title="Notes">
         <ReadAloud text={selectedNote ? `${selectedNote.title}. ${selectedNote.content}` : ''} label="Read aloud" />
-
-        <div style={{ flex: 1 }} />
 
         <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>
           {notes.length} notes · {allTags.length} tags
@@ -153,7 +139,7 @@ export function NotesPage() {
           }}>
           + New Note
         </button>
-      </div>
+      </AppShellBar>
 
       {notes.length === 0 && !editing ? (
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12 }}>

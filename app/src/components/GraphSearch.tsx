@@ -120,7 +120,7 @@ export function GraphSearch({ graph, onSelect }: GraphSearchProps) {
   }, [])
 
   return (
-    <div ref={containerRef} style={{ position: 'relative' }}>
+    <div ref={containerRef} className="graph-search" style={{ position: 'relative' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
         <input
           ref={inputRef}

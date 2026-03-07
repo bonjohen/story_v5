@@ -18,6 +18,8 @@ This is a **data and content project** that models storytelling structures as fo
 
 6. **Claude Code CLI Interface** — an `LLMAdapter` implementation (`ClaudeCodeAdapter`) that delegates LLM calls to the Claude Code CLI (`claude --print`) instead of calling the Anthropic API directly. Lets users run the full generation pipeline using their Claude Code subscription. See `docs/claude_code_cli_interface_design.md` (design), `docs/claude_code_cli_interface_usage.md` (usage guide), and `docs/claude_code_cli_interface_plan.md` (implementation plan).
 
+7. **UI Upgrade (Progressive Disclosure)** — restructured the interface around progressive disclosure: hamburger menu + NavDrawer replacing toolbar buttons, collapsible generation panel, info panel with accordion groups instead of 14 flat tabs, single-graph focus mode with optional split view, mobile-responsive CSS with 44px touch targets, and consistent AppShellBar across all sub-pages. See `docs/user_interface_upgrade_plan.md` (8-phase plan).
+
 ## Repository Structure
 
 ```
@@ -34,6 +36,7 @@ docs/                              ← Planning, specs, and task tracking
   claude_code_cli_interface_design.md ← Design doc: Claude Code CLI adapter
   claude_code_cli_interface_usage.md  ← Usage guide for CLI-based generation
   claude_code_cli_interface_plan.md   ← Implementation plan for CLI interface enhancements
+  user_interface_upgrade_plan.md     ← 8-phase UI upgrade plan (progressive disclosure)
   archetypes.json                   ← 15 archetypes: descriptions, examples, genres
   genres.json                      ← 27 genres: descriptions, examples, popularity
 
@@ -75,7 +78,7 @@ data/                              ← Deliverable outputs
 
 app/                               ← Interactive viewer (React + TypeScript + Vite)
   src/
-    components/                    ← Reusable UI components (GraphSearch, SettingsPanel, etc.)
+    components/                    ← Reusable UI components (AppShell, NavDrawer, Disclosure, GraphSearch, SettingsPanel, etc.)
     panels/                        ← Side panels (DetailPanel, PairingPanel, ExportPanel, etc.)
     render/                        ← Cytoscape canvas, styles, element builders
     graph-engine/                  ← Normalizer, validator, data index, example parser
@@ -86,7 +89,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
       panels/                      ← Generation UI panels (GenerationPanel, ContractPanel, TemplatesPanel, etc.)
       store/                       ← Generation Zustand stores (generationStore, requestStore)
       series/                      ← Series/episode generation subsystem
-    store/                         ← Zustand stores (graphStore, settingsStore)
+    store/                         ← Zustand stores (graphStore, settingsStore, uiStore)
     layout/                        ← Graph layout algorithms
     types/                         ← TypeScript interfaces
     instance/                      ← Story instance workspace (entity editors, lore management)

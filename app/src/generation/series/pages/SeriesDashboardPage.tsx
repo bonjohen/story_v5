@@ -5,8 +5,9 @@
  */
 
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSeriesStore } from '../store/seriesStore.ts'
+import { AppShellBar } from '../../../components/AppShell.tsx'
 import type { ThreadAgeInfo, ThreadHealthMetrics } from '../seriesManager.ts'
 import type { Series, PlotThread, EpisodeSlot } from '../types.ts'
 import { LoreViewerPanel } from '../panels/LoreViewerPanel.tsx'
@@ -354,57 +355,6 @@ function SlotsSection({ series }: { series: Series }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Dashboard Toolbar
-// ---------------------------------------------------------------------------
-
-function DashboardToolbar({ series }: { series: Series | null }) {
-  const navigate = useNavigate()
-
-  return (
-    <div
-      style={{
-        height: 42,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 16px',
-        borderBottom: '1px solid var(--border)',
-        background: 'var(--bg-surface)',
-        flexShrink: 0,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <button
-          onClick={() => navigate('/series')}
-          style={{
-            fontSize: 11,
-            padding: '3px 10px',
-            borderRadius: 4,
-            border: '1px solid var(--border)',
-            background: 'transparent',
-            color: 'var(--text-muted)',
-            cursor: 'pointer',
-          }}
-          aria-label="Back to series browser"
-        >
-          {'\u2190'} Series
-        </button>
-        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-          {series?.title ?? 'Loading...'}
-        </span>
-      </div>
-
-      {series && (
-        <div style={{ display: 'flex', gap: 8, fontSize: 11, color: 'var(--text-muted)' }}>
-          <span>{series.episode_count} episodes</span>
-          <span>·</span>
-          <span>{series.theme_tone.genre_name}</span>
-        </div>
-      )}
-    </div>
-  )
-}
 
 // ---------------------------------------------------------------------------
 // Detail panels (tabbed view of Lore, Arc, Threads)
@@ -483,7 +433,15 @@ export function SeriesDashboardPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      <DashboardToolbar series={currentSeries} />
+      <AppShellBar title={currentSeries?.title ?? 'Series Dashboard'}>
+        {currentSeries && (
+          <div style={{ display: 'flex', gap: 8, fontSize: 11, color: 'var(--text-muted)' }}>
+            <span>{currentSeries.episode_count} episodes</span>
+            <span>&middot;</span>
+            <span>{currentSeries.theme_tone.genre_name}</span>
+          </div>
+        )}
+      </AppShellBar>
 
       <div style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
         {loading && (

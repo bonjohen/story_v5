@@ -34,7 +34,7 @@ function renderPage() {
 describe('ScriptBrowserPage', () => {
   it('renders the page title', () => {
     renderPage()
-    expect(screen.getByText('Audio Scripts')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Walkthrough Scripts' })).toBeInTheDocument()
   })
 
   it('shows loading state', () => {

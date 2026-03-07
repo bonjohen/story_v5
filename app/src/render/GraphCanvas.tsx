@@ -466,6 +466,32 @@ export const GraphCanvas = memo(function GraphCanvas({
         aria-label={`Graph canvas: ${graph.graph.name} — ${graph.graph.nodes.length} nodes, ${graph.graph.edges.length} edges. Use mouse to pan and zoom, click nodes to select.`}
         style={{ width: '100%', height: '100%' }}
       />
+      {/* Floating zoom controls */}
+      <div style={{
+        position: 'absolute',
+        bottom: minimapSrc ? MINIMAP_H + 24 : 12,
+        right: 12,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 4,
+        zIndex: 6,
+      }}>
+        <button
+          aria-label="Zoom in"
+          onClick={() => { const cy = cyRef.current; if (cy) cy.zoom({ level: cy.zoom() * 1.3, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } }) }}
+          style={{ width: 32, height: 32, borderRadius: 6, background: 'var(--bg-elevated)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.3)' }}
+        >+</button>
+        <button
+          aria-label="Zoom out"
+          onClick={() => { const cy = cyRef.current; if (cy) cy.zoom({ level: cy.zoom() / 1.3, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } }) }}
+          style={{ width: 32, height: 32, borderRadius: 6, background: 'var(--bg-elevated)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.3)' }}
+        >−</button>
+        <button
+          aria-label="Fit graph to view"
+          onClick={() => { const cy = cyRef.current; if (cy) cy.fit(undefined, 30) }}
+          style={{ width: 32, height: 32, borderRadius: 6, background: 'var(--bg-elevated)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: 11, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.3)' }}
+        >Fit</button>
+      </div>
       {/* Minimap */}
       {minimapSrc && (
         <div

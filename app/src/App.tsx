@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useRef, useState, useMemo, memo } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
 import type { NormalizedGraph } from './graph-engine/index.ts'
 import { DetailPanel } from './panels/DetailPanel.tsx'
@@ -15,6 +15,9 @@ import { useKeyboardNav } from './hooks/useKeyboardNav.ts'
 import { useTraceNavigation } from './hooks/useTraceNavigation.ts'
 import { SettingsPanel } from './components/SettingsPanel.tsx'
 import { ExportPanel } from './panels/ExportPanel.tsx'
+import { Disclosure } from './components/Disclosure.tsx'
+import { AppShellBar } from './components/AppShell.tsx'
+import { useUIStore } from './store/uiStore.ts'
 import { GenerationPanel } from './generation/panels/GenerationPanel.tsx'
 import { ContractPanel } from './generation/panels/ContractPanel.tsx'
 import { PlanPanel } from './generation/panels/PlanPanel.tsx'
@@ -30,7 +33,6 @@ import { useDbInit } from './db/useDbInit.ts'
 import type { DataManifest } from './types/graph.ts'
 
 // Layout constants
-const TOOLBAR_HEIGHT = 42
 const INFO_PANEL_DEFAULT_HEIGHT = 260
 const INFO_PANEL_MIN_HEIGHT = 80
 const INFO_PANEL_MAX_HEIGHT = 600
@@ -46,7 +48,6 @@ function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: strin
 
 export default function App() {
   const location = useLocation()
-  const navigate = useNavigate()
   const manifestLoaded = useRef(false)
 
   // Store state
@@ -73,6 +74,12 @@ export default function App() {
   const settingsOpen = useSettingsStore((s) => s.settingsOpen)
   const toggleSettings = useSettingsStore((s) => s.toggleSettings)
 
+  // UI preferences
+  const genPanelOpen = useUIStore((s) => s.genPanelOpen)
+  const toggleGenPanel = useUIStore((s) => s.toggleGenPanel)
+  const splitView = useUIStore((s) => s.splitView)
+  const toggleSplitView = useUIStore((s) => s.toggleSplitView)
+
   // Generation state
   const genStatus = useGenerationStore((s) => s.status)
   const genContract = useGenerationStore((s) => s.contract)
@@ -93,7 +100,6 @@ export default function App() {
   const [genTab, setGenTab] = useState<'run' | 'contract' | 'plan' | 'trace' | 'compliance' | 'story'>('run')
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
   const [manifestError, setManifestError] = useState<string | null>(null)
-  const [infoPanel, setInfoPanel] = useState<string>('pairing')
   const [infoPanelOpen, setInfoPanelOpen] = useState(true)
   const [infoPanelHeight, setInfoPanelHeight] = useState(INFO_PANEL_DEFAULT_HEIGHT)
 
@@ -227,10 +233,9 @@ export default function App() {
     : null
   const hasDetailContent = !!(selectedNode || selectedEdge)
 
-  // Auto-switch to detail tab when node/edge is selected
+  // Auto-open info panel when node/edge is selected
   useEffect(() => {
     if (selectedNodeId || selectedEdgeId) {
-      setInfoPanel('detail')
       setInfoPanelOpen(true)
     }
   }, [selectedNodeId, selectedEdgeId])
@@ -261,29 +266,6 @@ export default function App() {
     return { coveredNodes, antiPatternNodes, activeSceneNodes }
   }, [genStatus, genPlan, genTrace, genContract, genHighlightNodes])
 
-  // Info panel tabs — progressive disclosure
-  const infoTabs = useMemo(() => {
-    const tabs: { id: string; label: string; badge?: boolean }[] = [
-      { id: 'pairing', label: 'Pairing' },
-    ]
-    if (hasDetailContent) {
-      tabs.push({ id: 'detail', label: 'Detail', badge: true })
-    }
-    tabs.push({ id: 'stats', label: 'Stats' })
-    tabs.push({ id: 'crossindex', label: 'X-Index' })
-    tabs.push({ id: 'elements', label: 'Elements' })
-    tabs.push({ id: 'timeline', label: 'Timeline' })
-    tabs.push({ id: 'arcs', label: 'Arcs' })
-    tabs.push({ id: 'templates', label: 'Templates', badge: !!(genTemplatePack || genBackbone) })
-    if (genContract) tabs.push({ id: 'gen-contract', label: 'Contract', badge: true })
-    if (genBackbone) tabs.push({ id: 'gen-backbone', label: 'Backbone', badge: true })
-    if (genPlan) tabs.push({ id: 'gen-plan', label: 'Plan', badge: true })
-    if (genSceneDrafts.size > 0) tabs.push({ id: 'gen-story', label: 'Story', badge: true })
-    if (genValidation) tabs.push({ id: 'gen-compliance', label: 'Checks', badge: true })
-    if (genChapterManifest) tabs.push({ id: 'gen-chapters', label: 'Chapters', badge: true })
-    return tabs
-  }, [hasDetailContent, genContract, genBackbone, genPlan, genSceneDrafts.size, genValidation, genChapterManifest, genTemplatePack])
-
   const activeCyRef = viewMode === 'archetype' ? cyArchRef : cyGenreRef
 
   return (
@@ -294,120 +276,79 @@ export default function App() {
       width: '100vw',
       overflow: 'hidden',
     }}>
-      {/* Toolbar — controls on the LEFT */}
-      <header role="banner" aria-label="Application toolbar" className="app-toolbar" style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-        padding: '6px 12px',
-        background: 'var(--bg-surface)',
-        borderBottom: '1px solid var(--border)',
-        flexShrink: 0,
-        zIndex: 10,
-        height: TOOLBAR_HEIGHT,
-      }}>
-        <span style={{
-          fontWeight: 600,
-          fontSize: 14,
-          color: 'var(--text-primary)',
-          whiteSpace: 'nowrap',
-        }}>
-          Story Structure Explorer
-        </span>
-
-        <div style={{ width: 1, height: 20, background: 'var(--border)', flexShrink: 0 }} />
-
-
-        {/* Story workspace link */}
+      {/* App bar — slim top bar with hamburger menu */}
+      <AppShellBar>
+        {/* Generation panel toggle */}
         <button
-          onClick={() => void navigate('/story')}
-          aria-label="Story workspace"
-          style={toolbarButtonStyle(false, '#22c55e')}
+          onClick={toggleGenPanel}
+          aria-label={genPanelOpen ? 'Hide generation panel' : 'Show generation panel'}
+          style={{
+            fontSize: 11,
+            padding: '3px 10px',
+            borderRadius: 4,
+            border: '1px solid',
+            borderColor: genPanelOpen ? '#22c55e' : 'var(--border)',
+            background: genPanelOpen ? '#22c55e18' : 'transparent',
+            color: genPanelOpen ? '#22c55e' : 'var(--text-muted)',
+            cursor: 'pointer',
+            transition: 'all 0.15s',
+            position: 'relative',
+          }}
         >
-          Story
+          Generate
+          {genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED' && (
+            <span style={{
+              position: 'absolute',
+              top: -2,
+              right: -2,
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              background: '#f59e0b',
+              animation: 'pulse 1.5s infinite',
+            }} />
+          )}
+          {genStatus === 'COMPLETED' && (
+            <span style={{
+              position: 'absolute',
+              top: -2,
+              right: -2,
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              background: '#22c55e',
+            }} />
+          )}
         </button>
 
-        {/* Scene board link */}
-        <button
-          onClick={() => void navigate('/sceneboard')}
-          aria-label="Scene board"
-          style={toolbarButtonStyle(false, '#f59e0b')}
-        >
-          Scenes
-        </button>
-
-        {/* Timeline link */}
-        <button
-          onClick={() => void navigate('/timeline')}
-          aria-label="Timeline view"
-          style={toolbarButtonStyle(false, '#06b6d4')}
-        >
-          Timeline
-        </button>
-
-        {/* Encyclopedia link */}
-        <button
-          onClick={() => void navigate('/encyclopedia')}
-          aria-label="Encyclopedia"
-          style={toolbarButtonStyle(false, '#14b8a6')}
-        >
-          Encyclopedia
-        </button>
-
-        {/* Manuscript link */}
-        <button
-          onClick={() => void navigate('/manuscript')}
-          aria-label="Manuscript workspace"
-          style={toolbarButtonStyle(false, '#14b8a6')}
-        >
-          Manuscript
-        </button>
-
-        {/* Notes link */}
-        <button
-          onClick={() => void navigate('/notes')}
-          aria-label="Notes browser"
-          style={toolbarButtonStyle(false, '#a855f7')}
-        >
-          Notes
-        </button>
-
-        {/* Scripts link */}
-        <button
-          onClick={() => void navigate('/scripts')}
-          aria-label="Browse audio scripts"
-          style={toolbarButtonStyle(false, 'var(--accent)')}
-        >
-          Scripts
-        </button>
-
-        {/* DB link */}
-        <button
-          onClick={() => void navigate('/db')}
-          aria-label="Database management"
-          style={toolbarButtonStyle(false, '#22c55e')}
-        >
-          DB
-        </button>
-
-        {/* Graph search + global search */}
+        {/* Graph search */}
         {currentGraph && (
           <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
         )}
         <GlobalSearch />
 
-        {/* Export button */}
+        {/* Export */}
         {currentGraph && (
           <button
             onClick={() => setShowExport((v) => !v)}
             aria-label="Export graph"
-            style={toolbarButtonStyle(showExport, 'var(--accent)')}
+            style={{
+              fontSize: 11,
+              padding: '3px 10px',
+              borderRadius: 4,
+              border: '1px solid',
+              borderColor: showExport ? 'var(--accent)' : 'var(--border)',
+              background: showExport ? 'var(--accent)18' : 'transparent',
+              color: showExport ? 'var(--accent)' : 'var(--text-muted)',
+              cursor: 'pointer',
+              transition: 'all 0.15s',
+            }}
           >
             Export
           </button>
         )}
 
-        {/* Settings gear */}
+        {/* Settings */}
         <button
           onClick={toggleSettings}
           aria-label="Settings"
@@ -418,13 +359,17 @@ export default function App() {
             color: settingsOpen ? 'var(--accent)' : 'var(--text-muted)',
             borderRadius: 4,
             transition: 'color 0.15s',
+            minHeight: 44,
+            minWidth: 44,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           {'\u2699'}
         </button>
 
-        <div style={{ flex: 1 }} />
-
+        {/* Status indicators */}
         {dbStatus.error && (
           <span style={{ fontSize: 9, color: '#ef4444' }} title={dbStatus.error}>DB err</span>
         )}
@@ -439,7 +384,7 @@ export default function App() {
         {(error || manifestError) && (
           <span style={{ fontSize: 11, color: '#ef4444' }}>{error || manifestError}</span>
         )}
-      </header>
+      </AppShellBar>
 
       {/* Settings panel overlay */}
       {settingsOpen && <SettingsPanel />}
@@ -456,8 +401,8 @@ export default function App() {
       {/* Main layout: Generation panel (left) + graphs (center) */}
       <div className="main-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
 
-        {/* Generation panel — always visible on the left */}
-        <div className="gen-panel" style={{
+        {/* Generation panel — toggleable sidebar */}
+        {genPanelOpen && <div className="gen-panel" style={{
           width: GEN_PANEL_WIDTH,
           flexShrink: 0,
           background: 'var(--bg-surface)',
@@ -473,11 +418,11 @@ export default function App() {
             flexShrink: 0,
           }}>
             <GenTab label={'\u25C0 Run'} active={genTab === 'run'} onClick={() => setGenTab('run')} highlight />
-            <GenTab label="Contract" active={genTab === 'contract'} onClick={() => setGenTab('contract')} badge={!!genContract} />
-            <GenTab label="Plan" active={genTab === 'plan'} onClick={() => setGenTab('plan')} badge={!!genPlan} />
-            <GenTab label="Map" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge={!!genTrace} />
-            <GenTab label="Checks" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge={!!genValidation} />
-            <GenTab label="Story" active={genTab === 'story'} onClick={() => setGenTab('story')} badge={genSceneDrafts.size > 0} />
+            {genContract && <GenTab label="Contract" active={genTab === 'contract'} onClick={() => setGenTab('contract')} badge />}
+            {genPlan && <GenTab label="Plan" active={genTab === 'plan'} onClick={() => setGenTab('plan')} badge />}
+            {genTrace && <GenTab label="Map" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge />}
+            {genValidation && <GenTab label="Checks" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge />}
+            {genSceneDrafts.size > 0 && <GenTab label="Story" active={genTab === 'story'} onClick={() => setGenTab('story')} badge />}
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
             {genTab === 'run' && <GenerationPanel />}
@@ -487,11 +432,11 @@ export default function App() {
             {genTab === 'compliance' && <CompliancePanel />}
             {genTab === 'story' && <StoryPanel onHighlightNodes={setGenHighlightNodes} />}
           </div>
-        </div>
+        </div>}
 
         {/* Info panel + graph area */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-          {/* Top info panel */}
+          {/* Collapsible info panel — accordion sections */}
           <div style={{
             height: infoPanelOpen ? infoPanelHeight : 28,
             background: 'var(--bg-surface)',
@@ -501,122 +446,135 @@ export default function App() {
             overflow: 'hidden',
             transition: draggingSep ? 'none' : 'height 0.2s ease',
           }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              borderBottom: infoPanelOpen ? '1px solid var(--border)' : 'none',
-              flexShrink: 0,
-              overflow: 'hidden',
-            }}>
-              <button
-                onClick={() => setInfoPanelOpen((v) => !v)}
-                aria-label={infoPanelOpen ? 'Collapse panel' : 'Expand panel'}
-                style={{
-                  padding: '4px 8px',
-                  fontSize: 10,
-                  color: 'var(--text-muted)',
-                  flexShrink: 0,
-                }}
-              >
-                {infoPanelOpen ? '\u25B2' : '\u25BC'}
-              </button>
-
-              <div className="info-tabs" style={{
+            {/* Collapse toggle */}
+            <button
+              onClick={() => setInfoPanelOpen((v) => !v)}
+              aria-label={infoPanelOpen ? 'Collapse panel' : 'Expand panel'}
+              style={{
                 display: 'flex',
-                flex: 1,
-                overflowX: 'auto',
-                gap: 0,
-              }}>
-                {infoTabs.map((tab) => (
-                  <BottomTab
-                    key={tab.id}
-                    label={tab.label}
-                    active={infoPanel === tab.id}
-                    badge={tab.badge}
-                    onClick={() => {
-                      setInfoPanel(tab.id)
-                      setInfoPanelOpen(true)
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
+                alignItems: 'center',
+                gap: 6,
+                padding: '4px 12px',
+                fontSize: 10,
+                color: 'var(--text-muted)',
+                flexShrink: 0,
+                borderBottom: '1px solid var(--border)',
+                minHeight: 28,
+              }}
+            >
+              <span>{infoPanelOpen ? '\u25B2' : '\u25BC'}</span>
+              <span style={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Inspector
+              </span>
+            </button>
 
             {infoPanelOpen && (
               <div style={{ flex: 1, overflowY: 'auto' }}>
-                {infoPanel === 'pairing' && <PairingPanel />}
-                {infoPanel === 'detail' && hasDetailContent && currentGraph && (
-                  <DetailPanel
-                    node={selectedNode}
-                    edge={selectedEdge}
-                    onTraceForward={handleTraceForward}
-                    onTraceBackward={handleTraceBackward}
-                    onClearTrace={handleClearTrace}
-                    traceActive={traceDirection}
-                    graph={currentGraph}
-                  />
+                {/* Graph group */}
+                <Disclosure title="Graph" persistKey="info-graph" badge={currentGraph ? `${currentGraph.graph.nodes.length}N` : ''}>
+                  <PairingPanel />
+                  {hasDetailContent && currentGraph && (
+                    <Disclosure title="Selected Element" persistKey="info-detail">
+                      <DetailPanel
+                        node={selectedNode}
+                        edge={selectedEdge}
+                        onTraceForward={handleTraceForward}
+                        onTraceBackward={handleTraceBackward}
+                        onClearTrace={handleClearTrace}
+                        traceActive={traceDirection}
+                        graph={currentGraph}
+                      />
+                    </Disclosure>
+                  )}
+                  {currentGraph && (
+                    <Disclosure title="Statistics" persistKey="info-stats" defaultCollapsed>
+                      <GraphStats graph={currentGraph} />
+                    </Disclosure>
+                  )}
+                  {currentGraph && (
+                    <Disclosure title="Elements" persistKey="info-elements" defaultCollapsed>
+                      <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
+                    </Disclosure>
+                  )}
+                  {currentGraph && (
+                    <Disclosure title="Cross-Index" persistKey="info-xindex" defaultCollapsed>
+                      <CrossIndexPanel graph={currentGraph} />
+                    </Disclosure>
+                  )}
+                </Disclosure>
+
+                {/* Visualization group */}
+                {archetypeGraph && (
+                  <Disclosure title="Visualization" persistKey="info-viz" defaultCollapsed>
+                    <Disclosure title="Timeline" persistKey="info-timeline" defaultCollapsed>
+                      <TimelinePanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+                    </Disclosure>
+                    <Disclosure title="Character Arcs" persistKey="info-arcs" defaultCollapsed>
+                      <CharacterArcPanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+                    </Disclosure>
+                  </Disclosure>
                 )}
-                {infoPanel === 'stats' && currentGraph && <GraphStats graph={currentGraph} />}
-                {infoPanel === 'crossindex' && currentGraph && <CrossIndexPanel graph={currentGraph} />}
-                {infoPanel === 'elements' && currentGraph && (
-                  <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
-                )}
-                {infoPanel === 'timeline' && archetypeGraph && (
-                  <TimelinePanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
-                )}
-                {infoPanel === 'arcs' && archetypeGraph && (
-                  <CharacterArcPanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
-                )}
-                {infoPanel === 'templates' && <TemplatesPanel />}
-                {infoPanel === 'gen-contract' && <ContractPanel onHighlightNodes={setGenHighlightNodes} />}
-                {infoPanel === 'gen-backbone' && genBackbone && (
-                  <div style={{ padding: '12px 14px', fontSize: 11, color: 'var(--text-primary)' }}>
-                    <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', marginBottom: 8 }}>Backbone</div>
-                    <div style={{ marginBottom: 8 }}>{genBackbone.beats.length} beats, {genBackbone.chapter_partition.length} chapters</div>
-                    {genBackbone.beats.map((beat, i) => {
-                      const slotNames = beat.scenes.flatMap((s) => Object.keys(s.slots))
-                      const uniqueSlots = [...new Set(slotNames)]
-                      const obligationCount = beat.scenes.reduce((n, s) => n + s.genre_obligations.length, 0)
-                      return (
-                        <div key={i} style={{ padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: '3px solid #f59e0b' }}>
-                          <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', marginBottom: 2 }}>
-                            <span style={{ fontWeight: 600 }}>{beat.label}</span>
-                            {beat.role && (
-                              <span style={{ fontSize: 9, fontWeight: 600, textTransform: 'uppercase', color: '#f59e0b' }}>
-                                {beat.role}
-                              </span>
-                            )}
-                          </div>
-                          {beat.definition && (
-                            <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: 3 }}>
-                              {beat.definition}
-                            </div>
-                          )}
-                          <div style={{ fontSize: 9, color: 'var(--text-muted)', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                            <span>{beat.scenes.length} scene{beat.scenes.length !== 1 ? 's' : ''}</span>
-                            {obligationCount > 0 && <span>{obligationCount} genre obligation{obligationCount !== 1 ? 's' : ''}</span>}
-                            {uniqueSlots.length > 0 && <span>Slots: {uniqueSlots.join(', ')}</span>}
-                          </div>
+
+                {/* Generation group — only when artifacts exist */}
+                {(genTemplatePack || genBackbone || genContract || genPlan || genSceneDrafts.size > 0 || genValidation || genChapterManifest) && (
+                  <Disclosure title="Generation" persistKey="info-gen" badge={genSceneDrafts.size > 0 ? `${genSceneDrafts.size} scenes` : ''}>
+                    <Disclosure title="Templates" persistKey="info-templates" defaultCollapsed>
+                      <TemplatesPanel />
+                    </Disclosure>
+                    {genContract && (
+                      <Disclosure title="Contract" persistKey="info-gen-contract" defaultCollapsed>
+                        <ContractPanel onHighlightNodes={setGenHighlightNodes} />
+                      </Disclosure>
+                    )}
+                    {genBackbone && (
+                      <Disclosure title="Backbone" persistKey="info-gen-backbone" defaultCollapsed badge={`${genBackbone.beats.length} beats`}>
+                        <div style={{ padding: '8px 12px', fontSize: 11, color: 'var(--text-primary)' }}>
+                          {genBackbone.beats.map((beat, i) => {
+                            const obligationCount = beat.scenes.reduce((n, s) => n + s.genre_obligations.length, 0)
+                            return (
+                              <div key={i} style={{ padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: '3px solid #f59e0b' }}>
+                                <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', marginBottom: 2 }}>
+                                  <span style={{ fontWeight: 600 }}>{beat.label}</span>
+                                  {beat.role && <span style={{ fontSize: 9, fontWeight: 600, textTransform: 'uppercase', color: '#f59e0b' }}>{beat.role}</span>}
+                                </div>
+                                {beat.definition && <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{beat.definition}</div>}
+                                <div style={{ fontSize: 9, color: 'var(--text-muted)' }}>
+                                  {beat.scenes.length} scene{beat.scenes.length !== 1 ? 's' : ''}{obligationCount > 0 ? `, ${obligationCount} obligations` : ''}
+                                </div>
+                              </div>
+                            )
+                          })}
                         </div>
-                      )
-                    })}
-                  </div>
-                )}
-                {infoPanel === 'gen-plan' && <PlanPanel onHighlightNodes={setGenHighlightNodes} />}
-                {infoPanel === 'gen-story' && <StoryPanel onHighlightNodes={setGenHighlightNodes} />}
-                {infoPanel === 'gen-compliance' && <CompliancePanel />}
-                {infoPanel === 'gen-chapters' && genChapterManifest && (
-                  <div style={{ padding: '12px 14px', fontSize: 11, color: 'var(--text-primary)' }}>
-                    <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', marginBottom: 8 }}>Chapters</div>
-                    {genChapterManifest.chapters.map((ch, i) => (
-                      <div key={i} style={{ padding: '4px 8px', marginBottom: 3, background: 'var(--bg-elevated)', borderRadius: 3 }}>
-                        <span style={{ fontWeight: 500 }}>{ch.title}</span>
-                        <span style={{ color: 'var(--text-muted)', marginLeft: 6, fontSize: 10 }}>
-                          {ch.scene_ids.length} scenes
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                      </Disclosure>
+                    )}
+                    {genPlan && (
+                      <Disclosure title="Plan" persistKey="info-gen-plan" defaultCollapsed>
+                        <PlanPanel onHighlightNodes={setGenHighlightNodes} />
+                      </Disclosure>
+                    )}
+                    {genSceneDrafts.size > 0 && (
+                      <Disclosure title="Story" persistKey="info-gen-story">
+                        <StoryPanel onHighlightNodes={setGenHighlightNodes} />
+                      </Disclosure>
+                    )}
+                    {genValidation && (
+                      <Disclosure title="Compliance" persistKey="info-gen-compliance" defaultCollapsed>
+                        <CompliancePanel />
+                      </Disclosure>
+                    )}
+                    {genChapterManifest && (
+                      <Disclosure title="Chapters" persistKey="info-gen-chapters" badge={`${genChapterManifest.chapters.length}`}>
+                        <div style={{ padding: '8px 12px', fontSize: 11, color: 'var(--text-primary)' }}>
+                          {genChapterManifest.chapters.map((ch, i) => (
+                            <div key={i} style={{ padding: '4px 8px', marginBottom: 3, background: 'var(--bg-elevated)', borderRadius: 3 }}>
+                              <span style={{ fontWeight: 500 }}>{ch.title}</span>
+                              <span style={{ color: 'var(--text-muted)', marginLeft: 6, fontSize: 10 }}>{ch.scene_ids.length} scenes</span>
+                            </div>
+                          ))}
+                        </div>
+                      </Disclosure>
+                    )}
+                  </Disclosure>
                 )}
               </div>
             )}
@@ -668,36 +626,132 @@ export default function App() {
             </div>
           )}
 
-          {/* Two graph documents side by side */}
+          {/* Graph toggle bar */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '3px 10px',
+            borderBottom: '1px solid var(--border)',
+            flexShrink: 0,
+            minHeight: 30,
+          }}>
+            {/* Segmented control: Archetype / Genre */}
+            <div style={{ display: 'flex', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
+              <button
+                onClick={() => activateGraph('archetype')}
+                style={{
+                  padding: '2px 12px',
+                  fontSize: 10,
+                  fontWeight: viewMode === 'archetype' ? 600 : 400,
+                  color: viewMode === 'archetype' ? '#f59e0b' : 'var(--text-muted)',
+                  background: viewMode === 'archetype' ? '#f59e0b14' : 'transparent',
+                  borderRight: '1px solid var(--border)',
+                }}
+              >
+                Archetype
+              </button>
+              <button
+                onClick={() => activateGraph('genre')}
+                style={{
+                  padding: '2px 12px',
+                  fontSize: 10,
+                  fontWeight: viewMode === 'genre' ? 600 : 400,
+                  color: viewMode === 'genre' ? '#8b5cf6' : 'var(--text-muted)',
+                  background: viewMode === 'genre' ? '#8b5cf614' : 'transparent',
+                }}
+              >
+                Genre
+              </button>
+            </div>
+
+            {/* Active graph name + counts */}
+            {currentGraph && (
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                {currentGraph.graph.name}
+                <span style={{ fontSize: 10, color: 'var(--text-muted)', marginLeft: 8 }}>
+                  {currentGraph.graph.nodes.length}N / {currentGraph.graph.edges.length}E
+                </span>
+              </span>
+            )}
+
+            {/* Compare toggle */}
+            <button
+              className="compare-toggle"
+              onClick={toggleSplitView}
+              aria-label={splitView ? 'Single graph view' : 'Compare side-by-side'}
+              style={{
+                fontSize: 10,
+                padding: '2px 8px',
+                borderRadius: 4,
+                border: '1px solid',
+                borderColor: splitView ? 'var(--accent)' : 'var(--border)',
+                color: splitView ? 'var(--accent)' : 'var(--text-muted)',
+                background: splitView ? 'rgba(59,130,246,0.08)' : 'transparent',
+              }}
+            >
+              Compare
+            </button>
+          </div>
+
+          {/* Graph area — single or split */}
           <div className="graph-pair" style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
-            {/* Archetype document */}
-            <GraphDocument
-              label="Archetype"
-              color="#f59e0b"
-              graphName={archetypeGraph?.graph.name ?? null}
-              graph={archetypeGraph}
-              graphId={archetypeDir ? `archetype/${archetypeDir}` : undefined}
-              onCyReady={handleArchCyReady}
-              onFocus={handleArchFocus}
-              isActive={viewMode === 'archetype'}
-              highlightedPath={viewMode === 'archetype' ? highlightedPath : undefined}
-              generationOverlay={generationOverlay}
-            />
-
-            <div style={{ width: 1, background: 'var(--border)', flexShrink: 0 }} />
-
-            {/* Genre document */}
-            <GraphDocument
-              label="Genre"
-              color="#8b5cf6"
-              graphName={genreGraph?.graph.name ?? null}
-              graph={genreGraph}
-              graphId={genreDir ? `genre/${genreDir}` : undefined}
-              onCyReady={handleGenreCyReady}
-              onFocus={handleGenreFocus}
-              isActive={viewMode === 'genre'}
-              highlightedPath={viewMode === 'genre' ? highlightedPath : undefined}
-            />
+            {splitView ? (
+              <>
+                <GraphDocument
+                  label="Archetype"
+                  color="#f59e0b"
+                  graphName={archetypeGraph?.graph.name ?? null}
+                  graph={archetypeGraph}
+                  graphId={archetypeDir ? `archetype/${archetypeDir}` : undefined}
+                  onCyReady={handleArchCyReady}
+                  onFocus={handleArchFocus}
+                  isActive={viewMode === 'archetype'}
+                  highlightedPath={viewMode === 'archetype' ? highlightedPath : undefined}
+                  generationOverlay={viewMode === 'archetype' ? generationOverlay : undefined}
+                />
+                <div style={{ width: 1, background: 'var(--border)', flexShrink: 0 }} />
+                <GraphDocument
+                  label="Genre"
+                  color="#8b5cf6"
+                  graphName={genreGraph?.graph.name ?? null}
+                  graph={genreGraph}
+                  graphId={genreDir ? `genre/${genreDir}` : undefined}
+                  onCyReady={handleGenreCyReady}
+                  onFocus={handleGenreFocus}
+                  isActive={viewMode === 'genre'}
+                  highlightedPath={viewMode === 'genre' ? highlightedPath : undefined}
+                />
+              </>
+            ) : (
+              /* Single graph — full width */
+              viewMode === 'archetype' ? (
+                <GraphDocument
+                  label="Archetype"
+                  color="#f59e0b"
+                  graphName={archetypeGraph?.graph.name ?? null}
+                  graph={archetypeGraph}
+                  graphId={archetypeDir ? `archetype/${archetypeDir}` : undefined}
+                  onCyReady={handleArchCyReady}
+                  onFocus={handleArchFocus}
+                  isActive
+                  highlightedPath={highlightedPath}
+                  generationOverlay={generationOverlay}
+                />
+              ) : (
+                <GraphDocument
+                  label="Genre"
+                  color="#8b5cf6"
+                  graphName={genreGraph?.graph.name ?? null}
+                  graph={genreGraph}
+                  graphId={genreDir ? `genre/${genreDir}` : undefined}
+                  onCyReady={handleGenreCyReady}
+                  onFocus={handleGenreFocus}
+                  isActive
+                  highlightedPath={highlightedPath}
+                />
+              )
+            )}
           </div>
 
 
@@ -821,7 +875,7 @@ const GraphDocument = memo(function GraphDocument({
             color: 'var(--text-muted)',
             fontSize: 12,
           }}>
-            Select from the Generate panel
+            No graph loaded
           </div>
         )}
       </div>
@@ -832,57 +886,6 @@ const GraphDocument = memo(function GraphDocument({
 // ---------------------------------------------------------------------------
 // Shared components
 // ---------------------------------------------------------------------------
-
-function toolbarButtonStyle(active: boolean, activeColor: string): React.CSSProperties {
-  return {
-    fontSize: 11,
-    padding: '3px 10px',
-    borderRadius: 4,
-    border: '1px solid',
-    borderColor: active ? activeColor : 'var(--border)',
-    background: active ? `${activeColor}18` : 'transparent',
-    color: active ? activeColor : 'var(--text-muted)',
-    cursor: 'pointer',
-    transition: 'all 0.15s',
-  }
-}
-
-const BottomTab = memo(function BottomTab({ label, active, onClick, badge }: {
-  label: string
-  active: boolean
-  onClick: () => void
-  badge?: boolean
-}) {
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        padding: '5px 10px',
-        fontSize: 10,
-        fontWeight: active ? 600 : 400,
-        color: active ? 'var(--accent)' : 'var(--text-muted)',
-        borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
-        transition: 'color 0.15s, border-color 0.15s',
-        position: 'relative',
-        whiteSpace: 'nowrap',
-        flexShrink: 0,
-      }}
-    >
-      {label}
-      {badge && !active && (
-        <span style={{
-          position: 'absolute',
-          top: 2,
-          right: 2,
-          width: 4,
-          height: 4,
-          borderRadius: '50%',
-          background: 'var(--accent)',
-        }} />
-      )}
-    </button>
-  )
-})
 
 const GenTab = memo(function GenTab({ label, active, onClick, badge, highlight }: {
   label: string
