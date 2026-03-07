@@ -3,7 +3,7 @@
  * Tabs: Characters, Places, Objects, Factions, Threads, Relationships
  */
 
-import { useState, useRef, useMemo } from 'react'
+import { useState, useRef, useMemo, useCallback } from 'react'
 import { useInstanceStore } from '../store/instanceStore.ts'
 import { CharacterEditor } from '../panels/CharacterEditor.tsx'
 import { PlaceEditor } from '../panels/PlaceEditor.tsx'
@@ -15,6 +15,11 @@ import type { StoryInstance } from '../types.ts'
 import { BTN, BADGE_STYLE, INPUT } from '../panels/shared.ts'
 import { useWorkspaceStore } from '../../store/workspaceStore.ts'
 import { ReadAloud } from '../../components/ReadAloud.tsx'
+import { ensureDbInit, getDb, saveDb } from '../../db/index.ts'
+import { createProject, listProjects } from '../../db/repository/projectRepo.ts'
+import { importStoryInstance } from '../../db/import/instanceImporter.ts'
+import { importManuscript } from '../../db/import/manuscriptImporter.ts'
+import { useManuscriptStore } from '../../manuscript/store/manuscriptStore.ts'
 
 type Tab = 'characters' | 'places' | 'objects' | 'factions' | 'threads' | 'maps'
 
@@ -44,8 +49,47 @@ export function StoryWorkspace() {
   const exportInstance = useInstanceStore((s) => s.exportInstance)
   const importInstance = useInstanceStore((s) => s.importInstance)
 
+  const manuscriptChapters = useManuscriptStore((s) => s.chapters)
+
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [showSelector, setShowSelector] = useState(!activeInstanceId)
+  const [dbIndexStatus, setDbIndexStatus] = useState<string | null>(null)
+
+  const handleIndexToDb = useCallback(async () => {
+    if (!instance) return
+    setDbIndexStatus('Indexing...')
+    try {
+      await ensureDbInit()
+      const db = await getDb()
+      // Get or create a default project
+      let projects = listProjects(db)
+      if (projects.length === 0) {
+        createProject(db, { project_key: 'default', name: 'Default Project' })
+        projects = listProjects(db)
+      }
+      const projectId = projects[0].project_id
+
+      const result = importStoryInstance(db, instance, projectId)
+
+      // Also import manuscript if available
+      let msResult = { chapters: 0, scenes: 0 }
+      if (manuscriptChapters.length > 0) {
+        msResult = importManuscript(db, result.storyId, manuscriptChapters)
+      }
+
+      await saveDb()
+      setDbIndexStatus(
+        `Indexed: ${result.entities} entities, ${result.relationships} rels, ${result.scenes} events` +
+        (msResult.chapters > 0 ? `, ${msResult.chapters} ch / ${msResult.scenes} scenes` : '') +
+        (result.termUsages > 0 ? `, ${result.termUsages} term links` : ''),
+      )
+      setTimeout(() => setDbIndexStatus(null), 5000)
+    } catch (err) {
+      console.error('DB index failed:', err)
+      setDbIndexStatus(`Error: ${err}`)
+      setTimeout(() => setDbIndexStatus(null), 5000)
+    }
+  }, [instance, manuscriptChapters])
 
   const handleExport = () => {
     if (!activeInstanceId) return
@@ -159,6 +203,14 @@ export function StoryWorkspace() {
           </button>
         )}
 
+        <button onClick={() => void handleIndexToDb()} disabled={!activeInstanceId} style={{ ...BTN, padding: '4px 10px', fontSize: 11, borderColor: '#22c55e40', color: '#22c55e' }}>
+          Index to DB
+        </button>
+        {dbIndexStatus && (
+          <span style={{ fontSize: 9, color: dbIndexStatus.startsWith('Error') ? '#ef4444' : '#22c55e' }}>
+            {dbIndexStatus}
+          </span>
+        )}
         <button onClick={handleExport} disabled={!activeInstanceId} style={{ ...BTN, padding: '4px 10px', fontSize: 11 }}>
           Export
         </button>

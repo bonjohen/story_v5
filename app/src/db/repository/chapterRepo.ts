@@ -11,18 +11,20 @@ export function createChapter(
     summary?: string
     status?: string
     target_word_count?: number
+    actual_word_count?: number
     json_data?: string
   },
 ): ChapterRow {
   const id = uuid()
   const ts = now()
   db.run(
-    `INSERT INTO chapters (chapter_id, story_id, chapter_number, title, summary, status, target_word_count, created_at, updated_at, json_data)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO chapters (chapter_id, story_id, chapter_number, title, summary, status, target_word_count, actual_word_count, created_at, updated_at, json_data)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id, fields.story_id, fields.chapter_number ?? null,
       fields.title ?? null, fields.summary ?? null,
       fields.status ?? 'draft', fields.target_word_count ?? null,
+      fields.actual_word_count ?? null,
       ts, ts, fields.json_data ?? null,
     ],
   )

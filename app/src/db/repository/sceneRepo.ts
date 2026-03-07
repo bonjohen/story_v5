@@ -17,14 +17,15 @@ export function createScene(
     genre_node_id?: string
     location_entity_id?: string
     target_word_count?: number
+    actual_word_count?: number
     json_data?: string
   },
 ): SceneRow {
   const id = uuid()
   const ts = now()
   db.run(
-    `INSERT INTO scenes (scene_id, story_id, chapter_id, scene_number, title, summary, status, scene_type, timeline_order, archetype_node_id, genre_node_id, location_entity_id, target_word_count, created_at, updated_at, json_data)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO scenes (scene_id, story_id, chapter_id, scene_number, title, summary, status, scene_type, timeline_order, archetype_node_id, genre_node_id, location_entity_id, target_word_count, actual_word_count, created_at, updated_at, json_data)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id, fields.story_id, fields.chapter_id ?? null,
       fields.scene_number ?? null, fields.title ?? null,
@@ -32,6 +33,7 @@ export function createScene(
       fields.scene_type ?? null, fields.timeline_order ?? null,
       fields.archetype_node_id ?? null, fields.genre_node_id ?? null,
       fields.location_entity_id ?? null, fields.target_word_count ?? null,
+      fields.actual_word_count ?? null,
       ts, ts, fields.json_data ?? null,
     ],
   )

@@ -198,17 +198,17 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Bridge the existing localStorage-based StoryInstance data into SQLite rows, including vocabulary term linkage.
 
-- [ ] **7.1** Create `app/src/db/import/instanceImporter.ts` — `importStoryInstance(db, instance: StoryInstance, projectId: string)`: creates a story row, then maps `StoryLore` entities (characters, places, objects, factions) to entity rows, relationships to relationship rows, plot threads to entity rows (type `thread`), world rules to entity rows (type `rule`), and event_log entries to scene rows (type `event`). For each imported entity, also record `term_usage` rows linking:
+- [X] **7.1** Create `app/src/db/import/instanceImporter.ts` — `importStoryInstance(db, instance: StoryInstance, projectId: string)`: creates a story row, then maps `StoryLore` entities (characters, places, objects, factions) to entity rows, relationships to relationship rows, plot threads to entity rows (type `thread`), world rules to entity rows (type `rule`), and event_log entries to scene rows (type `event`). For each imported entity, also record `term_usage` rows linking:
   - Characters to their `character_role` term (from `element_roles.json` vocabulary)
   - Relationships to their `relationship_type` term
   - Places to their `place_type` term
   - Objects to their `object_type` term
 
-- [ ] **7.2** Create `app/src/db/import/generationImporter.ts` — `importGenerationRun(db, storyId, artifacts)`: creates a run row and artifact rows from generation pipeline output (StoryBackbone, StoryPlan, ChapterManifest, scene drafts). For scenes imported from ChapterManifest, record `term_usage` for `archetype_node_role` and `genre_node_role` if the scene references archetype/genre nodes.
+- [X] **7.2** Create `app/src/db/import/generationImporter.ts` — `importGenerationRun(db, storyId, artifacts)`: creates a run row and artifact rows from generation pipeline output (StoryBackbone, StoryPlan, ChapterManifest, scene drafts). For scenes imported from ChapterManifest, record `term_usage` for `archetype_node_role` and `genre_node_role` if the scene references archetype/genre nodes.
 
-- [ ] **7.3** Create `app/src/db/import/manuscriptImporter.ts` — `importManuscript(db, storyId, chapters: ManuscriptChapter[])`: creates chapter rows and scene rows from manuscript store data. Each chapter gets its scenes linked via `chapter_id` FK. Scenes are numbered within each chapter by their array position.
+- [X] **7.3** Create `app/src/db/import/manuscriptImporter.ts` — `importManuscript(db, storyId, chapters: ManuscriptChapter[])`: creates chapter rows and scene rows from manuscript store data. Each chapter gets its scenes linked via `chapter_id` FK. Scenes are numbered within each chapter by their array position.
 
-- [ ] **7.4** Wire import into the UI — add an "Index to DB" button in the Story Workspace toolbar that imports the active instance. Show success/failure feedback. Include a "Re-import Vocabulary" button that re-runs the vocabulary importer.
+- [X] **7.4** Wire import into the UI — add an "Index to DB" button in the Story Workspace toolbar that imports the active instance. Show success/failure feedback. Include a "Re-import Vocabulary" button that re-runs the vocabulary importer.
 
 - [ ] **7.5** Test import with a realistic StoryInstance fixture. Verify term_usage rows are created for imported entities.
 
