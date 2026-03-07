@@ -173,9 +173,9 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Add the recommended indexes and verify the query use cases from the design doc, plus vocabulary-aware queries.
 
-- [ ] **6.1** Create `app/src/db/migrations/006_indexes.ts` — migration 6: all indexes from design doc section 13 (`stories(project_id)`, `entities(story_id, entity_type)`, `entity_relationships(story_id, relationship_type)`, `chapters(story_id, chapter_number)`, `scenes(story_id, chapter_id, timeline_order)`, `scene_entities(scene_id, entity_id)`, `artifacts(story_id, artifact_type)`, `runs(story_id, run_type, status)`, `tag_assignments(object_type, object_id)`), plus vocabulary indexes (`vocabulary_terms(domain_id, term_key)`, `term_usage(term_id)`, `term_usage(object_type, object_id)`, `term_usage(story_id)`).
+- [X] **6.1** Create `app/src/db/migrations/006_indexes.ts` — migration 6: all indexes from design doc section 13 (`stories(project_id)`, `entities(story_id, entity_type)`, `entity_relationships(story_id, relationship_type)`, `chapters(story_id, chapter_number)`, `scenes(story_id, chapter_id, timeline_order)`, `scene_entities(scene_id, entity_id)`, `artifacts(story_id, artifact_type)`, `runs(story_id, run_type, status)`, `tag_assignments(object_type, object_id)`), plus vocabulary indexes (`vocabulary_terms(domain_id, term_key)`, `term_usage(term_id)`, `term_usage(object_type, object_id)`, `term_usage(story_id)`).
 
-- [ ] **6.2** Create `app/src/db/queries.ts` — named query functions for design doc section 17 use cases plus vocabulary queries:
+- [X] **6.2** Create `app/src/db/queries.ts` — named query functions for design doc section 17 use cases plus vocabulary queries:
   1. List stories in project
   2. List characters in story
   3. List scenes in chapter order (many scenes per chapter)
