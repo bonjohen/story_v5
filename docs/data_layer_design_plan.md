@@ -218,10 +218,10 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Let users export/import the SQLite file and view DB status.
 
-- [ ] **8.1** Create `app/src/db/export.ts` — `exportDatabase(): Uint8Array` (returns raw .db bytes), `importDatabase(bytes: Uint8Array)` (replaces current DB and re-runs migrations if needed).
-- [ ] **8.2** Add DB management section to Settings panel or a new `/db` route — show: schema version, table row counts (including vocabulary domain/term counts), DB size in bytes. Buttons: Export .db, Import .db, Reset DB.
-- [ ] **8.3** Add auto-save to IndexedDB after each write operation (debounced, e.g. 1 second after last write).
-- [ ] **8.4** Add DB initialization status indicator — small badge in the nav bar showing whether the DB is loaded (or an error state).
+- [X] **8.1** Create `app/src/db/export.ts` — `exportDatabase(): Uint8Array` (returns raw .db bytes), `importDatabase(bytes: Uint8Array)` (replaces current DB and re-runs migrations if needed).
+- [X] **8.2** Add DB management section to Settings panel or a new `/db` route — show: schema version, table row counts (including vocabulary domain/term counts), DB size in bytes. Buttons: Export .db, Import .db, Reset DB.
+- [X] **8.3** Add auto-save to IndexedDB after each write operation (debounced, e.g. 1 second after last write).
+- [X] **8.4** Add DB initialization status indicator — small badge in the nav bar showing whether the DB is loaded (or an error state).
 
 ---
 

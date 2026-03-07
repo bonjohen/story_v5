@@ -413,6 +413,15 @@ export default function App() {
           Scripts
         </button>
 
+        {/* DB link */}
+        <button
+          onClick={() => void navigate('/db')}
+          aria-label="Database management"
+          style={toolbarButtonStyle(false, '#22c55e')}
+        >
+          DB
+        </button>
+
         {/* Graph search + global search */}
         {currentGraph && (
           <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
