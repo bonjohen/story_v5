@@ -65,12 +65,12 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Create the four foundational tables and their repository layer.
 
-- [ ] **2.1** Create `app/src/db/migrations/002_core_tables.ts` — migration 2: `CREATE TABLE projects`, `CREATE TABLE stories`, `CREATE TABLE entities`, `CREATE TABLE entity_relationships`. Use exact columns from design doc sections 7.1–7.4.
-- [ ] **2.2** Create `app/src/db/repository/projectRepo.ts` — CRUD functions: `createProject`, `getProject`, `listProjects`, `updateProject`, `deleteProject`. All functions take the `Database` instance as first arg.
-- [ ] **2.3** Create `app/src/db/repository/storyRepo.ts` — CRUD: `createStory`, `getStory`, `listStoriesByProject`, `updateStory`, `deleteStory`.
-- [ ] **2.4** Create `app/src/db/repository/entityRepo.ts` — CRUD: `createEntity`, `getEntity`, `listEntitiesByStory`, `listEntitiesByType`, `updateEntity`, `deleteEntity`.
-- [ ] **2.5** Create `app/src/db/repository/relationshipRepo.ts` — CRUD: `createRelationship`, `listRelationshipsForEntity`, `listRelationshipsByStory`, `deleteRelationship`.
-- [ ] **2.6** Create `app/src/db/types.ts` — TypeScript interfaces matching each table row: `ProjectRow`, `StoryRow`, `EntityRow`, `RelationshipRow`, etc. Include shared types for status values.
+- [X] **2.1** Create `app/src/db/migrations/002_core_tables.ts` — migration 2: `CREATE TABLE projects`, `CREATE TABLE stories`, `CREATE TABLE entities`, `CREATE TABLE entity_relationships`. Use exact columns from design doc sections 7.1–7.4.
+- [X] **2.2** Create `app/src/db/repository/projectRepo.ts` — CRUD functions: `createProject`, `getProject`, `listProjects`, `updateProject`, `deleteProject`. All functions take the `Database` instance as first arg.
+- [X] **2.3** Create `app/src/db/repository/storyRepo.ts` — CRUD: `createStory`, `getStory`, `listStoriesByProject`, `updateStory`, `deleteStory`.
+- [X] **2.4** Create `app/src/db/repository/entityRepo.ts` — CRUD: `createEntity`, `getEntity`, `listEntitiesByStory`, `listEntitiesByType`, `updateEntity`, `deleteEntity`.
+- [X] **2.5** Create `app/src/db/repository/relationshipRepo.ts` — CRUD: `createRelationship`, `listRelationshipsForEntity`, `listRelationshipsByStory`, `deleteRelationship`.
+- [X] **2.6** Create `app/src/db/types.ts` — TypeScript interfaces matching each table row: `ProjectRow`, `StoryRow`, `EntityRow`, `RelationshipRow`, etc. Include shared types for status values.
 - [ ] **2.7** Unit tests for repository functions using an in-memory sql.js database. Place in `app/src/db/__tests__/`.
 
 ---
