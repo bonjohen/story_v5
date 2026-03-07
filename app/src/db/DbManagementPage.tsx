@@ -8,8 +8,17 @@ import { exportDatabase, importDatabase } from './export.ts'
 import { importVocabulary } from './import/vocabularyImporter.ts'
 import { VocabularyBrowser } from './panels/VocabularyBrowser.tsx'
 import { TemplateCoverage } from './panels/TemplateCoverage.tsx'
+import { EntitySearch } from './panels/EntitySearch.tsx'
+import { ScenesForCharacter } from './panels/ScenesForCharacter.tsx'
+import { ArtifactBrowser } from './panels/ArtifactBrowser.tsx'
+import { RunHistory } from './panels/RunHistory.tsx'
+import { TagFilter } from './panels/TagFilter.tsx'
+import { useDbQuery } from './hooks.ts'
+import { listStoriesInProject } from './queries.ts'
+import { listProjects } from './repository/projectRepo.ts'
+import type { StoryRow, ProjectRow } from './types.ts'
 
-type DbTab = 'status' | 'vocabulary' | 'coverage'
+type DbTab = 'status' | 'vocabulary' | 'coverage' | 'entities' | 'scenes' | 'artifacts' | 'runs' | 'tags'
 
 const TOOLBAR_HEIGHT = 42
 
@@ -26,6 +35,14 @@ export function DbManagementPage() {
   const [vocabStatus, setVocabStatus] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<DbTab>('status')
   const fileRef = useRef<HTMLInputElement>(null)
+
+  // Fetch stories for query panels
+  const { data: projects } = useDbQuery<ProjectRow[]>((db) => listProjects(db), [])
+  const projectId = projects && projects.length > 0 ? projects[0].project_id : null
+  const { data: stories } = useDbQuery<StoryRow[]>(
+    (db) => projectId ? listStoriesInProject(db, projectId) : [],
+    [projectId],
+  )
 
   const refreshStats = useCallback(async () => {
     try {
@@ -154,7 +171,7 @@ export function DbManagementPage() {
         display: 'flex', borderBottom: '1px solid var(--border)',
         background: 'var(--bg-surface)', flexShrink: 0,
       }}>
-        {(['status', 'vocabulary', 'coverage'] as DbTab[]).map((tab) => (
+        {(['status', 'vocabulary', 'coverage', 'entities', 'scenes', 'artifacts', 'runs', 'tags'] as DbTab[]).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -180,6 +197,36 @@ export function DbManagementPage() {
       {activeTab === 'coverage' && (
         <div style={{ flex: 1, overflowY: 'auto' }}>
           <TemplateCoverage />
+        </div>
+      )}
+
+      {activeTab === 'entities' && (
+        <div style={{ flex: 1, overflow: 'hidden' }}>
+          <EntitySearch stories={stories ?? []} />
+        </div>
+      )}
+
+      {activeTab === 'scenes' && (
+        <div style={{ flex: 1, overflow: 'hidden' }}>
+          <ScenesForCharacter stories={stories ?? []} />
+        </div>
+      )}
+
+      {activeTab === 'artifacts' && (
+        <div style={{ flex: 1, overflow: 'hidden' }}>
+          <ArtifactBrowser stories={stories ?? []} />
+        </div>
+      )}
+
+      {activeTab === 'runs' && (
+        <div style={{ flex: 1, overflow: 'hidden' }}>
+          <RunHistory stories={stories ?? []} />
+        </div>
+      )}
+
+      {activeTab === 'tags' && (
+        <div style={{ flex: 1, overflow: 'hidden' }}>
+          <TagFilter stories={stories ?? []} />
         </div>
       )}
 

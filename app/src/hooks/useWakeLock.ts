@@ -1,16 +1,21 @@
 /**
- * Keeps the screen awake while the page is visible.
+ * Keeps the screen awake while TTS is playing.
  * Uses the Screen Wake Lock API (supported on Chrome Android 84+).
  * Automatically re-acquires the lock when the page regains focus.
  */
 
 import { useEffect, useRef } from 'react'
+import { useTTSStore } from '../scripts/store/ttsStore.ts'
 
-export function useWakeLock() {
+export function useWakeLock(active: boolean) {
   const lockRef = useRef<WakeLockSentinel | null>(null)
 
   useEffect(() => {
-    if (!('wakeLock' in navigator)) return
+    if (!active || !('wakeLock' in navigator)) {
+      void lockRef.current?.release()
+      lockRef.current = null
+      return
+    }
 
     const acquire = async () => {
       try {
@@ -34,11 +39,12 @@ export function useWakeLock() {
       void lockRef.current?.release()
       lockRef.current = null
     }
-  }, [])
+  }, [active])
 }
 
-/** Render-nothing component that holds the wake lock. */
+/** Render-nothing component that holds the wake lock while TTS is playing. */
 export function WakeLockProvider() {
-  useWakeLock()
+  const status = useTTSStore((s) => s.status)
+  useWakeLock(status === 'playing')
   return null
 }

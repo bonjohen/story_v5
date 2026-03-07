@@ -71,7 +71,7 @@ Before implementing, note what already exists and what the database augments (no
 - [X] **2.4** Create `app/src/db/repository/entityRepo.ts` — CRUD: `createEntity`, `getEntity`, `listEntitiesByStory`, `listEntitiesByType`, `updateEntity`, `deleteEntity`.
 - [X] **2.5** Create `app/src/db/repository/relationshipRepo.ts` — CRUD: `createRelationship`, `listRelationshipsForEntity`, `listRelationshipsByStory`, `deleteRelationship`.
 - [X] **2.6** Create `app/src/db/types.ts` — TypeScript interfaces matching each table row: `ProjectRow`, `StoryRow`, `EntityRow`, `RelationshipRow`, etc. Include shared types for status values.
-- [ ] **2.7** Unit tests for repository functions using an in-memory sql.js database. Place in `app/src/db/__tests__/`.
+- [X] **2.7** Unit tests for repository functions using an in-memory sql.js database. Place in `app/src/db/__tests__/`.
 
 ---
 
@@ -137,7 +137,7 @@ Before implementing, note what already exists and what the database augments (no
 
 - [X] **3.4** Wire vocabulary import into the migration or provide a manual "Import Vocabulary" action. The importer should be idempotent (upsert by `domain_id + term_key`).
 
-- [ ] **3.5** Unit tests: verify domain/term counts after import, term lookup by key, usage recording and querying.
+- [X] **3.5** Unit tests: verify domain/term counts after import, term lookup by key, usage recording and querying.
 
 ---
 
@@ -153,7 +153,7 @@ Before implementing, note what already exists and what the database augments (no
 
 - [X] **4.4** Create `app/src/db/repository/sceneEntityRepo.ts` — `addEntityToScene`, `removeEntityFromScene`, `listEntitiesInScene`, `listScenesForEntity`.
 
-- [ ] **4.5** Unit tests for chapter/scene/scene-entity repositories. Verify many-scenes-per-chapter cardinality.
+- [X] **4.5** Unit tests for chapter/scene/scene-entity repositories. Verify many-scenes-per-chapter cardinality.
 
 ---
 
@@ -165,7 +165,7 @@ Before implementing, note what already exists and what the database augments (no
 - [X] **5.2** Create `app/src/db/repository/artifactRepo.ts` — CRUD: `createArtifact`, `listArtifactsByStory`, `listArtifactsByType`, `getArtifact`, `updateArtifact`, `deleteArtifact`.
 - [X] **5.3** Create `app/src/db/repository/runRepo.ts` — CRUD: `createRun`, `listRunsByStory`, `getRun`, `updateRun` (for setting `finished_at` and `status`).
 - [X] **5.4** Create `app/src/db/repository/tagRepo.ts` — `createTag`, `listTags`, `assignTag`, `removeTagAssignment`, `listTagsForObject`, `listObjectsWithTag`.
-- [ ] **5.5** Unit tests for artifact/run/tag repositories.
+- [X] **5.5** Unit tests for artifact/run/tag repositories.
 
 ---
 
@@ -190,7 +190,7 @@ Before implementing, note what already exists and what the database augments (no
   12. **Find entities by vocabulary term** — e.g. "all characters with role `mentor`", "all places of type `stronghold`"
   13. **Vocabulary coverage report** — which domains/terms are used vs. unused for a given story
 
-- [ ] **6.3** Test each named query against a populated in-memory database.
+- [X] **6.3** Test each named query against a populated in-memory database.
 
 ---
 
@@ -210,7 +210,7 @@ Before implementing, note what already exists and what the database augments (no
 
 - [X] **7.4** Wire import into the UI — add an "Index to DB" button in the Story Workspace toolbar that imports the active instance. Show success/failure feedback. Include a "Re-import Vocabulary" button that re-runs the vocabulary importer.
 
-- [ ] **7.5** Test import with a realistic StoryInstance fixture. Verify term_usage rows are created for imported entities.
+- [X] **7.5** Test import with a realistic StoryInstance fixture. Verify term_usage rows are created for imported entities.
 
 ---
 
@@ -230,11 +230,11 @@ Before implementing, note what already exists and what the database augments (no
 **Goal:** Surface SQLite queries in the app UI so the database provides visible value, including vocabulary-powered views.
 
 - [X] **9.1** Create `app/src/db/hooks.ts` — React hooks: `useDbQuery<T>(queryFn, deps)` that runs a query function against the DB and returns `{ data, loading, error }`. Handles DB not-yet-initialized gracefully.
-- [ ] **9.2** Add entity search to Story Workspace — text input that queries `entities` table by name/type, faster than scanning the full StoryLore in memory for large instances.
-- [ ] **9.3** Add "Scenes for Character" view — select a character, see all scenes they participate in (via `scene_entities` join), with chapter context. Accessible from the character editor panel.
-- [ ] **9.4** Add artifact browser — list all artifacts for the current story, grouped by type, with status badges and file path links. Accessible from a new "Artifacts" tab or panel.
-- [ ] **9.5** Add run history panel — list all generation/validation runs for the current story, with timestamps and status. Accessible from the Generation panel.
-- [ ] **9.6** Add tag-based filtering — in the entity list views, allow filtering by tags assigned via the tag system.
+- [X] **9.2** Add entity search to Story Workspace — text input that queries `entities` table by name/type, faster than scanning the full StoryLore in memory for large instances.
+- [X] **9.3** Add "Scenes for Character" view — select a character, see all scenes they participate in (via `scene_entities` join), with chapter context. Accessible from the character editor panel.
+- [X] **9.4** Add artifact browser — list all artifacts for the current story, grouped by type, with status badges and file path links. Accessible from a new "Artifacts" tab or panel.
+- [X] **9.5** Add run history panel — list all generation/validation runs for the current story, with timestamps and status. Accessible from the Generation panel.
+- [X] **9.6** Add tag-based filtering — in the entity list views, allow filtering by tags assigned via the tag system.
 - [X] **9.7** Add vocabulary term browser — browse all imported vocabulary domains and terms. Show usage counts per term. Clicking a term shows all entities/scenes/relationships that use it across stories.
 - [X] **9.8** Add "Template Coverage" view for a story — shows which vocabulary terms from each domain are used (e.g. "7 of 13 character roles used", "4 of 10 place types used"), highlighting gaps and suggesting unused terms that might enrich the story.
 
