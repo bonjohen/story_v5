@@ -33,8 +33,6 @@ const GENRE_GRAPH = {
 const MATRIX = { title: 't', description: 'd', archetypes_reference: [], genres: Array.from({ length: 27 }, (_, i) => ({ genre: `G${i}`, genre_id: i + 1, naturally_compatible: [], occasionally_compatible: [], rarely_compatible: [] })) }
 const TONE = { title: 't', description: 'd', integrations: Array.from({ length: 27 }, (_, i) => ({ genre: `G${i}`, genre_id: `0${i + 1}`, tone_marker: 'TM', tone_description: 'd', archetype_interactions: [] })) }
 const ARCS = { title: 't', description: 'd', archetypes: Array.from({ length: 15 }, (_, i) => ({ archetype: `A${i}`, archetype_id: `0${i + 1}`, arc_profile: [], variant_profiles: [], arc_shape: 'U', dominant_emotion: 'hope', emotional_range: 0.5, summary: 's' })) }
-const HYBRIDS = { title: 't', description: 'd', hybrids: [] }
-const BLENDS = { title: 't', description: 'd', blends: [] }
 const VOCAB = { title: 't', description: 'd', node_roles: [], edge_meanings: [] }
 const MANIFEST = { generated: '2026-01-01T00:00:00Z', archetypes: [], genres: [], totals: { archetypes: 15, genres: 27, totalNodes: 100, totalEdges: 100 } }
 
@@ -57,8 +55,6 @@ function createMockProvider(): DataProvider {
   files.set('cross_references/genre_archetype_matrix.json', MATRIX)
   files.set('cross_references/tone_archetype_integration.json', TONE)
   files.set('cross_references/archetype_emotional_arcs.json', ARCS)
-  files.set('cross_references/hybrid_archetype_patterns.json', HYBRIDS)
-  files.set('cross_references/genre_blending_model.json', BLENDS)
   files.set('vocabulary/archetype_node_roles.json', VOCAB)
   files.set('vocabulary/archetype_edge_vocabulary.json', VOCAB)
   files.set('vocabulary/genre_node_roles.json', VOCAB)
@@ -91,8 +87,6 @@ describe('corpusLoader', () => {
     expect(corpus.matrix.genres).toHaveLength(27)
     expect(corpus.toneIntegration.integrations).toHaveLength(27)
     expect(corpus.emotionalArcs.archetypes).toHaveLength(15)
-    expect(corpus.hybridPatterns.hybrids).toBeDefined()
-    expect(corpus.blendingModel.blends).toBeDefined()
   })
 
   it('loads vocabularies', async () => {

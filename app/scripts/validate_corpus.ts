@@ -18,8 +18,6 @@ import type {
   GenreArchetypeMatrix,
   ToneArchetypeIntegration,
   ArchetypeEmotionalArcs,
-  HybridArchetypePatterns,
-  GenreBlendingModel,
   VocabularyFile,
   LoadedCorpus,
 } from '../src/generation/artifacts/types.ts'
@@ -86,9 +84,7 @@ try {
   const matrix = loadJson('cross_references/genre_archetype_matrix.json') as GenreArchetypeMatrix
   const toneIntegration = loadJson('cross_references/tone_archetype_integration.json') as ToneArchetypeIntegration
   const emotionalArcs = loadJson('cross_references/archetype_emotional_arcs.json') as ArchetypeEmotionalArcs
-  const hybridPatterns = loadJson('cross_references/hybrid_archetype_patterns.json') as HybridArchetypePatterns
-  const blendingModel = loadJson('cross_references/genre_blending_model.json') as GenreBlendingModel
-  console.log('  Loaded 5 cross-reference files')
+  console.log('  Loaded 3 cross-reference files')
 
   console.log('Loading vocabularies...')
   const archetypeNodeRoles = loadJson('vocabulary/archetype_node_roles.json') as VocabularyFile
@@ -108,8 +104,6 @@ try {
     matrix,
     toneIntegration,
     emotionalArcs,
-    hybridPatterns,
-    blendingModel,
     archetypeNodeRoles,
     archetypeEdgeMeanings,
     genreNodeRoles,

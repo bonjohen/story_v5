@@ -5,7 +5,6 @@ import type {
   StoryContract,
   LoadedCorpus,
   GenerationConfig,
-  SelectionResult,
 } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
@@ -118,8 +117,6 @@ function makeCorpus(): LoadedCorpus {
         },
       ],
     },
-    hybridPatterns: { title: '', description: '', hybrids: [] },
-    blendingModel: { title: '', description: '', blends: [] },
     archetypeNodeRoles: { title: '', description: '' },
     archetypeEdgeMeanings: { title: '', description: '' },
     genreNodeRoles: { title: '', description: '' },
@@ -137,7 +134,6 @@ function makeConfig(): GenerationConfig {
     tone_policy: { mode: 'warn' },
     repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
     coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
-    composition_defaults: { allow_blend: true, allow_hybrid: false },
   }
 }
 
@@ -317,82 +313,6 @@ describe('planner — LLM enhancement', () => {
     expect(plan.run_id).toBe('RUN_2026_03_04_0001')
     expect(plan.beats.length).toBeGreaterThan(0)
     expect(plan.scenes.length).toBeGreaterThan(0)
-  })
-})
-
-// ---------------------------------------------------------------------------
-// Hybrid archetype tests
-// ---------------------------------------------------------------------------
-
-describe('planner — hybrid archetypes', () => {
-  it('annotates beats with hybrid info when selection has hybrid enabled', async () => {
-    const selection: SelectionResult = {
-      schema_version: '1.0.0',
-      run_id: 'RUN_2026_03_04_0001',
-      generated_at: '2026-03-04T18:30:00Z',
-      source_corpus_hash: 'test',
-      primary_archetype: '01_heros_journey',
-      primary_genre: '06_science_fiction',
-      genre_blend: { enabled: false },
-      hybrid_archetype: {
-        enabled: true,
-        secondary_archetype: '03_the_quest',
-        pattern_id: 'heros_journey_x_quest',
-        frequency: 'very_common',
-        shared_roles: ['Origin', 'Catalyst'],
-        divergence_point: { role: 'Disruption', description: 'Quest diverges at disruption' },
-        composition_method: 'parallel_track',
-      },
-      compatibility: { matrix_classification: 'naturally compatible', rationale: ['Good fit'] },
-      tone_marker: { selected: 'somber', genre_tone_node_id: 'SF_N80_INTELLECTUAL', integration_classification: 'neutral' },
-    }
-
-    const plan = await buildPlan({
-      contract: makeContract(),
-      corpus: makeCorpus(),
-      config: makeConfig(),
-      selection,
-    })
-
-    // Beat at 'Origin' role should be marked as shared
-    expect(plan.beats[0].hybrid_info).toBeDefined()
-    expect(plan.beats[0].hybrid_info!.shared).toBe(true)
-    expect(plan.beats[0].hybrid_info!.divergence_beat).toBe(false)
-
-    // Beat at 'Disruption' role should be marked as divergence
-    expect(plan.beats[1].hybrid_info).toBeDefined()
-    expect(plan.beats[1].hybrid_info!.shared).toBe(false)
-    expect(plan.beats[1].hybrid_info!.divergence_beat).toBe(true)
-
-    // Beat at 'Catalyst' role should be marked as shared
-    expect(plan.beats[2].hybrid_info).toBeDefined()
-    expect(plan.beats[2].hybrid_info!.shared).toBe(true)
-  })
-
-  it('omits hybrid info when selection has hybrid disabled', async () => {
-    const selection: SelectionResult = {
-      schema_version: '1.0.0',
-      run_id: 'RUN_2026_03_04_0001',
-      generated_at: '2026-03-04T18:30:00Z',
-      source_corpus_hash: 'test',
-      primary_archetype: '01_heros_journey',
-      primary_genre: '06_science_fiction',
-      genre_blend: { enabled: false },
-      hybrid_archetype: { enabled: false },
-      compatibility: { matrix_classification: 'naturally compatible', rationale: ['Good fit'] },
-      tone_marker: { selected: 'somber', genre_tone_node_id: 'SF_N80_INTELLECTUAL', integration_classification: 'neutral' },
-    }
-
-    const plan = await buildPlan({
-      contract: makeContract(),
-      corpus: makeCorpus(),
-      config: makeConfig(),
-      selection,
-    })
-
-    for (const beat of plan.beats) {
-      expect(beat.hybrid_info).toBeUndefined()
-    }
   })
 })
 

@@ -1,6 +1,6 @@
 /**
  * Selection Engine: deterministic + explainable selection of archetype, genre,
- * blend, hybrid, and tone based on the story request and corpus data.
+ * and tone based on the story request and corpus data.
  *
  * No LLM calls — pure computation over cross-reference datasets.
  */
@@ -11,8 +11,6 @@ import type {
   LoadedCorpus,
   CompatibilityClass,
   ToneCompatibility,
-  GenreBlendSelection,
-  HybridArchetypeSelection,
 } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
@@ -113,12 +111,6 @@ export function runSelection(
   // Look up tone integration
   const toneResult = lookupToneIntegration(genreId, archetypeId, corpus)
 
-  // Genre blend selection
-  const genreBlend = selectGenreBlend(genreId, request, corpus)
-
-  // Hybrid archetype selection
-  const hybridArchetype = selectHybridArchetype(archetypeId, request, corpus)
-
   // Score alternatives (other archetypes for this genre)
   const alternatives = scoreAlternatives(genreId, corpus)
 
@@ -129,8 +121,6 @@ export function runSelection(
     source_corpus_hash: request.source_corpus_hash,
     primary_archetype: archetypeId,
     primary_genre: genreId,
-    genre_blend: genreBlend,
-    hybrid_archetype: hybridArchetype,
     compatibility: {
       matrix_classification: classification,
       rationale,
@@ -231,143 +221,6 @@ function lookupToneIntegration(
   }
 }
 
-function selectGenreBlend(
-  primaryGenreId: string,
-  request: StoryRequest,
-  corpus: LoadedCorpus,
-): GenreBlendSelection {
-  if (!request.constraints.allow_genre_blend) {
-    return { enabled: false }
-  }
-
-  // If the user specified a preferred blend genre, try to find it
-  const preferred = request.constraints.preferred_blend_genre
-  if (preferred) {
-    const prefId = findGenreId(preferred, corpus) ?? preferred
-    const match = corpus.blendingModel.blends.find(
-      (b) => b.genres.includes(primaryGenreId) && b.genres.includes(prefId),
-    )
-    if (match) {
-      return {
-        enabled: true,
-        secondary_genre: prefId,
-        pattern_id: match.blend_id,
-        stability: match.stability,
-        dominance: match.dominant_genre,
-        rationale: [match.resolution_strategy],
-      }
-    }
-    // Preferred genre has no blend pattern — return it anyway with defaults
-    console.warn(`[selectionEngine] No blend pattern found for ${primaryGenreId} + ${prefId}, using defaults`)
-    return {
-      enabled: true,
-      secondary_genre: prefId,
-      stability: 'conditionally_stable',
-      rationale: [`User-selected blend with ${preferred}`],
-    }
-  }
-
-  // Find blend patterns involving the primary genre
-  const candidates = corpus.blendingModel.blends.filter(
-    (b) => b.genres.includes(primaryGenreId),
-  )
-
-  if (candidates.length === 0) {
-    return { enabled: false }
-  }
-
-  // Filter out unstable blends unless explicitly allowed
-  const viable = candidates.filter(
-    (b) => b.stability !== 'unstable',
-  )
-
-  const best = viable.length > 0 ? viable[0] : candidates[0]
-  const secondaryGenre = best.genres.find((g) => g !== primaryGenreId)
-  if (!secondaryGenre) {
-    console.warn(`[selectionEngine] Genre blend pattern ${best.blend_id} has no secondary genre distinct from primary "${primaryGenreId}"`)
-    return { enabled: false }
-  }
-
-  return {
-    enabled: true,
-    secondary_genre: secondaryGenre,
-    pattern_id: best.blend_id,
-    stability: best.stability,
-    dominance: best.dominant_genre,
-    rationale: [best.resolution_strategy],
-  }
-}
-
-function selectHybridArchetype(
-  primaryArchetypeId: string,
-  request: StoryRequest,
-  corpus: LoadedCorpus,
-): HybridArchetypeSelection {
-  if (!request.constraints.allow_hybrid_archetype) {
-    return { enabled: false }
-  }
-
-  // If the user specified a preferred hybrid archetype, try to find it
-  const preferred = request.constraints.preferred_hybrid_archetype
-  if (preferred) {
-    const prefId = findArchetypeId(preferred, corpus) ?? preferred
-    const match = corpus.hybridPatterns.hybrids.find(
-      (h) => h.archetypes.includes(primaryArchetypeId) && h.archetypes.includes(prefId),
-    )
-    if (match) {
-      return {
-        enabled: true,
-        secondary_archetype: prefId,
-        pattern_id: match.hybrid_id,
-        frequency: match.frequency,
-        shared_roles: match.shared_roles,
-        divergence_point: match.divergence_point,
-        composition_method: match.composition_method,
-      }
-    }
-    // Preferred archetype has no hybrid pattern — return it with defaults
-    console.warn(`[selectionEngine] No hybrid pattern found for ${primaryArchetypeId} + ${prefId}, using defaults`)
-    return {
-      enabled: true,
-      secondary_archetype: prefId,
-      frequency: 'occasional',
-      composition_method: 'parallel_track',
-    }
-  }
-
-  // Find hybrid patterns involving the primary archetype
-  const candidates = corpus.hybridPatterns.hybrids.filter(
-    (h) => h.archetypes.includes(primaryArchetypeId),
-  )
-
-  if (candidates.length === 0) {
-    return { enabled: false }
-  }
-
-  // Pick the most common hybrid
-  const frequencyOrder = ['very_common', 'common', 'occasional'] as const
-  const sorted = [...candidates].sort(
-    (a, b) => frequencyOrder.indexOf(a.frequency) - frequencyOrder.indexOf(b.frequency),
-  )
-
-  const best = sorted[0]
-  const secondaryArchetype = best.archetypes.find((a) => a !== primaryArchetypeId)
-  if (!secondaryArchetype) {
-    console.warn(`[selectionEngine] Hybrid pattern ${best.hybrid_id} has no secondary archetype distinct from primary "${primaryArchetypeId}"`)
-    return { enabled: false }
-  }
-
-  return {
-    enabled: true,
-    secondary_archetype: secondaryArchetype,
-    pattern_id: best.hybrid_id,
-    frequency: best.frequency,
-    shared_roles: best.shared_roles,
-    divergence_point: best.divergence_point,
-    composition_method: best.composition_method,
-  }
-}
-
 function scoreAlternatives(
   genreId: string,
   corpus: LoadedCorpus,
@@ -426,9 +279,3 @@ function findArchetypeId(name: string, corpus: LoadedCorpus): string | null {
   return null
 }
 
-function findGenreId(name: string, corpus: LoadedCorpus): string | null {
-  for (const [dir, graph] of corpus.genreGraphs) {
-    if (graph.name.toLowerCase() === name.toLowerCase()) return dir
-  }
-  return null
-}

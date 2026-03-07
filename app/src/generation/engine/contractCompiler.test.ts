@@ -48,8 +48,6 @@ function makeCorpus(): LoadedCorpus {
     matrix: { title: '', description: '', archetypes_reference: [], genres: [] },
     toneIntegration: { title: '', description: '', integrations: [] },
     emotionalArcs: { title: '', description: '', archetypes: [] },
-    hybridPatterns: { title: '', description: '', hybrids: [] },
-    blendingModel: { title: '', description: '', blends: [] },
     archetypeNodeRoles: { title: '', description: '' },
     archetypeEdgeMeanings: { title: '', description: '' },
     genreNodeRoles: { title: '', description: '' },
@@ -69,8 +67,6 @@ function makeSelection(): SelectionResult {
     source_corpus_hash: 'test',
     primary_archetype: '01_heros_journey',
     primary_genre: '06_science_fiction',
-    genre_blend: { enabled: false },
-    hybrid_archetype: { enabled: false },
     compatibility: { matrix_classification: 'naturally compatible', rationale: ['Good fit'] },
     tone_marker: { selected: 'somber', genre_tone_node_id: 'SF_N80_INTELLECTUAL', integration_classification: 'neutral' },
   }
@@ -89,7 +85,7 @@ function makeRequest(): StoryRequest {
     requested_genre: 'Science Fiction',
     requested_archetype: "The Hero's Journey",
     tone_preference: 'somber',
-    constraints: { must_include: ['found family'], must_exclude: ['time travel'], allow_genre_blend: false, allow_hybrid_archetype: false },
+    constraints: { must_include: ['found family'], must_exclude: ['time travel'] },
   }
 }
 
@@ -99,7 +95,6 @@ function makeConfig(): GenerationConfig {
     tone_policy: { mode: 'warn' },
     repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
     coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
-    composition_defaults: { allow_blend: true, allow_hybrid: false },
   }
 }
 

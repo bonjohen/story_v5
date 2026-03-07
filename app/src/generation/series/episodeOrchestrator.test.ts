@@ -106,7 +106,6 @@ function makeConfig(): GenerationConfig {
     tone_policy: { mode: 'warn' },
     repair_policy: { max_attempts_per_scene: 1, full_rewrite_threshold: 3 },
     coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
-    composition_defaults: { allow_blend: false, allow_hybrid: false },
   }
 }
 
@@ -143,7 +142,7 @@ function makeEpisodeRequest(seriesId: string): EpisodeRequest {
     requested_genre: '06_science_fiction',
     requested_archetype: '01_heros_journey',
     tone_preference: 'wonder',
-    constraints: { must_include: [], must_exclude: [], allow_genre_blend: false, allow_hybrid_archetype: false },
+    constraints: { must_include: [], must_exclude: [] },
     series_id: seriesId,
     slot_number: 1,
     candidate_label: 'a',

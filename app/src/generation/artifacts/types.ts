@@ -21,19 +21,6 @@ export type CompatibilityClass = 'naturally compatible' | 'occasionally compatib
 /** Tone–archetype integration classification. */
 export type ToneCompatibility = 'reinforcing' | 'contrasting' | 'neutral'
 
-/** Genre blend stability. */
-export type BlendStability = 'stable' | 'conditionally_stable' | 'unstable'
-
-/** Hybrid archetype composition method. */
-export type CompositionMethod =
-  | 'parallel_track'
-  | 'sequential_override'
-  | 'nested'
-  | 'alternating_dominance'
-
-/** Hybrid archetype frequency tier. */
-export type HybridFrequency = 'very_common' | 'common' | 'occasional'
-
 /** Pipeline generation mode. */
 export type GenerationMode = 'draft' | 'outline' | 'contract-only' | 'backbone' | 'detailed-outline' | 'chapters'
 
@@ -77,10 +64,6 @@ export interface AudienceSpec {
 export interface RequestConstraints {
   must_include: string[]
   must_exclude: string[]
-  allow_genre_blend: boolean
-  allow_hybrid_archetype: boolean
-  preferred_blend_genre?: string
-  preferred_hybrid_archetype?: string
 }
 
 export interface StoryRequest extends RunMetadata {
@@ -98,25 +81,6 @@ export interface StoryRequest extends RunMetadata {
 // 5.3 — Selection Result
 // ---------------------------------------------------------------------------
 
-export interface GenreBlendSelection {
-  enabled: boolean
-  secondary_genre?: string
-  pattern_id?: string
-  stability?: BlendStability
-  dominance?: string
-  rationale?: string[]
-}
-
-export interface HybridArchetypeSelection {
-  enabled: boolean
-  secondary_archetype?: string
-  pattern_id?: string
-  frequency?: HybridFrequency
-  shared_roles?: string[]
-  divergence_point?: { role: string; description: string }
-  composition_method?: CompositionMethod
-}
-
 export interface CompatibilityInfo {
   matrix_classification: CompatibilityClass
   rationale: string[]
@@ -131,8 +95,6 @@ export interface ToneMarkerSelection {
 export interface SelectionResult extends RunMetadata {
   primary_archetype: string
   primary_genre: string
-  genre_blend: GenreBlendSelection
-  hybrid_archetype: HybridArchetypeSelection
   compatibility: CompatibilityInfo
   tone_marker: ToneMarkerSelection
 }
@@ -294,20 +256,12 @@ export interface EmotionalScores {
   resolution: number
 }
 
-export interface BeatHybridInfo {
-  secondary_archetype_id: string
-  shared: boolean                    // true if this beat's role exists in both archetypes
-  divergence_beat: boolean           // true if this is where the arcs split
-  composition_method: CompositionMethod
-}
-
 export interface Beat {
   beat_id: string
   archetype_node_id: string
   summary: string
   required_exit_conditions: string[]
   target_emotional_scores: EmotionalScores
-  hybrid_info?: BeatHybridInfo
 }
 
 export interface SceneArchetypeTrace {
@@ -481,17 +435,11 @@ export interface RepairPolicy {
   full_rewrite_threshold: number  // blocking errors before full rewrite
 }
 
-export interface CompositionDefaults {
-  allow_blend: boolean
-  allow_hybrid: boolean
-}
-
 export interface GenerationConfig {
   signals_policy: SignalsPolicy
   tone_policy: TonePolicy
   repair_policy: RepairPolicy
   coverage_targets: CoverageTargets
-  composition_defaults: CompositionDefaults
 }
 
 // ---------------------------------------------------------------------------
@@ -569,50 +517,6 @@ export interface ArchetypeEmotionalArcs {
   title: string
   description: string
   archetypes: EmotionalArcProfile[]
-}
-
-/** Hybrid pattern from hybrid_archetype_patterns.json */
-export interface HybridPattern {
-  hybrid_id: string
-  archetypes: [string, string]
-  frequency: HybridFrequency
-  shared_roles: string[]
-  divergence_point: { role: string; description: string }
-  composition_method: CompositionMethod
-  composition_description: string
-  example_works: Array<{ title: string; creator: string; note: string }>
-  structural_tensions: string[]
-}
-
-export interface HybridArchetypePatterns {
-  title: string
-  description: string
-  hybrids: HybridPattern[]
-}
-
-/** Genre blend from genre_blending_model.json */
-export interface BlendConflict {
-  genre1: string
-  genre2: string
-  resolution: string
-}
-
-export interface BlendPattern {
-  blend_id: string
-  genres: [string, string]
-  stability: BlendStability
-  dominant_genre: string
-  compatible_constraints: string[]
-  conflicting_constraints: BlendConflict[]
-  tone_synthesis: string
-  resolution_strategy: string
-  example_works: Array<{ title: string; note: string }>
-}
-
-export interface GenreBlendingModel {
-  title: string
-  description: string
-  blends: BlendPattern[]
 }
 
 /** Vocabulary entry types */
@@ -919,9 +823,6 @@ export interface LoadedCorpus {
   matrix: GenreArchetypeMatrix
   toneIntegration: ToneArchetypeIntegration
   emotionalArcs: ArchetypeEmotionalArcs
-  hybridPatterns: HybridArchetypePatterns
-  blendingModel: GenreBlendingModel
-
   /** Controlled vocabularies */
   archetypeNodeRoles: VocabularyFile
   archetypeEdgeMeanings: VocabularyFile

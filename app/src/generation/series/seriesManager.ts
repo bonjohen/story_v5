@@ -16,9 +16,6 @@ import type {
   CanonTimeline,
 } from './types.ts'
 import type { StoryGraph } from '../../types/graph.ts'
-import type {
-  LoadedCorpus,
-} from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
 // Thread Lifecycle Management
@@ -390,90 +387,6 @@ export function episodesInCurrentPhase(
   return canonTimeline.episodes.filter(
     (e) => e.overarching_phase === arc.current_phase,
   ).length
-}
-
-// ---------------------------------------------------------------------------
-// Genre Accent Variation
-// ---------------------------------------------------------------------------
-
-export interface AccentOption {
-  genre_id: string
-  genre_name: string
-  blend_stability: 'stable' | 'conditionally_stable' | 'unstable'
-  rationale: string
-}
-
-/**
- * Get compatible genre accents for a series based on its primary genre
- * and the genre blending model.
- */
-export function getCompatibleAccents(
-  primaryGenreId: string,
-  corpus: LoadedCorpus,
-): AccentOption[] {
-  const blendingModel = corpus.blendingModel
-  const accents: AccentOption[] = []
-
-  for (const blend of blendingModel.blends) {
-    // Check if this blend involves the primary genre
-    const genres = blend.genres as string[]
-    if (!genres.includes(primaryGenreId)) continue
-
-    // The accent is the other genre in the blend
-    const accentId = genres.find((g) => g !== primaryGenreId)
-    if (!accentId) continue
-
-    // Get genre name from graphs
-    const accentGraph = corpus.genreGraphs.get(accentId)
-    const accentName = accentGraph?.name ?? accentId
-
-    // Only suggest stable or conditionally stable blends
-    const stability = blend.stability as AccentOption['blend_stability']
-
-    accents.push({
-      genre_id: accentId,
-      genre_name: accentName,
-      blend_stability: stability,
-      rationale: blend.tone_synthesis as string ?? '',
-    })
-  }
-
-  // Sort: stable first, then conditionally_stable, then unstable
-  const stabilityOrder: Record<string, number> = {
-    stable: 0,
-    conditionally_stable: 1,
-    unstable: 2,
-  }
-  accents.sort(
-    (a, b) => (stabilityOrder[a.blend_stability] ?? 2) - (stabilityOrder[b.blend_stability] ?? 2),
-  )
-
-  return accents
-}
-
-/**
- * Check if a genre accent is compatible with the primary genre.
- */
-export function isAccentCompatible(
-  primaryGenreId: string,
-  accentGenreId: string,
-  corpus: LoadedCorpus,
-): { compatible: boolean; stability: string | null; warnings: string[] } {
-  const blendingModel = corpus.blendingModel
-
-  for (const blend of blendingModel.blends) {
-    const genres = blend.genres as string[]
-    if (genres.includes(primaryGenreId) && genres.includes(accentGenreId)) {
-      const stability = blend.stability as string
-      const warnings: string[] = []
-      if (stability === 'unstable') {
-        warnings.push(`This blend is classified as unstable: ${blend.resolution_strategy ?? 'use with caution'}`)
-      }
-      return { compatible: true, stability, warnings }
-    }
-  }
-
-  return { compatible: false, stability: null, warnings: [`No blend model found for ${primaryGenreId} × ${accentGenreId}`] }
 }
 
 // ---------------------------------------------------------------------------

@@ -26,7 +26,6 @@ import type { CyCore, GenerationOverlay } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
 import { useGenerationStore } from './generation/store/generationStore.ts'
-import { useRequestStore } from './generation/store/requestStore.ts'
 import { useDbInit } from './db/useDbInit.ts'
 import type { DataManifest } from './types/graph.ts'
 
@@ -84,37 +83,6 @@ export default function App() {
   const genBackbone = useGenerationStore((s) => s.backbone)
   const genChapterManifest = useGenerationStore((s) => s.chapterManifest)
   const genTemplatePack = useGenerationStore((s) => s.templatePack)
-  const genSelection = useGenerationStore((s) => s.selection)
-
-  // Sync auto-selected blend/hybrid back to request store dropdowns
-  const manifest = useGraphStore((s) => s.manifest)
-  useEffect(() => {
-    if (!genSelection) return
-    const { genre_blend, hybrid_archetype } = genSelection
-
-    // Convert directory IDs to display names using manifest
-    const dirToGenreName = (dir: string): string => {
-      if (!manifest) return dir
-      const entry = manifest.genres.find((g) => g.filePath.endsWith(`/${dir}`) || g.filePath === dir)
-      return entry?.name ?? dir
-    }
-    const dirToArchetypeName = (dir: string): string => {
-      if (!manifest) return dir
-      const entry = manifest.archetypes.find((a) => a.filePath.endsWith(`/${dir}`) || a.filePath === dir)
-      return entry?.name ?? dir
-    }
-
-    if (genre_blend?.enabled && genre_blend.secondary_genre) {
-      const name = dirToGenreName(genre_blend.secondary_genre)
-      useRequestStore.getState().setAllowBlend(true)
-      useRequestStore.getState().setBlendGenre(name)
-    }
-    if (hybrid_archetype?.enabled && hybrid_archetype.secondary_archetype) {
-      const name = dirToArchetypeName(hybrid_archetype.secondary_archetype)
-      useRequestStore.getState().setAllowHybrid(true)
-      useRequestStore.getState().setHybridArchetype(name)
-    }
-  }, [genSelection, manifest])
 
   // Database init
   const dbStatus = useDbInit()

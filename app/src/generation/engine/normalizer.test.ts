@@ -58,8 +58,6 @@ function makeMinimalCorpus(): LoadedCorpus {
     matrix: { title: 't', description: 'd', archetypes_reference: [], genres: Array.from({ length: 27 }, (_, i) => ({ genre: `G${i}`, genre_id: i, naturally_compatible: [], occasionally_compatible: [], rarely_compatible: [] })) },
     toneIntegration: { title: 't', description: 'd', integrations: Array.from({ length: 27 }, (_, i) => ({ genre: `G${i}`, genre_id: `${i}`, tone_marker: 'TM', tone_description: 'd', archetype_interactions: [] })) },
     emotionalArcs: { title: 't', description: 'd', archetypes: Array.from({ length: 15 }, (_, i) => ({ archetype: `A${i}`, archetype_id: `${i}`, arc_profile: [], variant_profiles: [], arc_shape: 'U', dominant_emotion: 'hope', emotional_range: 0.5, summary: 's' })) },
-    hybridPatterns: { title: 't', description: 'd', hybrids: [] },
-    blendingModel: { title: 't', description: 'd', blends: [] },
     archetypeNodeRoles: { title: 't', description: 'd' },
     archetypeEdgeMeanings: { title: 't', description: 'd' },
     genreNodeRoles: { title: 't', description: 'd' },

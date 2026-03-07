@@ -30,12 +30,10 @@
     "tone_preference": { "type": "string" },
     "constraints": {
       "type": "object",
-      "required": ["must_include", "must_exclude", "allow_genre_blend", "allow_hybrid_archetype"],
+      "required": ["must_include", "must_exclude"],
       "properties": {
         "must_include": { "type": "array", "items": { "type": "string" } },
-        "must_exclude": { "type": "array", "items": { "type": "string" } },
-        "allow_genre_blend": { "type": "boolean" },
-        "allow_hybrid_archetype": { "type": "boolean" }
+        "must_exclude": { "type": "array", "items": { "type": "string" } }
       },
       "additionalProperties": false
     }

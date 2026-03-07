@@ -164,10 +164,6 @@ export {
   isArcComplete,
   episodesInCurrentPhase,
   type ArcAdvancementSuggestion,
-  // Genre accent
-  getCompatibleAccents,
-  isAccentCompatible,
-  type AccentOption,
   // Slot management
   createEpisodeSlot,
   getOrCreateNextSlot,

@@ -19,7 +19,6 @@ const DEFAULT_CONFIG: GenerationConfig = {
   tone_policy: { mode: 'warn' },
   repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
   coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
-  composition_defaults: { allow_blend: true, allow_hybrid: false },
 }
 
 const ARCHETYPE_OPTIONS = [
@@ -143,20 +142,11 @@ export function GenerationPanel() {
   const genre = useRequestStore((s) => s.genre)
   const mode = useRequestStore((s) => s.mode)
   const tone = useRequestStore((s) => s.tone)
-  const allowBlend = useRequestStore((s) => s.allowBlend)
-  const blendGenre = useRequestStore((s) => s.blendGenre)
-  const allowHybrid = useRequestStore((s) => s.allowHybrid)
-  const hybridArchetype = useRequestStore((s) => s.hybridArchetype)
-
   const setPremise = useRequestStore((s) => s.setPremise)
   const setArchetype = useRequestStore((s) => s.setArchetype)
   const setGenre = useRequestStore((s) => s.setGenre)
   const setMode = useRequestStore((s) => s.setMode)
   const setTone = useRequestStore((s) => s.setTone)
-  const setAllowBlend = useRequestStore((s) => s.setAllowBlend)
-  const setBlendGenre = useRequestStore((s) => s.setBlendGenre)
-  const setAllowHybrid = useRequestStore((s) => s.setAllowHybrid)
-  const setHybridArchetype = useRequestStore((s) => s.setHybridArchetype)
 
   // Sync archetype/genre selections to graph display
   const handleArchetypeChange = useCallback((name: string) => {
@@ -212,23 +202,13 @@ export function GenerationPanel() {
       constraints: {
         must_include: [],
         must_exclude: [],
-        allow_genre_blend: allowBlend,
-        allow_hybrid_archetype: allowHybrid,
-        ...(allowBlend && blendGenre ? { preferred_blend_genre: blendGenre } : {}),
-        ...(allowHybrid && hybridArchetype ? { preferred_hybrid_archetype: hybridArchetype } : {}),
       },
     }
 
-    const config: GenerationConfig = {
-      ...DEFAULT_CONFIG,
-      composition_defaults: {
-        allow_blend: allowBlend,
-        allow_hybrid: allowHybrid,
-      },
-    }
+    const config: GenerationConfig = { ...DEFAULT_CONFIG }
 
     void startRun(request, config, mode)
-  }, [premise, archetype, genre, mode, tone, allowBlend, blendGenre, allowHybrid, hybridArchetype, startRun])
+  }, [premise, archetype, genre, mode, tone, startRun])
 
   const handleSaveInstance = useCallback(() => {
     if (!detailBindings) return
@@ -371,77 +351,6 @@ export function GenerationPanel() {
               Sets the emotional register for the story.
             </span>
           </label>
-        </div>
-
-        {/* Composition options */}
-        <div style={{
-          marginBottom: 12,
-          padding: '8px 10px',
-          background: 'var(--bg-primary)',
-          border: '1px solid var(--border)',
-          borderRadius: 4,
-        }}>
-          <span style={{ ...LABEL, display: 'block', marginBottom: 6 }}>Composition</span>
-          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)', marginBottom: 4 }}>
-            <input
-              type="checkbox"
-              checked={allowBlend}
-              onChange={(e) => setAllowBlend(e.target.checked)}
-              disabled={running}
-              style={{ marginTop: 2 }}
-            />
-            <span>
-              <strong>Genre blend</strong>
-              <span style={{ display: 'block', fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4, marginTop: 1 }}>
-                Mix constraints from a second genre.
-              </span>
-            </span>
-          </label>
-          {allowBlend && (
-            <div style={{ marginLeft: 22, marginBottom: 6 }}>
-              <select
-                value={blendGenre}
-                onChange={(e) => setBlendGenre(e.target.value)}
-                disabled={running}
-                style={{ ...INPUT, marginTop: 0 }}
-              >
-                <option value="">Auto-select best match</option>
-                {GENRE_OPTIONS.filter((g) => g !== genre).map((g) => (
-                  <option key={g} value={g}>{g}</option>
-                ))}
-              </select>
-            </div>
-          )}
-          <label style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 12, color: 'var(--text-primary)', marginBottom: 4 }}>
-            <input
-              type="checkbox"
-              checked={allowHybrid}
-              onChange={(e) => setAllowHybrid(e.target.checked)}
-              disabled={running}
-              style={{ marginTop: 2 }}
-            />
-            <span>
-              <strong>Hybrid archetype</strong>
-              <span style={{ display: 'block', fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4, marginTop: 1 }}>
-                Follow two archetype structures simultaneously.
-              </span>
-            </span>
-          </label>
-          {allowHybrid && (
-            <div style={{ marginLeft: 22, marginBottom: 2 }}>
-              <select
-                value={hybridArchetype}
-                onChange={(e) => setHybridArchetype(e.target.value)}
-                disabled={running}
-                style={{ ...INPUT, marginTop: 0 }}
-              >
-                <option value="">Auto-select best match</option>
-                {ARCHETYPE_OPTIONS.filter((o) => o.value !== archetype).map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
-                ))}
-              </select>
-            </div>
-          )}
         </div>
 
         {/* Action buttons */}

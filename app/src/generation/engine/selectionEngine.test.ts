@@ -76,38 +76,6 @@ function makeTestCorpus(): LoadedCorpus {
       ],
     },
     emotionalArcs: { title: '', description: '', archetypes: [] },
-    hybridPatterns: {
-      title: '', description: '',
-      hybrids: [
-        {
-          hybrid_id: 'heros_journey_x_quest',
-          archetypes: ['01_heros_journey', '03_the_quest'],
-          frequency: 'very_common',
-          shared_roles: ['Origin', 'Trial'],
-          divergence_point: { role: 'Crisis', description: 'Diverge at crisis' },
-          composition_method: 'parallel_track',
-          composition_description: 'd',
-          example_works: [],
-          structural_tensions: [],
-        },
-      ],
-    },
-    blendingModel: {
-      title: '', description: '',
-      blends: [
-        {
-          blend_id: 'sf_x_thriller',
-          genres: ['06_science_fiction', '04_thriller'],
-          stability: 'stable',
-          dominant_genre: '06_science_fiction',
-          compatible_constraints: [],
-          conflicting_constraints: [],
-          tone_synthesis: 'Techno-thriller',
-          resolution_strategy: 'SF provides premise, thriller provides pacing',
-          example_works: [],
-        },
-      ],
-    },
     archetypeNodeRoles: { title: '', description: '' },
     archetypeEdgeMeanings: { title: '', description: '' },
     genreNodeRoles: { title: '', description: '' },
@@ -135,8 +103,6 @@ function makeRequest(overrides: Partial<StoryRequest> = {}): StoryRequest {
     constraints: {
       must_include: [],
       must_exclude: [],
-      allow_genre_blend: false,
-      allow_hybrid_archetype: false,
     },
     ...overrides,
   }
@@ -176,38 +142,6 @@ describe('selectionEngine', () => {
 
     expect(selection.tone_marker.genre_tone_node_id).toBe('SF_N80_INTELLECTUAL_ENGAGEMENT')
     expect(selection.tone_marker.integration_classification).toBe('neutral')
-  })
-
-  it('disables blend when not requested', () => {
-    const corpus = makeTestCorpus()
-    const request = makeRequest()
-    const { selection } = runSelection(request, corpus)
-
-    expect(selection.genre_blend.enabled).toBe(false)
-  })
-
-  it('enables blend when requested and pattern exists', () => {
-    const corpus = makeTestCorpus()
-    const request = makeRequest({
-      constraints: { must_include: [], must_exclude: [], allow_genre_blend: true, allow_hybrid_archetype: false },
-    })
-    const { selection } = runSelection(request, corpus)
-
-    expect(selection.genre_blend.enabled).toBe(true)
-    expect(selection.genre_blend.secondary_genre).toBe('04_thriller')
-    expect(selection.genre_blend.stability).toBe('stable')
-  })
-
-  it('enables hybrid when requested and pattern exists', () => {
-    const corpus = makeTestCorpus()
-    const request = makeRequest({
-      constraints: { must_include: [], must_exclude: [], allow_genre_blend: false, allow_hybrid_archetype: true },
-    })
-    const { selection } = runSelection(request, corpus)
-
-    expect(selection.hybrid_archetype.enabled).toBe(true)
-    expect(selection.hybrid_archetype.secondary_archetype).toBe('03_the_quest')
-    expect(selection.hybrid_archetype.composition_method).toBe('parallel_track')
   })
 
   it('produces scored alternatives', () => {

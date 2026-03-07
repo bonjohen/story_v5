@@ -98,7 +98,6 @@ function makeConfig(): GenerationConfig {
     tone_policy: { mode: 'warn' },
     repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
     coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
-    composition_defaults: { allow_blend: true, allow_hybrid: false },
   }
 }
 

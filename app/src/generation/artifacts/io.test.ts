@@ -17,8 +17,6 @@ describe('artifact validation', () => {
     constraints: {
       must_include: [],
       must_exclude: [],
-      allow_genre_blend: false,
-      allow_hybrid_archetype: false,
     },
   }
 

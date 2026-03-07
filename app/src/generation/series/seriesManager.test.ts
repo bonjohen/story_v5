@@ -1,6 +1,6 @@
 /**
  * Tests for series manager: thread lifecycle, arc advancement,
- * genre accent selection, and slot management.
+ * and slot management.
  */
 import { describe, it, expect } from 'vitest'
 import {
@@ -13,14 +13,11 @@ import {
   getNextArcPhase,
   isArcComplete,
   episodesInCurrentPhase,
-  getCompatibleAccents,
-  isAccentCompatible,
   createEpisodeSlot,
   getOrCreateNextSlot,
   getSeriesStatus,
 } from './seriesManager.ts'
 import type { StoryLore, CanonTimeline, OverarchingArc, Series, PlotThread } from './types.ts'
-import type { LoadedCorpus } from '../artifacts/types.ts'
 import type { StoryGraph } from '../../types/graph.ts'
 
 // ---------------------------------------------------------------------------
@@ -147,70 +144,6 @@ function makeArchetypeGraph(): StoryGraph {
       { edge_id: 'HJ_E02', from: 'HJ_N02_CALL', to: 'HJ_N03_MENTOR', label: 'Acceptance', meaning: 'escalation', preconditions: [], effects_on_stakes: '', effects_on_character: '', common_alternatives: [], anti_patterns: [] },
     ],
   }
-}
-
-function makeMinimalCorpus(): LoadedCorpus {
-  const archetypeGraphs = new Map<string, StoryGraph>()
-  archetypeGraphs.set('01_heros_journey', makeArchetypeGraph())
-
-  const genreGraphs = new Map<string, StoryGraph>()
-  genreGraphs.set('06_science_fiction', {
-    id: '06_science_fiction', name: 'Science Fiction', type: 'genre', description: '',
-    nodes: [], edges: [],
-  })
-  genreGraphs.set('10_horror', {
-    id: '10_horror', name: 'Horror', type: 'genre', description: '',
-    nodes: [], edges: [],
-  })
-  genreGraphs.set('03_comedy', {
-    id: '03_comedy', name: 'Comedy', type: 'genre', description: '',
-    nodes: [], edges: [],
-  })
-
-  return {
-    archetypeGraphs,
-    genreGraphs,
-    variantGraphs: new Map(),
-    matrix: { title: '', description: '', archetypes_reference: [], genres: [] },
-    toneIntegration: { title: '', description: '', integrations: [] },
-    emotionalArcs: { title: '', description: '', archetypes: [] },
-    hybridPatterns: { title: '', description: '', hybrids: [] },
-    blendingModel: {
-      title: '', description: '',
-      blends: [
-        {
-          blend_id: 'sf_x_horror',
-          genres: ['06_science_fiction', '10_horror'],
-          stability: 'stable',
-          dominant_genre: 'horror',
-          compatible_constraints: [],
-          conflicting_constraints: [],
-          tone_synthesis: 'SF horror: technology becomes the threat',
-          resolution_strategy: '',
-          example_works: [],
-        },
-        {
-          blend_id: 'sf_x_comedy',
-          genres: ['06_science_fiction', '03_comedy'],
-          stability: 'conditionally_stable',
-          dominant_genre: 'science_fiction',
-          compatible_constraints: [],
-          conflicting_constraints: [],
-          tone_synthesis: 'Satirical SF: absurdity of technological progress',
-          resolution_strategy: '',
-          example_works: [],
-        },
-      ],
-    },
-    archetypeNodeRoles: { title: '', description: '' },
-    archetypeEdgeMeanings: { title: '', description: '' },
-    genreNodeRoles: { title: '', description: '' },
-    genreEdgeMeanings: { title: '', description: '' },
-    manifest: { generated: '', archetypes: [], genres: [], totals: {} as any },
-    corpusHash: 'test',
-    archetypeElements: new Map(),
-    genreElementConstraints: new Map(),
-  } as LoadedCorpus
 }
 
 // ---------------------------------------------------------------------------
@@ -369,46 +302,6 @@ describe('arc phase advancement', () => {
       { id: 'EP_003_a', phase: 'HJ_N02_CALL' },
     ])
     expect(episodesInCurrentPhase(makeArc(), timeline)).toBe(2)
-  })
-})
-
-// ---------------------------------------------------------------------------
-// Tests: Genre Accent Variation
-// ---------------------------------------------------------------------------
-
-describe('genre accent variation', () => {
-  it('lists compatible accents for primary genre', () => {
-    const corpus = makeMinimalCorpus()
-    const accents = getCompatibleAccents('06_science_fiction', corpus)
-
-    expect(accents.length).toBe(2)
-    expect(accents[0].genre_id).toBe('10_horror')  // stable first
-    expect(accents[0].blend_stability).toBe('stable')
-    expect(accents[1].genre_id).toBe('03_comedy')
-    expect(accents[1].blend_stability).toBe('conditionally_stable')
-  })
-
-  it('returns empty for genre with no blends', () => {
-    const corpus = makeMinimalCorpus()
-    const accents = getCompatibleAccents('01_drama', corpus)
-    expect(accents).toHaveLength(0)
-  })
-
-  it('validates accent compatibility', () => {
-    const corpus = makeMinimalCorpus()
-
-    const result = isAccentCompatible('06_science_fiction', '10_horror', corpus)
-    expect(result.compatible).toBe(true)
-    expect(result.stability).toBe('stable')
-    expect(result.warnings).toHaveLength(0)
-  })
-
-  it('warns for unknown accent combination', () => {
-    const corpus = makeMinimalCorpus()
-
-    const result = isAccentCompatible('06_science_fiction', '08_romance', corpus)
-    expect(result.compatible).toBe(false)
-    expect(result.warnings.length).toBeGreaterThan(0)
   })
 })
 

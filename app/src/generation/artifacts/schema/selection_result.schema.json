@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "SelectionResult",
-  "description": "Output of the SelectionEngine — chosen archetype, genre, blend, hybrid, tone",
+  "description": "Output of the SelectionEngine — chosen archetype, genre, compatibility, tone",
   "type": "object",
   "required": [
     "schema_version", "run_id", "generated_at", "source_corpus_hash",
     "primary_archetype", "primary_genre",
-    "genre_blend", "hybrid_archetype", "compatibility", "tone_marker"
+    "compatibility", "tone_marker"
   ],
   "properties": {
     "schema_version": { "type": "string" },
@@ -15,39 +15,6 @@
     "source_corpus_hash": { "type": "string" },
     "primary_archetype": { "type": "string" },
     "primary_genre": { "type": "string" },
-    "genre_blend": {
-      "type": "object",
-      "required": ["enabled"],
-      "properties": {
-        "enabled": { "type": "boolean" },
-        "secondary_genre": { "type": "string" },
-        "pattern_id": { "type": "string" },
-        "stability": { "enum": ["stable", "conditionally_stable", "unstable"] },
-        "dominance": { "type": "string" },
-        "rationale": { "type": "array", "items": { "type": "string" } }
-      }
-    },
-    "hybrid_archetype": {
-      "type": "object",
-      "required": ["enabled"],
-      "properties": {
-        "enabled": { "type": "boolean" },
-        "secondary_archetype": { "type": "string" },
-        "pattern_id": { "type": "string" },
-        "frequency": { "enum": ["very_common", "common", "occasional"] },
-        "shared_roles": { "type": "array", "items": { "type": "string" } },
-        "divergence_point": {
-          "type": "object",
-          "properties": {
-            "role": { "type": "string" },
-            "description": { "type": "string" }
-          }
-        },
-        "composition_method": {
-          "enum": ["parallel_track", "sequential_override", "nested", "alternating_dominance"]
-        }
-      }
-    },
     "compatibility": {
       "type": "object",
       "required": ["matrix_classification", "rationale"],

@@ -16,7 +16,7 @@ function makeRequest(): StoryRequest {
     requested_genre: 'Science Fiction',
     requested_archetype: "The Hero's Journey",
     tone_preference: 'intellectual',
-    constraints: { must_include: [], must_exclude: [], allow_genre_blend: false, allow_hybrid_archetype: false },
+    constraints: { must_include: [], must_exclude: [] },
   }
 }
 

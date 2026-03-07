@@ -47,8 +47,6 @@ function makeCorpus(): LoadedCorpus {
     matrix: { title: '', description: '', archetypes_reference: [], genres: [] },
     toneIntegration: { title: '', description: '', integrations: [] },
     emotionalArcs: { title: '', description: '', archetypes: [] },
-    hybridPatterns: { title: '', description: '', hybrids: [] },
-    blendingModel: { title: '', description: '', blends: [] },
     archetypeNodeRoles: { title: '', description: '' },
     archetypeEdgeMeanings: { title: '', description: '' },
     genreNodeRoles: { title: '', description: '' },
@@ -68,8 +66,6 @@ function makeSelection(): SelectionResult {
     source_corpus_hash: 'abc123',
     primary_archetype: '01_heros_journey',
     primary_genre: '06_science_fiction',
-    genre_blend: { enabled: false },
-    hybrid_archetype: { enabled: false },
     compatibility: { matrix_classification: 'naturally compatible', rationale: ['Good fit'] },
     tone_marker: { selected: 'intellectual', genre_tone_node_id: 'SF_N80_INTELLECTUAL', integration_classification: 'neutral' },
   }

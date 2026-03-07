@@ -16,8 +16,6 @@ import type {
   GenreArchetypeMatrix,
   ToneArchetypeIntegration,
   ArchetypeEmotionalArcs,
-  HybridArchetypePatterns,
-  GenreBlendingModel,
   VocabularyFile,
 } from '../artifacts/types.ts'
 
@@ -105,13 +103,11 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
   ])
 
   // Load cross-reference files in parallel
-  const [matrix, toneIntegration, emotionalArcs, hybridPatterns, blendingModel] =
+  const [matrix, toneIntegration, emotionalArcs] =
     await Promise.all([
       provider.loadJson('cross_references/genre_archetype_matrix.json') as Promise<GenreArchetypeMatrix>,
       provider.loadJson('cross_references/tone_archetype_integration.json') as Promise<ToneArchetypeIntegration>,
       provider.loadJson('cross_references/archetype_emotional_arcs.json') as Promise<ArchetypeEmotionalArcs>,
-      provider.loadJson('cross_references/hybrid_archetype_patterns.json') as Promise<HybridArchetypePatterns>,
-      provider.loadJson('cross_references/genre_blending_model.json') as Promise<GenreBlendingModel>,
     ])
 
   // Load vocabularies in parallel
@@ -137,8 +133,6 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
   hashComponents.push(`matrix:${matrix.genres.length}`)
   hashComponents.push(`tone:${toneIntegration.integrations.length}`)
   hashComponents.push(`arcs:${emotionalArcs.archetypes.length}`)
-  hashComponents.push(`hybrids:${hybridPatterns.hybrids.length}`)
-  hashComponents.push(`blends:${blendingModel.blends.length}`)
   hashComponents.push(`elements:${archetypeElements.size}`)
   hashComponents.push(`genreConstraints:${genreElementConstraints.size}`)
 
@@ -151,8 +145,6 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
     matrix,
     toneIntegration,
     emotionalArcs,
-    hybridPatterns,
-    blendingModel,
     archetypeNodeRoles,
     archetypeEdgeMeanings,
     genreNodeRoles,

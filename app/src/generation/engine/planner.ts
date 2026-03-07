@@ -7,7 +7,6 @@ import type {
   StoryContract,
   StoryPlan,
   Beat,
-  BeatHybridInfo,
   Scene,
   SceneElement,
   EmotionalScores,
@@ -91,29 +90,11 @@ export async function buildPlan(options: PlannerOptions): Promise<StoryPlan> {
 function buildBeats(
   contract: StoryContract,
   corpus: LoadedCorpus,
-  selection: SelectionResult | null,
+  _selection: SelectionResult | null,
 ): Beat[] {
   const arcEmotionalArc = corpus.emotionalArcs.archetypes.find(
     (a) => a.archetype_id === contract.archetype.archetype_id,
   )
-
-  // Resolve hybrid info if enabled
-  let hybridContext: {
-    sharedRoles: Set<string>
-    divergenceRole: string
-    secondaryId: string
-    compositionMethod: BeatHybridInfo['composition_method']
-  } | null = null
-
-  if (selection?.hybrid_archetype.enabled) {
-    const ha = selection.hybrid_archetype
-    hybridContext = {
-      sharedRoles: new Set(ha.shared_roles ?? []),
-      divergenceRole: ha.divergence_point?.role ?? '',
-      secondaryId: ha.secondary_archetype ?? '',
-      compositionMethod: ha.composition_method ?? 'parallel_track',
-    }
-  }
 
   return contract.phase_guidelines.map((phase, index) => {
     const beatId = `B${String(index + 1).padStart(2, '0')}`
@@ -134,24 +115,12 @@ function buildBeats(
       }
     }
 
-    // Build hybrid annotation if applicable
-    let hybridInfo: BeatHybridInfo | undefined
-    if (hybridContext) {
-      hybridInfo = {
-        secondary_archetype_id: hybridContext.secondaryId,
-        shared: hybridContext.sharedRoles.has(phase.role),
-        divergence_beat: phase.role === hybridContext.divergenceRole,
-        composition_method: hybridContext.compositionMethod,
-      }
-    }
-
     return {
       beat_id: beatId,
       archetype_node_id: phase.node_id,
       summary: `[${phase.role}] ${phase.definition}`,
       required_exit_conditions: phase.exit_conditions,
       target_emotional_scores: emotionalScores,
-      ...(hybridInfo ? { hybrid_info: hybridInfo } : {}),
     }
   })
 }

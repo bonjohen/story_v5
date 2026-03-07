@@ -63,8 +63,6 @@ function makeMockProvider(): DataProvider {
   }
 
   const emotionalArcs = { title: '', description: '', archetypes: [] }
-  const hybridPatterns = { title: '', description: '', hybrids: [] }
-  const blendingModel = { title: '', description: '', blends: [] }
   const vocabFile = { title: '', description: '' }
 
   const files: Record<string, unknown> = {
@@ -74,8 +72,6 @@ function makeMockProvider(): DataProvider {
     'cross_references/genre_archetype_matrix.json': matrix,
     'cross_references/tone_archetype_integration.json': toneIntegration,
     'cross_references/archetype_emotional_arcs.json': emotionalArcs,
-    'cross_references/hybrid_archetype_patterns.json': hybridPatterns,
-    'cross_references/genre_blending_model.json': blendingModel,
     'vocabulary/archetype_node_roles.json': vocabFile,
     'vocabulary/archetype_edge_vocabulary.json': vocabFile,
     'vocabulary/genre_node_roles.json': vocabFile,
@@ -117,7 +113,7 @@ function makeRequest(): StoryRequest {
     requested_genre: 'Science Fiction',
     requested_archetype: "The Hero's Journey",
     tone_preference: 'somber',
-    constraints: { must_include: [], must_exclude: [], allow_genre_blend: false, allow_hybrid_archetype: false },
+    constraints: { must_include: [], must_exclude: [] },
   }
 }
 
@@ -127,7 +123,6 @@ function makeConfig(): GenerationConfig {
     tone_policy: { mode: 'warn' },
     repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
     coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
-    composition_defaults: { allow_blend: true, allow_hybrid: false },
   }
 }
 
