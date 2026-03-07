@@ -240,6 +240,41 @@ export async function writeScene(
   }
 }
 
+/**
+ * Generate prose for a single scene using streaming, if the adapter supports it.
+ * Calls onChunk for each partial text chunk, then returns the full result.
+ * Falls back to non-streaming writeScene if completeStream is not available.
+ */
+export async function writeSceneStreaming(
+  scene: Scene,
+  beat: Beat,
+  contract: StoryContract,
+  llm: LLMAdapter | null,
+  onChunk: (chunk: string) => void,
+  plan?: StoryPlan | null,
+  priorScenes?: Scene[],
+): Promise<WriteSceneResult> {
+  if (!llm || !llm.completeStream) {
+    return writeScene(scene, beat, contract, llm, plan, priorScenes)
+  }
+
+  const messages = buildWriterPrompt(scene, beat, contract, plan, priorScenes)
+  const chunks: string[] = []
+
+  for await (const chunk of llm.completeStream(messages)) {
+    chunks.push(chunk)
+    onChunk(chunk)
+  }
+
+  const content = chunks.join('')
+
+  return {
+    scene_id: scene.scene_id,
+    content,
+    model: 'claude-code-stream',
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Template-based prose generator (no LLM required)
 // ---------------------------------------------------------------------------

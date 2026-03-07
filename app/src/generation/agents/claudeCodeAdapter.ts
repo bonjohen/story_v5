@@ -84,6 +84,96 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     }
   }
 
+  async completeJson(messages: LLMMessage[]): Promise<LLMResponse> {
+    this.callCount++
+    const callId = this.callCount
+    const prompt = formatMessagesForCli(messages)
+
+    if (this.verbose) {
+      console.error(`\n[claude-code-adapter] JSON call #${callId} — sending ${prompt.length} chars`)
+    }
+
+    const args = this.buildArgs()
+    args.push('--output-format', 'json')
+
+    let content = await this.spawnClaude(args, prompt, callId)
+    content = stripJsonFences(content)
+
+    return {
+      content,
+      model: this.model ?? 'claude-code',
+      usage: {
+        input_tokens: prompt.length,
+        output_tokens: content.length,
+      },
+    }
+  }
+
+  async *completeStream(messages: LLMMessage[]): AsyncIterable<string> {
+    this.callCount++
+    const callId = this.callCount
+    const prompt = formatMessagesForCli(messages)
+
+    if (this.verbose) {
+      console.error(`\n[claude-code-adapter] Stream #${callId} — sending ${prompt.length} chars`)
+    }
+
+    const args = this.buildArgs()
+    yield* this.spawnClaudeStream(args, prompt, callId)
+  }
+
+  private async *spawnClaudeStream(args: string[], prompt: string, callId: number): AsyncIterable<string> {
+    const proc = spawn(this.claudePath, args, {
+      cwd: this.cwd,
+      stdio: ['pipe', 'pipe', 'pipe'],
+      env: { ...process.env },
+      timeout: this.timeout,
+    })
+
+    let stderr = ''
+
+    proc.stderr.on('data', (chunk: Buffer) => {
+      stderr += chunk.toString()
+    })
+
+    // Write prompt to stdin and close
+    proc.stdin.write(prompt)
+    proc.stdin.end()
+
+    // Yield stdout chunks as they arrive
+    try {
+      for await (const chunk of proc.stdout) {
+        yield (chunk as Buffer).toString()
+      }
+    } catch (err) {
+      throw new Error(
+        `[claude-code-adapter] Stream #${callId}: Failed to read from '${this.claudePath}': ${(err as Error).message}\n` +
+        'Ensure Claude Code CLI is installed and available on PATH.\n' +
+        'Install: npm install -g @anthropic-ai/claude-code'
+      )
+    }
+
+    // Wait for process to close and check exit code
+    const code = await new Promise<number | null>((resolve, reject) => {
+      proc.on('close', resolve)
+      proc.on('error', reject)
+    })
+
+    if (this.verbose) {
+      console.error(`[claude-code-adapter] Stream #${callId} — exit code ${code}`)
+      if (stderr.trim()) {
+        console.error(`[claude-code-adapter] stderr: ${stderr.trim().slice(0, 200)}`)
+      }
+    }
+
+    if (code !== 0) {
+      throw new Error(
+        `[claude-code-adapter] Stream #${callId}: claude exited with code ${code}\n` +
+        `stderr: ${stderr.trim().slice(0, 500)}`
+      )
+    }
+  }
+
   private buildArgs(): string[] {
     const args: string[] = [
       '--print',       // Non-interactive: read stdin, print response, exit
@@ -153,6 +243,43 @@ export class ClaudeCodeAdapter implements LLMAdapter {
       proc.stdin.end()
     })
   }
+}
+
+// ---------------------------------------------------------------------------
+// JSON fence stripping
+// ---------------------------------------------------------------------------
+
+/**
+ * Strip markdown code fences and trailing text from JSON responses.
+ * Handles: ```json ... ```, ``` ... ```, leading/trailing whitespace,
+ * and trailing text after the closing brace/bracket.
+ */
+export function stripJsonFences(text: string): string {
+  let cleaned = text.trim()
+
+  // Strip opening code fence (```json or ```)
+  if (cleaned.startsWith('```')) {
+    cleaned = cleaned.replace(/^```(?:json|JSON)?\s*\n?/, '')
+  }
+
+  // Strip closing code fence
+  if (cleaned.endsWith('```')) {
+    cleaned = cleaned.replace(/\n?```\s*$/, '')
+  }
+
+  // If there's trailing text after the last } or ], remove it
+  const lastBrace = cleaned.lastIndexOf('}')
+  const lastBracket = cleaned.lastIndexOf(']')
+  const lastJson = Math.max(lastBrace, lastBracket)
+  if (lastJson >= 0 && lastJson < cleaned.length - 1) {
+    const trailing = cleaned.slice(lastJson + 1).trim()
+    // Only strip if trailing content is non-JSON (not another valid structure)
+    if (trailing && !trailing.startsWith('{') && !trailing.startsWith('[')) {
+      cleaned = cleaned.slice(0, lastJson + 1)
+    }
+  }
+
+  return cleaned.trim()
 }
 
 // ---------------------------------------------------------------------------

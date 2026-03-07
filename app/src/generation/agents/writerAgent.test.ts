@@ -63,11 +63,11 @@ describe('writerAgent', () => {
     expect(result.model).toBe('mock')
   })
 
-  it('generates stub scene without LLM', async () => {
+  it('generates template scene without LLM', async () => {
     const result = await writeScene(makeScene(), makeBeat(), makeContract(), null)
     expect(result.scene_id).toBe('S01')
-    expect(result.content).toContain('S01')
-    expect(result.content).toContain('Stub scene content')
-    expect(result.model).toBe('stub')
+    expect(result.content).toContain('Origin')
+    expect(result.content).toContain('Science Fiction')
+    expect(result.model).toBe('template')
   })
 })

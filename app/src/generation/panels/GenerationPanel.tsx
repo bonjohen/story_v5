@@ -11,6 +11,7 @@ import { useRequestStore } from '../store/requestStore.ts'
 import { useGraphStore } from '../../store/graphStore.ts'
 import { useInstanceStore } from '../../instance/store/instanceStore.ts'
 import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
+import { BridgeAdapter } from '../bridge/bridgeAdapter.ts'
 import type { StoryRequest, GenerationMode, GenerationConfig } from '../artifacts/types.ts'
 
 // Default generation config matching generation_config.json
@@ -142,11 +143,18 @@ export function GenerationPanel() {
   const genre = useRequestStore((s) => s.genre)
   const mode = useRequestStore((s) => s.mode)
   const tone = useRequestStore((s) => s.tone)
+  const llmBackend = useRequestStore((s) => s.llmBackend)
+  const bridgeUrl = useRequestStore((s) => s.bridgeUrl)
   const setPremise = useRequestStore((s) => s.setPremise)
   const setArchetype = useRequestStore((s) => s.setArchetype)
   const setGenre = useRequestStore((s) => s.setGenre)
   const setMode = useRequestStore((s) => s.setMode)
   const setTone = useRequestStore((s) => s.setTone)
+  const setLlmBackend = useRequestStore((s) => s.setLlmBackend)
+  const setBridgeUrl = useRequestStore((s) => s.setBridgeUrl)
+
+  const [bridgeStatus, setBridgeStatus] = useState<'disconnected' | 'connecting' | 'connected' | 'error'>('disconnected')
+  const bridgeRef = useRef<BridgeAdapter | null>(null)
 
   // Sync archetype/genre selections to graph display
   const handleArchetypeChange = useCallback((name: string) => {
@@ -185,7 +193,7 @@ export function GenerationPanel() {
     }
   }, [events])
 
-  const handleStart = useCallback(() => {
+  const handleStart = useCallback(async () => {
     const runId = `RUN_${new Date().toISOString().slice(0, 10).replace(/-/g, '_')}_${String(Math.floor(Math.random() * 9999)).padStart(4, '0')}`
     const request: StoryRequest = {
       schema_version: '1.0.0',
@@ -207,8 +215,22 @@ export function GenerationPanel() {
 
     const config: GenerationConfig = { ...DEFAULT_CONFIG }
 
-    void startRun(request, config, mode)
-  }, [premise, archetype, genre, mode, tone, startRun])
+    // Create LLM adapter based on backend selection
+    if (llmBackend === 'bridge') {
+      const adapter = new BridgeAdapter({ url: bridgeUrl })
+      bridgeRef.current = adapter
+      setBridgeStatus('connecting')
+      try {
+        await adapter.connect()
+        setBridgeStatus('connected')
+        void startRun(request, config, mode, adapter)
+      } catch {
+        setBridgeStatus('error')
+      }
+    } else {
+      void startRun(request, config, mode, null)
+    }
+  }, [premise, archetype, genre, mode, tone, llmBackend, bridgeUrl, startRun])
 
   const handleSaveInstance = useCallback(() => {
     if (!detailBindings) return
@@ -217,9 +239,14 @@ export function GenerationPanel() {
     setSavedInstance(true)
   }, [detailBindings, selection, request, loadInstance])
 
-  // Reset saved indicator when a new run starts
+  // Reset saved indicator when a new run starts; disconnect bridge when done
   useEffect(() => {
-    if (running) setSavedInstance(false)
+    if (running) {
+      setSavedInstance(false)
+    } else if (bridgeRef.current) {
+      bridgeRef.current.disconnect()
+      bridgeRef.current = null
+    }
   }, [running])
 
   const stateInfo = STATE_LABELS[status] ?? { label: status, color: 'var(--text-muted)' }
@@ -351,6 +378,54 @@ export function GenerationPanel() {
               Sets the emotional register for the story.
             </span>
           </label>
+        </div>
+
+        {/* LLM Backend */}
+        <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+          <label style={{ flex: 1 }}>
+            <span style={LABEL}>LLM Backend</span>
+            <select
+              value={llmBackend}
+              onChange={(e) => setLlmBackend(e.target.value as 'none' | 'bridge')}
+              disabled={running}
+              style={INPUT}
+            >
+              <option value="none">None (deterministic)</option>
+              <option value="bridge">Claude Code (local bridge)</option>
+            </select>
+            <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
+              {llmBackend === 'bridge'
+                ? 'Requires local bridge server: npx tsx app/scripts/start_bridge.ts'
+                : 'Template-based output, no AI calls.'}
+            </span>
+          </label>
+          {llmBackend === 'bridge' && (
+            <label style={{ flex: 1 }}>
+              <span style={LABEL}>Bridge URL</span>
+              <input
+                type="text"
+                value={bridgeUrl}
+                onChange={(e) => setBridgeUrl(e.target.value)}
+                disabled={running}
+                placeholder="ws://127.0.0.1:8765"
+                style={INPUT}
+              />
+              <span style={{
+                fontSize: 10,
+                marginTop: 3,
+                display: 'block',
+                color: bridgeStatus === 'connected' ? '#22c55e'
+                  : bridgeStatus === 'error' ? '#ef4444'
+                  : bridgeStatus === 'connecting' ? '#f59e0b'
+                  : 'var(--text-muted)',
+              }}>
+                {bridgeStatus === 'connected' ? 'Connected'
+                  : bridgeStatus === 'error' ? 'Connection failed'
+                  : bridgeStatus === 'connecting' ? 'Connecting...'
+                  : 'Not connected'}
+              </span>
+            </label>
+          )}
         </div>
 
         {/* Action buttons */}

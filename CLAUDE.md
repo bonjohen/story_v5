@@ -16,6 +16,8 @@ This is a **data and content project** that models storytelling structures as fo
 
 5. **SQLite Data Layer** — a browser-side SQLite metadata store (via sql.js/WASM) that indexes story entities, scenes, chapters, vocabulary terms, and generation artifacts into a queryable relational database. Persisted to IndexedDB, exportable as `.db` file. Includes vocabulary templatization (9 domains, ~102 terms), import bridges from StoryInstance/manuscript/generation pipeline, and query UI (vocabulary browser, template coverage). See `docs/data_layer_design_plan.md` (9-phase implementation plan).
 
+6. **Claude Code CLI Interface** — an `LLMAdapter` implementation (`ClaudeCodeAdapter`) that delegates LLM calls to the Claude Code CLI (`claude --print`) instead of calling the Anthropic API directly. Lets users run the full generation pipeline using their Claude Code subscription. See `docs/claude_code_cli_interface_design.md` (design), `docs/claude_code_cli_interface_usage.md` (usage guide), and `docs/claude_code_cli_interface_plan.md` (implementation plan).
+
 ## Repository Structure
 
 ```
@@ -29,6 +31,9 @@ docs/                              ← Planning, specs, and task tracking
   backbone_synthesis_assembly.md   ← Design doc: template, backbone, detail, chapter stages
   backbone_synthesis_assembly_plan.md ← 8-phase implementation plan for backbone synthesis
   data_layer_design_plan.md        ← 9-phase SQLite data layer implementation plan
+  claude_code_cli_interface_design.md ← Design doc: Claude Code CLI adapter
+  claude_code_cli_interface_usage.md  ← Usage guide for CLI-based generation
+  claude_code_cli_interface_plan.md   ← Implementation plan for CLI interface enhancements
   archetypes.json                   ← 15 archetypes: descriptions, examples, genres
   genres.json                      ← 27 genres: descriptions, examples, popularity
 
@@ -62,9 +67,7 @@ data/                              ← Deliverable outputs
     cross_archetype_index.json       ← Shared node roles/edge meanings across all 15
     cross_genre_constraint_index.json ← Shared constraint types across all 27
     archetype_emotional_arcs.json    ← Emotional arc analysis for archetypes
-    hybrid_archetype_patterns.json   ← Hybrid/combined archetype patterns
     tone_archetype_integration.json  ← Tone-archetype integration model
-    genre_blending_model.json        ← Genre blending/mixing model
     example_works_registry.json      ← Consolidated registry of all example works
     non_western_archetype_analysis.json ← Non-Western archetype analysis
     cross_medium_adaptation.json     ← Cross-medium adaptation patterns
@@ -108,6 +111,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 3 — Interactive Viewer**: Complete. All 8 phases implemented plus post-phase updates: info panel moved to top, simulation removed, Templates panel and requestStore added, character role profiles, blend/hybrid selection, GitHub Pages deployment.
 - **Goal 4 — Backbone Synthesis & Assembly**: Complete. All 8 phases implemented (schemas, TemplateCompiler, BackboneAssembler, feature packs, DetailSynthesizer, ChapterAssembler, orchestrator integration, documentation/scripts).
 - **Goal 5 — SQLite Data Layer**: Complete. All 9 phases implemented (foundation, core schema, vocabulary templatization, chapters/scenes, artifacts/runs/tags, indexes/queries, import bridge, export/management UI, query UI). Unit tests pending.
+- **Goal 6 — Claude Code CLI Interface**: Complete. All 8 phases implemented (adapter, CLI integration, docs, streaming, JSON mode, session reuse, browser bridge, verify).
 
 ## Key Conventions
 

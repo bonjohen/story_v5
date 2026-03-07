@@ -85,6 +85,7 @@ npx tsx app/scripts/generate_story.ts --request <file> [options]
 |------|-------------|
 | *(default)* | Use Anthropic API (requires `ANTHROPIC_API_KEY` env var) |
 | `--claude-code` | Use Claude Code CLI as the LLM backend |
+| `--claude-session` | Use session-aware Claude Code adapter (shares context across calls) |
 | `--no-llm` | Run deterministically without any LLM |
 
 ### Options
@@ -97,6 +98,7 @@ npx tsx app/scripts/generate_story.ts --request <file> [options]
 | `--max-repairs <n>` | Max repair attempts per failing scene | `2` |
 | `--max-tokens <n>` | Max response tokens per LLM call | adapter default |
 | `--claude-path <path>` | Path to `claude` binary | `claude` (from PATH) |
+| `--stream` | Enable streaming output for scene writing | off |
 | `--verbose` | Log LLM call details to stderr | off |
 
 ### Generation Modes
@@ -263,13 +265,70 @@ The detail agent expects JSON output. If Claude Code returns markdown-wrapped JS
 --claude-code --model claude-sonnet-4-20250514
 ```
 
+## Streaming Mode
+
+Add `--stream` to see partial scene output as it's generated:
+
+```bash
+npx tsx app/scripts/generate_story.ts \
+  --request my_request.json \
+  --claude-code \
+  --mode draft \
+  --stream \
+  --verbose
+```
+
+Streaming requires `--verbose` to display chunks on stderr. Without `--verbose`, streaming is enabled internally but chunks are not displayed.
+
+## Session Mode
+
+Use `--claude-session` instead of `--claude-code` to share conversation context across calls within a run:
+
+```bash
+npx tsx app/scripts/generate_story.ts \
+  --request my_request.json \
+  --claude-session \
+  --mode draft
+```
+
+Session mode uses `--session-id` to group related calls. Falls back gracefully if the installed CLI version doesn't support session features.
+
+## Browser Bridge
+
+The browser UI can delegate LLM calls to a local Claude Code CLI via a WebSocket bridge.
+
+### 1. Start the bridge server
+
+```bash
+npx tsx app/scripts/start_bridge.ts --verbose
+```
+
+Options:
+- `--port <n>` — WebSocket port (default: 8765)
+- `--host <addr>` — Bind address (default: 127.0.0.1)
+- `--model <model>` — LLM model to use
+- `--claude-path <path>` — Path to claude binary
+- `--verbose` — Enable logging
+
+### 2. Connect from the browser UI
+
+1. Open the app in your browser
+2. Go to the Generation panel
+3. Set **LLM Backend** to "Claude Code (local bridge)"
+4. Verify the **Bridge URL** matches your server (default: `ws://127.0.0.1:8765`)
+5. Click **Generate** — the status indicator shows connection state
+
+The bridge server must be running for the duration of generation. When the run completes, the browser disconnects automatically.
+
 ## Comparison of LLM Backends
 
-| Feature | Anthropic API | Claude Code CLI | No LLM |
-|---------|--------------|----------------|--------|
-| Authentication | `ANTHROPIC_API_KEY` | Claude Code login | None |
-| Billing | API credits | Subscription | Free |
-| Latency per call | ~2-5s | ~3-8s (process spawn overhead) | Instant |
-| Token tracking | Exact | Approximate (char count) | N/A |
-| Model selection | Any Anthropic model | Any model available to your Claude Code plan | N/A |
-| Output quality | Full LLM quality | Full LLM quality | Template-based |
+| Feature | Anthropic API | Claude Code CLI | Claude Code Session | Browser Bridge | No LLM |
+|---------|--------------|----------------|--------------------|----|--------|
+| Authentication | `ANTHROPIC_API_KEY` | Claude Code login | Claude Code login | Claude Code login | None |
+| Billing | API credits | Subscription | Subscription | Subscription | Free |
+| Latency per call | ~2-5s | ~3-8s | ~3-8s (shared context) | ~3-8s + WS overhead | Instant |
+| Token tracking | Exact | Approximate | Approximate | Approximate | N/A |
+| Model selection | Any Anthropic model | Any Claude Code model | Any Claude Code model | Any Claude Code model | N/A |
+| Output quality | Full LLM | Full LLM | Full LLM | Full LLM | Template-based |
+| Context sharing | Per-call | Per-call | Session-scoped | Per-call | N/A |
+| Environment | CLI only | CLI only | CLI only | Browser UI | Both |

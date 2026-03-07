@@ -28,7 +28,7 @@ import { compileTemplatePack } from './templateCompiler.ts'
 import { assembleBackbone } from './backboneAssembler.ts'
 import { synthesizeDetails } from './detailSynthesizer.ts'
 import { buildPlan } from './planner.ts'
-import { writeScene } from '../agents/writerAgent.ts'
+import { writeScene, writeSceneStreaming } from '../agents/writerAgent.ts'
 import { validateScenes } from '../validators/validationEngine.ts'
 import { repair } from './repairEngine.ts'
 import { buildTrace, generateComplianceReport } from './traceEngine.ts'
@@ -70,6 +70,8 @@ export interface OrchestratorOptions {
   llm?: LLMAdapter | null
   mode?: GenerationMode
   onEvent?: (event: OrchestratorEvent) => void
+  /** Called with partial text chunks during scene writing (streaming mode). */
+  onSceneChunk?: (sceneId: string, chunk: string) => void
 }
 
 // ---------------------------------------------------------------------------
@@ -109,7 +111,7 @@ function assertTransition(from: OrchestratorState, to: OrchestratorState): void 
  * Returns all artifacts produced during the run.
  */
 export async function orchestrate(options: OrchestratorOptions): Promise<OrchestratorResult> {
-  const { request, provider, config, llm = null, mode = 'draft', onEvent } = options
+  const { request, provider, config, llm = null, mode = 'draft', onEvent, onSceneChunk } = options
 
   let state: OrchestratorState = 'IDLE'
   const events: OrchestratorEvent[] = []
@@ -210,7 +212,9 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       transition('GENERATING_SCENE', `Writing scene ${scene.scene_id}`)
       const sceneIndex = plan.scenes.indexOf(scene)
       const priorScenes = plan.scenes.slice(0, sceneIndex)
-      const writeResult = await writeScene(scene, beat, contract, llm, plan, priorScenes)
+      const writeResult = onSceneChunk
+        ? await writeSceneStreaming(scene, beat, contract, llm, (chunk) => onSceneChunk(scene.scene_id, chunk), plan, priorScenes)
+        : await writeScene(scene, beat, contract, llm, plan, priorScenes)
       sceneDrafts.set(scene.scene_id, writeResult.content)
 
       // 6. Validate

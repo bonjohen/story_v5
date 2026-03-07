@@ -7,6 +7,8 @@
 import { create } from 'zustand'
 import type { GenerationMode } from '../artifacts/types.ts'
 
+export type LlmBackend = 'none' | 'bridge'
+
 export interface RequestStoreState {
   // Core selections
   premise: string
@@ -14,6 +16,8 @@ export interface RequestStoreState {
   genre: string
   mode: GenerationMode
   tone: string
+  llmBackend: LlmBackend
+  bridgeUrl: string
 
   // Slot overrides — user-edited values for template slots
   // Keyed by slot_name, value is the user's override (empty string = use default)
@@ -25,6 +29,8 @@ export interface RequestStoreState {
   setGenre: (v: string) => void
   setMode: (v: GenerationMode) => void
   setTone: (v: string) => void
+  setLlmBackend: (v: LlmBackend) => void
+  setBridgeUrl: (v: string) => void
   setSlotOverride: (slotName: string, value: string) => void
   clearSlotOverrides: () => void
 }
@@ -35,6 +41,8 @@ export const useRequestStore = create<RequestStoreState>((set) => ({
   genre: 'Science Fiction',
   mode: 'draft',
   tone: 'somber',
+  llmBackend: 'none',
+  bridgeUrl: 'ws://127.0.0.1:8765',
   slotOverrides: {},
 
   setPremise: (v) => set({ premise: v }),
@@ -42,6 +50,8 @@ export const useRequestStore = create<RequestStoreState>((set) => ({
   setGenre: (v) => set({ genre: v }),
   setMode: (v) => set({ mode: v }),
   setTone: (v) => set({ tone: v }),
+  setLlmBackend: (v) => set({ llmBackend: v }),
+  setBridgeUrl: (v) => set({ bridgeUrl: v }),
   setSlotOverride: (slotName, value) =>
     set((s) => ({ slotOverrides: { ...s.slotOverrides, [slotName]: value } })),
   clearSlotOverrides: () => set({ slotOverrides: {} }),

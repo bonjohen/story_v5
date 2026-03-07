@@ -17,6 +17,8 @@
  *   --claude-code        Use Claude Code CLI as the LLM backend (instead of Anthropic API)
  *   --claude-path <path> Path to claude binary (default: 'claude')
  *   --max-tokens <n>     Maximum response tokens (default: adapter default)
+ *   --stream              Enable streaming output for scene writing (claude-code only)
+ *   --claude-session      Use session-aware Claude Code adapter (shares context across calls)
  *   --verbose            Enable verbose logging of LLM calls
  */
 
@@ -26,6 +28,7 @@ import { parseGraphJson } from '../src/graph-engine/normalizer.ts'
 import { orchestrate } from '../src/generation/engine/orchestrator.ts'
 import { AnthropicAdapter } from '../src/generation/agents/anthropicAdapter.ts'
 import { ClaudeCodeAdapter } from '../src/generation/agents/claudeCodeAdapter.ts'
+import { ClaudeCodeSessionAdapter } from '../src/generation/agents/claudeCodeSessionAdapter.ts'
 import type { DataProvider } from '../src/generation/engine/corpusLoader.ts'
 import type {
   StoryRequest,
@@ -53,10 +56,12 @@ const maxTokens = getArg('--max-tokens') ? parseInt(getArg('--max-tokens')!, 10)
 const noLlm = args.includes('--no-llm')
 const useClaudeCode = args.includes('--claude-code')
 const claudePath = getArg('--claude-path')
+const stream = args.includes('--stream')
+const useSession = args.includes('--claude-session')
 const verbose = args.includes('--verbose')
 
 if (!requestPath) {
-  console.error('Usage: npx tsx app/scripts/generate_story.ts --request <file> [--mode draft|outline|contract-only] [--no-llm] [--claude-code]')
+  console.error('Usage: npx tsx app/scripts/generate_story.ts --request <file> [--mode draft|outline|contract-only] [--no-llm] [--claude-code] [--stream]')
   process.exit(1)
 }
 
@@ -111,6 +116,15 @@ const fsProvider: DataProvider = {
 
 function createLlm() {
   if (noLlm) return null
+  if (useSession) {
+    return new ClaudeCodeSessionAdapter({
+      claudePath: claudePath ?? undefined,
+      model: model ?? undefined,
+      maxTokens,
+      verbose,
+      cwd: PROJECT_ROOT,
+    })
+  }
   if (useClaudeCode) {
     return new ClaudeCodeAdapter({
       claudePath: claudePath ?? undefined,
@@ -135,7 +149,7 @@ const llm = createLlm()
 async function main() {
   console.log(`\n=== Story Generation ===`)
   console.log(`Mode: ${mode}`)
-  console.log(`LLM: ${noLlm ? 'disabled' : useClaudeCode ? 'claude-code' : (model ?? 'anthropic-api')}`)
+  console.log(`LLM: ${noLlm ? 'disabled' : useSession ? 'claude-session' : useClaudeCode ? 'claude-code' : (model ?? 'anthropic-api')}${stream ? ' (streaming)' : ''}`)
   console.log(`Request: ${requestPath}`)
   console.log('')
 
@@ -149,6 +163,9 @@ async function main() {
       const time = new Date(event.timestamp).toLocaleTimeString()
       console.log(`  [${time}] ${event.state}: ${event.message}`)
     },
+    onSceneChunk: stream && verbose
+      ? (sceneId, chunk) => process.stderr.write(`[${sceneId}] ${chunk}`)
+      : undefined,
   })
 
   // Write output

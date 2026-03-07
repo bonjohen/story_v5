@@ -115,6 +115,8 @@ export async function runDetailAgent(
   backbone: StoryBackbone,
 ): Promise<Partial<StoryDetailBindings>> {
   const messages = buildDetailSynthesisPrompt(request, backbone)
-  const response = await llm.complete(messages)
+  const response = llm.completeJson
+    ? await llm.completeJson(messages)
+    : await llm.complete(messages)
   return parseDetailResponse(response.content)
 }

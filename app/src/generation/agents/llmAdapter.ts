@@ -22,6 +22,12 @@ export interface LLMResponse {
 export interface LLMAdapter {
   /** Send a completion request and return the response text. */
   complete(messages: LLMMessage[]): Promise<LLMResponse>
+
+  /** Stream a completion, yielding partial text chunks as they arrive. Optional. */
+  completeStream?(messages: LLMMessage[]): AsyncIterable<string>
+
+  /** Complete with JSON output mode — strips fences, validates JSON. Optional. */
+  completeJson?(messages: LLMMessage[]): Promise<LLMResponse>
 }
 
 // ---------------------------------------------------------------------------

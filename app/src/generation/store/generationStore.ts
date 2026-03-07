@@ -21,6 +21,7 @@ import type {
 } from '../artifacts/types.ts'
 import type { OrchestratorEvent, OrchestratorResult } from '../engine/orchestrator.ts'
 import { orchestrate } from '../engine/orchestrator.ts'
+import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import { FetchDataProvider } from '../engine/corpusLoader.ts'
 
 // ---------------------------------------------------------------------------
@@ -58,7 +59,7 @@ export interface GenerationStoreState {
   error: string | null
 
   // Actions
-  startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode) => Promise<void>
+  startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode, llm?: LLMAdapter | null) => Promise<void>
   loadResult: (result: OrchestratorResult, request: StoryRequest) => void
   selectScene: (sceneId: string | null) => void
   clearRun: () => void
@@ -97,7 +98,7 @@ const INITIAL_STATE = {
 export const useGenerationStore = create<GenerationStoreState>((set) => ({
   ...INITIAL_STATE,
 
-  startRun: async (request, config, mode = 'contract-only') => {
+  startRun: async (request, config, mode = 'contract-only', llm = null) => {
     set({
       ...INITIAL_STATE,
       status: 'IDLE',
@@ -115,7 +116,7 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
         request,
         provider,
         config,
-        llm: null, // Browser mode: no LLM
+        llm,
         mode,
         onEvent: (event) => {
           set((state) => ({
