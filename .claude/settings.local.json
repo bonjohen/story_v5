@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Bash(*&&*)",
+      "Bash(gh *)",
+      "Bash(git *)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git *)",
+      "Bash(ls *)",
+      "Bash(echo *)",
+      "Bash(mkdir *)",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "Agent",
+      "Bash(git:*)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(python3:*)"
+    ]
+  }
+}
