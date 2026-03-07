@@ -161,10 +161,10 @@ Before implementing, note what already exists and what the database augments (no
 
 **Goal:** Add operational metadata tables.
 
-- [ ] **5.1** Create `app/src/db/migrations/005_artifacts_runs_tags.ts` — migration 5: `CREATE TABLE artifacts`, `CREATE TABLE runs`, `CREATE TABLE tags`, `CREATE TABLE tag_assignments`. Columns from design doc sections 7.8–7.11.
-- [ ] **5.2** Create `app/src/db/repository/artifactRepo.ts` — CRUD: `createArtifact`, `listArtifactsByStory`, `listArtifactsByType`, `getArtifact`, `updateArtifact`, `deleteArtifact`.
-- [ ] **5.3** Create `app/src/db/repository/runRepo.ts` — CRUD: `createRun`, `listRunsByStory`, `getRun`, `updateRun` (for setting `finished_at` and `status`).
-- [ ] **5.4** Create `app/src/db/repository/tagRepo.ts` — `createTag`, `listTags`, `assignTag`, `removeTagAssignment`, `listTagsForObject`, `listObjectsWithTag`.
+- [X] **5.1** Create `app/src/db/migrations/005_artifacts_runs_tags.ts` — migration 5: `CREATE TABLE artifacts`, `CREATE TABLE runs`, `CREATE TABLE tags`, `CREATE TABLE tag_assignments`. Columns from design doc sections 7.8–7.11.
+- [X] **5.2** Create `app/src/db/repository/artifactRepo.ts` — CRUD: `createArtifact`, `listArtifactsByStory`, `listArtifactsByType`, `getArtifact`, `updateArtifact`, `deleteArtifact`.
+- [X] **5.3** Create `app/src/db/repository/runRepo.ts` — CRUD: `createRun`, `listRunsByStory`, `getRun`, `updateRun` (for setting `finished_at` and `status`).
+- [X] **5.4** Create `app/src/db/repository/tagRepo.ts` — `createTag`, `listTags`, `assignTag`, `removeTagAssignment`, `listTagsForObject`, `listObjectsWithTag`.
 - [ ] **5.5** Unit tests for artifact/run/tag repositories.
 
 ---
