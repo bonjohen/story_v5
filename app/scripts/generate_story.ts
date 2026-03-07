@@ -14,6 +14,10 @@
  *   --model <model>      LLM model to use (default: claude-sonnet-4-20250514)
  *   --max-repairs <n>    Max repair attempts per scene (default: 2)
  *   --no-llm             Run without LLM (deterministic only)
+ *   --claude-code        Use Claude Code CLI as the LLM backend (instead of Anthropic API)
+ *   --claude-path <path> Path to claude binary (default: 'claude')
+ *   --max-tokens <n>     Maximum response tokens (default: adapter default)
+ *   --verbose            Enable verbose logging of LLM calls
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
@@ -21,6 +25,7 @@ import { resolve, join } from 'path'
 import { parseGraphJson } from '../src/graph-engine/normalizer.ts'
 import { orchestrate } from '../src/generation/engine/orchestrator.ts'
 import { AnthropicAdapter } from '../src/generation/agents/anthropicAdapter.ts'
+import { ClaudeCodeAdapter } from '../src/generation/agents/claudeCodeAdapter.ts'
 import type { DataProvider } from '../src/generation/engine/corpusLoader.ts'
 import type {
   StoryRequest,
@@ -44,10 +49,14 @@ const outDir = getArg('--out')
 const mode = (getArg('--mode') ?? 'draft') as GenerationMode
 const model = getArg('--model')
 const maxRepairs = parseInt(getArg('--max-repairs') ?? '2', 10)
+const maxTokens = getArg('--max-tokens') ? parseInt(getArg('--max-tokens')!, 10) : undefined
 const noLlm = args.includes('--no-llm')
+const useClaudeCode = args.includes('--claude-code')
+const claudePath = getArg('--claude-path')
+const verbose = args.includes('--verbose')
 
 if (!requestPath) {
-  console.error('Usage: npx tsx app/scripts/generate_story.ts --request <file> [--mode draft|outline|contract-only] [--no-llm]')
+  console.error('Usage: npx tsx app/scripts/generate_story.ts --request <file> [--mode draft|outline|contract-only] [--no-llm] [--claude-code]')
   process.exit(1)
 }
 
@@ -68,7 +77,6 @@ const config: GenerationConfig = existsSync(CONFIG_PATH)
       tone_policy: { mode: 'warn' },
       repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
       coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
-      composition_defaults: { allow_blend: true, allow_hybrid: false },
     }
 
 // Apply CLI overrides
@@ -101,7 +109,24 @@ const fsProvider: DataProvider = {
 // LLM adapter
 // ---------------------------------------------------------------------------
 
-const llm = noLlm ? null : new AnthropicAdapter({ model: model ?? undefined })
+function createLlm() {
+  if (noLlm) return null
+  if (useClaudeCode) {
+    return new ClaudeCodeAdapter({
+      claudePath: claudePath ?? undefined,
+      model: model ?? undefined,
+      maxTokens,
+      verbose,
+      cwd: PROJECT_ROOT,
+    })
+  }
+  return new AnthropicAdapter({
+    model: model ?? undefined,
+    maxTokens,
+  })
+}
+
+const llm = createLlm()
 
 // ---------------------------------------------------------------------------
 // Run
@@ -110,7 +135,7 @@ const llm = noLlm ? null : new AnthropicAdapter({ model: model ?? undefined })
 async function main() {
   console.log(`\n=== Story Generation ===`)
   console.log(`Mode: ${mode}`)
-  console.log(`LLM: ${noLlm ? 'disabled' : (model ?? 'default')}`)
+  console.log(`LLM: ${noLlm ? 'disabled' : useClaudeCode ? 'claude-code' : (model ?? 'anthropic-api')}`)
   console.log(`Request: ${requestPath}`)
   console.log('')
 
@@ -160,6 +185,16 @@ async function main() {
   }
   if (result.complianceReport) {
     writeFileSync(join(runDir, 'compliance_report.md'), result.complianceReport)
+  }
+  if (result.chapterManifest) {
+    writeFileSync(join(runDir, 'chapter_manifest.json'), JSON.stringify(result.chapterManifest, null, 2))
+  }
+  if (result.chapterTexts) {
+    const chaptersDir = join(runDir, 'chapters')
+    mkdirSync(chaptersDir, { recursive: true })
+    for (const [chapterId, text] of result.chapterTexts) {
+      writeFileSync(join(chaptersDir, `${chapterId}.md`), text)
+    }
   }
 
   console.log(`\n=== Result ===`)
