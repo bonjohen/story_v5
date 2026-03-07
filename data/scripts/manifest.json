@@ -37,5 +37,9 @@
   { "slug": "notes_system_guide", "title": "The Notes System", "subtitle": "Tagging, entity linking, saved queries, and backlinks", "estimatedMinutes": 8, "category": "Author Surfaces" },
   { "slug": "navigation_and_search_guide", "title": "Navigation and Global Search", "subtitle": "Cross-surface navigation, global search, and workspace persistence", "estimatedMinutes": 6, "category": "Author Surfaces" },
   { "slug": "example_fantasy_story", "title": "Building a Fantasy Story", "subtitle": "A worked example: from premise to compliance trace", "estimatedMinutes": 11, "category": "Examples" },
-  { "slug": "example_mystery_story", "title": "Building a Mystery", "subtitle": "A worked example: fair clueing, investigation structure, and compliance", "estimatedMinutes": 11, "category": "Examples" }
+  { "slug": "example_mystery_story", "title": "Building a Mystery", "subtitle": "A worked example: fair clueing, investigation structure, and compliance", "estimatedMinutes": 11, "category": "Examples" },
+  { "slug": "data_layer_overview", "title": "The SQLite Data Layer", "subtitle": "Browser-side relational database for story metadata, vocabulary, and queries", "estimatedMinutes": 10, "category": "Data Layer" },
+  { "slug": "vocabulary_templatization", "title": "Vocabulary Templatization", "subtitle": "How controlled vocabulary terms become queryable database records", "estimatedMinutes": 10, "category": "Data Layer" },
+  { "slug": "import_bridge_indexing", "title": "The Import Bridge", "subtitle": "Indexing stories from localStorage into the SQLite database", "estimatedMinutes": 9, "category": "Data Layer" },
+  { "slug": "db_management_and_export", "title": "Database Management and Export", "subtitle": "The /db page: status, vocabulary browser, coverage, and export", "estimatedMinutes": 9, "category": "Data Layer" }
 ]

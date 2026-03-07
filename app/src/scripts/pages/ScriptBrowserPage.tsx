@@ -13,6 +13,7 @@ const CATEGORY_ORDER = [
   'What This Enables',
   'Using the System',
   'Author Surfaces',
+  'Data Layer',
   'Examples',
 ]
 

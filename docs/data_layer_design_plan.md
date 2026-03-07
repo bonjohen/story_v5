@@ -20,7 +20,7 @@ The design document (section 20) lists open questions. Resolutions below guide a
 | 6 | Generic object tables | Not in V1. Entity types are differentiated by `entity_type` text column. |
 | 7 | Soft deletes | Not in V1. Use hard deletes. Add `deleted_at` column in V2 if needed. |
 | 8 | Revision tables | Not in V1. |
-| 9 | Import/sync from JSON corpus | Phase 6 builds importers that read StoryInstance (from localStorage or .story.json) and write rows. Phase 7 imports corpus vocabulary terms. |
+| 9 | Import/sync from JSON corpus | Phase 7 builds importers that read StoryInstance (from localStorage or .story.json) and write rows. Phase 3 imports corpus vocabulary terms. |
 | 10 | Manuscript text storage | Manuscript prose stays on disk / in localStorage. The `artifacts` table stores file path and content hash references. |
 
 ---

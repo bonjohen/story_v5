@@ -14,6 +14,8 @@ This is a **data and content project** that models storytelling structures as fo
 
 4. **Backbone Synthesis & Assembly** — a new generation pipeline stage that templatizes corpus knowledge, assembles story backbones with explicit slots, synthesizes story-specific details via LLM, and stitches scenes into chapter documents. See `docs/backbone_synthesis_assembly.md` (design) and `docs/backbone_synthesis_assembly_plan.md` (8-phase implementation plan).
 
+5. **SQLite Data Layer** — a browser-side SQLite metadata store (via sql.js/WASM) that indexes story entities, scenes, chapters, vocabulary terms, and generation artifacts into a queryable relational database. Persisted to IndexedDB, exportable as `.db` file. Includes vocabulary templatization (9 domains, ~102 terms), import bridges from StoryInstance/manuscript/generation pipeline, and query UI (vocabulary browser, template coverage). See `docs/data_layer_design_plan.md` (9-phase implementation plan).
+
 ## Repository Structure
 
 ```
@@ -26,6 +28,7 @@ docs/                              ← Planning, specs, and task tracking
   interactive_viewer_plan.md       ← 8-phase implementation plan for the viewer
   backbone_synthesis_assembly.md   ← Design doc: template, backbone, detail, chapter stages
   backbone_synthesis_assembly_plan.md ← 8-phase implementation plan for backbone synthesis
+  data_layer_design_plan.md        ← 9-phase SQLite data layer implementation plan
   archetypes.json                   ← 15 archetypes: descriptions, examples, genres
   genres.json                      ← 27 genres: descriptions, examples, popularity
 
@@ -83,7 +86,18 @@ app/                               ← Interactive viewer (React + TypeScript + 
     store/                         ← Zustand stores (graphStore, settingsStore)
     layout/                        ← Graph layout algorithms
     types/                         ← TypeScript interfaces
+    instance/                      ← Story instance workspace (entity editors, lore management)
+    manuscript/                    ← Manuscript workspace (prose editing, diff view)
+    notes/                         ← Notes system (tagging, entity linking, backlinks)
+    encyclopedia/                  ← Auto-generated lore encyclopedia
+    sceneboard/                    ← Scene board (card-based scene planning)
+    timelineview/                  ← Timeline view (chronological events, swim lanes)
     scripts/                       ← Walkthrough script pages, store, TTS engine
+    db/                            ← SQLite data layer (sql.js, migrations, repos, importers, UI)
+      migrations/                  ← Numbered migration SQL modules
+      repository/                  ← CRUD repos for each table (projectRepo, entityRepo, etc.)
+      import/                      ← Import bridges (vocabulary, instance, manuscript, generation)
+      panels/                      ← DB UI panels (VocabularyBrowser, TemplateCoverage)
   public/data/                     ← Copied graph JSON data served by Vite
 ```
 
@@ -93,6 +107,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 2 — Genre Depth Graphs**: Complete. All 27 graph JSONs, 27 narrative specs, 27 example mappings, cross-genre constraint index, genre × archetype compatibility matrix, and validation done.
 - **Goal 3 — Interactive Viewer**: Complete. All 8 phases implemented plus post-phase updates: info panel moved to top, simulation removed, Templates panel and requestStore added, character role profiles, blend/hybrid selection, GitHub Pages deployment.
 - **Goal 4 — Backbone Synthesis & Assembly**: Complete. All 8 phases implemented (schemas, TemplateCompiler, BackboneAssembler, feature packs, DetailSynthesizer, ChapterAssembler, orchestrator integration, documentation/scripts).
+- **Goal 5 — SQLite Data Layer**: Complete. All 9 phases implemented (foundation, core schema, vocabulary templatization, chapters/scenes, artifacts/runs/tags, indexes/queries, import bridge, export/management UI, query UI). Unit tests pending.
 
 ## Key Conventions
 
@@ -140,6 +155,7 @@ Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 - **Pre-push hook**: `.githooks/pre-push` runs `tsc -b` before every push to prevent broken builds
 - **Build**: `cd app && npm run build` runs `tsc -b && vite build`
 - **Typecheck only**: `cd app && npm run typecheck`
+- **Routes**: `/` (graph viewer), `/scripts` (walkthrough scripts), `/db` (database management), `/instance/*` (story workspace), `/manuscript` (manuscript editor)
 
 ### Bug Tracking
 
