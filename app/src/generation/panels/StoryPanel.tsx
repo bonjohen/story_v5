@@ -5,6 +5,7 @@
 
 import { useMemo, useCallback, useRef, useEffect } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
+import { ReadAloudButton } from './ReadAloudButton.tsx'
 
 interface StoryPanelProps {
   onHighlightNodes?: (nodeIds: string[]) => void
@@ -58,6 +59,10 @@ export function StoryPanel({ onHighlightNodes }: StoryPanelProps) {
       : request.premise
     : 'Untitled Story'
 
+  const getStoryText = useCallback(() => {
+    return orderedScenes.map(({ content }) => content).join('\n\n')
+  }, [orderedScenes])
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Story header */}
@@ -68,13 +73,20 @@ export function StoryPanel({ onHighlightNodes }: StoryPanelProps) {
         flexShrink: 0,
       }}>
         <div style={{
-          fontSize: 13,
-          fontWeight: 700,
-          color: 'var(--text-primary)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           marginBottom: 4,
-          lineHeight: 1.4,
         }}>
-          {title}
+          <span style={{
+            fontSize: 13,
+            fontWeight: 700,
+            color: 'var(--text-primary)',
+            lineHeight: 1.4,
+          }}>
+            {title}
+          </span>
+          <ReadAloudButton getText={getStoryText} />
         </div>
         <div style={{
           fontSize: 10,

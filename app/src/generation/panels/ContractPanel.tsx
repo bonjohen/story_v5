@@ -6,6 +6,7 @@
 
 import { useState, useCallback } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
+import { ReadAloudButton } from './ReadAloudButton.tsx'
 
 interface ContractPanelProps {
   onHighlightNodes?: (nodeIds: string[]) => void
@@ -34,6 +35,36 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
 
   const { archetype, genre, global_boundaries, phase_guidelines, validation_policy } = contract
 
+  const getContractText = useCallback(() => {
+    const lines: string[] = []
+    lines.push(`Story Contract. Archetype: ${archetype.name}. Genre: ${genre.name}.`)
+    if (selection) {
+      lines.push(`Compatibility: ${selection.compatibility.matrix_classification}.`)
+    }
+    if (global_boundaries.musts.length > 0) {
+      lines.push(`Must include: ${global_boundaries.musts.join('. ')}.`)
+    }
+    if (global_boundaries.must_nots.length > 0) {
+      lines.push(`Must exclude: ${global_boundaries.must_nots.join('. ')}.`)
+    }
+    if (archetype.spine_nodes.length > 0) {
+      lines.push(`Archetype spine has ${archetype.spine_nodes.length} nodes.`)
+    }
+    if (genre.hard_constraints.length > 0) {
+      lines.push(`${genre.hard_constraints.length} hard genre constraints.`)
+    }
+    if (genre.soft_constraints.length > 0) {
+      lines.push(`${genre.soft_constraints.length} soft genre constraints.`)
+    }
+    if (phase_guidelines.length > 0) {
+      lines.push('Phase guidelines:')
+      for (const pg of phase_guidelines) {
+        lines.push(`${pg.role}: ${pg.definition}`)
+      }
+    }
+    return lines.join('\n\n')
+  }, [archetype, genre, global_boundaries, phase_guidelines, selection])
+
   return (
     <div style={{ fontSize: 11, color: 'var(--text-primary)' }}>
       {/* Header summary */}
@@ -42,7 +73,10 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
         borderBottom: '1px solid var(--border)',
         background: 'var(--bg-primary)',
       }}>
-        <div style={{ fontWeight: 600, fontSize: 12, marginBottom: 4 }}>Story Contract</div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+          <span style={{ fontWeight: 600, fontSize: 12 }}>Story Contract</span>
+          <ReadAloudButton getText={getContractText} />
+        </div>
         <div style={{ display: 'flex', gap: 8 }}>
           <span style={{
             fontSize: 10,
