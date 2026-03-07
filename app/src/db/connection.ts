@@ -10,15 +10,25 @@ const IDB_STORE = 'databases'
 const IDB_DB_NAME = 'story_v5_sqljs'
 
 let db: Database | null = null
-let sqlPromise: ReturnType<typeof initSqlJs> | null = null
+let sqlPromise: Promise<Awaited<ReturnType<typeof initSqlJs>>> | null = null
+let dbUnavailable = false
 
 function getSqlJs() {
   if (!sqlPromise) {
     sqlPromise = initSqlJs({
       locateFile: (file: string) => `${import.meta.env.BASE_URL}${file}`,
+    }).catch((err) => {
+      dbUnavailable = true
+      sqlPromise = null
+      throw new Error(`SQLite WASM unavailable: ${err}`)
     })
   }
   return sqlPromise
+}
+
+/** Returns true if the database failed to initialize (e.g. WASM not available). */
+export function isDbUnavailable(): boolean {
+  return dbUnavailable
 }
 
 function openIDB(): Promise<IDBDatabase> {
