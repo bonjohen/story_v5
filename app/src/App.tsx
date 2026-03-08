@@ -17,10 +17,12 @@ import { ExportPanel } from './panels/ExportPanel.tsx'
 import { Disclosure } from './components/Disclosure.tsx'
 import { AppShellBar } from './components/AppShell.tsx'
 import { useUIStore } from './store/uiStore.ts'
-import { GenerationPanel } from './generation/panels/GenerationPanel.tsx'
+import { PipelineTab } from './generation/panels/PipelineTab.tsx'
+import { StorySetupTab } from './generation/panels/StorySetupTab.tsx'
+import { ElementsTab } from './generation/panels/ElementsTab.tsx'
+import { GenerateTab } from './generation/panels/GenerateTab.tsx'
 import { ContractPanel } from './generation/panels/ContractPanel.tsx'
 import { PlanPanel } from './generation/panels/PlanPanel.tsx'
-import { TracePanel } from './generation/panels/TracePanel.tsx'
 import { CompliancePanel } from './generation/panels/CompliancePanel.tsx'
 import { StoryPanel } from './generation/panels/StoryPanel.tsx'
 import { TemplatesPanel } from './generation/panels/TemplatesPanel.tsx'
@@ -34,6 +36,18 @@ import type { DataManifest } from './types/graph.ts'
 
 // Layout constants
 const GEN_PANEL_WIDTH = 340
+const MOBILE_BREAKPOINT = 768
+
+/** Hook to detect mobile viewport. */
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT)
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
+  return isMobile
+}
 
 /** Parse the URL pathname into a graph type and directory slug. */
 function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: string } | null {
@@ -46,6 +60,7 @@ function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: strin
 export default function App() {
   const location = useLocation()
   const manifestLoaded = useRef(false)
+  const isMobile = useIsMobile()
 
   // Store state
   const archetypeGraph = useGraphStore((s) => s.archetypeGraph)
@@ -94,7 +109,7 @@ export default function App() {
   // UI state
 
   const [showExport, setShowExport] = useState(false)
-  const [genTab, setGenTab] = useState<'run' | 'contract' | 'templates' | 'plan' | 'trace' | 'compliance' | 'story'>('run')
+  const [genTab, setGenTab] = useState<'pipeline' | 'setup' | 'elements' | 'generate'>('setup')
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
   const [manifestError, setManifestError] = useState<string | null>(null)
 
@@ -105,15 +120,15 @@ export default function App() {
   const handleGenreCyReady = useCallback((cy: CyCore) => { cyGenreRef.current = cy }, [])
 
 
-  // Auto-switch to Story tab once when draft generation completes
-  const autoSwitchedToStory = useRef(false)
+  // Auto-switch to Generate tab once when draft generation completes
+  const autoSwitchedToGenerate = useRef(false)
   useEffect(() => {
-    if (genStatus === 'COMPLETED' && genSceneDrafts.size > 0 && !autoSwitchedToStory.current) {
-      autoSwitchedToStory.current = true
-      setGenTab('story')
+    if (genStatus === 'COMPLETED' && genSceneDrafts.size > 0 && !autoSwitchedToGenerate.current) {
+      autoSwitchedToGenerate.current = true
+      setGenTab('generate')
     }
     if (genStatus === 'IDLE') {
-      autoSwitchedToStory.current = false
+      autoSwitchedToGenerate.current = false
     }
   }, [genStatus, genSceneDrafts.size])
 
@@ -249,8 +264,8 @@ export default function App() {
           onClick={toggleGenPanel}
           aria-label={genPanelOpen ? 'Hide generation panel' : 'Show generation panel'}
           style={{
-            fontSize: 11,
-            padding: '3px 10px',
+            fontSize: isMobile ? 13 : 11,
+            padding: isMobile ? '6px 16px' : '3px 10px',
             borderRadius: 4,
             border: '1px solid',
             borderColor: genPanelOpen ? '#22c55e' : 'var(--border)',
@@ -259,9 +274,11 @@ export default function App() {
             cursor: 'pointer',
             transition: 'all 0.15s',
             position: 'relative',
+            minHeight: 44,
+            minWidth: 44,
           }}
         >
-          Generate
+          {genPanelOpen && isMobile ? '\u2715 Close' : 'Generate'}
           {genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED' && (
             <span style={{
               position: 'absolute',
@@ -368,40 +385,35 @@ export default function App() {
       )}
 
       {/* Main layout: Generation panel (left) + graphs (center) */}
-      <div className="main-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+      <div className="main-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
 
-        {/* Generation panel — toggleable sidebar */}
+        {/* Generation panel — sidebar on desktop, full-width on mobile */}
         {genPanelOpen && <div className="gen-panel" style={{
-          width: GEN_PANEL_WIDTH,
+          width: isMobile ? '100%' : GEN_PANEL_WIDTH,
           flexShrink: 0,
           background: 'var(--bg-surface)',
-          borderRight: '1px solid var(--border)',
+          borderRight: isMobile ? 'none' : '1px solid var(--border)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
+          ...(isMobile ? { position: 'absolute', top: 0, left: 0, bottom: 0, zIndex: 20 } : {}),
         }}>
-          {/* Generation sub-tabs — Run always first and prominent */}
+          {/* 4 fixed generation tabs */}
           <div style={{
             display: 'flex',
             borderBottom: '1px solid var(--border)',
             flexShrink: 0,
           }}>
-            <GenTab label={'\u25C0 Run'} active={genTab === 'run'} onClick={() => setGenTab('run')} highlight />
-            {genContract && <GenTab label="Contract" active={genTab === 'contract'} onClick={() => setGenTab('contract')} badge />}
-            {genTemplatePack && <GenTab label="Templates" active={genTab === 'templates'} onClick={() => setGenTab('templates')} badge />}
-            {genPlan && <GenTab label="Plan" active={genTab === 'plan'} onClick={() => setGenTab('plan')} badge />}
-            {genTrace && <GenTab label="Map" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge />}
-            {genValidation && <GenTab label="Checks" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge />}
-            {genSceneDrafts.size > 0 && <GenTab label="Story" active={genTab === 'story'} onClick={() => setGenTab('story')} badge />}
+            <GenTab label="Pipeline" active={genTab === 'pipeline'} onClick={() => setGenTab('pipeline')} />
+            <GenTab label="Setup" active={genTab === 'setup'} onClick={() => setGenTab('setup')} highlight />
+            <GenTab label="Elements" active={genTab === 'elements'} onClick={() => setGenTab('elements')} badge={!!genBackbone} />
+            <GenTab label="Generate" active={genTab === 'generate'} onClick={() => setGenTab('generate')} badge={genSceneDrafts.size > 0 || (genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED')} />
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
-            {genTab === 'run' && <GenerationPanel />}
-            {genTab === 'contract' && <ContractPanel onHighlightNodes={setGenHighlightNodes} />}
-            {genTab === 'templates' && <TemplatesPanel />}
-            {genTab === 'plan' && <PlanPanel onHighlightNodes={setGenHighlightNodes} />}
-            {genTab === 'trace' && <TracePanel onHighlightNodes={setGenHighlightNodes} />}
-            {genTab === 'compliance' && <CompliancePanel />}
-            {genTab === 'story' && <StoryPanel onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'pipeline' && <PipelineTab />}
+            {genTab === 'setup' && <StorySetupTab />}
+            {genTab === 'elements' && <ElementsTab />}
+            {genTab === 'generate' && <GenerateTab onHighlightNodes={setGenHighlightNodes} />}
           </div>
         </div>}
 
@@ -676,6 +688,10 @@ const GenTab = memo(function GenTab({ label, active, onClick, badge, highlight }
         borderBottom: active ? '2px solid #22c55e' : '2px solid transparent',
         transition: 'color 0.15s, border-color 0.15s',
         position: 'relative',
+        minHeight: 44,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       {label}
