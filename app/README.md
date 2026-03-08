@@ -198,18 +198,42 @@ Three archetypes have **beat sheets** — scene-level mappings with timestamps:
                       └──────────────┘
 ```
 
-## Interactive Viewer
+## Application
 
-The web application renders the graphs using Cytoscape.js and provides:
+The interface is organized around a 5-tab generation panel with progressive disclosure:
+
+### Generation Tabs
+
+| Tab | Purpose |
+|-----|---------|
+| **Pipeline** | LLM connection (Claude Code CLI bridge), backend selection, import/export snapshots, telemetry |
+| **Setup** | Archetype/genre dropdowns (synced to graphs), premise textarea (auto-populated), tone, contract summary |
+| **Elements** | Editable entity CRUD — characters (name, role, traits, flaw, arc), places (atmosphere, features), objects (significance). Fill All Details via single LLM call |
+| **Analysis** | Graph canvases (archetype/genre/compare), node/edge detail panel, statistics, cross-index, timeline, character arcs, generation artifacts (contract, backbone, plan, story, compliance, chapters) |
+| **Generate** | Two paths: "Build Structure" (no LLM) or "Generate Story" (LLM). Event log, inline prose output, save as instance |
+
+### Graph Visualization (Analysis Tab)
 
 - **Graph canvas** — Zoomable, pannable directed graph with role-based node coloring and edge styling
-- **Sidebar** — Browse and select from all 42 graphs; toggle variant branches and failure mode overlays
 - **Detail panel** — Full metadata for selected nodes/edges with entry/exit conditions, failure modes, and trace controls
 - **Trace navigation** — BFS forward/backward from any node to highlight reachable paths
-- **Simulation mode** — Step through a graph node by node, choosing transitions at each step
-- **Example overlay** — Highlight which nodes map to scenes in real works (e.g., Star Wars mapped onto Hero's Journey)
-- **Analytics** — Graph statistics, degree distributions, path lengths, and cross-index lookups
+- **Statistics** — Graph stats, degree distributions, path lengths, cross-index lookups
 - **Export** — PNG, SVG, DOT (Graphviz), Mermaid, and GraphML output formats
+
+### Routes
+
+| Route | Page |
+|-------|------|
+| `/` | Main app (5-tab generation panel) |
+| `/story` | Story workspace (entity editors, system maps) |
+| `/sceneboard` | Scene board (card-based scene planning with lanes) |
+| `/timeline` | Timeline view (chronological events, swim lanes) |
+| `/encyclopedia` | Auto-generated lore encyclopedia |
+| `/manuscript` | Manuscript workspace (chapter binder, prose editor, diff view) |
+| `/notes` | Notes browser (tagging, entity linking, backlinks) |
+| `/scripts` | Walkthrough scripts (41 scripts with TTS playback) |
+| `/series` | Series browser (multi-episode management) |
+| `/db` | Database management (SQLite status, vocabulary browser) |
 
 ## Repository Structure
 
@@ -219,29 +243,42 @@ data/                            All graph data and cross-references (see Data M
   vocabulary/                    Controlled vocabularies and ID conventions
   archetypes/{nn_name}/          15 archetype folders (graph.json, narrative.md, examples.md)
   genres/{nn_name}/              27 genre folders (graph.json, narrative.md, examples.md)
+  scripts/                       41 walkthrough scripts with manifest.json
   cross_references/              Cross-referencing datasets, manifest, and corpus metadata
 app/                             Interactive viewer (React + TypeScript + Vite)
   src/
-    components/                  UI components (GraphSearch, SettingsPanel, VariantToggle)
-    panels/                      Side panels (DetailPanel, SimulationPanel, ExportPanel, etc.)
+    components/                  Reusable UI (AppShell, NavDrawer, Disclosure, GraphSearch, SettingsPanel)
+    panels/                      Shared panels (DetailPanel, PairingPanel, ExportPanel, etc.)
     render/                      Cytoscape canvas, styles, element builders
     graph-engine/                Normalizer, validator, data index, example parser
-    store/                       Zustand stores (graphStore, simulationStore, settingsStore)
+    generation/                  Story generation pipeline
+      engine/                    Core engines (templateCompiler, backboneAssembler, orchestrator, etc.)
+      agents/                    LLM adapters and agent prompts (ClaudeCodeAdapter, writerAgent, etc.)
+      artifacts/                 Types, JSON schemas, I/O helpers
+      panels/                    5-tab UI (PipelineTab, StorySetupTab, ElementsTab, AnalysisTab, GenerateTab)
+      store/                     Generation stores (generationStore, requestStore)
+      series/                    Series/episode generation subsystem
+    store/                       Zustand stores (graphStore, settingsStore, uiStore)
     hooks/                       Custom React hooks (keyboard nav, trace navigation)
     layout/                      Graph layout algorithms
     types/                       TypeScript interfaces
-  scripts/                       Data processing scripts (metadata injection, severity, etc.)
+    instance/                    Story instance workspace (entity editors, lore management)
+    manuscript/                  Manuscript workspace (prose editing, diff view)
+    notes/                       Notes system (tagging, entity linking, backlinks)
+    encyclopedia/                Auto-generated lore encyclopedia
+    sceneboard/                  Scene board (card-based scene planning)
+    timelineview/                Timeline view (chronological events, swim lanes)
+    scripts/                     Walkthrough script pages, store, TTS engine
+    db/                          SQLite data layer (sql.js, migrations, repos, importers, UI)
 ```
 
 ## Scripts
 
 ```bash
-npm run dev          # Start dev server
-npm run build        # Production build
+npm run dev          # Start dev server (auto-starts bridge for LLM)
+npm run build        # Production build (tsc -b && vite build)
 npm run preview      # Preview production build
-npm run lint         # ESLint with type-aware rules
-npm run format       # Prettier formatting
-npm run test         # Run Vitest test suite (161 tests)
+npm run typecheck    # TypeScript type check only
 ```
 
 ## Story Generation System
@@ -283,12 +320,17 @@ npx tsx app/scripts/generate_story.ts --request outputs/samples/simple_request.j
 | Corpus Loader | `engine/corpusLoader.ts` | Loads all 42 graphs + cross-references |
 | Selection Engine | `engine/selectionEngine.ts` | Scores genre-archetype combinations |
 | Contract Compiler | `engine/contractCompiler.ts` | Builds enforceable story contract |
+| Template Compiler | `engine/templateCompiler.ts` | Extracts slot templates from graph nodes |
+| Backbone Assembler | `engine/backboneAssembler.ts` | Assembles story backbone with explicit slots |
+| Detail Synthesizer | `engine/detailSynthesizer.ts` | LLM fills character/place/object details |
 | Planner | `engine/planner.ts` | Beat scaffolding + scene assignment |
 | Writer Agent | `agents/writerAgent.ts` | LLM-backed scene prose generation |
 | Validator | `validators/validationEngine.ts` | Heuristic + LLM constraint checking |
 | Repair Engine | `engine/repairEngine.ts` | Targeted edit or full rewrite |
+| Chapter Assembler | `engine/chapterAssembler.ts` | Stitches scenes into chapter documents |
 | Trace Engine | `engine/traceEngine.ts` | Audit trail + compliance report |
 | Orchestrator | `engine/orchestrator.ts` | State machine wiring everything together |
+| Claude Code Adapter | `agents/claudeCodeAdapter.ts` | LLM via Claude Code CLI (`claude --print`) |
 
 ### Configuration
 
@@ -307,9 +349,9 @@ See `generation_config.json` at project root:
 ## Tech Stack
 
 - **React 19** + **TypeScript** (strict mode)
-- **Vite 7** (dev server and build)
+- **Vite 7** (dev server and build, auto-starts LLM bridge)
 - **Cytoscape.js** (graph rendering)
-- **Zustand** (state management with persistence)
-- **React Router** (URL-based graph navigation)
-- **Vitest** + **Testing Library** (unit and component testing)
-- **ESLint** (type-aware rules via typescript-eslint) + **Prettier**
+- **Zustand** (state management with localStorage persistence)
+- **React Router** (client-side routing for all pages)
+- **sql.js** (browser-side SQLite via WASM, persisted to IndexedDB)
+- **Web Speech API** (TTS for walkthrough scripts)

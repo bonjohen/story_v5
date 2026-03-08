@@ -34,25 +34,28 @@ This is a **data and content project** that models storytelling structures as fo
 
 7. **UI Upgrade (Progressive Disclosure)** — restructured the interface around progressive disclosure: hamburger menu + NavDrawer replacing toolbar buttons, collapsible generation panel, info panel with accordion groups instead of 14 flat tabs, single-graph focus mode with optional split view, mobile-responsive CSS with 44px touch targets, and consistent AppShellBar across all sub-pages. See `docs/user_interface_upgrade_plan.md` (8-phase plan).
 
+8. **Generation UI Redesign** — replaced the monolithic GenerationPanel (882 lines) with 5 focused tabs: Pipeline (LLM connection, import/export), Story Setup (archetype/genre selection, premise, tone), Elements (editable entity CRUD for characters/places/objects), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Build Structure / Generate Story buttons, event log, prose output). See `docs/generation_ui_redesign_plan.md`.
+
 ## Repository Structure
 
 ```
-docs/                              ← Planning, specs, and task tracking
-  v0_plan.md                       ← Authoritative statement of work (read first)
-  goal_1.md                        ← Goal 1 task tracker (complete)
-  goal_2.md                        ← Goal 2 task tracker (complete)
-  v-next.md                        ← Deferred items: issues, suggestions, enhancements
-  interactive_viewer_design.md     ← UI/UX spec for interactive graph viewer
-  interactive_viewer_plan.md       ← 8-phase implementation plan for the viewer
-  backbone_synthesis_assembly.md   ← Design doc: template, backbone, detail, chapter stages
-  backbone_synthesis_assembly_plan.md ← 8-phase implementation plan for backbone synthesis
-  data_layer_design_plan.md        ← 9-phase SQLite data layer implementation plan
-  claude_code_cli_interface_design.md ← Design doc: Claude Code CLI adapter
-  claude_code_cli_interface_usage.md  ← Usage guide for CLI-based generation
-  claude_code_cli_interface_plan.md   ← Implementation plan for CLI interface enhancements
-  user_interface_upgrade_plan.md     ← 8-phase UI upgrade plan (progressive disclosure)
-  archetypes.json                   ← 15 archetypes: descriptions, examples, genres
-  genres.json                      ← 27 genres: descriptions, examples, popularity
+docs/                              ← Active planning and specs
+  generation_ui_redesign_plan.md   ← 5-tab generation UI redesign (complete)
+  story_elements_and_timelines.md  ← Story elements and timeline design
+  story_elements_and_timelines_plan.md ← Implementation plan
+  user_interface_upgrade_plan.md   ← 8-phase UI upgrade plan (complete)
+  archive/                         ← Completed plans and historical docs
+    v0_plan.md                     ← Original statement of work
+    goal_1.md, goal_2.md           ← Task trackers (complete)
+    v-next.md                      ← Deferred items (all resolved)
+    interactive_viewer_design.md   ← UI/UX spec for graph viewer
+    interactive_viewer_plan.md     ← 8-phase viewer implementation plan
+    backbone_synthesis_assembly.md ← Backbone pipeline design
+    backbone_synthesis_assembly_plan.md ← 8-phase backbone plan
+    data_layer_design_plan.md      ← 9-phase SQLite data layer plan
+    claude_code_cli_interface_*.md ← CLI adapter design, usage, plan
+    competition_review_plan.md     ← Author surfaces plan (complete)
+    code_review.md, code_review_2_plan.md ← Bug audit plans (complete)
 
 data/                              ← Deliverable outputs
   vocabulary/                      ← Controlled vocabularies and ID conventions
@@ -74,7 +77,7 @@ data/                              ← Deliverable outputs
       graph.json
       narrative.md
       examples.md
-  scripts/                           ← Walkthrough scripts for TTS-enabled reader
+  scripts/                           ← Walkthrough scripts for TTS-enabled reader (41 scripts)
     manifest.json                    ← Script metadata and ordering
     *.md                             ← Individual walkthrough scripts
   cross_references/                  ← Cross-referencing datasets and corpus metadata
@@ -93,14 +96,14 @@ data/                              ← Deliverable outputs
 app/                               ← Interactive viewer (React + TypeScript + Vite)
   src/
     components/                    ← Reusable UI components (AppShell, NavDrawer, Disclosure, GraphSearch, SettingsPanel, etc.)
-    panels/                        ← Side panels (DetailPanel, PairingPanel, ExportPanel, etc.)
+    panels/                        ← Shared panels (DetailPanel, PairingPanel, ExportPanel, etc.)
     render/                        ← Cytoscape canvas, styles, element builders
     graph-engine/                  ← Normalizer, validator, data index, example parser
     generation/                    ← Story generation pipeline
       engine/                      ← Core engines (templateCompiler, backboneAssembler, detailSynthesizer, chapterAssembler, orchestrator, etc.)
-      agents/                      ← LLM agent prompts (detailAgent, editorialAgent, plannerAgent, writerAgent, etc.)
+      agents/                      ← LLM adapters and agent prompts (ClaudeCodeAdapter, detailAgent, writerAgent, etc.)
       artifacts/                   ← Types, JSON schemas, I/O helpers
-      panels/                      ← Generation UI panels (GenerationPanel, ContractPanel, TemplatesPanel, etc.)
+      panels/                      ← 5-tab generation UI (PipelineTab, StorySetupTab, ElementsTab, AnalysisTab, GenerateTab)
       store/                       ← Generation Zustand stores (generationStore, requestStore)
       series/                      ← Series/episode generation subsystem
     store/                         ← Zustand stores (graphStore, settingsStore, uiStore)
@@ -129,6 +132,8 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 4 — Backbone Synthesis & Assembly**: Complete. All 8 phases implemented (schemas, TemplateCompiler, BackboneAssembler, feature packs, DetailSynthesizer, ChapterAssembler, orchestrator integration, documentation/scripts).
 - **Goal 5 — SQLite Data Layer**: Complete. All 9 phases implemented (foundation, core schema, vocabulary templatization, chapters/scenes, artifacts/runs/tags, indexes/queries, import bridge, export/management UI, query UI). Unit tests pending.
 - **Goal 6 — Claude Code CLI Interface**: Complete. All 8 phases implemented (adapter, CLI integration, docs, streaming, JSON mode, session reuse, browser bridge, verify).
+- **Goal 7 — UI Upgrade (Progressive Disclosure)**: Complete. All 8 phases implemented (AppShell/NavDrawer, collapsible gen panel, info panel accordion, single-graph focus, mobile touch, disclosure widgets, sub-page consistency, polish).
+- **Goal 8 — Generation UI Redesign**: Complete. All 8 phases implemented (extract constants, PipelineTab, StorySetupTab, ElementsTab, GenerateTab, rewire App.tsx, slim down GenerationPanel, polish/mobile). Plus Analysis tab added post-plan.
 
 ## Key Conventions
 
@@ -176,12 +181,12 @@ Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 - **Pre-push hook**: `.githooks/pre-push` runs `tsc -b` before every push to prevent broken builds
 - **Build**: `cd app && npm run build` runs `tsc -b && vite build`
 - **Typecheck only**: `cd app && npm run typecheck`
-- **Routes**: `/` (graph viewer), `/scripts` (walkthrough scripts), `/db` (database management), `/instance/*` (story workspace), `/manuscript` (manuscript editor)
+- **Routes**: `/` (main app with 5-tab generation panel), `/story` (story workspace), `/sceneboard` (scene board), `/timeline` (timeline view), `/encyclopedia` (encyclopedia), `/manuscript` (manuscript editor), `/notes` (notes browser), `/scripts` (walkthrough scripts), `/series` (series browser), `/db` (database management)
 
 ### Bug Tracking
 
-- **Code Review 1** (`docs/code_review.md`): Full audit from 2026-03-04. All 62 items acknowledged `[X]`.
-- **Code Review 2** (`docs/code_review_2_plan.md`): Bug audit from 2026-03-06. 43 items across 7 phases. Uses `[ ]` → `[~]` → `[X]` progression. Mark active item `[~]` before working, `[X]` when done. Commit and push at each phase end.
+- **Code Review 1** (`docs/archive/code_review.md`): Full audit from 2026-03-04. All 62 items acknowledged `[X]`.
+- **Code Review 2** (`docs/archive/code_review_2_plan.md`): Bug audit from 2026-03-06. 43 items across 7 phases. All complete.
 
 ### Quality Standards
 

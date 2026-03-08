@@ -1,6 +1,8 @@
 # Generation UI Redesign Plan
 
-Restructure the generation panel from a single monolithic form into 4 focused tabs. Remove the 6-option mode dropdown — replace with two paths: template-only (no LLM) and full generation (LLM).
+Restructure the generation panel from a single monolithic form into 5 focused tabs (originally planned as 4; Analysis tab added post-plan). Remove the 6-option mode dropdown — replace with two paths: template-only (no LLM) and full generation (LLM).
+
+**Status: Complete.** All 8 phases done, plus post-plan Analysis tab.
 
 ## Current State
 
@@ -97,3 +99,12 @@ Restructure the generation panel from a single monolithic form into 4 focused ta
 - [X] Premise lookup fires on mount via StorySetupTab
 - [X] Archetype/genre change clears stale results via StorySetupTab
 - [X] Final typecheck clean
+
+## Post-Plan: Analysis Tab
+- [X] Create `app/src/generation/panels/AnalysisTab.tsx`
+- [X] Move graph canvases (archetype/genre/compare toggle), node/edge detail panel, statistics, cross-index, timeline, character arcs from App.tsx right-side inspector
+- [X] Move generation artifact panels (templates, contract, backbone, plan, story, compliance, chapters) into Analysis tab disclosures
+- [X] Analysis tab renders full-width (not constrained to 340px sidebar)
+- [X] Add as 5th tab between Elements and Generate in App.tsx tab bar
+- [X] Clean up App.tsx: remove unused graph imports, store selectors, computed values
+- [X] Typecheck and verify
