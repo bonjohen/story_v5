@@ -4,13 +4,11 @@
 
 ---
 
-## The navigation bar
+## The navigation system
 
-The main toolbar runs across the top of every page. It contains the Story Explorer brand link (which returns you to the Structure graph viewer), followed by navigation buttons for each surface: Structure, Story, Scenes, Timeline, Encyclopedia, Manuscript, Notes, and Scripts.
+A slim app bar runs across the top of every page. On the left is a hamburger menu button that opens the navigation drawer — a slide-out panel with grouped links to every surface: Structure, Story, Scenes, Timeline, Encyclopedia, Manuscript, Notes, Scripts, Series, and Database. The drawer groups these into logical categories so you can find what you need quickly.
 
-The active section is highlighted with a colored underline and bold text, so you always know where you are. Each section has its own accent color — green for Story, amber for Scenes, cyan for Timeline, teal for Encyclopedia and Manuscript, purple for Notes.
-
-On the main Structure page, the toolbar also includes the graph search (which searches within the loaded archetype or genre graph) and the global search (which searches across all your story data).
+The app bar also shows the current page title and, on the main Structure page, includes the graph search (which searches within the loaded archetype or genre graph) and the global search (which searches across all your story data). A Generate button toggles the generation panel open and closed, with status indicators showing when generation is in progress or complete.
 
 ---
 

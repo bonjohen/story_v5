@@ -144,13 +144,13 @@ This is the engine that loads, parses, and validates graph data.
 
 Several Zustand stores manage the application state.
 
-**graphStore.ts** is the main store — which graphs are loaded (both archetype and genre simultaneously), the normalized graph data, search state, and selected elements. It manages dual graph display where both graphs render side by side with a `currentGraph` pointer tracking which was last interacted with.
+**graphStore.ts** is the main store — which graphs are loaded (both archetype and genre), the normalized graph data, search state, and selected elements. It tracks a `currentGraph` pointer for the active graph, with single-graph focus as the default and an optional split (compare) view available in the Analysis tab.
 
 **settingsStore.ts** handles user preferences — layout algorithm, color scheme, label visibility, animation settings. Persisted to local storage.
 
 **elementStore.ts** manages story element data — loaded archetype templates, example instances, template timelines, genre element constraints, and emotional arc profiles. Data is loaded lazily when an archetype or genre is viewed and cached for subsequent access.
 
-**requestStore.ts** (in the generation folder) maintains persistent form state for the generation sidebar — premise, archetype, genre, mode, tone, blend/hybrid settings, and slot overrides. These values survive tab switches and panel navigation.
+**requestStore.ts** (in the generation folder) maintains persistent form state for the generation panel's Setup tab — premise, archetype, genre, tone, blend/hybrid settings, and slot overrides. These values survive tab switches and panel navigation.
 
 ### app/src/render — the graph canvas
 
@@ -234,7 +234,7 @@ This is the engine that turns a story request into a finished story with full co
 
 **store/generationStore.ts** is the Zustand store for the generation UI — run status, loaded artifacts, selected scene, and actions to start, load, select, and clear runs.
 
-**panels/** contains the generation UI panels — GenerationPanel for controls, ContractPanel for the compiled rules, TemplatesPanel for character role profiles and slot bindings, PlanPanel for the beat sheet, StoryPanel for the generated prose, TracePanel for the scene-to-node mapping, and CompliancePanel for the validation dashboard.
+**panels/** contains the generation UI organized as five focused tabs: PipelineTab for LLM connection and telemetry, StorySetupTab for archetype/genre/premise/tone selection, ElementsTab for editable entity management (characters, places, objects), AnalysisTab for graph visualization and all inspection panels (contract, backbone, plan, story, compliance), and GenerateTab for running the pipeline and viewing prose output.
 
 ### app/scripts — data processing tools
 

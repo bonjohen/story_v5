@@ -10,7 +10,7 @@ The Story Workspace is where your story becomes a living, editable thing. It tak
 
 Think of it as the difference between a build log and a project. The generation pipeline produces artifacts. The Story Workspace gives those artifacts a home.
 
-You reach it by clicking "Story" in the navigation bar, or navigating to the /story route.
+You reach it by opening the hamburger menu and selecting "Story," or navigating to the /story route.
 
 ---
 

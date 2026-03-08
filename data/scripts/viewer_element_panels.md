@@ -6,7 +6,7 @@
 
 ## Three new panels
 
-The interactive viewer has three new tabs in the right-hand panel: **Elements**, **Timeline**, and **Arcs**. These panels visualize the story elements system — who appears where, how things change over time, and what emotional trajectory each character experiences. Let's walk through each one.
+The interactive viewer has three visualization panels accessible within the **Analysis** tab: **Elements**, **Timeline**, and **Arcs**. These panels visualize the story elements system — who appears where, how things change over time, and what emotional trajectory each character experiences. They appear as collapsible disclosure sections below the graph canvas. Let's walk through each one.
 
 ---
 
@@ -127,7 +127,7 @@ Below the chart, the panel shows the archetype's arc shape classification (W-cur
 
 ## How the panels work together
 
-The three panels are designed to complement each other and the existing Detail, Stats, and Cross-Index tabs.
+The three panels are designed to complement each other and the other Analysis tab sections — Detail, Stats, and Cross-Index.
 
 The **Detail** panel tells you about a single node's structure — definition, conditions, failure modes. The **Elements** panel tells you what populates that node — which characters, places, and objects are expected there. The **Timeline** panel shows you the flow across all nodes — who's where when, and what changes. The **Arcs** panel adds the emotional dimension — how intense, hopeful, fearful, or resolved each point feels.
 

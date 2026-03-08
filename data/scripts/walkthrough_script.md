@@ -60,15 +60,13 @@ You can leave the run ID and timestamps out — those are auto-generated.
 
 ---
 
-## Step 2: Choose your generation mode
+## Step 2: Choose your generation path
 
-There are three modes, and they're progressive — each one does everything the previous one does, plus more.
+There are two paths, and they serve different purposes.
 
-**Contract-only** is the fastest. It loads the corpus, scores your genre-archetype combination, and compiles the full story contract — all the rules, constraints, and structural requirements your story would need to follow. No LLM required. This is great for exploring what constraints a genre-archetype pairing actually imposes before you commit to generating anything.
+**Build Structure** is the fast, deterministic path. It loads the corpus, scores your genre-archetype combination, compiles the full story contract, assembles the backbone (beat structure with scene assignments), and extracts slot templates — all without any LLM calls. This is great for exploring what constraints a pairing imposes, and for setting up the structural scaffolding before committing to generation.
 
-**Outline** does everything contract-only does, plus it creates the beat-by-beat plan with scene assignments. The LLM enhances the beat summaries and scene goals, but the structural scaffolding is deterministic. You get a full outline you could write from yourself.
-
-**Draft** is the full pipeline. It writes prose for every scene, validates each one against the contract, repairs failures, and produces the complete trace. This is the mode that actually generates a story.
+**Generate Story** is the full pipeline. It does everything Build Structure does, then uses an LLM to synthesize character/place/object details, write prose for every scene, validate each scene against the contract, repair failures, and produce the complete compliance trace. This is the path that produces a finished story.
 
 ---
 
@@ -81,10 +79,10 @@ cd app
 npm install
 ```
 
-Then run the generator. For a quick contract-only run without an LLM:
+Then run the generator. For a quick structure-only run without an LLM:
 
 ```
-npx tsx app/scripts/generate_story.ts --request outputs/samples/simple_request.json --mode contract-only --no-llm
+npx tsx app/scripts/generate_story.ts --request outputs/samples/simple_request.json --mode backbone --no-llm
 ```
 
 That'll finish in a few seconds. For a full draft with the LLM:
@@ -93,7 +91,7 @@ That'll finish in a few seconds. For a full draft with the LLM:
 npx tsx app/scripts/generate_story.ts --request my_request.json --mode draft
 ```
 
-The LLM defaults to Claude Sonnet. You can change it with the model flag:
+The LLM uses the Claude Code CLI (`claude --print`) by default — no API key needed if you have Claude Code installed. You can also specify a model:
 
 ```
 npx tsx app/scripts/generate_story.ts --request my_request.json --mode draft --model claude-opus-4-20250514
@@ -142,29 +140,25 @@ cd app
 npm run dev
 ```
 
-Open localhost 5173 — or visit the deployed site at the project's GitHub Pages URL. You'll see two graph canvases side by side — archetype on the left, genre on the right. A generation sidebar is on the left side of the screen.
+Open localhost 5173 — or visit the deployed site at the project's GitHub Pages URL. You'll see a generation panel with five tabs across the top: Pipeline, Setup, Elements, Analysis, and Generate. Navigation to other surfaces (Story Workspace, Scene Board, Timeline, etc.) is through the hamburger menu in the top-left corner.
 
-The **Run** tab has the same fields as the JSON request — archetype picker, genre picker, premise text area, tone, mode selector, and blend/hybrid options. When you enable genre blending or hybrid archetypes, a dropdown appears letting you choose the specific secondary genre or hybrid archetype, or you can leave it on auto-select. All form values persist across tab switches — you won't lose your settings when you explore other panels. Fill it in and hit Generate. The event log scrolls as the pipeline progresses.
+The **Setup** tab has the same fields as the JSON request — archetype picker, genre picker, premise text area, tone, and blend/hybrid options. When you enable genre blending or hybrid archetypes, a dropdown appears letting you choose the specific secondary genre or hybrid archetype, or you can leave it on auto-select. All form values persist across tab switches. A contract summary appears inline once generation has run.
 
-Once the run completes, additional info panel tabs activate. The **Templates** tab has three sub-views: Slots shows character cards with expandable detail (archetype function, traits, motivations, flaw, arc direction, backstory, relationships, distinguishing feature) plus non-character slot bindings; Archetype Templates shows node templates with beat summaries, entry/exit conditions, and failure modes; Genre Templates shows constraint templates with severity levels and binding rules.
+The **Elements** tab shows the backbone slot templates and an editable entity registry — characters with name, role, traits, motivations, flaw, and arc direction; places with atmosphere and features; objects with significance and properties. You can add, edit, and remove entities directly, or use the "Fill All Details" button to have the LLM populate everything from the contract and backbone context in a single call.
 
-The **Backbone** tab shows the story's beat structure — each beat displays its archetype role, full definition enriched with genre obligations and text signals, scene count, and slot names.
+The **Analysis** tab expands to full width and shows the graph canvases — you can toggle between Archetype, Genre, or Compare (side-by-side) views. Below the canvas are collapsible sections for node/edge detail, pairing analysis, statistics, elements, and cross-index. If a story has been generated, additional sections appear for templates, contract, backbone beats, plan, story prose, compliance, and chapters.
 
-The **Contract** tab shows the boundaries, archetype spine, genre constraints by level, and validation policy. Clicking any constraint highlights the corresponding node on the graph canvas.
+The **Generate** tab has two buttons: "Build Structure" runs the deterministic pipeline (contract + backbone + templates) without any LLM calls. "Generate Story" runs the full pipeline including prose generation. The event log scrolls as the pipeline progresses, and generated scenes appear inline as they complete. You can save the result as a story instance or clear and start over.
 
-The **Plan** tab shows beats and scenes with coverage bars. The bars have target markers so you can see at a glance whether you're meeting the hard and soft constraint thresholds.
+The **Pipeline** tab manages the LLM connection (via the Claude Code CLI bridge that starts automatically with the dev server), import/export of generation snapshots, and telemetry.
 
-The **Trace** tab is a grid mapping each scene to its archetype node and genre obligations. Clicking a row highlights the relevant nodes on the graph.
-
-The **Compliance** tab is a dashboard — overall status, coverage metrics, and an expandable list of scenes with their individual check results.
-
-The graph canvas itself gets an overlay: nodes covered by the story are highlighted in green, anti-pattern nodes that were triggered are highlighted in red, and the currently selected scene's nodes pulse.
+On the Analysis tab, the graph canvas gets an overlay during generation: nodes covered by the story are highlighted in green, anti-pattern nodes are highlighted in red, and the currently active scene's nodes pulse.
 
 ---
 
 ## Tips and tricks
 
-**Start with contract-only mode.** It's instant, doesn't need an LLM, and tells you whether your genre-archetype combination makes structural sense before you spend tokens on generation.
+**Start with Build Structure.** It's instant, doesn't need an LLM, and tells you whether your genre-archetype combination makes structural sense before you spend tokens on generation.
 
 **Try genre blending.** Set allow_genre_blend to true and see what the selection engine pairs with your primary genre. Science Fiction plus Mystery is a classic blend. Horror plus Romance gives you gothic. The blending model knows which combinations are stable and which create productive tension.
 
