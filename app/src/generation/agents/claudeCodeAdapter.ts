@@ -88,8 +88,8 @@ export class ClaudeCodeAdapter implements LLMAdapter {
       console.error(`\n[claude-code-adapter] Call #${callId} — sending ${userPrompt.length} chars (sys: ${sysLen})`)
     }
 
-    const args = this.buildArgs(systemPrompt)
-    const content = await this.spawnClaude(args, userPrompt, callId)
+    const { args, stdinPrefix } = this.buildArgs(systemPrompt)
+    const content = await this.spawnClaude(args, stdinPrefix + userPrompt, callId)
 
     return {
       content,
@@ -119,8 +119,8 @@ export class ClaudeCodeAdapter implements LLMAdapter {
       console.error(`\n[claude-code-adapter] JSON call #${callId} — sending ${userPrompt.length} chars (sys: ${sysLen})`)
     }
 
-    const args = this.buildArgs(systemPrompt)
-    let content = await this.spawnClaude(args, userPrompt, callId)
+    const { args, stdinPrefix } = this.buildArgs(systemPrompt)
+    let content = await this.spawnClaude(args, stdinPrefix + userPrompt, callId)
     content = stripJsonFences(content)
 
     return {
@@ -144,8 +144,8 @@ export class ClaudeCodeAdapter implements LLMAdapter {
       console.error(`\n[claude-code-adapter] Stream #${callId} — sending ${userPrompt.length} chars (sys: ${sysLen})`)
     }
 
-    const args = this.buildArgs(systemPrompt)
-    yield* this.spawnClaudeStream(args, userPrompt, callId)
+    const { args, stdinPrefix } = this.buildArgs(systemPrompt)
+    yield* this.spawnClaudeStream(args, stdinPrefix + userPrompt, callId)
   }
 
   private async *spawnClaudeStream(args: string[], prompt: string, callId: number): AsyncIterable<string> {
@@ -208,7 +208,7 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     }
   }
 
-  private buildArgs(systemPrompt?: string): string[] {
+  private buildArgs(systemPrompt?: string): { args: string[]; stdinPrefix: string } {
     const args: string[] = [
       '--print',       // Non-interactive: read stdin, print response, exit
     ]
@@ -229,13 +229,20 @@ export class ClaudeCodeAdapter implements LLMAdapter {
       args.push('--max-budget-usd', String(this.maxBudgetUsd))
     }
 
-    // Use native --system-prompt flag instead of embedding in stdin
+    // Use native --system-prompt flag for short prompts.
+    // For long system prompts (>8KB), embed in stdin to avoid
+    // Windows command-line length limits (~32K total).
+    let stdinPrefix = ''
     if (systemPrompt) {
-      args.push('--system-prompt', systemPrompt)
+      if (systemPrompt.length <= 8000) {
+        args.push('--system-prompt', systemPrompt)
+      } else {
+        stdinPrefix = `[System Instructions]\n${systemPrompt}\n\n[User Request]\n`
+      }
     }
 
     args.push(...this.extraFlags)
-    return args
+    return { args, stdinPrefix }
   }
 
   private spawnClaude(args: string[], prompt: string, callId: number): Promise<string> {

@@ -59,6 +59,7 @@ export const useUIStore = create<UIStoreState>()(
     {
       name: 'story-ui-prefs',
       partialize: (state) => ({
+        genPanelOpen: state.genPanelOpen,
         infoPanelOpen: state.infoPanelOpen,
         splitView: state.splitView,
         collapsedSections: state.collapsedSections,
