@@ -11,6 +11,7 @@
 
 import { spawn } from 'child_process'
 import type { LLMAdapter, LLMMessage, LLMResponse } from './llmAdapter.ts'
+import { stripJsonFences } from './jsonUtils.ts'
 
 /** Return a copy of process.env with all Claude Code session vars removed
  *  so child `claude --print` doesn't detect a nested session and refuse to start. */
@@ -29,10 +30,15 @@ function cleanEnv(): NodeJS.ProcessEnv {
 export interface ClaudeCodeAdapterOptions {
   /** Path to the `claude` binary. Defaults to 'claude' (found via PATH). */
   claudePath?: string
-  /** Model to pass via --model flag. Omit to use Claude Code's default. */
+  /** Model to pass via --model flag. Omit to use Claude Code's default.
+   *  Accepts aliases: 'opus', 'sonnet', 'haiku' or full names like 'claude-opus-4-6'. */
   model?: string
   /** Maximum tokens for the response via --max-tokens flag. */
   maxTokens?: number
+  /** Reasoning effort level: 'low', 'medium', 'high'. */
+  effort?: 'low' | 'medium' | 'high'
+  /** Maximum dollar amount to spend on API calls per invocation. */
+  maxBudgetUsd?: number
   /** Additional CLI flags to pass to claude. */
   extraFlags?: string[]
   /** Working directory for the claude process. */
@@ -51,6 +57,8 @@ export class ClaudeCodeAdapter implements LLMAdapter {
   private claudePath: string
   private model: string | undefined
   private maxTokens: number | undefined
+  private effort: string | undefined
+  private maxBudgetUsd: number | undefined
   private extraFlags: string[]
   private cwd: string | undefined
   private timeout: number
@@ -61,6 +69,8 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     this.claudePath = options.claudePath ?? 'claude'
     this.model = options.model
     this.maxTokens = options.maxTokens
+    this.effort = options.effort
+    this.maxBudgetUsd = options.maxBudgetUsd
     this.extraFlags = options.extraFlags ?? []
     this.cwd = options.cwd
     this.timeout = options.timeout ?? 600_000
@@ -71,24 +81,21 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     this.callCount++
     const callId = this.callCount
 
-    // Build the prompt text from messages.
-    // System messages become a preamble, user/assistant messages follow.
-    const prompt = formatMessagesForCli(messages)
+    const { systemPrompt, userPrompt } = splitMessages(messages)
 
     if (this.verbose) {
-      console.error(`\n[claude-code-adapter] Call #${callId} — sending ${prompt.length} chars`)
+      const sysLen = systemPrompt?.length ?? 0
+      console.error(`\n[claude-code-adapter] Call #${callId} — sending ${userPrompt.length} chars (sys: ${sysLen})`)
     }
 
-    // Build CLI arguments
-    const args = this.buildArgs()
-
-    const content = await this.spawnClaude(args, prompt, callId)
+    const args = this.buildArgs(systemPrompt)
+    const content = await this.spawnClaude(args, userPrompt, callId)
 
     return {
       content,
       model: this.model ?? 'claude-code',
       usage: {
-        input_tokens: prompt.length, // approximate
+        input_tokens: userPrompt.length + (systemPrompt?.length ?? 0),
         output_tokens: content.length,
       },
     }
@@ -98,30 +105,29 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     this.callCount++
     const callId = this.callCount
 
-    // Append a JSON-output reminder to the last user message to reinforce
-    // the system prompt's instruction. Do NOT use --output-format json
-    // as it can cause CLI crashes on some platforms.
+    // Append a JSON-output reminder to the last user message
     const augmented = messages.map((m, i) =>
       i === messages.length - 1 && m.role === 'user'
         ? { ...m, content: m.content + '\n\nRespond with valid JSON only. No markdown fences, no commentary.' }
         : m,
     )
-    const prompt = formatMessagesForCli(augmented)
+
+    const { systemPrompt, userPrompt } = splitMessages(augmented)
 
     if (this.verbose) {
-      console.error(`\n[claude-code-adapter] JSON call #${callId} — sending ${prompt.length} chars`)
+      const sysLen = systemPrompt?.length ?? 0
+      console.error(`\n[claude-code-adapter] JSON call #${callId} — sending ${userPrompt.length} chars (sys: ${sysLen})`)
     }
 
-    const args = this.buildArgs()
-
-    let content = await this.spawnClaude(args, prompt, callId)
+    const args = this.buildArgs(systemPrompt)
+    let content = await this.spawnClaude(args, userPrompt, callId)
     content = stripJsonFences(content)
 
     return {
       content,
       model: this.model ?? 'claude-code',
       usage: {
-        input_tokens: prompt.length,
+        input_tokens: userPrompt.length + (systemPrompt?.length ?? 0),
         output_tokens: content.length,
       },
     }
@@ -130,14 +136,16 @@ export class ClaudeCodeAdapter implements LLMAdapter {
   async *completeStream(messages: LLMMessage[]): AsyncIterable<string> {
     this.callCount++
     const callId = this.callCount
-    const prompt = formatMessagesForCli(messages)
+
+    const { systemPrompt, userPrompt } = splitMessages(messages)
 
     if (this.verbose) {
-      console.error(`\n[claude-code-adapter] Stream #${callId} — sending ${prompt.length} chars`)
+      const sysLen = systemPrompt?.length ?? 0
+      console.error(`\n[claude-code-adapter] Stream #${callId} — sending ${userPrompt.length} chars (sys: ${sysLen})`)
     }
 
-    const args = this.buildArgs()
-    yield* this.spawnClaudeStream(args, prompt, callId)
+    const args = this.buildArgs(systemPrompt)
+    yield* this.spawnClaudeStream(args, userPrompt, callId)
   }
 
   private async *spawnClaudeStream(args: string[], prompt: string, callId: number): AsyncIterable<string> {
@@ -149,6 +157,7 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     })
 
     let stderr = ''
+    let stdoutCollected = ''
 
     proc.stderr.on('data', (chunk: Buffer) => {
       stderr += chunk.toString()
@@ -161,7 +170,9 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     // Yield stdout chunks as they arrive
     try {
       for await (const chunk of proc.stdout) {
-        yield (chunk as Buffer).toString()
+        const text = (chunk as Buffer).toString()
+        stdoutCollected += text
+        yield text
       }
     } catch (err) {
       throw new Error(
@@ -180,19 +191,24 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     if (this.verbose) {
       console.error(`[claude-code-adapter] Stream #${callId} — exit code ${code}`)
       if (stderr.trim()) {
-        console.error(`[claude-code-adapter] stderr: ${stderr.trim().slice(0, 200)}`)
+        console.error(`[claude-code-adapter] stderr: ${stderr.trim().slice(0, 500)}`)
       }
     }
 
     if (code !== 0) {
+      const stderrMsg = stderr.trim().slice(0, 500)
+      const stdoutMsg = stdoutCollected.trim().slice(0, 500)
+      const details = [
+        stderrMsg ? `stderr: ${stderrMsg}` : null,
+        stdoutMsg ? `stdout: ${stdoutMsg}` : null,
+      ].filter(Boolean).join('\n') || '(no output captured)'
       throw new Error(
-        `[claude-code-adapter] Stream #${callId}: claude exited with code ${code}\n` +
-        `stderr: ${stderr.trim().slice(0, 500)}`
+        `[claude-code-adapter] Stream #${callId}: claude exited with code ${code}\n${details}`
       )
     }
   }
 
-  private buildArgs(): string[] {
+  private buildArgs(systemPrompt?: string): string[] {
     const args: string[] = [
       '--print',       // Non-interactive: read stdin, print response, exit
     ]
@@ -203,6 +219,19 @@ export class ClaudeCodeAdapter implements LLMAdapter {
 
     if (this.maxTokens) {
       args.push('--max-tokens', String(this.maxTokens))
+    }
+
+    if (this.effort) {
+      args.push('--effort', this.effort)
+    }
+
+    if (this.maxBudgetUsd) {
+      args.push('--max-budget-usd', String(this.maxBudgetUsd))
+    }
+
+    // Use native --system-prompt flag instead of embedding in stdin
+    if (systemPrompt) {
+      args.push('--system-prompt', systemPrompt)
     }
 
     args.push(...this.extraFlags)
@@ -241,7 +270,7 @@ export class ClaudeCodeAdapter implements LLMAdapter {
         if (this.verbose) {
           console.error(`[claude-code-adapter] Call #${callId} — exit code ${code}, signal ${signal}, ${stdout.length} chars response`)
           if (stderr.trim()) {
-            console.error(`[claude-code-adapter] stderr: ${stderr.trim().slice(0, 200)}`)
+            console.error(`[claude-code-adapter] stderr: ${stderr.trim().slice(0, 500)}`)
           }
         }
 
@@ -250,9 +279,16 @@ export class ClaudeCodeAdapter implements LLMAdapter {
           const hint = code === null
             ? '\nProcess was killed — possible causes: timeout, out of memory, or OS termination.'
             : ''
+          // Claude CLI often writes errors to stdout, not stderr.
+          // Include both streams so the actual error message is visible.
+          const stderrMsg = stderr.trim().slice(0, 500)
+          const stdoutMsg = stdout.trim().slice(0, 500)
+          const details = [
+            stderrMsg ? `stderr: ${stderrMsg}` : null,
+            stdoutMsg ? `stdout: ${stdoutMsg}` : null,
+          ].filter(Boolean).join('\n') || '(no output captured)'
           reject(new Error(
-            `[claude-code-adapter] Call #${callId}: claude exited with code ${code}${signalInfo}${hint}\n` +
-            `stderr: ${stderr.trim().slice(0, 500)}`
+            `[claude-code-adapter] Call #${callId}: claude exited with code ${code}${signalInfo}${hint}\n${details}`
           ))
           return
         }
@@ -267,76 +303,33 @@ export class ClaudeCodeAdapter implements LLMAdapter {
   }
 }
 
-// ---------------------------------------------------------------------------
-// JSON fence stripping
-// ---------------------------------------------------------------------------
-
-/**
- * Strip markdown code fences and trailing text from JSON responses.
- * Handles: ```json ... ```, ``` ... ```, leading/trailing whitespace,
- * and trailing text after the closing brace/bracket.
- */
-export function stripJsonFences(text: string): string {
-  let cleaned = text.trim()
-
-  // Strip opening code fence (```json or ```)
-  if (cleaned.startsWith('```')) {
-    cleaned = cleaned.replace(/^```(?:json|JSON)?\s*\n?/, '')
-  }
-
-  // Strip closing code fence
-  if (cleaned.endsWith('```')) {
-    cleaned = cleaned.replace(/\n?```\s*$/, '')
-  }
-
-  // If there's trailing text after the last } or ], remove it
-  const lastBrace = cleaned.lastIndexOf('}')
-  const lastBracket = cleaned.lastIndexOf(']')
-  const lastJson = Math.max(lastBrace, lastBracket)
-  if (lastJson >= 0 && lastJson < cleaned.length - 1) {
-    const trailing = cleaned.slice(lastJson + 1).trim()
-    // Only strip if trailing content is non-JSON (not another valid structure)
-    if (trailing && !trailing.startsWith('{') && !trailing.startsWith('[')) {
-      cleaned = cleaned.slice(0, lastJson + 1)
-    }
-  }
-
-  return cleaned.trim()
-}
+// Re-export stripJsonFences for backward compatibility
+export { stripJsonFences } from './jsonUtils.ts'
 
 // ---------------------------------------------------------------------------
 // Prompt formatting
 // ---------------------------------------------------------------------------
 
 /**
- * Convert LLMMessage[] into a single text prompt suitable for `claude --print`.
- *
- * The claude CLI accepts a plain-text prompt on stdin. We format the messages
- * into a structured prompt that preserves the system/user/assistant roles.
+ * Split LLMMessage[] into a system prompt (for --system-prompt flag)
+ * and a user prompt (piped to stdin).
  */
-function formatMessagesForCli(messages: LLMMessage[]): string {
+function splitMessages(messages: LLMMessage[]): { systemPrompt: string | undefined; userPrompt: string } {
   const systemMessages = messages.filter((m) => m.role === 'system')
   const conversationMessages = messages.filter((m) => m.role !== 'system')
 
+  const systemPrompt = systemMessages.length > 0
+    ? systemMessages.map((m) => m.content).join('\n\n')
+    : undefined
+
   const parts: string[] = []
-
-  // System instructions go first as context
-  if (systemMessages.length > 0) {
-    for (const msg of systemMessages) {
-      parts.push(msg.content)
-    }
-    parts.push('') // separator
-  }
-
-  // Conversation messages
   for (const msg of conversationMessages) {
     if (msg.role === 'user') {
       parts.push(msg.content)
     } else if (msg.role === 'assistant') {
-      // Include prior assistant turns as context
       parts.push(`[Previous response]\n${msg.content}`)
     }
   }
 
-  return parts.join('\n\n')
+  return { systemPrompt, userPrompt: parts.join('\n\n') }
 }

@@ -13,6 +13,9 @@ import { useInstanceStore } from '../../instance/store/instanceStore.ts'
 import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
 import { exportSnapshot, downloadSnapshot, parseSnapshot } from '../artifacts/storySnapshot.ts'
+import { loadPremiseLookup, lookupPremise } from '../engine/premiseLookup.ts'
+import { buildFillDetailsPrompt, parseFillDetailsResponse } from '../agents/fillDetailsTemplate.ts'
+import type { PremiseEntry } from '../engine/premiseLookup.ts'
 import type { StoryRequest, GenerationMode, GenerationConfig } from '../artifacts/types.ts'
 
 // Default generation config matching generation_config.json
@@ -127,13 +130,31 @@ export function GenerationPanel() {
   const plan = useGenerationStore((s) => s.plan)
   const startRun = useGenerationStore((s) => s.startRun)
   const clearRun = useGenerationStore((s) => s.clearRun)
+  const backbone = useGenerationStore((s) => s.backbone)
   const detailBindings = useGenerationStore((s) => s.detailBindings)
+  const setDetailBindings = useGenerationStore((s) => s.setDetailBindings)
   const selection = useGenerationStore((s) => s.selection)
   const request = useGenerationStore((s) => s.request)
   const llmTelemetry = useGenerationStore((s) => s.llmTelemetry)
 
   const loadInstance = useInstanceStore((s) => s.loadInstance)
   const [savedInstance, setSavedInstance] = useState(false)
+
+  // Premise lookup map — loaded once from JSON, applied on load + selection change
+  type LookupMap = Record<string, PremiseEntry>
+  const [premiseLookup, setPremiseLookup] = useState<LookupMap | null>(null)
+  useEffect(() => {
+    loadPremiseLookup().then((map) => {
+      setPremiseLookup(map)
+      // Apply to current selections on first load
+      const { archetype: a, genre: g, setPremise: sp, setTone: st } = useRequestStore.getState()
+      const entry = lookupPremise(map, a, g)
+      if (entry) {
+        sp(entry.premise)
+        st(entry.tone)
+      }
+    }).catch(() => {})
+  }, [])
 
   // Graph store — sync selections to load corresponding graphs
   const manifest = useGraphStore((s) => s.manifest)
@@ -162,22 +183,52 @@ export function GenerationPanel() {
   const connectBridge = useRequestStore((s) => s.connectBridge)
   const disconnectBridge = useRequestStore((s) => s.disconnectBridge)
 
-  // Sync archetype/genre selections to graph display
+  // Auto-connect to bridge on mount (bridge is started by Vite plugin)
+  const autoConnectAttempted = useRef(false)
+  useEffect(() => {
+    if (autoConnectAttempted.current) return
+    autoConnectAttempted.current = true
+    const { bridgeStatus: bs } = useRequestStore.getState()
+    if (bs === 'disconnected') {
+      // Small delay to let the bridge server finish starting
+      const timer = setTimeout(() => {
+        void useRequestStore.getState().connectBridge()
+      }, 1500)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
+  // Apply looked-up premise and tone for the current archetype+genre pair
+  const applyPremiseLookup = useCallback((archName: string, genreName: string) => {
+    if (!premiseLookup) return
+    const entry = lookupPremise(premiseLookup, archName, genreName)
+    if (entry) {
+      setPremise(entry.premise)
+      setTone(entry.tone)
+    }
+  }, [premiseLookup, setPremise, setTone])
+
+  // Sync archetype/genre selections to graph display + premise lookup
+  // Clear stale generation results when selection changes
   const handleArchetypeChange = useCallback((name: string) => {
     setArchetype(name)
+    applyPremiseLookup(name, genre)
+    clearRun()
     if (manifest) {
       const dir = nameToDir(name, manifest.archetypes)
       if (dir) void loadArchetypeGraph(dir)
     }
-  }, [manifest, loadArchetypeGraph, setArchetype])
+  }, [manifest, loadArchetypeGraph, setArchetype, genre, applyPremiseLookup, clearRun])
 
   const handleGenreChange = useCallback((name: string) => {
     setGenre(name)
+    applyPremiseLookup(archetype, name)
+    clearRun()
     if (manifest) {
       const dir = nameToDir(name, manifest.genres)
       if (dir) void loadGenreGraph(dir)
     }
-  }, [manifest, loadGenreGraph, setGenre])
+  }, [manifest, loadGenreGraph, setGenre, archetype, applyPremiseLookup, clearRun])
 
   // Sync default selections to graph store on mount
   const syncedDefaults = useRef(false)
@@ -246,10 +297,51 @@ export function GenerationPanel() {
     setSavedInstance(true)
   }, [detailBindings, selection, request, loadInstance])
 
+  // Fill All Details — single LLM call to generate all story elements
+  const [fillingDetails, setFillingDetails] = useState(false)
+  const [fillError, setFillError] = useState<string | null>(null)
+
+  const handleFillDetails = useCallback(async () => {
+    if (!contract || !backbone || !request) return
+    setFillingDetails(true)
+    setFillError(null)
+
+    try {
+      // Ensure bridge is connected
+      let adapter = useRequestStore.getState().bridgeAdapter
+      if (!adapter || !adapter.connected) {
+        await connectBridge()
+        adapter = useRequestStore.getState().bridgeAdapter
+      }
+      if (!adapter) {
+        setFillError('Bridge not connected. Connect LLM first.')
+        setFillingDetails(false)
+        return
+      }
+
+      const messages = buildFillDetailsPrompt(request, contract, backbone)
+      const response = adapter.completeJson
+        ? await adapter.completeJson(messages)
+        : await adapter.complete(messages)
+
+      const { bindings } = parseFillDetailsResponse(
+        response.content,
+        request.run_id,
+        backbone.source_corpus_hash,
+      )
+      setDetailBindings(bindings)
+    } catch (err) {
+      setFillError(err instanceof Error ? err.message : String(err))
+    } finally {
+      setFillingDetails(false)
+    }
+  }, [contract, backbone, request, connectBridge, setDetailBindings])
+
   // Reset saved indicator when a new run starts
   useEffect(() => {
     if (running) {
       setSavedInstance(false)
+      setFillError(null)
     }
   }, [running])
 
@@ -562,6 +654,48 @@ export function GenerationPanel() {
             </button>
           )}
         </div>
+
+        {/* Fill All Details — single LLM call after backbone is ready */}
+        {backbone && contract && !running && (
+          <div style={{ marginBottom: 12 }}>
+            <button
+              onClick={handleFillDetails}
+              disabled={fillingDetails}
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                fontSize: 12,
+                fontWeight: 600,
+                borderRadius: 4,
+                border: '1px solid #8b5cf6',
+                background: fillingDetails ? 'var(--border)' : '#8b5cf618',
+                color: fillingDetails ? 'var(--text-muted)' : '#8b5cf6',
+                cursor: fillingDetails ? 'wait' : 'pointer',
+                transition: 'all 0.15s',
+              }}
+            >
+              {fillingDetails ? 'Filling Details...' : 'Fill All Details (1 LLM Call)'}
+            </button>
+            <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
+              Generates all characters, places, objects, events, emotional arcs, and timeline in a single LLM call using the contract and backbone.
+            </span>
+            {fillError && (
+              <div style={{
+                marginTop: 6,
+                padding: '6px 8px',
+                fontSize: 11,
+                color: '#ef4444',
+                background: 'rgba(239,68,68,0.08)',
+                borderRadius: 4,
+                border: '1px solid rgba(239,68,68,0.2)',
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+              }}>
+                {fillError}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Import / Export */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>

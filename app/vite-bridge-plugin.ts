@@ -2,11 +2,23 @@
  * Vite plugin that auto-starts the Claude Code Bridge Server
  * when the dev server starts. The bridge listens on ws://127.0.0.1:8765
  * so the browser UI can connect without manual terminal commands.
+ *
+ * IMPORTANT: Cleans Claude Code session env vars so the bridge's
+ * child `claude --print` calls don't detect a nested session.
  */
 
 import type { Plugin } from 'vite'
 import { spawn, type ChildProcess } from 'child_process'
 import path from 'path'
+
+/** Return a clean copy of process.env without Claude Code session vars. */
+function cleanEnv(): NodeJS.ProcessEnv {
+  const env = { ...process.env }
+  delete env.CLAUDECODE
+  delete env.CLAUDE_CODE_SSE_PORT
+  delete env.CLAUDE_CODE_ENTRYPOINT
+  return env
+}
 
 export function bridgePlugin(): Plugin {
   let child: ChildProcess | null = null
@@ -22,6 +34,7 @@ export function bridgePlugin(): Plugin {
         cwd: path.resolve(__dirname, '..'),
         stdio: ['ignore', 'pipe', 'pipe'],
         shell: true,
+        env: cleanEnv(),
       })
 
       child.stdout?.on('data', (data: Buffer) => {

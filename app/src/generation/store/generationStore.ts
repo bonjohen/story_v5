@@ -67,6 +67,7 @@ export interface GenerationStoreState {
   startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode, llm?: LLMAdapter | null) => Promise<void>
   loadResult: (result: OrchestratorResult, request: StoryRequest) => void
   loadSnapshot: (snapshot: StorySnapshot) => void
+  setDetailBindings: (bindings: StoryDetailBindings) => void
   selectScene: (sceneId: string | null) => void
   clearRun: () => void
 }
@@ -185,6 +186,8 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
   },
 
   loadSnapshot: (snapshot) => set(snapshotToStoreState(snapshot)),
+
+  setDetailBindings: (bindings) => set({ detailBindings: bindings }),
 
   selectScene: (sceneId) => set({ selectedSceneId: sceneId }),
 

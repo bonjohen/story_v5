@@ -2,6 +2,20 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## CRITICAL: LLM Backend Rules
+
+- **NEVER use an Anthropic API key.** Do not import, configure, or wire `AnthropicAdapter` or any direct API key-based adapter.
+- **ALWAYS use the Claude Code CLI** (`claude --print`) via `ClaudeCodeAdapter` for all LLM calls. The bridge server (`BridgeServer` in `bridgeServer.ts`) must use `ClaudeCodeAdapter`, never `AnthropicAdapter`.
+- **Do NOT spawn new Claude Code instances from within an active Claude Code session.** The `ClaudeCodeAdapter` already handles nested-session prevention by cleaning env vars (`CLAUDECODE`, `CLAUDE_CODE_SSE_PORT`, `CLAUDE_CODE_ENTRYPOINT`).
+- The Vite bridge plugin (`vite-bridge-plugin.ts`) auto-starts the bridge server when `npm run dev` runs.
+
+## CRITICAL: Always Leave Services Running
+
+- **After ANY code change, always restart and leave the dev server running.** Run `cd /c/Projects/story_v5/app && npm run dev` in the background before finishing.
+- The Vite dev server auto-starts the bridge server — no separate command needed.
+- **Never finish work without confirming the app is accessible in the browser.**
+- Use `run_in_background` for long-running services so they persist.
+
 ## Project Overview
 
 This is a **data and content project** that models storytelling structures as formal directed graphs. It produces two complementary analysis products, both complete:

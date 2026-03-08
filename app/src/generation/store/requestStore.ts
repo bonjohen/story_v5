@@ -49,11 +49,11 @@ export interface RequestStoreState {
 }
 
 export const useRequestStore = create<RequestStoreState>((set, get) => ({
-  premise: 'A young engineer discovers that her space station\'s AI has developed consciousness and must decide whether to report it or protect it.',
+  premise: '',
   archetype: 'The Hero\'s Journey',
-  genre: 'Science Fiction',
+  genre: 'Drama',
   mode: 'detailed-outline',
-  tone: 'somber',
+  tone: '',
   llmBackend: 'none',
   bridgeUrl: 'ws://127.0.0.1:8765',
   maxLlmCalls: 20,
