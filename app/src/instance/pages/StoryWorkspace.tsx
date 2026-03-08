@@ -12,6 +12,8 @@ import { FactionEditor } from '../panels/FactionEditor.tsx'
 import { PlotThreadTracker } from '../panels/PlotThreadTracker.tsx'
 import { SystemMap } from '../panels/SystemMap.tsx'
 import type { StoryInstance } from '../types.ts'
+import { parseSnapshot } from '../../generation/artifacts/storySnapshot.ts'
+import { instanceFromDetailBindings } from '../store/instanceBridge.ts'
 import { BTN, BADGE_STYLE, INPUT } from '../panels/shared.ts'
 import { useWorkspaceStore } from '../../store/workspaceStore.ts'
 import { ReadAloud } from '../../components/ReadAloud.tsx'
@@ -109,15 +111,36 @@ export function StoryWorkspace() {
     const reader = new FileReader()
     reader.onload = () => {
       try {
-        const inst = JSON.parse(reader.result as string) as StoryInstance
+        const raw = JSON.parse(reader.result as string)
+
+        // Detect story snapshot format and convert to instance
+        if (raw._format === 'story_v5_snapshot') {
+          const snapshot = parseSnapshot(reader.result as string)
+          if (!snapshot.detailBindings) {
+            alert('Snapshot has no detail bindings — run at least "detailed-outline" mode first')
+            return
+          }
+          const inst = instanceFromDetailBindings(
+            snapshot.detailBindings,
+            snapshot.selection ?? null,
+            snapshot.request ?? null,
+            raw.plotThreads ?? [],
+          )
+          importInstance(inst)
+          setShowSelector(false)
+          return
+        }
+
+        // Native story instance format
+        const inst = raw as StoryInstance
         if (!inst.metadata?.instance_id || !inst.lore) {
-          alert('Invalid story instance file')
+          alert('Invalid file — expected a story instance (.story.json) or snapshot (.snapshot.json)')
           return
         }
         importInstance(inst)
         setShowSelector(false)
       } catch {
-        alert('Failed to parse story instance file')
+        alert('Failed to parse file')
       }
     }
     reader.readAsText(file)
@@ -192,7 +215,7 @@ export function StoryWorkspace() {
         <button onClick={() => fileInputRef.current?.click()} style={{ ...BTN, padding: '4px 10px', fontSize: 11 }}>
           Import
         </button>
-        <input ref={fileInputRef} type="file" accept=".json,.story.json" onChange={handleImport} style={{ display: 'none' }} />
+        <input ref={fileInputRef} type="file" accept=".json,.story.json,.snapshot.json" onChange={handleImport} style={{ display: 'none' }} />
       </AppShellBar>
 
       {/* Instance selector dropdown */}

@@ -12,6 +12,16 @@
 import { spawn } from 'child_process'
 import type { LLMAdapter, LLMMessage, LLMResponse } from './llmAdapter.ts'
 
+/** Return a copy of process.env with all Claude Code session vars removed
+ *  so child `claude --print` doesn't detect a nested session and refuse to start. */
+function cleanEnv(): NodeJS.ProcessEnv {
+  const env = { ...process.env }
+  delete env.CLAUDECODE
+  delete env.CLAUDE_CODE_SSE_PORT
+  delete env.CLAUDE_CODE_ENTRYPOINT
+  return env
+}
+
 // ---------------------------------------------------------------------------
 // Options
 // ---------------------------------------------------------------------------
@@ -27,7 +37,7 @@ export interface ClaudeCodeAdapterOptions {
   extraFlags?: string[]
   /** Working directory for the claude process. */
   cwd?: string
-  /** Timeout in milliseconds. Default: 120_000 (2 minutes). */
+  /** Timeout in milliseconds. Default: 600_000 (10 minutes). */
   timeout?: number
   /** Enable verbose logging of prompts and responses to stderr. */
   verbose?: boolean
@@ -53,7 +63,7 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     this.maxTokens = options.maxTokens
     this.extraFlags = options.extraFlags ?? []
     this.cwd = options.cwd
-    this.timeout = options.timeout ?? 120_000
+    this.timeout = options.timeout ?? 600_000
     this.verbose = options.verbose ?? false
   }
 
@@ -87,14 +97,22 @@ export class ClaudeCodeAdapter implements LLMAdapter {
   async completeJson(messages: LLMMessage[]): Promise<LLMResponse> {
     this.callCount++
     const callId = this.callCount
-    const prompt = formatMessagesForCli(messages)
+
+    // Append a JSON-output reminder to the last user message to reinforce
+    // the system prompt's instruction. Do NOT use --output-format json
+    // as it can cause CLI crashes on some platforms.
+    const augmented = messages.map((m, i) =>
+      i === messages.length - 1 && m.role === 'user'
+        ? { ...m, content: m.content + '\n\nRespond with valid JSON only. No markdown fences, no commentary.' }
+        : m,
+    )
+    const prompt = formatMessagesForCli(augmented)
 
     if (this.verbose) {
       console.error(`\n[claude-code-adapter] JSON call #${callId} — sending ${prompt.length} chars`)
     }
 
     const args = this.buildArgs()
-    args.push('--output-format', 'json')
 
     let content = await this.spawnClaude(args, prompt, callId)
     content = stripJsonFences(content)
@@ -126,7 +144,7 @@ export class ClaudeCodeAdapter implements LLMAdapter {
     const proc = spawn(this.claudePath, args, {
       cwd: this.cwd,
       stdio: ['pipe', 'pipe', 'pipe'],
-      env: { ...process.env },
+      env: cleanEnv(),
       timeout: this.timeout,
     })
 
@@ -196,7 +214,7 @@ export class ClaudeCodeAdapter implements LLMAdapter {
       const proc = spawn(this.claudePath, args, {
         cwd: this.cwd,
         stdio: ['pipe', 'pipe', 'pipe'],
-        env: { ...process.env },
+        env: cleanEnv(),
         timeout: this.timeout,
       })
 
@@ -219,17 +237,21 @@ export class ClaudeCodeAdapter implements LLMAdapter {
         ))
       })
 
-      proc.on('close', (code) => {
+      proc.on('close', (code, signal) => {
         if (this.verbose) {
-          console.error(`[claude-code-adapter] Call #${callId} — exit code ${code}, ${stdout.length} chars response`)
+          console.error(`[claude-code-adapter] Call #${callId} — exit code ${code}, signal ${signal}, ${stdout.length} chars response`)
           if (stderr.trim()) {
             console.error(`[claude-code-adapter] stderr: ${stderr.trim().slice(0, 200)}`)
           }
         }
 
         if (code !== 0) {
+          const signalInfo = signal ? ` (signal: ${signal})` : ''
+          const hint = code === null
+            ? '\nProcess was killed — possible causes: timeout, out of memory, or OS termination.'
+            : ''
           reject(new Error(
-            `[claude-code-adapter] Call #${callId}: claude exited with code ${code}\n` +
+            `[claude-code-adapter] Call #${callId}: claude exited with code ${code}${signalInfo}${hint}\n` +
             `stderr: ${stderr.trim().slice(0, 500)}`
           ))
           return

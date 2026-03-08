@@ -440,6 +440,8 @@ export interface GenerationConfig {
   tone_policy: TonePolicy
   repair_policy: RepairPolicy
   coverage_targets: CoverageTargets
+  /** Hard cap on total LLM calls per run. Orchestrator stops gracefully when reached. Default: 20 */
+  max_llm_calls: number
 }
 
 // ---------------------------------------------------------------------------

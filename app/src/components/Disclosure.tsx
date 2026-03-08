@@ -15,6 +15,8 @@ interface DisclosureProps {
   persistKey?: string
   /** Default collapsed state (only used when no persisted state exists). */
   defaultCollapsed?: boolean
+  /** Nesting depth for indentation (0 = top level). */
+  depth?: number
   children: React.ReactNode
 }
 
@@ -23,6 +25,7 @@ export const Disclosure = memo(function Disclosure({
   badge,
   persistKey,
   defaultCollapsed = false,
+  depth = 0,
   children,
 }: DisclosureProps) {
   const storedCollapsed = useUIStore((s) => persistKey ? s.collapsedSections[persistKey] : undefined)
@@ -34,6 +37,8 @@ export const Disclosure = memo(function Disclosure({
     ? () => toggleStored(persistKey)
     : () => setLocalCollapsed((v) => !v)
 
+  const indent = depth * 12
+
   return (
     <div>
       <button
@@ -44,15 +49,17 @@ export const Disclosure = memo(function Disclosure({
           alignItems: 'center',
           gap: 6,
           width: '100%',
-          padding: '8px 12px',
-          fontSize: 11,
+          padding: `8px 12px 8px ${12 + indent}px`,
+          fontSize: depth > 0 ? 10 : 11,
           fontWeight: 600,
-          color: 'var(--text-secondary)',
+          color: depth > 0 ? 'var(--text-muted)' : 'var(--text-secondary)',
           textTransform: 'uppercase',
           letterSpacing: '0.04em',
           textAlign: 'left',
-          minHeight: 36,
+          minHeight: depth > 0 ? 30 : 36,
           transition: 'background 0.1s',
+          borderLeft: depth > 0 ? `2px solid var(--border)` : 'none',
+          marginLeft: depth > 0 ? indent - 12 : 0,
         }}
       >
         <span style={{

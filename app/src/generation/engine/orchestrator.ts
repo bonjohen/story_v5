@@ -19,7 +19,7 @@ import type {
   StoryDetailBindings,
   ChapterManifest,
 } from '../artifacts/types.ts'
-import type { LLMAdapter } from '../agents/llmAdapter.ts'
+import type { LLMAdapter, LLMMessage } from '../agents/llmAdapter.ts'
 import type { DataProvider } from './corpusLoader.ts'
 import { loadCorpus } from './corpusLoader.ts'
 import { runSelection } from './selectionEngine.ts'
@@ -60,6 +60,7 @@ export interface OrchestratorResult {
   chapterManifest?: ChapterManifest
   chapterTexts?: Map<string, string>
   events: OrchestratorEvent[]
+  llmTelemetry?: LLMCallTelemetry[]
   error?: string
 }
 
@@ -103,6 +104,115 @@ function assertTransition(from: OrchestratorState, to: OrchestratorState): void 
 }
 
 // ---------------------------------------------------------------------------
+// Instrumented LLM wrapper — telemetry for every call
+// ---------------------------------------------------------------------------
+
+export interface LLMCallTelemetry {
+  callNumber: number
+  method: 'complete' | 'completeJson' | 'completeStream'
+  messageCount: number
+  inputChars: number
+  systemChars: number
+  userChars: number
+  startedAt: string
+  completedAt?: string
+  durationMs?: number
+  outputChars?: number
+  status: 'pending' | 'success' | 'error'
+  error?: string
+}
+
+function instrumentedLLM(
+  llm: LLMAdapter,
+  onCall: (telemetry: LLMCallTelemetry) => void,
+): LLMAdapter {
+  let callCount = 0
+
+  function measure(messages: LLMMessage[], method: LLMCallTelemetry['method']): LLMCallTelemetry {
+    callCount++
+    const totalChars = messages.reduce((n, m) => n + m.content.length, 0)
+    const systemChars = messages.filter(m => m.role === 'system').reduce((n, m) => n + m.content.length, 0)
+    const userChars = messages.filter(m => m.role === 'user').reduce((n, m) => n + m.content.length, 0)
+    return {
+      callNumber: callCount,
+      method,
+      messageCount: messages.length,
+      inputChars: totalChars,
+      systemChars,
+      userChars,
+      startedAt: new Date().toISOString(),
+      status: 'pending',
+    }
+  }
+
+  return {
+    async complete(messages) {
+      const t = measure(messages, 'complete')
+      onCall(t)
+      try {
+        const start = Date.now()
+        const resp = await llm.complete(messages)
+        t.completedAt = new Date().toISOString()
+        t.durationMs = Date.now() - start
+        t.outputChars = resp.content.length
+        t.status = 'success'
+        onCall(t)
+        return resp
+      } catch (err) {
+        t.completedAt = new Date().toISOString()
+        t.status = 'error'
+        t.error = err instanceof Error ? err.message : String(err)
+        onCall(t)
+        throw err
+      }
+    },
+    completeJson: llm.completeJson ? async (messages) => {
+      const t = measure(messages, 'completeJson')
+      onCall(t)
+      try {
+        const start = Date.now()
+        const resp = await llm.completeJson!(messages)
+        t.completedAt = new Date().toISOString()
+        t.durationMs = Date.now() - start
+        t.outputChars = resp.content.length
+        t.status = 'success'
+        onCall(t)
+        return resp
+      } catch (err) {
+        t.completedAt = new Date().toISOString()
+        t.status = 'error'
+        t.error = err instanceof Error ? err.message : String(err)
+        onCall(t)
+        throw err
+      }
+    } : undefined,
+    completeStream: llm.completeStream ? async function* (messages) {
+      const t = measure(messages, 'completeStream')
+      onCall(t)
+      try {
+        const start = Date.now()
+        let totalOutput = 0
+        for await (const chunk of llm.completeStream!(messages)) {
+          totalOutput += chunk.length
+          yield chunk
+        }
+        t.completedAt = new Date().toISOString()
+        t.durationMs = Date.now() - start
+        t.outputChars = totalOutput
+        t.status = 'success'
+        onCall(t)
+      } catch (err) {
+        t.completedAt = new Date().toISOString()
+        t.status = 'error'
+        t.error = err instanceof Error ? err.message : String(err)
+        onCall(t)
+        throw err
+      }
+    } : undefined,
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Orchestrator
 // ---------------------------------------------------------------------------
 
@@ -111,7 +221,38 @@ function assertTransition(from: OrchestratorState, to: OrchestratorState): void 
  * Returns all artifacts produced during the run.
  */
 export async function orchestrate(options: OrchestratorOptions): Promise<OrchestratorResult> {
-  const { request, provider, config, llm = null, mode = 'draft', onEvent, onSceneChunk } = options
+  const { request, provider, config, llm: rawLlm = null, mode = 'draft', onEvent, onSceneChunk } = options
+
+  // Wrap LLM with instrumentation — emit telemetry as events
+  const telemetryLog: LLMCallTelemetry[] = []
+  const llm = rawLlm ? instrumentedLLM(rawLlm, (t) => {
+    // Update or add to log
+    const existing = telemetryLog.findIndex(e => e.callNumber === t.callNumber)
+    if (existing >= 0) telemetryLog[existing] = t
+    else telemetryLog.push(t)
+
+    // Emit as event so UI can display it
+    const sizeKb = (t.inputChars / 1024).toFixed(1)
+    if (t.status === 'pending') {
+      onEvent?.({
+        state: 'GENERATING_SCENE',
+        message: `LLM #${t.callNumber} ${t.method} — ${sizeKb}KB input (sys:${(t.systemChars/1024).toFixed(1)}K usr:${(t.userChars/1024).toFixed(1)}K)`,
+        timestamp: t.startedAt,
+      })
+    } else if (t.status === 'success') {
+      onEvent?.({
+        state: 'GENERATING_SCENE',
+        message: `LLM #${t.callNumber} OK — ${(t.outputChars!/1024).toFixed(1)}KB out, ${((t.durationMs!)/1000).toFixed(1)}s`,
+        timestamp: t.completedAt!,
+      })
+    } else if (t.status === 'error') {
+      onEvent?.({
+        state: 'GENERATING_SCENE',
+        message: `LLM #${t.callNumber} FAILED — ${t.error?.slice(0, 200)}`,
+        timestamp: t.completedAt!,
+      })
+    }
+  }) : null
 
   let state: OrchestratorState = 'IDLE'
   const events: OrchestratorEvent[] = []
@@ -159,7 +300,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     // 3.5. Template compilation
     const templatePack = compileTemplatePack(selection, contract, corpus)
     result.templatePack = templatePack
-    transition('TEMPLATES_COMPILED', `Templates compiled: ${Object.keys(templatePack.archetype_node_templates).length} archetype, ${Object.keys(templatePack.genre_level_templates).length} genre`)
+    transition('TEMPLATES_COMPILED', `Templates compiled: ${Object.keys(templatePack.archetype_node_templates).length} beat templates, ${Object.keys(templatePack.genre_level_templates).length} genre constraints`)
 
     // 3.6. Backbone assembly
     const backbone = assembleBackbone(contract, templatePack)
@@ -174,8 +315,9 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       return result
     }
 
-    // 3.7. Detail synthesis
-    const { bindings: detailBindings, updatedBackbone } = await synthesizeDetails(request, backbone, llm)
+    // 3.7. Detail synthesis — use LLM only for modes that generate prose
+    const useLlmForDetails = (mode === 'draft' || mode === 'chapters') ? llm : null
+    const { bindings: detailBindings, updatedBackbone } = await synthesizeDetails(request, backbone, useLlmForDetails)
     currentBackbone = updatedBackbone
     result.detailBindings = detailBindings
     result.backbone = currentBackbone
@@ -269,14 +411,15 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
 
     result.sceneDrafts = sceneDrafts
 
-    // 8. Final validation of all scenes
+    // 8. Final validation of all scenes (heuristic only — LLM validation
+    //    already ran per-scene during generate/repair loop above)
     const finalValidation = await validateScenes({
       contract,
       scenes: plan.scenes,
       beats: plan.beats,
       sceneDrafts,
       config,
-      llm,
+      llm: null,   // skip LLM re-validation to avoid redundant calls
       plan,
     })
     result.validation = finalValidation
@@ -319,5 +462,6 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
   }
 
   result.state = state
+  if (telemetryLog.length > 0) result.llmTelemetry = telemetryLog
   return result
 }

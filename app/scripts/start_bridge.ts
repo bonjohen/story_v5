@@ -1,8 +1,8 @@
 /**
  * Start the Claude Code Bridge Server.
  *
- * Exposes ClaudeCodeAdapter over WebSocket so the browser UI
- * can delegate LLM calls to the local Claude Code CLI.
+ * Uses the local `claude` CLI (already installed and authenticated).
+ * No API key needed — leverages existing Claude Code auth.
  *
  * Usage:
  *   npx tsx app/scripts/start_bridge.ts [options]

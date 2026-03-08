@@ -1,7 +1,6 @@
 import { useEffect, useCallback, useRef, useState, useMemo, memo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { GraphCanvas } from './render/GraphCanvas.tsx'
-import type { NormalizedGraph } from './graph-engine/index.ts'
 import { DetailPanel } from './panels/DetailPanel.tsx'
 import { GraphStats } from './panels/GraphStats.tsx'
 import { CrossIndexPanel } from './panels/CrossIndex.tsx'
@@ -29,13 +28,11 @@ import type { CyCore, GenerationOverlay } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
 import { useGenerationStore } from './generation/store/generationStore.ts'
+import { parseSnapshot } from './generation/artifacts/storySnapshot.ts'
 import { useDbInit } from './db/useDbInit.ts'
 import type { DataManifest } from './types/graph.ts'
 
 // Layout constants
-const INFO_PANEL_DEFAULT_HEIGHT = 260
-const INFO_PANEL_MIN_HEIGHT = 80
-const INFO_PANEL_MAX_HEIGHT = 600
 const GEN_PANEL_WIDTH = 340
 
 /** Parse the URL pathname into a graph type and directory slug. */
@@ -97,11 +94,9 @@ export default function App() {
   // UI state
 
   const [showExport, setShowExport] = useState(false)
-  const [genTab, setGenTab] = useState<'run' | 'contract' | 'plan' | 'trace' | 'compliance' | 'story'>('run')
+  const [genTab, setGenTab] = useState<'run' | 'contract' | 'templates' | 'plan' | 'trace' | 'compliance' | 'story'>('run')
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
   const [manifestError, setManifestError] = useState<string | null>(null)
-  const [infoPanelOpen, setInfoPanelOpen] = useState(true)
-  const [infoPanelHeight, setInfoPanelHeight] = useState(INFO_PANEL_DEFAULT_HEIGHT)
 
   const cyArchRef = useRef<CyCore | null>(null)
   const cyGenreRef = useRef<CyCore | null>(null)
@@ -109,51 +104,6 @@ export default function App() {
   const handleArchCyReady = useCallback((cy: CyCore) => { cyArchRef.current = cy }, [])
   const handleGenreCyReady = useCallback((cy: CyCore) => { cyGenreRef.current = cy }, [])
 
-  // Draggable separator between info panel and graph area
-  const dragRef = useRef<{ startY: number; startHeight: number } | null>(null)
-  const [draggingSep, setDraggingSep] = useState(false)
-  const infoPanelHeightRef = useRef(INFO_PANEL_DEFAULT_HEIGHT)
-  infoPanelHeightRef.current = infoPanelHeight
-
-  const resizeCytoscape = useCallback(() => {
-    cyArchRef.current?.resize()
-    cyArchRef.current?.fit(undefined, 30)
-    cyGenreRef.current?.resize()
-    cyGenreRef.current?.fit(undefined, 30)
-  }, [])
-
-  const handleSepPointerDown = useCallback((e: React.PointerEvent) => {
-    e.preventDefault()
-    dragRef.current = { startY: e.clientY, startHeight: infoPanelHeightRef.current }
-    setDraggingSep(true)
-    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
-  }, [])
-
-  const resizeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const handleSepPointerMove = useCallback((e: React.PointerEvent) => {
-    if (!dragRef.current) return
-    const delta = e.clientY - dragRef.current.startY
-    const next = Math.max(INFO_PANEL_MIN_HEIGHT, Math.min(INFO_PANEL_MAX_HEIGHT, dragRef.current.startHeight + delta))
-    setInfoPanelHeight(next)
-    // Debounced resize during drag
-    if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current)
-    resizeTimerRef.current = setTimeout(() => {
-      cyArchRef.current?.resize()
-      cyGenreRef.current?.resize()
-    }, 100)
-  }, [])
-
-  const handleSepPointerUp = useCallback(() => {
-    dragRef.current = null
-    setDraggingSep(false)
-    resizeCytoscape()
-  }, [resizeCytoscape])
-
-  // Resize Cytoscape when info panel is collapsed/expanded
-  useEffect(() => {
-    const timer = setTimeout(resizeCytoscape, 250)
-    return () => clearTimeout(timer)
-  }, [infoPanelOpen, resizeCytoscape])
 
   // Auto-switch to Story tab once when draft generation completes
   const autoSwitchedToStory = useRef(false)
@@ -185,6 +135,28 @@ export default function App() {
         setManifestError(err instanceof Error ? err.message : 'Failed to load manifest')
       })
   }, [setManifest])
+
+  // Auto-load sample snapshot on first visit if no generation data exists
+  const autoLoadTriggered = useRef(false)
+  useEffect(() => {
+    if (autoLoadTriggered.current) return
+    if (genStatus !== 'IDLE') return
+    if (!archetypeGraph) return
+    autoLoadTriggered.current = true
+
+    fetch(`${import.meta.env.BASE_URL}data/sample_snapshot.json`)
+      .then((res) => {
+        if (!res.ok) return
+        return res.text()
+      })
+      .then((text) => {
+        if (!text) return
+        if (useGenerationStore.getState().status !== 'IDLE') return
+        const snapshot = parseSnapshot(text)
+        useGenerationStore.getState().loadSnapshot(snapshot)
+      })
+      .catch(() => { /* sample not available — fine */ })
+  }, [archetypeGraph, genStatus])
 
   // Sync URL -> graph loading
   useEffect(() => {
@@ -233,12 +205,6 @@ export default function App() {
     : null
   const hasDetailContent = !!(selectedNode || selectedEdge)
 
-  // Auto-open info panel when node/edge is selected
-  useEffect(() => {
-    if (selectedNodeId || selectedEdgeId) {
-      setInfoPanelOpen(true)
-    }
-  }, [selectedNodeId, selectedEdgeId])
 
 
 
@@ -369,9 +335,12 @@ export default function App() {
           {'\u2699'}
         </button>
 
-        {/* Status indicators */}
+        {/* DB status indicator */}
         {dbStatus.error && (
           <span style={{ fontSize: 9, color: '#ef4444' }} title={dbStatus.error}>DB err</span>
+        )}
+        {dbStatus.loading && (
+          <span style={{ fontSize: 9, color: 'var(--text-muted)', animation: 'pulse 1.5s infinite' }}>DB...</span>
         )}
         {dbStatus.ready && (
           <span style={{ fontSize: 9, color: '#22c55e' }} title={`SQLite v${dbStatus.schemaVersion}`}>DB</span>
@@ -419,6 +388,7 @@ export default function App() {
           }}>
             <GenTab label={'\u25C0 Run'} active={genTab === 'run'} onClick={() => setGenTab('run')} highlight />
             {genContract && <GenTab label="Contract" active={genTab === 'contract'} onClick={() => setGenTab('contract')} badge />}
+            {genTemplatePack && <GenTab label="Templates" active={genTab === 'templates'} onClick={() => setGenTab('templates')} badge />}
             {genPlan && <GenTab label="Plan" active={genTab === 'plan'} onClick={() => setGenTab('plan')} badge />}
             {genTrace && <GenTab label="Map" active={genTab === 'trace'} onClick={() => setGenTab('trace')} badge />}
             {genValidation && <GenTab label="Checks" active={genTab === 'compliance'} onClick={() => setGenTab('compliance')} badge />}
@@ -427,6 +397,7 @@ export default function App() {
           <div style={{ flex: 1, overflowY: 'auto' }}>
             {genTab === 'run' && <GenerationPanel />}
             {genTab === 'contract' && <ContractPanel onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'templates' && <TemplatesPanel />}
             {genTab === 'plan' && <PlanPanel onHighlightNodes={setGenHighlightNodes} />}
             {genTab === 'trace' && <TracePanel onHighlightNodes={setGenHighlightNodes} />}
             {genTab === 'compliance' && <CompliancePanel />}
@@ -434,327 +405,233 @@ export default function App() {
           </div>
         </div>}
 
-        {/* Info panel + graph area */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-          {/* Collapsible info panel — accordion sections */}
-          <div style={{
-            height: infoPanelOpen ? infoPanelHeight : 28,
-            background: 'var(--bg-surface)',
-            flexShrink: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-            transition: draggingSep ? 'none' : 'height 0.2s ease',
-          }}>
-            {/* Collapse toggle */}
-            <button
-              onClick={() => setInfoPanelOpen((v) => !v)}
-              aria-label={infoPanelOpen ? 'Collapse panel' : 'Expand panel'}
-              style={{
+        {/* Inspector — full-height scrollable panel */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--bg-surface)' }}>
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            {/* Graph group — contains canvas, selection detail, and metadata */}
+            <Disclosure title="Graph" persistKey="info-graph" badge={currentGraph ? `${currentGraph.graph.nodes.length}N` : ''}>
+              {/* Graph toggle bar */}
+              <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                padding: '4px 12px',
-                fontSize: 10,
-                color: 'var(--text-muted)',
-                flexShrink: 0,
+                padding: '3px 10px',
                 borderBottom: '1px solid var(--border)',
-                minHeight: 28,
-              }}
-            >
-              <span>{infoPanelOpen ? '\u25B2' : '\u25BC'}</span>
-              <span style={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                Inspector
-              </span>
-            </button>
-
-            {infoPanelOpen && (
-              <div style={{ flex: 1, overflowY: 'auto' }}>
-                {/* Graph group */}
-                <Disclosure title="Graph" persistKey="info-graph" badge={currentGraph ? `${currentGraph.graph.nodes.length}N` : ''}>
-                  <PairingPanel />
-                  {hasDetailContent && currentGraph && (
-                    <Disclosure title="Selected Element" persistKey="info-detail">
-                      <DetailPanel
-                        node={selectedNode}
-                        edge={selectedEdge}
-                        onTraceForward={handleTraceForward}
-                        onTraceBackward={handleTraceBackward}
-                        onClearTrace={handleClearTrace}
-                        traceActive={traceDirection}
-                        graph={currentGraph}
-                      />
-                    </Disclosure>
-                  )}
-                  {currentGraph && (
-                    <Disclosure title="Statistics" persistKey="info-stats" defaultCollapsed>
-                      <GraphStats graph={currentGraph} />
-                    </Disclosure>
-                  )}
-                  {currentGraph && (
-                    <Disclosure title="Elements" persistKey="info-elements" defaultCollapsed>
-                      <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
-                    </Disclosure>
-                  )}
-                  {currentGraph && (
-                    <Disclosure title="Cross-Index" persistKey="info-xindex" defaultCollapsed>
-                      <CrossIndexPanel graph={currentGraph} />
-                    </Disclosure>
-                  )}
-                </Disclosure>
-
-                {/* Visualization group */}
-                {archetypeGraph && (
-                  <Disclosure title="Visualization" persistKey="info-viz" defaultCollapsed>
-                    <Disclosure title="Timeline" persistKey="info-timeline" defaultCollapsed>
-                      <TimelinePanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
-                    </Disclosure>
-                    <Disclosure title="Character Arcs" persistKey="info-arcs" defaultCollapsed>
-                      <CharacterArcPanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
-                    </Disclosure>
-                  </Disclosure>
-                )}
-
-                {/* Generation group — only when artifacts exist */}
-                {(genTemplatePack || genBackbone || genContract || genPlan || genSceneDrafts.size > 0 || genValidation || genChapterManifest) && (
-                  <Disclosure title="Generation" persistKey="info-gen" badge={genSceneDrafts.size > 0 ? `${genSceneDrafts.size} scenes` : ''}>
-                    <Disclosure title="Templates" persistKey="info-templates" defaultCollapsed>
-                      <TemplatesPanel />
-                    </Disclosure>
-                    {genContract && (
-                      <Disclosure title="Contract" persistKey="info-gen-contract" defaultCollapsed>
-                        <ContractPanel onHighlightNodes={setGenHighlightNodes} />
-                      </Disclosure>
-                    )}
-                    {genBackbone && (
-                      <Disclosure title="Backbone" persistKey="info-gen-backbone" defaultCollapsed badge={`${genBackbone.beats.length} beats`}>
-                        <div style={{ padding: '8px 12px', fontSize: 11, color: 'var(--text-primary)' }}>
-                          {genBackbone.beats.map((beat, i) => {
-                            const obligationCount = beat.scenes.reduce((n, s) => n + s.genre_obligations.length, 0)
-                            return (
-                              <div key={i} style={{ padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: '3px solid #f59e0b' }}>
-                                <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', marginBottom: 2 }}>
-                                  <span style={{ fontWeight: 600 }}>{beat.label}</span>
-                                  {beat.role && <span style={{ fontSize: 9, fontWeight: 600, textTransform: 'uppercase', color: '#f59e0b' }}>{beat.role}</span>}
-                                </div>
-                                {beat.definition && <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{beat.definition}</div>}
-                                <div style={{ fontSize: 9, color: 'var(--text-muted)' }}>
-                                  {beat.scenes.length} scene{beat.scenes.length !== 1 ? 's' : ''}{obligationCount > 0 ? `, ${obligationCount} obligations` : ''}
-                                </div>
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </Disclosure>
-                    )}
-                    {genPlan && (
-                      <Disclosure title="Plan" persistKey="info-gen-plan" defaultCollapsed>
-                        <PlanPanel onHighlightNodes={setGenHighlightNodes} />
-                      </Disclosure>
-                    )}
-                    {genSceneDrafts.size > 0 && (
-                      <Disclosure title="Story" persistKey="info-gen-story">
-                        <StoryPanel onHighlightNodes={setGenHighlightNodes} />
-                      </Disclosure>
-                    )}
-                    {genValidation && (
-                      <Disclosure title="Compliance" persistKey="info-gen-compliance" defaultCollapsed>
-                        <CompliancePanel />
-                      </Disclosure>
-                    )}
-                    {genChapterManifest && (
-                      <Disclosure title="Chapters" persistKey="info-gen-chapters" badge={`${genChapterManifest.chapters.length}`}>
-                        <div style={{ padding: '8px 12px', fontSize: 11, color: 'var(--text-primary)' }}>
-                          {genChapterManifest.chapters.map((ch, i) => (
-                            <div key={i} style={{ padding: '4px 8px', marginBottom: 3, background: 'var(--bg-elevated)', borderRadius: 3 }}>
-                              <span style={{ fontWeight: 500 }}>{ch.title}</span>
-                              <span style={{ color: 'var(--text-muted)', marginLeft: 6, fontSize: 10 }}>{ch.scene_ids.length} scenes</span>
-                            </div>
-                          ))}
-                        </div>
-                      </Disclosure>
-                    )}
-                  </Disclosure>
+                minHeight: 30,
+              }}>
+                <div style={{ display: 'flex', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
+                  <button
+                    onClick={() => { if (splitView) toggleSplitView(); activateGraph('archetype'); }}
+                    style={{
+                      padding: '2px 12px',
+                      fontSize: 10,
+                      fontWeight: !splitView && viewMode === 'archetype' ? 600 : 400,
+                      color: !splitView && viewMode === 'archetype' ? '#f59e0b' : 'var(--text-muted)',
+                      background: !splitView && viewMode === 'archetype' ? '#f59e0b14' : 'transparent',
+                      borderRight: '1px solid var(--border)',
+                    }}
+                  >
+                    Archetype
+                  </button>
+                  <button
+                    onClick={() => { if (splitView) toggleSplitView(); activateGraph('genre'); }}
+                    style={{
+                      padding: '2px 12px',
+                      fontSize: 10,
+                      fontWeight: !splitView && viewMode === 'genre' ? 600 : 400,
+                      color: !splitView && viewMode === 'genre' ? '#8b5cf6' : 'var(--text-muted)',
+                      background: !splitView && viewMode === 'genre' ? '#8b5cf614' : 'transparent',
+                      borderRight: '1px solid var(--border)',
+                    }}
+                  >
+                    Genre
+                  </button>
+                  <button
+                    className="compare-toggle"
+                    onClick={() => { if (!splitView) toggleSplitView(); }}
+                    style={{
+                      padding: '2px 12px',
+                      fontSize: 10,
+                      fontWeight: splitView ? 600 : 400,
+                      color: splitView ? 'var(--accent)' : 'var(--text-muted)',
+                      background: splitView ? 'rgba(59,130,246,0.08)' : 'transparent',
+                    }}
+                  >
+                    Compare
+                  </button>
+                </div>
+                {!splitView && currentGraph && (
+                  <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                    {currentGraph.graph.name}
+                    <span style={{ fontSize: 10, color: 'var(--text-muted)', marginLeft: 8 }}>
+                      {currentGraph.graph.nodes.length}N / {currentGraph.graph.edges.length}E
+                    </span>
+                  </span>
                 )}
               </div>
+
+              {/* Graph canvas — embedded with fixed height */}
+              <div style={{ height: 400, display: 'flex', overflow: 'hidden', borderBottom: '1px solid var(--border)' }}>
+                {splitView ? (
+                  <>
+                    <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                      {archetypeGraph ? (
+                        <div key={archetypeDir ? `archetype/${archetypeDir}` : undefined} style={{ width: '100%', height: '100%' }}>
+                          <GraphCanvas
+                            graph={archetypeGraph}
+                            graphId={archetypeDir ? `archetype/${archetypeDir}` : undefined}
+                            highlightedPath={viewMode === 'archetype' ? highlightedPath : undefined}
+                            generationOverlay={viewMode === 'archetype' ? generationOverlay : undefined}
+                            onCyReady={handleArchCyReady}
+                            onFocus={handleArchFocus}
+                          />
+                        </div>
+                      ) : (
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)', fontSize: 12 }}>No archetype loaded</div>
+                      )}
+                    </div>
+                    <div style={{ width: 1, background: 'var(--border)', flexShrink: 0 }} />
+                    <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                      {genreGraph ? (
+                        <div key={genreDir ? `genre/${genreDir}` : undefined} style={{ width: '100%', height: '100%' }}>
+                          <GraphCanvas
+                            graph={genreGraph}
+                            graphId={genreDir ? `genre/${genreDir}` : undefined}
+                            highlightedPath={viewMode === 'genre' ? highlightedPath : undefined}
+                            onCyReady={handleGenreCyReady}
+                            onFocus={handleGenreFocus}
+                          />
+                        </div>
+                      ) : (
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)', fontSize: 12 }}>No genre loaded</div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                    {currentGraph ? (
+                      <div key={viewMode === 'archetype' ? (archetypeDir ? `archetype/${archetypeDir}` : 'arch') : (genreDir ? `genre/${genreDir}` : 'genre')} style={{ width: '100%', height: '100%' }}>
+                        <GraphCanvas
+                          graph={currentGraph}
+                          graphId={viewMode === 'archetype' ? (archetypeDir ? `archetype/${archetypeDir}` : undefined) : (genreDir ? `genre/${genreDir}` : undefined)}
+                          highlightedPath={highlightedPath}
+                          generationOverlay={viewMode === 'archetype' ? generationOverlay : undefined}
+                          onCyReady={viewMode === 'archetype' ? handleArchCyReady : handleGenreCyReady}
+                          onFocus={viewMode === 'archetype' ? handleArchFocus : handleGenreFocus}
+                        />
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)', fontSize: 12 }}>No graph loaded</div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Selected element detail — shown directly when node/edge clicked */}
+              {hasDetailContent && currentGraph && (
+                <DetailPanel
+                  node={selectedNode}
+                  edge={selectedEdge}
+                  onTraceForward={handleTraceForward}
+                  onTraceBackward={handleTraceBackward}
+                  onClearTrace={handleClearTrace}
+                  traceActive={traceDirection}
+                  graph={currentGraph}
+                />
+              )}
+
+              <PairingPanel />
+              {currentGraph && (
+                <Disclosure title="Statistics" persistKey="info-stats" defaultCollapsed depth={1}>
+                  <GraphStats graph={currentGraph} />
+                </Disclosure>
+              )}
+              {currentGraph && (
+                <Disclosure title="Elements" persistKey="info-elements" defaultCollapsed depth={1}>
+                  <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
+                </Disclosure>
+              )}
+              {currentGraph && (
+                <Disclosure title="Cross-Index" persistKey="info-xindex" defaultCollapsed depth={1}>
+                  <CrossIndexPanel graph={currentGraph} />
+                </Disclosure>
+              )}
+            </Disclosure>
+
+            {/* Visualization group */}
+            {archetypeGraph && (
+              <Disclosure title="Visualization" persistKey="info-viz" defaultCollapsed>
+                <Disclosure title="Timeline" persistKey="info-timeline" defaultCollapsed depth={1}>
+                  <TimelinePanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+                </Disclosure>
+                <Disclosure title="Character Arcs" persistKey="info-arcs" defaultCollapsed depth={1}>
+                  <CharacterArcPanel graph={archetypeGraph} selectedNodeId={selectedNodeId} onSelectNode={selectNode} />
+                </Disclosure>
+              </Disclosure>
+            )}
+
+            {/* Generation group — only when artifacts exist */}
+            {(genTemplatePack || genBackbone || genContract || genPlan || genSceneDrafts.size > 0 || genValidation || genChapterManifest) && (
+              <Disclosure title="Generation" persistKey="info-gen" badge={genSceneDrafts.size > 0 ? `${genSceneDrafts.size} scenes` : ''}>
+                <Disclosure title="Templates" persistKey="info-templates" defaultCollapsed depth={1}>
+                  <TemplatesPanel />
+                </Disclosure>
+                {genContract && (
+                  <Disclosure title="Contract" persistKey="info-gen-contract" defaultCollapsed depth={1}>
+                    <ContractPanel onHighlightNodes={setGenHighlightNodes} />
+                  </Disclosure>
+                )}
+                {genBackbone && (
+                  <Disclosure title="Backbone" persistKey="info-gen-backbone" defaultCollapsed depth={1} badge={`${genBackbone.beats.length} beats`}>
+                    <div style={{ padding: '8px 12px', fontSize: 11, color: 'var(--text-primary)' }}>
+                      {genBackbone.beats.map((beat, i) => {
+                        const obligationCount = beat.scenes.reduce((n, s) => n + s.genre_obligations.length, 0)
+                        return (
+                          <div key={i} style={{ padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: '3px solid #f59e0b' }}>
+                            <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', marginBottom: 2 }}>
+                              <span style={{ fontWeight: 600 }}>{beat.label}</span>
+                              {beat.role && <span style={{ fontSize: 9, fontWeight: 600, textTransform: 'uppercase', color: '#f59e0b' }}>{beat.role}</span>}
+                            </div>
+                            {beat.definition && <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{beat.definition}</div>}
+                            <div style={{ fontSize: 9, color: 'var(--text-muted)' }}>
+                              {beat.scenes.length} scene{beat.scenes.length !== 1 ? 's' : ''}{obligationCount > 0 ? `, ${obligationCount} obligations` : ''}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </Disclosure>
+                )}
+                {genPlan && (
+                  <Disclosure title="Plan" persistKey="info-gen-plan" defaultCollapsed depth={1}>
+                    <PlanPanel onHighlightNodes={setGenHighlightNodes} />
+                  </Disclosure>
+                )}
+                {genSceneDrafts.size > 0 && (
+                  <Disclosure title="Story" persistKey="info-gen-story" depth={1}>
+                    <StoryPanel onHighlightNodes={setGenHighlightNodes} />
+                  </Disclosure>
+                )}
+                {genValidation && (
+                  <Disclosure title="Compliance" persistKey="info-gen-compliance" defaultCollapsed depth={1}>
+                    <CompliancePanel />
+                  </Disclosure>
+                )}
+                {genChapterManifest && (
+                  <Disclosure title="Chapters" persistKey="info-gen-chapters" depth={1} badge={`${genChapterManifest.chapters.length}`}>
+                    <div style={{ padding: '8px 12px', fontSize: 11, color: 'var(--text-primary)' }}>
+                      {genChapterManifest.chapters.map((ch, i) => (
+                        <div key={i} style={{ padding: '4px 8px', marginBottom: 3, background: 'var(--bg-elevated)', borderRadius: 3 }}>
+                          <span style={{ fontWeight: 500 }}>{ch.title}</span>
+                          <span style={{ color: 'var(--text-muted)', marginLeft: 6, fontSize: 10 }}>{ch.scene_ids.length} scenes</span>
+                        </div>
+                      ))}
+                    </div>
+                  </Disclosure>
+                )}
+              </Disclosure>
             )}
           </div>
-
-          {/* Draggable separator */}
-          {infoPanelOpen && (
-            <div
-              role="separator"
-              aria-orientation="horizontal"
-              aria-label="Resize info panel"
-              aria-valuenow={infoPanelHeight}
-              aria-valuemin={INFO_PANEL_MIN_HEIGHT}
-              aria-valuemax={INFO_PANEL_MAX_HEIGHT}
-              tabIndex={0}
-              onKeyDown={(e) => {
-                const step = 20
-                if (e.key === 'ArrowUp') {
-                  e.preventDefault()
-                  setInfoPanelHeight((h) => Math.max(INFO_PANEL_MIN_HEIGHT, h - step))
-                } else if (e.key === 'ArrowDown') {
-                  e.preventDefault()
-                  setInfoPanelHeight((h) => Math.min(INFO_PANEL_MAX_HEIGHT, h + step))
-                }
-              }}
-              onPointerDown={handleSepPointerDown}
-              onPointerMove={handleSepPointerMove}
-              onPointerUp={handleSepPointerUp}
-              onPointerCancel={handleSepPointerUp}
-              onLostPointerCapture={handleSepPointerUp}
-              style={{
-                height: 6,
-                flexShrink: 0,
-                cursor: 'row-resize',
-                background: 'var(--border)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                touchAction: 'none',
-              }}
-            >
-              <div style={{
-                width: 32,
-                height: 2,
-                borderRadius: 1,
-                background: 'var(--text-muted)',
-                opacity: 0.5,
-              }} />
-            </div>
-          )}
-
-          {/* Graph toggle bar */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            padding: '3px 10px',
-            borderBottom: '1px solid var(--border)',
-            flexShrink: 0,
-            minHeight: 30,
-          }}>
-            {/* Segmented control: Archetype / Genre */}
-            <div style={{ display: 'flex', borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
-              <button
-                onClick={() => activateGraph('archetype')}
-                style={{
-                  padding: '2px 12px',
-                  fontSize: 10,
-                  fontWeight: viewMode === 'archetype' ? 600 : 400,
-                  color: viewMode === 'archetype' ? '#f59e0b' : 'var(--text-muted)',
-                  background: viewMode === 'archetype' ? '#f59e0b14' : 'transparent',
-                  borderRight: '1px solid var(--border)',
-                }}
-              >
-                Archetype
-              </button>
-              <button
-                onClick={() => activateGraph('genre')}
-                style={{
-                  padding: '2px 12px',
-                  fontSize: 10,
-                  fontWeight: viewMode === 'genre' ? 600 : 400,
-                  color: viewMode === 'genre' ? '#8b5cf6' : 'var(--text-muted)',
-                  background: viewMode === 'genre' ? '#8b5cf614' : 'transparent',
-                }}
-              >
-                Genre
-              </button>
-            </div>
-
-            {/* Active graph name + counts */}
-            {currentGraph && (
-              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
-                {currentGraph.graph.name}
-                <span style={{ fontSize: 10, color: 'var(--text-muted)', marginLeft: 8 }}>
-                  {currentGraph.graph.nodes.length}N / {currentGraph.graph.edges.length}E
-                </span>
-              </span>
-            )}
-
-            {/* Compare toggle */}
-            <button
-              className="compare-toggle"
-              onClick={toggleSplitView}
-              aria-label={splitView ? 'Single graph view' : 'Compare side-by-side'}
-              style={{
-                fontSize: 10,
-                padding: '2px 8px',
-                borderRadius: 4,
-                border: '1px solid',
-                borderColor: splitView ? 'var(--accent)' : 'var(--border)',
-                color: splitView ? 'var(--accent)' : 'var(--text-muted)',
-                background: splitView ? 'rgba(59,130,246,0.08)' : 'transparent',
-              }}
-            >
-              Compare
-            </button>
-          </div>
-
-          {/* Graph area — single or split */}
-          <div className="graph-pair" style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
-            {splitView ? (
-              <>
-                <GraphDocument
-                  label="Archetype"
-                  color="#f59e0b"
-                  graphName={archetypeGraph?.graph.name ?? null}
-                  graph={archetypeGraph}
-                  graphId={archetypeDir ? `archetype/${archetypeDir}` : undefined}
-                  onCyReady={handleArchCyReady}
-                  onFocus={handleArchFocus}
-                  isActive={viewMode === 'archetype'}
-                  highlightedPath={viewMode === 'archetype' ? highlightedPath : undefined}
-                  generationOverlay={viewMode === 'archetype' ? generationOverlay : undefined}
-                />
-                <div style={{ width: 1, background: 'var(--border)', flexShrink: 0 }} />
-                <GraphDocument
-                  label="Genre"
-                  color="#8b5cf6"
-                  graphName={genreGraph?.graph.name ?? null}
-                  graph={genreGraph}
-                  graphId={genreDir ? `genre/${genreDir}` : undefined}
-                  onCyReady={handleGenreCyReady}
-                  onFocus={handleGenreFocus}
-                  isActive={viewMode === 'genre'}
-                  highlightedPath={viewMode === 'genre' ? highlightedPath : undefined}
-                />
-              </>
-            ) : (
-              /* Single graph — full width */
-              viewMode === 'archetype' ? (
-                <GraphDocument
-                  label="Archetype"
-                  color="#f59e0b"
-                  graphName={archetypeGraph?.graph.name ?? null}
-                  graph={archetypeGraph}
-                  graphId={archetypeDir ? `archetype/${archetypeDir}` : undefined}
-                  onCyReady={handleArchCyReady}
-                  onFocus={handleArchFocus}
-                  isActive
-                  highlightedPath={highlightedPath}
-                  generationOverlay={generationOverlay}
-                />
-              ) : (
-                <GraphDocument
-                  label="Genre"
-                  color="#8b5cf6"
-                  graphName={genreGraph?.graph.name ?? null}
-                  graph={genreGraph}
-                  graphId={genreDir ? `genre/${genreDir}` : undefined}
-                  onCyReady={handleGenreCyReady}
-                  onFocus={handleGenreFocus}
-                  isActive
-                  highlightedPath={highlightedPath}
-                />
-              )
-            )}
-          </div>
-
-
         </div>
       </div>
 
@@ -774,114 +651,6 @@ export default function App() {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Graph Document — label + GraphCanvas (no dropdown — driven by GenerationPanel)
-// ---------------------------------------------------------------------------
-
-interface GraphDocumentProps {
-  label: string
-  color: string
-  graphName: string | null
-  graph: NormalizedGraph | null
-  graphId?: string
-  onCyReady: (cy: CyCore) => void
-  onFocus: () => void
-  isActive: boolean
-  highlightedPath?: string[]
-  generationOverlay?: GenerationOverlay
-}
-
-const GraphDocument = memo(function GraphDocument({
-  label,
-  color,
-  graphName,
-  graph,
-  graphId,
-  onCyReady,
-  onFocus,
-  isActive,
-  highlightedPath,
-  generationOverlay,
-}: GraphDocumentProps) {
-  return (
-    <div style={{
-      flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: 'hidden',
-      minWidth: 0,
-      border: isActive ? `1px solid ${color}40` : '1px solid transparent',
-      transition: 'border-color 0.2s',
-    }}>
-      {/* Document header — label only, no dropdown */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8,
-        padding: '4px 10px',
-        background: `${color}08`,
-        borderBottom: `2px solid ${color}${isActive ? '80' : '30'}`,
-        flexShrink: 0,
-        minHeight: 28,
-      }}>
-        <span style={{
-          fontSize: 9,
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-          color,
-          flexShrink: 0,
-        }}>
-          {label}
-        </span>
-        {graphName && (
-          <span style={{
-            fontSize: 12,
-            fontWeight: 500,
-            color: 'var(--text-primary)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}>
-            {graphName}
-          </span>
-        )}
-        {graph && (
-          <span style={{ fontSize: 10, color: 'var(--text-muted)', flexShrink: 0, whiteSpace: 'nowrap', marginLeft: 8 }}>
-            {graph.graph.nodes.length}N / {graph.graph.edges.length}E
-          </span>
-        )}
-      </div>
-
-      {/* Canvas */}
-      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-        {graph ? (
-          <div key={graphId} style={{ width: '100%', height: '100%', animation: 'fadeIn 0.25s ease' }}>
-            <GraphCanvas
-              graph={graph}
-              graphId={graphId}
-              highlightedPath={highlightedPath}
-              generationOverlay={generationOverlay}
-              onCyReady={onCyReady}
-              onFocus={onFocus}
-            />
-          </div>
-        ) : (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            color: 'var(--text-muted)',
-            fontSize: 12,
-          }}>
-            No graph loaded
-          </div>
-        )}
-      </div>
-    </div>
-  )
-})
 
 // ---------------------------------------------------------------------------
 // Shared components

@@ -1,26 +1,13 @@
 /**
- * Templates Panel — displays compiled templates from the generation pipeline
- * and allows users to view/edit slot bindings before or after generation.
- *
- * Two sections:
- * 1. Template Catalog — read-only view of archetype node templates and
- *    genre constraint templates compiled from the corpus
- * 2. Slot Bindings — editable table of character/place/object/concept slots
- *    with their current bound values (from backbone or user overrides)
+ * Templates Panel — Mad Libs-style beat cards.
+ * Each beat shows its template text with inline editable slot fields,
+ * plus entry/exit conditions, signals, obligations, and anti-patterns.
  */
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback, type ReactNode } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { useRequestStore } from '../store/requestStore.ts'
 import type { DetailCharacter } from '../artifacts/types.ts'
-
-const LABEL: React.CSSProperties = {
-  fontSize: 10,
-  fontWeight: 700,
-  textTransform: 'uppercase',
-  letterSpacing: '0.05em',
-  color: 'var(--text-muted)',
-}
 
 const CATEGORY_COLORS: Record<string, string> = {
   character: '#f59e0b',
@@ -29,7 +16,19 @@ const CATEGORY_COLORS: Record<string, string> = {
   concept: '#a855f7',
 }
 
-type ViewMode = 'slots' | 'archetype-templates' | 'genre-templates'
+const ROLE_COLORS: Record<string, string> = {
+  Origin: '#22c55e',
+  Disruption: '#ef4444',
+  Catalyst: '#f97316',
+  Threshold: '#8b5cf6',
+  Trial: '#3b82f6',
+  Descent: '#6366f1',
+  Crisis: '#ef4444',
+  Transformation: '#a855f7',
+  Resolution: '#22c55e',
+}
+
+type ViewMode = 'beats' | 'cast' | 'genre'
 
 export function TemplatesPanel() {
   const templatePack = useGenerationStore((s) => s.templatePack)
@@ -38,44 +37,40 @@ export function TemplatesPanel() {
   const slotOverrides = useRequestStore((s) => s.slotOverrides)
   const setSlotOverride = useRequestStore((s) => s.setSlotOverride)
 
-  const [viewMode, setViewMode] = useState<ViewMode>('slots')
-  const [expandedTemplate, setExpandedTemplate] = useState<string | null>(null)
+  const [viewMode, setViewMode] = useState<ViewMode>('beats')
+  const [expandedBeat, setExpandedBeat] = useState<string | null>(null)
 
-  // Collect all slots from backbone scenes
-  const allSlots = useMemo(() => {
-    if (!backbone) return []
-    const seen = new Map<string, { slot_name: string; category: string; required: boolean; description?: string; bound_value?: string }>()
-    for (const beat of backbone.beats) {
-      for (const scene of beat.scenes) {
-        for (const [key, slot] of Object.entries(scene.slots)) {
-          if (!seen.has(key)) {
-            seen.set(key, {
-              slot_name: slot.slot_name,
-              category: slot.category,
-              required: slot.required,
-              description: slot.description,
-              bound_value: slot.bound_value,
-            })
+  // Build a lookup from slot name → bound value
+  const slotValues = useMemo(() => {
+    const map: Record<string, { value: string; category: string }> = {}
+    if (backbone) {
+      for (const beat of backbone.beats) {
+        for (const scene of beat.scenes) {
+          for (const [key, slot] of Object.entries(scene.slots)) {
+            if (!map[key]) {
+              map[key] = { value: slot.bound_value ?? '', category: slot.category }
+            }
           }
         }
       }
     }
-    // Merge with detail bindings if available
     if (detailBindings?.slot_bindings) {
       for (const [key, binding] of Object.entries(detailBindings.slot_bindings)) {
-        const existing = seen.get(key)
-        if (existing) {
-          existing.bound_value = binding.bound_value ?? existing.bound_value
+        if (map[key]) {
+          map[key].value = binding.bound_value ?? map[key].value
+        } else {
+          map[key] = { value: binding.bound_value ?? '', category: 'concept' }
         }
       }
     }
-    return Array.from(seen.values()).sort((a, b) => {
-      const catOrder = ['character', 'place', 'object', 'concept']
-      const ci = catOrder.indexOf(a.category) - catOrder.indexOf(b.category)
-      if (ci !== 0) return ci
-      return a.slot_name.localeCompare(b.slot_name)
-    })
-  }, [backbone, detailBindings])
+    // Apply user overrides
+    for (const [key, override] of Object.entries(slotOverrides)) {
+      if (override && map[key]) {
+        map[key].value = override
+      }
+    }
+    return map
+  }, [backbone, detailBindings, slotOverrides])
 
   // Characters from detail bindings
   const characters = useMemo(() => {
@@ -83,198 +78,230 @@ export function TemplatesPanel() {
     return Object.values(detailBindings.entity_registry.characters)
   }, [detailBindings])
 
-  const hasTemplates = !!templatePack
-  const hasSlots = allSlots.length > 0
+  const hasData = !!templatePack || !!backbone
 
-  if (!hasTemplates && !hasSlots) {
+  if (!hasData) {
     return (
       <div style={{ padding: '14px', fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-        <div style={{ ...LABEL, marginBottom: 8 }}>Templates & Slots</div>
-        <p>
-          Run generation (at least to the <strong>Backbone</strong> stage) to see compiled templates and editable slot bindings.
-        </p>
-        <p style={{ marginTop: 8 }}>
-          Templates are structural patterns extracted from the corpus for your selected archetype and genre.
-          Slots are placeholders for characters, places, objects, and concepts that get bound to concrete values.
-        </p>
+        <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 8 }}>
+          Story Templates
+        </div>
+        <p>Run generation to see beat-by-beat story templates with editable slots.</p>
       </div>
     )
   }
+
+  const beatCount = backbone?.beats.length ?? 0
 
   return (
     <div style={{ padding: '10px 14px', fontSize: 11, color: 'var(--text-primary)' }}>
       {/* View mode tabs */}
       <div style={{ display: 'flex', gap: 0, marginBottom: 10, borderBottom: '1px solid var(--border)' }}>
-        <TabButton label="Slots" active={viewMode === 'slots'} count={allSlots.length} onClick={() => setViewMode('slots')} />
-        <TabButton label="Archetype" active={viewMode === 'archetype-templates'} count={templatePack ? Object.keys(templatePack.archetype_node_templates).length : 0} onClick={() => setViewMode('archetype-templates')} />
-        <TabButton label="Genre" active={viewMode === 'genre-templates'} count={templatePack ? Object.keys(templatePack.genre_level_templates).length : 0} onClick={() => setViewMode('genre-templates')} />
+        <TabBtn label="Beats" active={viewMode === 'beats'} count={beatCount} onClick={() => setViewMode('beats')} />
+        <TabBtn label="Cast" active={viewMode === 'cast'} count={characters.length} onClick={() => setViewMode('cast')} />
+        <TabBtn label="Genre" active={viewMode === 'genre'} count={templatePack ? Object.keys(templatePack.genre_level_templates).length : 0} onClick={() => setViewMode('genre')} />
       </div>
 
-      {/* Slots view */}
-      {viewMode === 'slots' && (
+      {/* Beats view — Mad Libs cards */}
+      {viewMode === 'beats' && backbone && templatePack && (
         <div>
-          {/* Characters section */}
-          {characters.length > 0 && (
-            <div style={{ marginBottom: 12 }}>
-              <div style={{ ...LABEL, marginBottom: 6 }}>Characters ({characters.length})</div>
-              {characters.map((ch) => (
-                <CharacterCard key={ch.id} character={ch} />
-              ))}
-            </div>
-          )}
+          {backbone.beats.map((beat) => {
+            const tmpl = templatePack.archetype_node_templates[beat.archetype_node_id]
+            const isExpanded = expandedBeat === beat.beat_id
+            const roleColor = ROLE_COLORS[beat.role ?? ''] ?? 'var(--text-muted)'
+            const sceneSlots = beat.scenes.flatMap((s) => Object.entries(s.slots))
+            const obligations = beat.scenes.flatMap((s) => s.genre_obligations)
 
-          {/* Non-character slots (characters shown above with richer detail) */}
-          {hasSlots ? (
-            <div>
-              {allSlots.filter((s) => s.category !== 'character').length > 0 && (
-                <div style={{ ...LABEL, marginBottom: 6 }}>
-                  Places, Objects & Concepts ({allSlots.filter((s) => s.category !== 'character').length})
-                </div>
-              )}
-              {allSlots.filter((s) => s.category !== 'character').map((slot) => {
-                const override = slotOverrides[slot.slot_name]
-                const effectiveValue = override !== undefined && override !== '' ? override : (slot.bound_value ?? '')
-                const isOverridden = override !== undefined && override !== ''
-                return (
-                  <div key={slot.slot_name} style={{
-                    padding: '6px 8px',
-                    marginBottom: 4,
-                    background: 'var(--bg-elevated)',
-                    borderRadius: 4,
-                    borderLeft: `3px solid ${CATEGORY_COLORS[slot.category] ?? 'var(--border)'}`,
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-                      <span style={{
-                        fontSize: 9,
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        color: CATEGORY_COLORS[slot.category] ?? 'var(--text-muted)',
-                      }}>
-                        {slot.category}
-                      </span>
-                      <span style={{ fontWeight: 600, fontSize: 11 }}>
-                        {slot.slot_name}
-                      </span>
-                      {slot.required && (
-                        <span style={{ fontSize: 9, color: '#ef4444', fontWeight: 600 }}>REQ</span>
-                      )}
-                      {isOverridden && (
-                        <span style={{ fontSize: 9, color: '#22c55e', fontWeight: 600 }}>EDITED</span>
-                      )}
-                    </div>
-                    {slot.description && (
-                      <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 3, lineHeight: 1.4 }}>
-                        {slot.description}
-                      </div>
-                    )}
-                    <input
-                      type="text"
-                      value={effectiveValue}
-                      onChange={(e) => setSlotOverride(slot.slot_name, e.target.value)}
-                      placeholder={slot.bound_value || 'Unbound — enter a value'}
-                      style={{
-                        display: 'block',
-                        width: '100%',
-                        padding: '4px 6px',
-                        fontSize: 11,
-                        background: isOverridden ? 'rgba(34,197,94,0.06)' : 'var(--bg-primary)',
-                        color: 'var(--text-primary)',
-                        border: `1px solid ${isOverridden ? 'rgba(34,197,94,0.3)' : 'var(--border)'}`,
-                        borderRadius: 3,
-                      }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          ) : (
-            <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
-              No slots yet. Run generation to at least the Backbone stage.
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Archetype templates view */}
-      {viewMode === 'archetype-templates' && templatePack && (
-        <div>
-          <div style={{ ...LABEL, marginBottom: 6 }}>
-            Archetype Node Templates ({Object.keys(templatePack.archetype_node_templates).length})
-          </div>
-          {Object.entries(templatePack.archetype_node_templates).map(([nodeId, tmpl]) => {
-            const isExpanded = expandedTemplate === nodeId
             return (
-              <div key={nodeId} style={{
-                marginBottom: 4,
+              <div key={beat.beat_id} style={{
+                marginBottom: 6,
                 background: 'var(--bg-elevated)',
-                borderRadius: 4,
+                borderRadius: 6,
+                borderLeft: `3px solid ${roleColor}`,
                 overflow: 'hidden',
               }}>
+                {/* Beat header — always visible */}
                 <button
-                  onClick={() => setExpandedTemplate(isExpanded ? null : nodeId)}
+                  onClick={() => setExpandedBeat(isExpanded ? null : beat.beat_id)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: 6,
                     width: '100%',
-                    padding: '6px 8px',
+                    padding: '8px 10px',
                     textAlign: 'left',
-                    fontSize: 11,
+                    fontSize: 12,
                     color: 'var(--text-primary)',
                   }}
                 >
-                  <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>
+                  <span style={{ fontSize: 9, color: 'var(--text-muted)', flexShrink: 0 }}>
                     {isExpanded ? '\u25BC' : '\u25B6'}
                   </span>
-                  <span style={{ fontWeight: 600 }}>{tmpl.label}</span>
+                  <span style={{ fontWeight: 700, flex: 1 }}>{beat.label}</span>
                   <span style={{
                     fontSize: 9,
-                    color: '#f59e0b',
                     fontWeight: 600,
                     textTransform: 'uppercase',
-                    marginLeft: 8,
+                    color: roleColor,
+                    padding: '1px 6px',
+                    borderRadius: 3,
+                    background: `${roleColor}14`,
+                    flexShrink: 0,
                   }}>
-                    {tmpl.role}
+                    {beat.role}
                   </span>
                 </button>
+
+                {/* Expanded beat card — the "Mad Libs" form */}
                 {isExpanded && (
-                  <div style={{ padding: '4px 8px 8px 22px', fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    <div style={{ marginBottom: 4 }}>{tmpl.beat_summary_template}</div>
-                    {(tmpl.entry_conditions?.length ?? 0) > 0 && (
-                      <div style={{ marginBottom: 3 }}>
-                        <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Entry: </span>
-                        {tmpl.entry_conditions!.join('; ')}
+                  <div style={{ padding: '0 10px 10px' }}>
+                    {/* Template text with inline slots */}
+                    {tmpl && (
+                      <div style={{
+                        fontSize: 12,
+                        lineHeight: 1.7,
+                        color: 'var(--text-primary)',
+                        marginBottom: 10,
+                        padding: '8px 10px',
+                        background: 'var(--bg-primary)',
+                        borderRadius: 4,
+                        border: '1px solid var(--border)',
+                      }}>
+                        <TemplateText
+                          text={tmpl.beat_summary_template.split('|')[0].trim()}
+                          slotValues={slotValues}
+                          requiredElements={tmpl.required_elements}
+                          onSlotChange={setSlotOverride}
+                        />
                       </div>
                     )}
-                    {(tmpl.exit_conditions?.length ?? 0) > 0 && (
-                      <div style={{ marginBottom: 3 }}>
-                        <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Exit: </span>
-                        {tmpl.exit_conditions!.join('; ')}
+
+                    {/* Slots for this beat */}
+                    {sceneSlots.length > 0 && (
+                      <Section label="Fill in the blanks">
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                          {dedupeSlots(sceneSlots).map(([key, slot]) => {
+                            const bound = slotValues[key]
+                            const catColor = CATEGORY_COLORS[slot.category] ?? 'var(--text-muted)'
+                            return (
+                              <div key={key} style={{ flex: '1 1 140px', minWidth: 120 }}>
+                                <label style={{ display: 'block', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: catColor, marginBottom: 2 }}>
+                                  {slot.slot_name}
+                                  {slot.required && <span style={{ color: '#ef4444', marginLeft: 3 }}>*</span>}
+                                </label>
+                                <input
+                                  type="text"
+                                  value={slotOverrides[key] ?? bound?.value ?? ''}
+                                  onChange={(e) => setSlotOverride(key, e.target.value)}
+                                  placeholder={slot.slot_name}
+                                  style={{
+                                    display: 'block',
+                                    width: '100%',
+                                    padding: '4px 6px',
+                                    fontSize: 11,
+                                    background: 'var(--bg-primary)',
+                                    color: 'var(--text-primary)',
+                                    border: `1px solid var(--border)`,
+                                    borderBottom: `2px solid ${catColor}`,
+                                    borderRadius: '3px 3px 0 0',
+                                  }}
+                                />
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </Section>
+                    )}
+
+                    {/* Entry / Exit conditions */}
+                    {tmpl && (tmpl.entry_conditions?.length || tmpl.exit_conditions?.length) && (
+                      <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+                        {tmpl.entry_conditions && tmpl.entry_conditions.length > 0 && (
+                          <div style={{ flex: 1 }}>
+                            <MetaLabel color="#22c55e">Entry</MetaLabel>
+                            {tmpl.entry_conditions.map((c, i) => (
+                              <MetaItem key={i}>{c}</MetaItem>
+                            ))}
+                          </div>
+                        )}
+                        {tmpl.exit_conditions && tmpl.exit_conditions.length > 0 && (
+                          <div style={{ flex: 1 }}>
+                            <MetaLabel color="#f59e0b">Exit</MetaLabel>
+                            {tmpl.exit_conditions.map((c, i) => (
+                              <MetaItem key={i}>{c}</MetaItem>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
-                    {tmpl.signals_to_include.length > 0 && (
-                      <div style={{ marginBottom: 3 }}>
-                        <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Signals: </span>
-                        {tmpl.signals_to_include.join(', ')}
-                      </div>
+
+                    {/* Signals */}
+                    {tmpl && tmpl.signals_to_include.length > 0 && (
+                      <Section label="Signals to include">
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                          {tmpl.signals_to_include.map((s, i) => (
+                            <span key={i} style={{
+                              fontSize: 10,
+                              padding: '2px 8px',
+                              borderRadius: 10,
+                              background: 'rgba(59,130,246,0.1)',
+                              color: '#60a5fa',
+                              border: '1px solid rgba(59,130,246,0.2)',
+                            }}>
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </Section>
                     )}
-                    {tmpl.failure_modes_to_avoid.length > 0 && (
-                      <div style={{ marginBottom: 3 }}>
-                        <span style={{ fontWeight: 600, color: '#ef4444' }}>Avoid: </span>
-                        {tmpl.failure_modes_to_avoid.join(', ')}
-                      </div>
+
+                    {/* Genre obligations */}
+                    {obligations.length > 0 && (
+                      <Section label="Genre obligations">
+                        {obligations.map((ob, i) => {
+                          const genreTmpl = templatePack.genre_level_templates[ob.node_id]
+                          return (
+                            <div key={i} style={{
+                              fontSize: 10,
+                              padding: '4px 8px',
+                              marginBottom: 3,
+                              borderRadius: 3,
+                              background: ob.severity === 'hard' ? 'rgba(245,158,11,0.08)' : 'rgba(139,92,246,0.08)',
+                              borderLeft: `2px solid ${ob.severity === 'hard' ? '#f59e0b' : '#8b5cf6'}`,
+                              color: 'var(--text-secondary)',
+                            }}>
+                              <span style={{ fontWeight: 600 }}>{genreTmpl?.label ?? ob.label}</span>
+                              <span style={{
+                                fontSize: 8,
+                                marginLeft: 6,
+                                padding: '0 4px',
+                                borderRadius: 2,
+                                fontWeight: 600,
+                                textTransform: 'uppercase',
+                                color: ob.severity === 'hard' ? '#f59e0b' : '#8b5cf6',
+                              }}>
+                                {ob.severity === 'hard' ? 'Required' : 'Suggested'}
+                              </span>
+                              {genreTmpl && (
+                                <div style={{ marginTop: 2, fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                                  {genreTmpl.constraint_template.slice(0, 120)}{genreTmpl.constraint_template.length > 120 ? '...' : ''}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })}
+                      </Section>
                     )}
-                    {tmpl.required_elements.length > 0 && (
-                      <div style={{ marginBottom: 3 }}>
-                        <span style={{ fontWeight: 600, color: '#3b82f6' }}>Elements: </span>
-                        {tmpl.required_elements.join(', ')}
-                      </div>
-                    )}
-                    {tmpl.scene_obligations.length > 0 && (
-                      <div>
-                        <span style={{ fontWeight: 600, color: '#8b5cf6' }}>Genre obligations: </span>
-                        {tmpl.scene_obligations.join(', ')}
-                      </div>
+
+                    {/* Anti-patterns */}
+                    {tmpl && tmpl.failure_modes_to_avoid.length > 0 && (
+                      <Section label="Avoid">
+                        {tmpl.failure_modes_to_avoid.map((f, i) => (
+                          <div key={i} style={{ fontSize: 10, color: '#fbbf24', lineHeight: 1.4, marginBottom: 2 }}>
+                            {'\u2718'} {f}
+                          </div>
+                        ))}
+                      </Section>
                     )}
                   </div>
                 )}
@@ -284,35 +311,35 @@ export function TemplatesPanel() {
 
           {/* Tone guidance */}
           {templatePack.tone_guidance && (
-            <div style={{ marginTop: 10 }}>
-              <div style={{ ...LABEL, marginBottom: 4 }}>Tone Guidance</div>
-              <div style={{
-                padding: '6px 8px',
-                background: 'var(--bg-elevated)',
-                borderRadius: 4,
-                fontSize: 10,
-                color: 'var(--text-secondary)',
-                lineHeight: 1.5,
-              }}>
-                <div style={{ fontWeight: 600, marginBottom: 2 }}>{templatePack.tone_guidance.tone_description}</div>
-                {templatePack.tone_guidance.directives.map((d, i) => (
-                  <div key={i}>- {d}</div>
-                ))}
+            <div style={{
+              marginTop: 8,
+              padding: '8px 10px',
+              background: 'var(--bg-elevated)',
+              borderRadius: 6,
+              borderLeft: '3px solid #06b6d4',
+            }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: '#06b6d4', marginBottom: 4 }}>
+                Tone: {templatePack.tone_guidance.tone_description}
               </div>
+              {templatePack.tone_guidance.directives.map((d, i) => (
+                <div key={i} style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.5 }}>- {d}</div>
+              ))}
             </div>
           )}
 
           {/* Anti-pattern guidance */}
           {templatePack.anti_pattern_guidance && templatePack.anti_pattern_guidance.length > 0 && (
-            <div style={{ marginTop: 10 }}>
-              <div style={{ ...LABEL, marginBottom: 4 }}>Anti-Pattern Warnings</div>
+            <div style={{ marginTop: 8 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: '#ef4444', marginBottom: 4 }}>
+                Global Anti-Patterns
+              </div>
               {templatePack.anti_pattern_guidance.map((ap) => (
                 <div key={ap.node_id} style={{
-                  padding: '6px 8px',
+                  padding: '4px 8px',
                   marginBottom: 3,
                   background: 'rgba(239,68,68,0.06)',
                   borderRadius: 4,
-                  borderLeft: '3px solid #ef4444',
+                  borderLeft: '2px solid #ef4444',
                   fontSize: 10,
                   color: 'var(--text-secondary)',
                 }}>
@@ -325,74 +352,249 @@ export function TemplatesPanel() {
         </div>
       )}
 
-      {/* Genre templates view */}
-      {viewMode === 'genre-templates' && templatePack && (
+      {/* Cast view */}
+      {viewMode === 'cast' && (
         <div>
-          <div style={{ ...LABEL, marginBottom: 6 }}>
-            Genre Constraint Templates ({Object.keys(templatePack.genre_level_templates).length})
-          </div>
-          {Object.entries(templatePack.genre_level_templates).map(([nodeId, tmpl]) => {
-            const isExpanded = expandedTemplate === nodeId
-            return (
-              <div key={nodeId} style={{
-                marginBottom: 4,
-                background: 'var(--bg-elevated)',
-                borderRadius: 4,
-                overflow: 'hidden',
-              }}>
-                <button
-                  onClick={() => setExpandedTemplate(isExpanded ? null : nodeId)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    width: '100%',
-                    padding: '6px 8px',
-                    textAlign: 'left',
-                    fontSize: 11,
-                    color: 'var(--text-primary)',
-                  }}
-                >
-                  <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>
-                    {isExpanded ? '\u25BC' : '\u25B6'}
-                  </span>
-                  <span style={{ fontWeight: 600 }}>{tmpl.label}</span>
-                  <span style={{
-                    fontSize: 9,
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    marginLeft: 8,
-                    color: tmpl.severity === 'hard' ? '#ef4444' : '#f59e0b',
-                  }}>
-                    {tmpl.severity} L{tmpl.level}
-                  </span>
-                </button>
-                {isExpanded && (
-                  <div style={{ padding: '4px 8px 8px 22px', fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    <div style={{ marginBottom: 4 }}>{tmpl.constraint_template}</div>
-                    {tmpl.binding_rules.length > 0 && (
-                      <div style={{ marginBottom: 3 }}>
-                        {tmpl.binding_rules.map((r, i) => (
-                          <div key={i} style={{ color: 'var(--text-muted)' }}>{r}</div>
-                        ))}
-                      </div>
-                    )}
-                    {tmpl.anti_patterns_to_block && tmpl.anti_patterns_to_block.length > 0 && (
-                      <div>
-                        <span style={{ fontWeight: 600, color: '#ef4444' }}>Block: </span>
-                        {tmpl.anti_patterns_to_block.join(', ')}
-                      </div>
-                    )}
-                  </div>
-                )}
+          {characters.length > 0 ? (
+            characters.map((ch) => <CharacterCard key={ch.id} character={ch} />)
+          ) : (
+            <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
+              No characters yet. Run generation to populate the cast.
+            </div>
+          )}
+
+          {/* Places and objects */}
+          {detailBindings?.entity_registry.places && detailBindings.entity_registry.places.length > 0 && (
+            <div style={{ marginTop: 10 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: '#3b82f6', marginBottom: 4 }}>
+                Places ({detailBindings.entity_registry.places.length})
               </div>
-            )
-          })}
+              {detailBindings.entity_registry.places.map((p) => (
+                <div key={p.id} style={{
+                  padding: '6px 8px',
+                  marginBottom: 3,
+                  background: 'var(--bg-elevated)',
+                  borderRadius: 4,
+                  borderLeft: '3px solid #3b82f6',
+                }}>
+                  <div style={{ fontWeight: 600, fontSize: 12 }}>{p.name}</div>
+                  <span style={{ fontSize: 9, color: '#3b82f6', fontWeight: 600, textTransform: 'uppercase' }}>{p.type}</span>
+                  {p.features && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{p.features.join(' | ')}</div>}
+                  {p.atmosphere && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, fontStyle: 'italic', lineHeight: 1.4 }}>{p.atmosphere}</div>}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {detailBindings?.entity_registry.objects && detailBindings.entity_registry.objects.length > 0 && (
+            <div style={{ marginTop: 10 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: '#22c55e', marginBottom: 4 }}>
+                Objects ({detailBindings.entity_registry.objects.length})
+              </div>
+              {detailBindings.entity_registry.objects.map((o) => (
+                <div key={o.id} style={{
+                  padding: '6px 8px',
+                  marginBottom: 3,
+                  background: 'var(--bg-elevated)',
+                  borderRadius: 4,
+                  borderLeft: '3px solid #22c55e',
+                }}>
+                  <div style={{ fontWeight: 600, fontSize: 12 }}>{o.name}</div>
+                  <span style={{ fontSize: 9, color: '#22c55e', fontWeight: 600, textTransform: 'uppercase' }}>{o.type}</span>
+                  {o.significance && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{o.significance}</div>}
+                  {o.properties && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{o.properties.join(' | ')}</div>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Genre view */}
+      {viewMode === 'genre' && templatePack && (
+        <div>
+          {Object.entries(templatePack.genre_level_templates).map(([nodeId, tmpl]) => (
+            <GenreConstraintCard key={nodeId} tmpl={tmpl} />
+          ))}
         </div>
       )}
     </div>
   )
 }
+
+// ---------------------------------------------------------------------------
+// Template text renderer — replaces {slot} with inline editable fields
+// ---------------------------------------------------------------------------
+
+function TemplateText({ text, slotValues, requiredElements, onSlotChange }: {
+  text: string
+  slotValues: Record<string, { value: string; category: string }>
+  requiredElements?: string[]
+  onSlotChange: (slot: string, value: string) => void
+}) {
+  // Build a version of the text with {slot} patterns injected.
+  // The raw text uses natural language ("The protagonist's familiar...") while
+  // required_elements has the slot names ("{protagonist}", "{ordinary_world}").
+  // We replace matching words in the text with {slot_name} markers, then render.
+  const processedText = useMemo(() => {
+    if (!requiredElements || requiredElements.length === 0) return text
+
+    let result = text
+    for (const el of requiredElements) {
+      const slotName = el.replace(/^\{|\}$/g, '')
+      // Replace the slot name word (with underscores as spaces) in the text
+      // e.g. "ordinary_world" matches "ordinary world" in text
+      const asWords = slotName.replace(/_/g, ' ')
+      // Case-insensitive replace of the word form, preserving word boundaries
+      const wordPattern = new RegExp(`\\b${asWords}\\b`, 'gi')
+      if (wordPattern.test(result)) {
+        result = result.replace(wordPattern, `{${slotName}}`)
+      } else {
+        // Also try the underscore form directly
+        const underscorePattern = new RegExp(`\\b${slotName}\\b`, 'gi')
+        if (underscorePattern.test(result)) {
+          result = result.replace(underscorePattern, `{${slotName}}`)
+        }
+      }
+    }
+    return result
+  }, [text, requiredElements])
+
+  // Split on {slot_name} patterns
+  const parts = processedText.split(/(\{[a-z_]+\})/g)
+
+  return (
+    <span>
+      {parts.map((part, i) => {
+        const match = part.match(/^\{([a-z_]+)\}$/)
+        if (!match) return <span key={i}>{part}</span>
+
+        const slotName = match[1]
+        const bound = slotValues[slotName]
+        const displayValue = bound?.value || slotName.replace(/_/g, ' ')
+        const catColor = CATEGORY_COLORS[bound?.category ?? 'concept'] ?? '#a855f7'
+
+        return (
+          <InlineSlot
+            key={i}
+            slotName={slotName}
+            value={displayValue}
+            color={catColor}
+            onChange={(v) => onSlotChange(slotName, v)}
+          />
+        )
+      })}
+    </span>
+  )
+}
+
+function InlineSlot({ slotName, value, color, onChange }: {
+  slotName: string
+  value: string
+  color: string
+  onChange: (v: string) => void
+}) {
+  const [editing, setEditing] = useState(false)
+  const [draft, setDraft] = useState(value)
+
+  const commit = useCallback(() => {
+    setEditing(false)
+    if (draft.trim() && draft !== value) {
+      onChange(draft.trim())
+    } else {
+      setDraft(value)
+    }
+  }, [draft, value, onChange])
+
+  if (editing) {
+    return (
+      <input
+        autoFocus
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => { if (e.key === 'Enter') commit(); if (e.key === 'Escape') { setDraft(value); setEditing(false) } }}
+        style={{
+          display: 'inline',
+          width: Math.max(60, draft.length * 7 + 20),
+          padding: '1px 4px',
+          fontSize: 12,
+          fontWeight: 600,
+          color,
+          background: `${color}12`,
+          border: `1px solid ${color}`,
+          borderRadius: 3,
+          outline: 'none',
+        }}
+      />
+    )
+  }
+
+  return (
+    <span
+      onClick={() => { setDraft(value); setEditing(true) }}
+      title={`Click to edit: ${slotName}`}
+      style={{
+        display: 'inline',
+        padding: '1px 6px',
+        fontWeight: 700,
+        color,
+        background: `${color}14`,
+        borderBottom: `2px solid ${color}`,
+        borderRadius: '3px 3px 0 0',
+        cursor: 'pointer',
+        transition: 'background 0.15s',
+      }}
+    >
+      {value}
+    </span>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/** Deduplicate slots across scenes in a beat (same slot can appear in multiple scenes). */
+function dedupeSlots(slots: [string, { slot_name: string; category: string; required: boolean; bound_value?: string }][]) {
+  const seen = new Set<string>()
+  return slots.filter(([key]) => {
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+function Section({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', marginBottom: 4 }}>
+        {label}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function MetaLabel({ color, children }: { color: string; children: ReactNode }) {
+  return (
+    <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color, marginBottom: 2 }}>
+      {children}
+    </div>
+  )
+}
+
+function MetaItem({ children }: { children: ReactNode }) {
+  return (
+    <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4, paddingLeft: 6 }}>
+      {'\u2022'} {children}
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Character card
+// ---------------------------------------------------------------------------
 
 function CharacterCard({ character: ch }: { character: DetailCharacter }) {
   const [expanded, setExpanded] = useState(false)
@@ -431,37 +633,27 @@ function CharacterCard({ character: ch }: { character: DetailCharacter }) {
       )}
       {expanded && (
         <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 4, lineHeight: 1.5 }}>
-          {ch.traits && ch.traits.length > 0 && (
-            <FieldRow label="Traits" values={ch.traits} />
-          )}
-          {ch.motivations && ch.motivations.length > 0 && (
-            <FieldRow label="Motivations" values={ch.motivations} />
-          )}
+          {ch.traits && ch.traits.length > 0 && <FieldRow label="Traits" values={ch.traits} />}
+          {ch.motivations && ch.motivations.length > 0 && <FieldRow label="Motivations" values={ch.motivations} />}
           {ch.flaw && (
             <div style={{ marginBottom: 3 }}>
-              <span style={{ fontWeight: 600, color: '#ef4444', fontSize: 9, textTransform: 'uppercase' }}>Flaw: </span>
-              {ch.flaw}
+              <span style={{ fontWeight: 600, color: '#ef4444', fontSize: 9, textTransform: 'uppercase' }}>Flaw: </span>{ch.flaw}
             </div>
           )}
           {ch.arc_direction && (
             <div style={{ marginBottom: 3 }}>
-              <span style={{ fontWeight: 600, color: '#3b82f6', fontSize: 9, textTransform: 'uppercase' }}>Arc: </span>
-              {ch.arc_direction}
+              <span style={{ fontWeight: 600, color: '#3b82f6', fontSize: 9, textTransform: 'uppercase' }}>Arc: </span>{ch.arc_direction}
             </div>
           )}
           {ch.backstory && (
             <div style={{ marginBottom: 3 }}>
-              <span style={{ fontWeight: 600, color: 'var(--text-muted)', fontSize: 9, textTransform: 'uppercase' }}>Backstory: </span>
-              {ch.backstory}
+              <span style={{ fontWeight: 600, color: 'var(--text-muted)', fontSize: 9, textTransform: 'uppercase' }}>Backstory: </span>{ch.backstory}
             </div>
           )}
-          {ch.relationships && ch.relationships.length > 0 && (
-            <FieldRow label="Relationships" values={ch.relationships} />
-          )}
+          {ch.relationships && ch.relationships.length > 0 && <FieldRow label="Relationships" values={ch.relationships} />}
           {ch.distinguishing_feature && (
             <div style={{ marginBottom: 3 }}>
-              <span style={{ fontWeight: 600, color: '#8b5cf6', fontSize: 9, textTransform: 'uppercase' }}>Distinguishing: </span>
-              {ch.distinguishing_feature}
+              <span style={{ fontWeight: 600, color: '#8b5cf6', fontSize: 9, textTransform: 'uppercase' }}>Distinguishing: </span>{ch.distinguishing_feature}
             </div>
           )}
         </div>
@@ -479,7 +671,81 @@ function FieldRow({ label, values }: { label: string; values: string[] }) {
   )
 }
 
-function TabButton({ label, active, count, onClick }: {
+// ---------------------------------------------------------------------------
+// Genre constraint card
+// ---------------------------------------------------------------------------
+
+function GenreConstraintCard({ tmpl }: {
+  tmpl: { label: string; severity: string; level: number | null; constraint_template: string; binding_rules: string[]; anti_patterns_to_block?: string[] }
+}) {
+  const [expanded, setExpanded] = useState(false)
+  return (
+    <div style={{
+      marginBottom: 4,
+      background: 'var(--bg-elevated)',
+      borderRadius: 4,
+      overflow: 'hidden',
+    }}>
+      <button
+        onClick={() => setExpanded((v) => !v)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+          width: '100%',
+          padding: '6px 8px',
+          textAlign: 'left',
+          fontSize: 11,
+          color: 'var(--text-primary)',
+        }}
+      >
+        <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>
+          {expanded ? '\u25BC' : '\u25B6'}
+        </span>
+        <span style={{ fontWeight: 600, flex: 1 }}>{tmpl.label}</span>
+        <span style={{
+          fontSize: 9,
+          fontWeight: 600,
+          textTransform: 'uppercase',
+          padding: '1px 5px',
+          borderRadius: 3,
+          color: tmpl.severity === 'hard' ? '#f59e0b' : '#8b5cf6',
+          background: tmpl.severity === 'hard' ? 'rgba(245,158,11,0.12)' : 'rgba(139,92,246,0.12)',
+        }}>
+          {tmpl.severity === 'hard' ? 'Required' : 'Suggested'} L{tmpl.level}
+        </span>
+      </button>
+      {expanded && (
+        <div style={{ padding: '4px 8px 8px 22px', fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+          <div style={{ marginBottom: 4 }}>{tmpl.constraint_template}</div>
+          {tmpl.binding_rules.length > 0 && (
+            <div style={{ marginBottom: 3 }}>
+              {tmpl.binding_rules.map((r, i) => (
+                <div key={i} style={{ color: 'var(--text-muted)' }}>{r}</div>
+              ))}
+            </div>
+          )}
+          {tmpl.anti_patterns_to_block && tmpl.anti_patterns_to_block.length > 0 && (
+            <div>
+              <span style={{ fontWeight: 600, color: '#ef4444' }}>Avoid: </span>
+              {tmpl.anti_patterns_to_block.map((ap, i) => (
+                <div key={i} style={{ marginLeft: 8, color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                  {'\u2718'} {ap}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Tab button
+// ---------------------------------------------------------------------------
+
+function TabBtn({ label, active, count, onClick }: {
   label: string
   active: boolean
   count: number

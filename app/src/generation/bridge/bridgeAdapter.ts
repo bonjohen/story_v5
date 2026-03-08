@@ -18,7 +18,7 @@ import type { LLMAdapter, LLMMessage, LLMResponse } from '../agents/llmAdapter.t
 export interface BridgeAdapterOptions {
   /** WebSocket URL of the bridge server. Default: ws://127.0.0.1:8765 */
   url?: string
-  /** Timeout per request in milliseconds. Default: 120_000 */
+  /** Timeout per request in milliseconds. Default: 600_000 (10 minutes) */
   timeout?: number
 }
 
@@ -39,7 +39,7 @@ export class BridgeAdapter implements LLMAdapter {
 
   constructor(options: BridgeAdapterOptions = {}) {
     this.url = options.url ?? 'ws://127.0.0.1:8765'
-    this.timeout = options.timeout ?? 120_000
+    this.timeout = options.timeout ?? 600_000
   }
 
   get connected(): boolean {

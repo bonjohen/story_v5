@@ -15,13 +15,23 @@ let dbUnavailable = false
 
 function getSqlJs() {
   if (!sqlPromise) {
-    sqlPromise = initSqlJs({
-      locateFile: (file: string) => `${import.meta.env.BASE_URL}${file}`,
-    }).catch((err) => {
-      dbUnavailable = true
-      sqlPromise = null
-      throw new Error(`SQLite WASM unavailable: ${err}`)
-    })
+    const wasmUrl = `${import.meta.env.BASE_URL}sql-wasm.wasm`
+    // Pre-check that the WASM file is actually a WASM binary, not an HTML 404 page
+    sqlPromise = fetch(wasmUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error(`WASM fetch failed: ${res.status}`)
+        const ct = res.headers.get('content-type') ?? ''
+        if (ct.includes('text/html')) throw new Error('WASM file served as HTML (likely 404)')
+        return initSqlJs({
+          locateFile: () => wasmUrl,
+        })
+      })
+      .catch((err) => {
+        dbUnavailable = true
+        sqlPromise = null
+        console.warn('SQLite WASM unavailable:', err)
+        throw new Error(`SQLite WASM unavailable: ${err}`)
+      })
   }
   return sqlPromise
 }

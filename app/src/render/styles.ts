@@ -47,7 +47,7 @@ function getColors() {
 
     // Selection
     selected: '#fbbf24',
-    neighbor: '#fbbf2466',
+    neighbor: 'rgba(251, 191, 36, 0.4)',
   }
 }
 
@@ -339,9 +339,9 @@ export function getCoreStyle(graphType: 'archetype' | 'genre'): Stylesheet[] {
       },
     },
 
-    // Loop edges (self-referencing)
+    // Loop edges (self-referencing) — tagged with .loop class in element builder
     {
-      selector: 'edge[source = target]',
+      selector: 'edge.loop',
       style: {
         'curve-style': 'unbundled-bezier',
         'control-point-distances': 40 as unknown as number,

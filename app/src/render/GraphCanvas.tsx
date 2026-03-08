@@ -186,15 +186,22 @@ export const GraphCanvas = memo(function GraphCanvas({
     onCyReady?.(cy)
 
     // Ensure graph is properly fitted after layout + container are settled
+    let destroyed = false
     requestAnimationFrame(() => {
+      if (destroyed) return
       cy.fit(undefined, 30)
       requestAnimationFrame(() => {
+        if (destroyed) return
         renderMinimap()
-        requestAnimationFrame(() => updateViewportRect())
+        requestAnimationFrame(() => {
+          if (destroyed) return
+          updateViewportRect()
+        })
       })
     })
 
     return () => {
+      destroyed = true
       cy.removeAllListeners()
       cy.destroy()
       cyRef.current = null

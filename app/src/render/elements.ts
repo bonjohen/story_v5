@@ -54,6 +54,7 @@ export function buildCytoscapeElements(normalized: NormalizedGraph): ElementDefi
   for (const edge of graph.edges) {
     const category = getEdgeCategory(edge.meaning)
     const isVariantEdge = /_(E[5-7]\d)_/.test(edge.edge_id)
+    const isLoop = edge.from === edge.to
 
     elements.push({
       data: {
@@ -65,7 +66,7 @@ export function buildCytoscapeElements(normalized: NormalizedGraph): ElementDefi
         category,
         isVariant: isVariantEdge,
       },
-      classes: [category, isVariantEdge ? 'variant' : ''].filter(Boolean).join(' '),
+      classes: [category, isVariantEdge ? 'variant' : '', isLoop ? 'loop' : ''].filter(Boolean).join(' '),
     })
   }
 

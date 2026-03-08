@@ -1,8 +1,8 @@
 /**
  * Bridge Server: WebSocket server that exposes ClaudeCodeAdapter to browser clients.
  *
- * Accepts JSON-encoded LLMMessage[] requests over WebSocket,
- * delegates to ClaudeCodeAdapter, and returns LLMResponse results.
+ * Delegates LLM calls to the local `claude` CLI via ClaudeCodeAdapter.
+ * Uses the existing Claude Code installation — no API key needed.
  *
  * Protocol:
  *   Client → Server: { id: string, type: 'complete' | 'completeJson', messages: LLMMessage[] }
@@ -100,7 +100,6 @@ export class BridgeServer {
         return
       }
 
-      // Close all client connections
       for (const client of this.wss.clients) {
         client.close()
       }

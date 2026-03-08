@@ -11,8 +11,8 @@ import { useRequestStore } from '../store/requestStore.ts'
 import { useGraphStore } from '../../store/graphStore.ts'
 import { useInstanceStore } from '../../instance/store/instanceStore.ts'
 import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
-import { BridgeAdapter } from '../bridge/bridgeAdapter.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
+import { exportSnapshot, downloadSnapshot, parseSnapshot } from '../artifacts/storySnapshot.ts'
 import type { StoryRequest, GenerationMode, GenerationConfig } from '../artifacts/types.ts'
 
 // Default generation config matching generation_config.json
@@ -21,6 +21,7 @@ const DEFAULT_CONFIG: GenerationConfig = {
   tone_policy: { mode: 'warn' },
   repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
   coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
+  max_llm_calls: 20,
 }
 
 const ARCHETYPE_OPTIONS = [
@@ -129,6 +130,7 @@ export function GenerationPanel() {
   const detailBindings = useGenerationStore((s) => s.detailBindings)
   const selection = useGenerationStore((s) => s.selection)
   const request = useGenerationStore((s) => s.request)
+  const llmTelemetry = useGenerationStore((s) => s.llmTelemetry)
 
   const loadInstance = useInstanceStore((s) => s.loadInstance)
   const [savedInstance, setSavedInstance] = useState(false)
@@ -154,8 +156,11 @@ export function GenerationPanel() {
   const setLlmBackend = useRequestStore((s) => s.setLlmBackend)
   const setBridgeUrl = useRequestStore((s) => s.setBridgeUrl)
 
-  const [bridgeStatus, setBridgeStatus] = useState<'disconnected' | 'connecting' | 'connected' | 'error'>('disconnected')
-  const bridgeRef = useRef<BridgeAdapter | null>(null)
+  const maxLlmCalls = useRequestStore((s) => s.maxLlmCalls)
+  const setMaxLlmCalls = useRequestStore((s) => s.setMaxLlmCalls)
+  const bridgeStatus = useRequestStore((s) => s.bridgeStatus)
+  const connectBridge = useRequestStore((s) => s.connectBridge)
+  const disconnectBridge = useRequestStore((s) => s.disconnectBridge)
 
   // Sync archetype/genre selections to graph display
   const handleArchetypeChange = useCallback((name: string) => {
@@ -214,24 +219,25 @@ export function GenerationPanel() {
       },
     }
 
-    const config: GenerationConfig = { ...DEFAULT_CONFIG }
+    const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: maxLlmCalls }
 
     // Create LLM adapter based on backend selection
     if (llmBackend === 'bridge') {
-      const adapter = new BridgeAdapter({ url: bridgeUrl })
-      bridgeRef.current = adapter
-      setBridgeStatus('connecting')
-      try {
-        await adapter.connect()
-        setBridgeStatus('connected')
-        void startRun(request, config, mode, adapter)
-      } catch {
-        setBridgeStatus('error')
+      // Reuse existing connection or establish new one
+      let adapter = useRequestStore.getState().bridgeAdapter
+      if (!adapter || !adapter.connected) {
+        try {
+          await connectBridge()
+          adapter = useRequestStore.getState().bridgeAdapter
+        } catch {
+          return
+        }
       }
+      void startRun(request, config, mode, adapter)
     } else {
       void startRun(request, config, mode, null)
     }
-  }, [premise, archetype, genre, mode, tone, llmBackend, bridgeUrl, startRun])
+  }, [premise, archetype, genre, mode, tone, llmBackend, maxLlmCalls, startRun, connectBridge])
 
   const handleSaveInstance = useCallback(() => {
     if (!detailBindings) return
@@ -240,15 +246,46 @@ export function GenerationPanel() {
     setSavedInstance(true)
   }, [detailBindings, selection, request, loadInstance])
 
-  // Reset saved indicator when a new run starts; disconnect bridge when done
+  // Reset saved indicator when a new run starts
   useEffect(() => {
     if (running) {
       setSavedInstance(false)
-    } else if (bridgeRef.current) {
-      bridgeRef.current.disconnect()
-      bridgeRef.current = null
     }
   }, [running])
+
+  const handleConnect = useCallback(() => {
+    void connectBridge()
+  }, [connectBridge])
+
+  const loadSnapshot = useGenerationStore((s) => s.loadSnapshot)
+
+  const handleExport = useCallback(() => {
+    const state = useGenerationStore.getState()
+    const snapshot = exportSnapshot(state)
+    downloadSnapshot(snapshot)
+  }, [])
+
+  const handleImport = useCallback(() => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.json'
+    input.onchange = () => {
+      const file = input.files?.[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = () => {
+        try {
+          const snapshot = parseSnapshot(reader.result as string)
+          loadSnapshot(snapshot)
+        } catch (err) {
+          console.error('Failed to import snapshot:', err)
+          alert(`Import failed: ${err instanceof Error ? err.message : String(err)}`)
+        }
+      }
+      reader.readAsText(file)
+    }
+    input.click()
+  }, [loadSnapshot])
 
   const stateInfo = STATE_LABELS[status] ?? { label: status, color: 'var(--text-muted)' }
   const hasResults = contract || plan
@@ -381,54 +418,112 @@ export function GenerationPanel() {
           </label>
         </div>
 
-        {/* LLM Backend — collapsed by default */}
-        <Disclosure title="LLM Backend" persistKey="gen-llm-backend" defaultCollapsed={true} badge={llmBackend === 'bridge' ? 'bridge' : ''}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 10, padding: '0 12px' }}>
-          <label style={{ flex: 1 }}>
-            <span style={LABEL}>Backend</span>
-            <select
-              value={llmBackend}
-              onChange={(e) => setLlmBackend(e.target.value as 'none' | 'bridge')}
-              disabled={running}
-              style={INPUT}
-            >
-              <option value="none">None (deterministic)</option>
-              <option value="bridge">Claude Code (local bridge)</option>
-            </select>
-            <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
-              {llmBackend === 'bridge'
-                ? 'Requires local bridge server: npx tsx app/scripts/start_bridge.ts'
-                : 'Template-based output, no AI calls.'}
-            </span>
-          </label>
-          {llmBackend === 'bridge' && (
-            <label style={{ flex: 1 }}>
-              <span style={LABEL}>Bridge URL</span>
-              <input
-                type="text"
-                value={bridgeUrl}
-                onChange={(e) => setBridgeUrl(e.target.value)}
+        {/* LLM Connection */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          marginBottom: 10,
+          padding: '8px 10px',
+          borderRadius: 6,
+          border: '1px solid',
+          borderColor: bridgeStatus === 'connected' ? '#22c55e40' : 'var(--border)',
+          background: bridgeStatus === 'connected' ? '#22c55e08' : 'var(--bg-primary)',
+        }}>
+          <button
+            onClick={handleConnect}
+            disabled={running || bridgeStatus === 'connecting' || bridgeStatus === 'connected'}
+            style={{
+              padding: '7px 16px',
+              fontSize: 12,
+              fontWeight: 600,
+              borderRadius: 4,
+              cursor: bridgeStatus === 'connecting' ? 'wait'
+                : bridgeStatus === 'connected' ? 'default' : 'pointer',
+              border: 'none',
+              background: bridgeStatus === 'connected' ? '#22c55e'
+                : bridgeStatus === 'error' ? '#ef4444'
+                : 'var(--accent)',
+              color: '#fff',
+              transition: 'all 0.15s',
+              flexShrink: 0,
+            }}
+          >
+            {bridgeStatus === 'connected' ? 'LLM Connected'
+              : bridgeStatus === 'connecting' ? 'Connecting...'
+              : bridgeStatus === 'error' ? 'Retry Connection'
+              : 'Connect LLM'}
+          </button>
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+            {bridgeStatus === 'connected' && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {bridgeUrl}
+                </span>
+                <button onClick={disconnectBridge} style={{ fontSize: 10, color: 'var(--text-muted)', flexShrink: 0 }}>
+                  Disconnect
+                </button>
+              </div>
+            )}
+            {bridgeStatus === 'error' && (
+              <span style={{ fontSize: 10, color: '#ef4444', lineHeight: 1.3 }}>
+                Could not connect to bridge at {bridgeUrl}
+              </span>
+            )}
+            {bridgeStatus === 'disconnected' && (
+              <span style={{ fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.3 }}>
+                {llmBackend === 'none' ? 'No LLM — template output only' : 'Claude Code bridge'}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* LLM Settings (collapsed) */}
+        <Disclosure title="LLM Settings" persistKey="gen-llm-settings" defaultCollapsed={true}
+          badge={llmBackend === 'bridge' ? 'bridge' : 'template'}>
+          <div style={{ padding: '4px 12px 10px' }}>
+            <label style={{ display: 'block', marginBottom: 8 }}>
+              <span style={LABEL}>Backend</span>
+              <select
+                value={llmBackend}
+                onChange={(e) => setLlmBackend(e.target.value as 'none' | 'bridge')}
                 disabled={running}
-                placeholder="ws://127.0.0.1:8765"
                 style={INPUT}
+              >
+                <option value="none">None (deterministic template)</option>
+                <option value="bridge">Claude Code (local bridge)</option>
+              </select>
+            </label>
+            <label style={{ display: 'block', marginBottom: 8 }}>
+              <span style={LABEL}>Max LLM Calls</span>
+              <input
+                type="number"
+                value={maxLlmCalls}
+                onChange={(e) => setMaxLlmCalls(Number(e.target.value))}
+                disabled={running}
+                min={1}
+                max={100}
+                style={{ ...INPUT, width: 80 }}
               />
-              <span style={{
-                fontSize: 10,
-                marginTop: 3,
-                display: 'block',
-                color: bridgeStatus === 'connected' ? '#22c55e'
-                  : bridgeStatus === 'error' ? '#ef4444'
-                  : bridgeStatus === 'connecting' ? '#f59e0b'
-                  : 'var(--text-muted)',
-              }}>
-                {bridgeStatus === 'connected' ? 'Connected'
-                  : bridgeStatus === 'error' ? 'Connection failed'
-                  : bridgeStatus === 'connecting' ? 'Connecting...'
-                  : 'Not connected'}
+              <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
+                Hard cap on LLM calls per run. Pipeline stops gracefully when reached.
               </span>
             </label>
-          )}
-        </div>
+            {llmBackend === 'bridge' && (
+              <label style={{ display: 'block' }}>
+                <span style={LABEL}>Bridge URL</span>
+                <input
+                  type="text"
+                  value={bridgeUrl}
+                  onChange={(e) => setBridgeUrl(e.target.value)}
+                  disabled={running || bridgeStatus === 'connected'}
+                  placeholder="ws://127.0.0.1:8765"
+                  style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }}
+                />
+              </label>
+            )}
+          </div>
         </Disclosure>
 
         {/* Action buttons */}
@@ -464,6 +559,44 @@ export function GenerationPanel() {
               }}
             >
               Clear
+            </button>
+          )}
+        </div>
+
+        {/* Import / Export */}
+        <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+          <button
+            onClick={handleImport}
+            disabled={running}
+            style={{
+              flex: 1,
+              padding: '6px 10px',
+              fontSize: 11,
+              borderRadius: 4,
+              border: '1px solid var(--border)',
+              color: 'var(--text-secondary)',
+              cursor: running ? 'not-allowed' : 'pointer',
+              transition: 'all 0.15s',
+            }}
+          >
+            Import
+          </button>
+          {hasResults && (
+            <button
+              onClick={handleExport}
+              disabled={running}
+              style={{
+                flex: 1,
+                padding: '6px 10px',
+                fontSize: 11,
+                borderRadius: 4,
+                border: '1px solid var(--border)',
+                color: 'var(--text-secondary)',
+                cursor: running ? 'not-allowed' : 'pointer',
+                transition: 'all 0.15s',
+              }}
+            >
+              Export
             </button>
           )}
         </div>
@@ -542,6 +675,72 @@ export function GenerationPanel() {
               })}
             </div>
           </div>
+        )}
+
+        {/* LLM Telemetry */}
+        {llmTelemetry.length > 0 && (
+          <Disclosure title="LLM Telemetry" persistKey="gen-llm-telemetry" defaultCollapsed={false}
+            badge={`${llmTelemetry.length} calls`}>
+            <div style={{ padding: '4px 0' }}>
+              {/* Summary row */}
+              <div style={{
+                display: 'flex',
+                gap: 12,
+                padding: '4px 8px',
+                marginBottom: 4,
+                fontSize: 10,
+                color: 'var(--text-muted)',
+                borderBottom: '1px solid var(--border)',
+              }}>
+                <span>Total: {llmTelemetry.length}</span>
+                <span>OK: {llmTelemetry.filter(t => t.status === 'success').length}</span>
+                <span style={{ color: llmTelemetry.some(t => t.status === 'error') ? '#ef4444' : undefined }}>
+                  Errors: {llmTelemetry.filter(t => t.status === 'error').length}
+                </span>
+                <span>
+                  In: {(llmTelemetry.reduce((s, t) => s + t.inputChars, 0) / 1024).toFixed(1)}KB
+                </span>
+                <span>
+                  Out: {(llmTelemetry.filter(t => t.outputChars).reduce((s, t) => s + (t.outputChars ?? 0), 0) / 1024).toFixed(1)}KB
+                </span>
+              </div>
+              {/* Per-call rows */}
+              <div style={{ maxHeight: 180, overflowY: 'auto' }}>
+                {llmTelemetry.map((t) => (
+                  <div key={t.callNumber} style={{
+                    display: 'flex',
+                    gap: 6,
+                    alignItems: 'baseline',
+                    padding: '2px 8px',
+                    fontSize: 10,
+                    fontFamily: 'monospace',
+                    color: t.status === 'error' ? '#ef4444'
+                      : t.status === 'success' ? 'var(--text-secondary)'
+                      : 'var(--text-muted)',
+                  }}>
+                    <span style={{ width: 24, flexShrink: 0, textAlign: 'right' }}>#{t.callNumber}</span>
+                    <span style={{ width: 55, flexShrink: 0 }}>{t.method === 'completeJson' ? 'json' : t.method === 'completeStream' ? 'stream' : 'text'}</span>
+                    <span style={{ width: 50, flexShrink: 0 }}>{(t.inputChars / 1024).toFixed(1)}K in</span>
+                    <span style={{ width: 50, flexShrink: 0 }}>{t.outputChars != null ? `${(t.outputChars / 1024).toFixed(1)}K out` : '...'}</span>
+                    <span style={{ width: 40, flexShrink: 0 }}>{t.durationMs != null ? `${(t.durationMs / 1000).toFixed(1)}s` : ''}</span>
+                    <span style={{
+                      fontWeight: 600,
+                      color: t.status === 'error' ? '#ef4444'
+                        : t.status === 'success' ? '#22c55e'
+                        : '#f59e0b',
+                    }}>
+                      {t.status === 'error' ? 'FAIL' : t.status === 'success' ? 'OK' : 'WAIT'}
+                    </span>
+                    {t.error && (
+                      <span style={{ color: '#ef4444', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {t.error.slice(0, 80)}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Disclosure>
         )}
       </div>
     </div>

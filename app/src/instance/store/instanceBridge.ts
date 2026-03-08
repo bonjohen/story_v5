@@ -21,6 +21,7 @@ import type {
   LoreCharacter,
   LorePlace,
   LoreObject,
+  PlotThread,
 } from '../../generation/series/types.ts'
 import type { CharacterRole, PlaceType, ObjectType } from '../../types/elements.ts'
 import type { ArcType } from '../../types/elements.ts'
@@ -119,11 +120,13 @@ function detailObjectToLore(dobj: DetailObject, sourceId: string): LoreObject {
 
 /**
  * Create a StoryInstance from generation pipeline output.
+ * Optional plotThreads array populates the lore plot_threads field.
  */
 export function instanceFromDetailBindings(
   bindings: StoryDetailBindings,
   selection: SelectionResult | null,
   request: StoryRequest | null,
+  plotThreads?: PlotThread[],
 ): StoryInstance {
   const sourceId = bindings.run_id ?? 'generation'
   const now = new Date().toISOString()
@@ -140,6 +143,7 @@ export function instanceFromDetailBindings(
     objects: bindings.entity_registry.objects.map((o) =>
       detailObjectToLore(o, sourceId),
     ),
+    plot_threads: plotThreads ?? [],
   }
 
   const metadata: InstanceMetadata = {

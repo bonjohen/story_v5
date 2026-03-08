@@ -1,6 +1,6 @@
 /**
  * Zustand store for the story generation pipeline UI.
- * Manages run state, artifacts, event logs, and scene selection.
+ * Manages run state, artifacts, event logs, LLM telemetry, and scene selection.
  */
 
 import { create } from 'zustand'
@@ -19,10 +19,12 @@ import type {
   StoryDetailBindings,
   ChapterManifest,
 } from '../artifacts/types.ts'
-import type { OrchestratorEvent, OrchestratorResult } from '../engine/orchestrator.ts'
+import type { OrchestratorEvent, OrchestratorResult, LLMCallTelemetry } from '../engine/orchestrator.ts'
 import { orchestrate } from '../engine/orchestrator.ts'
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import { FetchDataProvider } from '../engine/corpusLoader.ts'
+import type { StorySnapshot } from '../artifacts/storySnapshot.ts'
+import { snapshotToStoreState } from '../artifacts/storySnapshot.ts'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -52,6 +54,9 @@ export interface GenerationStoreState {
   // Event log
   events: OrchestratorEvent[]
 
+  // LLM telemetry
+  llmTelemetry: LLMCallTelemetry[]
+
   // UI selection
   selectedSceneId: string | null
 
@@ -61,6 +66,7 @@ export interface GenerationStoreState {
   // Actions
   startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode, llm?: LLMAdapter | null) => Promise<void>
   loadResult: (result: OrchestratorResult, request: StoryRequest) => void
+  loadSnapshot: (snapshot: StorySnapshot) => void
   selectScene: (sceneId: string | null) => void
   clearRun: () => void
 }
@@ -87,6 +93,7 @@ const INITIAL_STATE = {
   complianceReport: null as string | null,
   chapterManifest: null as ChapterManifest | null,
   events: [] as OrchestratorEvent[],
+  llmTelemetry: [] as LLMCallTelemetry[],
   selectedSceneId: null as string | null,
   error: null as string | null,
 }
@@ -107,6 +114,7 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
       running: true,
       request,
       events: [],
+      llmTelemetry: [],
       error: null,
     })
 
@@ -141,6 +149,7 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
         trace: result.trace ?? null,
         complianceReport: result.complianceReport ?? null,
         chapterManifest: result.chapterManifest ?? null,
+        llmTelemetry: result.llmTelemetry ?? [],
         error: result.error ?? null,
       })
     } catch (err) {
@@ -170,9 +179,12 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
       complianceReport: result.complianceReport ?? null,
       chapterManifest: result.chapterManifest ?? null,
       events: result.events,
+      llmTelemetry: result.llmTelemetry ?? [],
       error: result.error ?? null,
     })
   },
+
+  loadSnapshot: (snapshot) => set(snapshotToStoreState(snapshot)),
 
   selectScene: (sceneId) => set({ selectedSceneId: sceneId }),
 

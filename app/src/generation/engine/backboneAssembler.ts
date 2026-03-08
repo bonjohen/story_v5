@@ -227,12 +227,48 @@ function findConstraintLabel(
 // Slot extraction and assignment
 // ---------------------------------------------------------------------------
 
+/** Default character slots inferred from archetype node roles when no elements.json exists. */
+const ROLE_DEFAULT_SLOTS: Record<string, { slots: string[]; place?: string }> = {
+  'Ordinary World':       { slots: ['protagonist'], place: 'ordinary_world' },
+  'Call to Adventure':    { slots: ['protagonist', 'herald'] },
+  'Refusal':              { slots: ['protagonist'] },
+  'Meeting the Mentor':   { slots: ['protagonist', 'mentor'] },
+  'Crossing the Threshold': { slots: ['protagonist', 'threshold_guardian'], place: 'special_world' },
+  'Tests, Allies, Enemies': { slots: ['protagonist', 'ally', 'antagonist'] },
+  'Approach':             { slots: ['protagonist', 'ally'] },
+  'Ordeal':               { slots: ['protagonist', 'antagonist'] },
+  'Supreme Ordeal':       { slots: ['protagonist', 'antagonist'] },
+  'Reward':               { slots: ['protagonist'] },
+  'Road Back':            { slots: ['protagonist'] },
+  'Resurrection':         { slots: ['protagonist', 'antagonist'] },
+  'Return':               { slots: ['protagonist'], place: 'ordinary_world' },
+  'Climax':               { slots: ['protagonist', 'antagonist'] },
+  'Crisis':               { slots: ['protagonist'] },
+  'Resolution':           { slots: ['protagonist'] },
+  'Setup':                { slots: ['protagonist'], place: 'ordinary_world' },
+  'Confrontation':        { slots: ['protagonist', 'antagonist'] },
+  'Transformation':       { slots: ['protagonist'] },
+  'Dark Night':           { slots: ['protagonist'] },
+  'Battle':               { slots: ['protagonist', 'antagonist'] },
+  'Revelation':           { slots: ['protagonist'] },
+  'Downfall':             { slots: ['protagonist'] },
+  'Fall':                 { slots: ['protagonist'] },
+  'Reckoning':            { slots: ['protagonist', 'antagonist'] },
+}
+
+/** Minimum slots every story needs — applied to the first beat. */
+const CORE_SLOTS = ['protagonist', 'antagonist']
+
 function assignSlots(
   beats: BackboneBeat[],
   contract: StoryContract,
   templatePack: TemplatePack,
 ): void {
   const elementRequirements = contract.element_requirements ?? []
+  const hasElementData = elementRequirements.length > 0
+
+  // Track which core slots have been assigned globally
+  const globalSlots = new Set<string>()
 
   for (const beat of beats) {
     const template = templatePack.archetype_node_templates[beat.archetype_node_id]
@@ -246,36 +282,94 @@ function assignSlots(
     for (const scene of beat.scenes) {
       const slots: SlotMap = {}
 
-      // Add slots from template required_elements (e.g., "{protagonist}", "{mentor}")
-      for (const slotRef of requiredElementSlots) {
-        const slotName = slotRef.replace(/^\{|\}$/g, '')
-        slots[slotName] = {
-          slot_name: slotName,
-          category: 'character',
-          required: true,
-          description: `Required element: ${slotName}`,
-        }
-      }
-
-      // Add slots from contract element requirements at this node
-      for (const er of nodeRequirements) {
-        const slotName = er.role_or_type
-        if (!slots[slotName]) {
+      if (hasElementData) {
+        // Use element_requirements from elements.json
+        for (const slotRef of requiredElementSlots) {
+          const slotName = slotRef.replace(/^\{|\}$/g, '')
           slots[slotName] = {
             slot_name: slotName,
-            category: er.category === 'character' ? 'character'
-              : er.category === 'place' ? 'place'
-              : er.category === 'object' ? 'object'
-              : 'concept',
-            required: er.required,
-            description: er.definition,
+            category: inferSlotCategory(slotName),
+            required: true,
+            description: `Required element: ${slotName}`,
           }
+        }
+        for (const er of nodeRequirements) {
+          const slotName = er.role_or_type
+          if (!slots[slotName]) {
+            slots[slotName] = {
+              slot_name: slotName,
+              category: er.category === 'character' ? 'character'
+                : er.category === 'place' ? 'place'
+                : er.category === 'object' ? 'object'
+                : 'concept',
+              required: er.required,
+              description: er.definition,
+            }
+          }
+        }
+      } else {
+        // Infer slots from archetype node role
+        const roleDefaults = beat.role ? ROLE_DEFAULT_SLOTS[beat.role] : undefined
+        const slotNames = roleDefaults?.slots ?? CORE_SLOTS
+
+        for (const slotName of slotNames) {
+          slots[slotName] = {
+            slot_name: slotName,
+            category: inferSlotCategory(slotName),
+            required: true,
+            description: `${slotName} — inferred from ${beat.role} phase`,
+          }
+          globalSlots.add(slotName)
+        }
+
+        // Add place slot if defined for this role
+        if (roleDefaults?.place) {
+          slots[roleDefaults.place] = {
+            slot_name: roleDefaults.place,
+            category: 'place',
+            required: false,
+            description: `Setting for ${beat.role} phase`,
+          }
+          globalSlots.add(roleDefaults.place)
         }
       }
 
       scene.slots = slots
     }
   }
+
+  // Ensure core slots appear at least in the first scene
+  if (!hasElementData && beats.length > 0 && beats[0].scenes.length > 0) {
+    const firstScene = beats[0].scenes[0]
+    for (const core of CORE_SLOTS) {
+      if (!firstScene.slots[core]) {
+        firstScene.slots[core] = {
+          slot_name: core,
+          category: inferSlotCategory(core),
+          required: true,
+          description: `Core story role: ${core}`,
+        }
+      }
+    }
+  }
+}
+
+/** Known place and object slot names for category inference. */
+const PLACE_SLOTS = new Set([
+  'ordinary_world', 'special_world', 'underworld', 'home', 'threshold',
+  'setting', 'arena', 'sanctuary', 'fortress', 'kingdom', 'village',
+  'city', 'wilderness', 'labyrinth', 'prison', 'temple', 'court',
+])
+
+const OBJECT_SLOTS = new Set([
+  'talisman', 'weapon', 'treasure', 'elixir', 'artifact', 'key',
+  'map', 'potion', 'scroll', 'relic', 'token', 'gift', 'tool',
+])
+
+function inferSlotCategory(slotName: string): 'character' | 'place' | 'object' | 'concept' {
+  if (PLACE_SLOTS.has(slotName)) return 'place'
+  if (OBJECT_SLOTS.has(slotName)) return 'object'
+  return 'character'
 }
 
 // ---------------------------------------------------------------------------

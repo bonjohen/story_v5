@@ -37,7 +37,7 @@ export const useUIStore = create<UIStoreState>()(
       toggleNav: () => set((s) => ({ navOpen: !s.navOpen })),
       setNavOpen: (v) => set({ navOpen: v }),
 
-      genPanelOpen: false,
+      genPanelOpen: true,
       toggleGenPanel: () => set((s) => ({ genPanelOpen: !s.genPanelOpen })),
 
       infoPanelOpen: true,
@@ -59,7 +59,6 @@ export const useUIStore = create<UIStoreState>()(
     {
       name: 'story-ui-prefs',
       partialize: (state) => ({
-        genPanelOpen: state.genPanelOpen,
         infoPanelOpen: state.infoPanelOpen,
         splitView: state.splitView,
         collapsedSections: state.collapsedSections,
