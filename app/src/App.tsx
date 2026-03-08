@@ -30,7 +30,6 @@ import type { CyCore, GenerationOverlay } from './render/GraphCanvas.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
 import { useGenerationStore } from './generation/store/generationStore.ts'
-import { parseSnapshot } from './generation/artifacts/storySnapshot.ts'
 import { useDbInit } from './db/useDbInit.ts'
 import type { DataManifest } from './types/graph.ts'
 
@@ -151,27 +150,6 @@ export default function App() {
       })
   }, [setManifest])
 
-  // Auto-load sample snapshot on first visit if no generation data exists
-  const autoLoadTriggered = useRef(false)
-  useEffect(() => {
-    if (autoLoadTriggered.current) return
-    if (genStatus !== 'IDLE') return
-    if (!archetypeGraph) return
-    autoLoadTriggered.current = true
-
-    fetch(`${import.meta.env.BASE_URL}data/sample_snapshot.json`)
-      .then((res) => {
-        if (!res.ok) return
-        return res.text()
-      })
-      .then((text) => {
-        if (!text) return
-        if (useGenerationStore.getState().status !== 'IDLE') return
-        const snapshot = parseSnapshot(text)
-        useGenerationStore.getState().loadSnapshot(snapshot)
-      })
-      .catch(() => { /* sample not available — fine */ })
-  }, [archetypeGraph, genStatus])
 
   // Sync URL -> graph loading
   useEffect(() => {
