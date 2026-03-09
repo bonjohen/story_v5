@@ -9,6 +9,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Do NOT spawn new Claude Code instances from within an active Claude Code session.** The `ClaudeCodeAdapter` already handles nested-session prevention by cleaning env vars (`CLAUDECODE`, `CLAUDE_CODE_SSE_PORT`, `CLAUDE_CODE_ENTRYPOINT`).
 - The Vite bridge plugin (`vite-bridge-plugin.ts`) auto-starts the bridge server when `npm run dev` runs.
 
+## jcodemunch MCP Integration
+
+This project has a **jcodemunch MCP server** configured for code intelligence. Use jcodemunch tools for codebase exploration, symbol lookup, and code search — they provide AST-aware results that are faster and more structured than raw file reads.
+
+- **Repo identifier**: `bonjohen/story_v5` (use this for all `repo` parameters)
+- **Index**: Run `index_repo(url: "bonjohen/story_v5", use_ai_summaries: false)` to index/re-index. Use `incremental: true` (default) after code changes.
+- **AI summaries are disabled** (`use_ai_summaries: false`) — summaries use docstring/signature fallback only. Do not enable AI summaries (they require API keys we don't use).
+
+### Available Tools
+
+| Tool | Use When |
+|------|----------|
+| `list_repos` | Check what repos are indexed |
+| `index_repo` / `index_folder` | Index or re-index the codebase |
+| `invalidate_cache` | Force full re-index (deletes cached index) |
+| `get_repo_outline` | Quick overview: directories, languages, symbol counts |
+| `get_file_tree` | Browse file structure, optionally filtered by path prefix |
+| `get_file_outline` | List all symbols in a file (functions, classes, types) with signatures |
+| `get_file_content` | Read cached source, optionally sliced to line range |
+| `get_symbol` | Get full source of a specific symbol by ID |
+| `get_symbols` | Batch-retrieve multiple symbols at once |
+| `search_symbols` | Search by name/signature/summary; filter by kind (`function`, `class`, `type`, etc.) or language |
+| `search_text` | Full-text search across file contents (strings, comments, config values) |
+
+### When to Use jcodemunch vs Built-in Tools
+
+- **Use jcodemunch** for: understanding code structure, finding symbol definitions, exploring unfamiliar parts of the codebase, getting file outlines before diving in
+- **Use built-in Read/Glob/Grep** for: reading specific known files, making edits, simple pattern matching
+- **Prefer `search_symbols`** over Grep when looking for function/class/type definitions
+- **Prefer `get_file_outline`** before reading a large file to understand its structure first
+
 ## CRITICAL: Always Leave Services Running
 
 - **After ANY code change, always restart and leave the dev server running.** Run `cd /c/Projects/story_v5/app && npm run dev` in the background before finishing.
@@ -34,9 +65,9 @@ This is a **data and content project** that models storytelling structures as fo
 
 7. **UI Upgrade (Progressive Disclosure)** — restructured the interface around progressive disclosure: hamburger menu + NavDrawer replacing toolbar buttons, collapsible generation panel, info panel with accordion groups instead of 14 flat tabs, single-graph focus mode with optional split view, mobile-responsive CSS with 44px touch targets, and consistent AppShellBar across all sub-pages. See `docs/user_interface_upgrade_plan.md` (8-phase plan).
 
-8. **Generation UI Redesign** — replaced the monolithic GenerationPanel (882 lines) with 4 focused tabs: Story Setup (archetype/genre selection, premise, tone, LLM connection), Elements (editable entity CRUD for characters/places/objects), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Generate Story button, event log, prose output, import/export snapshots, export story .md). Plus a Graph tab for Cytoscape visualization. PipelineTab removed — all functionality moved to Setup and Generate tabs. See `docs/generation_ui_redesign_plan.md`.
+8. **Generation UI Redesign** — replaced the monolithic GenerationPanel with 4 focused tabs: Story Setup (archetype/genre selection, premise, tone, LLM connection), Elements (editable entity CRUD for characters/places/objects), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Generate Story button, event log, prose output, save/load projects, export story .md). Plus a Graph tab for Cytoscape visualization. See `docs/generation_ui_redesign_plan.md`.
 
-9. **UI Refactor 1** — removed the "Hide generation panel" toggle (panel always visible), cleaned LLM output (stripPreamble, no beat IDs in prose), preserved elements across generation runs, human-friendly event log messages, formalized save/load workflow design. See `docs/ui_refactor_1_design.md`.
+9. **UI Refactor 1** — removed the "Hide generation panel" toggle (panel always visible), cleaned LLM output (stripPreamble, no beat IDs in prose), preserved elements across generation runs, human-friendly event log messages, unified StoryProject save/load (replaces snapshot import/export, captures both requestStore settings and generation artifacts). Dead files (GenerationPanel.tsx, PipelineTab.tsx) deleted. See `docs/ui_refactor_1_design.md`.
 
 ## Repository Structure
 
@@ -137,7 +168,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 6 — Claude Code CLI Interface**: Complete. All 8 phases implemented (adapter, CLI integration, docs, streaming, JSON mode, session reuse, browser bridge, verify).
 - **Goal 7 — UI Upgrade (Progressive Disclosure)**: Complete. All 8 phases implemented (AppShell/NavDrawer, collapsible gen panel, info panel accordion, single-graph focus, mobile touch, disclosure widgets, sub-page consistency, polish).
 - **Goal 8 — Generation UI Redesign**: Complete. All 8 phases implemented (extract constants, PipelineTab, StorySetupTab, ElementsTab, GenerateTab, rewire App.tsx, slim down GenerationPanel, polish/mobile). Plus Analysis tab added post-plan.
-- **UI Refactor 1**: Complete. Removed gen panel toggle, cleaned LLM output, preserved elements across runs, human-friendly events, save/load design. See `docs/ui_refactor_1_design.md`.
+- **UI Refactor 1**: Complete. Removed gen panel toggle, cleaned LLM output, preserved elements across runs, human-friendly events, unified StoryProject save/load, dead file cleanup. See `docs/ui_refactor_1_design.md`.
 
 ## Key Conventions
 
