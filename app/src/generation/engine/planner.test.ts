@@ -283,26 +283,24 @@ describe('planner — coverage tracking', () => {
 
 describe('planner — LLM enhancement', () => {
   it('enhances beat summaries with mock LLM', async () => {
+    // enhancePlanWithLLM uses batched calls: one for beats, one for scenes
     const llm = new MockLLMAdapter([
-      'The hero tends moisture vaporators under twin suns.',
-      'A holographic message shatters the hero\'s routine.',
-      'An old hermit reveals the hero\'s hidden legacy.',
-      'Scene goal: Establish mundane world.',
-      'Scene goal: Reveal the speculative premise.',
-      'Scene goal: Provide guidance and exposition.',
+      // Batched beat response
+      'BEAT_ID=B01: The hero tends moisture vaporators under twin suns.\nBEAT_ID=B02: A holographic message shatters the hero\'s routine.\nBEAT_ID=B03: An old hermit reveals the hero\'s hidden legacy.',
+      // Batched scene response
+      'SCENE_ID=S01: Establish mundane world.\nSCENE_ID=S02: Reveal the premise.\nSCENE_ID=S03: Provide guidance.',
     ])
     const plan = await buildPlan({ contract: makeContract(), corpus: makeCorpus(), config: makeConfig(), llm })
-    // Beat summaries should be replaced by LLM responses
     expect(plan.beats[0].summary).toBe('The hero tends moisture vaporators under twin suns.')
     expect(plan.beats[1].summary).toBe("A holographic message shatters the hero's routine.")
   })
 
   it('enhances scene goals with mock LLM', async () => {
     const llm = new MockLLMAdapter([
-      'Enhanced beat 1', 'Enhanced beat 2', 'Enhanced beat 3',
-      'Establish the protagonist in a mundane tech-dependent world.',
-      'Reveal the speculative premise through a disruptive event.',
-      'Introduce a mentor who explains the rules of the world.',
+      // Batched beat response
+      'BEAT_ID=B01: Enhanced beat 1\nBEAT_ID=B02: Enhanced beat 2\nBEAT_ID=B03: Enhanced beat 3',
+      // Batched scene response
+      'SCENE_ID=S01: Establish the protagonist in a mundane tech-dependent world.\nSCENE_ID=S02: Reveal the speculative premise through a disruptive event.\nSCENE_ID=S03: Introduce a mentor who explains the rules of the world.',
     ])
     const plan = await buildPlan({ contract: makeContract(), corpus: makeCorpus(), config: makeConfig(), llm })
     expect(plan.scenes[0].scene_goal).toBe('Establish the protagonist in a mundane tech-dependent world.')

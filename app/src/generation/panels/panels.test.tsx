@@ -1,6 +1,21 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { useGenerationStore } from '../store/generationStore.ts'
+
+// Mock speechSynthesis for ReadAloudButton (not available in jsdom)
+if (!window.speechSynthesis) {
+  Object.defineProperty(window, 'speechSynthesis', {
+    value: {
+      getVoices: vi.fn(() => []),
+      speak: vi.fn(),
+      cancel: vi.fn(),
+      pause: vi.fn(),
+      resume: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    },
+  })
+}
 import { ContractPanel } from './ContractPanel.tsx'
 import { PlanPanel } from './PlanPanel.tsx'
 import { TracePanel } from './TracePanel.tsx'

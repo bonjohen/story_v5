@@ -34,13 +34,16 @@ This is a **data and content project** that models storytelling structures as fo
 
 7. **UI Upgrade (Progressive Disclosure)** — restructured the interface around progressive disclosure: hamburger menu + NavDrawer replacing toolbar buttons, collapsible generation panel, info panel with accordion groups instead of 14 flat tabs, single-graph focus mode with optional split view, mobile-responsive CSS with 44px touch targets, and consistent AppShellBar across all sub-pages. See `docs/user_interface_upgrade_plan.md` (8-phase plan).
 
-8. **Generation UI Redesign** — replaced the monolithic GenerationPanel (882 lines) with 5 focused tabs: Pipeline (LLM connection, import/export), Story Setup (archetype/genre selection, premise, tone), Elements (editable entity CRUD for characters/places/objects), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Build Structure / Generate Story buttons, event log, prose output). See `docs/generation_ui_redesign_plan.md`.
+8. **Generation UI Redesign** — replaced the monolithic GenerationPanel (882 lines) with 4 focused tabs: Story Setup (archetype/genre selection, premise, tone, LLM connection), Elements (editable entity CRUD for characters/places/objects), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Generate Story button, event log, prose output, import/export snapshots, export story .md). Plus a Graph tab for Cytoscape visualization. PipelineTab removed — all functionality moved to Setup and Generate tabs. See `docs/generation_ui_redesign_plan.md`.
+
+9. **UI Refactor 1** — removed the "Hide generation panel" toggle (panel always visible), cleaned LLM output (stripPreamble, no beat IDs in prose), preserved elements across generation runs, human-friendly event log messages, formalized save/load workflow design. See `docs/ui_refactor_1_design.md`.
 
 ## Repository Structure
 
 ```
 docs/                              ← Active planning and specs
   generation_ui_redesign_plan.md   ← 5-tab generation UI redesign (complete)
+  ui_refactor_1_design.md          ← UI data element inventory + save/load design
   story_elements_and_timelines.md  ← Story elements and timeline design
   story_elements_and_timelines_plan.md ← Implementation plan
   user_interface_upgrade_plan.md   ← 8-phase UI upgrade plan (complete)
@@ -103,7 +106,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
       engine/                      ← Core engines (templateCompiler, backboneAssembler, detailSynthesizer, chapterAssembler, orchestrator, etc.)
       agents/                      ← LLM adapters and agent prompts (ClaudeCodeAdapter, detailAgent, writerAgent, etc.)
       artifacts/                   ← Types, JSON schemas, I/O helpers
-      panels/                      ← 5-tab generation UI (PipelineTab, StorySetupTab, ElementsTab, AnalysisTab, GenerateTab)
+      panels/                      ← Generation UI tabs (StorySetupTab, ElementsTab, AnalysisTab, GenerateTab) + legacy PipelineTab/GenerationPanel
       store/                       ← Generation Zustand stores (generationStore, requestStore)
       series/                      ← Series/episode generation subsystem
     store/                         ← Zustand stores (graphStore, settingsStore, uiStore)
@@ -134,6 +137,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 6 — Claude Code CLI Interface**: Complete. All 8 phases implemented (adapter, CLI integration, docs, streaming, JSON mode, session reuse, browser bridge, verify).
 - **Goal 7 — UI Upgrade (Progressive Disclosure)**: Complete. All 8 phases implemented (AppShell/NavDrawer, collapsible gen panel, info panel accordion, single-graph focus, mobile touch, disclosure widgets, sub-page consistency, polish).
 - **Goal 8 — Generation UI Redesign**: Complete. All 8 phases implemented (extract constants, PipelineTab, StorySetupTab, ElementsTab, GenerateTab, rewire App.tsx, slim down GenerationPanel, polish/mobile). Plus Analysis tab added post-plan.
+- **UI Refactor 1**: Complete. Removed gen panel toggle, cleaned LLM output, preserved elements across runs, human-friendly events, save/load design. See `docs/ui_refactor_1_design.md`.
 
 ## Key Conventions
 
@@ -181,7 +185,8 @@ Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 - **Pre-push hook**: `.githooks/pre-push` runs `tsc -b` before every push to prevent broken builds
 - **Build**: `cd app && npm run build` runs `tsc -b && vite build`
 - **Typecheck only**: `cd app && npm run typecheck`
-- **Routes**: `/` (main app with 5-tab generation panel), `/story` (story workspace), `/sceneboard` (scene board), `/timeline` (timeline view), `/encyclopedia` (encyclopedia), `/manuscript` (manuscript editor), `/notes` (notes browser), `/scripts` (walkthrough scripts), `/series` (series browser), `/db` (database management)
+- **Tests**: `cd app && npx vitest run` (all tests), `cd app && npx vitest run src/store` (specific folder)
+- **Routes**: `/` (main app — always-visible generation panel with Setup/Elements/Graph/Analysis/Generate tabs), `/story` (story workspace), `/sceneboard` (scene board), `/timeline` (timeline view), `/encyclopedia` (encyclopedia), `/manuscript` (manuscript editor), `/notes` (notes browser), `/scripts` (walkthrough scripts), `/series` (series browser), `/db` (database management)
 
 ### Bug Tracking
 
