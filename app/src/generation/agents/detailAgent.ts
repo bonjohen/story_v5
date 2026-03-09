@@ -41,44 +41,34 @@ export function buildDetailSynthesisPrompt(
   return [
     {
       role: 'system',
-      content: `You are a story detail synthesizer. Your job is to create concrete characters, places, and objects that fill the story's structural slots. You must output ONLY valid JSON matching the StoryDetailBindings schema. Do not write prose — only structured JSON data.
-
-Output schema:
+      content: `You are a story detail generator. Create characters, places, and objects for the given slots. Output ONLY valid JSON:
 {
   "entity_registry": {
-    "characters": [{ "id": "char_01", "name": "...", "role": "...", "traits": [...], "motivations": [...], "backstory": "..." }],
-    "places": [{ "id": "place_01", "name": "...", "type": "...", "features": [...], "atmosphere": "..." }],
-    "objects": [{ "id": "obj_01", "name": "...", "type": "...", "significance": "...", "properties": [...] }]
+    "characters": [{"id":"char_01","name":"...","role":"...","traits":[...],"motivations":[...]}],
+    "places": [{"id":"place_01","name":"...","type":"...","features":[...],"atmosphere":"..."}],
+    "objects": [{"id":"obj_01","name":"...","type":"...","significance":"..."}]
   },
   "slot_bindings": {
-    "slot_name": { "slot_name": "...", "bound_entity_id": "...", "bound_value": "...", "rationale": "..." }
-  },
-  "open_mysteries": [{ "id": "mystery_01", "description": "...", "planted_at_beat": "..." }],
-  "promises": [{ "id": "promise_01", "description": "...", "made_at_beat": "..." }],
-  "payoffs": [{ "id": "payoff_01", "promise_id": "...", "description": "...", "delivered_at_beat": "..." }],
-  "unresolved_todos": []
-}`,
+    "slot_name": {"slot_name":"...","bound_entity_id":"...","bound_value":"...","rationale":"..."}
+  }
+}
+No markdown fences. No commentary. Just JSON.`,
     },
     {
       role: 'user',
       content: [
-        `Story premise: ${request.premise}`,
-        `Genre: ${request.requested_genre}`,
-        `Archetype: ${request.requested_archetype}`,
-        `Tone: ${request.tone_preference}`,
-        `Medium: ${request.medium}`,
-        `Audience: ${request.audience.age_band}`,
-        `Content limits: ${request.audience.content_limits.join(', ') || 'none'}`,
-        `Must include: ${request.constraints.must_include.join(', ') || 'none'}`,
-        `Must exclude: ${request.constraints.must_exclude.join(', ') || 'none'}`,
+        `PREMISE: ${request.premise}`,
+        `GENRE: ${request.requested_genre}`,
+        `ARCHETYPE: ${request.requested_archetype}`,
+        `TONE: ${request.tone_preference || 'not specified'}`,
         '',
-        'Story beats:',
+        'BEATS:',
         beatSummaries,
         '',
-        'Slots to fill:',
+        'SLOTS TO FILL:',
         slotList,
         '',
-        'Create concrete entities for all required slots. Ensure names and details fit the genre and tone. Output valid JSON only.',
+        'Create entities for all required slots. Fit the genre and tone. Output valid JSON only.',
       ].join('\n'),
     },
   ]

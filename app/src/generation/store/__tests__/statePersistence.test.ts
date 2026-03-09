@@ -16,11 +16,11 @@ function resetAll() {
     genre: 'Drama',
     mode: 'detailed-outline',
     tone: '',
-    llmBackend: 'none',
+    llmBackend: 'openai',
     bridgeUrl: 'ws://127.0.0.1:8765',
     maxLlmCalls: 20,
     openaiBaseUrl: 'http://localhost:11434/v1',
-    openaiModel: 'qwen3:32b',
+    openaiModel: 'llama3:8b-instruct-q8_0',
     openaiApiKey: '',
     bridgeStatus: 'disconnected',
     bridgeAdapter: null,
@@ -29,10 +29,11 @@ function resetAll() {
   useGenerationStore.getState().clearRun()
   useUIStore.setState({
     navOpen: false,
-    genPanelOpen: true,
     infoPanelOpen: true,
     splitView: false,
     collapsedSections: {},
+    setupLocked: false,
+    elementsLocked: false,
   })
 }
 
@@ -71,30 +72,19 @@ describe('cross-store state persistence', () => {
     })
   })
 
-  describe('generation panel toggle', () => {
-    it('preserves request state when panel is closed and reopened', () => {
-      // Fill in form
+  describe('generation state persistence', () => {
+    it('preserves request state across store reads', () => {
       useRequestStore.getState().setPremise('A space opera about first contact')
       useRequestStore.getState().setArchetype('The Quest')
       useRequestStore.getState().setGenre('Science Fiction')
 
-      // Close the gen panel
-      useUIStore.getState().toggleGenPanel()
-      expect(useUIStore.getState().genPanelOpen).toBe(false)
-
-      // Reopen
-      useUIStore.getState().toggleGenPanel()
-      expect(useUIStore.getState().genPanelOpen).toBe(true)
-
-      // Form values still present
       const req = useRequestStore.getState()
       expect(req.premise).toBe('A space opera about first contact')
       expect(req.archetype).toBe('The Quest')
       expect(req.genre).toBe('Science Fiction')
     })
 
-    it('preserves generation artifacts when panel is toggled', () => {
-      // Simulate some generation results
+    it('preserves generation artifacts across store reads', () => {
       useGenerationStore.setState({
         status: 'COMPLETED',
         runId: 'test-run-001',
@@ -104,11 +94,6 @@ describe('cross-store state persistence', () => {
         ]),
       })
 
-      // Toggle panel off and on
-      useUIStore.getState().toggleGenPanel()
-      useUIStore.getState().toggleGenPanel()
-
-      // Artifacts persist
       const gen = useGenerationStore.getState()
       expect(gen.status).toBe('COMPLETED')
       expect(gen.runId).toBe('test-run-001')

@@ -31,6 +31,16 @@ function sanitizeList(items: string[]): string[] {
   return items.map(sanitize)
 }
 
+/**
+ * Strip LLM preamble like "Here is the scene:" from generated prose.
+ */
+function stripPreamble(text: string): string {
+  return text
+    .replace(/^(?:Here(?:'s| is) (?:the )?(?:revised|rewritten|updated|new|requested)? ?(?:scene|version|text|prose)[:\.]?\s*\n*)/i, '')
+    .replace(/^(?:Sure[!,.]?\s*(?:Here(?:'s| is)[^]*?:\s*\n*))/i, '')
+    .trim()
+}
+
 // ---------------------------------------------------------------------------
 // Prompt builder
 // ---------------------------------------------------------------------------
@@ -43,51 +53,48 @@ export function buildWriterPrompt(
   priorScenes?: Scene[],
 ): LLMMessage[] {
   const hardList = scene.constraints_checklist.hard.join(', ') || 'none'
-  const softList = scene.constraints_checklist.soft.join(', ') || 'none'
   const mustNotList = scene.constraints_checklist.must_not.join(', ') || 'none'
   const contentLimits = contract.global_boundaries.content_limits.join(', ') || 'none'
 
   // Build element context from plan roster and scene elements
   const elementContext = buildElementContext(scene, plan ?? null, priorScenes ?? [])
 
+  // Extract human-readable beat role (e.g. "[Catalyst] The hero..." → "Catalyst")
+  const roleMatch = beat.summary.match(/^\[([^\]]+)\]\s*(.*)/)
+  const beatRole = roleMatch ? roleMatch[1] : beat.archetype_node_id
+  const beatDefinition = roleMatch ? roleMatch[2] : beat.summary
+
   return [
     {
       role: 'system',
       content: [
-        `You are a fiction writer crafting a scene for a ${contract.genre.name} story using the ${contract.archetype.name} archetype.`,
+        `You are a fiction writer. Write narrative prose for a ${contract.genre.name} story.`,
+        `Tone: ${contract.genre.tone_marker.join(', ')}`,
+        contentLimits !== 'none' ? `Content limits: ${contentLimits}` : '',
         '',
-        'Rules:',
-        `- Genre: ${contract.genre.name}`,
-        `- Tone markers: ${contract.genre.tone_marker.join(', ')}`,
-        `- Content limits: ${contentLimits}`,
-        '',
-        'Your scene MUST satisfy every hard constraint listed below.',
-        'Your scene SHOULD satisfy soft constraints where natural.',
-        'Your scene MUST NOT exhibit any anti-pattern behavior listed below.',
-        '',
-        'Write the scene as narrative prose. Do not include meta-commentary or constraint labels in the output.',
-      ].join('\n'),
+        'IMPORTANT:',
+        '- Output ONLY narrative prose — no headings, labels, preamble, or meta-commentary.',
+        '- Do NOT echo the scene goal, beat name, or constraint names in your output.',
+        '- Do NOT write "Here is the scene" or similar introductions.',
+        '- Start directly with the story text.',
+      ].filter(Boolean).join('\n'),
     },
     {
       role: 'user',
       content: [
-        `Scene: ${scene.scene_id} (Beat: ${beat.beat_id})`,
-        `Scene goal: ${scene.scene_goal}`,
-        `Beat summary: ${beat.summary}`,
-        `Archetype phase: ${beat.archetype_node_id}`,
-        '',
-        `Hard constraints (MUST satisfy): ${hardList}`,
-        `Soft constraints (SHOULD satisfy): ${softList}`,
-        `Anti-patterns (MUST NOT): ${mustNotList}`,
-        '',
-        `Exit conditions for this beat: ${beat.required_exit_conditions.join('; ') || 'none'}`,
+        `This scene is the "${beatRole}" moment: ${beatDefinition}`,
+        `What must happen: ${scene.scene_goal}`,
         '',
         `Setting: ${sanitize(scene.setting || '(to be determined by writer)')}`,
         `Characters: ${sanitizeList(scene.characters).join(', ') || '(to be determined by writer)'}`,
         ...(elementContext ? ['', elementContext] : []),
         '',
-        'Write the scene.',
-      ].join('\n'),
+        hardList !== 'none' ? `Genre requirements: ${hardList}` : '',
+        mustNotList !== 'none' ? `Avoid: ${mustNotList}` : '',
+        beat.required_exit_conditions.length > 0 ? `By the end: ${beat.required_exit_conditions.join('; ')}` : '',
+        '',
+        'Write the scene as narrative prose. Start directly with the story.',
+      ].filter(Boolean).join('\n'),
     },
   ]
 }
@@ -234,7 +241,7 @@ export async function writeScene(
 
   return {
     scene_id: scene.scene_id,
-    content: response.content,
+    content: stripPreamble(response.content),
     model: response.model,
     usage: response.usage,
   }
@@ -266,7 +273,7 @@ export async function writeSceneStreaming(
     onChunk(chunk)
   }
 
-  const content = chunks.join('')
+  const content = stripPreamble(chunks.join(''))
 
   return {
     scene_id: scene.scene_id,

@@ -17,11 +17,11 @@ function reset() {
     genre: 'Drama',
     mode: 'detailed-outline',
     tone: '',
-    llmBackend: 'none',
+    llmBackend: 'openai',
     bridgeUrl: 'ws://127.0.0.1:8765',
     maxLlmCalls: 20,
     openaiBaseUrl: 'http://localhost:11434/v1',
-    openaiModel: 'qwen3:32b',
+    openaiModel: 'llama3:8b-instruct-q8_0',
     openaiApiKey: '',
     bridgeStatus: 'disconnected',
     bridgeAdapter: null,
@@ -53,8 +53,8 @@ describe('requestStore', () => {
       expect(getState().tone).toBe('')
     })
 
-    it('starts with no LLM backend', () => {
-      expect(getState().llmBackend).toBe('none')
+    it('defaults to OpenAI-compatible (Ollama) backend', () => {
+      expect(getState().llmBackend).toBe('openai')
     })
 
     it('has default bridge URL', () => {
@@ -195,10 +195,10 @@ describe('requestStore', () => {
       expect(getState().llmBackend).toBe('bridge')
     })
 
-    it('switches back to none', () => {
+    it('switches back to openai', () => {
       getState().setLlmBackend('bridge')
-      getState().setLlmBackend('none')
-      expect(getState().llmBackend).toBe('none')
+      getState().setLlmBackend('openai')
+      expect(getState().llmBackend).toBe('openai')
     })
 
     it('sets custom bridge URL', () => {

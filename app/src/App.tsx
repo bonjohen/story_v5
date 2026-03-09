@@ -4,8 +4,6 @@ import { SettingsPanel } from './components/SettingsPanel.tsx'
 import { ExportPanel } from './panels/ExportPanel.tsx'
 import { AppShellBar } from './components/AppShell.tsx'
 import { GraphViewer } from './components/GraphViewer.tsx'
-import { useUIStore } from './store/uiStore.ts'
-import { PipelineTab } from './generation/panels/PipelineTab.tsx'
 import { StorySetupTab } from './generation/panels/StorySetupTab.tsx'
 import { ElementsTab } from './generation/panels/ElementsTab.tsx'
 import { AnalysisTab } from './generation/panels/AnalysisTab.tsx'
@@ -44,10 +42,6 @@ export default function App() {
   // Settings
   const settingsOpen = useSettingsStore((s) => s.settingsOpen)
   const toggleSettings = useSettingsStore((s) => s.toggleSettings)
-
-  // UI preferences
-  const genPanelOpen = useUIStore((s) => s.genPanelOpen)
-  const toggleGenPanel = useUIStore((s) => s.toggleGenPanel)
 
   // Generation state
   const genStatus = useGenerationStore((s) => s.status)
@@ -154,48 +148,13 @@ export default function App() {
     }}>
       {/* App bar — slim top bar with hamburger menu */}
       <AppShellBar>
-        {/* Generation panel toggle */}
-        <button
-          onClick={toggleGenPanel}
-          aria-label={genPanelOpen ? 'Hide generation panel' : 'Show generation panel'}
-          style={{
-            fontSize: 11,
-            padding: '3px 10px',
-            borderRadius: 4,
-            border: '1px solid',
-            borderColor: genPanelOpen ? '#22c55e' : 'var(--border)',
-            background: genPanelOpen ? '#22c55e18' : 'transparent',
-            color: genPanelOpen ? '#22c55e' : 'var(--text-muted)',
-            cursor: 'pointer',
-            transition: 'all 0.15s',
-            position: 'relative',
-          }}
-        >
-          Generate
-          {genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED' && (
-            <span style={{
-              position: 'absolute',
-              top: -2,
-              right: -2,
-              width: 6,
-              height: 6,
-              borderRadius: '50%',
-              background: '#f59e0b',
-              animation: 'pulse 1.5s infinite',
-            }} />
-          )}
-          {genStatus === 'COMPLETED' && (
-            <span style={{
-              position: 'absolute',
-              top: -2,
-              right: -2,
-              width: 6,
-              height: 6,
-              borderRadius: '50%',
-              background: '#22c55e',
-            }} />
-          )}
-        </button>
+        {/* Status indicator for generation */}
+        {genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED' && (
+          <span style={{ fontSize: 11, color: '#f59e0b', animation: 'pulse 1.5s infinite' }}>Generating...</span>
+        )}
+        {genStatus === 'COMPLETED' && (
+          <span style={{ fontSize: 11, color: '#22c55e' }}>Complete</span>
+        )}
 
         {/* Export */}
         {currentGraph && (
@@ -273,14 +232,14 @@ export default function App() {
       <div className="main-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
 
         {/* Generation panel — always full width */}
-        {genPanelOpen && <div className="gen-panel" style={{
+        <div className="gen-panel" style={{
           width: '100%',
           background: 'var(--bg-surface)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
         }}>
-          {/* 6 fixed generation tabs */}
+          {/* 5 fixed generation tabs */}
           <div style={{
             display: 'flex',
             borderBottom: '1px solid var(--border)',
@@ -291,7 +250,6 @@ export default function App() {
             <GenTab label="Graph" active={genTab === 'graph'} onClick={() => setGenTab('graph')} badge={!!currentGraph} />
             <GenTab label="Analysis" active={genTab === 'analysis'} onClick={() => setGenTab('analysis')} />
             <GenTab label="Generate" active={genTab === 'generate'} onClick={() => setGenTab('generate')} badge={genSceneDrafts.size > 0 || (genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED')} />
-            <GenTab label="Pipeline" active={genTab === 'pipeline'} onClick={() => setGenTab('pipeline')} />
           </div>
           <div style={{ flex: 1, overflowY: genTab === 'graph' ? 'hidden' : 'auto', display: 'flex', flexDirection: 'column' }}>
             {genTab === 'setup' && <StorySetupTab />}
@@ -299,16 +257,8 @@ export default function App() {
             {genTab === 'graph' && <GraphViewer genHighlightNodes={genHighlightNodes} />}
             {genTab === 'analysis' && <AnalysisTab onHighlightNodes={setGenHighlightNodes} />}
             {genTab === 'generate' && <GenerateTab onHighlightNodes={setGenHighlightNodes} />}
-            {genTab === 'pipeline' && <PipelineTab />}
           </div>
-        </div>}
-
-        {/* Prompt to open panel when closed */}
-        {!genPanelOpen && (
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontSize: 12, background: 'var(--bg-surface)' }}>
-            Click Generate to open the panel
-          </div>
-        )}
+        </div>
       </div>
     </div>
   )

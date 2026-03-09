@@ -34,7 +34,15 @@ export async function repairScene(
     strategy,
   )
   const response = await llm.complete(messages)
-  return response.content
+  return stripPreamble(response.content)
+}
+
+/**
+ * Strip LLM preamble like "Here is the revised scene:" from the output.
+ */
+function stripPreamble(text: string): string {
+  // Remove common LLM preamble lines
+  return text.replace(/^(?:Here(?:'s| is) (?:the )?(?:revised|rewritten|updated|new) (?:scene|version|text)[:\.]?\s*\n*)/i, '').trim()
 }
 
 // ---------------------------------------------------------------------------
@@ -45,7 +53,7 @@ function buildRepairPrompt(
   originalContent: string,
   validation: SceneValidation,
   scene: Scene,
-  beat: Beat,
+  _beat: Beat,
   contract: StoryContract,
   strategy: 'targeted_edit' | 'full_rewrite',
 ): LLMMessage[] {
@@ -82,39 +90,33 @@ function buildRepairPrompt(
     {
       role: 'system',
       content: [
-        `You are a fiction editor repairing a scene for a ${contract.genre.name} story.`,
+        `You are a fiction editor revising a scene for a ${contract.genre.name} story.`,
+        `Tone: ${contract.genre.tone_marker.join(', ')}`,
         '',
         `Strategy: ${strategyInstruction}`,
         '',
-        'Rules:',
-        `- Do NOT introduce new characters or plot points not in the beat plan.`,
-        `- Maintain the genre tone: ${contract.genre.tone_marker.join(', ')}`,
-        `- Content limits: ${contract.global_boundaries.content_limits.join(', ') || 'none'}`,
-        '',
-        'Output ONLY the revised scene text. No meta-commentary.',
+        'IMPORTANT:',
+        '- Output ONLY the revised narrative prose.',
+        '- Do NOT write "Here is the revised scene" or any preamble.',
+        '- Do NOT echo constraint names, beat labels, or scene goals in the prose.',
+        '- Start directly with the story text.',
       ].join('\n'),
     },
     {
       role: 'user',
       content: [
-        `Scene: ${scene.scene_id} (Beat: ${beat.beat_id})`,
         `Scene goal: ${scene.scene_goal}`,
-        `Beat: ${beat.summary}`,
         '',
         '--- ORIGINAL SCENE ---',
         originalContent.slice(0, 4000),
         '',
-        '--- FAILURES TO FIX ---',
+        '--- PROBLEMS TO FIX ---',
         ...failureDirectives,
         '',
         ...(warningDirectives.length > 0
-          ? ['--- WARNINGS (fix if possible) ---', ...warningDirectives, '']
+          ? ['--- OPTIONAL IMPROVEMENTS ---', ...warningDirectives, '']
           : []),
-        '--- CONSTRAINTS ---',
-        `Hard: ${scene.constraints_checklist.hard.join(', ') || 'none'}`,
-        `Must NOT: ${scene.constraints_checklist.must_not.join(', ') || 'none'}`,
-        '',
-        'Write the revised scene.',
+        'Revise the scene. Output only the prose.',
       ].join('\n'),
     },
   ]

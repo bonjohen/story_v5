@@ -73,6 +73,14 @@ export interface OrchestratorOptions {
   onEvent?: (event: OrchestratorEvent) => void
   /** Called with partial text chunks during scene writing (streaming mode). */
   onSceneChunk?: (sceneId: string, chunk: string) => void
+  /** Called as each artifact is produced — allows progressive UI updates and cancel-safe state. */
+  onArtifact?: (partial: Partial<OrchestratorResult>) => void
+  /** Pre-existing detail bindings — skip detail synthesis if provided. */
+  existingDetailBindings?: StoryDetailBindings | null
+  /** Called with the full prompt messages for each LLM call. */
+  onPrompt?: (callNumber: number, messages: LLMMessage[]) => void
+  /** AbortSignal for cancellation — checked between pipeline stages. */
+  signal?: AbortSignal
 }
 
 // ---------------------------------------------------------------------------
@@ -125,6 +133,7 @@ export interface LLMCallTelemetry {
 function instrumentedLLM(
   llm: LLMAdapter,
   onCall: (telemetry: LLMCallTelemetry) => void,
+  onPrompt?: (callNumber: number, messages: LLMMessage[]) => void,
 ): LLMAdapter {
   let callCount = 0
 
@@ -149,6 +158,7 @@ function instrumentedLLM(
     async complete(messages) {
       const t = measure(messages, 'complete')
       onCall(t)
+      onPrompt?.(t.callNumber, messages)
       try {
         const start = Date.now()
         const resp = await llm.complete(messages)
@@ -169,6 +179,7 @@ function instrumentedLLM(
     completeJson: llm.completeJson ? async (messages) => {
       const t = measure(messages, 'completeJson')
       onCall(t)
+      onPrompt?.(t.callNumber, messages)
       try {
         const start = Date.now()
         const resp = await llm.completeJson!(messages)
@@ -189,6 +200,7 @@ function instrumentedLLM(
     completeStream: llm.completeStream ? async function* (messages) {
       const t = measure(messages, 'completeStream')
       onCall(t)
+      onPrompt?.(t.callNumber, messages)
       try {
         const start = Date.now()
         let totalOutput = 0
@@ -221,7 +233,11 @@ function instrumentedLLM(
  * Returns all artifacts produced during the run.
  */
 export async function orchestrate(options: OrchestratorOptions): Promise<OrchestratorResult> {
-  const { request, provider, config, llm: rawLlm = null, mode = 'draft', onEvent, onSceneChunk } = options
+  const { request, provider, config, llm: rawLlm = null, mode = 'draft', onEvent, onSceneChunk, onArtifact, existingDetailBindings, onPrompt, signal } = options
+
+  function checkCancelled() {
+    if (signal?.aborted) throw new Error('Generation cancelled')
+  }
 
   // Wrap LLM with instrumentation — emit telemetry as events
   const telemetryLog: LLMCallTelemetry[] = []
@@ -232,27 +248,29 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     else telemetryLog.push(t)
 
     // Emit as event so UI can display it
-    const sizeKb = (t.inputChars / 1024).toFixed(1)
+    const methodLabel = t.method === 'completeStream' ? 'Streaming prose'
+      : t.method === 'completeJson' ? 'Generating structured data'
+      : 'Sending prompt'
     if (t.status === 'pending') {
       onEvent?.({
         state: 'GENERATING_SCENE',
-        message: `LLM #${t.callNumber} ${t.method} — ${sizeKb}KB input (sys:${(t.systemChars/1024).toFixed(1)}K usr:${(t.userChars/1024).toFixed(1)}K)`,
+        message: `${methodLabel} (${(t.inputChars / 1024).toFixed(1)}KB prompt)...`,
         timestamp: t.startedAt,
       })
     } else if (t.status === 'success') {
       onEvent?.({
         state: 'GENERATING_SCENE',
-        message: `LLM #${t.callNumber} OK — ${(t.outputChars!/1024).toFixed(1)}KB out, ${((t.durationMs!)/1000).toFixed(1)}s`,
+        message: `Received ${(t.outputChars! / 1024).toFixed(1)}KB in ${(t.durationMs! / 1000).toFixed(1)}s`,
         timestamp: t.completedAt!,
       })
     } else if (t.status === 'error') {
       onEvent?.({
         state: 'GENERATING_SCENE',
-        message: `LLM #${t.callNumber} FAILED — ${t.error?.slice(0, 200)}`,
+        message: `LLM error: ${t.error?.slice(0, 200)}`,
         timestamp: t.completedAt!,
       })
     }
-  }) : null
+  }, onPrompt) : null
 
   let state: OrchestratorState = 'IDLE'
   const events: OrchestratorEvent[] = []
@@ -277,18 +295,21 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
 
   try {
     // 1. Load corpus
+    checkCancelled()
     const corpus = await loadCorpus(provider)
-    transition('LOADED_CORPUS', 'Corpus loaded and validated')
+    transition('LOADED_CORPUS', 'Story structure library loaded')
 
     // 2. Selection
     const { selection } = runSelection(request, corpus)
     result.selection = selection
-    transition('SELECTED', `Selected ${selection.primary_archetype} × ${selection.primary_genre}`)
+    onArtifact?.({ selection })
+    transition('SELECTED', `Using ${selection.primary_archetype} archetype with ${selection.primary_genre} genre`)
 
     // 3. Contract
     const contract = compileContract(selection, request, corpus, config)
     result.contract = contract
-    transition('CONTRACT_READY', `Contract compiled: ${contract.phase_guidelines.length} phases`)
+    onArtifact?.({ contract })
+    transition('CONTRACT_READY', `Story contract ready: ${contract.phase_guidelines.length} phases, ${contract.genre.hard_constraints.length} hard constraints`)
 
     // Stop here for contract-only mode
     if (mode === 'contract-only') {
@@ -300,13 +321,15 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     // 3.5. Template compilation
     const templatePack = compileTemplatePack(selection, contract, corpus)
     result.templatePack = templatePack
-    transition('TEMPLATES_COMPILED', `Templates compiled: ${Object.keys(templatePack.archetype_node_templates).length} beat templates, ${Object.keys(templatePack.genre_level_templates).length} genre constraints`)
+    onArtifact?.({ templatePack })
+    transition('TEMPLATES_COMPILED', `${Object.keys(templatePack.archetype_node_templates).length} beat templates and ${Object.keys(templatePack.genre_level_templates).length} genre rules compiled`)
 
     // 3.6. Backbone assembly
     const backbone = assembleBackbone(contract, templatePack)
     let currentBackbone = backbone
     result.backbone = backbone
-    transition('BACKBONE_ASSEMBLED', `Backbone assembled: ${backbone.beats.length} beats, ${backbone.chapter_partition.length} chapters`)
+    onArtifact?.({ backbone })
+    transition('BACKBONE_ASSEMBLED', `Story outline: ${backbone.beats.length} beats across ${backbone.chapter_partition.length} chapters`)
 
     // Stop here for backbone mode
     if (mode === 'backbone') {
@@ -315,13 +338,22 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       return result
     }
 
-    // 3.7. Detail synthesis — use LLM only for modes that generate prose
-    const useLlmForDetails = (mode === 'draft' || mode === 'chapters') ? llm : null
-    const { bindings: detailBindings, updatedBackbone } = await synthesizeDetails(request, backbone, useLlmForDetails)
-    currentBackbone = updatedBackbone
+    // 3.7. Detail synthesis — skip if user already provided bindings
+    checkCancelled()
+    let detailBindings: StoryDetailBindings
+    if (existingDetailBindings) {
+      detailBindings = existingDetailBindings
+      transition('DETAILS_BOUND', `Using your ${detailBindings.entity_registry.characters.length} characters, ${detailBindings.entity_registry.places.length} places, ${detailBindings.entity_registry.objects.length} objects`)
+    } else {
+      const useLlmForDetails = (mode === 'draft' || mode === 'chapters') ? llm : null
+      const { bindings, updatedBackbone } = await synthesizeDetails(request, backbone, useLlmForDetails)
+      detailBindings = bindings
+      currentBackbone = updatedBackbone
+      result.backbone = currentBackbone
+      transition('DETAILS_BOUND', `Created ${detailBindings.entity_registry.characters.length} characters, ${detailBindings.entity_registry.places.length} places, ${detailBindings.entity_registry.objects.length} objects`)
+    }
     result.detailBindings = detailBindings
-    result.backbone = currentBackbone
-    transition('DETAILS_BOUND', `Details bound: ${Object.keys(detailBindings.slot_bindings).length} slots, ${detailBindings.entity_registry.characters.length} characters`)
+    onArtifact?.({ detailBindings, backbone: currentBackbone })
 
     // Stop here for detailed-outline mode
     if (mode === 'detailed-outline') {
@@ -330,10 +362,11 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       return result
     }
 
-    // 4. Plan
-    const plan = await buildPlan({ contract, corpus, config, llm, selection })
+    // 4. Plan — pass detailBindings so writer gets real character names/traits
+    const plan = await buildPlan({ contract, corpus, config, llm, selection, detailBindings })
     result.plan = plan
-    transition('PLANNED', `Plan built: ${plan.beats.length} beats, ${plan.scenes.length} scenes`)
+    onArtifact?.({ plan })
+    transition('PLANNED', `Scene plan ready: ${plan.scenes.length} scenes across ${plan.beats.length} beats`)
 
     // Stop here for outline mode
     if (mode === 'outline') {
@@ -343,15 +376,24 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     }
 
     // 5. Generate scenes
+    checkCancelled()
     const sceneDrafts = new Map<string, string>()
-    for (const scene of plan.scenes) {
+    const totalScenes = plan.scenes.length
+    for (let si = 0; si < plan.scenes.length; si++) {
+      const scene = plan.scenes[si]
+      checkCancelled()
       const beat = plan.beats.find((b) => b.beat_id === scene.beat_id)
       if (!beat) {
         console.warn(`[orchestrator] Skipping scene ${scene.scene_id}: no matching beat "${scene.beat_id}" found in plan`)
         continue
       }
 
-      transition('GENERATING_SCENE', `Writing scene ${scene.scene_id}`)
+      // Extract human-friendly beat label (e.g. "[Catalyst] The hero receives..." → "Catalyst")
+      const roleMatch = beat.summary.match(/^\[([^\]]+)\]/)
+      const sceneName = roleMatch ? roleMatch[1] : scene.scene_goal
+      const sceneLabel = `${si + 1}/${totalScenes}: ${sceneName}`
+
+      transition('GENERATING_SCENE', `Writing ${sceneLabel}`)
       const sceneIndex = plan.scenes.indexOf(scene)
       const priorScenes = plan.scenes.slice(0, sceneIndex)
       const writeResult = onSceneChunk
@@ -360,7 +402,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       sceneDrafts.set(scene.scene_id, writeResult.content)
 
       // 6. Validate
-      transition('VALIDATING_SCENE', `Validating scene ${scene.scene_id}`)
+      transition('VALIDATING_SCENE', `Checking ${sceneLabel} against genre constraints`)
       let validation = await validateScenes({
         contract,
         scenes: [scene],
@@ -379,7 +421,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
         currentSceneResult.status === 'fail' &&
         repairAttempt < config.repair_policy.max_attempts_per_scene
       ) {
-        transition('REPAIRING_SCENE', `Repairing scene ${scene.scene_id} (attempt ${repairAttempt + 1})`)
+        transition('REPAIRING_SCENE', `Revising ${sceneLabel} (attempt ${repairAttempt + 1})`)
         const repairResult = await repair({
           sceneId: scene.scene_id,
           originalContent: sceneDrafts.get(scene.scene_id) ?? '',
@@ -394,7 +436,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
         repairAttempt++
 
         // Re-validate
-        transition('VALIDATING_SCENE', `Re-validating scene ${scene.scene_id}`)
+        transition('VALIDATING_SCENE', `Re-checking ${sceneLabel}`)
         validation = await validateScenes({
           contract,
           scenes: [scene],
@@ -441,10 +483,10 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       const chapterResult = await assembleChapters(currentBackbone, sceneDrafts, llm)
       result.chapterManifest = chapterResult.manifest
       result.chapterTexts = chapterResult.chapters
-      transition('CHAPTERS_ASSEMBLED', `Chapters assembled: ${chapterResult.manifest.total_chapter_count} chapters`)
+      transition('CHAPTERS_ASSEMBLED', `${chapterResult.manifest.total_chapter_count} chapters assembled`)
     }
 
-    transition('COMPLETED', 'Generation complete')
+    transition('COMPLETED', `Story complete — ${sceneDrafts.size} scenes written`)
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)
     try {

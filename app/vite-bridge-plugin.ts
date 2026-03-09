@@ -44,17 +44,24 @@ export function bridgePlugin(): Plugin {
 
       child.stderr?.on('data', (data: Buffer) => {
         const line = data.toString().trim()
-        if (line) console.log(`[bridge] ${line}`)
+        if (line.includes('EADDRINUSE')) {
+          console.log('[bridge] Port 8765 already in use — bridge already running or port occupied (OK)')
+          child?.kill()
+          child = null
+        } else if (line) {
+          console.log(`[bridge] ${line}`)
+        }
       })
 
       child.on('error', (err) => {
-        console.warn(`[bridge] Failed to start bridge server: ${err.message}`)
+        console.log(`[bridge] Bridge server not started (${err.message})`)
         child = null
       })
 
       child.on('exit', (code) => {
         if (code !== 0 && code !== null) {
-          console.warn(`[bridge] Bridge server exited with code ${code} (port may already be in use — bridge likely already running)`)
+          // Already handled EADDRINUSE above; other failures get a quiet note
+          console.log(`[bridge] Bridge server exited (code ${code})`)
         }
         child = null
       })

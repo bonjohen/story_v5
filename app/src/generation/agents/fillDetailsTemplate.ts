@@ -23,69 +23,21 @@ import { stripJsonFences } from './jsonUtils.ts'
 // System prompt — role and output schema
 // ---------------------------------------------------------------------------
 
-const SYSTEM_PROMPT = `You are a story detail synthesizer. Given a story premise, archetype structure, genre constraints, and backbone beats, you generate ALL concrete story elements in a single response.
+const SYSTEM_PROMPT = `You are a story detail generator. Given a premise, archetype, genre, and list of slots to fill, generate characters, places, and objects.
 
-You must produce a complete, internally consistent set of:
-- Characters (with names, roles, traits, motivations, flaws, backstories, arcs, relationships, distinguishing features)
-- Places (with names, types, sensory features, atmosphere)
-- Objects (with names, types, narrative significance, physical properties)
-- Events/Moments (timeline of key story events mapped to beats, with participants and transitions)
-- Emotional Arc (tension/hope/fear/resolution scores per beat)
-- Narrative Promises and Payoffs (setup and delivery of story threads)
-- Open Mysteries (unanswered questions that drive reader engagement)
-
-Output ONLY valid JSON. No markdown fences, no commentary, no prose.
-
-JSON Schema:
+Output ONLY valid JSON matching this schema:
 {
   "entity_registry": {
-    "characters": [{
-      "id": "char_01",
-      "name": "Full Name",
-      "role": "protagonist|mentor|antagonist|ally|love_interest|threshold_guardian|shapeshifter|trickster|herald",
-      "archetype_function": "narrative purpose in the story",
-      "traits": ["trait1", "trait2", "trait3"],
-      "motivations": ["surface goal", "deeper need"],
-      "flaw": "inner wound or blind spot",
-      "backstory": "2-3 sentence origin that explains who they are",
-      "arc_direction": "how they change from beginning to end",
-      "relationships": ["relationship to Character X: nature of bond"],
-      "distinguishing_feature": "memorable physical/behavioral detail"
-    }],
-    "places": [{
-      "id": "place_01",
-      "name": "Location Name",
-      "type": "setting role (ordinary_world, threshold, ordeal_arena, etc.)",
-      "features": ["visual detail", "sensory detail", "functional detail"],
-      "atmosphere": "emotional quality of this place"
-    }],
-    "objects": [{
-      "id": "obj_01",
-      "name": "Object Name",
-      "type": "narrative role (weapon, token, mcguffin, etc.)",
-      "significance": "why this object matters to the story",
-      "properties": ["physical description", "symbolic meaning"]
-    }]
+    "characters": [{"id":"char_01","name":"Full Name","role":"protagonist|mentor|antagonist|ally","traits":["trait1","trait2"],"motivations":["goal"],"flaw":"weakness"}],
+    "places": [{"id":"place_01","name":"Name","type":"setting type","features":["detail"],"atmosphere":"mood"}],
+    "objects": [{"id":"obj_01","name":"Name","type":"token|weapon|mcguffin","significance":"why it matters"}]
   },
   "slot_bindings": {
-    "slot_name": {
-      "slot_name": "matches backbone slot key",
-      "bound_entity_id": "char_01|place_01|obj_01",
-      "bound_value": "display name",
-      "rationale": "why this entity fills this structural role"
-    }
-  },
-  "timeline": [{
-    "beat_id": "beat_01",
-    "event_summary": "what happens in this beat",
-    "emotional_scores": { "tension": 0.0, "hope": 0.0, "fear": 0.0, "resolution": 0.0 },
-    "participants": { "characters": ["char_01"], "places": ["place_01"], "objects": ["obj_01"] },
-    "transitions": [{ "entity_id": "char_01", "change": "emotional|status|location|knowledge|relationship", "description": "what changes" }]
-  }],
-  "open_mysteries": [{ "id": "mystery_01", "description": "unanswered question", "planted_at_beat": "beat_01", "resolved_at_beat": "beat_05" }],
-  "promises": [{ "id": "promise_01", "description": "narrative setup", "made_at_beat": "beat_01" }],
-  "payoffs": [{ "id": "payoff_01", "promise_id": "promise_01", "description": "how it pays off", "delivered_at_beat": "beat_07" }]
-}`
+    "slot_name": {"slot_name":"key","bound_entity_id":"char_01","bound_value":"display name","rationale":"why"}
+  }
+}
+
+No markdown fences. No commentary. Just JSON.`
 
 // ---------------------------------------------------------------------------
 // User prompt builder — injects all available context
@@ -93,7 +45,7 @@ JSON Schema:
 
 export function buildFillDetailsPrompt(
   request: StoryRequest,
-  contract: StoryContract,
+  _contract: StoryContract,
   backbone: StoryBackbone,
 ): LLMMessage[] {
   // Collect all unique slots
@@ -107,68 +59,27 @@ export function buildFillDetailsPrompt(
   }
 
   const slotList = Object.entries(allSlots)
-    .map(([key, slot]) => `  - ${key} (${slot.category}, ${slot.required ? 'REQUIRED' : 'optional'}): ${slot.description ?? ''}`)
+    .map(([key, slot]) => `- ${key} (${slot.category}, ${slot.required ? 'REQUIRED' : 'optional'})`)
     .join('\n')
 
-  const beatDetails = backbone.beats
-    .map((b) => {
-      const scenes = b.scenes.map((s) => `    Scene: ${s.scene_goal}`).join('\n')
-      return `  ${b.beat_id} — ${b.label} (${b.role ?? 'beat'})\n    ${b.definition ?? ''}\n${scenes}`
-    })
-    .join('\n\n')
-
-  // Extract constraints from phase guidelines
-  const hardConstraints = contract.phase_guidelines
-    .flatMap((p) => p.failure_modes ?? [])
-
-  const toneMarkers = contract.genre?.tone_marker ?? []
-  const antiPatterns = contract.genre?.anti_patterns ?? []
-
-  const chapterOutline = backbone.chapter_partition
-    .map((ch) => `  ${ch.chapter_id}: "${ch.title ?? ''}" — beats: ${ch.beat_ids.join(', ')} — tone: ${ch.tone_goal ?? ''}`)
+  const beatList = backbone.beats
+    .map((b) => `- ${b.label}`)
     .join('\n')
 
   const userContent = [
-    `=== STORY PREMISE ===`,
-    request.premise,
+    `PREMISE: ${request.premise}`,
+    `ARCHETYPE: ${request.requested_archetype}`,
+    `GENRE: ${request.requested_genre}`,
+    `TONE: ${request.tone_preference || 'not specified'}`,
     '',
-    `=== ARCHETYPE: ${request.requested_archetype} ===`,
-    `Structure: ${contract.archetype.name}`,
-    `Spine nodes: ${contract.archetype.spine_nodes.join(', ')}`,
-    `Required roles: ${contract.archetype.required_roles.join(', ')}`,
+    `BEATS (${backbone.beats.length}):`,
+    beatList,
     '',
-    `=== GENRE: ${request.requested_genre} ===`,
-    `Hard constraints: ${contract.genre.hard_constraints.join(', ')}`,
-    `Soft constraints: ${contract.genre.soft_constraints.join(', ')}`,
-    `Tone: ${request.tone_preference}`,
-    toneMarkers.length > 0 ? `Tone markers: ${toneMarkers.join(', ')}` : '',
-    antiPatterns.length > 0 ? `Anti-patterns to AVOID: ${antiPatterns.join(', ')}` : '',
-    '',
-    `=== HARD CONSTRAINTS ===`,
-    hardConstraints.length > 0 ? hardConstraints.map((c) => `  - ${c}`).join('\n') : '  (none)',
-    '',
-    `=== STORY BEATS (${backbone.beats.length} beats) ===`,
-    beatDetails,
-    '',
-    `=== CHAPTER STRUCTURE ===`,
-    chapterOutline,
-    '',
-    `=== SLOTS TO FILL ===`,
+    `SLOTS TO FILL:`,
     slotList,
     '',
-    `=== STYLE ===`,
-    `Voice: ${backbone.style_directives.global_voice ?? 'not specified'}`,
-    `Pacing: ${backbone.style_directives.global_pacing ?? 'not specified'}`,
-    '',
-    `=== INSTRUCTIONS ===`,
-    `Generate ALL entities needed for this story. Every REQUIRED slot must have a binding.`,
-    `Characters must have distinct names, clear motivations, and specific flaws.`,
-    `Places must have sensory atmosphere descriptions.`,
-    `Include a timeline entry for every beat showing who is present and what changes.`,
-    `All names and details must fit the ${request.requested_genre} genre and ${request.tone_preference} tone.`,
-    `Ensure relationships between characters are bidirectional and specific.`,
-    `Output valid JSON only.`,
-  ].filter(Boolean).join('\n')
+    `Generate characters, places, and objects for this story. Every REQUIRED slot must have a slot_binding. Output valid JSON only.`,
+  ].join('\n')
 
   return [
     { role: 'system', content: SYSTEM_PROMPT },

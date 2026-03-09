@@ -5,8 +5,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { useRequestStore } from '../store/requestStore.ts'
+import { useUIStore } from '../../store/uiStore.ts'
 import { buildFillDetailsPrompt, parseFillDetailsResponse } from '../agents/fillDetailsTemplate.ts'
-import { LABEL, INPUT } from './generationConstants.ts'
+import { LABEL, INPUT, DEFAULT_CONFIG } from './generationConstants.ts'
+import type { StoryRequest, GenerationConfig } from '../artifacts/types.ts'
 import type {
   StoryDetailBindings,
   DetailCharacter,
@@ -27,22 +29,51 @@ export function ElementsTab() {
   const request = useGenerationStore((s) => s.request)
   const detailBindings = useGenerationStore((s) => s.detailBindings)
   const setDetailBindings = useGenerationStore((s) => s.setDetailBindings)
+  const startRun = useGenerationStore((s) => s.startRun)
 
+  const premise = useRequestStore((s) => s.premise)
+  const archetype = useRequestStore((s) => s.archetype)
+  const genre = useRequestStore((s) => s.genre)
+  const tone = useRequestStore((s) => s.tone)
   const connectBridge = useRequestStore((s) => s.connectBridge)
+
+  const locked = useUIStore((s) => s.elementsLocked)
+  const toggleLock = useUIStore((s) => s.toggleElementsLock)
 
   const [fillingDetails, setFillingDetails] = useState(false)
   const [fillError, setFillError] = useState<string | null>(null)
+  const [fillAbort, setFillAbort] = useState<AbortController | null>(null)
+  const [fillLog, setFillLog] = useState<string[]>([])
+  const [promptPreview, setPromptPreview] = useState<string | null>(null)
 
   useEffect(() => {
     if (running) setFillError(null)
   }, [running])
 
+  const handleBuildStructure = useCallback(() => {
+    const runId = `RUN_${new Date().toISOString().slice(0, 10).replace(/-/g, '_')}_${String(Math.floor(Math.random() * 9999)).padStart(4, '0')}`
+    const req: StoryRequest = {
+      schema_version: '1.0.0', run_id: runId, generated_at: new Date().toISOString(),
+      source_corpus_hash: '', premise, medium: 'novel', length_target: 'short_story',
+      audience: { age_band: 'adult', content_limits: [] },
+      requested_genre: genre, requested_archetype: archetype, tone_preference: tone,
+      constraints: { must_include: [], must_exclude: [] },
+    }
+    const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: 0 }
+    void startRun(req, config, 'backbone', null)
+  }, [premise, archetype, genre, tone, startRun])
+
   const handleFillDetails = useCallback(async () => {
     if (!contract || !backbone || !request) return
+    const abort = new AbortController()
+    setFillAbort(abort)
     setFillingDetails(true)
     setFillError(null)
+    const log: string[] = []
+    const addLog = (msg: string) => { log.push(`${new Date().toLocaleTimeString()} ${msg}`); setFillLog([...log]) }
 
     try {
+      addLog('Connecting to LLM...')
       let adapter = useRequestStore.getState().bridgeAdapter
       if (!adapter) {
         try {
@@ -53,26 +84,62 @@ export function ElementsTab() {
       if (!adapter) {
         setFillError('LLM not connected. Configure and connect via the Pipeline tab.')
         setFillingDetails(false)
+        setFillAbort(null)
         return
       }
+      addLog('LLM connected')
 
       const messages = buildFillDetailsPrompt(request, contract, backbone)
+      const fullText = messages.map((m) => `[${m.role}]\n${m.content}`).join('\n\n')
+      setPromptPreview(fullText)
+      const promptKb = (fullText.length / 1024).toFixed(1)
+      addLog(`Sending prompt (${promptKb}KB)...`)
+
       const response = adapter.completeJson
         ? await adapter.completeJson(messages)
         : await adapter.complete(messages)
+
+      if (abort.signal.aborted) return
+
+      addLog(`Response received (${(response.content.length / 1024).toFixed(1)}KB)`)
+      addLog('Parsing response...')
 
       const { bindings } = parseFillDetailsResponse(
         response.content,
         request.run_id,
         backbone.source_corpus_hash,
       )
+
+      const chars = bindings.entity_registry.characters
+      const places = bindings.entity_registry.places
+      const objects = bindings.entity_registry.objects
+      const slots = Object.keys(bindings.slot_bindings).length
+
+      addLog(`Created ${chars.length} characters: ${chars.map(c => c.name || c.role).join(', ')}`)
+      addLog(`Created ${places.length} places: ${places.map(p => p.name || p.type).join(', ')}`)
+      addLog(`Created ${objects.length} objects: ${objects.map(o => o.name || o.type).join(', ')}`)
+      addLog(`Bound ${slots} template slots`)
+      addLog('Fill Details complete')
+
       setDetailBindings(bindings)
     } catch (err) {
-      setFillError(err instanceof Error ? err.message : String(err))
+      if (abort.signal.aborted) return
+      const msg = err instanceof Error ? err.message : String(err)
+      addLog(`Error: ${msg}`)
+      console.error('[fill-details] Error:', err)
+      setFillError(msg)
     } finally {
       setFillingDetails(false)
+      setFillAbort(null)
     }
   }, [contract, backbone, request, connectBridge, setDetailBindings])
+
+  const handleCancelFill = useCallback(() => {
+    fillAbort?.abort()
+    setFillingDetails(false)
+    setFillAbort(null)
+    setFillError('Fill Details cancelled')
+  }, [fillAbort])
 
   // --- Entity editing helpers ---
   // Clone detailBindings and write back through setDetailBindings
@@ -197,17 +264,53 @@ export function ElementsTab() {
     }))
   }, [updateBindings])
 
-  // Initialize empty bindings if none exist but user wants to add entities manually
-  const initEmptyBindings = useCallback(() => {
+  // Initialize bindings from backbone slots — creates skeleton entities for each slot
+  const initFromSlots = useCallback(() => {
     const req = useGenerationStore.getState().request
     const bb = useGenerationStore.getState().backbone
+
+    // Collect unique slots from backbone
+    const slots: Record<string, { category: string; required: boolean; description?: string }> = {}
+    if (bb) {
+      for (const beat of bb.beats) {
+        for (const scene of beat.scenes) {
+          for (const [key, slot] of Object.entries(scene.slots)) {
+            if (!slots[key]) slots[key] = { category: slot.category, required: slot.required, description: slot.description }
+          }
+        }
+      }
+    }
+
+    // Create skeleton entities from slots
+    const characters: StoryDetailBindings['entity_registry']['characters'] = []
+    const places: StoryDetailBindings['entity_registry']['places'] = []
+    const objects: StoryDetailBindings['entity_registry']['objects'] = []
+    const slotBindings: StoryDetailBindings['slot_bindings'] = {}
+
+    let charN = 1, placeN = 1, objN = 1
+    for (const [key, slot] of Object.entries(slots)) {
+      if (slot.category === 'character') {
+        const id = `char_${String(charN++).padStart(2, '0')}`
+        characters.push({ id, name: '', role: key, traits: [], motivations: [] })
+        slotBindings[key] = { slot_name: key, bound_entity_id: id, bound_value: '', rationale: slot.description ?? '' }
+      } else if (slot.category === 'place') {
+        const id = `place_${String(placeN++).padStart(2, '0')}`
+        places.push({ id, name: '', type: key, features: [] })
+        slotBindings[key] = { slot_name: key, bound_entity_id: id, bound_value: '', rationale: slot.description ?? '' }
+      } else if (slot.category === 'object') {
+        const id = `obj_${String(objN++).padStart(2, '0')}`
+        objects.push({ id, name: '', type: key })
+        slotBindings[key] = { slot_name: key, bound_entity_id: id, bound_value: '', rationale: slot.description ?? '' }
+      }
+    }
+
     setDetailBindings({
       schema_version: '1.0.0',
       run_id: req?.run_id ?? 'manual',
       generated_at: new Date().toISOString(),
       source_corpus_hash: bb?.source_corpus_hash ?? '',
-      entity_registry: { characters: [], places: [], objects: [] },
-      slot_bindings: {},
+      entity_registry: { characters, places, objects },
+      slot_bindings: slotBindings,
     })
   }, [setDetailBindings])
 
@@ -245,12 +348,48 @@ export function ElementsTab() {
 
   return (
     <div style={{ padding: '10px 12px' }}>
-      {/* No backbone yet */}
-      {!backbone && (
-        <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5 }}>
-          Run at least a Backbone generation first to see template slots here.
-          Go to the Generate tab and click "Build Structure".
-        </p>
+      {/* Lock toggle */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 6 }}>
+        <button
+          onClick={toggleLock}
+          title={locked ? 'Unlock Elements' : 'Lock Elements'}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 4,
+            fontSize: 10, padding: '2px 8px', borderRadius: 3,
+            border: `1px solid ${locked ? '#f59e0b' : 'var(--border)'}`,
+            background: locked ? '#f59e0b18' : 'transparent',
+            color: locked ? '#f59e0b' : 'var(--text-muted)',
+            cursor: 'pointer',
+          }}
+        >
+          {locked ? '\u{1F512}' : '\u{1F513}'} {locked ? 'Locked' : 'Unlocked'}
+        </button>
+      </div>
+
+      {/* No backbone yet — show Build Structure button */}
+      {!backbone && !running && (
+        <div style={{ marginBottom: 12 }}>
+          <button
+            onClick={handleBuildStructure}
+            disabled={!premise.trim()}
+            style={{
+              width: '100%', padding: '10px 12px', fontSize: 12, fontWeight: 600,
+              borderRadius: 4, border: '1px solid #f59e0b',
+              background: '#f59e0b18', color: !premise.trim() ? 'var(--text-muted)' : '#f59e0b',
+              cursor: !premise.trim() ? 'not-allowed' : 'pointer', transition: 'all 0.15s',
+            }}
+          >
+            Build Structure
+            <div style={{ fontSize: 9, fontWeight: 400, marginTop: 2, opacity: 0.8 }}>
+              No LLM needed — creates template slots from archetype + genre
+            </div>
+          </button>
+          {!premise.trim() && (
+            <p style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>
+              Enter a premise on the Setup tab first.
+            </p>
+          )}
+        </div>
       )}
 
       {/* Backbone slot templates */}
@@ -291,21 +430,36 @@ export function ElementsTab() {
       )}
 
       {/* Fill All Details button */}
-      {backbone && contract && !running && (
+      {backbone && contract && !running && !locked && (
         <div style={{ marginBottom: 12 }}>
-          <button
-            onClick={handleFillDetails}
-            disabled={fillingDetails}
-            style={{
-              width: '100%', padding: '8px 12px', fontSize: 12, fontWeight: 600,
-              borderRadius: 4, border: '1px solid #8b5cf6',
-              background: fillingDetails ? 'var(--border)' : '#8b5cf618',
-              color: fillingDetails ? 'var(--text-muted)' : '#8b5cf6',
-              cursor: fillingDetails ? 'wait' : 'pointer', transition: 'all 0.15s',
-            }}
-          >
-            {fillingDetails ? 'Filling Details...' : 'Fill All Details (1 LLM Call)'}
-          </button>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button
+              onClick={handleFillDetails}
+              disabled={fillingDetails}
+              style={{
+                flex: 1, padding: '8px 12px', fontSize: 12, fontWeight: 600,
+                borderRadius: 4, border: '1px solid #8b5cf6',
+                background: fillingDetails ? 'var(--border)' : '#8b5cf618',
+                color: fillingDetails ? 'var(--text-muted)' : '#8b5cf6',
+                cursor: fillingDetails ? 'wait' : 'pointer', transition: 'all 0.15s',
+              }}
+            >
+              {fillingDetails ? 'Filling Details...' : 'Fill All Details (1 LLM Call)'}
+            </button>
+            {fillingDetails && (
+              <button
+                onClick={handleCancelFill}
+                style={{
+                  padding: '8px 12px', fontSize: 12, fontWeight: 600,
+                  borderRadius: 4, border: '1px solid #ef4444',
+                  background: '#ef444418', color: '#ef4444',
+                  cursor: 'pointer', transition: 'all 0.15s',
+                }}
+              >
+                Stop
+              </button>
+            )}
+          </div>
           <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
             Generates characters, places, objects, events, arcs, and timeline in a single LLM call.
           </span>
@@ -322,24 +476,63 @@ export function ElementsTab() {
         </div>
       )}
 
-      {/* Entity Registry — editable */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-          <span style={LABEL}>Entity Registry</span>
-          {!registry && (
-            <button onClick={initEmptyBindings} style={{
+      {/* Fill Details event log */}
+      {fillLog.length > 0 && (
+        <div style={{ marginBottom: 12 }}>
+          <span style={LABEL}>Fill Details Log</span>
+          <div style={{
+            marginTop: 4, maxHeight: 150, overflowY: 'auto',
+            background: 'var(--bg-primary)', border: '1px solid var(--border)',
+            borderRadius: 4, padding: 6,
+          }}>
+            {fillLog.map((entry, i) => (
+              <div key={i} style={{ fontSize: 10, padding: '1px 0', color: 'var(--text-muted)', fontFamily: 'monospace' }}>
+                {entry}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Prompt preview — shows what was sent to LLM */}
+      {promptPreview && (
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span style={LABEL}>Prompt Sent ({(promptPreview.length / 1024).toFixed(1)}KB)</span>
+            <button onClick={() => setPromptPreview(null)} style={{
+              fontSize: 10, padding: '1px 6px', borderRadius: 3,
+              border: '1px solid var(--border)', color: 'var(--text-muted)', cursor: 'pointer',
+            }}>Hide</button>
+          </div>
+          <pre style={{
+            marginTop: 4, maxHeight: 300, overflowY: 'auto',
+            background: 'var(--bg-primary)', border: '1px solid var(--border)',
+            borderRadius: 4, padding: 8, fontSize: 10, lineHeight: 1.4,
+            color: 'var(--text-muted)', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+          }}>
+            {promptPreview}
+          </pre>
+        </div>
+      )}
+
+      {/* Entity Registry — editable (unless locked) */}
+      <div style={locked ? { opacity: 0.7, pointerEvents: 'none' } : undefined}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4, pointerEvents: 'auto' }}>
+          <span style={LABEL}>Entity Registry {locked && <span style={{ fontSize: 9, color: '#f59e0b' }}>(locked)</span>}</span>
+          {!registry && !locked && (
+            <button onClick={initFromSlots} style={{
               fontSize: 10, padding: '2px 8px', borderRadius: 3,
               border: '1px solid var(--border)', color: 'var(--text-muted)',
               cursor: 'pointer',
             }}>
-              Start Empty
+              Manual Entry
             </button>
           )}
         </div>
 
         {!registry && (
           <p style={{ fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4 }}>
-            No entities yet. Use "Fill All Details" or click "Start Empty" to add manually.
+            No entities yet. Use "Build Structure", then use "Fill All Details" or click "Manual Entry" to add manually.
           </p>
         )}
 

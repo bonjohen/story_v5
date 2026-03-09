@@ -6,6 +6,7 @@
 import type {
   StoryContract,
   StoryPlan,
+  StoryDetailBindings,
   Beat,
   Scene,
   SceneElement,
@@ -31,6 +32,7 @@ export interface PlannerOptions {
   config: GenerationConfig
   llm?: LLMAdapter | null
   selection?: SelectionResult | null
+  detailBindings?: StoryDetailBindings | null
 }
 
 /**
@@ -39,7 +41,7 @@ export interface PlannerOptions {
  * provided, beat summaries and scene goals are enhanced.
  */
 export async function buildPlan(options: PlannerOptions): Promise<StoryPlan> {
-  const { contract, corpus, config, llm, selection } = options
+  const { contract, corpus, config, llm, selection, detailBindings } = options
 
   // 1. Build beats from archetype spine nodes
   const beats = buildBeats(contract, corpus, selection ?? null)
@@ -50,8 +52,10 @@ export async function buildPlan(options: PlannerOptions): Promise<StoryPlan> {
   // 3. Verify coverage
   verifyCoverage(scenes, contract, config)
 
-  // 4. Build element roster from contract requirements
-  const elementRoster = buildElementRoster(contract)
+  // 4. Build element roster — prefer detail bindings (real names/traits) over contract placeholders
+  const elementRoster = detailBindings
+    ? rosterFromDetailBindings(detailBindings)
+    : buildElementRoster(contract)
 
   // 5. Populate scenes with element assignments and timeline moments
   populateScenesWithElements(scenes, contract, elementRoster)
@@ -255,6 +259,47 @@ function buildElementRoster(contract: StoryContract): ElementRoster {
       role_or_type: r.role_or_type,
       description: r.definition,
     }))
+
+  return { characters, places, objects }
+}
+
+/**
+ * Build element roster from StoryDetailBindings — uses actual character names,
+ * traits, and motivations so the writer prompt gets real story details.
+ */
+function rosterFromDetailBindings(bindings: StoryDetailBindings): ElementRoster {
+  const characters: RosterEntry[] = bindings.entity_registry.characters.map((ch) => ({
+    id: ch.id,
+    name: ch.name || ch.role || ch.id,
+    category: 'character' as const,
+    role_or_type: ch.role || 'character',
+    description: [
+      ch.flaw ? `Flaw: ${ch.flaw}` : '',
+      ch.traits?.length ? `Traits: ${ch.traits.join(', ')}` : '',
+      ch.motivations?.length ? `Motivations: ${ch.motivations.join(', ')}` : '',
+    ].filter(Boolean).join('. ') || undefined,
+    traits: ch.traits,
+    motivations: ch.motivations,
+  }))
+
+  const places: RosterEntry[] = bindings.entity_registry.places.map((pl) => ({
+    id: pl.id,
+    name: pl.name || pl.type || pl.id,
+    category: 'place' as const,
+    role_or_type: pl.type || 'setting',
+    description: [
+      pl.atmosphere ? `Atmosphere: ${pl.atmosphere}` : '',
+      pl.features?.length ? `Features: ${pl.features.join(', ')}` : '',
+    ].filter(Boolean).join('. ') || undefined,
+  }))
+
+  const objects: RosterEntry[] = bindings.entity_registry.objects.map((obj) => ({
+    id: obj.id,
+    name: obj.name || obj.type || obj.id,
+    category: 'object' as const,
+    role_or_type: obj.type || 'object',
+    description: obj.significance || undefined,
+  }))
 
   return { characters, places, objects }
 }

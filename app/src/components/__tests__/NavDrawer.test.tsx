@@ -12,7 +12,6 @@ import { useUIStore } from '../../store/uiStore.ts'
 function resetUI() {
   useUIStore.setState({
     navOpen: false,
-    genPanelOpen: true,
     infoPanelOpen: true,
     splitView: false,
     collapsedSections: {},

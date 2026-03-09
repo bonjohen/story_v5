@@ -13,7 +13,7 @@ function getState() {
 function reset() {
   useUIStore.setState({
     navOpen: false,
-    genPanelOpen: true,
+
     infoPanelOpen: true,
     splitView: false,
     collapsedSections: {},
@@ -26,10 +26,6 @@ describe('uiStore', () => {
   describe('initial state', () => {
     it('nav drawer starts closed', () => {
       expect(getState().navOpen).toBe(false)
-    })
-
-    it('generation panel starts open', () => {
-      expect(getState().genPanelOpen).toBe(true)
     })
 
     it('info panel starts open', () => {
@@ -68,19 +64,6 @@ describe('uiStore', () => {
       getState().setNavOpen(true)
       getState().setNavOpen(false)
       expect(getState().navOpen).toBe(false)
-    })
-  })
-
-  describe('toggleGenPanel', () => {
-    it('closes the generation panel', () => {
-      getState().toggleGenPanel()
-      expect(getState().genPanelOpen).toBe(false)
-    })
-
-    it('reopens the generation panel', () => {
-      getState().toggleGenPanel()
-      getState().toggleGenPanel()
-      expect(getState().genPanelOpen).toBe(true)
     })
   })
 
@@ -142,9 +125,8 @@ describe('uiStore', () => {
 
   describe('state independence', () => {
     it('toggling one panel does not affect others', () => {
-      getState().toggleGenPanel()
-      expect(getState().genPanelOpen).toBe(false)
-      expect(getState().infoPanelOpen).toBe(true)
+      getState().toggleInfoPanel()
+      expect(getState().infoPanelOpen).toBe(false)
       expect(getState().splitView).toBe(false)
       expect(getState().navOpen).toBe(false)
     })
@@ -152,7 +134,6 @@ describe('uiStore', () => {
     it('opening nav does not affect panels', () => {
       getState().toggleNav()
       expect(getState().navOpen).toBe(true)
-      expect(getState().genPanelOpen).toBe(true)
       expect(getState().infoPanelOpen).toBe(true)
     })
   })

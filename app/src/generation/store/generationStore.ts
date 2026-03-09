@@ -57,6 +57,9 @@ export interface GenerationStoreState {
   // LLM telemetry
   llmTelemetry: LLMCallTelemetry[]
 
+  // Prompt log — full text of each LLM prompt sent
+  promptLog: { callNumber: number; messages: { role: string; content: string }[] }[]
+
   // UI selection
   selectedSceneId: string | null
 
@@ -65,6 +68,7 @@ export interface GenerationStoreState {
 
   // Actions
   startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode, llm?: LLMAdapter | null) => Promise<void>
+  cancelRun: () => void
   loadResult: (result: OrchestratorResult, request: StoryRequest) => void
   loadSnapshot: (snapshot: StorySnapshot) => void
   setDetailBindings: (bindings: StoryDetailBindings) => void
@@ -95,6 +99,7 @@ const INITIAL_STATE = {
   chapterManifest: null as ChapterManifest | null,
   events: [] as OrchestratorEvent[],
   llmTelemetry: [] as LLMCallTelemetry[],
+  promptLog: [] as GenerationStoreState['promptLog'],
   selectedSceneId: null as string | null,
   error: null as string | null,
 }
@@ -103,10 +108,20 @@ const INITIAL_STATE = {
 // Store
 // ---------------------------------------------------------------------------
 
+let activeAbortController: AbortController | null = null
+
 export const useGenerationStore = create<GenerationStoreState>((set) => ({
   ...INITIAL_STATE,
 
   startRun: async (request, config, mode = 'contract-only', llm = null) => {
+    // Cancel any existing run
+    activeAbortController?.abort()
+    const abortController = new AbortController()
+    activeAbortController = abortController
+
+    // Preserve user-edited detail bindings across runs
+    const prevDetailBindings = useGenerationStore.getState().detailBindings
+
     set({
       ...INITIAL_STATE,
       status: 'IDLE',
@@ -114,8 +129,10 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
       mode,
       running: true,
       request,
+      detailBindings: prevDetailBindings,
       events: [],
       llmTelemetry: [],
+      promptLog: [],
       error: null,
     })
 
@@ -127,15 +144,42 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
         config,
         llm,
         mode,
+        existingDetailBindings: prevDetailBindings,
+        signal: abortController.signal,
         onEvent: (event) => {
+          // Update status and events; also push partial artifacts as they arrive
           set((state) => ({
             status: event.state,
             events: [...state.events, event],
           }))
         },
+        onSceneChunk: (sceneId, chunk) => {
+          // Append streaming chunk to sceneDrafts for live display
+          set((state) => {
+            const drafts = new Map(state.sceneDrafts)
+            drafts.set(sceneId, (drafts.get(sceneId) ?? '') + chunk)
+            return { sceneDrafts: drafts }
+          })
+        },
+        onPrompt: (callNumber, messages) => {
+          set((state) => ({
+            promptLog: [...state.promptLog, { callNumber, messages: messages.map(m => ({ role: m.role, content: m.content })) }],
+          }))
+        },
+        onArtifact: (partial) => {
+          // Push each artifact into store as it's produced — survives cancellation
+          set((state) => ({
+            selection: partial.selection ?? state.selection,
+            contract: partial.contract ?? state.contract,
+            templatePack: partial.templatePack ?? state.templatePack,
+            backbone: partial.backbone ?? state.backbone,
+            detailBindings: partial.detailBindings ?? state.detailBindings,
+            plan: partial.plan ?? state.plan,
+          }))
+        },
       })
 
-      // Load all produced artifacts
+      // Load all produced artifacts — keep previous detailBindings if orchestrator didn't produce new ones
       set({
         status: result.state,
         running: false,
@@ -143,7 +187,7 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
         contract: result.contract ?? null,
         templatePack: result.templatePack ?? null,
         backbone: result.backbone ?? null,
-        detailBindings: result.detailBindings ?? null,
+        detailBindings: result.detailBindings ?? prevDetailBindings,
         plan: result.plan ?? null,
         sceneDrafts: result.sceneDrafts ?? new Map(),
         validation: result.validation ?? null,
@@ -154,12 +198,24 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
         error: result.error ?? null,
       })
     } catch (err) {
-      set({
-        status: 'FAILED',
+      // On error/cancel, keep whatever artifacts were produced so far
+      const msg = err instanceof Error ? err.message : String(err)
+      const isCancelled = msg === 'Generation cancelled'
+      set((state) => ({
+        status: isCancelled ? state.status : 'FAILED',
         running: false,
-        error: err instanceof Error ? err.message : String(err),
-      })
+        error: msg,
+        // Restore detailBindings if not yet replaced
+        detailBindings: state.detailBindings ?? prevDetailBindings,
+      }))
     }
+  },
+
+  cancelRun: () => {
+    activeAbortController?.abort()
+    activeAbortController = null
+    // Keep all artifacts produced so far — just stop running
+    set({ running: false, error: 'Generation cancelled' })
   },
 
   loadResult: (result, request) => {

@@ -8,11 +8,56 @@ import { useGenerationStore } from '../store/generationStore.ts'
 import { useRequestStore } from '../store/requestStore.ts'
 import { useInstanceStore } from '../../instance/store/instanceStore.ts'
 import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
+import { exportSnapshot, downloadSnapshot, parseSnapshot } from '../artifacts/storySnapshot.ts'
+import { Disclosure } from '../../components/Disclosure.tsx'
 import { STATE_LABELS, LABEL, DEFAULT_CONFIG } from './generationConstants.ts'
 import type { StoryRequest, GenerationConfig } from '../artifacts/types.ts'
 
 export interface GenerateTabProps {
   onHighlightNodes?: (nodes: string[]) => void
+}
+
+function PromptLog({ entries }: { entries: { callNumber: number; messages: { role: string; content: string }[] }[] }) {
+  const [expandedCall, setExpandedCall] = useState<number | null>(null)
+  return (
+    <div style={{ marginTop: 12 }}>
+      <span style={LABEL}>Prompts Sent ({entries.length})</span>
+      <div style={{ marginTop: 4 }}>
+        {entries.map((entry) => (
+          <div key={entry.callNumber} style={{ marginBottom: 4 }}>
+            <button
+              onClick={() => setExpandedCall(expandedCall === entry.callNumber ? null : entry.callNumber)}
+              style={{
+                width: '100%', textAlign: 'left', padding: '4px 8px', fontSize: 10,
+                background: 'var(--bg-primary)', border: '1px solid var(--border)',
+                borderRadius: 3, cursor: 'pointer', color: 'var(--text-primary)',
+                fontFamily: 'monospace',
+              }}
+            >
+              {expandedCall === entry.callNumber ? '\u25BC' : '\u25B6'} Call #{entry.callNumber} — {entry.messages.length} messages, {entry.messages.reduce((n, m) => n + m.content.length, 0)} chars
+            </button>
+            {expandedCall === entry.callNumber && (
+              <div style={{
+                border: '1px solid var(--border)', borderTop: 'none',
+                borderRadius: '0 0 3px 3px', maxHeight: 400, overflowY: 'auto',
+              }}>
+                {entry.messages.map((msg, j) => (
+                  <div key={j} style={{ padding: '6px 8px', borderBottom: '1px solid var(--border)' }}>
+                    <div style={{ fontSize: 10, fontWeight: 600, color: msg.role === 'system' ? '#f59e0b' : '#3b82f6', marginBottom: 2 }}>
+                      {msg.role}
+                    </div>
+                    <pre style={{ fontSize: 10, lineHeight: 1.4, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, color: 'var(--text-primary)' }}>
+                      {msg.content}
+                    </pre>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
@@ -24,11 +69,15 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const plan = useGenerationStore((s) => s.plan)
   const startRun = useGenerationStore((s) => s.startRun)
   const clearRun = useGenerationStore((s) => s.clearRun)
+  const cancelRun = useGenerationStore((s) => s.cancelRun)
   const detailBindings = useGenerationStore((s) => s.detailBindings)
   const selection = useGenerationStore((s) => s.selection)
   const request = useGenerationStore((s) => s.request)
   const sceneDrafts = useGenerationStore((s) => s.sceneDrafts)
   const backbone = useGenerationStore((s) => s.backbone)
+  const promptLog = useGenerationStore((s) => s.promptLog)
+  const llmTelemetry = useGenerationStore((s) => s.llmTelemetry)
+  const loadSnapshot = useGenerationStore((s) => s.loadSnapshot)
 
   const premise = useRequestStore((s) => s.premise)
   const archetype = useRequestStore((s) => s.archetype)
@@ -41,10 +90,16 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const [savedInstance, setSavedInstance] = useState(false)
 
   const logRef = useRef<HTMLDivElement>(null)
+  const storyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight
   }, [events])
+
+  // Auto-scroll story view when new prose arrives
+  useEffect(() => {
+    if (storyRef.current) storyRef.current.scrollTop = storyRef.current.scrollHeight
+  }, [sceneDrafts])
 
   useEffect(() => {
     if (running) setSavedInstance(false)
@@ -67,13 +122,6 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       constraints: { must_include: [], must_exclude: [] },
     }
   }, [premise, archetype, genre, tone])
-
-  // Build Structure — no LLM, runs contract + backbone + templates
-  const handleBuildStructure = useCallback(async () => {
-    const req = buildRequest()
-    const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: 0 }
-    void startRun(req, config, 'backbone', null)
-  }, [buildRequest, startRun])
 
   // Generate Story — LLM, runs full pipeline through prose
   const handleGenerateStory = useCallback(async () => {
@@ -100,21 +148,90 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
     setSavedInstance(true)
   }, [detailBindings, selection, request, loadInstance])
 
+  const handleExport = useCallback(() => {
+    const state = useGenerationStore.getState()
+    const snapshot = exportSnapshot(state)
+    downloadSnapshot(snapshot)
+  }, [])
+
+  const handleImport = useCallback(() => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.json'
+    input.onchange = () => {
+      const file = input.files?.[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = () => {
+        try {
+          const snapshot = parseSnapshot(reader.result as string)
+          loadSnapshot(snapshot)
+        } catch (err) {
+          console.error('Failed to import snapshot:', err)
+          alert(`Import failed: ${err instanceof Error ? err.message : String(err)}`)
+        }
+      }
+      reader.readAsText(file)
+    }
+    input.click()
+  }, [loadSnapshot])
+
+  const handleExportStory = useCallback(() => {
+    const entries = plan
+      ? plan.scenes.map((scene) => {
+          const beat = plan.beats.find((b) => b.beat_id === scene.beat_id)
+          const roleMatch = beat?.summary.match(/^\[([^\]]+)\]/)
+          return { label: roleMatch ? roleMatch[1] : scene.scene_goal, prose: sceneDrafts.get(scene.scene_id) }
+        })
+      : backbone
+        ? backbone.beats.flatMap((beat) =>
+            beat.scenes.map((scene) => ({ label: beat.label, prose: sceneDrafts.get(scene.scene_id) })))
+        : []
+    const parts = entries.filter((e) => e.prose).map((e) => `## ${e.label}\n\n${e.prose}`)
+    if (parts.length === 0) return
+    const title = request?.premise?.slice(0, 60) || 'Story'
+    const md = `# ${title}\n\n${parts.join('\n\n---\n\n')}\n`
+    const blob = new Blob([md], { type: 'text/markdown' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${request?.run_id ?? 'story'}.md`
+    a.click()
+    URL.revokeObjectURL(url)
+  }, [plan, backbone, sceneDrafts, request])
+
   const stateInfo = STATE_LABELS[status] ?? { label: status, color: 'var(--text-muted)' }
   const hasResults = contract || plan
   const canSaveInstance = !running && detailBindings != null
+  const hasStory = sceneDrafts.size > 0
 
-  // Collect scene prose in order
-  const sceneEntries = backbone
-    ? backbone.beats.flatMap((beat) =>
-        beat.scenes.map((scene) => ({
-          beatLabel: beat.label,
+  // Collect scene prose in order — use plan scenes (S01, S02...) which match sceneDrafts keys
+  const sceneEntries = plan
+    ? plan.scenes.map((scene) => {
+        const beat = plan.beats.find((b) => b.beat_id === scene.beat_id)
+        return {
+          beatLabel: beat?.summary ?? scene.beat_id,
           sceneGoal: scene.scene_goal,
           prose: sceneDrafts.get(scene.scene_id),
           sceneId: scene.scene_id,
-        }))
-      )
-    : []
+        }
+      })
+    : backbone
+      ? backbone.beats.flatMap((beat) =>
+          beat.scenes.map((scene) => ({
+            beatLabel: beat.label,
+            sceneGoal: scene.scene_goal,
+            prose: sceneDrafts.get(scene.scene_id),
+            sceneId: scene.scene_id,
+          }))
+        )
+      : []
+
+  // Find the last scene that has prose (for "writing..." indicator)
+  let lastProseIdx = -1
+  for (let j = sceneEntries.length - 1; j >= 0; j--) {
+    if (sceneEntries[j].prose) { lastProseIdx = j; break }
+  }
 
   return (
     <div style={{ padding: '10px 12px' }}>
@@ -137,34 +254,13 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         )}
       </div>
 
-      {/* Two-button choice */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
-        <button
-          onClick={handleBuildStructure}
-          disabled={running || !premise.trim()}
-          style={{
-            flex: 1,
-            padding: '10px 12px',
-            fontSize: 12,
-            fontWeight: 600,
-            borderRadius: 4,
-            border: '1px solid #f59e0b',
-            background: running ? 'var(--border)' : '#f59e0b18',
-            color: running ? 'var(--text-muted)' : '#f59e0b',
-            cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
-            transition: 'all 0.15s',
-          }}
-        >
-          Build Structure
-          <div style={{ fontSize: 9, fontWeight: 400, marginTop: 2, opacity: 0.8 }}>
-            No LLM needed
-          </div>
-        </button>
+      {/* Generate Story button */}
+      <div style={{ marginBottom: 12 }}>
         <button
           onClick={handleGenerateStory}
           disabled={running || !premise.trim()}
           style={{
-            flex: 1,
+            width: '100%',
             padding: '10px 12px',
             fontSize: 12,
             fontWeight: 600,
@@ -177,11 +273,31 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           }}
         >
           Generate Story
-          <div style={{ fontSize: 9, fontWeight: 400, marginTop: 2, opacity: 0.8 }}>
-            Full LLM pipeline
-          </div>
         </button>
       </div>
+
+      {/* Stop button — visible while running */}
+      {running && (
+        <div style={{ marginBottom: 12 }}>
+          <button
+            onClick={cancelRun}
+            style={{
+              width: '100%',
+              padding: '8px 12px',
+              fontSize: 12,
+              fontWeight: 600,
+              borderRadius: 4,
+              border: '1px solid #ef4444',
+              background: '#ef444418',
+              color: '#ef4444',
+              cursor: 'pointer',
+              transition: 'all 0.15s',
+            }}
+          >
+            Stop Generation
+          </button>
+        </div>
+      )}
 
       {/* Clear / Save buttons */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
@@ -222,6 +338,25 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
             {savedInstance ? 'Saved' : 'Save as Instance'}
           </button>
         )}
+        {hasStory && !running && (
+          <button
+            onClick={handleExportStory}
+            style={{
+              flex: 1,
+              padding: '6px 10px',
+              fontSize: 11,
+              fontWeight: 600,
+              borderRadius: 4,
+              border: '1px solid #22c55e',
+              background: '#22c55e18',
+              color: '#22c55e',
+              cursor: 'pointer',
+              transition: 'all 0.15s',
+            }}
+          >
+            Export Story (.md)
+          </button>
+        )}
       </div>
 
       {/* Error display */}
@@ -239,21 +374,32 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         </div>
       )}
 
-      {/* Story prose output */}
-      {sceneEntries.some((s) => s.prose) && (
-        <div style={{ marginBottom: 12 }}>
-          <span style={LABEL}>Story</span>
-          <div style={{
-            marginTop: 4,
-            maxHeight: 400,
-            overflowY: 'auto',
-            background: 'var(--bg-primary)',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            padding: 8,
-          }}>
-            {sceneEntries.map((entry) => {
+      {/* Story prose output — always visible */}
+      <div style={{ marginBottom: 12 }}>
+        <span style={LABEL}>
+          Story
+          {sceneEntries.length > 0 && (
+            <span style={{ fontSize: 10, fontWeight: 400, color: 'var(--text-muted)', marginLeft: 6 }}>
+              {sceneEntries.filter((s) => s.prose).length}/{sceneEntries.length} scenes
+            </span>
+          )}
+        </span>
+        <div
+          ref={storyRef}
+          style={{
+          marginTop: 4,
+          minHeight: 60,
+          maxHeight: 500,
+          overflowY: 'auto',
+          background: 'var(--bg-primary)',
+          border: '1px solid var(--border)',
+          borderRadius: 4,
+          padding: 8,
+        }}>
+          {sceneEntries.some((s) => s.prose) ? (
+            sceneEntries.map((entry, idx) => {
               if (!entry.prose) return null
+              const isLast = idx === lastProseIdx
               return (
                 <div key={entry.sceneId} style={{ marginBottom: 12 }}
                   onMouseEnter={() => onHighlightNodes?.([entry.sceneId])}
@@ -261,6 +407,11 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
                 >
                   <div style={{ fontSize: 10, fontWeight: 600, color: '#f59e0b', marginBottom: 3 }}>
                     {entry.beatLabel} — {entry.sceneGoal}
+                    {running && isLast && (
+                      <span style={{ color: 'var(--text-muted)', fontWeight: 400, animation: 'pulse 1.5s infinite', marginLeft: 6 }}>
+                        writing...
+                      </span>
+                    )}
                   </div>
                   <div style={{
                     fontSize: 12,
@@ -272,10 +423,14 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
                   </div>
                 </div>
               )
-            })}
-          </div>
+            })
+          ) : (
+            <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0 }}>
+              No story yet. Click "Generate Story" to write prose.
+            </p>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Event log */}
       {events.length > 0 && (
@@ -312,6 +467,76 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           </div>
         </div>
       )}
+
+      {/* Import / Export */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 12, marginBottom: 12 }}>
+        <button
+          onClick={handleImport}
+          disabled={running}
+          style={{
+            flex: 1, padding: '6px 10px', fontSize: 11, borderRadius: 4,
+            border: '1px solid var(--border)', color: 'var(--text-secondary)',
+            cursor: running ? 'not-allowed' : 'pointer',
+          }}
+        >
+          Import Snapshot
+        </button>
+        {hasResults && (
+          <button
+            onClick={handleExport}
+            disabled={running}
+            style={{
+              flex: 1, padding: '6px 10px', fontSize: 11, borderRadius: 4,
+              border: '1px solid var(--border)', color: 'var(--text-secondary)',
+              cursor: running ? 'not-allowed' : 'pointer',
+            }}
+          >
+            Export Snapshot
+          </button>
+        )}
+      </div>
+
+      {/* LLM Telemetry */}
+      {llmTelemetry.length > 0 && (
+        <Disclosure title="LLM Telemetry" persistKey="gen-llm-telemetry" defaultCollapsed={true}
+          badge={`${llmTelemetry.length} calls`}>
+          <div style={{ padding: '4px 0' }}>
+            <div style={{
+              display: 'flex', gap: 12, padding: '4px 8px', marginBottom: 4,
+              fontSize: 10, color: 'var(--text-muted)', borderBottom: '1px solid var(--border)',
+            }}>
+              <span>Total: {llmTelemetry.length}</span>
+              <span>OK: {llmTelemetry.filter(t => t.status === 'success').length}</span>
+              <span style={{ color: llmTelemetry.some(t => t.status === 'error') ? '#ef4444' : undefined }}>
+                Errors: {llmTelemetry.filter(t => t.status === 'error').length}
+              </span>
+              <span>In: {(llmTelemetry.reduce((s, t) => s + t.inputChars, 0) / 1024).toFixed(1)}KB</span>
+              <span>Out: {(llmTelemetry.filter(t => t.outputChars).reduce((s, t) => s + (t.outputChars ?? 0), 0) / 1024).toFixed(1)}KB</span>
+            </div>
+            <div style={{ maxHeight: 180, overflowY: 'auto' }}>
+              {llmTelemetry.map((t) => (
+                <div key={t.callNumber} style={{
+                  display: 'flex', gap: 6, alignItems: 'baseline', padding: '2px 8px',
+                  fontSize: 10, fontFamily: 'monospace',
+                  color: t.status === 'error' ? '#ef4444' : t.status === 'success' ? 'var(--text-secondary)' : 'var(--text-muted)',
+                }}>
+                  <span style={{ width: 24, flexShrink: 0, textAlign: 'right' }}>#{t.callNumber}</span>
+                  <span style={{ width: 55, flexShrink: 0 }}>{t.method === 'completeJson' ? 'json' : t.method === 'completeStream' ? 'stream' : 'text'}</span>
+                  <span style={{ width: 50, flexShrink: 0 }}>{(t.inputChars / 1024).toFixed(1)}K in</span>
+                  <span style={{ width: 50, flexShrink: 0 }}>{t.outputChars != null ? `${(t.outputChars / 1024).toFixed(1)}K out` : '...'}</span>
+                  <span style={{ width: 40, flexShrink: 0 }}>{t.durationMs != null ? `${(t.durationMs / 1000).toFixed(1)}s` : ''}</span>
+                  <span style={{ fontWeight: 600, color: t.status === 'error' ? '#ef4444' : t.status === 'success' ? '#22c55e' : '#f59e0b' }}>
+                    {t.status === 'error' ? 'FAIL' : t.status === 'success' ? 'OK' : 'WAIT'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Disclosure>
+      )}
+
+      {/* Prompt log */}
+      {promptLog.length > 0 && <PromptLog entries={promptLog} />}
     </div>
   )
 }

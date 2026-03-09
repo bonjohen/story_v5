@@ -12,10 +12,6 @@ export interface UIStoreState {
   toggleNav: () => void
   setNavOpen: (v: boolean) => void
 
-  // Generation panel (left sidebar)
-  genPanelOpen: boolean
-  toggleGenPanel: () => void
-
   // Info panel (top)
   infoPanelOpen: boolean
   toggleInfoPanel: () => void
@@ -28,6 +24,12 @@ export interface UIStoreState {
   collapsedSections: Record<string, boolean>
   toggleSection: (id: string) => void
   isSectionCollapsed: (id: string) => boolean
+
+  // Lock switches — prevent edits to Setup / Elements tabs
+  setupLocked: boolean
+  elementsLocked: boolean
+  toggleSetupLock: () => void
+  toggleElementsLock: () => void
 }
 
 export const useUIStore = create<UIStoreState>()(
@@ -36,9 +38,6 @@ export const useUIStore = create<UIStoreState>()(
       navOpen: false,
       toggleNav: () => set((s) => ({ navOpen: !s.navOpen })),
       setNavOpen: (v) => set({ navOpen: v }),
-
-      genPanelOpen: true,
-      toggleGenPanel: () => set((s) => ({ genPanelOpen: !s.genPanelOpen })),
 
       infoPanelOpen: true,
       toggleInfoPanel: () => set((s) => ({ infoPanelOpen: !s.infoPanelOpen })),
@@ -55,14 +54,19 @@ export const useUIStore = create<UIStoreState>()(
           },
         })),
       isSectionCollapsed: (id) => !!get().collapsedSections[id],
+
+      setupLocked: false,
+      elementsLocked: false,
+      toggleSetupLock: () => set((s) => ({ setupLocked: !s.setupLocked })),
+      toggleElementsLock: () => set((s) => ({ elementsLocked: !s.elementsLocked })),
     }),
     {
       name: 'story-ui-prefs',
       partialize: (state) => ({
-        genPanelOpen: state.genPanelOpen,
         infoPanelOpen: state.infoPanelOpen,
         splitView: state.splitView,
         collapsedSections: state.collapsedSections,
+        // setupLocked and elementsLocked intentionally NOT persisted — always unlocked on load
       }),
     },
   ),
