@@ -312,20 +312,10 @@ input::placeholder {
     gap: 6px !important;
   }
 
-  /* Generation panel: bottom sheet overlay on mobile */
+  /* Generation panel: full-width in normal flow on mobile */
   .gen-panel {
-    position: fixed !important;
-    bottom: 0;
-    left: 0;
-    right: 0;
     width: 100% !important;
-    max-height: 55vh;
     border-right: none !important;
-    border-top: 1px solid var(--border);
-    border-radius: 12px 12px 0 0;
-    z-index: 80;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
-    animation: slideUp 0.25s ease;
   }
 
   /* Main layout: stack vertically on mobile */
@@ -349,13 +339,10 @@ input::placeholder {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Ensure touch targets are at least 44px (WCAG 2.5.5) */
+  /* Ensure touch targets are at least 44px (WCAG 2.5.5) — scoped to toolbars */
   .app-toolbar button,
   .page-toolbar button,
-  .page-toolbar a,
-  button,
-  [role="button"],
-  select {
+  .page-toolbar a {
     min-height: 44px;
     min-width: 44px;
   }

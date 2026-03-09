@@ -1,0 +1,371 @@
+{
+  "story_id": "hp_deathly_hallows_sacrifice",
+  "story_title": "Harry Potter and the Deathly Hallows",
+  "archetype_id": "archetype_12_the_sacrifice",
+  "characters": [
+    {
+      "id": "char_harry",
+      "name": "Harry Potter",
+      "role": "protagonist",
+      "traits": ["brave", "selfless", "loyal", "impulsive", "burdened"],
+      "motivations": ["protect his friends", "defeat Voldemort", "honor the memory of his parents", "end the cycle of violence"],
+      "arc_type": "sacrifice",
+      "relationships": [
+        { "target": "char_voldemort", "type": "nemesis" },
+        { "target": "char_dumbledore", "type": "mentor_student" },
+        { "target": "char_hermione", "type": "ally" },
+        { "target": "char_ron", "type": "ally" },
+        { "target": "char_snape", "type": "guardian" }
+      ]
+    },
+    {
+      "id": "char_voldemort",
+      "name": "Lord Voldemort",
+      "role": "antagonist",
+      "traits": ["megalomaniacal", "ruthless", "fearful of death", "incapable of love", "strategic"],
+      "motivations": ["achieve immortality", "dominate the wizarding world", "destroy Harry Potter"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_harry", "type": "nemesis" },
+        { "target": "char_snape", "type": "servant_master" }
+      ]
+    },
+    {
+      "id": "char_dumbledore",
+      "name": "Albus Dumbledore",
+      "role": "mentor",
+      "traits": ["wise", "secretive", "manipulative", "compassionate", "guilt-ridden"],
+      "motivations": ["guide Harry to the truth", "ensure Voldemort's defeat", "atone for past mistakes"],
+      "arc_type": "revealed",
+      "relationships": [
+        { "target": "char_harry", "type": "mentor_student" },
+        { "target": "char_snape", "type": "ally" }
+      ]
+    },
+    {
+      "id": "char_hermione",
+      "name": "Hermione Granger",
+      "role": "ally",
+      "traits": ["brilliant", "resourceful", "determined", "empathetic"],
+      "motivations": ["support Harry's mission", "protect the innocent", "prove that love and knowledge triumph over tyranny"],
+      "arc_type": "steadfast",
+      "relationships": [
+        { "target": "char_harry", "type": "ally" },
+        { "target": "char_ron", "type": "romantic" }
+      ]
+    },
+    {
+      "id": "char_ron",
+      "name": "Ron Weasley",
+      "role": "ally",
+      "traits": ["loyal", "insecure", "courageous under pressure", "humorous", "emotional"],
+      "motivations": ["stand by Harry", "protect his family", "prove himself worthy"],
+      "arc_type": "growth",
+      "relationships": [
+        { "target": "char_harry", "type": "ally" },
+        { "target": "char_hermione", "type": "romantic" }
+      ]
+    },
+    {
+      "id": "char_snape",
+      "name": "Severus Snape",
+      "role": "shapeshifter",
+      "traits": ["secretive", "bitter", "devoted", "conflicted", "courageous"],
+      "motivations": ["honor his love for Lily Potter", "protect Harry from the shadows", "redeem himself"],
+      "arc_type": "revealed",
+      "relationships": [
+        { "target": "char_harry", "type": "guardian" },
+        { "target": "char_voldemort", "type": "betrayer" },
+        { "target": "char_dumbledore", "type": "ally" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_hogwarts",
+      "name": "Hogwarts School of Witchcraft and Wizardry",
+      "type": "sanctuary",
+      "description": "The ancient castle that has been Harry's true home, now transformed into a battlefield for the final stand against Voldemort's forces.",
+      "atmosphere": "Once warm and protective, now besieged and scarred by war, yet still a rallying point for those who fight for good."
+    },
+    {
+      "id": "place_forbidden_forest",
+      "name": "The Forbidden Forest",
+      "type": "underworld",
+      "description": "The dark woodland on the Hogwarts grounds where Harry walks alone to meet his death, surrounded by the spirits of his loved ones summoned by the Resurrection Stone.",
+      "atmosphere": "Silent, cold, and suffused with dread, yet also a place of unexpected peace as Harry accepts his fate."
+    },
+    {
+      "id": "place_kings_cross",
+      "name": "King's Cross Limbo",
+      "type": "crossroads",
+      "description": "The ethereal, white version of King's Cross station where Harry speaks with Dumbledore between life and death, deciding whether to go on or go back.",
+      "atmosphere": "Bright, clean, and otherworldly — a threshold between existence and oblivion, suffused with clarity."
+    },
+    {
+      "id": "place_shell_cottage",
+      "name": "Shell Cottage",
+      "type": "sanctuary",
+      "description": "Bill and Fleur's seaside home where Harry and his companions recover after escaping Malfoy Manor, and where Harry begins to understand the Deathly Hallows.",
+      "atmosphere": "Peaceful and windswept, a brief respite of safety and mourning amid the chaos of war."
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_elder_wand",
+      "name": "The Elder Wand",
+      "type": "weapon",
+      "description": "The most powerful wand in existence, one of the three Deathly Hallows, passed through a bloody lineage of owners and now central to the final confrontation between Harry and Voldemort.",
+      "significance": "Represents the futility of seeking power through domination; its true allegiance follows a chain of disarming that Voldemort fails to understand, ultimately undoing him.",
+      "rules": [
+        "Allegiance transfers to whoever defeats or disarms its current master",
+        "Cannot be truly mastered by killing, only by overcoming",
+        "Its power is legendary but ultimately subordinate to the magic of self-sacrifice"
+      ]
+    },
+    {
+      "id": "obj_resurrection_stone",
+      "name": "The Resurrection Stone",
+      "type": "relic",
+      "description": "A small black stone hidden inside the first Golden Snitch Harry ever caught, capable of summoning shades of the dead to comfort the living.",
+      "significance": "Allows Harry to summon the spirits of his parents, Sirius, and Lupin as he walks to his death, giving him the courage to face sacrifice without flinching.",
+      "rules": [
+        "Summons shades of the dead, not true resurrection",
+        "The summoned spirits are visible only to the holder",
+        "Must be turned three times in the hand to activate"
+      ]
+    },
+    {
+      "id": "obj_horcrux_harry",
+      "name": "The Horcrux Within Harry",
+      "type": "talisman",
+      "description": "An unintentional fragment of Voldemort's soul lodged in Harry since the night his parents were murdered, binding Harry's life to Voldemort's immortality.",
+      "significance": "The hidden reason Harry must die — as long as this fragment survives, Voldemort cannot be truly killed. Harry's willingness to die to destroy it is the ultimate act of sacrifice.",
+      "rules": [
+        "Can only be destroyed by destroying its vessel",
+        "Its presence gives Harry a psychic connection to Voldemort",
+        "Voldemort is unaware this Horcrux exists"
+      ]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_hp_sacrifice",
+    "story_id": "hp_deathly_hallows_sacrifice",
+    "archetype_id": "archetype_12_the_sacrifice",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "SA_N01_VALUED_LIFE",
+        "label": "The Life Worth Living",
+        "description": "Harry has built deep bonds with his friends, the Weasley family, and the wider wizarding community. Despite years of danger, he has found belonging at Hogwarts and purpose in his friendships. These relationships are what give his life meaning and what he stands to lose.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_harry", "char_hermione", "char_ron"],
+          "places": ["place_shell_cottage"],
+          "objects": []
+        },
+        "character_states": {
+          "char_harry": "determined but weary, sustained by loyalty to friends",
+          "char_hermione": "focused and strategic, holding the group together",
+          "char_ron": "returned and recommitted after his crisis of faith"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_harry",
+            "change": "bonds",
+            "target": "char_ron",
+            "detail": "Ron's return after destroying the locket Horcrux reaffirms their unbreakable friendship."
+          }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "SA_N02_THREAT_EMERGES",
+        "label": "The Battle of Hogwarts Begins",
+        "description": "Voldemort's army besieges Hogwarts. Students and teachers erect magical defenses, but the Dark Lord's forces are overwhelming. Death Eaters breach the walls, giants attack, and casualties mount on both sides. The scale of destruction makes clear that half-measures will not suffice.",
+        "position": 0.2,
+        "participants": {
+          "characters": ["char_harry", "char_voldemort", "char_hermione", "char_ron"],
+          "places": ["place_hogwarts"],
+          "objects": ["obj_elder_wand"]
+        },
+        "character_states": {
+          "char_harry": "racing to find and destroy the remaining Horcruxes before time runs out",
+          "char_voldemort": "confident and merciless, commanding his forces from the Forbidden Forest"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_voldemort",
+            "change": "arrives",
+            "target": "place_hogwarts",
+            "description": "Voldemort brings his full army to Hogwarts, turning the school into a warzone."
+          },
+          {
+            "entity_id": "char_harry",
+            "change": "learns",
+            "detail": "Harry witnesses friends and allies falling in battle, intensifying the urgency."
+          }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "SA_N03_REALIZATION",
+        "label": "Snape's Memories — The Truth Revealed",
+        "description": "After Snape is killed by Voldemort's snake Nagini, Harry collects his dying memories and views them in the Pensieve. He discovers that Snape was loyal to Dumbledore all along, motivated by his enduring love for Lily Potter. Most devastating of all, Harry learns from Dumbledore's own words that he himself is an unintended Horcrux — and that he must die for Voldemort to become mortal.",
+        "position": 0.4,
+        "participants": {
+          "characters": ["char_harry", "char_snape", "char_dumbledore"],
+          "places": ["place_hogwarts"],
+          "objects": ["obj_horcrux_harry"]
+        },
+        "character_states": {
+          "char_harry": "shattered by the revelation that his mentor raised him like a lamb for slaughter",
+          "char_snape": "dead, but his true nature finally revealed as protector and double agent",
+          "char_dumbledore": "revealed posthumously as both loving guardian and cold strategist"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_harry",
+            "change": "learns",
+            "detail": "Harry discovers he carries a fragment of Voldemort's soul and must die to destroy it."
+          },
+          {
+            "entity_id": "char_snape",
+            "change": "reveals",
+            "description": "Snape's memories expose his lifelong devotion to Lily and his role as Dumbledore's most trusted agent."
+          },
+          {
+            "entity_id": "char_snape",
+            "change": "dies",
+            "description": "Killed by Nagini on Voldemort's order, believing Snape was the Elder Wand's master."
+          }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "SA_N04_RESISTANCE",
+        "label": "The Walk to the Forest",
+        "description": "Harry does not tell anyone what he has learned. He wrestles with terror and grief but does not seriously consider refusing. His resistance is internal — the anguish of leaving behind everyone he loves, of never growing old, of walking knowingly into oblivion. He uses the Resurrection Stone to summon the shades of his parents, Sirius, and Lupin, who walk beside him into the forest.",
+        "position": 0.55,
+        "participants": {
+          "characters": ["char_harry"],
+          "places": ["place_forbidden_forest"],
+          "objects": ["obj_resurrection_stone"]
+        },
+        "character_states": {
+          "char_harry": "terrified but resolute, drawing courage from the spirits of those who died before him"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_harry",
+            "change": "decides",
+            "description": "Harry chooses not to fight or flee but to walk willingly to his own death for the sake of everyone he loves."
+          },
+          {
+            "entity_id": "obj_resurrection_stone",
+            "change": "reveals",
+            "detail": "The stone summons James, Lily, Sirius, and Lupin, who assure Harry that dying does not hurt."
+          }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "SA_N05_DECISION",
+        "label": "Harry Surrenders to Voldemort",
+        "description": "Harry stands before Voldemort in the Forbidden Forest clearing, unarmed and unresisting. He does not draw his wand or attempt to defend himself. He has dropped the Resurrection Stone. This is the decisive moment — Harry has chosen death, and he faces it with open eyes.",
+        "position": 0.7,
+        "participants": {
+          "characters": ["char_harry", "char_voldemort"],
+          "places": ["place_forbidden_forest"],
+          "objects": ["obj_elder_wand", "obj_horcrux_harry"]
+        },
+        "character_states": {
+          "char_harry": "calm and accepting, having made peace with his death",
+          "char_voldemort": "triumphant and contemptuous, believing he has won"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_harry",
+            "change": "loses",
+            "detail": "Harry drops the Resurrection Stone in the forest, surrendering his last comfort."
+          },
+          {
+            "entity_id": "char_harry",
+            "change": "transforms",
+            "description": "Harry transforms from a fighter into a willing sacrifice, embodying the same protective magic his mother used."
+          }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "SA_N06_SACRIFICIAL_ACT",
+        "label": "The Killing Curse and King's Cross Limbo",
+        "description": "Voldemort casts the Killing Curse. Harry falls. But instead of dying, he awakens in a pristine white version of King's Cross station, where he meets Dumbledore's spirit. Dumbledore explains that Harry's willing sacrifice has invoked the same ancient magic Lily used — by choosing to die, Harry has destroyed the Horcrux within himself while his own soul remains intact. A maimed, pitiful fragment of Voldemort whimpers beneath a bench. Harry chooses to return to life.",
+        "position": 0.85,
+        "participants": {
+          "characters": ["char_harry", "char_voldemort", "char_dumbledore"],
+          "places": ["place_kings_cross"],
+          "objects": ["obj_horcrux_harry", "obj_elder_wand"]
+        },
+        "character_states": {
+          "char_harry": "at peace in the liminal space, gaining understanding before choosing to return",
+          "char_dumbledore": "warm and honest at last, answering Harry's questions without evasion",
+          "char_voldemort": "unknowingly diminished — the Horcrux in Harry is destroyed"
+        },
+        "transitions": [
+          {
+            "entity_id": "obj_horcrux_harry",
+            "change": "transforms",
+            "description": "The Horcrux fragment within Harry is destroyed by Voldemort's own curse, severing their soul-bond."
+          },
+          {
+            "entity_id": "char_harry",
+            "change": "decides",
+            "detail": "Harry chooses to return to the living world rather than 'go on' into death."
+          },
+          {
+            "entity_id": "char_harry",
+            "change": "transforms",
+            "description": "Harry is reborn free of Voldemort's soul, his willing sacrifice granting protective magic over all of Hogwarts' defenders."
+          }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "SA_N07_WORLD_SAVED",
+        "label": "Voldemort's Defeat and the New Dawn",
+        "description": "Harry reveals himself alive in the Great Hall. In the final duel, he explains to Voldemort that the Elder Wand's allegiance belongs to Harry, not Voldemort. Voldemort's Killing Curse rebounds, destroying him once and for all. Harry's sacrifice has broken Voldemort's power: his protective magic shields everyone who fought, and the wizarding world is freed from tyranny. Harry chooses a quiet life, having proven that love and self-sacrifice triumph over the fear of death.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_harry", "char_voldemort", "char_hermione", "char_ron"],
+          "places": ["place_hogwarts"],
+          "objects": ["obj_elder_wand"]
+        },
+        "character_states": {
+          "char_harry": "victorious but humble, wanting only peace and the company of those he loves",
+          "char_voldemort": "destroyed by his own reflected curse, undone by his inability to understand love",
+          "char_hermione": "relieved and exhausted, reunited with Harry and Ron",
+          "char_ron": "grief-stricken for Fred but grateful for survival and victory"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_voldemort",
+            "change": "dies",
+            "description": "Voldemort's Killing Curse rebounds from Harry due to the Elder Wand's true allegiance, destroying him permanently."
+          },
+          {
+            "entity_id": "char_harry",
+            "change": "gains",
+            "detail": "Harry gains freedom from the prophecy, from the Horcrux bond, and from the burden of being the Chosen One."
+          },
+          {
+            "entity_id": "obj_elder_wand",
+            "change": "reveals",
+            "description": "The Elder Wand's allegiance to Harry — through the chain of Dumbledore to Draco to Harry — is the final piece Voldemort never understood."
+          }
+        ]
+      }
+    ]
+  }
+}

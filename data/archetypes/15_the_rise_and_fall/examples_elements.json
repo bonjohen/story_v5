@@ -1,0 +1,395 @@
+{
+  "story_id": "wolf_of_wall_street_2013",
+  "story_title": "The Wolf of Wall Street",
+  "archetype_id": "archetype_15_the_rise_and_fall",
+  "characters": [
+    {
+      "id": "char_jordan",
+      "name": "Jordan Belfort",
+      "role": "protagonist",
+      "traits": ["charismatic", "insatiable", "manipulative", "reckless", "eloquent"],
+      "motivations": ["accumulate obscene wealth", "prove himself superior to the establishment", "live without limits or consequences", "be worshipped by those around him"],
+      "arc_type": "rise_and_fall",
+      "relationships": [
+        { "target": "char_donnie", "type": "ally", "detail": "Donnie is Jordan's most loyal lieutenant, amplifying his worst impulses" },
+        { "target": "char_naomi", "type": "romantic", "detail": "Naomi is both trophy and tether — represents the lifestyle Jordan craves and the family he neglects" },
+        { "target": "char_denham", "type": "nemesis", "detail": "Agent Denham is the incorruptible force Jordan cannot buy, charm, or outrun" },
+        { "target": "char_hanna", "type": "mentor_student", "detail": "Hanna introduces Jordan to the Wall Street culture of excess and amorality" },
+        { "target": "char_max", "type": "parent_child", "detail": "Max serves as Jordan's conscience, horrified by the scale of corruption but unable to stop it" }
+      ]
+    },
+    {
+      "id": "char_donnie",
+      "name": "Donnie Azoff",
+      "role": "ally",
+      "traits": ["sycophantic", "volatile", "loyal", "reckless", "crude"],
+      "motivations": ["escape his mundane middle-class existence", "share in Jordan's wealth and power", "belong to something extraordinary"],
+      "arc_type": "follower",
+      "relationships": [
+        { "target": "char_jordan", "type": "ally", "detail": "Quits his job on the spot to follow Jordan, becoming his most devoted disciple" },
+        { "target": "char_denham", "type": "rival", "detail": "Provokes Denham with petty taunts that accelerate the investigation" }
+      ]
+    },
+    {
+      "id": "char_naomi",
+      "name": "Naomi Lapaglia",
+      "role": "love_interest",
+      "traits": ["stunning", "shrewd", "materialistic", "resilient", "sharp-tongued"],
+      "motivations": ["secure financial security and luxury", "protect her children from Jordan's chaos", "maintain her own power within the marriage"],
+      "arc_type": "disillusionment",
+      "relationships": [
+        { "target": "char_jordan", "type": "romantic", "detail": "Initially dazzled by Jordan's wealth, eventually repelled by his addiction and violence" }
+      ]
+    },
+    {
+      "id": "char_denham",
+      "name": "Agent Patrick Denham",
+      "role": "antagonist",
+      "traits": ["incorruptible", "patient", "methodical", "quietly righteous", "unimpressed"],
+      "motivations": ["bring Stratton Oakmont to justice", "prove that wealth does not place anyone above the law", "resist the seduction of Jordan's lifestyle"],
+      "arc_type": "steady",
+      "relationships": [
+        { "target": "char_jordan", "type": "nemesis", "detail": "Refuses Jordan's attempted bribe on the yacht, becoming his implacable pursuer" }
+      ]
+    },
+    {
+      "id": "char_hanna",
+      "name": "Mark Hanna",
+      "role": "mentor",
+      "traits": ["suave", "cynical", "hedonistic", "experienced", "philosophical"],
+      "motivations": ["enjoy the spoils of Wall Street without guilt", "initiate newcomers into the true culture of finance"],
+      "arc_type": "catalyst",
+      "relationships": [
+        { "target": "char_jordan", "type": "mentor_student", "detail": "Teaches Jordan the foundational philosophy: the client's money is an illusion, cocaine keeps you sharp, and the game is rigged in your favor" }
+      ]
+    },
+    {
+      "id": "char_max",
+      "name": "Max Belfort",
+      "role": "foil",
+      "traits": ["cautious", "working-class", "principled", "anxious", "loving"],
+      "motivations": ["protect his son from legal consequences", "maintain some moral boundary within the operation", "preserve family bonds"],
+      "arc_type": "witness",
+      "relationships": [
+        { "target": "char_jordan", "type": "parent_child", "detail": "Nicknamed 'Mad Max' for his temper but serves as the only voice of restraint Jordan occasionally heeds" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_queens",
+      "name": "Jordan's Queens Apartment",
+      "type": "ordinary_world",
+      "description": "The modest apartment where Jordan and his first wife Teresa live at the start of his career. Small rooms, cheap furniture, a life of middle-class striving that Jordan finds suffocating and intolerable.",
+      "atmosphere": "cramped, ordinary, hungry"
+    },
+    {
+      "id": "place_stratton",
+      "name": "Stratton Oakmont Offices",
+      "type": "stronghold",
+      "description": "The Long Island boiler room that grows into a sprawling empire of phone banks, trading floors, and drug-fueled debauchery. A kingdom of excess where Jordan rules as absolute monarch and the sales floor doubles as a circus.",
+      "atmosphere": "manic, predatory, intoxicating"
+    },
+    {
+      "id": "place_mansion",
+      "name": "Old Brookville Mansion",
+      "type": "summit",
+      "description": "Jordan and Naomi's palatial Long Island estate with its white columns, swimming pool, and helicopter pad. The physical manifestation of everything Jordan has built — and everything he stands to lose.",
+      "atmosphere": "opulent, precarious, isolating"
+    },
+    {
+      "id": "place_prison",
+      "name": "Federal Prison Camp",
+      "type": "wasteland",
+      "description": "The minimum-security federal prison where Jordan serves 22 months after his conviction. A stark, mundane environment that strips away every trapping of his former life, reducing the Wolf of Wall Street to inmate number and tennis partner.",
+      "atmosphere": "deflated, institutional, anticlimactic"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_quaaludes",
+      "name": "Quaaludes (Lemmon 714s)",
+      "type": "symbol",
+      "description": "The rare vintage Quaaludes that Jordan and Donnie hoard and consume in escalating quantities. The Lemmon 714 scene — where Jordan crawls to his Lamborghini unable to walk or speak — is the film's most explicit depiction of excess tipping into self-destruction.",
+      "significance": "Track the arc from recreational indulgence to total loss of control. The drugs that make Jordan feel invincible ultimately render him literally unable to function, a physical metaphor for his entire trajectory.",
+      "rules": ["Consumption escalates in proportion to Jordan's power and paranoia", "The country club Quaalude scene marks the point where excess becomes grotesque rather than glamorous"]
+    },
+    {
+      "id": "obj_yacht",
+      "name": "The Naomi (Motor Yacht)",
+      "type": "treasure",
+      "description": "Jordan's 170-foot yacht, named after his wife, which sinks in a Mediterranean storm when Jordan insists on sailing to Switzerland to hide money despite gale warnings. The sinking is both literal and symbolic.",
+      "significance": "Represents the peak of Jordan's material achievement and the moment nature itself rebels against his hubris. His refusal to heed warnings about the storm mirrors his refusal to heed warnings about the FBI investigation.",
+      "rules": ["Named after Naomi, tying his marriage to his wealth", "The sinking forces Jordan to accept he cannot control everything through sheer will"]
+    },
+    {
+      "id": "obj_mic",
+      "name": "The Microphone / Sales Floor Podium",
+      "type": "tool",
+      "description": "The microphone and elevated platform from which Jordan delivers his legendary motivational speeches to the Stratton Oakmont sales floor, whipping hundreds of brokers into a frenzy of greed and loyalty.",
+      "significance": "Jordan's true superpower is his voice — his ability to sell anything to anyone. The microphone amplifies this gift. The film bookends with Jordan at a podium: first commanding his empire, finally reduced to teaching sales seminars to strangers in a hotel ballroom.",
+      "rules": ["The podium speeches mark key inflection points in the rise and fall", "The final seminar scene mirrors the Stratton speeches but strips away the power and stakes"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_wolf_wall_street_master",
+    "story_id": "wolf_of_wall_street_2013",
+    "archetype_id": "archetype_15_the_rise_and_fall",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "RF_N01_HUMBLE_ORIGIN",
+        "label": "A Kid from the Bronx",
+        "description": "Jordan Belfort arrives on Wall Street as a young, eager stockbroker with a freshly minted Series 7 license and a modest apartment in Queens. He is hungry, ambitious, and naive — a working-class kid who believes that hard work and talent will earn him a place at the table. His first wife Teresa supports him. He has no connections, no money, and no idea how the game actually works.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_jordan", "char_max"],
+          "places": ["place_queens"],
+          "objects": []
+        },
+        "character_states": {
+          "char_jordan": "ambitious, naive, eager to prove himself, living modestly in Queens",
+          "char_max": "proud of his son's legitimate Wall Street job, cautiously optimistic"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "arrives",
+            "target": "place_stratton",
+            "description": "Jordan enters the world of Wall Street finance, bringing raw charisma and hunger but no understanding of its true culture"
+          }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "RF_N02_FIRST_OPPORTUNITY",
+        "label": "The Lunch with Hanna",
+        "description": "On his first day at L.F. Rothschild, senior broker Mark Hanna takes Jordan to lunch and reveals Wall Street's true philosophy: the client's money was never real, cocaine is a performance enhancer, and the only goal is to move money from the client's pocket to yours. Black Monday wipes out Jordan's firm, but Hanna's lessons survive. Jordan discovers penny stocks on Long Island, where his polished sales technique earns 50% commissions instead of 1%. He realizes he has found his angle.",
+        "position": 0.12,
+        "participants": {
+          "characters": ["char_jordan", "char_hanna"],
+          "places": ["place_queens"],
+          "objects": []
+        },
+        "character_states": {
+          "char_jordan": "absorbing Hanna's philosophy, losing his naivete, discovering his gift for sales",
+          "char_hanna": "casually corrupting, treating amorality as simple professional wisdom"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "learns",
+            "description": "Internalizes Hanna's nihilistic philosophy — the money is not real, the game is rigged, and guilt is for amateurs"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "decides",
+            "description": "Chooses to exploit penny stock commissions using his Rothschild-trained sales skills, finding the gap between respectability and profitability"
+          }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "RF_N03_RAPID_ASCENT",
+        "label": "Building the Empire",
+        "description": "Jordan founds Stratton Oakmont with Donnie Azoff and a crew of untrained, hungry outsiders. He teaches them his sales script — the 'straight line' method — and transforms a garage operation into a Wall Street powerhouse. The firm goes from penny stocks to IPOs. Money pours in. Jordan buys a mansion, a Ferrari, a helicopter. He meets Naomi at a party and begins an affair. The sales floor becomes a Roman circus of drugs, prostitutes, midget-tossing, and millions in daily commissions.",
+        "position": 0.3,
+        "participants": {
+          "characters": ["char_jordan", "char_donnie", "char_naomi"],
+          "places": ["place_stratton"],
+          "objects": ["obj_mic"]
+        },
+        "character_states": {
+          "char_jordan": "ascendant, intoxicated by power, building his kingdom with evangelical fervor",
+          "char_donnie": "euphoric, devoted, feeding off Jordan's energy and largesse",
+          "char_naomi": "attracted to Jordan's power and confidence, beginning the affair that will define her life"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "gains",
+            "target": "wealth, power, and a loyal army",
+            "description": "Builds Stratton Oakmont from nothing into a firm generating millions per week through aggressive penny stock manipulation and IPO fraud"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "bonds",
+            "target": "char_donnie",
+            "description": "Donnie quits his job on the spot after seeing Jordan's pay stub, becoming his most loyal confederate and enabler"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "bonds",
+            "target": "char_naomi",
+            "description": "Begins the affair with Naomi that will destroy his first marriage and become the centerpiece of his lifestyle"
+          }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "RF_N04_PEAK_OF_POWER",
+        "label": "The Wolf at His Zenith",
+        "description": "Jordan is earning $49 million a year, married to Naomi, living in a mansion with a private helicopter and yacht. Forbes publishes a hit piece calling him 'The Wolf of Wall Street' — he frames it. His speeches to the sales floor are messianic. He throws legendary parties. He has Swiss bank accounts, a fleet of luxury cars, and the absolute loyalty of hundreds of brokers who worship him. He believes he is untouchable.",
+        "position": 0.45,
+        "participants": {
+          "characters": ["char_jordan", "char_donnie", "char_naomi", "char_max"],
+          "places": ["place_mansion", "place_stratton"],
+          "objects": ["obj_mic", "obj_yacht"]
+        },
+        "character_states": {
+          "char_jordan": "godlike, addicted to excess, convinced of his own invincibility",
+          "char_naomi": "enjoying the lifestyle but beginning to see the cracks in Jordan's behavior",
+          "char_donnie": "living in Jordan's reflected glory, escalating his own drug use",
+          "char_max": "deeply uncomfortable with the scale of illegality, acting as reluctant accountant"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "gains",
+            "target": "the Forbes profile and the 'Wolf' identity",
+            "description": "Embraces the Forbes attack piece as a badge of honor, cementing his public persona and attracting both recruits and federal attention"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "reveals",
+            "description": "His reaction to the Forbes piece — pride instead of caution — reveals that Jordan's ego has overtaken his survival instincts"
+          }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "RF_N05_CRACKS_FORM",
+        "label": "The FBI Comes Calling",
+        "description": "Agent Patrick Denham boards Jordan's yacht under the guise of a friendly visit. Jordan, unable to resist showing off, attempts to bribe him with a job offer. Denham refuses with quiet contempt and leaves. The investigation accelerates. Jordan's drug use spirals — the Quaalude binge at the country club leaves him crawling on the ground, unable to walk, crashing his Lamborghini. Naomi grows increasingly hostile. The cracks are no longer hairline; they are structural.",
+        "position": 0.55,
+        "participants": {
+          "characters": ["char_jordan", "char_denham", "char_donnie", "char_naomi"],
+          "places": ["place_mansion"],
+          "objects": ["obj_yacht", "obj_quaaludes"]
+        },
+        "character_states": {
+          "char_jordan": "rattled beneath the bravado, self-medicating with escalating drug binges",
+          "char_denham": "patient, methodical, building an airtight case piece by piece",
+          "char_naomi": "disgusted by Jordan's addiction, protective of their children, considering divorce",
+          "char_donnie": "panicking, making reckless moves that create additional legal exposure"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "reveals",
+            "description": "The failed bribe attempt on the yacht reveals Jordan's fundamental misunderstanding — he believes everyone has a price, but Denham does not"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "loses",
+            "target": "physical control",
+            "description": "The Quaalude overdose at the country club strips Jordan of basic motor function, a physical manifestation of the control he is losing in every dimension of his life"
+          }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "RF_N06_DESPERATE_GRIP",
+        "label": "Running the Money",
+        "description": "Jordan attempts to smuggle cash to Swiss bank accounts using Naomi's aunt's name, strapping money to mules and sailing his yacht across the Mediterranean. When Swiss banking secrecy laws change, he pivots frantically. The yacht sinks in a storm after Jordan refuses to heed weather warnings — they are rescued by the Italian coast guard. Back home, Jordan discovers the FBI has flipped key associates. He delivers one final, desperate speech to the Stratton sales floor, attempting to rally his troops, but the walls are closing in from every direction.",
+        "position": 0.7,
+        "participants": {
+          "characters": ["char_jordan", "char_donnie", "char_naomi", "char_max"],
+          "places": ["place_stratton"],
+          "objects": ["obj_yacht", "obj_mic"]
+        },
+        "character_states": {
+          "char_jordan": "desperate, scrambling, making increasingly reckless decisions to preserve his empire",
+          "char_donnie": "terrified of prison, becoming a liability",
+          "char_naomi": "demanding divorce, using the children as leverage",
+          "char_max": "begging Jordan to take the deal and cooperate"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "loses",
+            "target": "obj_yacht",
+            "description": "The yacht named after Naomi sinks in a storm — Jordan's arrogant refusal to change course despite warnings mirrors his entire trajectory"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "breaks",
+            "target": "char_naomi",
+            "description": "Naomi files for divorce and full custody after Jordan endangers their daughter during a drug-fueled driving incident"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "decides",
+            "description": "Initially agrees to step down from Stratton to cooperate with the FBI, then reverses his decision in a manic speech, choosing his empire over his freedom"
+          }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "RF_N07_FALL",
+        "label": "The Arrest and Betrayal",
+        "description": "The FBI closes in. Jordan is arrested. Facing decades in prison, he agrees to wear a wire and inform on his colleagues — including Donnie. He passes Donnie a note warning him, but Denham intercepts it. Jordan's cooperation reduces his sentence but completes his moral collapse: the man who inspired fanatical loyalty betrays every person who trusted him. He is sentenced to 36 months in federal prison. Naomi is gone. Stratton Oakmont is shuttered. The money is seized. Every pillar of his identity is demolished.",
+        "position": 0.85,
+        "participants": {
+          "characters": ["char_jordan", "char_denham", "char_donnie", "char_max"],
+          "places": ["place_prison"],
+          "objects": []
+        },
+        "character_states": {
+          "char_jordan": "broken, cooperating with the FBI, betraying everyone who followed him",
+          "char_denham": "victorious, having dismantled the empire through patience and incorruptibility",
+          "char_donnie": "betrayed by the man he worshipped, facing his own charges",
+          "char_max": "devastated by his son's choices but relieved the charade is over"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "loses",
+            "target": "everything — wife, children, fortune, freedom, loyalty",
+            "description": "Stripped of every trapping of his former life: Naomi divorces him, assets are seized, Stratton is closed, and he enters federal custody"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "betrays",
+            "target": "char_donnie",
+            "description": "Agrees to wear a wire against his closest ally, then tries to warn him but is caught — completing the destruction of every relationship he built"
+          },
+          {
+            "entity_id": "char_denham",
+            "change": "gains",
+            "target": "justice",
+            "description": "Secures the conviction he pursued for years, vindicating his refusal to be bought"
+          }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "RF_N08_LEGACY",
+        "label": "The Seminar Circuit",
+        "description": "After serving 22 months of a reduced sentence, Jordan Belfort reinvents himself as a motivational speaker and sales trainer. The final scene shows him at a seminar in Auckland, New Zealand, asking audience members to sell him a pen — the same exercise he used to recruit brokers at Stratton Oakmont. The audience stares at him with hungry, admiring eyes. The cycle is ready to begin again. Jordan has lost his empire but kept his one true asset: the ability to sell anything to anyone. The system that created him remains intact.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_jordan"],
+          "places": ["place_prison"],
+          "objects": ["obj_mic"]
+        },
+        "character_states": {
+          "char_jordan": "diminished but unbroken, recycling his charisma into a smaller arena, fundamentally unchanged"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jordan",
+            "change": "transforms",
+            "description": "Reinvents himself from convicted felon into motivational speaker, but the transformation is superficial — the same salesmanship, the same hunger, the same audience of marks"
+          },
+          {
+            "entity_id": "char_jordan",
+            "change": "reveals",
+            "description": "The final 'sell me this pen' moment reveals that Jordan learned nothing — and that the world is always ready to be sold to again"
+          }
+        ]
+      }
+    ]
+  }
+}

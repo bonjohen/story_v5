@@ -8,6 +8,16 @@ import { useGenerationStore } from '../store/generationStore.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
 import { exportSnapshot, downloadSnapshot, parseSnapshot } from '../artifacts/storySnapshot.ts'
 import { LABEL, INPUT } from './generationConstants.ts'
+import type { LlmBackend } from '../store/requestStore.ts'
+
+/** Preset configurations for common providers. */
+const PRESETS = [
+  { label: 'Ollama (local)', baseUrl: 'http://localhost:11434/v1', model: 'qwen3:32b', needsKey: false },
+  { label: 'LM Studio (local)', baseUrl: 'http://localhost:1234/v1', model: 'loaded-model', needsKey: false },
+  { label: 'OpenRouter (free)', baseUrl: 'https://openrouter.ai/api/v1', model: 'mistralai/mistral-small-3.1-24b-instruct:free', needsKey: true },
+  { label: 'OpenRouter (Qwen3)', baseUrl: 'https://openrouter.ai/api/v1', model: 'qwen/qwen3-235b-a22b:free', needsKey: true },
+  { label: 'Groq', baseUrl: 'https://api.groq.com/openai/v1', model: 'llama-3.3-70b-versatile', needsKey: true },
+] as const
 
 export function PipelineTab() {
   const running = useGenerationStore((s) => s.running)
@@ -26,16 +36,23 @@ export function PipelineTab() {
   const connectBridge = useRequestStore((s) => s.connectBridge)
   const disconnectBridge = useRequestStore((s) => s.disconnectBridge)
 
-  // Auto-connect to bridge on mount
+  const openaiBaseUrl = useRequestStore((s) => s.openaiBaseUrl)
+  const openaiModel = useRequestStore((s) => s.openaiModel)
+  const openaiApiKey = useRequestStore((s) => s.openaiApiKey)
+  const setOpenaiBaseUrl = useRequestStore((s) => s.setOpenaiBaseUrl)
+  const setOpenaiModel = useRequestStore((s) => s.setOpenaiModel)
+  const setOpenaiApiKey = useRequestStore((s) => s.setOpenaiApiKey)
+
+  // Auto-connect on mount if backend is set
   const autoConnectAttempted = useRef(false)
   useEffect(() => {
     if (autoConnectAttempted.current) return
     autoConnectAttempted.current = true
-    const { bridgeStatus: bs } = useRequestStore.getState()
-    if (bs === 'disconnected') {
+    const { bridgeStatus: bs, llmBackend: lb } = useRequestStore.getState()
+    if (bs === 'disconnected' && lb !== 'none') {
       const timer = setTimeout(() => {
         void useRequestStore.getState().connectBridge()
-      }, 1500)
+      }, 500)
       return () => clearTimeout(timer)
     }
   }, [])
@@ -43,6 +60,15 @@ export function PipelineTab() {
   const handleConnect = useCallback(() => {
     void connectBridge()
   }, [connectBridge])
+
+  const handlePreset = useCallback((idx: number) => {
+    const p = PRESETS[idx]
+    setLlmBackend('openai')
+    setOpenaiBaseUrl(p.baseUrl)
+    setOpenaiModel(p.model)
+    if (!p.needsKey) setOpenaiApiKey('')
+    disconnectBridge()
+  }, [setLlmBackend, setOpenaiBaseUrl, setOpenaiModel, setOpenaiApiKey, disconnectBridge])
 
   const handleExport = useCallback(() => {
     const state = useGenerationStore.getState()
@@ -73,10 +99,13 @@ export function PipelineTab() {
   }, [loadSnapshot])
 
   const hasResults = contract || plan
+  const backendLabel = bridgeStatus === 'connected'
+    ? (llmBackend === 'openai' ? openaiModel : 'Claude Code bridge')
+    : llmBackend === 'none' ? 'template only' : 'disconnected'
 
   return (
     <div style={{ padding: '10px 12px' }}>
-      {/* LLM Connection */}
+      {/* Connection status + connect button */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -107,9 +136,9 @@ export function PipelineTab() {
             flexShrink: 0,
           }}
         >
-          {bridgeStatus === 'connected' ? 'LLM Connected'
+          {bridgeStatus === 'connected' ? 'Connected'
             : bridgeStatus === 'connecting' ? 'Connecting...'
-            : bridgeStatus === 'error' ? 'Retry Connection'
+            : bridgeStatus === 'error' ? 'Retry'
             : 'Connect LLM'}
         </button>
 
@@ -117,7 +146,7 @@ export function PipelineTab() {
           {bridgeStatus === 'connected' && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {bridgeUrl}
+                {backendLabel}
               </span>
               <button onClick={disconnectBridge} style={{ fontSize: 10, color: 'var(--text-muted)', flexShrink: 0 }}>
                 Disconnect
@@ -126,33 +155,123 @@ export function PipelineTab() {
           )}
           {bridgeStatus === 'error' && (
             <span style={{ fontSize: 10, color: '#ef4444', lineHeight: 1.3 }}>
-              Could not connect to bridge at {bridgeUrl}
+              Connection failed. Check settings below.
             </span>
           )}
           {bridgeStatus === 'disconnected' && (
             <span style={{ fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.3 }}>
-              {llmBackend === 'none' ? 'No LLM — template output only' : 'Claude Code bridge'}
+              {llmBackend === 'none' ? 'No LLM — template output only' : 'Not connected'}
             </span>
           )}
         </div>
       </div>
 
       {/* LLM Settings */}
-      <Disclosure title="LLM Settings" persistKey="gen-llm-settings" defaultCollapsed={true}
-        badge={llmBackend === 'bridge' ? 'bridge' : 'template'}>
+      <Disclosure title="LLM Settings" persistKey="gen-llm-settings" defaultCollapsed={false}
+        badge={backendLabel}>
         <div style={{ padding: '4px 12px 10px' }}>
+          {/* Backend selector */}
           <label style={{ display: 'block', marginBottom: 8 }}>
             <span style={LABEL}>Backend</span>
             <select
               value={llmBackend}
-              onChange={(e) => setLlmBackend(e.target.value as 'none' | 'bridge')}
+              onChange={(e) => {
+                setLlmBackend(e.target.value as LlmBackend)
+                disconnectBridge()
+              }}
               disabled={running}
               style={INPUT}
             >
               <option value="none">None (deterministic template)</option>
-              <option value="bridge">Claude Code (local bridge)</option>
+              <option value="openai">OpenAI-Compatible (Ollama, OpenRouter, etc.)</option>
+              <option value="bridge">Claude Code Bridge (WebSocket)</option>
             </select>
           </label>
+
+          {/* OpenAI-compatible settings */}
+          {llmBackend === 'openai' && (
+            <>
+              {/* Presets */}
+              <div style={{ marginBottom: 8 }}>
+                <span style={{ ...LABEL, marginBottom: 4 }}>Quick Setup</span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                  {PRESETS.map((p, i) => (
+                    <button
+                      key={p.label}
+                      onClick={() => handlePreset(i)}
+                      disabled={running}
+                      style={{
+                        fontSize: 10,
+                        padding: '3px 8px',
+                        borderRadius: 3,
+                        border: '1px solid var(--border)',
+                        color: openaiBaseUrl === p.baseUrl && openaiModel === p.model
+                          ? '#22c55e' : 'var(--text-muted)',
+                        background: openaiBaseUrl === p.baseUrl && openaiModel === p.model
+                          ? '#22c55e10' : 'transparent',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <label style={{ display: 'block', marginBottom: 8 }}>
+                <span style={LABEL}>Base URL</span>
+                <input
+                  type="text"
+                  value={openaiBaseUrl}
+                  onChange={(e) => setOpenaiBaseUrl(e.target.value)}
+                  disabled={running || bridgeStatus === 'connected'}
+                  placeholder="http://localhost:11434/v1"
+                  style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }}
+                />
+              </label>
+
+              <label style={{ display: 'block', marginBottom: 8 }}>
+                <span style={LABEL}>Model</span>
+                <input
+                  type="text"
+                  value={openaiModel}
+                  onChange={(e) => setOpenaiModel(e.target.value)}
+                  disabled={running || bridgeStatus === 'connected'}
+                  placeholder="qwen3:32b"
+                  style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }}
+                />
+              </label>
+
+              <label style={{ display: 'block', marginBottom: 8 }}>
+                <span style={LABEL}>API Key (optional for local)</span>
+                <input
+                  type="password"
+                  value={openaiApiKey}
+                  onChange={(e) => setOpenaiApiKey(e.target.value)}
+                  disabled={running || bridgeStatus === 'connected'}
+                  placeholder="sk-... (leave empty for Ollama/LM Studio)"
+                  style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }}
+                />
+              </label>
+            </>
+          )}
+
+          {/* Bridge settings */}
+          {llmBackend === 'bridge' && (
+            <label style={{ display: 'block', marginBottom: 8 }}>
+              <span style={LABEL}>Bridge URL</span>
+              <input
+                type="text"
+                value={bridgeUrl}
+                onChange={(e) => setBridgeUrl(e.target.value)}
+                disabled={running || bridgeStatus === 'connected'}
+                placeholder="ws://127.0.0.1:8765"
+                style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }}
+              />
+            </label>
+          )}
+
+          {/* Max LLM calls */}
           <label style={{ display: 'block', marginBottom: 8 }}>
             <span style={LABEL}>Max LLM Calls</span>
             <input
@@ -168,19 +287,6 @@ export function PipelineTab() {
               Hard cap on LLM calls per run. Pipeline stops gracefully when reached.
             </span>
           </label>
-          {llmBackend === 'bridge' && (
-            <label style={{ display: 'block' }}>
-              <span style={LABEL}>Bridge URL</span>
-              <input
-                type="text"
-                value={bridgeUrl}
-                onChange={(e) => setBridgeUrl(e.target.value)}
-                disabled={running || bridgeStatus === 'connected'}
-                placeholder="ws://127.0.0.1:8765"
-                style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }}
-              />
-            </label>
-          )}
         </div>
       </Disclosure>
 

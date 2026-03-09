@@ -1,0 +1,411 @@
+{
+  "story_id": "knives_out_2019",
+  "story_title": "Knives Out",
+  "archetype_id": "archetype_13_the_mystery_unveiled",
+  "characters": [
+    {
+      "id": "char_marta",
+      "name": "Marta Cabrera",
+      "role": "protagonist",
+      "traits": ["compassionate", "honest to a fault", "resourceful", "anxious", "morally grounded"],
+      "motivations": ["protect her family from deportation", "uncover the truth about Harlan's death", "do the right thing despite personal cost", "honor her bond with Harlan"],
+      "arc_type": "revelation",
+      "relationships": [
+        { "target": "char_ransom", "type": "betrayer" },
+        { "target": "char_blanc", "type": "ally" },
+        { "target": "char_harlan", "type": "mentor_student" },
+        { "target": "char_linda", "type": "rival" },
+        { "target": "char_walt", "type": "rival" }
+      ]
+    },
+    {
+      "id": "char_ransom",
+      "name": "Hugh 'Ransom' Drysdale",
+      "role": "antagonist",
+      "traits": ["charming", "entitled", "cunning", "sociopathic", "reckless"],
+      "motivations": ["reclaim his inheritance", "frame Marta for Harlan's death", "avoid exposure at any cost"],
+      "arc_type": "unmasked",
+      "relationships": [
+        { "target": "char_marta", "type": "betrayer" },
+        { "target": "char_harlan", "type": "parent_child" },
+        { "target": "char_linda", "type": "parent_child" }
+      ]
+    },
+    {
+      "id": "char_blanc",
+      "name": "Benoit Blanc",
+      "role": "mentor",
+      "traits": ["perceptive", "theatrical", "patient", "methodical", "deceptively folksy"],
+      "motivations": ["solve the case", "identify who hired him anonymously", "ensure justice is served"],
+      "arc_type": "catalyst",
+      "relationships": [
+        { "target": "char_marta", "type": "ally" },
+        { "target": "char_ransom", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_harlan",
+      "name": "Harlan Thrombey",
+      "role": "herald",
+      "traits": ["brilliant", "provocative", "generous", "perceptive", "mischievous"],
+      "motivations": ["force his family to stand on their own", "protect Marta's future", "expose the parasitism of his children"],
+      "arc_type": "catalyst",
+      "relationships": [
+        { "target": "char_marta", "type": "mentor_student" },
+        { "target": "char_ransom", "type": "parent_child" },
+        { "target": "char_linda", "type": "parent_child" },
+        { "target": "char_walt", "type": "parent_child" }
+      ]
+    },
+    {
+      "id": "char_linda",
+      "name": "Linda Drysdale",
+      "role": "foil",
+      "traits": ["imperious", "self-made", "sharp", "defensive", "domineering"],
+      "motivations": ["preserve family reputation", "secure her share of the estate", "maintain control over Ransom"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_harlan", "type": "parent_child" },
+        { "target": "char_ransom", "type": "parent_child" },
+        { "target": "char_marta", "type": "rival" }
+      ]
+    },
+    {
+      "id": "char_walt",
+      "name": "Walt Thrombey",
+      "role": "foil",
+      "traits": ["resentful", "scheming", "insecure", "passive-aggressive", "dependent"],
+      "motivations": ["retain control of Harlan's publishing empire", "discredit Marta's claim to the estate", "prove his worth to the family"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_harlan", "type": "parent_child" },
+        { "target": "char_marta", "type": "rival" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_thrombey_estate",
+      "name": "The Thrombey Estate",
+      "type": "stronghold",
+      "description": "Harlan Thrombey's sprawling Gothic mansion filled with mystery novel memorabilia, secret nooks, and an ornate study where the patriarch was found dead. Every room holds clues and every family member has a reason to lurk in its corridors.",
+      "atmosphere": "Grand but claustrophobic, dripping with old-money tension and the theatrical menace of a classic whodunit setting."
+    },
+    {
+      "id": "place_harlans_study",
+      "name": "Harlan's Study",
+      "type": "sanctuary",
+      "description": "The wood-paneled upper-floor study where Harlan and Marta played Go on the night of his death, and where Harlan slit his own throat after believing Marta had accidentally poisoned him. The room is ringed with daggers, manuscripts, and game boards.",
+      "atmosphere": "Intimate and bookish, yet haunted by the violence of what happened there — a sanctuary turned crime scene."
+    },
+    {
+      "id": "place_medical_examiners",
+      "name": "Medical Examiner's Office",
+      "type": "threshold",
+      "description": "The clinical setting where toxicology results and the truth about Harlan's blood are examined, and where a critical piece of evidence — Fran's toxicology report — threatens to unravel Ransom's scheme.",
+      "atmosphere": "Sterile and institutional, a place where scientific fact cuts through family lies."
+    },
+    {
+      "id": "place_go_board",
+      "name": "The Go Board Nook",
+      "type": "crossroads",
+      "description": "The corner of Harlan's study where they played Go nightly. The unfinished game on the night of his death becomes a metaphor for the strategic contest between Marta's honesty and Ransom's deception.",
+      "atmosphere": "Quiet and contemplative, a space of trust between Harlan and Marta, now freighted with guilt and memory."
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_switched_vials",
+      "name": "The Switched Medicine Vials",
+      "type": "mcguffin",
+      "description": "The vials of morphine and ketorolac that Ransom secretly swapped in Marta's medical bag, intending for her to accidentally overdose Harlan. Marta's trained instincts led her to administer the correct doses by feel despite the switched labels.",
+      "significance": "The central mechanism of the plot — Ransom's murder attempt that failed because of Marta's competence, and the secret that drives all of Marta's guilt and fear throughout the film.",
+      "rules": [
+        "The labels were swapped but the liquid contents remained in their original vials",
+        "Marta administered the correct medication by muscle memory despite the wrong labels",
+        "The swap is only revealed when toxicology confirms Harlan had the correct drugs in his system"
+      ]
+    },
+    {
+      "id": "obj_will",
+      "name": "Harlan's Revised Will",
+      "type": "document",
+      "description": "The legally binding last will and testament in which Harlan Thrombey disinherits his entire family and leaves his full estate — house, publishing rights, and fortune — to Marta Cabrera.",
+      "significance": "The will is the inciting bombshell that exposes every family member's true character and provides Ransom's motive for the murder plot. It transforms Marta from caretaker to target.",
+      "rules": [
+        "The will is valid and notarized, superseding all prior versions",
+        "A slayer rule would void Marta's inheritance if she were found responsible for Harlan's death",
+        "Its contents are read to the family by the attorney, triggering immediate hostility toward Marta"
+      ]
+    },
+    {
+      "id": "obj_knife_ring",
+      "name": "The Knife Display Ring",
+      "type": "symbol",
+      "description": "A circular display of ornamental knives and daggers mounted on the wall of Harlan's study, radiating outward like a starburst. In the film's final shot, Marta stands on the balcony holding a coffee mug reading 'My House, My Rules' while the Thrombeys look up from below.",
+      "significance": "A visual metaphor for the entire film — a ring of blades surrounding the mystery, pointing outward at every suspect. The retractable prop knife Ransom grabs in the climax comes from this display, symbolizing that his scheme was always theatrical and hollow.",
+      "rules": [
+        "Contains both real and prop knives, indistinguishable at a glance",
+        "Ransom instinctively grabs a retractable stage knife in his final desperate act",
+        "The display frames Harlan's study like a crown of suspicion"
+      ]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_knives_out",
+    "story_id": "knives_out_2019",
+    "archetype_id": "archetype_13_the_mystery_unveiled",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "MU_N01_SURFACE_ORDER",
+        "label": "The Morning After the Party",
+        "description": "Harlan Thrombey is found dead in his study the morning after his 85th birthday party, his throat slit. The police conduct routine interviews with the family, each of whom presents a slightly different account of the evening. On the surface, it appears to be a straightforward suicide by an eccentric old man.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_harlan", "char_linda", "char_walt", "char_ransom"],
+          "places": ["place_thrombey_estate", "place_harlans_study"],
+          "objects": ["obj_knife_ring"]
+        },
+        "character_states": {
+          "char_harlan": "deceased, discovered in his study with a self-inflicted wound",
+          "char_linda": "performatively grief-stricken, already positioning herself as matriarch",
+          "char_walt": "nervous and deflective, concealing that Harlan fired him the previous night",
+          "char_ransom": "conspicuously absent from the birthday party and initial interviews"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_harlan",
+            "change": "dies",
+            "description": "Harlan is found dead, setting the mystery in motion. His death appears self-inflicted but the circumstances are suspicious."
+          }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "MU_N02_QUESTION_POSED",
+        "label": "Blanc Arrives — 'I Suspect Foul Play'",
+        "description": "Detective Benoit Blanc reveals he was anonymously hired to investigate Harlan's death. He announces to the family that he does not believe the suicide is what it seems. His presence transforms a closed case into an active investigation and puts every family member on edge.",
+        "position": 0.12,
+        "participants": {
+          "characters": ["char_blanc", "char_marta", "char_linda", "char_walt"],
+          "places": ["place_thrombey_estate"],
+          "objects": []
+        },
+        "character_states": {
+          "char_blanc": "genial but probing, methodically observing each family member's reaction to his announcement",
+          "char_marta": "anxious, believing she accidentally killed Harlan with the wrong medication"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_blanc",
+            "change": "arrives",
+            "target": "place_thrombey_estate",
+            "description": "Blanc's arrival transforms the situation from closed suicide to active murder investigation."
+          },
+          {
+            "entity_id": "char_marta",
+            "change": "learns",
+            "detail": "Marta realizes that a detective's involvement could expose what she believes is her fatal mistake."
+          }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "MU_N03_INITIAL_CLUES",
+        "label": "Marta's Confession and the Will",
+        "description": "Through flashback, we see the truth from Marta's perspective: she believes she mixed up the vials and gave Harlan a morphine overdose. Harlan, realizing there was no time for an antidote, devised a plan to make his death look like suicide and protect Marta from suspicion. Meanwhile, the reading of the will reveals that Harlan left everything to Marta, giving every Thrombey a motive.",
+        "position": 0.25,
+        "participants": {
+          "characters": ["char_marta", "char_harlan", "char_linda", "char_walt", "char_ransom"],
+          "places": ["place_harlans_study", "place_thrombey_estate"],
+          "objects": ["obj_switched_vials", "obj_will"]
+        },
+        "character_states": {
+          "char_marta": "consumed by guilt, believing she accidentally killed her friend and mentor",
+          "char_harlan": "shown in flashback as decisive and protective, staging his own death to save Marta",
+          "char_ransom": "outraged by the will, though masking his reaction with theatrical indifference"
+        },
+        "transitions": [
+          {
+            "entity_id": "obj_will",
+            "change": "reveals",
+            "description": "The will's contents are read aloud, disinheriting the entire Thrombey family in favor of Marta."
+          },
+          {
+            "entity_id": "char_ransom",
+            "change": "decides",
+            "detail": "Ransom begins formulating his plan to frame Marta, though this is not yet visible to the audience."
+          },
+          {
+            "entity_id": "char_marta",
+            "change": "learns",
+            "detail": "Marta discovers she is the sole heir, transforming her from caretaker to the family's primary target."
+          }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "MU_N04_FALSE_TRAIL",
+        "label": "Ransom's Offer to Help",
+        "description": "Ransom approaches Marta with an apparent alliance: he claims he does not care about the money and offers to help her navigate the family's hostility and the investigation. In reality, he is manipulating her, steering her actions to build a case for her guilt. He drives her to the medical examiner's office, supposedly to help, while actually ensuring evidence of her involvement accumulates.",
+        "position": 0.38,
+        "participants": {
+          "characters": ["char_marta", "char_ransom", "char_blanc"],
+          "places": ["place_thrombey_estate", "place_medical_examiners"],
+          "objects": ["obj_switched_vials"]
+        },
+        "character_states": {
+          "char_marta": "grateful and trusting, believing Ransom is her only ally among the Thrombeys",
+          "char_ransom": "performing empathy while carefully guiding Marta deeper into his trap",
+          "char_blanc": "suspicious of Ransom's sudden helpfulness but allowing events to develop"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_ransom",
+            "change": "bonds",
+            "target": "char_marta",
+            "detail": "Ransom feigns alliance with Marta, building her trust so he can better manipulate her."
+          },
+          {
+            "entity_id": "char_blanc",
+            "change": "learns",
+            "detail": "Blanc notes Ransom's atypical behavior — why would the disinherited grandson help the woman who replaced him?"
+          }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "MU_N05_DEEPENING",
+        "label": "The Blackmail Note and Fran's Poisoning",
+        "description": "Marta receives an anonymous blackmail note with a photocopy of the toxicology report. When she goes to meet the blackmailer, she finds Fran, the housekeeper, overdosed on morphine. Marta calls 911 and tries to save Fran, but the situation looks damning — Marta found over a dying woman with her own fingerprints on the evidence. The walls are closing in, and Marta begins to suspect that someone is actively engineering her downfall.",
+        "position": 0.5,
+        "participants": {
+          "characters": ["char_marta", "char_ransom", "char_blanc"],
+          "places": ["place_thrombey_estate"],
+          "objects": ["obj_switched_vials"]
+        },
+        "character_states": {
+          "char_marta": "terrified and increasingly isolated, realizing she is being set up",
+          "char_ransom": "escalating his scheme, having poisoned Fran to eliminate a witness who saw him tampering with the vials",
+          "char_blanc": "assembling the pieces, recognizing the pattern of manufactured evidence"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_marta",
+            "change": "learns",
+            "detail": "Marta realizes someone is actively framing her — this is not just her own mistake catching up with her."
+          },
+          {
+            "entity_id": "char_ransom",
+            "change": "reveals",
+            "description": "Ransom's willingness to poison Fran shows the true depth of his sociopathy, though Marta does not yet know he is responsible."
+          }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "MU_N06_BREAKTHROUGH",
+        "label": "The Toxicology Report — Marta Was Right All Along",
+        "description": "Blanc reveals the critical breakthrough: the toxicology report shows that Harlan had the correct medication in his system. Marta did not poison him — she administered the right drugs despite the switched labels, guided by her trained hands. This means Harlan's death was a true suicide based on a false premise. Someone switched the labels to create the appearance of an accidental overdose that never actually occurred.",
+        "position": 0.65,
+        "participants": {
+          "characters": ["char_marta", "char_blanc"],
+          "places": ["place_medical_examiners"],
+          "objects": ["obj_switched_vials"]
+        },
+        "character_states": {
+          "char_marta": "stunned with relief and then horror — she is innocent, but someone tried to make her a murderer",
+          "char_blanc": "vindicated in his instincts, now zeroing in on who had access to Marta's medical bag"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_marta",
+            "change": "learns",
+            "detail": "Marta discovers she never poisoned Harlan — her muscle memory saved him, though he died believing otherwise."
+          },
+          {
+            "entity_id": "obj_switched_vials",
+            "change": "reveals",
+            "description": "The vials prove the labels were deliberately swapped, confirming premeditated tampering rather than accident."
+          },
+          {
+            "entity_id": "char_blanc",
+            "change": "decides",
+            "detail": "Blanc shifts focus from 'who killed Harlan' to 'who set Marta up' — a reframing that points directly at Ransom."
+          }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "MU_N07_CONFRONTATION",
+        "label": "Ransom Unmasked",
+        "description": "Blanc assembles the family and confronts Ransom with the full reconstruction: Ransom switched the vials, anonymously hired Blanc to pressure Marta into confessing, destroyed the real toxicology report, and poisoned Fran when she became a witness. Marta triggers his confession by telling him Fran survived and identified him — causing Ransom to blurt out self-incriminating details. He lunges at Marta with a knife from the display ring, but it turns out to be a retractable prop. He is arrested.",
+        "position": 0.85,
+        "participants": {
+          "characters": ["char_marta", "char_ransom", "char_blanc", "char_linda", "char_walt"],
+          "places": ["place_thrombey_estate"],
+          "objects": ["obj_knife_ring", "obj_switched_vials"]
+        },
+        "character_states": {
+          "char_ransom": "cornered and finally dropping his charming mask, revealing pure venom and desperation",
+          "char_marta": "brave enough to provoke Ransom's confession despite the danger, using his own tactics against him",
+          "char_blanc": "triumphant but measured, having orchestrated the confrontation with surgical precision",
+          "char_linda": "horrified to see her son exposed as a would-be murderer"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_ransom",
+            "change": "reveals",
+            "description": "Ransom's confession tumbles out when Marta baits him with false information about Fran's survival."
+          },
+          {
+            "entity_id": "char_ransom",
+            "change": "loses",
+            "detail": "Ransom loses everything — his freedom, his family's support, and any claim to the inheritance he killed for."
+          },
+          {
+            "entity_id": "obj_knife_ring",
+            "change": "reveals",
+            "description": "The knife Ransom grabs is a retractable prop — even his final violent act is hollow and theatrical."
+          }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "MU_N08_NEW_UNDERSTANDING",
+        "label": "Marta on the Balcony",
+        "description": "With Ransom arrested and the truth fully revealed, Marta stands on the balcony of the Thrombey estate — now her estate — looking down at the assembled family below. She holds a coffee mug reading 'My House, My Rules, My Coffee.' The woman they dismissed as 'the help' now owns everything. The mystery's resolution has not just identified a killer but overturned the entire power structure, rewarding genuine goodness over inherited entitlement.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_marta", "char_linda", "char_walt"],
+          "places": ["place_thrombey_estate"],
+          "objects": ["obj_will"]
+        },
+        "character_states": {
+          "char_marta": "quietly triumphant, inheriting the estate with clean hands and a clear conscience",
+          "char_linda": "defeated, forced to confront that her self-made mythology could not protect her son from his own nature",
+          "char_walt": "powerless, having lost both his father's business and any leverage over Marta"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_marta",
+            "change": "gains",
+            "detail": "Marta gains the full Thrombey estate, vindicated by the truth and Harlan's faith in her character."
+          },
+          {
+            "entity_id": "char_marta",
+            "change": "transforms",
+            "description": "Marta transforms from a guilt-ridden caretaker hiding a secret into the rightful owner of the estate, standing above the family that tried to destroy her."
+          },
+          {
+            "entity_id": "char_linda",
+            "change": "loses",
+            "detail": "Linda loses her son to prison and her inheritance to the woman she looked down upon."
+          }
+        ]
+      }
+    ]
+  }
+}

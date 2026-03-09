@@ -7,7 +7,7 @@ import { memo } from 'react'
 import { useUIStore } from '../store/uiStore.ts'
 import { NavDrawer } from './NavDrawer.tsx'
 
-const BAR_HEIGHT = 44
+const BAR_HEIGHT = 32
 
 interface AppShellBarProps {
   /** Optional page title override. Defaults to "Story Structure Explorer". */
@@ -45,8 +45,6 @@ export const AppShellBar = memo(function AppShellBar({ title, children }: AppShe
             fontSize: 18,
             padding: '4px 8px',
             color: 'var(--text-muted)',
-            minHeight: 44,
-            minWidth: 44,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

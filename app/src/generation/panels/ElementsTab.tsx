@@ -44,12 +44,14 @@ export function ElementsTab() {
 
     try {
       let adapter = useRequestStore.getState().bridgeAdapter
-      if (!adapter || !adapter.connected) {
-        await connectBridge()
+      if (!adapter) {
+        try {
+          await connectBridge()
+        } catch { /* handled below */ }
         adapter = useRequestStore.getState().bridgeAdapter
       }
       if (!adapter) {
-        setFillError('Bridge not connected. Connect LLM first via the Pipeline tab.')
+        setFillError('LLM not connected. Configure and connect via the Pipeline tab.')
         setFillingDetails(false)
         return
       }

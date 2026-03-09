@@ -17,9 +17,26 @@ import { stripJsonFences } from './jsonUtils.ts'
  *  so child `claude --print` doesn't detect a nested session and refuse to start. */
 function cleanEnv(): NodeJS.ProcessEnv {
   const env = { ...process.env }
-  delete env.CLAUDECODE
-  delete env.CLAUDE_CODE_SSE_PORT
-  delete env.CLAUDE_CODE_ENTRYPOINT
+  // Remove all known Claude Code session detection vars
+  const SESSION_VARS = [
+    'CLAUDECODE',
+    'CLAUDE_CODE_SSE_PORT',
+    'CLAUDE_CODE_ENTRYPOINT',
+    'CLAUDE_CODE_SESSION_ID',
+    'CLAUDE_CODE_CONVERSATION_ID',
+    'CLAUDE_CODE_PROJECT_DIR',
+    'CLAUDE_CODE_PARENT_SESSION',
+    'CLAUDE_CODE_NESTED',
+  ]
+  for (const key of SESSION_VARS) {
+    delete env[key]
+  }
+  // Also remove any dynamically-set CLAUDE_CODE_* vars we may have missed
+  for (const key of Object.keys(env)) {
+    if (key.startsWith('CLAUDE_CODE_')) {
+      delete env[key]
+    }
+  }
   return env
 }
 
@@ -33,7 +50,7 @@ export interface ClaudeCodeAdapterOptions {
   /** Model to pass via --model flag. Omit to use Claude Code's default.
    *  Accepts aliases: 'opus', 'sonnet', 'haiku' or full names like 'claude-opus-4-6'. */
   model?: string
-  /** Maximum tokens for the response via --max-tokens flag. */
+  /** @deprecated Not supported by claude CLI. Ignored. */
   maxTokens?: number
   /** Reasoning effort level: 'low', 'medium', 'high'. */
   effort?: 'low' | 'medium' | 'high'
@@ -56,7 +73,6 @@ export interface ClaudeCodeAdapterOptions {
 export class ClaudeCodeAdapter implements LLMAdapter {
   private claudePath: string
   private model: string | undefined
-  private maxTokens: number | undefined
   private effort: string | undefined
   private maxBudgetUsd: number | undefined
   private extraFlags: string[]
@@ -68,7 +84,6 @@ export class ClaudeCodeAdapter implements LLMAdapter {
   constructor(options: ClaudeCodeAdapterOptions = {}) {
     this.claudePath = options.claudePath ?? 'claude'
     this.model = options.model
-    this.maxTokens = options.maxTokens
     this.effort = options.effort
     this.maxBudgetUsd = options.maxBudgetUsd
     this.extraFlags = options.extraFlags ?? []
@@ -217,10 +232,6 @@ export class ClaudeCodeAdapter implements LLMAdapter {
       args.push('--model', this.model)
     }
 
-    if (this.maxTokens) {
-      args.push('--max-tokens', String(this.maxTokens))
-    }
-
     if (this.effort) {
       args.push('--effort', this.effort)
     }
@@ -254,15 +265,15 @@ export class ClaudeCodeAdapter implements LLMAdapter {
         timeout: this.timeout,
       })
 
-      let stdout = ''
-      let stderr = ''
+      const stdoutChunks: string[] = []
+      const stderrChunks: string[] = []
 
       proc.stdout.on('data', (chunk: Buffer) => {
-        stdout += chunk.toString()
+        stdoutChunks.push(chunk.toString())
       })
 
       proc.stderr.on('data', (chunk: Buffer) => {
-        stderr += chunk.toString()
+        stderrChunks.push(chunk.toString())
       })
 
       proc.on('error', (err) => {
@@ -273,21 +284,31 @@ export class ClaudeCodeAdapter implements LLMAdapter {
         ))
       })
 
-      proc.on('close', (code, signal) => {
+      // Wait for both streams to close before processing exit code,
+      // so we capture all stderr/stdout data (avoids race condition).
+      let stdoutEnded = false
+      let stderrEnded = false
+      let exitCode: number | null = null
+      let exitSignal: NodeJS.Signals | null = null
+
+      const tryFinish = () => {
+        if (!stdoutEnded || !stderrEnded || exitCode === undefined) return
+
+        const stdout = stdoutChunks.join('')
+        const stderr = stderrChunks.join('')
+
         if (this.verbose) {
-          console.error(`[claude-code-adapter] Call #${callId} — exit code ${code}, signal ${signal}, ${stdout.length} chars response`)
+          console.error(`[claude-code-adapter] Call #${callId} — exit code ${exitCode}, signal ${exitSignal}, ${stdout.length} chars response`)
           if (stderr.trim()) {
             console.error(`[claude-code-adapter] stderr: ${stderr.trim().slice(0, 500)}`)
           }
         }
 
-        if (code !== 0) {
-          const signalInfo = signal ? ` (signal: ${signal})` : ''
-          const hint = code === null
+        if (exitCode !== 0) {
+          const signalInfo = exitSignal ? ` (signal: ${exitSignal})` : ''
+          const hint = exitCode === null
             ? '\nProcess was killed — possible causes: timeout, out of memory, or OS termination.'
             : ''
-          // Claude CLI often writes errors to stdout, not stderr.
-          // Include both streams so the actual error message is visible.
           const stderrMsg = stderr.trim().slice(0, 500)
           const stdoutMsg = stdout.trim().slice(0, 500)
           const details = [
@@ -295,12 +316,20 @@ export class ClaudeCodeAdapter implements LLMAdapter {
             stdoutMsg ? `stdout: ${stdoutMsg}` : null,
           ].filter(Boolean).join('\n') || '(no output captured)'
           reject(new Error(
-            `[claude-code-adapter] Call #${callId}: claude exited with code ${code}${signalInfo}${hint}\n${details}`
+            `[claude-code-adapter] Call #${callId}: claude exited with code ${exitCode}${signalInfo}${hint}\n${details}`
           ))
           return
         }
 
         resolve(stdout.trim())
+      }
+
+      proc.stdout.on('end', () => { stdoutEnded = true; tryFinish() })
+      proc.stderr.on('end', () => { stderrEnded = true; tryFinish() })
+      proc.on('close', (code, signal) => {
+        exitCode = code
+        exitSignal = signal
+        tryFinish()
       })
 
       // Write prompt to stdin and close

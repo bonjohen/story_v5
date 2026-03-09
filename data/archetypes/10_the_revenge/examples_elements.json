@@ -1,0 +1,336 @@
+{
+  "story_id": "count_of_monte_cristo",
+  "story_title": "The Count of Monte Cristo",
+  "archetype_id": "archetype_10_the_revenge",
+  "characters": [
+    {
+      "id": "char_dantes",
+      "name": "Edmond Dant\u00e8s / Count of Monte Cristo",
+      "role": "protagonist",
+      "traits": ["intelligent", "patient", "resourceful", "obsessive", "charismatic"],
+      "motivations": ["punish those who wronged him", "reclaim stolen life", "prove his innocence", "test the limits of justice"],
+      "arc_type": "transformation",
+      "relationships": [
+        { "target": "char_faria", "type": "mentor_student", "detail": "Faria educates Dant\u00e8s during imprisonment, giving him the tools for his transformation" },
+        { "target": "char_mercedes", "type": "romantic", "detail": "Former fianc\u00e9e whose marriage to Fernand deepens Dant\u00e8s's sense of betrayal" },
+        { "target": "char_fernand", "type": "nemesis", "detail": "Childhood rival who conspired to have Dant\u00e8s imprisoned out of jealousy" },
+        { "target": "char_danglars", "type": "nemesis", "detail": "Jealous colleague who authored the denunciation letter" },
+        { "target": "char_villefort", "type": "nemesis", "detail": "Prosecutor who buried Dant\u00e8s to protect his own political ambitions" }
+      ]
+    },
+    {
+      "id": "char_fernand",
+      "name": "Fernand Mondego",
+      "role": "antagonist",
+      "traits": ["envious", "ambitious", "cowardly", "duplicitous", "status-seeking"],
+      "motivations": ["possess Merc\u00e9d\u00e8s", "rise in social rank", "eliminate rivals"],
+      "arc_type": "fall",
+      "relationships": [
+        { "target": "char_dantes", "type": "nemesis", "detail": "Betrayed his supposed friend to steal his fianc\u00e9e" },
+        { "target": "char_mercedes", "type": "romantic", "detail": "Married Merc\u00e9d\u00e8s during Dant\u00e8s's imprisonment" }
+      ]
+    },
+    {
+      "id": "char_faria",
+      "name": "Abb\u00e9 Faria",
+      "role": "mentor",
+      "traits": ["erudite", "generous", "wise", "dying", "visionary"],
+      "motivations": ["pass on his knowledge before death", "give Dant\u00e8s purpose", "see justice done by proxy"],
+      "arc_type": "steady",
+      "relationships": [
+        { "target": "char_dantes", "type": "mentor_student", "detail": "Teaches Dant\u00e8s languages, science, history, and reveals the treasure of Monte Cristo" }
+      ]
+    },
+    {
+      "id": "char_danglars",
+      "name": "Danglars",
+      "role": "antagonist",
+      "traits": ["greedy", "calculating", "petty", "materialistic", "scheming"],
+      "motivations": ["accumulate wealth", "surpass Dant\u00e8s professionally", "avoid consequences"],
+      "arc_type": "fall",
+      "relationships": [
+        { "target": "char_dantes", "type": "rival", "detail": "Envied Dant\u00e8s's promotion and drafted the false accusation" }
+      ]
+    },
+    {
+      "id": "char_villefort",
+      "name": "Villefort",
+      "role": "antagonist",
+      "traits": ["ruthless", "self-preserving", "hypocritical", "authoritarian", "secretive"],
+      "motivations": ["protect his political career", "conceal his father's Bonapartist ties", "maintain public respectability"],
+      "arc_type": "fall",
+      "relationships": [
+        { "target": "char_dantes", "type": "betrayer", "detail": "Knew Dant\u00e8s was innocent but imprisoned him to protect his own secrets" }
+      ]
+    },
+    {
+      "id": "char_mercedes",
+      "name": "Merc\u00e9d\u00e8s",
+      "role": "love_interest",
+      "traits": ["faithful", "sorrowful", "dignified", "conflicted", "perceptive"],
+      "motivations": ["survive after losing Dant\u00e8s", "protect her son Albert", "find peace with the past"],
+      "arc_type": "endurance",
+      "relationships": [
+        { "target": "char_dantes", "type": "romantic", "detail": "Never stopped loving Dant\u00e8s despite marrying Fernand" },
+        { "target": "char_fernand", "type": "romantic", "detail": "Married Fernand believing Dant\u00e8s was dead" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_marseille",
+      "name": "Marseille",
+      "type": "ordinary_world",
+      "description": "The bustling Mediterranean port where young Dant\u00e8s works as a sailor, surrounded by friends, love, and the promise of a captaincy.",
+      "atmosphere": "sunlit, hopeful, communal"
+    },
+    {
+      "id": "place_chateau_dif",
+      "name": "Ch\u00e2teau d'If",
+      "type": "underworld",
+      "description": "The island fortress-prison where Dant\u00e8s is held for fourteen years without trial, slowly transforming from an innocent young man into a vessel of vengeance.",
+      "atmosphere": "dark, oppressive, isolating"
+    },
+    {
+      "id": "place_monte_cristo",
+      "name": "Island of Monte Cristo",
+      "type": "sanctuary",
+      "description": "The remote island where Faria's treasure lies hidden, serving as the crucible of Dant\u00e8s's rebirth as the Count.",
+      "atmosphere": "wild, mythic, transformative"
+    },
+    {
+      "id": "place_paris",
+      "name": "Paris",
+      "type": "special_world",
+      "description": "The glittering capital where the Count orchestrates his elaborate schemes against Fernand, Danglars, and Villefort, who have risen to positions of power.",
+      "atmosphere": "opulent, treacherous, theatrical"
+    },
+    {
+      "id": "place_auteuil",
+      "name": "Villefort's House at Auteuil",
+      "type": "stronghold",
+      "description": "Villefort's country house concealing buried secrets\u2014literally and figuratively\u2014that the Count exploits to unravel the prosecutor's carefully constructed life.",
+      "atmosphere": "haunted, secretive, claustrophobic"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_treasure",
+      "name": "Treasure of Monte Cristo",
+      "type": "treasure",
+      "description": "An immense fortune hidden by the Spada family on the island of Monte Cristo, revealed to Dant\u00e8s by Abb\u00e9 Faria. It funds his entire campaign of retribution.",
+      "significance": "Transforms Dant\u00e8s from a penniless escapee into an almost supernaturally wealthy and powerful figure capable of manipulating high society.",
+      "rules": [
+        "Grants near-unlimited financial power but cannot restore lost time or innocence",
+        "Enables the Count's disguises and elaborate schemes",
+        "Symbolizes the double-edged nature of worldly power"
+      ]
+    },
+    {
+      "id": "obj_letter",
+      "name": "The Denunciation Letter",
+      "type": "document",
+      "description": "The anonymous letter written by Danglars accusing Dant\u00e8s of being a Bonapartist agent, which Fernand posted and Villefort exploited.",
+      "significance": "The instrument of Dant\u00e8s's false imprisonment and the physical proof connecting all three conspirators to his destruction.",
+      "rules": [
+        "Serves as irrefutable evidence of the conspiracy",
+        "Villefort destroyed his copy, but the Count uncovers the truth through other means",
+        "Represents how a single written lie can annihilate an innocent life"
+      ]
+    },
+    {
+      "id": "obj_pharaon",
+      "name": "The Pharaon (Ship)",
+      "type": "vessel",
+      "description": "The merchant vessel Dant\u00e8s captained before his arrest, later lost by Morrel's shipping firm. The Count secretly replaces it as an act of gratitude.",
+      "significance": "Symbolizes the life stolen from Dant\u00e8s and the one thread of grace in his revenge\u2014his capacity to reward the loyal as fiercely as he punishes the treacherous.",
+      "rules": [
+        "Represents Dant\u00e8s's lost ordinary life and honest ambitions",
+        "Its replacement demonstrates the Count's power to restore as well as destroy",
+        "Connects to Morrel, the one figure who tried to help Dant\u00e8s"
+      ]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_monte_cristo_revenge",
+    "story_id": "count_of_monte_cristo",
+    "archetype_id": "archetype_10_the_revenge",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "RV_N01_ORIGINAL_STATE",
+        "label": "The Promised Life",
+        "description": "Young Edmond Dant\u00e8s returns to Marseille aboard the Pharaon, about to be named captain and to marry his beloved Merc\u00e9d\u00e8s. He is trusting, optimistic, and unaware that jealousy festers among those closest to him.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_dantes", "char_mercedes", "char_fernand", "char_danglars"],
+          "places": ["place_marseille"],
+          "objects": ["obj_pharaon"]
+        },
+        "character_states": {
+          "char_dantes": "innocent, joyful, trusting",
+          "char_mercedes": "loving, hopeful",
+          "char_fernand": "envious, scheming beneath a friendly exterior",
+          "char_danglars": "resentful of Dant\u00e8s's promotion"
+        },
+        "transitions": [
+          { "entity_id": "char_fernand", "change": "decides", "target": "char_dantes", "detail": "Agrees to Danglars's plot to denounce Dant\u00e8s" },
+          { "entity_id": "char_danglars", "change": "reveals", "description": "Drafts the anonymous denunciation letter accusing Dant\u00e8s of treason" }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "RV_N02_INCITING_WRONG",
+        "label": "Arrest and Burial Alive",
+        "description": "On the eve of his wedding, Dant\u00e8s is arrested on false charges of Bonapartist conspiracy. Villefort, knowing Dant\u00e8s is innocent, sentences him to indefinite imprisonment at the Ch\u00e2teau d'If to protect his own political secrets. Dant\u00e8s's life is obliterated in a single night.",
+        "position": 0.12,
+        "participants": {
+          "characters": ["char_dantes", "char_villefort", "char_mercedes"],
+          "places": ["place_marseille", "place_chateau_dif"],
+          "objects": ["obj_letter"]
+        },
+        "character_states": {
+          "char_dantes": "bewildered, pleading, then despairing",
+          "char_villefort": "coldly calculating, sacrificing an innocent to preserve his career",
+          "char_mercedes": "devastated, left without explanation"
+        },
+        "transitions": [
+          { "entity_id": "char_dantes", "change": "loses", "description": "Loses his freedom, his fianc\u00e9e, his career, and his identity in one stroke" },
+          { "entity_id": "char_dantes", "change": "arrives", "target": "place_chateau_dif", "detail": "Imprisoned without trial in a lightless cell" },
+          { "entity_id": "char_mercedes", "change": "loses", "target": "char_dantes", "detail": "Believes Dant\u00e8s has vanished forever" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "RV_N03_VOW",
+        "label": "The Oath in the Dark",
+        "description": "After years of solitary confinement, Dant\u00e8s meets Abb\u00e9 Faria through a tunnel between their cells. Faria educates him, reveals the conspiracy behind his imprisonment, and tells him of the treasure on Monte Cristo. When Faria dies, Dant\u00e8s takes his place in the burial sack and escapes. He vows to become the instrument of Providence, rewarding the faithful and punishing the wicked.",
+        "position": 0.25,
+        "participants": {
+          "characters": ["char_dantes", "char_faria"],
+          "places": ["place_chateau_dif"],
+          "objects": ["obj_treasure"]
+        },
+        "character_states": {
+          "char_dantes": "reborn with purpose, burning with cold resolve",
+          "char_faria": "dying, passing his legacy to a worthy heir"
+        },
+        "transitions": [
+          { "entity_id": "char_dantes", "change": "learns", "description": "Acquires languages, sciences, history, and swordsmanship from Faria over many years" },
+          { "entity_id": "char_faria", "change": "dies", "description": "Dies in prison, bequeathing the treasure's location and his intellectual legacy" },
+          { "entity_id": "char_dantes", "change": "decides", "description": "Swears to use the treasure to enact justice upon Fernand, Danglars, and Villefort" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "RV_N04_PREPARATION",
+        "label": "Rebirth as the Count",
+        "description": "Dant\u00e8s escapes the Ch\u00e2teau d'If, recovers the treasure from the island of Monte Cristo, and spends years crafting multiple identities\u2014the Count of Monte Cristo, the Abb\u00e9 Busoni, Lord Wilmore. He investigates every detail of his enemies' lives, their weaknesses, their secrets, and their families.",
+        "position": 0.38,
+        "participants": {
+          "characters": ["char_dantes"],
+          "places": ["place_monte_cristo", "place_paris"],
+          "objects": ["obj_treasure"]
+        },
+        "character_states": {
+          "char_dantes": "methodical, patient, assuming the persona of an omniscient aristocrat"
+        },
+        "transitions": [
+          { "entity_id": "char_dantes", "change": "gains", "description": "Claims the Spada treasure, becoming one of the wealthiest men in Europe" },
+          { "entity_id": "char_dantes", "change": "transforms", "description": "Sheds his identity as a simple sailor and becomes the enigmatic Count of Monte Cristo" },
+          { "entity_id": "char_dantes", "change": "arrives", "target": "place_paris", "detail": "Enters Parisian society as a mysterious, impossibly wealthy stranger" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "RV_N05_PURSUIT",
+        "label": "The Web Tightens",
+        "description": "In Paris, the Count systematically dismantles his three enemies. He exposes Fernand's treachery in the Ali Pasha affair, bankrupts Danglars through manipulated investments, and unearths Villefort's buried crimes at Auteuil\u2014including attempted infanticide. Each scheme is tailored to the specific sin of its target: betrayal destroys the betrayer, greed consumes the greedy, hypocrisy unmasks the hypocrite.",
+        "position": 0.55,
+        "participants": {
+          "characters": ["char_dantes", "char_fernand", "char_danglars", "char_villefort"],
+          "places": ["place_paris", "place_auteuil"],
+          "objects": ["obj_letter"]
+        },
+        "character_states": {
+          "char_dantes": "coldly precise, orchestrating ruin from behind a mask of charm",
+          "char_fernand": "increasingly exposed, his fabricated honor crumbling",
+          "char_danglars": "hemorrhaging wealth, panicking",
+          "char_villefort": "watching his household disintegrate as poisoning and old sins surface"
+        },
+        "transitions": [
+          { "entity_id": "char_fernand", "change": "reveals", "description": "His betrayal of Ali Pasha is made public, destroying his military reputation" },
+          { "entity_id": "char_danglars", "change": "loses", "description": "Loses his fortune through the Count's financial manipulations" },
+          { "entity_id": "char_villefort", "change": "reveals", "description": "His buried crimes at Auteuil are systematically brought to light" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "RV_N06_MORAL_CROSSROADS",
+        "label": "The Cost of Vengeance",
+        "description": "The Count's schemes produce unintended casualties. Villefort's wife, driven to madness by the Count's indirect influence, poisons members of the household including her own child. Merc\u00e9d\u00e8s confronts the Count and begs for her son Albert's life. Dant\u00e8s is forced to confront whether he has become as monstrous as those he punishes\u2014whether Providence's instrument has overstepped into mere cruelty.",
+        "position": 0.7,
+        "participants": {
+          "characters": ["char_dantes", "char_mercedes", "char_villefort"],
+          "places": ["place_paris"],
+          "objects": []
+        },
+        "character_states": {
+          "char_dantes": "shaken, questioning whether his justice has become injustice",
+          "char_mercedes": "grief-stricken, forcing Dant\u00e8s to see the human cost of his vengeance",
+          "char_villefort": "unraveling as his family is destroyed"
+        },
+        "transitions": [
+          { "entity_id": "char_dantes", "change": "learns", "description": "Recognizes that his vengeance has harmed innocents and that he is not God" },
+          { "entity_id": "char_mercedes", "change": "reveals", "target": "char_dantes", "detail": "Reveals she always knew the Count's true identity and appeals to the man he once was" },
+          { "entity_id": "char_dantes", "change": "decides", "description": "Chooses to spare Albert and begins to question the totality of his mission" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "RV_N07_FINAL_RECKONING",
+        "label": "Three Falls",
+        "description": "Each enemy meets an end shaped by his own sin. Fernand, publicly disgraced and abandoned by his wife and son, shoots himself. Danglars, stripped of every franc, is captured and starved until he understands what it means to truly need. Villefort, discovering his wife and child dead by poison, goes irrevocably mad. The Count has destroyed them all\u2014but the victories taste of ash.",
+        "position": 0.85,
+        "participants": {
+          "characters": ["char_dantes", "char_fernand", "char_danglars", "char_villefort"],
+          "places": ["place_paris"],
+          "objects": []
+        },
+        "character_states": {
+          "char_dantes": "triumphant yet hollowed, realizing vengeance cannot restore what was lost",
+          "char_fernand": "utterly ruined, choosing death over dishonor",
+          "char_danglars": "broken, begging for mercy",
+          "char_villefort": "insane, clutching his dead child"
+        },
+        "transitions": [
+          { "entity_id": "char_fernand", "change": "dies", "description": "Takes his own life after public disgrace and abandonment by his family" },
+          { "entity_id": "char_danglars", "change": "transforms", "description": "Reduced from banker to beggar, finally granted mercy by the Count" },
+          { "entity_id": "char_villefort", "change": "transforms", "description": "Descends into permanent madness upon finding his family destroyed" }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "RV_N08_AFTERMATH",
+        "label": "Wait and Hope",
+        "description": "With his vengeance complete, the Count releases Danglars with a final lesson, gives away portions of his fortune to the deserving, and departs with Hayd\u00e9e, who loves him. He leaves behind a letter to Maximilian Morrel with his final wisdom: all human wisdom is contained in two words\u2014wait and hope. The avenger, having exhausted his wrath, chooses to live again.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_dantes", "char_mercedes"],
+          "places": ["place_monte_cristo"],
+          "objects": ["obj_treasure"]
+        },
+        "character_states": {
+          "char_dantes": "weary but finally releasing his rage, choosing hope over vengeance",
+          "char_mercedes": "alone but at peace, having preserved her son and her dignity"
+        },
+        "transitions": [
+          { "entity_id": "char_dantes", "change": "transforms", "description": "Releases the identity of the Count and the burden of vengeance, choosing to live as a man again" },
+          { "entity_id": "char_dantes", "change": "departs", "target": "place_paris", "detail": "Leaves Europe with Hayd\u00e9e, sailing into an uncertain but hopeful future" },
+          { "entity_id": "char_mercedes", "change": "decides", "description": "Accepts her solitude with grace, having refused the Count's offered fortune" }
+        ]
+      }
+    ]
+  }
+}

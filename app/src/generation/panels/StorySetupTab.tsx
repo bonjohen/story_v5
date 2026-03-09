@@ -123,7 +123,7 @@ export function StorySetupTab() {
           value={premise}
           onChange={(e) => setPremise(e.target.value)}
           disabled={running}
-          rows={4}
+          rows={10}
           placeholder="Describe your story idea in a sentence or two..."
           style={{
             ...INPUT,

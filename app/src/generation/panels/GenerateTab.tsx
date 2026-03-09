@@ -35,7 +35,6 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const genre = useRequestStore((s) => s.genre)
   const tone = useRequestStore((s) => s.tone)
   const maxLlmCalls = useRequestStore((s) => s.maxLlmCalls)
-  const llmBackend = useRequestStore((s) => s.llmBackend)
   const connectBridge = useRequestStore((s) => s.connectBridge)
 
   const loadInstance = useInstanceStore((s) => s.loadInstance)
@@ -81,21 +80,18 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
     const req = buildRequest()
     const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: maxLlmCalls }
 
-    if (llmBackend === 'bridge') {
-      let adapter = useRequestStore.getState().bridgeAdapter
-      if (!adapter || !adapter.connected) {
-        try {
-          await connectBridge()
-          adapter = useRequestStore.getState().bridgeAdapter
-        } catch {
-          return
-        }
+    // Always try bridge connection
+    let adapter = useRequestStore.getState().bridgeAdapter
+    if (!adapter) {
+      try {
+        await connectBridge()
+        adapter = useRequestStore.getState().bridgeAdapter
+      } catch {
+        // fall through — will run without LLM
       }
-      void startRun(req, config, 'draft', adapter)
-    } else {
-      void startRun(req, config, 'draft', null)
     }
-  }, [buildRequest, maxLlmCalls, llmBackend, startRun, connectBridge])
+    void startRun(req, config, 'draft', adapter ?? null)
+  }, [buildRequest, maxLlmCalls, startRun, connectBridge])
 
   const handleSaveInstance = useCallback(() => {
     if (!detailBindings) return

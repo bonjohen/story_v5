@@ -1,10 +1,9 @@
-import { useEffect, useCallback, useRef, useState, memo } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 import { useLocation } from 'react-router-dom'
-import { GlobalSearch } from './components/GlobalSearch.tsx'
-import { GraphSearch } from './components/GraphSearch.tsx'
 import { SettingsPanel } from './components/SettingsPanel.tsx'
 import { ExportPanel } from './panels/ExportPanel.tsx'
 import { AppShellBar } from './components/AppShell.tsx'
+import { GraphViewer } from './components/GraphViewer.tsx'
 import { useUIStore } from './store/uiStore.ts'
 import { PipelineTab } from './generation/panels/PipelineTab.tsx'
 import { StorySetupTab } from './generation/panels/StorySetupTab.tsx'
@@ -20,20 +19,6 @@ import { nameToDir } from './generation/panels/generationConstants.ts'
 import { loadPremiseLookup, lookupPremise } from './generation/engine/premiseLookup.ts'
 import type { DataManifest } from './types/graph.ts'
 
-// Layout constants
-const GEN_PANEL_WIDTH = 340
-const MOBILE_BREAKPOINT = 768
-
-/** Hook to detect mobile viewport. */
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT)
-  useEffect(() => {
-    const handler = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
-    window.addEventListener('resize', handler)
-    return () => window.removeEventListener('resize', handler)
-  }, [])
-  return isMobile
-}
 
 /** Parse the URL pathname into a graph type and directory slug. */
 function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: string } | null {
@@ -46,8 +31,6 @@ function parseRoute(pathname: string): { type: 'archetype' | 'genre'; dir: strin
 export default function App() {
   const location = useLocation()
   const manifestLoaded = useRef(false)
-  const isMobile = useIsMobile()
-
   // Store state
   const archetypeGraph = useGraphStore((s) => s.archetypeGraph)
   const archetypeDir = useGraphStore((s) => s.archetypeDir)
@@ -77,8 +60,9 @@ export default function App() {
   // UI state
   const [showExport, setShowExport] = useState(false)
   const exportCyRef = useRef(null)
-  const [genTab, setGenTab] = useState<'pipeline' | 'setup' | 'elements' | 'analysis' | 'generate'>('setup')
+  const [genTab, setGenTab] = useState<'pipeline' | 'setup' | 'elements' | 'graph' | 'analysis' | 'generate'>('setup')
   const [manifestError, setManifestError] = useState<string | null>(null)
+  const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
 
 
   // Auto-switch to Generate tab once when draft generation completes
@@ -160,10 +144,6 @@ export default function App() {
     }
   }, [archetypeGraph, archetypeDir, selectNode])
 
-  const handleSearchSelect = useCallback((nodeId: string) => {
-    selectNode(nodeId)
-  }, [selectNode])
-
   return (
     <div className="page-shell" style={{
       display: 'flex',
@@ -179,8 +159,8 @@ export default function App() {
           onClick={toggleGenPanel}
           aria-label={genPanelOpen ? 'Hide generation panel' : 'Show generation panel'}
           style={{
-            fontSize: isMobile ? 13 : 11,
-            padding: isMobile ? '6px 16px' : '3px 10px',
+            fontSize: 11,
+            padding: '3px 10px',
             borderRadius: 4,
             border: '1px solid',
             borderColor: genPanelOpen ? '#22c55e' : 'var(--border)',
@@ -189,11 +169,9 @@ export default function App() {
             cursor: 'pointer',
             transition: 'all 0.15s',
             position: 'relative',
-            minHeight: 44,
-            minWidth: 44,
           }}
         >
-          {genPanelOpen && isMobile ? '\u2715 Close' : 'Generate'}
+          Generate
           {genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED' && (
             <span style={{
               position: 'absolute',
@@ -218,12 +196,6 @@ export default function App() {
             }} />
           )}
         </button>
-
-        {/* Graph search */}
-        {currentGraph && (
-          <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />
-        )}
-        <GlobalSearch />
 
         {/* Export */}
         {currentGraph && (
@@ -257,8 +229,6 @@ export default function App() {
             color: settingsOpen ? 'var(--accent)' : 'var(--text-muted)',
             borderRadius: 4,
             transition: 'color 0.15s',
-            minHeight: 44,
-            minWidth: 44,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -299,52 +269,47 @@ export default function App() {
         />
       )}
 
-      {/* Main layout: Generation panel (left) + content (center) */}
+      {/* Main layout: Generation panel (left) + graph viewer (center) */}
       <div className="main-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
 
-        {/* Generation panel — sidebar on desktop, full-width on mobile */}
+        {/* Generation panel — always full width */}
         {genPanelOpen && <div className="gen-panel" style={{
-          width: isMobile ? '100%' : (genTab === 'analysis' ? '100%' : GEN_PANEL_WIDTH),
-          flexShrink: 0,
+          width: '100%',
           background: 'var(--bg-surface)',
-          borderRight: isMobile || genTab === 'analysis' ? 'none' : '1px solid var(--border)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
-          ...(isMobile && genTab !== 'analysis' ? { position: 'absolute', top: 0, left: 0, bottom: 0, zIndex: 20 } : {}),
         }}>
-          {/* 5 fixed generation tabs */}
+          {/* 6 fixed generation tabs */}
           <div style={{
             display: 'flex',
             borderBottom: '1px solid var(--border)',
             flexShrink: 0,
           }}>
-            <GenTab label="Pipeline" active={genTab === 'pipeline'} onClick={() => setGenTab('pipeline')} />
             <GenTab label="Setup" active={genTab === 'setup'} onClick={() => setGenTab('setup')} highlight />
             <GenTab label="Elements" active={genTab === 'elements'} onClick={() => setGenTab('elements')} badge={!!genBackbone} />
-            <GenTab label="Analysis" active={genTab === 'analysis'} onClick={() => setGenTab('analysis')} badge={!!currentGraph} />
+            <GenTab label="Graph" active={genTab === 'graph'} onClick={() => setGenTab('graph')} badge={!!currentGraph} />
+            <GenTab label="Analysis" active={genTab === 'analysis'} onClick={() => setGenTab('analysis')} />
             <GenTab label="Generate" active={genTab === 'generate'} onClick={() => setGenTab('generate')} badge={genSceneDrafts.size > 0 || (genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED')} />
+            <GenTab label="Pipeline" active={genTab === 'pipeline'} onClick={() => setGenTab('pipeline')} />
           </div>
-          <div style={{ flex: 1, overflowY: genTab === 'analysis' ? 'hidden' : 'auto', display: 'flex', flexDirection: 'column' }}>
-            {genTab === 'pipeline' && <PipelineTab />}
+          <div style={{ flex: 1, overflowY: genTab === 'graph' ? 'hidden' : 'auto', display: 'flex', flexDirection: 'column' }}>
             {genTab === 'setup' && <StorySetupTab />}
             {genTab === 'elements' && <ElementsTab />}
-            {genTab === 'analysis' && <AnalysisTab />}
-            {genTab === 'generate' && <GenerateTab onHighlightNodes={() => {}} />}
+            {genTab === 'graph' && <GraphViewer genHighlightNodes={genHighlightNodes} />}
+            {genTab === 'analysis' && <AnalysisTab onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'generate' && <GenerateTab onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'pipeline' && <PipelineTab />}
           </div>
         </div>}
 
-        {/* Main content area — shown when Analysis tab is NOT active */}
-        {(!genPanelOpen || genTab !== 'analysis') && (
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--bg-surface)' }}>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontSize: 12 }}>
-              {!genPanelOpen && 'Click Generate to open the panel'}
-            </div>
+        {/* Prompt to open panel when closed */}
+        {!genPanelOpen && (
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontSize: 12, background: 'var(--bg-surface)' }}>
+            Click Generate to open the panel
           </div>
         )}
       </div>
-
-      {/* Screen-reader announcements are handled inside AnalysisTab */}
     </div>
   )
 }
@@ -374,7 +339,6 @@ const GenTab = memo(function GenTab({ label, active, onClick, badge, highlight }
         borderBottom: active ? '2px solid #22c55e' : '2px solid transparent',
         transition: 'color 0.15s, border-color 0.15s',
         position: 'relative',
-        minHeight: 44,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

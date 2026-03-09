@@ -181,22 +181,17 @@ export function GenerationPanel() {
 
     const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: maxLlmCalls }
 
-    // Create LLM adapter based on backend selection
-    if (llmBackend === 'bridge') {
-      // Reuse existing connection or establish new one
-      let adapter = useRequestStore.getState().bridgeAdapter
-      if (!adapter || !adapter.connected) {
-        try {
-          await connectBridge()
-          adapter = useRequestStore.getState().bridgeAdapter
-        } catch {
-          return
-        }
+    // Always try to connect adapter
+    let adapter = useRequestStore.getState().bridgeAdapter
+    if (!adapter) {
+      try {
+        await connectBridge()
+        adapter = useRequestStore.getState().bridgeAdapter
+      } catch {
+        // fall through — will run without LLM
       }
-      void startRun(request, config, mode, adapter)
-    } else {
-      void startRun(request, config, mode, null)
     }
+    void startRun(request, config, mode, adapter ?? null)
   }, [premise, archetype, genre, mode, tone, llmBackend, maxLlmCalls, startRun, connectBridge])
 
   const handleSaveInstance = useCallback(() => {
@@ -216,14 +211,16 @@ export function GenerationPanel() {
     setFillError(null)
 
     try {
-      // Ensure bridge is connected
+      // Ensure LLM is connected
       let adapter = useRequestStore.getState().bridgeAdapter
-      if (!adapter || !adapter.connected) {
-        await connectBridge()
+      if (!adapter) {
+        try {
+          await connectBridge()
+        } catch { /* handled below */ }
         adapter = useRequestStore.getState().bridgeAdapter
       }
       if (!adapter) {
-        setFillError('Bridge not connected. Connect LLM first.')
+        setFillError('LLM not connected. Configure and connect via the Pipeline tab.')
         setFillingDetails(false)
         return
       }
@@ -345,7 +342,7 @@ export function GenerationPanel() {
             value={premise}
             onChange={(e) => setPremise(e.target.value)}
             disabled={running}
-            rows={3}
+            rows={10}
             placeholder="Describe your story idea in a sentence or two..."
             style={{
               ...INPUT,

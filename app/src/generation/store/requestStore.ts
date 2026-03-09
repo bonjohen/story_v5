@@ -3,15 +3,19 @@
  * Persists form values across tab switches and re-renders.
  * The GenerationPanel reads/writes from here instead of local useState.
  *
- * Also manages the bridge adapter lifecycle so connection state
- * survives GenerationPanel mount/unmount cycles (e.g. toggling the panel).
+ * Manages LLM adapter lifecycle — supports:
+ *   - Bridge (WebSocket to local Claude Code bridge server)
+ *   - OpenAI-compatible (direct fetch to Ollama, OpenRouter, LM Studio, etc.)
+ *   - None (deterministic template output only)
  */
 
 import { create } from 'zustand'
 import { BridgeAdapter } from '../bridge/bridgeAdapter.ts'
+import { OpenAICompatibleAdapter } from '../agents/openaiCompatibleAdapter.ts'
+import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import type { GenerationMode } from '../artifacts/types.ts'
 
-export type LlmBackend = 'none' | 'bridge'
+export type LlmBackend = 'none' | 'bridge' | 'openai'
 export type BridgeStatus = 'disconnected' | 'connecting' | 'connected' | 'error'
 
 export interface RequestStoreState {
@@ -25,9 +29,14 @@ export interface RequestStoreState {
   bridgeUrl: string
   maxLlmCalls: number
 
-  // Bridge connection — lives in store so it survives panel unmount
+  // OpenAI-compatible settings
+  openaiBaseUrl: string
+  openaiModel: string
+  openaiApiKey: string
+
+  // Connection state — lives in store so it survives panel unmount
   bridgeStatus: BridgeStatus
-  bridgeAdapter: BridgeAdapter | null
+  bridgeAdapter: LLMAdapter | null
 
   // Slot overrides — user-edited values for template slots
   // Keyed by slot_name, value is the user's override (empty string = use default)
@@ -42,6 +51,9 @@ export interface RequestStoreState {
   setLlmBackend: (v: LlmBackend) => void
   setBridgeUrl: (v: string) => void
   setMaxLlmCalls: (v: number) => void
+  setOpenaiBaseUrl: (v: string) => void
+  setOpenaiModel: (v: string) => void
+  setOpenaiApiKey: (v: string) => void
   setSlotOverride: (slotName: string, value: string) => void
   clearSlotOverrides: () => void
   connectBridge: () => Promise<void>
@@ -57,6 +69,9 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
   llmBackend: 'none',
   bridgeUrl: 'ws://127.0.0.1:8765',
   maxLlmCalls: 20,
+  openaiBaseUrl: 'http://localhost:11434/v1',
+  openaiModel: 'qwen3:32b',
+  openaiApiKey: '',
   bridgeStatus: 'disconnected',
   bridgeAdapter: null,
   slotOverrides: {},
@@ -69,18 +84,42 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
   setLlmBackend: (v) => set({ llmBackend: v }),
   setBridgeUrl: (v) => set({ bridgeUrl: v }),
   setMaxLlmCalls: (v) => set({ maxLlmCalls: Math.max(1, Math.min(100, v)) }),
+  setOpenaiBaseUrl: (v) => set({ openaiBaseUrl: v }),
+  setOpenaiModel: (v) => set({ openaiModel: v }),
+  setOpenaiApiKey: (v) => set({ openaiApiKey: v }),
   setSlotOverride: (slotName, value) =>
     set((s) => ({ slotOverrides: { ...s.slotOverrides, [slotName]: value } })),
   clearSlotOverrides: () => set({ slotOverrides: {} }),
 
   connectBridge: async () => {
-    const { bridgeStatus, bridgeUrl } = get()
-    if (bridgeStatus === 'connected') return
-    set({ llmBackend: 'bridge', bridgeStatus: 'connecting' })
-    const adapter = new BridgeAdapter({ url: bridgeUrl })
+    const state = get()
+    const { bridgeStatus, llmBackend } = state
+
+    if (bridgeStatus === 'connected') {
+      // Ensure llmBackend is set even if already connected
+      if (llmBackend === 'none') set({ llmBackend: 'openai' })
+      return
+    }
+
+    const backend = llmBackend === 'none' ? 'openai' : llmBackend
+    set({ llmBackend: backend, bridgeStatus: 'connecting' })
+
     try {
-      await adapter.connect()
-      set({ bridgeAdapter: adapter, bridgeStatus: 'connected' })
+      if (backend === 'openai') {
+        // Direct fetch adapter — no connection needed, just validate URL
+        const { openaiBaseUrl, openaiModel, openaiApiKey } = state
+        const adapter = new OpenAICompatibleAdapter({
+          baseUrl: openaiBaseUrl,
+          model: openaiModel,
+          apiKey: openaiApiKey || undefined,
+        })
+        set({ bridgeAdapter: adapter, bridgeStatus: 'connected' })
+      } else {
+        // WebSocket bridge to Claude Code CLI
+        const adapter = new BridgeAdapter({ url: state.bridgeUrl })
+        await adapter.connect()
+        set({ bridgeAdapter: adapter, bridgeStatus: 'connected' })
+      }
     } catch {
       set({ bridgeAdapter: null, bridgeStatus: 'error' })
     }
@@ -88,7 +127,9 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
 
   disconnectBridge: () => {
     const { bridgeAdapter } = get()
-    if (bridgeAdapter) bridgeAdapter.disconnect()
+    if (bridgeAdapter && 'disconnect' in bridgeAdapter) {
+      (bridgeAdapter as BridgeAdapter).disconnect()
+    }
     set({ bridgeAdapter: null, bridgeStatus: 'disconnected' })
   },
 }))

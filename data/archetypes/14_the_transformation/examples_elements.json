@@ -1,0 +1,332 @@
+{
+  "story_id": "black_swan_2010",
+  "story_title": "Black Swan",
+  "archetype_id": "archetype_14_the_transformation",
+  "characters": [
+    {
+      "id": "char_nina",
+      "name": "Nina Sayers",
+      "role": "protagonist",
+      "traits": ["perfectionist", "fragile", "disciplined", "repressed", "obsessive"],
+      "motivations": ["achieve artistic perfection", "earn the lead role in Swan Lake", "escape her mother's control", "embody both the White and Black Swan"],
+      "arc_type": "transformation",
+      "relationships": [
+        { "target": "char_thomas", "type": "mentor_student", "detail": "Thomas pushes Nina to access raw emotion and sensuality she has suppressed" },
+        { "target": "char_lily", "type": "rival", "detail": "Lily represents the uninhibited darkness Nina must integrate" },
+        { "target": "char_erica", "type": "parent_child", "detail": "Erica infantilizes Nina to keep her dependent and controlled" },
+        { "target": "char_beth", "type": "rival", "detail": "Beth is the fading star Nina both idolizes and replaces" }
+      ]
+    },
+    {
+      "id": "char_thomas",
+      "name": "Thomas Leroy",
+      "role": "mentor",
+      "traits": ["seductive", "manipulative", "demanding", "perceptive", "charismatic"],
+      "motivations": ["stage a transcendent production of Swan Lake", "mold Nina into a complete artist", "provoke authentic emotion in his dancers"],
+      "arc_type": "steady",
+      "relationships": [
+        { "target": "char_nina", "type": "mentor_student", "detail": "Uses psychological and physical provocation to break through Nina's rigidity" },
+        { "target": "char_beth", "type": "betrayer", "detail": "Discards Beth once her usefulness as prima ballerina ends" }
+      ]
+    },
+    {
+      "id": "char_lily",
+      "name": "Lily",
+      "role": "shadow",
+      "traits": ["spontaneous", "sensual", "carefree", "talented", "threatening"],
+      "motivations": ["dance freely without obsession", "enjoy life outside the studio", "compete for the lead role"],
+      "arc_type": "mirror",
+      "relationships": [
+        { "target": "char_nina", "type": "rival", "detail": "Embodies the dark, instinctive qualities Nina lacks and fears" },
+        { "target": "char_thomas", "type": "ally", "detail": "Earns Thomas's approval through natural expressiveness" }
+      ]
+    },
+    {
+      "id": "char_erica",
+      "name": "Erica Sayers",
+      "role": "antagonist",
+      "traits": ["overprotective", "bitter", "controlling", "passive-aggressive", "smothering"],
+      "motivations": ["live vicariously through Nina's career", "prevent Nina from surpassing her own failed ambitions", "maintain total emotional control over her daughter"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_nina", "type": "parent_child", "detail": "Keeps Nina in a childlike state through guilt and surveillance" }
+      ]
+    },
+    {
+      "id": "char_beth",
+      "name": "Beth MacIntyre",
+      "role": "foil",
+      "traits": ["aging", "desperate", "passionate", "self-destructive", "once-brilliant"],
+      "motivations": ["cling to her identity as prima ballerina", "resist being discarded by Thomas"],
+      "arc_type": "fall",
+      "relationships": [
+        { "target": "char_nina", "type": "rival", "detail": "Serves as a dark mirror of what total devotion to the role costs" },
+        { "target": "char_thomas", "type": "betrayer", "detail": "Cast aside after years of service to his artistic vision" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_studio",
+      "name": "Lincoln Center Ballet Studio",
+      "type": "ordinary_world",
+      "description": "The rehearsal studios where Nina has trained for years, a world of mirrors, barres, and relentless discipline where she excels at technical precision but struggles with emotional expression.",
+      "atmosphere": "sterile, pressurized, reflective"
+    },
+    {
+      "id": "place_apartment",
+      "name": "Nina and Erica's Apartment",
+      "type": "sanctuary",
+      "description": "A suffocating pink-walled bedroom filled with stuffed animals and music boxes, reflecting Erica's desire to keep Nina as a perpetual child. Both a refuge and a prison.",
+      "atmosphere": "claustrophobic, infantile, oppressive"
+    },
+    {
+      "id": "place_stage",
+      "name": "Lincoln Center Main Stage",
+      "type": "summit",
+      "description": "The grand performance stage where Nina's opening night of Swan Lake takes place. The site of her ultimate triumph and self-destruction, where hallucination and reality merge completely.",
+      "atmosphere": "magnificent, hallucinatory, transcendent"
+    },
+    {
+      "id": "place_nightclub",
+      "name": "Downtown Nightclub",
+      "type": "threshold",
+      "description": "The dark, pulsing club where Lily takes Nina to let loose. A liminal space where Nina first experiments with losing control, taking ecstasy, and confronting her repressed desires.",
+      "atmosphere": "chaotic, intoxicating, liberating"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_mirror",
+      "name": "Studio Mirrors",
+      "type": "symbol",
+      "description": "The ever-present mirrors in the rehearsal studio and Nina's home that increasingly show distorted reflections, cracks, and her Black Swan alter ego staring back.",
+      "significance": "Externalize Nina's fracturing psyche and the duality she must integrate. Her reflections become autonomous, representing the shadow self demanding acknowledgment.",
+      "rules": ["Reflections increasingly diverge from Nina's actual movements", "Cracks in mirrors parallel cracks in Nina's sanity", "The Black Swan first manifests through mirror reflections"]
+    },
+    {
+      "id": "obj_costume",
+      "name": "Black Swan Costume",
+      "type": "talisman",
+      "description": "The dark, feathered costume for the Odile role that Nina must wear for the seduction scene. Putting it on catalyzes her final transformation.",
+      "significance": "Represents the dark identity Nina must inhabit. Wearing it triggers the hallucinatory physical transformation where she sprouts black feathers and her legs bend backward.",
+      "rules": ["Donning the costume accelerates the psychological transformation", "The costume blurs the line between performance and psychotic break"]
+    },
+    {
+      "id": "obj_nail_file",
+      "name": "Nail File / Glass Shard",
+      "type": "weapon",
+      "description": "The sharp objects Nina uses to scratch and cut herself throughout the film, culminating in the mirror shard she believes she stabs Lily with but actually drives into her own abdomen.",
+      "significance": "Tracks Nina's escalating self-harm as a physical manifestation of her internal war. The final stabbing represents both the murder of her rigid old self and the mortal cost of transformation.",
+      "rules": ["Self-injury intensifies as the transformation progresses", "The weapon turns inward — the enemy was always herself"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_black_swan_master",
+    "story_id": "black_swan_2010",
+    "archetype_id": "archetype_14_the_transformation",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "TF_N01_FIXED_IDENTITY",
+        "label": "The Perfect White Swan",
+        "description": "Nina is a technically flawless but emotionally repressed ballet dancer living under her mother's total control. She practices obsessively, sleeps in a child's bedroom, and has never deviated from rigid discipline. She is the ideal White Swan — pure, fragile, obedient — but cannot access the dark sensuality of the Black Swan.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_nina", "char_erica"],
+          "places": ["place_apartment", "place_studio"],
+          "objects": []
+        },
+        "character_states": {
+          "char_nina": "repressed, technically perfect, emotionally stunted, desperate for the lead role",
+          "char_erica": "controlling, living vicariously, maintaining Nina's childlike dependency"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_nina",
+            "change": "decides",
+            "description": "Nina resolves to win the dual role of Odette/Odile in the new Swan Lake production, staking her entire identity on achieving perfection"
+          }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "TF_N02_CATALYST_OF_CHANGE",
+        "label": "Cast as the Swan Queen",
+        "description": "Thomas casts Nina as the Swan Queen after she bites him during an aggressive audition — the first crack in her controlled facade. He tells her she must find the Black Swan within herself. Simultaneously, Lily arrives at the company, embodying everything Nina suppresses: spontaneity, sensuality, and raw instinct.",
+        "position": 0.15,
+        "participants": {
+          "characters": ["char_nina", "char_thomas", "char_lily", "char_beth"],
+          "places": ["place_studio"],
+          "objects": []
+        },
+        "character_states": {
+          "char_nina": "elated but terrified, aware she cannot yet embody the Black Swan",
+          "char_thomas": "calculating, testing whether Nina can transcend her limitations",
+          "char_lily": "effortlessly expressive, unaware she represents Nina's shadow"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_nina",
+            "change": "gains",
+            "target": "the lead role",
+            "description": "Wins the Swan Queen part but only after an uncharacteristic act of aggression — biting Thomas — that hints at buried darkness"
+          },
+          {
+            "entity_id": "char_beth",
+            "change": "loses",
+            "target": "her position as prima ballerina",
+            "description": "Beth is forcibly retired, foreshadowing the cost of total identification with a role"
+          }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "TF_N03_DENIAL_AND_STRUGGLE",
+        "label": "Resisting the Dark Side",
+        "description": "Nina tries to access the Black Swan through her usual method — more practice, more control, more perfection — but Thomas tells her she is frigid and mechanical. She begins experiencing hallucinations: scratches on her back, her reflection moving independently, skin peeling to reveal feathers. Her mother tightens control. Nina resists every avenue of transformation.",
+        "position": 0.3,
+        "participants": {
+          "characters": ["char_nina", "char_thomas", "char_erica"],
+          "places": ["place_studio", "place_apartment"],
+          "objects": ["obj_mirror", "obj_nail_file"]
+        },
+        "character_states": {
+          "char_nina": "frustrated, frightened by hallucinations, doubling down on control",
+          "char_thomas": "disappointed, pushing harder, questioning his casting choice",
+          "char_erica": "alarmed by Nina's stress, tightening surveillance"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_nina",
+            "change": "learns",
+            "description": "Realizes that technical perfection alone cannot produce the Black Swan — something fundamental in her must change"
+          },
+          {
+            "entity_id": "char_nina",
+            "change": "loses",
+            "target": "grip on reality",
+            "description": "Hallucinations begin: scratches appear on her back, her reflection moves independently in mirrors"
+          }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "TF_N04_LIMINAL_STATE",
+        "label": "Night of Abandon",
+        "description": "Lily takes Nina to a nightclub where Nina takes ecstasy, drinks heavily, and for the first time in her life abandons control. She hallucinates a sexual encounter with Lily. The next morning she oversleeps, arrives late to rehearsal, and discovers Lily learning her part. Reality and hallucination become indistinguishable. Nina exists between her old identity and something new and terrifying.",
+        "position": 0.45,
+        "participants": {
+          "characters": ["char_nina", "char_lily"],
+          "places": ["place_nightclub", "place_apartment"],
+          "objects": ["obj_mirror"]
+        },
+        "character_states": {
+          "char_nina": "unmoored, paranoid, oscillating between euphoria and terror",
+          "char_lily": "casual and unbothered, unaware of Nina's psychological crisis"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_nina",
+            "change": "transforms",
+            "description": "Crosses into liminal territory — no longer the controlled perfectionist but not yet the integrated artist, trapped between identities"
+          },
+          {
+            "entity_id": "char_nina",
+            "change": "bonds",
+            "target": "char_lily",
+            "detail": "hallucinatory",
+            "description": "The imagined sexual encounter with Lily represents Nina's psyche attempting to merge with her shadow self"
+          }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "TF_N05_CRUCIBLE",
+        "label": "Opening Night Collapse",
+        "description": "On opening night, Nina's psychosis reaches its peak. She stumbles during the White Swan pas de deux with her partner. Backstage, she confronts Lily — or a hallucination of Lily — in her dressing room and stabs her with a mirror shard to prevent her from taking the role. She hides the body and returns to stage, but the crucible is the realization that she has committed an irreversible act to protect her transformation.",
+        "position": 0.65,
+        "participants": {
+          "characters": ["char_nina", "char_lily"],
+          "places": ["place_stage"],
+          "objects": ["obj_nail_file", "obj_mirror"]
+        },
+        "character_states": {
+          "char_nina": "psychotic, desperate, willing to kill to complete the transformation",
+          "char_lily": "alive and unharmed in reality — Nina stabbed herself"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_nina",
+            "change": "decides",
+            "description": "Chooses to destroy what she perceives as the external threat to her role, not yet understanding the enemy is internal"
+          },
+          {
+            "entity_id": "char_nina",
+            "change": "reveals",
+            "description": "The stabbing reveals that Nina's transformation requires self-destruction — the shard went into her own body"
+          }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "TF_N06_INTEGRATION",
+        "label": "Becoming the Black Swan",
+        "description": "Nina returns to the stage for the Black Swan act. In a hallucinatory crescendo, her arms sprout black feathers, her eyes turn red, her legs bend into avian form. She dances the Black Swan with terrifying, transcendent power — feral, seductive, and utterly unleashed. The audience erupts. Thomas whispers that she was perfect. For one luminous moment, Nina has integrated both halves: technical mastery and raw, dark emotion.",
+        "position": 0.8,
+        "participants": {
+          "characters": ["char_nina", "char_thomas"],
+          "places": ["place_stage"],
+          "objects": ["obj_costume"]
+        },
+        "character_states": {
+          "char_nina": "transcendent, fully embodying both White and Black Swan, bleeding from the hidden wound",
+          "char_thomas": "awestruck, witnessing the artistic perfection he demanded"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_nina",
+            "change": "transforms",
+            "description": "Achieves total integration of light and dark selves in her performance, becoming the complete artist at the cost of her sanity and her life"
+          },
+          {
+            "entity_id": "char_nina",
+            "change": "gains",
+            "target": "artistic perfection",
+            "description": "Delivers a performance of supernatural power that fulfills Thomas's vision and transcends her own limitations"
+          }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "TF_N07_NEW_IDENTITY",
+        "label": "It Was Perfect",
+        "description": "Nina performs the final White Swan death scene — Odette's suicide leap — and collapses on the mattress below the stage. The company discovers she is bleeding from a real wound: the mirror shard in her abdomen. As Thomas and the others rush to her, Nina whispers 'I felt it. Perfect. It was perfect.' She has achieved the new identity — the complete artist who can embody both purity and darkness — but the transformation was literal self-destruction. The screen whites out as the audience gives a standing ovation.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_nina", "char_thomas", "char_lily"],
+          "places": ["place_stage"],
+          "objects": ["obj_nail_file", "obj_costume"]
+        },
+        "character_states": {
+          "char_nina": "dying, ecstatic, at peace — the transformation is complete but fatal",
+          "char_thomas": "horrified at the physical cost, awed by the artistic achievement",
+          "char_lily": "alive, confused, unaware she was the object of Nina's psychotic projection"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_nina",
+            "change": "transforms",
+            "description": "Completes her transformation into the perfect artist, achieving a new identity that fuses discipline and abandon — but the cost is her life"
+          },
+          {
+            "entity_id": "char_nina",
+            "change": "dies",
+            "description": "The mortal wound from the mirror shard — self-inflicted in her psychotic state — bleeds out during the final act, making the stage death real"
+          }
+        ]
+      }
+    ]
+  }
+}

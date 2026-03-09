@@ -1,0 +1,385 @@
+{
+  "story_id": "jaws_1975",
+  "story_title": "Jaws (1975)",
+  "archetype_id": "archetype_05_overcoming_the_monster",
+  "characters": [
+    {
+      "id": "char_brody",
+      "name": "Chief Martin Brody",
+      "role": "protagonist",
+      "traits": ["hydrophobic", "dutiful", "stubborn", "protective", "resourceful"],
+      "motivations": ["protect the citizens of Amity Island", "overcome his fear of water", "prove himself as the new police chief"],
+      "arc_type": "positive",
+      "relationships": [
+        { "target": "char_shark", "type": "nemesis" },
+        { "target": "char_quint", "type": "ally" },
+        { "target": "char_hooper", "type": "ally" },
+        { "target": "char_vaughn", "type": "rival" }
+      ]
+    },
+    {
+      "id": "char_shark",
+      "name": "The Great White Shark",
+      "role": "antagonist",
+      "traits": ["relentless", "enormous", "territorial", "predatory", "elusive"],
+      "motivations": ["hunt prey in the shallow waters of Amity Island", "defend its feeding territory"],
+      "arc_type": "flat",
+      "relationships": [
+        { "target": "char_brody", "type": "nemesis" },
+        { "target": "char_quint", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_quint",
+      "name": "Quint",
+      "role": "mentor",
+      "traits": ["grizzled", "fearless", "obsessive", "experienced", "fatalistic"],
+      "motivations": ["destroy the shark as a personal vendetta rooted in his USS Indianapolis trauma", "prove his supremacy over nature", "earn the bounty"],
+      "arc_type": "tragic",
+      "relationships": [
+        { "target": "char_brody", "type": "mentor_student" },
+        { "target": "char_hooper", "type": "rival" },
+        { "target": "char_shark", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_hooper",
+      "name": "Matt Hooper",
+      "role": "ally",
+      "traits": ["intellectual", "wealthy", "enthusiastic", "scientific", "courageous"],
+      "motivations": ["study the shark as a marine biologist", "help Brody close the beaches", "prove the danger is real with scientific evidence"],
+      "arc_type": "positive",
+      "relationships": [
+        { "target": "char_brody", "type": "ally" },
+        { "target": "char_quint", "type": "rival" },
+        { "target": "char_shark", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_vaughn",
+      "name": "Mayor Larry Vaughn",
+      "role": "threshold_guardian",
+      "traits": ["political", "dismissive", "self-serving", "charismatic", "cowardly"],
+      "motivations": ["keep Amity's beaches open for the Fourth of July tourist revenue", "preserve his political reputation", "minimize public panic"],
+      "arc_type": "flat",
+      "relationships": [
+        { "target": "char_brody", "type": "rival" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_amity",
+      "name": "Amity Island",
+      "type": "ordinary_world",
+      "description": "A small New England resort town economically dependent on summer tourism, with a tight-knit community and quiet coastal charm.",
+      "atmosphere": "idyllic and sun-drenched on the surface, with a growing undercurrent of dread once the shark attacks begin"
+    },
+    {
+      "id": "place_ocean",
+      "name": "The Open Ocean",
+      "type": "special_world",
+      "description": "The vast Atlantic waters beyond Amity's shoreline where the Orca ventures to hunt the shark, stripping away the safety of land.",
+      "atmosphere": "isolated, hostile, and primordial — a domain where human authority means nothing"
+    },
+    {
+      "id": "place_orca",
+      "name": "The Orca (Quint's Boat)",
+      "type": "threshold",
+      "description": "Quint's aging fishing vessel, the sole platform from which the three men wage their battle against the shark.",
+      "atmosphere": "cramped, weathered, and increasingly fragile as the shark systematically destroys it"
+    },
+    {
+      "id": "place_beach",
+      "name": "Amity Beach",
+      "type": "crossroads",
+      "description": "The public beach where swimmers gather unaware and where the shark's attacks publicly shatter the town's denial.",
+      "atmosphere": "festive and crowded during the Fourth of July, then panicked and blood-stained during attacks"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_scuba_tank",
+      "name": "Compressed Air Scuba Tank",
+      "type": "weapon",
+      "description": "A pressurized scuba tank that Brody lodges in the shark's mouth during the climactic battle.",
+      "significance": "The improvised weapon that destroys the shark when Brody shoots it, representing his resourcefulness triumphing over brute force.",
+      "rules": ["must be pressurized to explode when shot", "requires accurate marksmanship under extreme duress"]
+    },
+    {
+      "id": "obj_orca_boat",
+      "name": "The Orca's Hull and Barrels",
+      "type": "tool",
+      "description": "The barrel-and-cleat system Quint uses to tire and track the shark, along with the boat itself as their mobile hunting platform.",
+      "significance": "Represents human technology and expertise pitted against nature; its progressive destruction mirrors the crew's dwindling odds.",
+      "rules": ["barrels are meant to keep the shark at the surface", "the boat's structural integrity limits the hunt's duration"]
+    },
+    {
+      "id": "obj_shark_cage",
+      "name": "Anti-Shark Cage",
+      "type": "tool",
+      "description": "Hooper's reinforced steel diving cage, designed to allow close underwater observation of the shark in safety.",
+      "significance": "Embodies the scientific approach to confronting the monster — methodical and controlled — which the shark violently overwhelms.",
+      "rules": ["requires underwater deployment from the boat", "proves insufficient against the shark's size and power"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_jaws_master",
+    "story_id": "jaws_1975",
+    "archetype_id": "archetype_05_overcoming_the_monster",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "OM_N01_PEACEFUL_STATE",
+        "label": "Amity's Summer Peace",
+        "description": "Amity Island basks in the anticipation of a profitable summer tourist season. Chief Brody, a transplant from New York, is settling into the quiet rhythms of small-town coastal life with his family.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_brody", "char_vaughn"],
+          "places": ["place_amity", "place_beach"],
+          "objects": []
+        },
+        "character_states": {
+          "char_brody": "content but slightly out of place as the new chief, still afraid of water",
+          "char_vaughn": "confident and focused on the upcoming tourist season revenue"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_brody",
+            "change": "arrives",
+            "detail": "recently relocated from New York City to Amity Island",
+            "description": "Brody has traded urban crime for what he believes will be a peaceful coastal posting, establishing his ordinary world before the monster shatters it."
+          }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "OM_N02_MONSTER_REVEALED",
+        "label": "Chrissie's Death",
+        "description": "A young woman, Chrissie Watkins, is killed during a nighttime swim — the first victim of the great white shark. Brody discovers the remains and suspects a shark attack, but the coroner is pressured to attribute the death to a boating accident.",
+        "position": 0.1,
+        "participants": {
+          "characters": ["char_brody", "char_vaughn", "char_shark"],
+          "places": ["place_beach"],
+          "objects": []
+        },
+        "character_states": {
+          "char_brody": "alarmed and instinctively wants to close the beaches",
+          "char_shark": "established as a lethal unseen presence lurking in Amity's waters",
+          "char_vaughn": "dismissive, pressuring the coroner to change the cause of death"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_shark",
+            "change": "reveals",
+            "detail": "its presence through the brutal killing of Chrissie Watkins",
+            "description": "The monster announces itself with a visceral attack that the community immediately tries to suppress and deny."
+          },
+          {
+            "entity_id": "char_brody",
+            "change": "learns",
+            "detail": "a deadly predator is hunting in Amity's waters",
+            "description": "Brody's instinct to protect clashes immediately with political pressure to keep the beaches open."
+          }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "OM_N03_CALL_TO_CONFRONT",
+        "label": "The Fourth of July Attack",
+        "description": "Despite Brody's warnings, Mayor Vaughn keeps the beaches open for the holiday weekend. The shark attacks again in broad daylight, killing a young boy named Alex Kintner in front of hundreds of beachgoers. The town can no longer deny the threat, and a bounty is placed on the shark.",
+        "position": 0.25,
+        "participants": {
+          "characters": ["char_brody", "char_vaughn", "char_shark", "char_hooper"],
+          "places": ["place_beach", "place_amity"],
+          "objects": []
+        },
+        "character_states": {
+          "char_brody": "guilt-ridden for not overriding the mayor and closing the beaches",
+          "char_hooper": "arrives in Amity to investigate, confirms the shark is a massive great white",
+          "char_vaughn": "finally forced to acknowledge the crisis after public attacks"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_brody",
+            "change": "decides",
+            "detail": "the shark must be hunted and killed regardless of political opposition",
+            "description": "Alex Kintner's public death transforms Brody's concern into a personal mission; the guilt of inaction becomes the fuel for confrontation."
+          },
+          {
+            "entity_id": "char_hooper",
+            "change": "arrives",
+            "target": "place_amity",
+            "description": "Hooper's arrival brings scientific authority and confirms Brody's worst fears about the size and danger of the shark."
+          }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "OM_N04_PREPARATION",
+        "label": "Assembling the Crew",
+        "description": "Brody hires Quint, a grizzled shark hunter, to track and kill the great white. Hooper insists on joining with his scientific equipment and anti-shark cage. The three men load the Orca with harpoons, barrels, and provisions. Quint's USS Indianapolis monologue reveals the deep personal stakes driving his obsession with sharks.",
+        "position": 0.4,
+        "participants": {
+          "characters": ["char_brody", "char_quint", "char_hooper"],
+          "places": ["place_orca"],
+          "objects": ["obj_orca_boat", "obj_shark_cage"]
+        },
+        "character_states": {
+          "char_brody": "determined but terrified of the open water, placing his trust in Quint and Hooper",
+          "char_quint": "confident and commanding, treating the hunt as a personal reckoning with his past",
+          "char_hooper": "eager and scientifically prepared, clashing with Quint's intuitive methods"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_brody",
+            "change": "bonds",
+            "target": "char_quint",
+            "description": "Brody enters a mentor-student dynamic with Quint, deferring to his expertise on the sea while maintaining his authority as the mission's moral compass."
+          },
+          {
+            "entity_id": "char_quint",
+            "change": "reveals",
+            "detail": "his USS Indianapolis survivor's trauma and lifelong hatred of sharks",
+            "description": "Quint's monologue about watching hundreds of men devoured by sharks after their ship sank exposes the wound that makes this hunt existential for him."
+          }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "OM_N05_INITIAL_ENCOUNTER",
+        "label": "First Contact at Sea",
+        "description": "The Orca locates the shark on the open ocean. Its sheer size stuns all three men — Brody delivers the iconic line 'You're gonna need a bigger boat.' Quint fires harpoons and attaches tracking barrels, but the shark dives and drags them, demonstrating power that exceeds anything they anticipated.",
+        "position": 0.55,
+        "participants": {
+          "characters": ["char_brody", "char_quint", "char_hooper", "char_shark"],
+          "places": ["place_ocean", "place_orca"],
+          "objects": ["obj_orca_boat"]
+        },
+        "character_states": {
+          "char_brody": "viscerally confronting both his fear of the water and the enormity of the shark",
+          "char_quint": "thrilled by the challenge but beginning to underestimate the shark's resilience",
+          "char_shark": "revealed in full — far larger and more powerful than any of them expected"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_brody",
+            "change": "learns",
+            "detail": "the shark is far more dangerous than any preparation could address",
+            "description": "Seeing the shark for the first time shatters any remaining illusion that this is a routine hunt, forcing Brody to confront the reality of what they face."
+          },
+          {
+            "entity_id": "char_shark",
+            "change": "reveals",
+            "detail": "its true size and power by surfacing alongside the Orca",
+            "description": "The monster transitions from unseen dread to visible, overwhelming physical threat."
+          }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "OM_N06_NIGHTMARE",
+        "label": "The Orca Under Siege",
+        "description": "The shark launches repeated attacks on the Orca, biting through the hull, flooding the engine room, and destroying the radio. Hooper descends in the anti-shark cage to inject the shark with strychnine, but the shark destroys the cage, forcing Hooper to hide on the ocean floor. Quint's obsession drives him to push the boat's engines to destruction trying to outrun the shark.",
+        "position": 0.75,
+        "participants": {
+          "characters": ["char_brody", "char_quint", "char_hooper", "char_shark"],
+          "places": ["place_ocean", "place_orca"],
+          "objects": ["obj_orca_boat", "obj_shark_cage"]
+        },
+        "character_states": {
+          "char_brody": "isolated on a sinking boat with dwindling options, forced to act alone",
+          "char_quint": "spiraling into obsessive recklessness, destroying the engine in his frenzy to fight the shark",
+          "char_hooper": "trapped underwater after the cage is destroyed, removed from the fight",
+          "char_shark": "systematically dismantling their vessel and defenses"
+        },
+        "transitions": [
+          {
+            "entity_id": "obj_shark_cage",
+            "change": "breaks",
+            "description": "The shark crushes the anti-shark cage, eliminating the scientific approach and leaving only brute survival."
+          },
+          {
+            "entity_id": "obj_orca_boat",
+            "change": "breaks",
+            "description": "The Orca takes on water and begins to sink, stripping away the crew's platform and safety."
+          },
+          {
+            "entity_id": "char_quint",
+            "change": "loses",
+            "detail": "control of the situation as his obsession overrides tactical judgment",
+            "description": "Quint smashes the radio and burns out the engine, ensuring there is no retreat — his vendetta against sharks has sealed their fate."
+          }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "OM_N07_FINAL_CONFRONT",
+        "label": "Quint's Death and Brody's Stand",
+        "description": "The shark breaches onto the sinking Orca's stern. Quint slides down the deck into the shark's jaws and is killed. Brody, alone on the mast of the sinking boat, shoves a compressed air scuba tank into the shark's mouth. As the shark charges one final time, Brody takes aim with a rifle and fires, detonating the tank and blowing the shark apart.",
+        "position": 0.9,
+        "participants": {
+          "characters": ["char_brody", "char_quint", "char_shark"],
+          "places": ["place_ocean", "place_orca"],
+          "objects": ["obj_scuba_tank"]
+        },
+        "character_states": {
+          "char_brody": "utterly alone, clinging to the mast, overcoming his deepest fear to take the final shot",
+          "char_quint": "consumed by the very creature he spent his life hunting",
+          "char_shark": "at peak dominance moments before its destruction"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_quint",
+            "change": "dies",
+            "detail": "devoured by the shark on the deck of his own boat",
+            "description": "Quint's death fulfills his tragic arc — the Indianapolis survivor is finally claimed by the predator he could never escape, his obsession becoming his undoing."
+          },
+          {
+            "entity_id": "char_brody",
+            "change": "transforms",
+            "detail": "from a man paralyzed by his fear of water into someone who defeats the monster alone at sea",
+            "description": "Brody's shot is the culmination of his entire arc: the hydrophobic landlubber, standing in the ocean, destroys the creature that terrorized his community."
+          },
+          {
+            "entity_id": "char_shark",
+            "change": "dies",
+            "detail": "destroyed when Brody detonates the scuba tank lodged in its mouth",
+            "description": "The monster is obliterated not by Quint's brute strength or Hooper's science, but by Brody's desperate improvisation — the everyman triumphs."
+          }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "OM_N08_WORLD_RESTORED",
+        "label": "Swimming Home",
+        "description": "With the shark destroyed, Hooper surfaces alive from hiding on the ocean floor. He and Brody fashion a makeshift raft from the Orca's wreckage and paddle toward Amity Island. The water is calm. Brody, the man who feared the sea, floats peacefully on its surface.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_brody", "char_hooper"],
+          "places": ["place_ocean", "place_amity"],
+          "objects": []
+        },
+        "character_states": {
+          "char_brody": "exhausted, grieving Quint, but at peace — his fear of water conquered alongside the shark",
+          "char_hooper": "alive against all odds, bonded with Brody through shared trauma"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_brody",
+            "change": "transforms",
+            "detail": "fully reconciled with the ocean that once terrified him",
+            "description": "Brody floating calmly on the water as he paddles home is the visual proof of his transformation — the ordinary world is restored, and its protector has been forged by the ordeal."
+          },
+          {
+            "entity_id": "char_brody",
+            "change": "departs",
+            "target": "place_ocean",
+            "description": "Brody and Hooper leave the special world of the open sea, returning to the safety of Amity Island and civilian life."
+          }
+        ]
+      }
+    ]
+  }
+}

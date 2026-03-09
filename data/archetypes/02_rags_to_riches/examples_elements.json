@@ -1,0 +1,279 @@
+{
+  "story_id": "rocky_1976",
+  "story_title": "Rocky (1976)",
+  "archetype_id": "archetype_02_rags_to_riches",
+  "characters": [
+    {
+      "id": "char_rocky",
+      "name": "Rocky Balboa",
+      "role": "protagonist",
+      "traits": ["tenacious", "humble", "inarticulate", "big-hearted", "self-doubting"],
+      "motivations": ["prove he is not just another bum from the neighborhood", "earn self-respect", "win Adrian's love", "go the distance against Apollo"],
+      "arc_type": "rags_to_riches",
+      "relationships": [
+        { "target": "char_apollo", "type": "rival", "detail": "Outmatched challenger given a once-in-a-lifetime shot at the heavyweight title" },
+        { "target": "char_adrian", "type": "romantic", "detail": "Shy, tentative courtship that becomes Rocky's emotional anchor" },
+        { "target": "char_mickey", "type": "mentor_student", "detail": "Estranged trainer who finally believes in Rocky and pushes him to his limit" },
+        { "target": "char_paulie", "type": "ally", "detail": "Resentful best friend whose jealousy tests Rocky's loyalty" }
+      ]
+    },
+    {
+      "id": "char_apollo",
+      "name": "Apollo Creed",
+      "role": "antagonist",
+      "traits": ["charismatic", "showman", "supremely confident", "cunning", "underestimating"],
+      "motivations": ["stage an entertaining bicentennial spectacle", "prove his dominance", "protect his legacy"],
+      "arc_type": "flat",
+      "relationships": [
+        { "target": "char_rocky", "type": "rival", "detail": "Views Rocky as a publicity stunt until forced to respect him in the ring" }
+      ]
+    },
+    {
+      "id": "char_adrian",
+      "name": "Adrian Pennino",
+      "role": "love_interest",
+      "traits": ["shy", "intelligent", "gentle", "emotionally guarded", "quietly courageous"],
+      "motivations": ["escape her brother's oppressive household", "find someone who sees her true worth"],
+      "arc_type": "coming_of_age",
+      "relationships": [
+        { "target": "char_rocky", "type": "romantic", "detail": "Rocky's persistence breaks through her shell; she becomes his reason to fight" },
+        { "target": "char_paulie", "type": "sibling", "detail": "Dominated by her brother, she gradually asserts independence" }
+      ]
+    },
+    {
+      "id": "char_mickey",
+      "name": "Mickey Goldmill",
+      "role": "mentor",
+      "traits": ["grizzled", "brutally honest", "passionate", "demanding", "secretly sentimental"],
+      "motivations": ["train one last champion before he dies", "redeem years of running a failing gym"],
+      "arc_type": "mentor",
+      "relationships": [
+        { "target": "char_rocky", "type": "mentor_student", "detail": "Initially dismisses Rocky, then begs for the chance to train him" }
+      ]
+    },
+    {
+      "id": "char_paulie",
+      "name": "Paulie Pennino",
+      "role": "foil",
+      "traits": ["bitter", "alcoholic", "jealous", "loyal underneath", "crude"],
+      "motivations": ["escape his dead-end meatpacking job", "ride Rocky's coattails to something better"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_rocky", "type": "ally", "detail": "Childhood friend who resents Rocky's rising fortune" },
+        { "target": "char_adrian", "type": "sibling", "detail": "Controls Adrian until Rocky draws her away" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_neighborhood",
+      "name": "South Philadelphia Streets",
+      "type": "ordinary_world",
+      "description": "Run-down row houses, corner bars, and freezing winter sidewalks where Rocky ekes out a living as a small-time enforcer and club fighter.",
+      "atmosphere": "Gritty, blue-collar, and quietly desperate — a world where ambition goes to die."
+    },
+    {
+      "id": "place_gym",
+      "name": "Mighty Mick's Boxing Gym",
+      "type": "sanctuary",
+      "description": "A decrepit, sweat-stained gym above a hardware store where Mickey trains fighters and Rocky rediscovers discipline.",
+      "atmosphere": "Spartan and punishing, but charged with purpose once training begins."
+    },
+    {
+      "id": "place_spectrum",
+      "name": "Philadelphia Spectrum Arena",
+      "type": "summit",
+      "description": "The sold-out arena where the bicentennial title fight takes place under blazing lights and a roaring crowd.",
+      "atmosphere": "Electric, overwhelming, and larger than anything Rocky has ever experienced."
+    },
+    {
+      "id": "place_steps",
+      "name": "Philadelphia Museum of Art Steps",
+      "type": "threshold",
+      "description": "The iconic stone staircase Rocky sprints up during training, marking his physical and spiritual transformation.",
+      "atmosphere": "Triumphant and cinematic — the boundary between the man he was and the man he is becoming."
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_gloves",
+      "name": "Rocky's Boxing Gloves",
+      "type": "weapon",
+      "description": "Worn leather gloves that represent Rocky's only real skill and his sole means of self-expression.",
+      "significance": "The gloves are both literal tools of combat and symbols of the only language Rocky truly speaks.",
+      "rules": ["Rocky fights with heart rather than technique", "The gloves connect him to a tradition of working-class fighters"]
+    },
+    {
+      "id": "obj_poster",
+      "name": "Apollo's Fight Poster",
+      "type": "symbol",
+      "description": "The promotional poster for the bicentennial fight featuring Apollo in patriotic garb and Rocky as the unknown challenger.",
+      "significance": "Materializes the opportunity — Rocky sees his name in print and realizes the fight is real, not a joke.",
+      "rules": ["The poster reduces Rocky to a gimmick, fueling his need to prove himself", "It represents the gap between spectacle and substance"]
+    },
+    {
+      "id": "obj_meat",
+      "name": "Sides of Beef in the Meat Locker",
+      "type": "tool",
+      "description": "Hanging beef carcasses in Paulie's meatpacking plant that Rocky uses as improvised punching bags during training.",
+      "significance": "An unconventional training method that symbolizes Rocky's blue-collar resourcefulness and raw power.",
+      "rules": ["Training on meat shows Rocky's willingness to use whatever is at hand", "The meat locker is Paulie's world repurposed for Rocky's dream"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_rocky_master",
+    "story_id": "rocky_1976",
+    "archetype_id": "archetype_02_rags_to_riches",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "RR_N01_LOWLY_STATE",
+        "label": "The Italian Stallion Goes Nowhere",
+        "description": "Rocky Balboa fights in dingy club bouts for pocket money, collects debts for a loan shark he lacks the heart to hurt people for, and shuffles home to a bare apartment with two pet turtles. He is a good man stuck in a life that offers nothing.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_rocky", "char_paulie"],
+          "places": ["place_neighborhood"],
+          "objects": ["obj_gloves"]
+        },
+        "character_states": {
+          "char_rocky": { "emotional": "resigned", "status": "anonymous club fighter and part-time leg-breaker", "want": "something more but cannot name it" },
+          "char_adrian": { "emotional": "withdrawn", "status": "living under Paulie's thumb at the pet store", "want": "to be left alone" }
+        },
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "reveals", "detail": "His gentleness with the neighborhood kids and his turtles shows the man beneath the fighter" },
+          { "entity_id": "place_neighborhood", "change": "reveals", "description": "The streets establish the ceiling on Rocky's life — talent wasted, potential invisible" }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "RR_N02_OPPORTUNITY",
+        "label": "Apollo Picks a Nobody",
+        "description": "When Apollo Creed's scheduled opponent drops out, he selects Rocky — 'The Italian Stallion' — as a bicentennial publicity stunt. A nobody gets a shot at the heavyweight championship of the world.",
+        "position": 0.15,
+        "participants": {
+          "characters": ["char_rocky", "char_apollo"],
+          "places": ["place_neighborhood"],
+          "objects": ["obj_poster"]
+        },
+        "character_states": {},
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "gains", "target": "obj_poster", "detail": "The fight offer arrives — absurd, impossible, and completely real" },
+          { "entity_id": "char_apollo", "change": "decides", "detail": "Chooses Rocky for the name and the story, not the skill" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "RR_N03_INITIAL_RISE",
+        "label": "Mickey Comes Knocking",
+        "description": "Mickey, who previously gave Rocky's locker away, shows up at his apartment begging to be his trainer. After a bitter confrontation about years of neglect, Rocky chases him down the street and accepts. Training begins in earnest.",
+        "position": 0.25,
+        "participants": {
+          "characters": ["char_rocky", "char_mickey"],
+          "places": ["place_gym", "place_neighborhood"],
+          "objects": ["obj_gloves"]
+        },
+        "character_states": {},
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "bonds", "target": "char_mickey", "detail": "Swallows his resentment and lets Mickey in, gaining the structure he needs" },
+          { "entity_id": "char_mickey", "change": "decides", "detail": "Commits fully to Rocky as his last shot at training a contender" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "RR_N04_SOCIAL_TRIALS",
+        "label": "Training and Courtship",
+        "description": "Rocky endures grueling training — one-armed pushups, chasing chickens, pounding frozen meat — while simultaneously courting the painfully shy Adrian. Paulie resents both developments. The media treats the fight as a joke.",
+        "position": 0.4,
+        "participants": {
+          "characters": ["char_rocky", "char_adrian", "char_mickey", "char_paulie"],
+          "places": ["place_gym"],
+          "objects": ["obj_meat", "obj_gloves"]
+        },
+        "character_states": {},
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "transforms", "detail": "Physical conditioning reshapes him from club brawler to disciplined fighter" },
+          { "entity_id": "char_rocky", "change": "bonds", "target": "char_adrian", "detail": "Their first date at the ice rink breaks through Adrian's defenses" },
+          { "entity_id": "char_paulie", "change": "reveals", "detail": "His jealousy and alcoholism intensify as Rocky and Adrian grow closer" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "RR_N05_APPARENT_PEAK",
+        "label": "Running Up the Steps",
+        "description": "In the iconic training montage, Rocky sprints through the pre-dawn streets of Philadelphia and charges up the museum steps, arms raised in triumph. He has become the best version of himself physically. The city begins to notice.",
+        "position": 0.55,
+        "participants": {
+          "characters": ["char_rocky"],
+          "places": ["place_steps", "place_neighborhood"],
+          "objects": []
+        },
+        "character_states": {
+          "char_rocky": { "emotional": "exhilarated", "status": "in peak fighting condition", "want": "to go the distance" }
+        },
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "transforms", "detail": "The steps mark the completion of his physical metamorphosis" },
+          { "entity_id": "place_steps", "change": "reveals", "description": "The threshold is crossed — Rocky has risen above the streets, at least in body" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "RR_N06_CRISIS_OF_WORTH",
+        "label": "The Night Before the Fight",
+        "description": "Alone in the arena the night before, Rocky confesses to Adrian that he cannot win. Apollo is too good. But he does not need to win — he just needs to go the distance. No one has ever lasted fifteen rounds with Creed. If he can do that, he will know he is not just another bum from the neighborhood.",
+        "position": 0.7,
+        "participants": {
+          "characters": ["char_rocky", "char_adrian"],
+          "places": ["place_spectrum"],
+          "objects": []
+        },
+        "character_states": {
+          "char_rocky": { "emotional": "vulnerable and clear-eyed", "status": "facing the truth of his own limitations", "want": "to go fifteen rounds and prove his worth" },
+          "char_adrian": { "emotional": "steady and loving", "status": "fully committed to Rocky", "want": "Rocky to know he is enough" }
+        },
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "decides", "detail": "Redefines victory: going the distance matters more than winning the belt" },
+          { "entity_id": "char_rocky", "change": "reveals", "detail": "His deepest fear — that he really is nobody — finally spoken aloud" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "RR_N07_PROOF_OF_CHARACTER",
+        "label": "Fifteen Rounds with Apollo Creed",
+        "description": "The fight is brutal and honest. Apollo knocks Rocky down repeatedly, but Rocky keeps getting up. He breaks Apollo's ribs, cuts him open, and stuns the champion who expected an exhibition. By the final bell, both men are barely standing. Rocky has gone the distance.",
+        "position": 0.85,
+        "participants": {
+          "characters": ["char_rocky", "char_apollo", "char_mickey"],
+          "places": ["place_spectrum"],
+          "objects": ["obj_gloves"]
+        },
+        "character_states": {},
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "transforms", "detail": "Absorbs everything Apollo throws and refuses to stay down — proving his worth through endurance" },
+          { "entity_id": "char_apollo", "change": "learns", "detail": "Realizes too late that Rocky is no joke; fights for survival in the final rounds" }
+        ]
+      },
+      {
+        "moment_id": "M08",
+        "archetype_node": "RR_N08_TRUE_ELEVATION",
+        "label": "Adrian!",
+        "description": "The judges award a split decision to Apollo, but Rocky does not care about the verdict. Bloodied and swollen, he ignores the chaos and the cameras, calling out only for Adrian. She pushes through the crowd to reach him. They embrace in the ring and say 'I love you.' Rocky has found what he was truly fighting for.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_rocky", "char_adrian"],
+          "places": ["place_spectrum"],
+          "objects": []
+        },
+        "character_states": {
+          "char_rocky": { "emotional": "at peace", "status": "lost the decision but won his soul", "want": "only Adrian" },
+          "char_adrian": { "emotional": "fierce and unguarded", "status": "no longer hiding from the world", "want": "to be with Rocky" }
+        },
+        "transitions": [
+          { "entity_id": "char_rocky", "change": "transforms", "detail": "True elevation is not the belt but the knowledge that he went the distance and the love waiting for him" },
+          { "entity_id": "char_adrian", "change": "transforms", "detail": "Steps into the ring — the most public, chaotic place imaginable — for Rocky, completing her own arc from invisible to visible" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "story_id": "alice_wonderland",
+  "story_title": "Alice's Adventures in Wonderland",
+  "archetype_id": "archetype_04_voyage_and_return",
+  "characters": [
+    {
+      "id": "char_alice",
+      "name": "Alice",
+      "role": "protagonist",
+      "traits": ["curious", "polite", "logical", "stubborn", "imaginative"],
+      "motivations": ["satisfy her restless curiosity", "make sense of a world that defies sense", "find her way home", "assert her identity against creatures who deny it"],
+      "arc_type": "voyage_and_return",
+      "relationships": [
+        { "target": "char_queen", "type": "nemesis", "detail": "The Queen's tyranny is the final threat Alice must confront before escaping Wonderland" },
+        { "target": "char_cheshire", "type": "ally", "detail": "The Cat offers cryptic guidance and is the only creature who acknowledges Wonderland's madness" },
+        { "target": "char_hatter", "type": "ally", "detail": "The Hatter is friendly but unhelpful, embodying Wonderland's maddening hospitality" },
+        { "target": "char_rabbit", "type": "guardian", "detail": "The White Rabbit is the lure that draws Alice in and the thread she follows through the labyrinth" }
+      ]
+    },
+    {
+      "id": "char_queen",
+      "name": "Queen of Hearts",
+      "role": "antagonist",
+      "traits": ["tyrannical", "volatile", "petulant", "terrifying", "absurd"],
+      "motivations": ["maintain absolute control through fear", "punish anyone who contradicts her", "enforce her croquet game as law"],
+      "arc_type": "flat",
+      "relationships": [
+        { "target": "char_alice", "type": "nemesis", "detail": "Sentences Alice to death for the crime of existing with opinions" },
+        { "target": "char_king", "type": "romantic", "detail": "The King quietly pardons everyone behind her back, undermining her authority" }
+      ]
+    },
+    {
+      "id": "char_cheshire",
+      "name": "Cheshire Cat",
+      "role": "trickster",
+      "traits": ["enigmatic", "amused", "philosophical", "detached", "unsettling"],
+      "motivations": ["observe the absurdity of Wonderland from a comfortable distance", "nudge Alice toward realizations without giving direct answers"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_alice", "type": "ally", "detail": "Offers Alice the only honest counsel in Wonderland: everyone here is mad, including her" }
+      ]
+    },
+    {
+      "id": "char_hatter",
+      "name": "Mad Hatter",
+      "role": "ally",
+      "traits": ["manic", "hospitable", "rude", "riddle-obsessed", "trapped"],
+      "motivations": ["fill the eternal tea-time with conversation", "pose unanswerable riddles"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_alice", "type": "ally", "detail": "Invites Alice to the tea party but offers her nothing except confusion and rudeness" }
+      ]
+    },
+    {
+      "id": "char_rabbit",
+      "name": "White Rabbit",
+      "role": "herald",
+      "traits": ["anxious", "punctual", "self-important", "flustered", "officious"],
+      "motivations": ["avoid being late for the Duchess", "serve the court without drawing the Queen's wrath"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_alice", "type": "guardian", "detail": "Unknowingly lures Alice into Wonderland by being too interesting to ignore" },
+        { "target": "char_queen", "type": "servant_master", "detail": "Serves as the Queen's herald, trembling at every royal command" }
+      ]
+    },
+    {
+      "id": "char_king",
+      "name": "King of Hearts",
+      "role": "foil",
+      "traits": ["meek", "ineffectual", "kind-hearted", "bumbling"],
+      "motivations": ["keep the peace by quietly pardoning the Queen's victims"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_queen", "type": "romantic", "detail": "A timid counterweight to the Queen's fury, undermining her sentences with secret pardons" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_riverbank",
+      "name": "The Riverbank",
+      "type": "ordinary_world",
+      "description": "A drowsy English riverbank on a golden afternoon where Alice sits with her sister, bored by a book with no pictures or conversations.",
+      "atmosphere": "Warm, languid, and safe — the epitome of Victorian childhood comfort that Alice is about to shatter."
+    },
+    {
+      "id": "place_rabbit_hole",
+      "name": "The Rabbit Hole",
+      "type": "threshold",
+      "description": "A vertical tunnel that begins as a rabbit burrow and becomes a slow, surreal fall past shelves of marmalade and maps, depositing Alice in the Hall of Doors.",
+      "atmosphere": "Dreamlike and disorienting — gravity loosens its grip and the rules of the world peel away."
+    },
+    {
+      "id": "place_wonderland",
+      "name": "Wonderland",
+      "type": "special_world",
+      "description": "A nonsensical landscape of talking animals, sentient playing cards, impossible gardens, and tea parties frozen in time. Logic is optional and courtesy is a weapon.",
+      "atmosphere": "Vivid, anarchic, and beautiful, but threaded with menace — a child's dream always on the verge of becoming a nightmare."
+    },
+    {
+      "id": "place_court",
+      "name": "The Queen's Court",
+      "type": "stronghold",
+      "description": "The croquet ground and trial chamber of the Queen of Hearts, where flamingos serve as mallets, hedgehogs as balls, and card soldiers as arches — all under threat of decapitation.",
+      "atmosphere": "Oppressive absurdity — power without reason, judgment without justice."
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_bottle",
+      "name": "DRINK ME Bottle and EAT ME Cake",
+      "type": "key",
+      "description": "A small bottle of liquid and a cake that cause Alice to shrink and grow, altering her size wildly and unpredictably.",
+      "significance": "The consumables are Wonderland's gatekeeping mechanism — Alice must change herself physically to navigate its spaces, mirroring how childhood forces identity shifts on the unwilling.",
+      "rules": ["Drinking shrinks Alice; eating enlarges her", "The effects are unpredictable in degree", "Size changes create as many problems as they solve"]
+    },
+    {
+      "id": "obj_flamingo",
+      "name": "Flamingo Croquet Mallet",
+      "type": "tool",
+      "description": "A live flamingo Alice must use as a croquet mallet in the Queen's game, which twists its neck to look at her and refuses to cooperate.",
+      "significance": "The flamingo embodies Wonderland's central frustration: even tools have wills of their own, and playing by the rules is impossible when the rules are alive.",
+      "rules": ["The flamingo will not stay rigid", "The hedgehog-balls walk away", "The Queen always wins because the game has no real rules"]
+    },
+    {
+      "id": "obj_cards",
+      "name": "Pack of Cards",
+      "type": "symbol",
+      "description": "The playing-card soldiers, courtiers, and royalty that compose the Queen's court — literally two-dimensional figures of authority.",
+      "significance": "The cards represent hollow authority. When Alice finally sees them for what they are — just cards — she breaks Wonderland's hold on her.",
+      "rules": ["The cards obey the Queen out of fear, not loyalty", "They are easily toppled and have no real power", "Alice's recognition of this ends the dream"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_alice_master",
+    "story_id": "alice_wonderland",
+    "archetype_id": "archetype_04_voyage_and_return",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "VR_N01_FAMILIAR_WORLD",
+        "label": "A Golden Afternoon",
+        "description": "Alice sits on the riverbank beside her sister, drowsy with boredom. The book her sister reads has no pictures and no conversations. The world is safe, predictable, and insufferably dull. Alice's mind is already wandering when the White Rabbit runs past.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_alice"],
+          "places": ["place_riverbank"],
+          "objects": []
+        },
+        "character_states": {
+          "char_alice": { "emotional": "bored and restless", "status": "safe in the ordinary world", "want": "something interesting to happen" }
+        },
+        "transitions": [
+          { "entity_id": "char_alice", "change": "reveals", "detail": "Her boredom and curiosity establish her as a child who will chase anything strange" },
+          { "entity_id": "char_rabbit", "change": "arrives", "description": "The White Rabbit dashes past checking his pocket watch, and Alice's curiosity ignites" }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "VR_N02_PASSAGE",
+        "label": "Down the Rabbit Hole",
+        "description": "Alice follows the White Rabbit without hesitation and tumbles down a seemingly endless vertical shaft. She falls past cupboards, bookshelves, and jars of marmalade, wondering idly whether she will fall right through the earth. She lands softly in the Hall of Doors, where a tiny golden key unlocks a door to a beautiful garden she cannot fit through.",
+        "position": 0.1,
+        "participants": {
+          "characters": ["char_alice", "char_rabbit"],
+          "places": ["place_rabbit_hole"],
+          "objects": ["obj_bottle"]
+        },
+        "character_states": {},
+        "transitions": [
+          { "entity_id": "char_alice", "change": "departs", "target": "place_riverbank", "detail": "Leaves the ordinary world entirely by following the Rabbit underground" },
+          { "entity_id": "char_alice", "change": "arrives", "target": "place_rabbit_hole", "detail": "The slow fall is the passage between worlds — gentle enough to seem harmless, strange enough to signal that the rules have changed" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "VR_N03_FASCINATION",
+        "label": "Curiouser and Curiouser",
+        "description": "Alice drinks from the DRINK ME bottle, shrinks to ten inches, eats the EAT ME cake, and grows enormous — cycling through size changes that alternately trap her and free her. She swims in a pool of her own tears, converses with a philosophical Caterpillar, and attends the Mad Hatter's eternal tea party. Wonderland is bewildering but thrilling.",
+        "position": 0.25,
+        "participants": {
+          "characters": ["char_alice", "char_hatter", "char_cheshire"],
+          "places": ["place_wonderland"],
+          "objects": ["obj_bottle"]
+        },
+        "character_states": {
+          "char_alice": { "emotional": "delighted and confused", "status": "exploring Wonderland freely", "want": "to understand the rules of this place" }
+        },
+        "transitions": [
+          { "entity_id": "char_alice", "change": "transforms", "detail": "Her body shifts size repeatedly — she is literally losing control of who she is" },
+          { "entity_id": "char_alice", "change": "learns", "detail": "Wonderland creatures are polite on the surface but hostile to logic; conversations go nowhere" },
+          { "entity_id": "char_cheshire", "change": "reveals", "detail": "Tells Alice that everyone in Wonderland is mad — including her, since she is here" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "VR_N04_SHADOW_EMERGES",
+        "label": "The Queen's Croquet Ground",
+        "description": "Alice enters the Queen of Hearts' domain and is drawn into a croquet game played with live flamingos, hedgehogs, and card soldiers. The Queen screams 'Off with her head!' at the slightest provocation. The game has no rules — or rather, the only rule is that the Queen wins. What seemed whimsical is now dangerous.",
+        "position": 0.45,
+        "participants": {
+          "characters": ["char_alice", "char_queen", "char_king"],
+          "places": ["place_court"],
+          "objects": ["obj_flamingo", "obj_cards"]
+        },
+        "character_states": {
+          "char_alice": { "emotional": "frightened but indignant", "status": "subject to the Queen's arbitrary authority", "want": "to survive without surrendering her principles" },
+          "char_queen": { "emotional": "furious and gleeful", "status": "absolute ruler of a mad court", "want": "total obedience and the pleasure of sentencing" }
+        },
+        "transitions": [
+          { "entity_id": "char_alice", "change": "learns", "detail": "Wonderland is not a playground — it has a tyrant, and the tyrant has noticed her" },
+          { "entity_id": "char_queen", "change": "reveals", "detail": "Her power is absolute and absurd; she orders executions with the ease of a child throwing a tantrum" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "VR_N05_FRUSTRATION",
+        "label": "The Trial of the Knave",
+        "description": "Alice is called as a witness at the trial of the Knave of Hearts, accused of stealing tarts. The proceedings are a parody of justice: evidence is nonsensical, the jury writes down their own names for fear of forgetting them, and the Queen demands the sentence before the verdict. Alice, who has been growing larger throughout, begins to lose patience with the entire farce.",
+        "position": 0.65,
+        "participants": {
+          "characters": ["char_alice", "char_queen", "char_king", "char_rabbit"],
+          "places": ["place_court"],
+          "objects": ["obj_cards"]
+        },
+        "character_states": {
+          "char_alice": { "emotional": "frustrated and emboldened", "status": "growing physically and psychologically larger", "want": "to call out the injustice and go home" }
+        },
+        "transitions": [
+          { "entity_id": "char_alice", "change": "transforms", "detail": "She has been growing in size throughout the trial — her body mirrors her growing refusal to submit" },
+          { "entity_id": "char_alice", "change": "decides", "detail": "Begins to challenge the court openly: 'Stuff and nonsense!'" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "VR_N06_ESCAPE",
+        "label": "Nothing But a Pack of Cards",
+        "description": "The Queen shrieks 'Off with her head!' and the entire pack of cards rises into the air and flies at Alice. Now full-sized and fed up, Alice shouts: 'Who cares for you? You're nothing but a pack of cards!' The spell breaks. The cards flutter down as dead leaves. Wonderland collapses.",
+        "position": 0.85,
+        "participants": {
+          "characters": ["char_alice", "char_queen"],
+          "places": ["place_court"],
+          "objects": ["obj_cards"]
+        },
+        "character_states": {},
+        "transitions": [
+          { "entity_id": "char_alice", "change": "decides", "detail": "Refuses to be afraid of hollow authority — she names the cards for what they are" },
+          { "entity_id": "obj_cards", "change": "reveals", "description": "The cards lose all power the moment Alice stops believing in their authority" },
+          { "entity_id": "char_queen", "change": "loses", "detail": "Her tyranny evaporates when her subject simply refuses to be tyrannized" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "VR_N07_RETURN_CHANGED",
+        "label": "Waking on the Riverbank",
+        "description": "Alice wakes with her head in her sister's lap, dead leaves falling on her face. It was a dream — or was it? She tells her sister about the wonderful adventures, then runs off for tea. Her sister, left alone, imagines how Alice will grow into a woman who keeps the simple, loving heart of childhood. Alice returns to the ordinary world, but the journey has quietly changed her understanding of rules, authority, and the courage to say 'nonsense' to nonsense.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_alice"],
+          "places": ["place_riverbank"],
+          "objects": []
+        },
+        "character_states": {
+          "char_alice": { "emotional": "awake and alive", "status": "returned to the ordinary world", "want": "tea — and to remember what she saw" }
+        },
+        "transitions": [
+          { "entity_id": "char_alice", "change": "arrives", "target": "place_riverbank", "detail": "Returns to exactly where she started, but she is not the same girl who fell asleep" },
+          { "entity_id": "char_alice", "change": "transforms", "detail": "Carries back the knowledge that authority can be hollow and that curiosity, however dangerous, is worth the journey" }
+        ]
+      }
+    ]
+  }
+}

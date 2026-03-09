@@ -1,0 +1,314 @@
+{
+  "story_id": "shawshank_redemption",
+  "story_title": "The Shawshank Redemption",
+  "archetype_id": "archetype_11_the_escape",
+  "characters": [
+    {
+      "id": "char_andy",
+      "name": "Andy Dufresne",
+      "role": "protagonist",
+      "traits": ["patient", "intelligent", "quietly defiant", "resourceful", "enigmatic"],
+      "motivations": ["maintain inner freedom despite imprisonment", "prove his innocence", "build something meaningful even in captivity", "escape to a life of dignity"],
+      "arc_type": "endurance",
+      "relationships": [
+        { "target": "char_red", "type": "ally", "detail": "Deep friendship built over decades of shared imprisonment and mutual respect" },
+        { "target": "char_norton", "type": "nemesis", "detail": "Norton exploits Andy's financial skills while blocking any chance of legal release" },
+        { "target": "char_brooks", "type": "ally", "detail": "Fellow inmate whose fate illustrates the dangers of institutionalization" },
+        { "target": "char_tommy", "type": "ally", "detail": "Young inmate whose testimony could prove Andy's innocence" },
+        { "target": "char_hadley", "type": "guardian", "detail": "Brutal guard whose tax problems Andy solves, earning limited protection" }
+      ]
+    },
+    {
+      "id": "char_red",
+      "name": "Ellis \"Red\" Redding",
+      "role": "ally",
+      "traits": ["pragmatic", "world-weary", "loyal", "observant", "self-aware"],
+      "motivations": ["survive prison without losing himself", "protect his friends", "find something worth hoping for", "earn genuine redemption"],
+      "arc_type": "awakening",
+      "relationships": [
+        { "target": "char_andy", "type": "ally", "detail": "Andy rekindles hope in Red that he had long abandoned" },
+        { "target": "char_brooks", "type": "ally", "detail": "Watches Brooks's tragic release as a warning of what institutionalization does" }
+      ]
+    },
+    {
+      "id": "char_norton",
+      "name": "Warden Samuel Norton",
+      "role": "antagonist",
+      "traits": ["hypocritical", "authoritarian", "corrupt", "pious facade", "vindictive"],
+      "motivations": ["maintain absolute control over Shawshank", "profit from prison labor schemes", "preserve his public image of Christian rectitude", "keep Andy as his personal financial tool"],
+      "arc_type": "fall",
+      "relationships": [
+        { "target": "char_andy", "type": "servant_master", "detail": "Forces Andy to launder money while quoting scripture" },
+        { "target": "char_hadley", "type": "ally", "detail": "Hadley serves as Norton's enforcer" }
+      ]
+    },
+    {
+      "id": "char_brooks",
+      "name": "Brooks Hatlen",
+      "role": "foil",
+      "traits": ["gentle", "institutionalized", "elderly", "fearful", "broken"],
+      "motivations": ["remain in the only world he understands", "care for his pet crow Jake", "find a place in a world that moved on without him"],
+      "arc_type": "tragedy",
+      "relationships": [
+        { "target": "char_red", "type": "ally", "detail": "His fate haunts Red and shapes Red's understanding of freedom" },
+        { "target": "char_andy", "type": "ally", "detail": "Andy inherits the library Brooks maintained" }
+      ]
+    },
+    {
+      "id": "char_tommy",
+      "name": "Tommy Williams",
+      "role": "herald",
+      "traits": ["brash", "good-hearted", "uneducated", "eager", "unfortunate"],
+      "motivations": ["earn his GED", "do the right thing", "get home to his family"],
+      "arc_type": "sacrifice",
+      "relationships": [
+        { "target": "char_andy", "type": "mentor_student", "detail": "Andy tutors Tommy for his GED; Tommy repays him with the truth about the real killer" },
+        { "target": "char_norton", "type": "nemesis", "detail": "Norton has Tommy killed to silence the evidence that would free Andy" }
+      ]
+    },
+    {
+      "id": "char_hadley",
+      "name": "Captain Byron Hadley",
+      "role": "threshold_guardian",
+      "traits": ["brutal", "short-tempered", "greedy", "intimidating", "transactional"],
+      "motivations": ["maintain authority through fear", "avoid paying taxes on his inheritance", "serve Norton's interests"],
+      "arc_type": "static",
+      "relationships": [
+        { "target": "char_andy", "type": "guardian", "detail": "Andy's financial advice earns Hadley's grudging protection" },
+        { "target": "char_norton", "type": "servant_master", "detail": "Executes Norton's orders without question, including murder" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_shawshank",
+      "name": "Shawshank State Penitentiary",
+      "type": "stronghold",
+      "description": "A massive Gothic prison in Maine where inmates serve long sentences under the corrupt administration of Warden Norton. Its gray stone walls represent both physical confinement and the psychological prison of institutionalization.",
+      "atmosphere": "oppressive, regimented, gray, suffocating"
+    },
+    {
+      "id": "place_library",
+      "name": "Shawshank Prison Library",
+      "type": "sanctuary",
+      "description": "The prison library that Andy expands from a closet of donated paperbacks into a proper collection through years of persistent letter-writing. It becomes a space of education, dignity, and quiet resistance.",
+      "atmosphere": "orderly, hopeful, a pocket of civilization within the prison"
+    },
+    {
+      "id": "place_cell",
+      "name": "Andy's Cell",
+      "type": "ordinary_world",
+      "description": "Andy's small prison cell, unremarkable except for the large poster on the wall\u2014Rita Hayworth, then Marilyn Monroe, then Raquel Welch\u2014concealing the tunnel he digs over nineteen years.",
+      "atmosphere": "confining, deceptively ordinary, hiding a secret"
+    },
+    {
+      "id": "place_zihuatanejo",
+      "name": "Zihuatanejo, Mexico",
+      "type": "special_world",
+      "description": "The small Pacific coastal town Andy dreams of\u2014a place with no memory, where a man can start fresh. It represents the opposite of Shawshank in every way: open, warm, free.",
+      "atmosphere": "sunlit, boundless, peaceful, redemptive"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_rock_hammer",
+      "name": "Rock Hammer",
+      "type": "tool",
+      "description": "A small geological hammer Andy purchases from Red, ostensibly for his hobby of shaping and polishing rocks. In reality, it is the instrument with which he carves a tunnel through his cell wall over nineteen years.",
+      "significance": "Embodies Andy's defining qualities\u2014patience, persistence, and the refusal to accept that walls are permanent. A tiny tool applied with geological patience achieves what brute force never could.",
+      "rules": [
+        "Small enough to conceal inside a hollowed-out Bible",
+        "Requires nearly two decades of nightly work to breach the cell wall",
+        "Symbolizes hope expressed through action rather than mere feeling"
+      ]
+    },
+    {
+      "id": "obj_poster",
+      "name": "Pin-Up Poster",
+      "type": "symbol",
+      "description": "A succession of movie star posters\u2014Rita Hayworth, Marilyn Monroe, Raquel Welch\u2014that hang on Andy's cell wall, concealing the growing tunnel behind them.",
+      "significance": "Functions on two levels: to the world, a harmless decoration; to Andy, the veil over his lifelong project. It represents the difference between appearance and reality, the surface story and the true one.",
+      "rules": [
+        "Must be large enough to cover the tunnel entrance",
+        "Changes over the decades, marking the passage of time",
+        "Only its true purpose is revealed when Andy is already gone"
+      ]
+    },
+    {
+      "id": "obj_ledger",
+      "name": "Norton's Financial Ledger",
+      "type": "document",
+      "description": "The meticulous records Andy keeps of Warden Norton's money laundering operation\u2014kickbacks, bribes, and embezzled prison labor funds\u2014all funneled through a fictitious identity Andy created.",
+      "significance": "Andy's insurance policy and ultimate weapon. By maintaining these records, he ensures that his escape will also destroy Norton. The same financial expertise Norton exploited becomes the instrument of the warden's downfall.",
+      "rules": [
+        "Contains evidence sufficient to convict Norton and his staff",
+        "Andy mails it to the Portland Daily Bugle upon escaping",
+        "The fictitious identity 'Randall Stephens' allows Andy to claim Norton's laundered funds"
+      ]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_shawshank_escape",
+    "story_id": "shawshank_redemption",
+    "archetype_id": "archetype_11_the_escape",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "ES_N01_CONFINEMENT",
+        "label": "Sentenced to Shawshank",
+        "description": "Andy Dufresne, a young banker wrongly convicted of murdering his wife and her lover, arrives at Shawshank State Penitentiary. He is quiet, composed, and seemingly out of place. Red bets against his survival on the first night. The prison's brutality\u2014the beatings, the Sisters, the dehumanizing routine\u2014establishes the world Andy must either submit to or overcome.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_andy", "char_red", "char_hadley", "char_brooks"],
+          "places": ["place_shawshank", "place_cell"],
+          "objects": []
+        },
+        "character_states": {
+          "char_andy": "shell-shocked but quietly observing, already adapting",
+          "char_red": "cynical, experienced, curious about the newcomer",
+          "char_hadley": "establishing dominance through violence on the first night",
+          "char_brooks": "deeply institutionalized, decades into his sentence"
+        },
+        "transitions": [
+          { "entity_id": "char_andy", "change": "arrives", "target": "place_shawshank", "detail": "Begins a life sentence for a crime he did not commit" },
+          { "entity_id": "char_red", "change": "bonds", "target": "char_andy", "detail": "Begins to notice Andy's unusual composure and quiet intelligence" }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "ES_N02_SPARK_OF_HOPE",
+        "label": "The Rock Hammer and the Rooftop Beers",
+        "description": "Andy asks Red to procure a rock hammer, claiming he wants to shape chess pieces. Months later, while tarring a rooftop, Andy overhears Hadley complaining about taxes on an inheritance. Andy risks his life by offering financial advice, earning cold beers for his work crew. For one afternoon, the inmates feel like free men. Andy begins to understand that hope\u2014and usefulness\u2014are currencies even in prison.",
+        "position": 0.15,
+        "participants": {
+          "characters": ["char_andy", "char_red", "char_hadley"],
+          "places": ["place_shawshank"],
+          "objects": ["obj_rock_hammer"]
+        },
+        "character_states": {
+          "char_andy": "calculating, willing to risk everything for a small gesture of freedom",
+          "char_red": "astonished by Andy's audacity, beginning to admire him",
+          "char_hadley": "grudgingly impressed, now sees Andy as useful"
+        },
+        "transitions": [
+          { "entity_id": "char_andy", "change": "gains", "description": "Acquires the rock hammer that will become his means of escape" },
+          { "entity_id": "char_andy", "change": "reveals", "description": "Demonstrates his financial expertise, making himself valuable to the guards" },
+          { "entity_id": "char_hadley", "change": "bonds", "target": "char_andy", "detail": "Enters a transactional relationship\u2014protection in exchange for tax advice" }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "ES_N03_PLANNING",
+        "label": "Building the Tunnel and the Library",
+        "description": "Over years, Andy pursues two parallel projects. In public, he writes weekly letters to the state senate until they fund a proper prison library\u2014a visible act of civilizing resistance. In secret, behind the poster in his cell, he chips away at the wall every night with the rock hammer, disposing of debris in the exercise yard. He also begins managing Norton's corrupt finances, becoming indispensable to the warden.",
+        "position": 0.3,
+        "participants": {
+          "characters": ["char_andy", "char_norton", "char_red", "char_brooks"],
+          "places": ["place_cell", "place_library"],
+          "objects": ["obj_rock_hammer", "obj_poster", "obj_ledger"]
+        },
+        "character_states": {
+          "char_andy": "patient, methodical, playing a decades-long game on multiple fronts",
+          "char_norton": "increasingly reliant on Andy, blind to the danger",
+          "char_red": "loyal but skeptical of hope, serving his time",
+          "char_brooks": "about to be paroled, terrified of the outside world"
+        },
+        "transitions": [
+          { "entity_id": "char_andy", "change": "gains", "description": "Builds the prison library into a real educational resource through relentless correspondence" },
+          { "entity_id": "char_andy", "change": "learns", "description": "Maps the building's plumbing and infrastructure, planning his escape route through the sewer main" },
+          { "entity_id": "char_norton", "change": "bonds", "target": "char_andy", "detail": "Draws Andy deeper into his money laundering, creating mutual dependency" }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "ES_N04_SETBACKS",
+        "label": "Brooks and Tommy",
+        "description": "Two devastating events test Andy's resolve. First, Brooks Hatlen is paroled after fifty years and, unable to cope with freedom, hangs himself\u2014a stark warning about what prison does to a man's soul. Then Tommy Williams arrives with proof that another man committed Andy's murders. When Andy brings this to Norton, the warden has Tommy killed and throws Andy into solitary confinement for two months. Norton will never let his personal financial wizard go free.",
+        "position": 0.5,
+        "participants": {
+          "characters": ["char_andy", "char_tommy", "char_norton", "char_hadley", "char_brooks", "char_red"],
+          "places": ["place_shawshank"],
+          "objects": []
+        },
+        "character_states": {
+          "char_andy": "devastated by Tommy's murder, hardened in his determination to escape",
+          "char_tommy": "eager to help, unaware that his honesty will cost his life",
+          "char_norton": "ruthlessly eliminating any threat to his control over Andy",
+          "char_brooks": "destroyed by freedom he was never prepared to handle",
+          "char_red": "grieving for Brooks, fearful for Andy"
+        },
+        "transitions": [
+          { "entity_id": "char_brooks", "change": "dies", "description": "Hangs himself in a halfway house, unable to survive outside the institution that defined him" },
+          { "entity_id": "char_tommy", "change": "dies", "description": "Shot by Hadley on Norton's orders, silencing the evidence of Andy's innocence" },
+          { "entity_id": "char_andy", "change": "decides", "description": "Resolves that legal justice is impossible\u2014escape is the only path to freedom" }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "ES_N05_POINT_OF_NO_RETURN",
+        "label": "Get Busy Living or Get Busy Dying",
+        "description": "After emerging from solitary, Andy speaks to Red with a strange serenity that frightens his friend. He talks about Zihuatanejo, a little town on the Pacific coast of Mexico where he plans to live. He tells Red about a specific hayfield in Buxton, Maine, where something is buried under a volcanic glass rock. Red, terrified that Andy is planning suicide, begs him to abandon whatever he's contemplating. Andy smiles and says nothing more. That night, he makes his final preparations.",
+        "position": 0.65,
+        "participants": {
+          "characters": ["char_andy", "char_red"],
+          "places": ["place_shawshank"],
+          "objects": ["obj_ledger"]
+        },
+        "character_states": {
+          "char_andy": "utterly calm, every piece in place, ready to act",
+          "char_red": "afraid, reading Andy's composure as a sign of finality"
+        },
+        "transitions": [
+          { "entity_id": "char_andy", "change": "decides", "description": "Commits fully to the escape plan he has built over nineteen years" },
+          { "entity_id": "char_andy", "change": "reveals", "target": "char_red", "detail": "Gives Red the clue to find the buried package in Buxton\u2014money and an invitation to Zihuatanejo" }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "ES_N06_ESCAPE_ATTEMPT",
+        "label": "Through the Wall and the Filth",
+        "description": "On a thunderstorm night, Andy puts on Norton's shoes and suit under his prison clothes, seals the ledger and a letter to the newspaper in a waterproof bag, replaces the poster behind him for the last time, and crawls through the tunnel into the sewer pipe. He wades through five hundred yards of raw sewage\u2014a baptism of filth\u2014and emerges into a creek in the rain. He strips off his prison clothes, raises his arms to the sky, and lets the rain wash him clean. By morning he has visited a dozen banks as Randall Stephens, collected Norton's laundered money, and mailed the evidence to the press.",
+        "position": 0.82,
+        "participants": {
+          "characters": ["char_andy", "char_norton"],
+          "places": ["place_cell", "place_shawshank"],
+          "objects": ["obj_rock_hammer", "obj_poster", "obj_ledger"]
+        },
+        "character_states": {
+          "char_andy": "liberated, reborn through literal filth into freedom",
+          "char_norton": "asleep, unaware that his empire is collapsing"
+        },
+        "transitions": [
+          { "entity_id": "char_andy", "change": "departs", "target": "place_shawshank", "detail": "Crawls through the tunnel and five hundred yards of sewer pipe to freedom" },
+          { "entity_id": "char_andy", "change": "transforms", "description": "Emerges from the sewage as a free man, shedding his prisoner identity forever" },
+          { "entity_id": "char_norton", "change": "loses", "description": "Discovers the empty cell and the tunnel; the ledger and evidence are already en route to authorities" }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "ES_N07_FREEDOM",
+        "label": "Zihuatanejo",
+        "description": "Norton shoots himself when the police arrive. Hadley is arrested. Red, eventually paroled, nearly follows Brooks's path into despair\u2014but remembers Andy's words. He finds the buried package under the volcanic rock in Buxton: cash and a letter asking him to come to Zihuatanejo. Red violates his parole and travels to Mexico. On a bright beach, he sees Andy sanding the hull of a boat. They embrace. Red narrates: 'I hope I can make it across the border. I hope to see my friend and shake his hand. I hope the Pacific is as blue as it has been in my dreams. I hope.'",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_andy", "char_red", "char_norton", "char_hadley"],
+          "places": ["place_zihuatanejo"],
+          "objects": []
+        },
+        "character_states": {
+          "char_andy": "at peace, building a new life in the sun",
+          "char_red": "finally hopeful, choosing freedom over fear",
+          "char_norton": "dead by his own hand, his corruption fully exposed",
+          "char_hadley": "arrested, facing justice for his crimes"
+        },
+        "transitions": [
+          { "entity_id": "char_norton", "change": "dies", "description": "Shoots himself rather than face prosecution for corruption and murder" },
+          { "entity_id": "char_hadley", "change": "loses", "description": "Arrested and stripped of authority as the scandal breaks" },
+          { "entity_id": "char_red", "change": "transforms", "description": "Chooses hope over institutionalized despair, violating parole to find Andy in Mexico" },
+          { "entity_id": "char_red", "change": "arrives", "target": "place_zihuatanejo", "detail": "Reunites with Andy on the Pacific shore, completing his own journey from cynicism to hope" }
+        ]
+      }
+    ]
+  }
+}

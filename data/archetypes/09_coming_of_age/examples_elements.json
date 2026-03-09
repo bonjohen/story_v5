@@ -1,0 +1,368 @@
+{
+  "story_id": "to_kill_a_mockingbird",
+  "story_title": "To Kill a Mockingbird",
+  "archetype_id": "archetype_09_coming_of_age",
+  "characters": [
+    {
+      "id": "char_scout",
+      "name": "Scout Finch",
+      "role": "protagonist",
+      "traits": ["curious", "tomboyish", "outspoken", "empathetic", "precocious"],
+      "motivations": ["understand the adult world around her", "live up to her father's moral example", "protect the people she loves", "make sense of Maycomb's contradictions"],
+      "arc_type": "positive",
+      "relationships": [
+        { "target": "char_atticus", "type": "parent_child" },
+        { "target": "char_jem", "type": "sibling" },
+        { "target": "char_boo", "type": "guardian" },
+        { "target": "char_tom", "type": "ally" },
+        { "target": "char_ewell", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_atticus",
+      "name": "Atticus Finch",
+      "role": "mentor",
+      "traits": ["principled", "patient", "eloquent", "courageous", "compassionate"],
+      "motivations": ["defend Tom Robinson because justice demands it", "raise his children to see people as human beings", "model moral courage in a town that punishes it"],
+      "arc_type": "flat",
+      "relationships": [
+        { "target": "char_scout", "type": "parent_child" },
+        { "target": "char_jem", "type": "parent_child" },
+        { "target": "char_tom", "type": "ally" },
+        { "target": "char_ewell", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_boo",
+      "name": "Arthur 'Boo' Radley",
+      "role": "shapeshifter",
+      "traits": ["reclusive", "gentle", "misunderstood", "protective", "silent"],
+      "motivations": ["watch over the Finch children from the shadows", "connect with the outside world through small gifts"],
+      "arc_type": "positive",
+      "relationships": [
+        { "target": "char_scout", "type": "guardian" },
+        { "target": "char_jem", "type": "guardian" },
+        { "target": "char_ewell", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_jem",
+      "name": "Jeremy 'Jem' Finch",
+      "role": "ally",
+      "traits": ["brave", "idealistic", "protective", "impressionable", "sensitive"],
+      "motivations": ["protect his younger sister", "emulate his father's courage", "believe in the fairness of the justice system"],
+      "arc_type": "positive",
+      "relationships": [
+        { "target": "char_scout", "type": "sibling" },
+        { "target": "char_atticus", "type": "parent_child" },
+        { "target": "char_boo", "type": "ally" }
+      ]
+    },
+    {
+      "id": "char_tom",
+      "name": "Tom Robinson",
+      "role": "foil",
+      "traits": ["honest", "dignified", "hardworking", "gentle", "vulnerable"],
+      "motivations": ["prove his innocence against false charges", "provide for his family"],
+      "arc_type": "tragic",
+      "relationships": [
+        { "target": "char_atticus", "type": "ally" },
+        { "target": "char_ewell", "type": "nemesis" }
+      ]
+    },
+    {
+      "id": "char_ewell",
+      "name": "Bob Ewell",
+      "role": "antagonist",
+      "traits": ["cruel", "ignorant", "vindictive", "cowardly", "violent"],
+      "motivations": ["preserve his family's reputation by scapegoating Tom Robinson", "punish Atticus for humiliating him in court", "reassert dominance in the racial hierarchy"],
+      "arc_type": "negative",
+      "relationships": [
+        { "target": "char_atticus", "type": "nemesis" },
+        { "target": "char_tom", "type": "nemesis" },
+        { "target": "char_scout", "type": "nemesis" },
+        { "target": "char_boo", "type": "nemesis" }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_maycomb",
+      "name": "Maycomb, Alabama",
+      "type": "ordinary_world",
+      "description": "A sleepy, insular Southern town during the Great Depression where everyone knows everyone and social hierarchies are rigidly enforced along lines of race and class.",
+      "atmosphere": "languid and familiar on the surface, with deep currents of prejudice flowing beneath the neighborly routines"
+    },
+    {
+      "id": "place_courthouse",
+      "name": "Maycomb County Courthouse",
+      "type": "crossroads",
+      "description": "The aging courthouse where Tom Robinson's trial takes place, with the white gallery below and the colored balcony above where Scout and Jem watch the proceedings.",
+      "atmosphere": "stifling and tense, a crucible where the town's moral character is publicly tested and found wanting"
+    },
+    {
+      "id": "place_radley_house",
+      "name": "The Radley Place",
+      "type": "threshold",
+      "description": "The shuttered, decaying house where Boo Radley has been confined for years, the subject of childhood legends and dares among Maycomb's children.",
+      "atmosphere": "gothic and foreboding in the children's imagination, eventually revealed as a place of quiet compassion"
+    },
+    {
+      "id": "place_finch_home",
+      "name": "The Finch House",
+      "type": "sanctuary",
+      "description": "Atticus's modest home on the main residential street of Maycomb, where Scout and Jem are raised with books, conversation, and moral instruction.",
+      "atmosphere": "warm, literate, and safe — a haven of reason in a town ruled by prejudice"
+    }
+  ],
+  "objects": [
+    {
+      "id": "obj_knothole_gifts",
+      "name": "Knothole Gifts",
+      "type": "talisman",
+      "description": "Small treasures left by Boo Radley in the knothole of a tree near the Radley property — twine, carved soap figures, a pocket watch, pennies, chewing gum.",
+      "significance": "Boo's only means of communication with the children, transforming him from a monster of their imagination into a gentle, reaching presence. The gifts trace Scout's evolving understanding of who Boo really is.",
+      "rules": ["placed secretly without direct contact", "cemented over by Nathan Radley to sever Boo's connection to the outside world"]
+    },
+    {
+      "id": "obj_blanket",
+      "name": "Boo Radley's Blanket",
+      "type": "symbol",
+      "description": "A blanket that Boo drapes over Scout's shoulders during the night Miss Maudie's house burns, without Scout even noticing his presence.",
+      "significance": "Concrete proof that Boo has been watching over the children all along, collapsing the distance between the feared phantom and the secret guardian.",
+      "rules": ["placed during the chaos of the fire when no one is watching", "Scout only realizes it afterward when Atticus points it out"]
+    }
+  ],
+  "timeline": {
+    "timeline_id": "tl_mockingbird_master",
+    "story_id": "to_kill_a_mockingbird",
+    "archetype_id": "archetype_09_coming_of_age",
+    "type": "master",
+    "moments": [
+      {
+        "moment_id": "M01",
+        "archetype_node": "CA_N01_INNOCENCE",
+        "label": "Summers of Play in Maycomb",
+        "description": "Scout, Jem, and their summer friend Dill spend their days in imaginative play, daring each other to approach the Radley house and inventing stories about the monstrous Boo Radley. Scout's world is simple: school is boring, her father reads to her every night, and Maycomb's rhythms are predictable and safe.",
+        "position": 0.0,
+        "participants": {
+          "characters": ["char_scout", "char_jem"],
+          "places": ["place_maycomb", "place_finch_home", "place_radley_house"],
+          "objects": []
+        },
+        "character_states": {
+          "char_scout": "innocent and confident, viewing the world in black and white, fascinated by the Radley mystery",
+          "char_jem": "adventurous older brother, leading the dares and games around the Radley house"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_scout",
+            "change": "learns",
+            "detail": "the childhood mythology of Boo Radley as a frightening phantom",
+            "description": "Scout absorbs the town's legends about Boo — that he eats squirrels and peers through windows at night — establishing the innocent worldview that will be dismantled by experience."
+          }
+        ]
+      },
+      {
+        "moment_id": "M02",
+        "archetype_node": "CA_N02_FIRST_EXPOSURE",
+        "label": "Atticus Takes the Robinson Case",
+        "description": "Atticus agrees to defend Tom Robinson, a Black man accused of raping Mayella Ewell. Scout begins hearing the word 'nigger-lover' directed at her father by classmates and townspeople. She fights Cecil Jacobs at school and is told by Atticus that real courage is not a man with a gun but knowing you're licked before you begin and seeing it through anyway.",
+        "position": 0.15,
+        "participants": {
+          "characters": ["char_scout", "char_atticus", "char_jem"],
+          "places": ["place_maycomb", "place_finch_home"],
+          "objects": []
+        },
+        "character_states": {
+          "char_scout": "confused and angry that her father is being attacked for doing something she senses is right",
+          "char_atticus": "steady and resolute, using the crisis as a teaching moment about conscience",
+          "char_jem": "beginning to grasp the social cost of his father's principles"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_scout",
+            "change": "learns",
+            "detail": "that doing the right thing can make your own community turn against you",
+            "description": "The slurs and hostility directed at Atticus crack open Scout's assumption that Maycomb is a safe, fair place — her first exposure to the adult world's capacity for cruelty."
+          },
+          {
+            "entity_id": "char_scout",
+            "change": "decides",
+            "detail": "to stop fighting with her fists after Atticus asks her to keep her head",
+            "description": "Scout's first exercise in restraint marks the beginning of her movement away from childish impulse toward the measured courage her father models."
+          }
+        ]
+      },
+      {
+        "moment_id": "M03",
+        "archetype_node": "CA_N03_TESTING_GROUND",
+        "label": "The Mob at the Jailhouse",
+        "description": "A lynch mob arrives at the county jail to seize Tom Robinson the night before the trial. Scout, Jem, and Dill sneak out and find Atticus sitting guard alone. Scout breaks the tension by singling out Walter Cunningham in the crowd and speaking to him about his son, inadvertently shaming the mob into dispersing.",
+        "position": 0.3,
+        "participants": {
+          "characters": ["char_scout", "char_atticus", "char_jem"],
+          "places": ["place_maycomb"],
+          "objects": []
+        },
+        "character_states": {
+          "char_scout": "unaware of the danger she is in, acting on pure social instinct rather than fear",
+          "char_atticus": "quietly terrified for his children but recognizing that Scout's innocence accomplished what his courage alone could not",
+          "char_jem": "old enough to understand the mob's intent, refusing to leave his father's side"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_scout",
+            "change": "reveals",
+            "detail": "the power of seeing people as individuals rather than a faceless mob",
+            "description": "By speaking to Mr. Cunningham as a person — asking about his son, his entailment — Scout unwittingly demonstrates the empathy Atticus has been teaching, and it dissolves the mob's collective violence."
+          },
+          {
+            "entity_id": "char_jem",
+            "change": "transforms",
+            "detail": "from a child playing at bravery to a boy who stands against real danger",
+            "description": "Jem's refusal to go home when Atticus orders him to marks his passage from childhood dares at the Radley house to genuine moral courage under threat."
+          }
+        ]
+      },
+      {
+        "moment_id": "M04",
+        "archetype_node": "CA_N04_MENTOR_OR_MODEL",
+        "label": "Atticus in the Courtroom",
+        "description": "Scout and Jem watch the trial from the colored balcony. Atticus methodically dismantles the Ewells' testimony, proving that Tom's crippled left arm makes the alleged assault physically impossible and that Mayella's injuries came from her father. His closing argument appeals to the jury's conscience, asking them to see Tom as a human being.",
+        "position": 0.45,
+        "participants": {
+          "characters": ["char_scout", "char_atticus", "char_jem", "char_tom", "char_ewell"],
+          "places": ["place_courthouse"],
+          "objects": []
+        },
+        "character_states": {
+          "char_scout": "absorbing her father's moral example in its fullest public expression",
+          "char_atticus": "at the peak of his powers, modeling the principle that all people deserve dignity and fair treatment",
+          "char_tom": "dignified and truthful on the stand, his decency visible to everyone willing to see it",
+          "char_ewell": "exposed as a liar and abuser, humiliated before the town"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_scout",
+            "change": "learns",
+            "detail": "what her father's principles look like when enacted at their highest cost",
+            "description": "Watching Atticus defend Tom Robinson in a courtroom full of hostile observers crystallizes every lesson he has taught her about courage, empathy, and justice."
+          },
+          {
+            "entity_id": "char_tom",
+            "change": "reveals",
+            "detail": "his humanity and innocence through honest testimony",
+            "description": "Tom's account of helping Mayella out of simple kindness — and his admission that he felt sorry for her — lays bare the tragedy: his compassion is what the town cannot forgive."
+          }
+        ]
+      },
+      {
+        "moment_id": "M05",
+        "archetype_node": "CA_N05_CRISIS_OF_IDENTITY",
+        "label": "The Guilty Verdict",
+        "description": "Despite Atticus's irrefutable defense, the all-white jury convicts Tom Robinson. Jem weeps openly. Scout watches the Black community in the balcony stand silently as Atticus walks out alone. The verdict forces both children to confront the fact that justice and fairness are not the same thing in Maycomb.",
+        "position": 0.6,
+        "participants": {
+          "characters": ["char_scout", "char_jem", "char_atticus", "char_tom"],
+          "places": ["place_courthouse"],
+          "objects": []
+        },
+        "character_states": {
+          "char_scout": "shaken but processing — she sees the injustice but does not yet fully grasp its weight",
+          "char_jem": "devastated, his faith in the justice system shattered beyond repair",
+          "char_atticus": "weary and unsurprised, grieving the outcome he expected but fought against anyway"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_jem",
+            "change": "loses",
+            "detail": "his belief that courts and laws are inherently fair",
+            "description": "The guilty verdict breaks something in Jem that cannot be repaired — his idealism collides with systemic racism and he cannot reconcile them."
+          },
+          {
+            "entity_id": "char_scout",
+            "change": "learns",
+            "detail": "that the world does not operate on the principles her father taught her",
+            "description": "Scout's crisis of identity begins here: the moral framework Atticus built for her is true and right, but the world refuses to honor it."
+          }
+        ]
+      },
+      {
+        "moment_id": "M06",
+        "archetype_node": "CA_N06_LOSS_OF_INNOCENCE",
+        "label": "Tom's Death and Ewell's Revenge",
+        "description": "Tom Robinson is shot and killed trying to escape prison, and Atticus delivers the news with quiet anguish. Bob Ewell, still seething from his courtroom humiliation, spits in Atticus's face, threatens Tom's widow, and eventually attacks Scout and Jem on a dark road as they walk home from a Halloween pageant. Boo Radley emerges from his house to save them, killing Ewell in the struggle.",
+        "position": 0.8,
+        "participants": {
+          "characters": ["char_scout", "char_jem", "char_ewell", "char_boo", "char_tom"],
+          "places": ["place_maycomb", "place_radley_house"],
+          "objects": []
+        },
+        "character_states": {
+          "char_scout": "terrified during the attack, then overwhelmed as the full weight of the story's violence and injustice crashes over her",
+          "char_jem": "unconscious with a broken arm, physically marked by the violence of Ewell's hatred",
+          "char_boo": "stepping out of years of seclusion to protect the children he has watched over",
+          "char_ewell": "consumed by his own venom, lashing out at children because he cannot reach Atticus"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_tom",
+            "change": "dies",
+            "detail": "shot seventeen times while attempting to climb the prison fence",
+            "description": "Tom's death is the story's deepest wound — a good man destroyed by a system that never intended to see him as human, regardless of the evidence."
+          },
+          {
+            "entity_id": "char_ewell",
+            "change": "dies",
+            "detail": "killed by Boo Radley while attacking Scout and Jem",
+            "description": "Ewell's violence reaches its final expression against the most innocent targets, and it is the town's other outcast — Boo — who stops him."
+          },
+          {
+            "entity_id": "char_boo",
+            "change": "reveals",
+            "detail": "himself as the children's silent protector by saving their lives",
+            "description": "Boo's emergence collapses every childhood myth about him. The monster is a savior; the phantom is a neighbor. Scout's entire understanding of appearance versus reality is rewritten in a single moment."
+          }
+        ]
+      },
+      {
+        "moment_id": "M07",
+        "archetype_node": "CA_N07_NEW_MATURITY",
+        "label": "Standing on the Radley Porch",
+        "description": "Scout walks Boo home and stands on his porch, looking out at the street from his perspective. She sees the neighborhood as he has seen it for years — the children playing, the seasons turning, the small dramas of Maycomb. She understands, at last, what Atticus meant when he said you never really understand a person until you stand in their shoes. She returns home, and Atticus reads to her until she falls asleep.",
+        "position": 1.0,
+        "participants": {
+          "characters": ["char_scout", "char_boo", "char_atticus"],
+          "places": ["place_radley_house", "place_finch_home", "place_maycomb"],
+          "objects": ["obj_knothole_gifts", "obj_blanket"]
+        },
+        "character_states": {
+          "char_scout": "matured beyond her years, carrying grief and understanding in equal measure, able to see through another person's eyes",
+          "char_boo": "briefly visible and known, then returned to his quiet world — understood at last by the one person who matters",
+          "char_atticus": "steadfast as always, reading to his daughter as the world she knows reconstitutes itself around harder truths"
+        },
+        "transitions": [
+          {
+            "entity_id": "char_scout",
+            "change": "transforms",
+            "detail": "from a child who saw Boo as a monster into a young person who sees him as a mockingbird — someone whose goodness must be protected from the world's cruelty",
+            "description": "Standing on Boo's porch is Scout's definitive moment of maturity. She has lost her innocence to racism, violence, and injustice, but she has gained her father's gift: the ability to see the world through someone else's eyes."
+          },
+          {
+            "entity_id": "char_scout",
+            "change": "bonds",
+            "target": "char_boo",
+            "description": "Scout takes Boo's arm and walks him home gently, treating the town recluse with the same quiet dignity Atticus showed Tom Robinson. The child has become the protector."
+          },
+          {
+            "entity_id": "char_boo",
+            "change": "departs",
+            "target": "place_radley_house",
+            "description": "Boo retreats behind his door for the last time, but he is no longer a mystery or a phantom — Scout has seen him, understood him, and let him go."
+          }
+        ]
+      }
+    ]
+  }
+}
