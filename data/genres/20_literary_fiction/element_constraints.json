@@ -1,0 +1,35 @@
+{
+  "genre_id": "genre_20_literary_fiction",
+  "genre_name": "Literary Fiction",
+  "description": "Literary fiction requires a central consciousness whose interiority is the primary narrative engine, mirror characters who apply pressure on inner life, and objects that accrue meaning through repetition — the ending must be resonant without being vague.",
+  "character_constraints": [
+    { "role": "central_consciousness", "severity": "required", "description": "A character whose self-deceptions, contradictions, and inner life are the primary subject — interiority is the engine.", "min_count": 1 },
+    { "role": "mirror_character", "severity": "required", "description": "A character who applies pressure on the protagonist's interiority — exposing what they hide from themselves.", "min_count": 1 }
+  ],
+  "relationship_constraints": [
+    { "type": "interiority_pressure", "severity": "required", "description": "Other characters exist to expose the protagonist's inner life — relationships serve interior revelation, not external plot.", "between_roles": ["central_consciousness", "mirror_character"] }
+  ],
+  "place_constraints": [
+    { "type": "symbolic_setting", "severity": "required", "description": "A mundane location that accumulates thematic weight through the narrative — the house, the garden, the office becomes a symbol." }
+  ],
+  "object_constraints": [
+    { "type": "recurring_object", "severity": "required", "description": "An object that accrues meaning through repetition and transformation — its significance deepens with each appearance." },
+    { "type": "metaphor_object", "severity": "recommended", "description": "An object functioning on both literal and symbolic levels simultaneously." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "LIT_R01",
+      "description": "Character interiority must be the primary narrative engine — plot serves interior revelation, not the reverse.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least 3 major timeline transitions are initiated by the protagonist's internal realization or self-confrontation."
+    },
+    {
+      "rule_id": "LIT_R02",
+      "description": "The ending must be resonant without being vague — earned ambiguity is required, trailing off is forbidden.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The final scene resolves or reframes the central interior question, even if it does not resolve the external situation."
+    }
+  ]
+}

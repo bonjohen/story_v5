@@ -1,0 +1,39 @@
+{
+  "genre_id": "genre_15_historical",
+  "genre_name": "Historical",
+  "description": "Historical fiction requires characters whose identity is constituted by their period's social position, settings with operative material conditions, and conflicts caused by historical conditions rather than merely set against them.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character whose identity is constituted by the period's social position — class, gender, profession, and era shape every choice.", "min_count": 1 },
+    { "role": "historical_figure", "severity": "optional", "description": "A real historical person rendered with documented accuracy — not a cameo but a participant." },
+    { "role": "social_hierarchy_embodiment", "severity": "recommended", "description": "A character who personifies the era's power structure — lord, enslaver, priest, officer." }
+  ],
+  "relationship_constraints": [
+    { "type": "period_power", "severity": "required", "description": "Hierarchy of the era shapes every relationship — master/servant, lord/vassal, colonizer/colonized.", "between_roles": ["protagonist", "social_hierarchy_embodiment"] },
+    { "type": "cross_class", "severity": "optional", "description": "A relationship that crosses social boundaries of the era, creating tension specific to the period." }
+  ],
+  "place_constraints": [
+    { "type": "period_setting", "severity": "required", "description": "A setting where material conditions of the era are operative — technology, transportation, communication, sanitation." },
+    { "type": "power_institution", "severity": "recommended", "description": "Court, estate, battlefield, parliament, or temple — the physical seat of period authority." }
+  ],
+  "object_constraints": [
+    { "type": "period_document", "severity": "recommended", "description": "A letter, writ, edict, or order carrying time-bound authority and consequences." },
+    { "type": "status_object", "severity": "recommended", "description": "An object that embodies social power — seal, crown, deed, weapon of the era." },
+    { "type": "period_weapon", "severity": "optional", "description": "Weaponry consistent with the era — its capabilities and limitations shape conflict." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "HIS_R01",
+      "description": "The central conflict must be caused by historical conditions, not merely set against them — remove the period and the story should collapse.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The inciting incident and climax are both directly caused by conditions specific to the historical period."
+    },
+    {
+      "rule_id": "HIS_R02",
+      "description": "Characters must think within the conceptual framework of their era — no anachronistic moral vocabulary or modern sensibility.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "Character dialogue and decisions reflect the values and knowledge available in the depicted period."
+    }
+  ]
+}

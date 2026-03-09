@@ -1,7 +1,7 @@
 /**
  * Zustand store for story generation request parameters.
  * Persists form values across tab switches and re-renders.
- * The GenerationPanel reads/writes from here instead of local useState.
+ * The generation tabs read/write from here instead of local useState.
  *
  * Manages LLM adapter lifecycle — supports:
  *   - Bridge (WebSocket to local Claude Code bridge server)
@@ -13,7 +13,7 @@ import { create } from 'zustand'
 import { BridgeAdapter } from '../bridge/bridgeAdapter.ts'
 import { OpenAICompatibleAdapter } from '../agents/openaiCompatibleAdapter.ts'
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
-import type { GenerationMode } from '../artifacts/types.ts'
+import type { GenerationMode, StoryProjectRequest } from '../artifacts/types.ts'
 
 export type LlmBackend = 'none' | 'bridge' | 'openai'
 export type BridgeStatus = 'disconnected' | 'connecting' | 'connected' | 'error'
@@ -58,6 +58,7 @@ export interface RequestStoreState {
   clearSlotOverrides: () => void
   connectBridge: () => Promise<void>
   disconnectBridge: () => void
+  loadFromProject: (req: StoryProjectRequest) => void
 }
 
 export const useRequestStore = create<RequestStoreState>((set, get) => ({
@@ -132,4 +133,16 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
     }
     set({ bridgeAdapter: null, bridgeStatus: 'disconnected' })
   },
+
+  loadFromProject: (req) => set({
+    premise: req.premise,
+    archetype: req.archetype,
+    genre: req.genre,
+    tone: req.tone,
+    llmBackend: req.llmBackend,
+    bridgeUrl: req.bridgeUrl,
+    maxLlmCalls: req.maxLlmCalls,
+    openaiBaseUrl: req.openaiBaseUrl,
+    openaiModel: req.openaiModel,
+  }),
 }))

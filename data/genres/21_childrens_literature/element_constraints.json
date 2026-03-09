@@ -1,0 +1,38 @@
+{
+  "genre_id": "genre_21_childrens_literature",
+  "genre_name": "Children's Literature",
+  "description": "Children's literature requires a child protagonist who acts and earns the resolution, structurally absent adults, and stakes that are genuinely felt but calibrated so the safe frame never collapses.",
+  "character_constraints": [
+    { "role": "child_protagonist", "severity": "required", "description": "A child who acts, chooses, and earns the resolution through their own effort — not rescued by adults.", "min_count": 1 },
+    { "role": "preoccupied_adult", "severity": "required", "description": "An adult who is structurally absent from the central action — busy, distracted, or unaware, creating space for child agency.", "min_count": 1 },
+    { "role": "wonder_companion", "severity": "optional", "description": "A magical creature, talking animal, or extraordinary friend who accompanies the journey." }
+  ],
+  "relationship_constraints": [
+    { "type": "child_agency", "severity": "required", "description": "The child must solve the problem — adults cannot intervene to fix it.", "between_roles": ["child_protagonist", "preoccupied_adult"] }
+  ],
+  "place_constraints": [
+    { "type": "wonder_location", "severity": "required", "description": "The impossible, magical, or extraordinary space — where the rules of the ordinary world are suspended." },
+    { "type": "challenge_location", "severity": "required", "description": "A place where difficulty must be faced — the dark forest, the locked room, the bully's territory." },
+    { "type": "safe_space", "severity": "recommended", "description": "Home or its equivalent — the frame of safety that the adventure departs from and returns to." }
+  ],
+  "object_constraints": [
+    { "type": "personal_significance_object", "severity": "required", "description": "A lost blanket, broken toy, small creature, or treasured item — the object the child cares about most." },
+    { "type": "wonder_object", "severity": "optional", "description": "A magical key, enchanted book, or impossible device that enables the extraordinary." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "CHI_R01",
+      "description": "The moral or emotional takeaway must be delivered through the child's own experience, never announced by an adult or narrator.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The resolution scene is driven by the child protagonist's action or realization, not by adult instruction."
+    },
+    {
+      "rule_id": "CHI_R02",
+      "description": "Stakes must be calibrated: genuinely felt but not so overwhelming that the safe frame collapses.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "No scene depicts irreversible harm to the child protagonist or destruction of the safe-space frame."
+    }
+  ]
+}

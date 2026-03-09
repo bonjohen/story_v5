@@ -1,0 +1,38 @@
+{
+  "genre_id": "genre_01_drama",
+  "genre_name": "Drama",
+  "description": "Drama requires element configurations rooted in interpersonal conflict, emotional stakes, and irreversible choices — the engine is human relationships under pressure, not external threats.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character with a deep emotional stake who must make irreversible interpersonal decisions — an agent, not a passenger.", "min_count": 1 },
+    { "role": "counter_force", "severity": "recommended", "description": "An opposing figure whose conflict with the protagonist is rooted in relationship, not villainy — a spouse, parent, friend, or colleague." },
+    { "role": "witness", "severity": "optional", "description": "A bystander or confidant whose presence raises the emotional stakes of confrontation." }
+  ],
+  "relationship_constraints": [
+    { "type": "intimate_opposition", "severity": "required", "description": "Conflict rooted in a close relationship — the antagonism is personal and relational, not external.", "between_roles": ["protagonist", "counter_force"] },
+    { "type": "moral_witness", "severity": "optional", "description": "A relationship where one character observes and judges another's choices." }
+  ],
+  "place_constraints": [
+    { "type": "confined_space", "severity": "required", "description": "A setting that forces proximity and prevents easy escape — home, courtroom, hospital, institution." },
+    { "type": "contested_space", "severity": "recommended", "description": "The arena where the central confrontation unfolds — emotionally charged and specific." }
+  ],
+  "object_constraints": [
+    { "type": "symbolic_object", "severity": "recommended", "description": "A document, ring, letter, or will that carries the emotional stakes in physical form." },
+    { "type": "evidence_of_past", "severity": "optional", "description": "An object that surfaces buried history — photograph, recording, diary entry." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "DRA_R01",
+      "description": "Every major beat must involve an interpersonal decision — the protagonist must act as agent in relationships, not merely react to external events.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least 3 timeline transitions are initiated by the protagonist making a relational choice."
+    },
+    {
+      "rule_id": "DRA_R02",
+      "description": "An irreversible choice scene and an aftermath scene are both mandatory — the drama must cross a point of no return.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline contains at least one 'chooses' transition that cannot be undone and a subsequent scene showing consequences."
+    }
+  ]
+}

@@ -10,7 +10,6 @@ import { useCallback } from 'react'
 import { GraphStats } from '../../panels/GraphStats.tsx'
 import { CrossIndexPanel } from '../../panels/CrossIndex.tsx'
 import { PairingPanel } from '../../panels/PairingPanel.tsx'
-import { ElementsPanel } from '../../panels/ElementsPanel.tsx'
 import { TimelinePanel } from '../../panels/TimelinePanel.tsx'
 import { CharacterArcPanel } from '../../panels/CharacterArcPanel.tsx'
 import { Disclosure } from '../../components/Disclosure.tsx'
@@ -44,16 +43,13 @@ export function AnalysisTab({ onHighlightNodes }: AnalysisTabProps) {
 
   return (
     <div style={{ flex: 1, overflowY: 'auto' }}>
-      <PairingPanel />
+      <Disclosure title="Story Pairing" persistKey="info-pairing">
+        <PairingPanel />
+      </Disclosure>
 
       {currentGraph && (
         <Disclosure title="Statistics" persistKey="info-stats" defaultCollapsed>
           <GraphStats graph={currentGraph} />
-        </Disclosure>
-      )}
-      {currentGraph && (
-        <Disclosure title="Elements" persistKey="info-elements" defaultCollapsed>
-          <ElementsPanel graph={currentGraph} selectedNodeId={selectedNodeId} />
         </Disclosure>
       )}
       {currentGraph && (

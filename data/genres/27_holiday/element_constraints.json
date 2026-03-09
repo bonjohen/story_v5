@@ -1,0 +1,38 @@
+{
+  "genre_id": "genre_27_holiday",
+  "genre_name": "Holiday",
+  "description": "Holiday fiction requires the holiday itself to be reason for gathering, source of deadline, mirror of wound, and medium of healing — not merely backdrop or decoration.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character with an emotional wound made undeniable by the holiday — the season forces confrontation.", "min_count": 1 },
+    { "role": "estranged_counterpart", "severity": "required", "description": "The person or relationship that has been broken — estrangement is the wound the holiday exposes.", "min_count": 1 },
+    { "role": "community_expectation", "severity": "required", "description": "Secondary characters who embody holiday pressure — neighbors, family, coworkers performing expected cheer.", "min_count": 1 }
+  ],
+  "relationship_constraints": [
+    { "type": "estrangement", "severity": "required", "description": "A broken bond that the holiday makes impossible to ignore.", "between_roles": ["protagonist", "estranged_counterpart"] },
+    { "type": "holiday_pressure", "severity": "required", "description": "Social or familial obligation that creates a gathering which cannot be avoided." }
+  ],
+  "place_constraints": [
+    { "type": "gathering_space", "severity": "required", "description": "The table, living room, or venue no one can exit gracefully — the holiday forces proximity." },
+    { "type": "holiday_specific_location", "severity": "required", "description": "A load-bearing, not decorative, holiday setting — the tree lot, the church, the town square during the festival." }
+  ],
+  "object_constraints": [
+    { "type": "weighted_holiday_object", "severity": "required", "description": "A broken ornament, empty chair, wrong gift, or missing decoration that carries thematic meaning — not mere set dressing." },
+    { "type": "tradition_object", "severity": "recommended", "description": "An object representing what has been lost or broken — the recipe not followed, the stocking not hung." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "HOL_R01",
+      "description": "The holiday must serve four functions simultaneously: reason for gathering, source of deadline, mirror of wound, and medium of healing.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The holiday drives at least one gathering scene, creates a time constraint, reflects the protagonist's wound, and provides the medium for resolution."
+    },
+    {
+      "rule_id": "HOL_R02",
+      "description": "A broken-tradition scene and a restoration scene are both mandatory.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline contains a scene where a holiday tradition fails or is disrupted and a later scene where it is restored or reinvented."
+    }
+  ]
+}

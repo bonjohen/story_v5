@@ -1,0 +1,37 @@
+{
+  "genre_id": "genre_22_satire",
+  "genre_name": "Satire",
+  "description": "Satire requires characters trapped in or benefiting from the satirized system, institutional settings that mirror real-world targets, and comic beats that serve the critique — removing the joke removes the point.",
+  "character_constraints": [
+    { "role": "true_believer", "severity": "required", "description": "A character who enacts the satirized ideology sincerely — their earnestness reveals the absurdity.", "min_count": 1 },
+    { "role": "operator", "severity": "required", "description": "A character who navigates the system cynically for personal gain — knows the rules are absurd but exploits them.", "min_count": 1 },
+    { "role": "outsider", "severity": "recommended", "description": "A newcomer or foreigner whose confusion reveals the system's absurdity to the audience." },
+    { "role": "victim", "severity": "required", "description": "A character whose suffering makes the critique concrete — without victims, satire becomes mere cleverness.", "min_count": 1 }
+  ],
+  "relationship_constraints": [
+    { "type": "system_complicity", "severity": "required", "description": "Characters are trapped in, benefiting from, or perpetuating the satirized system — no one is fully outside it." }
+  ],
+  "place_constraints": [
+    { "type": "institutional_mirror", "severity": "required", "description": "A political body, bureaucracy, corporation, or social institution that serves as a legible parallel to the real-world target." }
+  ],
+  "object_constraints": [
+    { "type": "procedural_artifact", "severity": "required", "description": "Forms, policies, documents, or procedures that embody bureaucratic dysfunction or ideological absurdity." },
+    { "type": "institutional_output", "severity": "recommended", "description": "Reports, products, or outcomes that demonstrate the gap between institutional rhetoric and reality." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "SAT_R01",
+      "description": "Every comic beat must serve the satirical critique — removing the joke removes the point. Comedy without critique is not satire.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "Each comic scene in the timeline targets a specific aspect of the satirized system or ideology."
+    },
+    {
+      "rule_id": "SAT_R02",
+      "description": "The satirical world's absurd rules must be applied consistently throughout — internal logic must hold even as it exposes external absurdity.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "Rules established in the first quarter of the timeline are enforced consistently through the climax."
+    }
+  ]
+}

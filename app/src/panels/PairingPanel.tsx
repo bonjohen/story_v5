@@ -1,12 +1,10 @@
 /**
  * Pairing Panel — shows compatibility and cross-reference info for the
- * selected archetype + genre pair. Progressively reveals more information
- * as the generation pipeline advances.
+ * selected archetype + genre pair.
  */
 
 import { useState, useEffect, useMemo } from 'react'
 import { useGraphStore } from '../store/graphStore.ts'
-import { useGenerationStore } from '../generation/store/generationStore.ts'
 
 // ---------------------------------------------------------------------------
 // Types for cross-reference data
@@ -37,15 +35,6 @@ export function PairingPanel() {
   const manifest = useGraphStore((s) => s.manifest)
   const selectedArchetypeDir = useGraphStore((s) => s.archetypeDir)
   const selectedGenreDir = useGraphStore((s) => s.genreDir)
-
-  // Generation state for progressive disclosure
-  const genStatus = useGenerationStore((s) => s.status)
-  const genContract = useGenerationStore((s) => s.contract)
-  const genBackbone = useGenerationStore((s) => s.backbone)
-  const genDetailBindings = useGenerationStore((s) => s.detailBindings)
-  const genPlan = useGenerationStore((s) => s.plan)
-  const genSceneDrafts = useGenerationStore((s) => s.sceneDrafts)
-  const genChapterManifest = useGenerationStore((s) => s.chapterManifest)
 
   const [matrix, setMatrix] = useState<CompatibilityMatrix | null>(null)
   const [loading, setLoading] = useState(true)
@@ -113,7 +102,6 @@ export function PairingPanel() {
   const tierInfo = compatibility ? TIER_INFO[compatibility.tier] : null
 
   const hasBothSelected = !!selectedArchetypeDir && !!selectedGenreDir
-  const hasGeneration = genStatus !== 'IDLE'
 
   return (
     <div style={{ padding: '12px 14px' }}>
@@ -242,63 +230,6 @@ export function PairingPanel() {
         </div>
       )}
 
-      {/* Progressive generation info */}
-      {hasGeneration && (
-        <div style={{ marginTop: 4 }}>
-          <div style={{
-            fontSize: 10,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            color: 'var(--text-muted)',
-            marginBottom: 8,
-          }}>
-            Generation Progress
-          </div>
-
-          <ProgressStep
-            label="Contract"
-            description={genContract
-              ? `${genContract.archetype.spine_nodes.length} spine nodes, ${genContract.genre.hard_constraints.length} hard constraints`
-              : undefined}
-            done={!!genContract}
-          />
-          <ProgressStep
-            label="Backbone"
-            description={genBackbone
-              ? `${genBackbone.beats.length} beats, ${genBackbone.chapter_partition.length} chapters`
-              : undefined}
-            done={!!genBackbone}
-          />
-          <ProgressStep
-            label="Detail Bindings"
-            description={genDetailBindings
-              ? `${Object.keys(genDetailBindings.entity_registry.characters ?? {}).length} characters, ${Object.keys(genDetailBindings.slot_bindings ?? {}).length} slots bound`
-              : undefined}
-            done={!!genDetailBindings}
-          />
-          <ProgressStep
-            label="Scene Plan"
-            description={genPlan
-              ? `${genPlan.scenes.length} scenes planned`
-              : undefined}
-            done={!!genPlan}
-          />
-          <ProgressStep
-            label="Scene Drafts"
-            description={genSceneDrafts.size > 0
-              ? `${genSceneDrafts.size} scenes written`
-              : undefined}
-            done={genSceneDrafts.size > 0}
-          />
-          <ProgressStep
-            label="Chapters"
-            description={genChapterManifest
-              ? `${genChapterManifest.chapters.length} chapters assembled`
-              : undefined}
-            done={!!genChapterManifest}
-          />
-        </div>
-      )}
     </div>
   )
 }
@@ -354,49 +285,6 @@ function PairSlot({ label, name, meta, color, placeholder }: {
           {placeholder}
         </div>
       )}
-    </div>
-  )
-}
-
-function ProgressStep({ label, description, done }: {
-  label: string
-  description?: string
-  done: boolean
-}) {
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: 8,
-      marginBottom: 6,
-      opacity: done ? 1 : 0.4,
-    }}>
-      <span style={{
-        fontSize: 11,
-        color: done ? '#22c55e' : 'var(--text-muted)',
-        flexShrink: 0,
-        marginTop: 1,
-      }}>
-        {done ? '\u2713' : '\u25CB'}
-      </span>
-      <div>
-        <div style={{
-          fontSize: 11,
-          fontWeight: done ? 600 : 400,
-          color: done ? 'var(--text-primary)' : 'var(--text-muted)',
-        }}>
-          {label}
-        </div>
-        {description && (
-          <div style={{
-            fontSize: 10,
-            color: 'var(--text-muted)',
-            marginTop: 1,
-          }}>
-            {description}
-          </div>
-        )}
-      </div>
     </div>
   )
 }

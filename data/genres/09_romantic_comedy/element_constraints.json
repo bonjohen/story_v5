@@ -1,0 +1,39 @@
+{
+  "genre_id": "genre_09_romantic_comedy",
+  "genre_name": "Romantic Comedy",
+  "description": "Romantic comedy requires two active co-equal leads in forced proximity, with every scene serving both comic and romantic engines simultaneously — the misalignment must be sustained long enough that overcoming it requires real effort.",
+  "character_constraints": [
+    { "role": "lead_one", "severity": "required", "description": "An active co-equal lead with a distinct worldview that creates friction with the other lead.", "min_count": 1 },
+    { "role": "lead_two", "severity": "required", "description": "An active co-equal lead — not a prize to be won but a full participant in the romantic negotiation.", "min_count": 1 },
+    { "role": "rival", "severity": "optional", "description": "A romantic competitor who raises the stakes but is not the true obstacle." },
+    { "role": "social_audience", "severity": "recommended", "description": "Friends, family, or colleagues who witness, comment on, and complicate the romance." }
+  ],
+  "relationship_constraints": [
+    { "type": "forced_proximity", "severity": "required", "description": "Both leads must share an unavoidable setting — workplace, social circle, neighboring spaces — that prevents retreat.", "between_roles": ["lead_one", "lead_two"] },
+    { "type": "rival_tension", "severity": "optional", "description": "A competing romantic interest that clarifies what the leads actually want." }
+  ],
+  "place_constraints": [
+    { "type": "shared_forced_space", "severity": "required", "description": "The workplace, apartment building, or social venue that keeps both leads in unavoidable contact." },
+    { "type": "grand_gesture_location", "severity": "recommended", "description": "A public or significant location for the climactic declaration — airport, rooftop, party." }
+  ],
+  "object_constraints": [
+    { "type": "meet_cute_object", "severity": "recommended", "description": "An object associated with the initial meeting or misunderstanding — becomes a callback in resolution." },
+    { "type": "grand_gesture_token", "severity": "recommended", "description": "A gift, letter, or token that carries emotional weight in the climactic scene." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "ROM_R01",
+      "description": "Every scene must serve both the comic engine and the romantic engine simultaneously — pure comedy or pure romance scenes are structural failures.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "Each scene in the timeline contains both a comic complication and a romantic development."
+    },
+    {
+      "rule_id": "ROM_R02",
+      "description": "The misalignment between leads must be sustained long enough that overcoming it requires real effort — no easy or premature resolution.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The romantic resolution occurs in the final quarter of the timeline, not before."
+    }
+  ]
+}

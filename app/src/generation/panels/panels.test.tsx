@@ -20,7 +20,6 @@ import { ContractPanel } from './ContractPanel.tsx'
 import { PlanPanel } from './PlanPanel.tsx'
 import { TracePanel } from './TracePanel.tsx'
 import { CompliancePanel } from './CompliancePanel.tsx'
-import { GenerationPanel } from './GenerationPanel.tsx'
 import type {
   StoryContract,
   StoryPlan,
@@ -168,15 +167,6 @@ function mockValidation(): ValidationResults {
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
-
-describe('GenerationPanel', () => {
-  it('renders with form controls', () => {
-    render(<GenerationPanel />)
-    expect(screen.getByText('Story Generation')).toBeInTheDocument()
-    expect(screen.getByText('Generate')).toBeInTheDocument()
-    expect(screen.getByText('Idle')).toBeInTheDocument()
-  })
-})
 
 describe('ContractPanel', () => {
   it('shows placeholder when no contract', () => {

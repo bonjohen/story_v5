@@ -8,10 +8,10 @@ import { useGenerationStore } from '../store/generationStore.ts'
 import { useRequestStore } from '../store/requestStore.ts'
 import { useInstanceStore } from '../../instance/store/instanceStore.ts'
 import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
-import { exportSnapshot, downloadSnapshot, parseSnapshot } from '../artifacts/storySnapshot.ts'
+import { exportProject, downloadProject, parseProject } from '../artifacts/storySnapshot.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
 import { STATE_LABELS, LABEL, DEFAULT_CONFIG } from './generationConstants.ts'
-import type { StoryRequest, GenerationConfig } from '../artifacts/types.ts'
+import type { StoryRequest, GenerationConfig, StoryProjectRequest } from '../artifacts/types.ts'
 
 export interface GenerateTabProps {
   onHighlightNodes?: (nodes: string[]) => void
@@ -75,6 +75,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const request = useGenerationStore((s) => s.request)
   const sceneDrafts = useGenerationStore((s) => s.sceneDrafts)
   const backbone = useGenerationStore((s) => s.backbone)
+  const chapterManifest = useGenerationStore((s) => s.chapterManifest)
   const promptLog = useGenerationStore((s) => s.promptLog)
   const llmTelemetry = useGenerationStore((s) => s.llmTelemetry)
   const loadSnapshot = useGenerationStore((s) => s.loadSnapshot)
@@ -85,9 +86,11 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const tone = useRequestStore((s) => s.tone)
   const maxLlmCalls = useRequestStore((s) => s.maxLlmCalls)
   const connectBridge = useRequestStore((s) => s.connectBridge)
+  const loadFromProject = useRequestStore((s) => s.loadFromProject)
 
   const loadInstance = useInstanceStore((s) => s.loadInstance)
   const [savedInstance, setSavedInstance] = useState(false)
+  const [projectName, setProjectName] = useState('')
 
   const logRef = useRef<HTMLDivElement>(null)
   const storyRef = useRef<HTMLDivElement>(null)
@@ -149,10 +152,23 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   }, [detailBindings, selection, request, loadInstance])
 
   const handleExport = useCallback(() => {
-    const state = useGenerationStore.getState()
-    const snapshot = exportSnapshot(state)
-    downloadSnapshot(snapshot)
-  }, [])
+    const genState = useGenerationStore.getState()
+    const reqState = useRequestStore.getState()
+    const reqData: StoryProjectRequest = {
+      premise: reqState.premise,
+      archetype: reqState.archetype,
+      genre: reqState.genre,
+      tone: reqState.tone,
+      llmBackend: reqState.llmBackend,
+      bridgeUrl: reqState.bridgeUrl,
+      maxLlmCalls: reqState.maxLlmCalls,
+      openaiBaseUrl: reqState.openaiBaseUrl,
+      openaiModel: reqState.openaiModel,
+    }
+    const name = projectName.trim() || reqState.premise.slice(0, 40) || 'Untitled'
+    const project = exportProject(name, reqData, genState)
+    downloadProject(project)
+  }, [projectName])
 
   const handleImport = useCallback(() => {
     const input = document.createElement('input')
@@ -164,17 +180,19 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       const reader = new FileReader()
       reader.onload = () => {
         try {
-          const snapshot = parseSnapshot(reader.result as string)
-          loadSnapshot(snapshot)
+          const project = parseProject(reader.result as string)
+          loadFromProject(project.request)
+          loadSnapshot(project.generation)
+          setProjectName(project.projectName)
         } catch (err) {
-          console.error('Failed to import snapshot:', err)
+          console.error('Failed to import project:', err)
           alert(`Import failed: ${err instanceof Error ? err.message : String(err)}`)
         }
       }
       reader.readAsText(file)
     }
     input.click()
-  }, [loadSnapshot])
+  }, [loadSnapshot, loadFromProject])
 
   const handleExportStory = useCallback(() => {
     const entries = plan
@@ -253,6 +271,30 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           </span>
         )}
       </div>
+
+      {/* Generation Progress */}
+      {(contract || backbone || detailBindings || plan || sceneDrafts.size > 0 || chapterManifest) && (
+        <div style={{ marginBottom: 10 }}>
+          <ProgressStep label="Contract"
+            description={contract ? `${contract.archetype.spine_nodes.length} spine nodes, ${contract.genre.hard_constraints.length} hard constraints` : undefined}
+            done={!!contract} />
+          <ProgressStep label="Backbone"
+            description={backbone ? `${backbone.beats.length} beats, ${backbone.chapter_partition.length} chapters` : undefined}
+            done={!!backbone} />
+          <ProgressStep label="Detail Bindings"
+            description={detailBindings ? `${detailBindings.entity_registry.characters.length} characters, ${Object.keys(detailBindings.slot_bindings ?? {}).length} slots bound` : undefined}
+            done={!!detailBindings} />
+          <ProgressStep label="Scene Plan"
+            description={plan ? `${plan.scenes.length} scenes planned` : undefined}
+            done={!!plan} />
+          <ProgressStep label="Scene Drafts"
+            description={sceneDrafts.size > 0 ? `${sceneDrafts.size} scenes written` : undefined}
+            done={sceneDrafts.size > 0} />
+          <ProgressStep label="Chapters"
+            description={chapterManifest ? `${chapterManifest.chapters.length} chapters assembled` : undefined}
+            done={!!chapterManifest} />
+        </div>
+      )}
 
       {/* Generate Story button */}
       <div style={{ marginBottom: 12 }}>
@@ -468,22 +510,26 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         </div>
       )}
 
-      {/* Import / Export */}
-      <div style={{ display: 'flex', gap: 8, marginTop: 12, marginBottom: 12 }}>
-        <button
-          onClick={handleImport}
-          disabled={running}
-          style={{
-            flex: 1, padding: '6px 10px', fontSize: 11, borderRadius: 4,
-            border: '1px solid var(--border)', color: 'var(--text-secondary)',
-            cursor: running ? 'not-allowed' : 'pointer',
-          }}
-        >
-          Import Snapshot
-        </button>
+      {/* Save / Load Project */}
+      <div style={{ marginTop: 12, marginBottom: 12 }}>
         {hasResults && (
+          <div style={{ marginBottom: 8 }}>
+            <input
+              type="text"
+              value={projectName}
+              onChange={(e) => setProjectName(e.target.value)}
+              placeholder={premise.slice(0, 40) || 'Project name'}
+              style={{
+                width: '100%', padding: '4px 8px', fontSize: 11, borderRadius: 4,
+                border: '1px solid var(--border)', background: 'var(--bg-primary)',
+                color: 'var(--text-primary)', boxSizing: 'border-box',
+              }}
+            />
+          </div>
+        )}
+        <div style={{ display: 'flex', gap: 8 }}>
           <button
-            onClick={handleExport}
+            onClick={handleImport}
             disabled={running}
             style={{
               flex: 1, padding: '6px 10px', fontSize: 11, borderRadius: 4,
@@ -491,9 +537,22 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
               cursor: running ? 'not-allowed' : 'pointer',
             }}
           >
-            Export Snapshot
+            Load Project
           </button>
-        )}
+          {hasResults && (
+            <button
+              onClick={handleExport}
+              disabled={running}
+              style={{
+                flex: 1, padding: '6px 10px', fontSize: 11, borderRadius: 4,
+                border: '1px solid var(--border)', color: 'var(--text-secondary)',
+                cursor: running ? 'not-allowed' : 'pointer',
+              }}
+            >
+              Save Project
+            </button>
+          )}
+        </div>
       </div>
 
       {/* LLM Telemetry */}
@@ -537,6 +596,53 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
 
       {/* Prompt log */}
       {promptLog.length > 0 && <PromptLog entries={promptLog} />}
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Progress step
+// ---------------------------------------------------------------------------
+
+function ProgressStep({ label, description, done }: {
+  label: string
+  description?: string
+  done: boolean
+}) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: 8,
+      marginBottom: 6,
+      opacity: done ? 1 : 0.4,
+    }}>
+      <span style={{
+        fontSize: 11,
+        color: done ? '#22c55e' : 'var(--text-muted)',
+        flexShrink: 0,
+        marginTop: 1,
+      }}>
+        {done ? '\u2713' : '\u25CB'}
+      </span>
+      <div>
+        <div style={{
+          fontSize: 11,
+          fontWeight: done ? 600 : 400,
+          color: done ? 'var(--text-primary)' : 'var(--text-muted)',
+        }}>
+          {label}
+        </div>
+        {description && (
+          <div style={{
+            fontSize: 10,
+            color: 'var(--text-muted)',
+            marginTop: 1,
+          }}>
+            {description}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -1,0 +1,38 @@
+{
+  "genre_id": "genre_18_family",
+  "genre_name": "Family",
+  "description": "Family fiction requires characters bound by generational patterns, domestic spaces charged with emotional specificity, and family relationships as the primary engine of conflict and resolution.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character whose central need is relational — belonging, forgiveness, understanding, or escape from family patterns.", "min_count": 1 },
+    { "role": "family_counterpart", "severity": "required", "description": "A family member in an opposing generational or emotional position — parent/child, sibling/sibling.", "min_count": 1 },
+    { "role": "extended_family", "severity": "recommended", "description": "Additional family members who embody inherited patterns — the aunt who repeats grandmother's mistakes." }
+  ],
+  "relationship_constraints": [
+    { "type": "generational_conflict", "severity": "required", "description": "Tension between generations — values, expectations, or wounds passed down.", "between_roles": ["protagonist", "family_counterpart"] },
+    { "type": "family_wound", "severity": "required", "description": "The unspoken thing — a betrayal, loss, or secret that the family has organized itself around avoiding." }
+  ],
+  "place_constraints": [
+    { "type": "domestic_space", "severity": "required", "description": "An emotionally specific home location — kitchen, dining table, childhood bedroom — where family dynamics play out." },
+    { "type": "ritual_space", "severity": "recommended", "description": "A reunion venue, holiday gathering place, or ceremony site where the family must perform togetherness." }
+  ],
+  "object_constraints": [
+    { "type": "heirloom", "severity": "recommended", "description": "A photograph, inherited object, or family artifact that carries generational weight." },
+    { "type": "absence_marker", "severity": "recommended", "description": "The empty chair, the missing place setting, the removed photograph — what is gone defines what remains." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "FAM_R01",
+      "description": "Family relationships must be the primary engine of conflict and resolution — external threats cannot substitute for interpersonal dynamics.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least 3 major timeline transitions are driven by family relationship dynamics, not external events."
+    },
+    {
+      "rule_id": "FAM_R02",
+      "description": "A family gathering disruption scene and an earned reconciliation (or conscious separation) scene are both mandatory.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline contains a 'disrupts' transition at a gathering and a subsequent 'reconciles' or 'separates' transition."
+    }
+  ]
+}

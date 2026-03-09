@@ -1,0 +1,42 @@
+{
+  "genre_id": "genre_12_crime",
+  "genre_name": "Crime",
+  "description": "Crime requires characters defined by their relationship to criminal activity, moral compromise as engine, and crime as the primary driver of every major plot development.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character defined by their relationship to criminal activity — criminal, cop, victim, or someone drawn in.", "min_count": 1 },
+    { "role": "antagonist", "severity": "required", "description": "An opposing force from within or outside the criminal world — rival, law enforcement, or betrayer.", "min_count": 1 },
+    { "role": "victim_or_community", "severity": "recommended", "description": "The human cost of crime — individuals or community affected by criminal activity." },
+    { "role": "law_enforcement", "severity": "recommended", "description": "The institutional pressure of justice — present even when not the protagonist." }
+  ],
+  "relationship_constraints": [
+    { "type": "criminal_opposition", "severity": "required", "description": "Direct opposition rooted in criminal activity — pursuit, rivalry, or betrayal.", "between_roles": ["protagonist", "antagonist"] },
+    { "type": "moral_corruption", "severity": "required", "description": "A relationship in which a moral line is crossed — complicity, coercion, or seduction into crime." }
+  ],
+  "place_constraints": [
+    { "type": "criminal_territory", "severity": "required", "description": "Safe houses, target buildings, neutral ground — the geography of criminal operations." },
+    { "type": "law_enforcement_space", "severity": "recommended", "description": "Precinct, courtroom, or interrogation room — the institutional counterweight." },
+    { "type": "confrontation_site", "severity": "required", "description": "The location where criminal and legal worlds collide in the climax." }
+  ],
+  "object_constraints": [
+    { "type": "contraband", "severity": "recommended", "description": "Drugs, stolen goods, laundered money — the physical substance of the crime." },
+    { "type": "evidence", "severity": "recommended", "description": "Physical proof that could convict or exonerate — its control drives plot." },
+    { "type": "weapon", "severity": "optional", "description": "Tools of violence that escalate stakes when they appear." },
+    { "type": "currency", "severity": "optional", "description": "Money or valuables that represent the motive and reward of crime." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "CRI_R01",
+      "description": "Crime must be the primary engine of every major plot development — not merely background or setting.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least 3 major timeline transitions are directly caused by criminal activity or its consequences."
+    },
+    {
+      "rule_id": "CRI_R02",
+      "description": "A moral compromise scene and a reckoning scene are both mandatory — the protagonist must cross a line and face consequences.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline contains a 'compromises' transition and a subsequent 'reckons' or 'faces consequences' transition."
+    }
+  ]
+}

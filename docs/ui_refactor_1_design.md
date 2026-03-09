@@ -128,7 +128,7 @@ Used to identify duplicates, orphans, and consolidation opportunities.
 | validation, trace, compliance | — | — | — | Full |
 | templatePack | — | — | — | Templates |
 | chapterManifest | — | — | — | Chapters |
-| Import/Export snapshot | — | — | Buttons | — |
+| Save/Load Project | — | — | Buttons | — |
 | Export Story (.md) | — | — | Button | — |
 | Save as Instance | — | — | Button | — |
 
@@ -138,10 +138,10 @@ Used to identify duplicates, orphans, and consolidation opportunities.
 
 | Item | Where it appears | Notes |
 |---|---|---|
-| LLM settings (backend, URL, model, key, maxCalls) | Setup + old PipelineTab | PipelineTab removed from tabs. GenerationPanel still has them. |
+| LLM settings (backend, URL, model, key, maxCalls) | Setup tab | PipelineTab and GenerationPanel deleted. |
 | Contract summary | Setup tab | Also available in Analysis. Setup shows a compact card. |
 | sceneDrafts | Generate (prose) + Analysis (StoryPanel) | Same data, different presentation. |
-| LLM Telemetry | Generate + old PipelineTab | PipelineTab removed. GenerationPanel still has it. |
+| LLM Telemetry | Generate tab | PipelineTab and GenerationPanel deleted. |
 | premise/archetype/genre/tone | requestStore (editable) + generationStore.request (snapshot) | Request is a frozen copy; requestStore is the live edit. Correct separation. |
 
 ---
@@ -150,10 +150,8 @@ Used to identify duplicates, orphans, and consolidation opportunities.
 
 | Data Element | Stored In | Notes |
 |---|---|---|
-| `mode` (generation mode selector) | requestStore | Only on old GenerationPanel. Not on any current tab. |
 | `slotOverrides` | requestStore | Stored, no UI to edit. |
-| `selection` | generationStore | Not displayed anywhere. Available in snapshot. |
-| `selectedSceneId` | generationStore | Future feature — scene highlight on hover. |
+| `selection` | generationStore | Not displayed anywhere. Available in project save. |
 | `open_mysteries`, `promises`, `payoffs` | detailBindings | Filled by LLM but not shown in Elements UI. |
 | `unresolved_todos` | detailBindings | Filled by synthesizer but not shown. |
 | `trace` | generationStore | Available for export, no dedicated display. |
@@ -205,9 +203,10 @@ The generation panel is now always visible — there is no scenario where the us
 
 ### 8.4 Implementation Steps
 
-- [ ] Define `StoryProject` interface in `generation/artifacts/types.ts` with version, metadata, requestState, and generationState fields.
-- [ ] Add `exportProject()` to generationStore — merges requestStore + generationStore into StoryProject JSON.
-- [ ] Add `importProject()` to generationStore — restores both stores from StoryProject JSON, triggers graph reload.
-- [ ] Update GenerateTab: rename "Export Snapshot" to "Save Project", rename "Import Snapshot" to "Load Project", wire new functions.
-- [ ] Add version migration logic for forward compatibility (v1 initial).
-- [ ] Include `projectName` field in requestStore with editable input on Setup or Generate tab.
+- [X] Define `StoryProject` interface in `generation/artifacts/types.ts` with version, metadata, requestState, and generationState fields.
+- [X] Add `exportProject()` and `downloadProject()` in `storySnapshot.ts` — merges requestStore + generationStore into StoryProject JSON.
+- [X] Add `parseProject()` in `storySnapshot.ts` — handles both project and legacy snapshot formats.
+- [X] Add `loadFromProject()` action to requestStore — restores all request fields from project.
+- [X] Update GenerateTab: renamed buttons to "Save Project" / "Load Project", project name input, wired new functions.
+- [X] Add backward compatibility: `parseProject()` wraps legacy `story_v5_snapshot` files with default request values.
+- [X] Add round-trip tests in `storyProject.test.ts` and `loadFromProject` test.

@@ -1,0 +1,40 @@
+{
+  "genre_id": "genre_25_political",
+  "genre_name": "Political",
+  "description": "Political fiction requires characters who navigate institutional power through negotiation and coalition, not physical action — goals are achieved through strategic sacrifice, alliance, and betrayal.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character who navigates institutional power — neither pure idealist nor pure cynic, but someone who must compromise to act.", "min_count": 1 },
+    { "role": "faction_antagonist", "severity": "required", "description": "An opposing political force with legitimate (if conflicting) interests — not a cartoon villain.", "min_count": 1 },
+    { "role": "faction_ally", "severity": "required", "description": "A political ally whose support comes with conditions and whose loyalty may shift.", "min_count": 1 },
+    { "role": "affected_population", "severity": "recommended", "description": "Ordinary people whose lives are shaped by political decisions — gives collective stakes human faces." }
+  ],
+  "relationship_constraints": [
+    { "type": "coalition", "severity": "required", "description": "The protagonist must build alliances — no political goal is achievable alone." },
+    { "type": "betrayal", "severity": "required", "description": "A realignment scene is mandatory — an ally defects or an enemy becomes a partner." }
+  ],
+  "place_constraints": [
+    { "type": "legislative_space", "severity": "required", "description": "Parliament, senate, council chamber, or party headquarters — where official power is exercised." },
+    { "type": "private_deal_space", "severity": "required", "description": "Back rooms, private offices, restaurants — where real negotiations happen away from public view." },
+    { "type": "public_persuasion_venue", "severity": "recommended", "description": "Rally, press conference, debate stage — where political actors perform for the public." }
+  ],
+  "object_constraints": [
+    { "type": "institutional_document", "severity": "required", "description": "Bills, votes, intelligence files, polling data — documents that carry institutional weight." },
+    { "type": "information_asset", "severity": "required", "description": "Controlling what is known drives the plot — leaks, dossiers, recorded conversations." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "POL_R01",
+      "description": "Goals must be achieved through negotiation, coalition, and strategic sacrifice — not through physical action or personal virtue alone.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The climax transition involves a political deal, vote, or strategic concession rather than a physical confrontation."
+    },
+    {
+      "rule_id": "POL_R02",
+      "description": "A negotiation scene, a betrayal/realignment scene, and a public persuasion scene are all mandatory structural beats.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline contains distinct 'negotiates', 'betrays/realigns', and 'persuades publicly' transitions."
+    }
+  ]
+}

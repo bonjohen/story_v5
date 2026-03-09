@@ -1,0 +1,38 @@
+{
+  "genre_id": "genre_02_action",
+  "genre_name": "Action",
+  "description": "Action requires physically capable characters, formidable antagonists, dangerous environments, and defined tools — the climax must be decided by the protagonist's physical action, not coincidence.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A physically capable character who resolves the central conflict through direct action.", "min_count": 1 },
+    { "role": "antagonist", "severity": "required", "description": "A formidable and active opposing force whose capabilities match or exceed the protagonist's.", "min_count": 1 },
+    { "role": "ally", "severity": "optional", "description": "A unit member or partner who provides support but cannot substitute for the protagonist's agency." }
+  ],
+  "relationship_constraints": [
+    { "type": "adversary", "severity": "required", "description": "Direct physical opposition — protagonist and antagonist must confront each other.", "between_roles": ["protagonist", "antagonist"] },
+    { "type": "unit_bond", "severity": "optional", "description": "A loyalty bond between protagonist and allies that raises the cost of failure." }
+  ],
+  "place_constraints": [
+    { "type": "dangerous_environment", "severity": "required", "description": "Terrain, architecture, or wilderness that acts as a third participant in action sequences." },
+    { "type": "stronghold", "severity": "recommended", "description": "The antagonist's base or fortified position that must be breached in the climax." }
+  ],
+  "object_constraints": [
+    { "type": "weapon", "severity": "required", "description": "A defined weapon or combat tool — established early with consistent capabilities throughout." },
+    { "type": "vehicle_or_tool", "severity": "recommended", "description": "A vehicle, device, or tool used in set pieces — Chekhov's Gun applies to all items used in the climax." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "ACT_R01",
+      "description": "The protagonist must be visibly worse off after each escalation set piece — action without cost is weightless.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least 2 'loses' or 'suffers' transitions appear in the timeline before the climax."
+    },
+    {
+      "rule_id": "ACT_R02",
+      "description": "The climax must be decided by the protagonist's physical action, not coincidence, intervention, or deus ex machina.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The final confrontation transition is initiated by the protagonist, not by an external event or ally."
+    }
+  ]
+}

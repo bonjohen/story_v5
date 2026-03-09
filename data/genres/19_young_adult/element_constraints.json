@@ -1,0 +1,38 @@
+{
+  "genre_id": "genre_19_young_adult",
+  "genre_name": "Young Adult",
+  "description": "Young Adult requires a protagonist in active identity flux, a peer social world as primary relational fabric, and authority figures who are simultaneously shelter and cage — every choice must feel world-defining from inside the protagonist's perspective.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A young person in visible, active identity flux — discovering who they are through choices and consequences.", "min_count": 1 },
+    { "role": "peer", "severity": "required", "description": "Age-mates who constitute the protagonist's primary social world — friends, rivals, love interests.", "min_count": 2 },
+    { "role": "authority_figure", "severity": "required", "description": "An adult who is simultaneously shelter and cage — parent, teacher, mentor whose protection also constrains.", "min_count": 1 }
+  ],
+  "relationship_constraints": [
+    { "type": "peer_loyalty", "severity": "required", "description": "Bonds of friendship and allegiance that are tested and redefined through the story." },
+    { "type": "authority_conflict", "severity": "required", "description": "Tension between the protagonist's emerging identity and the authority figure's expectations or rules.", "between_roles": ["protagonist", "authority_figure"] }
+  ],
+  "place_constraints": [
+    { "type": "social_arena", "severity": "required", "description": "School, academy, faction, or community where peer dynamics play out under institutional rules." },
+    { "type": "private_refuge", "severity": "recommended", "description": "A space for identity exploration away from social and authority pressure — bedroom, hideout, secret meeting place." }
+  ],
+  "object_constraints": [
+    { "type": "identity_marker", "severity": "required", "description": "An object adopted or rejected as part of identity formation — uniform, token, accessory, or inherited item." },
+    { "type": "loyalty_token", "severity": "recommended", "description": "An object that represents a peer bond — shared secret, gift, or symbol of belonging." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "YA_R01",
+      "description": "The protagonist must visibly change identity across the story — who they are at the end is different from who they were at the start.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The protagonist's self-description or defining trait in the final quarter differs from the first quarter."
+    },
+    {
+      "rule_id": "YA_R02",
+      "description": "Every major choice must feel world-defining from inside the protagonist's perspective — no adult relativizing or diminishing the stakes.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "At least 2 decision transitions are framed as irreversible from the protagonist's point of view."
+    }
+  ]
+}

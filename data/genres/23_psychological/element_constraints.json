@@ -1,0 +1,37 @@
+{
+  "genre_id": "genre_23_psychological",
+  "genre_name": "Psychological",
+  "description": "Psychological fiction requires a protagonist with traceable psychological architecture, a manipulator or mirror figure, claustrophobic spaces that externalize mental states, and pressure that escalates without resetting.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character with specific psychological architecture — a traceable wound, obsession, or cognitive distortion that drives behavior.", "min_count": 1 },
+    { "role": "manipulator_mirror", "severity": "required", "description": "A gaslighter, double, therapist, or analyst figure who interacts with the protagonist's psychology — amplifying, reflecting, or exploiting it.", "min_count": 1 },
+    { "role": "unreliable_witness", "severity": "optional", "description": "A character whose account contradicts the protagonist's — adding uncertainty about what is real." }
+  ],
+  "relationship_constraints": [
+    { "type": "psychological_entrapment", "severity": "required", "description": "The protagonist cannot escape by simply leaving — the trap is internal, relational, or cognitive.", "between_roles": ["protagonist", "manipulator_mirror"] }
+  ],
+  "place_constraints": [
+    { "type": "claustrophobic_space", "severity": "required", "description": "A confined environment that externalizes the protagonist's psychological condition — asylum, apartment, isolated house." },
+    { "type": "mind_location", "severity": "recommended", "description": "Spaces that warp with the protagonist's perception — rooms that change size, corridors that shift, familiar places made strange." }
+  ],
+  "object_constraints": [
+    { "type": "triggering_object", "severity": "required", "description": "A photograph, childhood object, or sensory trigger that challenges memory and destabilizes the protagonist's account." },
+    { "type": "evidence_object", "severity": "recommended", "description": "A physical object that contradicts the protagonist's version of events — diary entry, recording, letter." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "PSY_R01",
+      "description": "The same psychological force creating danger must be what resolution is reached through — no external rescue or deus ex machina.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The resolution transition involves the protagonist confronting the same psychological pattern that created the crisis."
+    },
+    {
+      "rule_id": "PSY_R02",
+      "description": "Pressure must escalate without resetting — no cycling between crisis and stability. Each escalation is permanent.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "No 'stabilizes' or 'returns to normal' transition appears between escalation beats in the timeline."
+    }
+  ]
+}

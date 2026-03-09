@@ -1,0 +1,38 @@
+{
+  "genre_id": "genre_03_comedy",
+  "genre_name": "Comedy",
+  "description": "Comedy requires characters whose self-image is incongruent with reality, social settings that force proximity, and props that embody deception — escalation must be causal, not random.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character whose self-image is visibly incongruent with reality — the comic gap is the engine.", "min_count": 1 },
+    { "role": "foil", "severity": "recommended", "description": "A character who understands what the protagonist does not — their clarity highlights the protagonist's blindness." },
+    { "role": "social_witness", "severity": "recommended", "description": "Characters whose presence raises the social stakes of the protagonist's misadventures." }
+  ],
+  "relationship_constraints": [
+    { "type": "incongruity_pair", "severity": "required", "description": "The comic gap between a character and their situation — the central engine of humor.", "between_roles": ["protagonist", "foil"] },
+    { "type": "social_pressure", "severity": "recommended", "description": "A relationship where social expectations force the protagonist into increasingly absurd positions." }
+  ],
+  "place_constraints": [
+    { "type": "social_trap", "severity": "required", "description": "A setting that forces proximity and provides witnesses — dinner party, workplace, family gathering." },
+    { "type": "escalation_space", "severity": "recommended", "description": "A location where successive complications pile up — each scene in this space makes things worse." }
+  ],
+  "object_constraints": [
+    { "type": "prop", "severity": "required", "description": "An object that embodies the central deception or misunderstanding — the physical anchor of the comic premise." },
+    { "type": "complication_item", "severity": "recommended", "description": "An object that escalates rather than resolves — each interaction with it makes things worse." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "COM_R01",
+      "description": "Every escalation must be a direct causal consequence of the prior complication — not random bad luck or coincidence.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "Each escalation transition in the timeline has a causal link to a preceding complication."
+    },
+    {
+      "rule_id": "COM_R02",
+      "description": "Permanent harm to sympathetic characters is forbidden — crossing this line converts comedy to cruelty.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "No sympathetic character suffers irreversible damage or loss in the resolution."
+    }
+  ]
+}

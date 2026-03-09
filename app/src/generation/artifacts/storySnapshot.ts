@@ -16,39 +16,14 @@ import type {
   StoryDetailBindings,
   ChapterManifest,
   OrchestratorState,
+  StoryProject,
+  StoryProjectRequest,
+  StorySnapshot,
 } from './types.ts'
 import type { OrchestratorEvent } from '../engine/orchestrator.ts'
 
-// ---------------------------------------------------------------------------
-// Snapshot type
-// ---------------------------------------------------------------------------
-
-export interface StorySnapshot {
-  _format: 'story_v5_snapshot'
-  _version: '1.0.0'
-  exported_at: string
-
-  // Run metadata
-  status: OrchestratorState
-  run_id: string | null
-  mode: GenerationMode
-  events: OrchestratorEvent[]
-  error: string | null
-
-  // All artifacts (null if not produced)
-  request: StoryRequest | null
-  selection: SelectionResult | null
-  contract: StoryContract | null
-  templatePack: TemplatePack | null
-  backbone: StoryBackbone | null
-  detailBindings: StoryDetailBindings | null
-  plan: StoryPlan | null
-  sceneDrafts: Record<string, string>  // Map serialized as object
-  validation: ValidationResults | null
-  trace: StoryTrace | null
-  complianceReport: string | null
-  chapterManifest: ChapterManifest | null
-}
+// Re-export so existing consumers of StorySnapshot from this module still work
+export type { StorySnapshot }
 
 // ---------------------------------------------------------------------------
 // Export — read store state, produce downloadable JSON
@@ -145,4 +120,72 @@ export function snapshotToStoreState(snapshot: StorySnapshot) {
     chapterManifest: snapshot.chapterManifest,
     selectedSceneId: null,
   }
+}
+
+// ---------------------------------------------------------------------------
+// StoryProject — unified save/load (request settings + generation artifacts)
+// ---------------------------------------------------------------------------
+
+const DEFAULT_PROJECT_REQUEST: StoryProjectRequest = {
+  premise: '',
+  archetype: "The Hero's Journey",
+  genre: 'Drama',
+  tone: '',
+  llmBackend: 'openai',
+  bridgeUrl: 'ws://127.0.0.1:8765',
+  maxLlmCalls: 20,
+  openaiBaseUrl: 'http://localhost:11434/v1',
+  openaiModel: 'llama3:8b-instruct-q8_0',
+}
+
+/** Build a StoryProject envelope from request + generation store state. */
+export function exportProject(
+  projectName: string,
+  requestState: StoryProjectRequest,
+  generationState: Parameters<typeof exportSnapshot>[0],
+): StoryProject {
+  return {
+    _format: 'story_v5_project',
+    _version: '1.0.0',
+    projectName,
+    savedAt: new Date().toISOString(),
+    request: requestState,
+    generation: exportSnapshot(generationState),
+  }
+}
+
+/** Trigger browser download of a project as JSON. */
+export function downloadProject(project: StoryProject): void {
+  const json = JSON.stringify(project, null, 2)
+  const blob = new Blob([json], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  const safeName = project.projectName.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 60) || 'project'
+  a.href = url
+  a.download = `${safeName}.project.json`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+/**
+ * Parse a JSON string as a StoryProject. Handles both formats:
+ * - `story_v5_project` → return as-is
+ * - `story_v5_snapshot` → wrap in a project with default request values
+ */
+export function parseProject(json: string): StoryProject {
+  const data = JSON.parse(json)
+  if (data._format === 'story_v5_project') {
+    return data as StoryProject
+  }
+  if (data._format === 'story_v5_snapshot') {
+    return {
+      _format: 'story_v5_project',
+      _version: '1.0.0',
+      projectName: 'Imported Snapshot',
+      savedAt: data.exported_at ?? new Date().toISOString(),
+      request: { ...DEFAULT_PROJECT_REQUEST },
+      generation: data as StorySnapshot,
+    }
+  }
+  throw new Error('Not a valid story project or snapshot file')
 }

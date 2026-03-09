@@ -1,0 +1,39 @@
+{
+  "genre_id": "genre_17_biography",
+  "genre_name": "Biography",
+  "description": "Biography requires a documented subject, real relationships, archival artifacts, and the tension between public persona and private self — hagiography is the primary anti-pattern.",
+  "character_constraints": [
+    { "role": "subject", "severity": "required", "description": "A single documented person whose life is the narrative subject — rendered with complexity, not idealization.", "min_count": 1 },
+    { "role": "real_relationship", "severity": "required", "description": "Family members, rivals, collaborators, or mentors documented in the historical record.", "min_count": 2 },
+    { "role": "public_counterpart", "severity": "recommended", "description": "The gap between public persona and private self — a journalist, biographer, or public who sees only the surface." }
+  ],
+  "relationship_constraints": [
+    { "type": "public_private_split", "severity": "required", "description": "The tension between who the subject is publicly and who they are privately — this gap is the narrative engine." },
+    { "type": "mentor_or_rival", "severity": "recommended", "description": "A formative relationship that shaped the subject's trajectory — documented, not invented." }
+  ],
+  "place_constraints": [
+    { "type": "documented_location", "severity": "required", "description": "Real places rendered with period accuracy — the subject's actual environments." },
+    { "type": "private_space", "severity": "required", "description": "Where the subject is unguarded — home, studio, sickbed — the site of private truth." },
+    { "type": "public_venue", "severity": "recommended", "description": "The stage, podium, courtroom, or arena where the public persona operates." }
+  ],
+  "object_constraints": [
+    { "type": "archival_artifact", "severity": "required", "description": "Letters, notebooks, photographs, recordings — primary sources that anchor the narrative in documented reality." },
+    { "type": "personal_object", "severity": "recommended", "description": "An object that carries the weight of the subject's inner life — instrument, manuscript, keepsake." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "BIO_R01",
+      "description": "A defining moment scene and a crucible scene (maximum pressure) are both mandatory — the biography must dramatize turning points.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline contains at least one 'defines' transition and one 'endures' or 'breaks under' transition."
+    },
+    {
+      "rule_id": "BIO_R02",
+      "description": "Hagiography — suppressing failures, flaws, and contradictions — is the primary anti-pattern and must be absent.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline includes at least one scene depicting the subject's failure, flaw, or moral compromise."
+    }
+  ]
+}

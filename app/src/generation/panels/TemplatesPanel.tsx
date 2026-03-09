@@ -28,7 +28,7 @@ const ROLE_COLORS: Record<string, string> = {
   Resolution: '#22c55e',
 }
 
-type ViewMode = 'beats' | 'cast' | 'genre'
+type ViewMode = 'genre' | 'beats' | 'cast' | 'places' | 'relationships' | 'objects'
 
 export function TemplatesPanel() {
   const templatePack = useGenerationStore((s) => s.templatePack)
@@ -37,7 +37,7 @@ export function TemplatesPanel() {
   const slotOverrides = useRequestStore((s) => s.slotOverrides)
   const setSlotOverride = useRequestStore((s) => s.setSlotOverride)
 
-  const [viewMode, setViewMode] = useState<ViewMode>('beats')
+  const [viewMode, setViewMode] = useState<ViewMode>('genre')
   const [expandedBeat, setExpandedBeat] = useState<string | null>(null)
 
   // Build a lookup from slot name → bound value
@@ -72,11 +72,34 @@ export function TemplatesPanel() {
     return map
   }, [backbone, detailBindings, slotOverrides])
 
-  // Characters from detail bindings
+  // Entities from detail bindings
   const characters = useMemo(() => {
     if (!detailBindings?.entity_registry.characters) return []
     return Object.values(detailBindings.entity_registry.characters)
   }, [detailBindings])
+
+  const places = useMemo(() => {
+    if (!detailBindings?.entity_registry.places) return []
+    return detailBindings.entity_registry.places
+  }, [detailBindings])
+
+  const objects = useMemo(() => {
+    if (!detailBindings?.entity_registry.objects) return []
+    return detailBindings.entity_registry.objects
+  }, [detailBindings])
+
+  // Collect all relationships from characters
+  const relationships = useMemo(() => {
+    const rels: { character: string; relationship: string }[] = []
+    for (const ch of characters) {
+      if (ch.relationships) {
+        for (const r of ch.relationships) {
+          rels.push({ character: ch.name, relationship: r })
+        }
+      }
+    }
+    return rels
+  }, [characters])
 
   const hasData = !!templatePack || !!backbone
 
@@ -96,10 +119,14 @@ export function TemplatesPanel() {
   return (
     <div style={{ padding: '10px 14px', fontSize: 11, color: 'var(--text-primary)' }}>
       {/* View mode tabs */}
-      <div style={{ display: 'flex', gap: 0, marginBottom: 10, borderBottom: '1px solid var(--border)' }}>
-        <TabBtn label="Beats" active={viewMode === 'beats'} count={beatCount} onClick={() => setViewMode('beats')} />
-        <TabBtn label="Cast" active={viewMode === 'cast'} count={characters.length} onClick={() => setViewMode('cast')} />
+      <div style={{ display: 'flex', gap: 0, marginBottom: 10, borderBottom: '1px solid var(--border)', flexWrap: 'wrap', alignItems: 'center' }}>
         <TabBtn label="Genre" active={viewMode === 'genre'} count={templatePack ? Object.keys(templatePack.genre_level_templates).length : 0} onClick={() => setViewMode('genre')} />
+        <TabBtn label="Beats" active={viewMode === 'beats'} count={beatCount} onClick={() => setViewMode('beats')} />
+        <div style={{ width: 1, height: 16, background: 'var(--border)', margin: '0 4px', flexShrink: 0 }} />
+        <TabBtn label="Cast" active={viewMode === 'cast'} count={characters.length} onClick={() => setViewMode('cast')} editable />
+        <TabBtn label="Places" active={viewMode === 'places'} count={places.length} onClick={() => setViewMode('places')} editable />
+        <TabBtn label="Rels" active={viewMode === 'relationships'} count={relationships.length} onClick={() => setViewMode('relationships')} editable />
+        <TabBtn label="Objects" active={viewMode === 'objects'} count={objects.length} onClick={() => setViewMode('objects')} editable />
       </div>
 
       {/* Beats view — Mad Libs cards */}
@@ -362,49 +389,80 @@ export function TemplatesPanel() {
               No characters yet. Run generation to populate the cast.
             </div>
           )}
+        </div>
+      )}
 
-          {/* Places and objects */}
-          {detailBindings?.entity_registry.places && detailBindings.entity_registry.places.length > 0 && (
-            <div style={{ marginTop: 10 }}>
-              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: '#3b82f6', marginBottom: 4 }}>
-                Places ({detailBindings.entity_registry.places.length})
+      {/* Places view */}
+      {viewMode === 'places' && (
+        <div>
+          {places.length > 0 ? (
+            places.map((p) => (
+              <div key={p.id} style={{
+                padding: '6px 8px',
+                marginBottom: 3,
+                background: 'var(--bg-elevated)',
+                borderRadius: 4,
+                borderLeft: '3px solid #3b82f6',
+              }}>
+                <div style={{ fontWeight: 600, fontSize: 12 }}>{p.name}</div>
+                <span style={{ fontSize: 9, color: '#3b82f6', fontWeight: 600, textTransform: 'uppercase' }}>{p.type}</span>
+                {p.features && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{p.features.join(' | ')}</div>}
+                {p.atmosphere && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, fontStyle: 'italic', lineHeight: 1.4 }}>{p.atmosphere}</div>}
               </div>
-              {detailBindings.entity_registry.places.map((p) => (
-                <div key={p.id} style={{
-                  padding: '6px 8px',
-                  marginBottom: 3,
-                  background: 'var(--bg-elevated)',
-                  borderRadius: 4,
-                  borderLeft: '3px solid #3b82f6',
-                }}>
-                  <div style={{ fontWeight: 600, fontSize: 12 }}>{p.name}</div>
-                  <span style={{ fontSize: 9, color: '#3b82f6', fontWeight: 600, textTransform: 'uppercase' }}>{p.type}</span>
-                  {p.features && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{p.features.join(' | ')}</div>}
-                  {p.atmosphere && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, fontStyle: 'italic', lineHeight: 1.4 }}>{p.atmosphere}</div>}
-                </div>
-              ))}
+            ))
+          ) : (
+            <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
+              No places yet. Run generation to populate locations.
             </div>
           )}
+        </div>
+      )}
 
-          {detailBindings?.entity_registry.objects && detailBindings.entity_registry.objects.length > 0 && (
-            <div style={{ marginTop: 10 }}>
-              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: '#22c55e', marginBottom: 4 }}>
-                Objects ({detailBindings.entity_registry.objects.length})
+      {/* Relationships view */}
+      {viewMode === 'relationships' && (
+        <div>
+          {relationships.length > 0 ? (
+            relationships.map((r, i) => (
+              <div key={i} style={{
+                padding: '6px 8px',
+                marginBottom: 3,
+                background: 'var(--bg-elevated)',
+                borderRadius: 4,
+                borderLeft: '3px solid #a855f7',
+              }}>
+                <div style={{ fontWeight: 600, fontSize: 12, color: '#f59e0b' }}>{r.character}</div>
+                <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{r.relationship}</div>
               </div>
-              {detailBindings.entity_registry.objects.map((o) => (
-                <div key={o.id} style={{
-                  padding: '6px 8px',
-                  marginBottom: 3,
-                  background: 'var(--bg-elevated)',
-                  borderRadius: 4,
-                  borderLeft: '3px solid #22c55e',
-                }}>
-                  <div style={{ fontWeight: 600, fontSize: 12 }}>{o.name}</div>
-                  <span style={{ fontSize: 9, color: '#22c55e', fontWeight: 600, textTransform: 'uppercase' }}>{o.type}</span>
-                  {o.significance && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{o.significance}</div>}
-                  {o.properties && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{o.properties.join(' | ')}</div>}
-                </div>
-              ))}
+            ))
+          ) : (
+            <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
+              No relationships yet. Run generation to populate character relationships.
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Objects view */}
+      {viewMode === 'objects' && (
+        <div>
+          {objects.length > 0 ? (
+            objects.map((o) => (
+              <div key={o.id} style={{
+                padding: '6px 8px',
+                marginBottom: 3,
+                background: 'var(--bg-elevated)',
+                borderRadius: 4,
+                borderLeft: '3px solid #22c55e',
+              }}>
+                <div style={{ fontWeight: 600, fontSize: 12 }}>{o.name}</div>
+                <span style={{ fontSize: 9, color: '#22c55e', fontWeight: 600, textTransform: 'uppercase' }}>{o.type}</span>
+                {o.significance && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{o.significance}</div>}
+                {o.properties && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{o.properties.join(' | ')}</div>}
+              </div>
+            ))
+          ) : (
+            <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
+              No objects yet. Run generation to populate story objects.
             </div>
           )}
         </div>
@@ -745,12 +803,14 @@ function GenreConstraintCard({ tmpl }: {
 // Tab button
 // ---------------------------------------------------------------------------
 
-function TabBtn({ label, active, count, onClick }: {
+function TabBtn({ label, active, count, onClick, editable }: {
   label: string
   active: boolean
   count: number
   onClick: () => void
+  editable?: boolean
 }) {
+  const activeColor = editable ? '#22c55e' : 'var(--accent)'
   return (
     <button
       onClick={onClick}
@@ -758,8 +818,8 @@ function TabBtn({ label, active, count, onClick }: {
         padding: '5px 10px',
         fontSize: 10,
         fontWeight: active ? 600 : 400,
-        color: active ? 'var(--accent)' : 'var(--text-muted)',
-        borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
+        color: active ? activeColor : 'var(--text-muted)',
+        borderBottom: active ? `2px solid ${activeColor}` : '2px solid transparent',
         transition: 'color 0.15s, border-color 0.15s',
         whiteSpace: 'nowrap',
       }}

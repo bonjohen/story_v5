@@ -1,0 +1,37 @@
+{
+  "genre_id": "genre_26_musical",
+  "genre_name": "Musical",
+  "description": "Musical requires characters with clearly statable desires, an ensemble that amplifies emotional states, and musical numbers that do traceable narrative work — I Want song, showstopper, and reprise are mandatory.",
+  "character_constraints": [
+    { "role": "protagonist", "severity": "required", "description": "A character with a clearly statable desire — the I Want song must be possible. What they want drives the story.", "min_count": 1 },
+    { "role": "ensemble", "severity": "required", "description": "A social body that amplifies emotional states — chorus, community, or group whose collective energy shapes tone.", "min_count": 1 },
+    { "role": "love_interest_or_antagonist", "severity": "required", "description": "The primary source of opposition or desire — the relationship that generates the central dramatic tension.", "min_count": 1 }
+  ],
+  "relationship_constraints": [
+    { "type": "desire_obstacle", "severity": "required", "description": "What stands between the protagonist and their want — the engine of every musical number.", "between_roles": ["protagonist", "love_interest_or_antagonist"] }
+  ],
+  "place_constraints": [
+    { "type": "heightened_reality_setting", "severity": "required", "description": "A setting consistent with the song logic — where bursting into song feels natural within the established reality." },
+    { "type": "ensemble_staging_space", "severity": "required", "description": "A location that accommodates large-scale musical numbers — town square, theater, ballroom, street." }
+  ],
+  "object_constraints": [
+    { "type": "prop_with_symbolic_weight", "severity": "required", "description": "An object carried through multiple musical numbers with transforming meaning — rose, letter, hat, instrument." },
+    { "type": "motif_carrier", "severity": "recommended", "description": "A physical embodiment of a recurring musical theme — the object the reprise references." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "MUS_R01",
+      "description": "Every musical number must do traceable narrative work — the situation must change when the song ends.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "Each musical number in the timeline is followed by a changed relationship, decision, or revelation."
+    },
+    {
+      "rule_id": "MUS_R02",
+      "description": "I Want song, showstopper, and reprise are all mandatory structural beats.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "The timeline contains an 'I Want' scene in the first quarter, a showstopper in the third quarter, and a reprise near the climax."
+    }
+  ]
+}

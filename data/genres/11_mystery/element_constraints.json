@@ -1,0 +1,42 @@
+{
+  "genre_id": "genre_11_mystery",
+  "genre_name": "Mystery",
+  "description": "Mystery requires an investigator, a victim, a culprit active throughout, a suspect circle, and clues that all appear before the reveal — fair play and a mid-story pivot are mandatory.",
+  "character_constraints": [
+    { "role": "investigator", "severity": "required", "description": "The character who drives the investigation — professional or amateur, but must actively pursue the truth.", "min_count": 1 },
+    { "role": "victim", "severity": "required", "description": "The character whose fate initiates the mystery — their identity and relationships generate suspects.", "min_count": 1 },
+    { "role": "culprit", "severity": "required", "description": "The guilty party — must be active and present throughout the story, not introduced late.", "min_count": 1 },
+    { "role": "suspect", "severity": "required", "description": "Characters with motive, means, or opportunity who could plausibly be guilty.", "min_count": 3 },
+    { "role": "witness", "severity": "recommended", "description": "Characters who provide partial, unreliable, or contradictory testimony." }
+  ],
+  "relationship_constraints": [
+    { "type": "detective_victim", "severity": "required", "description": "The investigator's connection to the victim — personal or professional — that drives the investigation.", "between_roles": ["investigator", "victim"] },
+    { "type": "interrogation", "severity": "required", "description": "Active questioning relationships — the investigator must press suspects and witnesses for information." }
+  ],
+  "place_constraints": [
+    { "type": "crime_scene", "severity": "required", "description": "The location of the crime — sealed or revisitable, containing physical evidence." },
+    { "type": "closed_circle", "severity": "required", "description": "A location or social context containing all suspects — country house, office, small town." },
+    { "type": "investigation_space", "severity": "recommended", "description": "The investigator's home base for piecing together evidence — office, study, incident room." }
+  ],
+  "object_constraints": [
+    { "type": "clue", "severity": "required", "description": "Physical or informational evidence that, correctly interpreted, points to the culprit.", "min_count": 3 },
+    { "type": "evidence", "severity": "required", "description": "Forensic or documentary proof that narrows the suspect pool." },
+    { "type": "weapon_or_mechanism", "severity": "recommended", "description": "The means of the crime — must be established and consistent." }
+  ],
+  "element_rules": [
+    {
+      "rule_id": "MYS_R01",
+      "description": "All clues necessary to solve the mystery must appear before the reveal — fair play is mandatory.",
+      "severity": "required",
+      "applies_to": "objects",
+      "testable_condition": "Every clue referenced in the reveal scene appears earlier in the timeline."
+    },
+    {
+      "rule_id": "MYS_R02",
+      "description": "A mid-story pivot that reframes the investigation is mandatory — the initial theory must prove wrong.",
+      "severity": "required",
+      "applies_to": "characters",
+      "testable_condition": "A 'reframes' or 'discovers' transition appears in the middle third of the timeline that changes the direction of investigation."
+    }
+  ]
+}

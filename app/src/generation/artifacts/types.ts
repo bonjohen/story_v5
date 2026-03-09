@@ -809,6 +809,62 @@ export interface ChapterManifest extends RunMetadata {
 // Loaded Corpus (aggregate type for the full corpus in memory)
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// StoryProject — unified save/load envelope
+// ---------------------------------------------------------------------------
+
+/** Serializable subset of requestStore state (no secrets, no runtime adapters). */
+export interface StoryProjectRequest {
+  premise: string
+  archetype: string
+  genre: string
+  tone: string
+  llmBackend: 'none' | 'bridge' | 'openai'
+  bridgeUrl: string
+  maxLlmCalls: number
+  openaiBaseUrl: string
+  openaiModel: string
+  // openaiApiKey intentionally omitted from save
+}
+
+/** Shape of an exported generation snapshot (mirrors storySnapshot.ts). */
+export interface StorySnapshot {
+  _format: 'story_v5_snapshot'
+  _version: '1.0.0'
+  exported_at: string
+  status: OrchestratorState
+  run_id: string | null
+  mode: GenerationMode
+  events: Array<{ state: OrchestratorState; message: string; timestamp: string }>
+  error: string | null
+  request: StoryRequest | null
+  selection: SelectionResult | null
+  contract: StoryContract | null
+  templatePack: TemplatePack | null
+  backbone: StoryBackbone | null
+  detailBindings: StoryDetailBindings | null
+  plan: StoryPlan | null
+  sceneDrafts: Record<string, string>
+  validation: ValidationResults | null
+  trace: StoryTrace | null
+  complianceReport: string | null
+  chapterManifest: ChapterManifest | null
+}
+
+/** Top-level envelope that wraps request settings + generation artifacts. */
+export interface StoryProject {
+  _format: 'story_v5_project'
+  _version: '1.0.0'
+  projectName: string
+  savedAt: string
+  request: StoryProjectRequest
+  generation: StorySnapshot
+}
+
+// ---------------------------------------------------------------------------
+// Loaded Corpus (aggregate type for the full corpus in memory)
+// ---------------------------------------------------------------------------
+
 import type { StoryGraph, DataManifest } from '../../types/graph.ts'
 import type { ArchetypeElements } from '../../types/elements.ts'
 import type { GenreElementConstraints } from '../../types/element-constraints.ts'
