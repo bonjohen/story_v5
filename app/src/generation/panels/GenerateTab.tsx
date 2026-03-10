@@ -9,6 +9,7 @@ import { useRequestStore } from '../store/requestStore.ts'
 import { useInstanceStore } from '../../instance/store/instanceStore.ts'
 import { instanceFromDetailBindings } from '../../instance/store/instanceBridge.ts'
 import { exportProject, downloadProject, parseProject } from '../artifacts/storySnapshot.ts'
+import { OpenAICompatibleAdapter } from '../agents/openaiCompatibleAdapter.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
 import { STATE_LABELS, LABEL, DEFAULT_CONFIG } from './generationConstants.ts'
 import type { StoryRequest, GenerationConfig, StoryProjectRequest } from '../artifacts/types.ts'
@@ -87,6 +88,10 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const maxLlmCalls = useRequestStore((s) => s.maxLlmCalls)
   const connectBridge = useRequestStore((s) => s.connectBridge)
   const loadFromProject = useRequestStore((s) => s.loadFromProject)
+  const fastDraft = useRequestStore((s) => s.fastDraft)
+  const setFastDraft = useRequestStore((s) => s.setFastDraft)
+  const skipValidation = useRequestStore((s) => s.skipValidation)
+  const setSkipValidation = useRequestStore((s) => s.setSkipValidation)
 
   const loadInstance = useInstanceStore((s) => s.loadInstance)
   const [savedInstance, setSavedInstance] = useState(false)
@@ -126,13 +131,22 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
     }
   }, [premise, archetype, genre, tone])
 
+  // Build Structure — no LLM needed, creates contract + backbone for Randomize/Manual Entry
+  const handleBuildStructure = useCallback(() => {
+    const req = buildRequest()
+    const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: 0 }
+    void startRun(req, config, 'backbone', null)
+  }, [buildRequest, startRun])
+
   // Generate Story — LLM, runs full pipeline through prose
   const handleGenerateStory = useCallback(async () => {
     const req = buildRequest()
     const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: maxLlmCalls }
+    const reqState = useRequestStore.getState()
+    const effectiveSkipValidation = reqState.fastDraft || reqState.skipValidation
 
     // Always try bridge connection
-    let adapter = useRequestStore.getState().bridgeAdapter
+    let adapter = reqState.bridgeAdapter
     if (!adapter) {
       try {
         await connectBridge()
@@ -141,7 +155,21 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         // fall through — will run without LLM
       }
     }
-    void startRun(req, config, 'draft', adapter ?? null)
+
+    // Build planning adapter if a separate planning model is configured
+    let planningAdapter = null
+    if (reqState.openaiPlanningModel && reqState.llmBackend === 'openai') {
+      planningAdapter = new OpenAICompatibleAdapter({
+        baseUrl: reqState.openaiBaseUrl,
+        model: reqState.openaiPlanningModel,
+        apiKey: reqState.openaiApiKey || undefined,
+      })
+    }
+
+    void startRun(req, config, 'draft', adapter ?? null, {
+      skipValidation: effectiveSkipValidation,
+      planningLlm: planningAdapter,
+    })
   }, [buildRequest, maxLlmCalls, startRun, connectBridge])
 
   const handleSaveInstance = useCallback(() => {
@@ -164,6 +192,9 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       maxLlmCalls: reqState.maxLlmCalls,
       openaiBaseUrl: reqState.openaiBaseUrl,
       openaiModel: reqState.openaiModel,
+      skipValidation: reqState.skipValidation,
+      fastDraft: reqState.fastDraft,
+      openaiPlanningModel: reqState.openaiPlanningModel,
     }
     const name = projectName.trim() || reqState.premise.slice(0, 40) || 'Untitled'
     const project = exportProject(name, reqData, genState)
@@ -293,6 +324,61 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           <ProgressStep label="Chapters"
             description={chapterManifest ? `${chapterManifest.chapters.length} chapters assembled` : undefined}
             done={!!chapterManifest} />
+        </div>
+      )}
+
+      {/* Performance options */}
+      <div style={{ marginBottom: 10, padding: '6px 8px', background: 'var(--bg-secondary)', borderRadius: 4, border: '1px solid var(--border)' }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, marginBottom: 4 }}>
+          <input
+            type="checkbox"
+            checked={fastDraft}
+            onChange={(e) => setFastDraft(e.target.checked)}
+            disabled={running}
+          />
+          <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Fast Draft</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>
+            — skip validation, batch beats, lower token limits (~60-70% faster)
+          </span>
+        </label>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, marginLeft: 20 }}>
+          <input
+            type="checkbox"
+            checked={fastDraft || skipValidation}
+            onChange={(e) => setSkipValidation(e.target.checked)}
+            disabled={running || fastDraft}
+          />
+          <span style={{ color: 'var(--text-secondary)' }}>Skip validation/repair</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>
+            (~72 fewer LLM calls)
+          </span>
+        </label>
+      </div>
+
+      {/* Build Structure button — no LLM needed */}
+      {!backbone && (
+        <div style={{ marginBottom: 8 }}>
+          <button
+            onClick={handleBuildStructure}
+            disabled={running || !premise.trim()}
+            style={{
+              width: '100%',
+              padding: '8px 12px',
+              fontSize: 12,
+              fontWeight: 600,
+              borderRadius: 4,
+              border: '1px solid #8b5cf6',
+              background: running ? 'var(--border)' : '#8b5cf618',
+              color: running ? 'var(--text-muted)' : '#8b5cf6',
+              cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
+              transition: 'all 0.15s',
+            }}
+          >
+            Build Structure
+          </button>
+          <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
+            Creates contract + backbone from corpus data. No LLM needed. Enables Randomize &amp; Manual Entry on Elements tab.
+          </span>
         </div>
       )}
 
