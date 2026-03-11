@@ -9,7 +9,7 @@
  * No bridge server or WebSocket needed — calls the API directly from the browser.
  */
 
-import type { LLMAdapter, LLMMessage, LLMResponse } from './llmAdapter.ts'
+import type { LLMAdapter, LLMMessage, LLMResponse, LLMCompletionOptions } from './llmAdapter.ts'
 import { stripJsonFences } from './jsonUtils.ts'
 
 // ---------------------------------------------------------------------------
@@ -59,14 +59,14 @@ export class OpenAICompatibleAdapter implements LLMAdapter {
     this.apiKey = options.apiKey
     this.maxTokens = options.maxTokens ?? 4096
     this.temperature = options.temperature ?? 0.7
-    this.timeout = options.timeout ?? 300_000
+    this.timeout = options.timeout ?? 600_000
   }
 
-  async complete(messages: LLMMessage[]): Promise<LLMResponse> {
+  async complete(messages: LLMMessage[], options?: LLMCompletionOptions): Promise<LLMResponse> {
     const body = {
       model: this.model,
       messages: messages.map((m) => ({ role: m.role, content: m.content })),
-      max_tokens: this.maxTokens,
+      max_tokens: options?.maxTokens ?? this.maxTokens,
       temperature: this.temperature,
     }
 
@@ -74,7 +74,7 @@ export class OpenAICompatibleAdapter implements LLMAdapter {
     return this.parseResponse(data)
   }
 
-  async completeJson(messages: LLMMessage[]): Promise<LLMResponse> {
+  async completeJson(messages: LLMMessage[], options?: LLMCompletionOptions): Promise<LLMResponse> {
     // Append JSON instruction to last user message
     const augmented = messages.map((m, i) =>
       i === messages.length - 1 && m.role === 'user'
@@ -85,7 +85,7 @@ export class OpenAICompatibleAdapter implements LLMAdapter {
     const body: Record<string, unknown> = {
       model: this.model,
       messages: augmented.map((m) => ({ role: m.role, content: m.content })),
-      max_tokens: this.maxTokens,
+      max_tokens: options?.maxTokens ?? this.maxTokens,
       temperature: this.temperature,
       response_format: { type: 'json_object' },
     }
@@ -108,11 +108,11 @@ export class OpenAICompatibleAdapter implements LLMAdapter {
     return response
   }
 
-  async *completeStream(messages: LLMMessage[]): AsyncIterable<string> {
+  async *completeStream(messages: LLMMessage[], options?: LLMCompletionOptions): AsyncIterable<string> {
     const body = {
       model: this.model,
       messages: messages.map((m) => ({ role: m.role, content: m.content })),
-      max_tokens: this.maxTokens,
+      max_tokens: options?.maxTokens ?? this.maxTokens,
       temperature: this.temperature,
       stream: true,
     }

@@ -67,7 +67,7 @@ export interface GenerationStoreState {
   error: string | null
 
   // Actions
-  startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode, llm?: LLMAdapter | null) => Promise<void>
+  startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode, llm?: LLMAdapter | null, runOptions?: { skipValidation?: boolean; planningLlm?: LLMAdapter | null }) => Promise<void>
   cancelRun: () => void
   loadResult: (result: OrchestratorResult, request: StoryRequest) => void
   loadSnapshot: (snapshot: StorySnapshot) => void
@@ -113,7 +113,7 @@ let activeAbortController: AbortController | null = null
 export const useGenerationStore = create<GenerationStoreState>((set) => ({
   ...INITIAL_STATE,
 
-  startRun: async (request, config, mode = 'contract-only', llm = null) => {
+  startRun: async (request, config, mode = 'contract-only', llm = null, runOptions = {}) => {
     // Cancel any existing run
     activeAbortController?.abort()
     const abortController = new AbortController()
@@ -143,9 +143,11 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
         provider,
         config,
         llm,
+        planningLlm: runOptions.planningLlm ?? null,
         mode,
         existingDetailBindings: prevDetailBindings,
         signal: abortController.signal,
+        skipValidation: runOptions.skipValidation ?? false,
         onEvent: (event) => {
           // Update status and events; also push partial artifacts as they arrive
           set((state) => ({

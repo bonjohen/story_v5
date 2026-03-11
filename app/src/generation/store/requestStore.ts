@@ -33,6 +33,14 @@ export interface RequestStoreState {
   openaiBaseUrl: string
   openaiModel: string
   openaiApiKey: string
+  /** Optional faster model for planning calls (beat summaries, scene goals, validation). */
+  openaiPlanningModel: string
+
+  // Performance optimization flags
+  /** Skip validation/repair cycle — saves ~72 LLM calls per run. */
+  skipValidation: boolean
+  /** Enable all fast-draft optimizations at once. */
+  fastDraft: boolean
 
   // Connection state — lives in store so it survives panel unmount
   bridgeStatus: BridgeStatus
@@ -41,6 +49,10 @@ export interface RequestStoreState {
   // Slot overrides — user-edited values for template slots
   // Keyed by slot_name, value is the user's override (empty string = use default)
   slotOverrides: Record<string, string>
+
+  // Hello test — response from a quick "Hello" probe sent to the LLM
+  helloResponse: string | null
+  helloLoading: boolean
 
   // Actions
   setPremise: (v: string) => void
@@ -54,10 +66,14 @@ export interface RequestStoreState {
   setOpenaiBaseUrl: (v: string) => void
   setOpenaiModel: (v: string) => void
   setOpenaiApiKey: (v: string) => void
+  setOpenaiPlanningModel: (v: string) => void
+  setSkipValidation: (v: boolean) => void
+  setFastDraft: (v: boolean) => void
   setSlotOverride: (slotName: string, value: string) => void
   clearSlotOverrides: () => void
   connectBridge: () => Promise<void>
   disconnectBridge: () => void
+  sendHello: () => Promise<void>
   loadFromProject: (req: StoryProjectRequest) => void
 }
 
@@ -71,11 +87,16 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
   bridgeUrl: 'ws://127.0.0.1:8765',
   maxLlmCalls: 20,
   openaiBaseUrl: 'http://localhost:11434/v1',
-  openaiModel: 'llama3:8b-instruct-q8_0',
+  openaiModel: 'llama3-8k',
   openaiApiKey: '',
+  openaiPlanningModel: '',
+  skipValidation: false,
+  fastDraft: false,
   bridgeStatus: 'disconnected',
   bridgeAdapter: null,
   slotOverrides: {},
+  helloResponse: null,
+  helloLoading: false,
 
   setPremise: (v) => set({ premise: v }),
   setArchetype: (v) => set({ archetype: v }),
@@ -88,6 +109,9 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
   setOpenaiBaseUrl: (v) => set({ openaiBaseUrl: v }),
   setOpenaiModel: (v) => set({ openaiModel: v }),
   setOpenaiApiKey: (v) => set({ openaiApiKey: v }),
+  setOpenaiPlanningModel: (v) => set({ openaiPlanningModel: v }),
+  setSkipValidation: (v) => set({ skipValidation: v }),
+  setFastDraft: (v) => set({ fastDraft: v }),
   setSlotOverride: (slotName, value) =>
     set((s) => ({ slotOverrides: { ...s.slotOverrides, [slotName]: value } })),
   clearSlotOverrides: () => set({ slotOverrides: {} }),
@@ -103,26 +127,29 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
     }
 
     const backend = llmBackend === 'none' ? 'openai' : llmBackend
-    set({ llmBackend: backend, bridgeStatus: 'connecting' })
+    set({ llmBackend: backend, bridgeStatus: 'connecting', helloResponse: null, helloLoading: true })
 
     try {
+      let adapter: LLMAdapter
       if (backend === 'openai') {
-        // Direct fetch adapter — no connection needed, just validate URL
         const { openaiBaseUrl, openaiModel, openaiApiKey } = state
-        const adapter = new OpenAICompatibleAdapter({
+        adapter = new OpenAICompatibleAdapter({
           baseUrl: openaiBaseUrl,
           model: openaiModel,
           apiKey: openaiApiKey || undefined,
         })
-        set({ bridgeAdapter: adapter, bridgeStatus: 'connected' })
       } else {
-        // WebSocket bridge to Claude Code CLI
-        const adapter = new BridgeAdapter({ url: state.bridgeUrl })
-        await adapter.connect()
-        set({ bridgeAdapter: adapter, bridgeStatus: 'connected' })
+        const bridgeAdapter = new BridgeAdapter({ url: state.bridgeUrl })
+        await bridgeAdapter.connect()
+        adapter = bridgeAdapter
       }
+
+      // Verify the LLM responds before marking as connected
+      const response = await adapter.complete([{ role: 'user', content: 'Hello' }])
+      const reply = response.content.trim().slice(0, 200)
+      set({ bridgeAdapter: adapter, bridgeStatus: 'connected', helloResponse: reply, helloLoading: false })
     } catch {
-      set({ bridgeAdapter: null, bridgeStatus: 'error' })
+      set({ bridgeAdapter: null, bridgeStatus: 'error', helloResponse: null, helloLoading: false })
     }
   },
 
@@ -131,7 +158,19 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
     if (bridgeAdapter && 'disconnect' in bridgeAdapter) {
       (bridgeAdapter as BridgeAdapter).disconnect()
     }
-    set({ bridgeAdapter: null, bridgeStatus: 'disconnected' })
+    set({ bridgeAdapter: null, bridgeStatus: 'disconnected', helloResponse: null })
+  },
+
+  sendHello: async () => {
+    const { bridgeAdapter, bridgeStatus } = get()
+    if (bridgeStatus !== 'connected' || !bridgeAdapter) return
+    set({ helloLoading: true, helloResponse: null })
+    try {
+      const response = await bridgeAdapter.complete([{ role: 'user', content: 'Hello' }])
+      set({ helloResponse: response.content.trim().slice(0, 200), helloLoading: false })
+    } catch {
+      set({ helloResponse: '[error]', helloLoading: false })
+    }
   },
 
   loadFromProject: (req) => set({
@@ -144,5 +183,8 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
     maxLlmCalls: req.maxLlmCalls,
     openaiBaseUrl: req.openaiBaseUrl,
     openaiModel: req.openaiModel,
+    skipValidation: req.skipValidation ?? false,
+    fastDraft: req.fastDraft ?? false,
+    openaiPlanningModel: req.openaiPlanningModel ?? '',
   }),
 }))

@@ -93,14 +93,16 @@ function computeCorpusHash(components: string[]): string {
 // ---------------------------------------------------------------------------
 
 export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> {
-  // Load all graphs and element data in parallel
-  const [archetypeGraphs, genreGraphs, variantGraphs, archetypeElements, genreElementConstraints] = await Promise.all([
+  // Load archetype graphs + other data in parallel (variants depend on archetype graph.json metadata)
+  const [archetypeGraphsWithMeta, genreGraphs, archetypeElements, genreElementConstraints] = await Promise.all([
     loadArchetypeGraphs(provider),
     loadGenreGraphs(provider),
-    loadVariantGraphs(provider),
     loadArchetypeElements(provider),
     loadGenreElementConstraints(provider),
   ])
+  const archetypeGraphs = archetypeGraphsWithMeta.graphs
+  // Load variants only for archetypes that declare a variant_file (avoids 404s for the rest)
+  const variantGraphs = await loadVariantGraphs(provider, archetypeGraphsWithMeta.variantDirs)
 
   // Load cross-reference files in parallel
   const [matrix, toneIntegration, emotionalArcs] =
@@ -162,18 +164,20 @@ export async function loadCorpus(provider: DataProvider): Promise<LoadedCorpus> 
 
 async function loadArchetypeGraphs(
   provider: DataProvider,
-): Promise<Map<string, StoryGraph>> {
-  const map = new Map<string, StoryGraph>()
+): Promise<{ graphs: Map<string, StoryGraph>; variantDirs: string[] }> {
+  const graphs = new Map<string, StoryGraph>()
+  const variantDirs: string[] = []
   const results = await Promise.all(
     ARCHETYPE_DIRS.map(async (dir) => {
-      const raw = await provider.loadJson(`archetypes/${dir}/graph.json`)
-      return { dir, graph: parseGraphJson(raw) }
+      const raw = await provider.loadJson(`archetypes/${dir}/graph.json`) as Record<string, unknown>
+      return { dir, graph: parseGraphJson(raw), hasVariants: typeof raw.variant_file === 'string' && raw.variant_file !== '' }
     }),
   )
-  for (const { dir, graph } of results) {
-    map.set(dir, graph)
+  for (const { dir, graph, hasVariants } of results) {
+    graphs.set(dir, graph)
+    if (hasVariants) variantDirs.push(dir)
   }
-  return map
+  return { graphs, variantDirs }
 }
 
 async function loadGenreGraphs(
@@ -194,13 +198,13 @@ async function loadGenreGraphs(
 
 async function loadVariantGraphs(
   provider: DataProvider,
+  variantDirs: string[],
 ): Promise<Map<string, StoryGraph>> {
   const map = new Map<string, StoryGraph>()
+  if (variantDirs.length === 0) return map
   const results = await Promise.all(
-    ARCHETYPE_DIRS.map(async (dir) => {
+    variantDirs.map(async (dir) => {
       const path = `archetypes/${dir}/variants.json`
-      const hasVariants = await provider.exists(path)
-      if (!hasVariants) return null
       const raw = await provider.loadJson(path) as Record<string, unknown>
       // Variant files use parent_graph instead of id/name/type — wrap for parseGraphJson
       const wrapped = {
@@ -215,7 +219,7 @@ async function loadVariantGraphs(
     }),
   )
   for (const result of results) {
-    if (result) map.set(result.dir, result.graph)
+    map.set(result.dir, result.graph)
   }
   return map
 }
@@ -226,11 +230,12 @@ async function loadArchetypeElements(
   const map = new Map<string, ArchetypeElements>()
   const results = await Promise.all(
     ARCHETYPE_DIRS.map(async (dir) => {
-      const path = `archetypes/${dir}/elements.json`
-      const hasElements = await provider.exists(path)
-      if (!hasElements) return null
-      const raw = await provider.loadJson(path) as ArchetypeElements
-      return { dir, elements: raw }
+      try {
+        const raw = await provider.loadJson(`archetypes/${dir}/elements.json`) as ArchetypeElements
+        return { dir, elements: raw }
+      } catch {
+        return null // File doesn't exist — skip silently
+      }
     }),
   )
   for (const result of results) {
@@ -245,11 +250,12 @@ async function loadGenreElementConstraints(
   const map = new Map<string, GenreElementConstraints>()
   const results = await Promise.all(
     GENRE_DIRS.map(async (dir) => {
-      const path = `genres/${dir}/element_constraints.json`
-      const hasConstraints = await provider.exists(path)
-      if (!hasConstraints) return null
-      const raw = await provider.loadJson(path) as GenreElementConstraints
-      return { dir, constraints: raw }
+      try {
+        const raw = await provider.loadJson(`genres/${dir}/element_constraints.json`) as GenreElementConstraints
+        return { dir, constraints: raw }
+      } catch {
+        return null // File doesn't exist — skip silently
+      }
     }),
   )
   for (const result of results) {

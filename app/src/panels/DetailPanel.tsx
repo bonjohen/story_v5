@@ -37,30 +37,30 @@ const ROLE_SYMBOLS: Record<string, string> = {
   'Anti-Pattern': '\u2298',  // circled slash
 }
 
-/** Color map for archetype node roles */
+/** Color map for archetype node roles — matches Cytoscape canvas colors in styles.ts */
 const ROLE_COLORS: Record<string, string> = {
-  'Origin': '#22c55e',
-  'Disruption': '#ef4444',
-  'Commitment': '#f59e0b',
-  'Catalyst': '#f97316',
-  'Threshold': '#8b5cf6',
-  'Trial': '#3b82f6',
-  'Escalation': '#f97316',
-  'Crisis': '#ef4444',
-  'Descent': '#dc2626',
-  'Transformation': '#a855f7',
-  'Revelation': '#06b6d4',
-  'Irreversible Cost': '#dc2626',
-  'Resolution': '#22c55e',
-  'Reckoning': '#eab308',
-  // Genre roles
-  'Genre Promise': '#3b82f6',
-  'Core Constraint': '#f59e0b',
-  'Subgenre Pattern': '#8b5cf6',
-  'World/Setting Rules': '#06b6d4',
-  'Scene Obligations': '#22c55e',
-  'Tone Marker': '#06b6d4',
-  'Anti-Pattern': '#ef4444',
+  'Origin': '#22c55e',       // start
+  'Disruption': '#f97316',   // escalation category
+  'Commitment': '#14b8a6',   // commitment (teal)
+  'Catalyst': '#06b6d4',     // catalyst (cyan)
+  'Threshold': '#14b8a6',    // commitment category
+  'Trial': '#64748b',        // neutral category
+  'Escalation': '#f97316',   // escalation
+  'Crisis': '#dc2626',       // crisis
+  'Descent': '#6366f1',      // descent (indigo)
+  'Transformation': '#a855f7', // transformation
+  'Revelation': '#3b82f6',   // revelation (blue)
+  'Irreversible Cost': '#ef4444', // irreversible (red)
+  'Resolution': '#eab308',   // terminal
+  'Reckoning': '#dc2626',    // crisis category
+  // Genre roles — match canvas category colors
+  'Genre Promise': '#22c55e',     // start
+  'Core Constraint': '#f97316',   // escalation
+  'Subgenre Pattern': '#3b82f6',  // revelation
+  'World/Setting Rules': '#06b6d4', // catalyst
+  'Scene Obligations': '#14b8a6', // commitment
+  'Tone Marker': '#06b6d4',      // tone (cyan)
+  'Anti-Pattern': '#ef4444',     // antipattern (red)
 }
 
 /** Color map for edge meanings */

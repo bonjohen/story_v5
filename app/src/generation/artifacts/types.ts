@@ -825,6 +825,12 @@ export interface StoryProjectRequest {
   openaiBaseUrl: string
   openaiModel: string
   // openaiApiKey intentionally omitted from save
+  /** Skip validation/repair cycle for faster generation. */
+  skipValidation?: boolean
+  /** Enable all fast-draft optimizations (skip validation, batch beats, lower max_tokens). */
+  fastDraft?: boolean
+  /** Optional separate model for planning calls (beat summaries, scene goals, validation). */
+  openaiPlanningModel?: string
 }
 
 /** Shape of an exported generation snapshot (mirrors storySnapshot.ts). */

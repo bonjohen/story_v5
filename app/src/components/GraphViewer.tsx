@@ -8,6 +8,7 @@
 import { useCallback, useRef, useMemo } from 'react'
 import { GraphCanvas } from '../render/GraphCanvas.tsx'
 import { GraphSearch } from './GraphSearch.tsx'
+import { GraphLegend } from './GraphLegend.tsx'
 import { DetailPanel } from '../panels/DetailPanel.tsx'
 import { useGraphStore } from '../store/graphStore.ts'
 import { useUIStore } from '../store/uiStore.ts'
@@ -124,6 +125,11 @@ export function GraphViewer({ genHighlightNodes }: GraphViewerProps) {
             </span>
           </span>
         )}
+        {!hasDetail && currentGraph && (
+          <span style={{ fontSize: 10, color: 'var(--text-muted)', fontStyle: 'italic', whiteSpace: 'nowrap' }}>
+            Click a node or edge to see detail
+          </span>
+        )}
         {currentGraph && <GraphSearch graph={currentGraph} onSelect={handleSearchSelect} />}
       </div>
 
@@ -142,6 +148,7 @@ export function GraphViewer({ genHighlightNodes }: GraphViewerProps) {
               ) : (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)', fontSize: 12 }}>No archetype loaded</div>
               )}
+              <GraphLegend graphType="archetype" activeRole={viewMode === 'archetype' ? selectedNode?.role : undefined} activeEdgeMeaning={viewMode === 'archetype' ? selectedEdge?.meaning : undefined} />
             </div>
             <div style={{ width: 1, background: 'var(--border)', flexShrink: 0 }} />
             <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
@@ -154,6 +161,7 @@ export function GraphViewer({ genHighlightNodes }: GraphViewerProps) {
               ) : (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)', fontSize: 12 }}>No genre loaded</div>
               )}
+              <GraphLegend graphType="genre" activeRole={viewMode === 'genre' ? selectedNode?.role : undefined} activeEdgeMeaning={viewMode === 'genre' ? selectedEdge?.meaning : undefined} />
             </div>
           </>
         ) : (
@@ -177,6 +185,7 @@ export function GraphViewer({ genHighlightNodes }: GraphViewerProps) {
                 No graph loaded
               </div>
             )}
+            {currentGraph && <GraphLegend graphType={viewMode} activeRole={selectedNode?.role} activeEdgeMeaning={selectedEdge?.meaning} />}
           </div>
         )}
       </div>

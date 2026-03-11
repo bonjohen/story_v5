@@ -83,7 +83,7 @@ export const Disclosure = memo(function Disclosure({
         )}
       </button>
       {!isCollapsed && (
-        <div>{children}</div>
+        <div style={{ paddingLeft: 12 + indent }}>{children}</div>
       )}
     </div>
   )

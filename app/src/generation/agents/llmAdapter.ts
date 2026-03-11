@@ -19,15 +19,21 @@ export interface LLMResponse {
   usage?: { input_tokens: number; output_tokens: number }
 }
 
+/** Per-call options that override adapter defaults. */
+export interface LLMCompletionOptions {
+  /** Override max output tokens for this call. */
+  maxTokens?: number
+}
+
 export interface LLMAdapter {
   /** Send a completion request and return the response text. */
-  complete(messages: LLMMessage[]): Promise<LLMResponse>
+  complete(messages: LLMMessage[], options?: LLMCompletionOptions): Promise<LLMResponse>
 
   /** Stream a completion, yielding partial text chunks as they arrive. Optional. */
-  completeStream?(messages: LLMMessage[]): AsyncIterable<string>
+  completeStream?(messages: LLMMessage[], options?: LLMCompletionOptions): AsyncIterable<string>
 
   /** Complete with JSON output mode — strips fences, validates JSON. Optional. */
-  completeJson?(messages: LLMMessage[]): Promise<LLMResponse>
+  completeJson?(messages: LLMMessage[], options?: LLMCompletionOptions): Promise<LLMResponse>
 }
 
 // ---------------------------------------------------------------------------
@@ -42,7 +48,7 @@ export class MockLLMAdapter implements LLMAdapter {
     this.responses = responses
   }
 
-  async complete(_messages: LLMMessage[]): Promise<LLMResponse> {
+  async complete(_messages: LLMMessage[], _options?: LLMCompletionOptions): Promise<LLMResponse> {
     const content = this.responses[this.callIndex % this.responses.length]
     this.callIndex++
     return Promise.resolve({

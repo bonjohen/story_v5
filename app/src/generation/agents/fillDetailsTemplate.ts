@@ -62,18 +62,11 @@ export function buildFillDetailsPrompt(
     .map(([key, slot]) => `- ${key} (${slot.category}, ${slot.required ? 'REQUIRED' : 'optional'})`)
     .join('\n')
 
-  const beatList = backbone.beats
-    .map((b) => `- ${b.label}`)
-    .join('\n')
-
   const userContent = [
     `PREMISE: ${request.premise}`,
     `ARCHETYPE: ${request.requested_archetype}`,
     `GENRE: ${request.requested_genre}`,
     `TONE: ${request.tone_preference || 'not specified'}`,
-    '',
-    `BEATS (${backbone.beats.length}):`,
-    beatList,
     '',
     `SLOTS TO FILL:`,
     slotList,

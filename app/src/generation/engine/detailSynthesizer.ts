@@ -11,7 +11,7 @@
  */
 
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
-import { runDetailAgent } from '../agents/detailAgent.ts'
+import { runDetailAgentParallel } from '../agents/detailAgent.ts'
 import type {
   StoryRequest,
   StoryBackbone,
@@ -87,7 +87,7 @@ async function synthesizeWithLLM(
   llm: LLMAdapter,
   allSlots: Map<string, BackboneSlot>,
 ): Promise<StoryDetailBindings> {
-  const partial = await runDetailAgent(llm, request, backbone)
+  const partial = await runDetailAgentParallel(llm, request, backbone)
 
   // Merge LLM results with defaults for any missing fields
   const entityRegistry: EntityRegistry = {

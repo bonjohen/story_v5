@@ -45,7 +45,7 @@ export async function validateSceneWithLLM(
     contract.genre.name,
   )
 
-  const response = await llm.complete(messages)
+  const response = await llm.complete(messages, { maxTokens: 512 })
   return parseUnifiedResponse(response.content, hardConstraints, antiPatterns)
 }
 
@@ -92,11 +92,7 @@ function buildUnifiedValidationPrompt(
   return [
     {
       role: 'system',
-      content: [
-        `You are a scene validator for a ${genreName} story.`,
-        'Evaluate the scene text against all checks below.',
-        'Respond with ONE line per check item, using the format specified in each section.',
-      ].join('\n'),
+      content: `${genreName} scene validator. One line per check, use the format in each section.`,
     },
     {
       role: 'user',

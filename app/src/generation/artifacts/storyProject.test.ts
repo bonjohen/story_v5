@@ -38,7 +38,7 @@ function makeRequest(): StoryProjectRequest {
     bridgeUrl: 'ws://127.0.0.1:8765',
     maxLlmCalls: 30,
     openaiBaseUrl: 'http://localhost:11434/v1',
-    openaiModel: 'llama3:8b-instruct-q8_0',
+    openaiModel: 'llama3-8k',
   }
 }
 
@@ -103,6 +103,6 @@ describe('requestStore loadFromProject', () => {
     expect(state.llmBackend).toBe('openai')
     expect(state.maxLlmCalls).toBe(30)
     expect(state.openaiBaseUrl).toBe('http://localhost:11434/v1')
-    expect(state.openaiModel).toBe('llama3:8b-instruct-q8_0')
+    expect(state.openaiModel).toBe('llama3-8k')
   })
 })

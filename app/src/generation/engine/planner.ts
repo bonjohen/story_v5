@@ -63,9 +63,9 @@ export async function buildPlan(options: PlannerOptions): Promise<StoryPlan> {
   // 6. Validate element roster covers required template roles
   validateElementRosterCoverage(elementRoster, contract)
 
-  // 7. Optionally enhance with LLM
+  // 7. Optionally enhance with LLM (one beat at a time with full context)
   if (llm) {
-    await enhancePlanWithLLM(beats, scenes, contract, llm)
+    await enhancePlanWithLLM(beats, scenes, contract, llm, elementRoster)
   }
 
   const coverageTargets: CoverageTargets = {

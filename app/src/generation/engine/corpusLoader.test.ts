@@ -111,10 +111,12 @@ describe('corpusLoader', () => {
   it('detects variant files when present', async () => {
     // Build a provider that includes a variant file for hero's journey
     const variantGraph = { ...ARCHETYPE_GRAPH, id: 'variant' }
+    const archGraphWithVariants = { ...ARCHETYPE_GRAPH, variant_file: 'variants.json' }
     const baseProvider = createMockProvider()
 
-    // Extract the underlying file map by capturing calls to the base provider
+    // Override hero's journey graph.json to include variant_file, plus add variants.json
     const files = new Map<string, unknown>()
+    files.set('archetypes/01_heros_journey/graph.json', archGraphWithVariants)
     files.set('archetypes/01_heros_journey/variants.json', variantGraph)
 
     const provider: DataProvider = {

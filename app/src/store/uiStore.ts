@@ -65,7 +65,8 @@ export const useUIStore = create<UIStoreState>()(
       partialize: (state) => ({
         infoPanelOpen: state.infoPanelOpen,
         splitView: state.splitView,
-        collapsedSections: state.collapsedSections,
+        // collapsedSections intentionally NOT persisted — each load starts with defaults
+        // (top section expanded, rest collapsed per tab)
         // setupLocked and elementsLocked intentionally NOT persisted — always unlocked on load
       }),
     },

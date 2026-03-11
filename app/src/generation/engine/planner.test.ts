@@ -282,25 +282,33 @@ describe('planner — coverage tracking', () => {
 // ---------------------------------------------------------------------------
 
 describe('planner — LLM enhancement', () => {
-  it('enhances beat summaries with mock LLM', async () => {
-    // enhancePlanWithLLM uses batched calls: one for beats, one for scenes
+  it('enhances beat summaries with mock LLM (one call per beat)', async () => {
+    // enhancePlanWithLLM processes one beat at a time, then one scene at a time
     const llm = new MockLLMAdapter([
-      // Batched beat response
-      'BEAT_ID=B01: The hero tends moisture vaporators under twin suns.\nBEAT_ID=B02: A holographic message shatters the hero\'s routine.\nBEAT_ID=B03: An old hermit reveals the hero\'s hidden legacy.',
-      // Batched scene response
-      'SCENE_ID=S01: Establish mundane world.\nSCENE_ID=S02: Reveal the premise.\nSCENE_ID=S03: Provide guidance.',
+      // Per-beat responses (3 beats)
+      'BEAT_ID=B01: The hero tends moisture vaporators under twin suns.',
+      'BEAT_ID=B02: A holographic message shatters the hero\'s routine.',
+      'BEAT_ID=B03: An old hermit reveals the hero\'s hidden legacy.',
+      // Per-scene responses (3 scenes)
+      'SCENE_ID=S01: Establish mundane world.',
+      'SCENE_ID=S02: Reveal the premise.',
+      'SCENE_ID=S03: Provide guidance.',
     ])
     const plan = await buildPlan({ contract: makeContract(), corpus: makeCorpus(), config: makeConfig(), llm })
     expect(plan.beats[0].summary).toBe('The hero tends moisture vaporators under twin suns.')
     expect(plan.beats[1].summary).toBe("A holographic message shatters the hero's routine.")
   })
 
-  it('enhances scene goals with mock LLM', async () => {
+  it('enhances scene goals with mock LLM (one call per scene)', async () => {
     const llm = new MockLLMAdapter([
-      // Batched beat response
-      'BEAT_ID=B01: Enhanced beat 1\nBEAT_ID=B02: Enhanced beat 2\nBEAT_ID=B03: Enhanced beat 3',
-      // Batched scene response
-      'SCENE_ID=S01: Establish the protagonist in a mundane tech-dependent world.\nSCENE_ID=S02: Reveal the speculative premise through a disruptive event.\nSCENE_ID=S03: Introduce a mentor who explains the rules of the world.',
+      // Per-beat responses (3 beats)
+      'BEAT_ID=B01: Enhanced beat 1',
+      'BEAT_ID=B02: Enhanced beat 2',
+      'BEAT_ID=B03: Enhanced beat 3',
+      // Per-scene responses (3 scenes)
+      'SCENE_ID=S01: Establish the protagonist in a mundane tech-dependent world.',
+      'SCENE_ID=S02: Reveal the speculative premise through a disruptive event.',
+      'SCENE_ID=S03: Introduce a mentor who explains the rules of the world.',
     ])
     const plan = await buildPlan({ contract: makeContract(), corpus: makeCorpus(), config: makeConfig(), llm })
     expect(plan.scenes[0].scene_goal).toBe('Establish the protagonist in a mundane tech-dependent world.')

@@ -135,7 +135,10 @@ const DEFAULT_PROJECT_REQUEST: StoryProjectRequest = {
   bridgeUrl: 'ws://127.0.0.1:8765',
   maxLlmCalls: 20,
   openaiBaseUrl: 'http://localhost:11434/v1',
-  openaiModel: 'llama3:8b-instruct-q8_0',
+  openaiModel: 'llama3-8k',
+  skipValidation: false,
+  fastDraft: false,
+  openaiPlanningModel: '',
 }
 
 /** Build a StoryProject envelope from request + generation store state. */

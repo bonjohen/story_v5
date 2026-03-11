@@ -19,7 +19,7 @@ import type {
   StoryDetailBindings,
   ChapterManifest,
 } from '../artifacts/types.ts'
-import type { LLMAdapter, LLMMessage } from '../agents/llmAdapter.ts'
+import type { LLMAdapter, LLMMessage, LLMCompletionOptions } from '../agents/llmAdapter.ts'
 import type { DataProvider } from './corpusLoader.ts'
 import { loadCorpus } from './corpusLoader.ts'
 import { runSelection } from './selectionEngine.ts'
@@ -69,6 +69,8 @@ export interface OrchestratorOptions {
   provider: DataProvider
   config: GenerationConfig
   llm?: LLMAdapter | null
+  /** Optional separate LLM for planning calls (beat summaries, scene goals). Uses main llm if not set. */
+  planningLlm?: LLMAdapter | null
   mode?: GenerationMode
   onEvent?: (event: OrchestratorEvent) => void
   /** Called with partial text chunks during scene writing (streaming mode). */
@@ -81,6 +83,8 @@ export interface OrchestratorOptions {
   onPrompt?: (callNumber: number, messages: LLMMessage[]) => void
   /** AbortSignal for cancellation — checked between pipeline stages. */
   signal?: AbortSignal
+  /** Skip the validation/repair cycle for faster generation. */
+  skipValidation?: boolean
 }
 
 // ---------------------------------------------------------------------------
@@ -96,7 +100,7 @@ const VALID_TRANSITIONS: Record<OrchestratorState, OrchestratorState[]> = {
   BACKBONE_ASSEMBLED: ['DETAILS_BOUND', 'COMPLETED', 'FAILED'],  // COMPLETED for backbone mode
   DETAILS_BOUND: ['PLANNED', 'COMPLETED', 'FAILED'],             // COMPLETED for detailed-outline mode
   PLANNED: ['GENERATING_SCENE', 'COMPLETED', 'FAILED'],
-  GENERATING_SCENE: ['VALIDATING_SCENE', 'FAILED'],
+  GENERATING_SCENE: ['VALIDATING_SCENE', 'GENERATING_SCENE', 'CHAPTERS_ASSEMBLED', 'COMPLETED', 'FAILED'],
   VALIDATING_SCENE: ['REPAIRING_SCENE', 'GENERATING_SCENE', 'CHAPTERS_ASSEMBLED', 'COMPLETED', 'FAILED'],
   REPAIRING_SCENE: ['VALIDATING_SCENE', 'COMPLETED', 'FAILED'],
   CHAPTERS_ASSEMBLED: ['COMPLETED', 'FAILED'],
@@ -155,13 +159,13 @@ function instrumentedLLM(
   }
 
   return {
-    async complete(messages) {
+    async complete(messages, options?: LLMCompletionOptions) {
       const t = measure(messages, 'complete')
       onCall(t)
       onPrompt?.(t.callNumber, messages)
       try {
         const start = Date.now()
-        const resp = await llm.complete(messages)
+        const resp = await llm.complete(messages, options)
         t.completedAt = new Date().toISOString()
         t.durationMs = Date.now() - start
         t.outputChars = resp.content.length
@@ -176,13 +180,13 @@ function instrumentedLLM(
         throw err
       }
     },
-    completeJson: llm.completeJson ? async (messages) => {
+    completeJson: llm.completeJson ? async (messages, options?: LLMCompletionOptions) => {
       const t = measure(messages, 'completeJson')
       onCall(t)
       onPrompt?.(t.callNumber, messages)
       try {
         const start = Date.now()
-        const resp = await llm.completeJson!(messages)
+        const resp = await llm.completeJson!(messages, options)
         t.completedAt = new Date().toISOString()
         t.durationMs = Date.now() - start
         t.outputChars = resp.content.length
@@ -197,14 +201,14 @@ function instrumentedLLM(
         throw err
       }
     } : undefined,
-    completeStream: llm.completeStream ? async function* (messages) {
+    completeStream: llm.completeStream ? async function* (messages, options?: LLMCompletionOptions) {
       const t = measure(messages, 'completeStream')
       onCall(t)
       onPrompt?.(t.callNumber, messages)
       try {
         const start = Date.now()
         let totalOutput = 0
-        for await (const chunk of llm.completeStream!(messages)) {
+        for await (const chunk of llm.completeStream!(messages, options)) {
           totalOutput += chunk.length
           yield chunk
         }
@@ -233,7 +237,7 @@ function instrumentedLLM(
  * Returns all artifacts produced during the run.
  */
 export async function orchestrate(options: OrchestratorOptions): Promise<OrchestratorResult> {
-  const { request, provider, config, llm: rawLlm = null, mode = 'draft', onEvent, onSceneChunk, onArtifact, existingDetailBindings, onPrompt, signal } = options
+  const { request, provider, config, llm: rawLlm = null, planningLlm: rawPlanningLlm = null, mode = 'draft', onEvent, onSceneChunk, onArtifact, existingDetailBindings, onPrompt, signal, skipValidation = false } = options
 
   function checkCancelled() {
     if (signal?.aborted) throw new Error('Generation cancelled')
@@ -271,6 +275,21 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       })
     }
   }, onPrompt) : null
+
+  // Planning LLM — use separate adapter if provided, otherwise fall back to main LLM
+  const planningLlm = rawPlanningLlm
+    ? instrumentedLLM(rawPlanningLlm, (t) => {
+        const existing = telemetryLog.findIndex(e => e.callNumber === t.callNumber)
+        if (existing >= 0) telemetryLog[existing] = t
+        else telemetryLog.push(t)
+        const methodLabel = t.method === 'completeJson' ? 'Planning (JSON)' : 'Planning'
+        if (t.status === 'pending') {
+          onEvent?.({ state: 'GENERATING_SCENE', message: `${methodLabel} (${(t.inputChars / 1024).toFixed(1)}KB prompt)...`, timestamp: t.startedAt })
+        } else if (t.status === 'success') {
+          onEvent?.({ state: 'GENERATING_SCENE', message: `Planning: ${(t.outputChars! / 1024).toFixed(1)}KB in ${(t.durationMs! / 1000).toFixed(1)}s`, timestamp: t.completedAt! })
+        }
+      }, onPrompt)
+    : llm
 
   let state: OrchestratorState = 'IDLE'
   const events: OrchestratorEvent[] = []
@@ -362,8 +381,8 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       return result
     }
 
-    // 4. Plan — pass detailBindings so writer gets real character names/traits
-    const plan = await buildPlan({ contract, corpus, config, llm, selection, detailBindings })
+    // 4. Plan — use planningLlm for beat/scene summaries
+    const plan = await buildPlan({ contract, corpus, config, llm: planningLlm, selection, detailBindings })
     result.plan = plan
     onArtifact?.({ plan })
     transition('PLANNED', `Scene plan ready: ${plan.scenes.length} scenes across ${plan.beats.length} beats`)
@@ -401,53 +420,55 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
         : await writeScene(scene, beat, contract, llm, plan, priorScenes)
       sceneDrafts.set(scene.scene_id, writeResult.content)
 
-      // 6. Validate
-      transition('VALIDATING_SCENE', `Checking ${sceneLabel} against genre constraints`)
-      let validation = await validateScenes({
-        contract,
-        scenes: [scene],
-        beats: [beat],
-        sceneDrafts: new Map([[scene.scene_id, writeResult.content]]),
-        config,
-        llm,
-        plan,
-      })
-
-      // 7. Repair loop
-      let repairAttempt = 0
-      let currentSceneResult = validation.scenes[0]
-      while (
-        currentSceneResult &&
-        currentSceneResult.status === 'fail' &&
-        repairAttempt < config.repair_policy.max_attempts_per_scene
-      ) {
-        transition('REPAIRING_SCENE', `Revising ${sceneLabel} (attempt ${repairAttempt + 1})`)
-        const repairResult = await repair({
-          sceneId: scene.scene_id,
-          originalContent: sceneDrafts.get(scene.scene_id) ?? '',
-          validation: currentSceneResult,
-          scene,
-          beat,
-          contract,
-          config,
-          llm,
-        })
-        sceneDrafts.set(scene.scene_id, repairResult.revised_content)
-        repairAttempt++
-
-        // Re-validate
-        transition('VALIDATING_SCENE', `Re-checking ${sceneLabel}`)
-        validation = await validateScenes({
+      // 6. Validate + 7. Repair — skip entirely when skipValidation is enabled
+      if (!skipValidation) {
+        transition('VALIDATING_SCENE', `Checking ${sceneLabel} against genre constraints`)
+        let validation = await validateScenes({
           contract,
           scenes: [scene],
           beats: [beat],
-          sceneDrafts: new Map([[scene.scene_id, repairResult.revised_content]]),
+          sceneDrafts: new Map([[scene.scene_id, writeResult.content]]),
           config,
           llm,
           plan,
         })
-        // Use fresh result from re-validation (no mutation of old reference)
-        currentSceneResult = validation.scenes[0]
+
+        // 7. Repair loop
+        let repairAttempt = 0
+        let currentSceneResult = validation.scenes[0]
+        while (
+          currentSceneResult &&
+          currentSceneResult.status === 'fail' &&
+          repairAttempt < config.repair_policy.max_attempts_per_scene
+        ) {
+          transition('REPAIRING_SCENE', `Revising ${sceneLabel} (attempt ${repairAttempt + 1})`)
+          const repairResult = await repair({
+            sceneId: scene.scene_id,
+            originalContent: sceneDrafts.get(scene.scene_id) ?? '',
+            validation: currentSceneResult,
+            scene,
+            beat,
+            contract,
+            config,
+            llm,
+          })
+          sceneDrafts.set(scene.scene_id, repairResult.revised_content)
+          repairAttempt++
+
+          // Re-validate
+          transition('VALIDATING_SCENE', `Re-checking ${sceneLabel}`)
+          validation = await validateScenes({
+            contract,
+            scenes: [scene],
+            beats: [beat],
+            sceneDrafts: new Map([[scene.scene_id, repairResult.revised_content]]),
+            config,
+            llm,
+            plan,
+          })
+          // Use fresh result from re-validation (no mutation of old reference)
+          currentSceneResult = validation.scenes[0]
+        }
       }
     }
 

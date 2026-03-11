@@ -1,6 +1,5 @@
 /**
- * GenerateTab — two-button generation (Build Structure / Generate Story),
- * progress, event log, story prose output, save/clear.
+ * GenerateTab — three zones: Actions (top), Output (middle), Debug (bottom).
  */
 
 import { useCallback, useRef, useEffect, useState } from 'react'
@@ -16,49 +15,6 @@ import type { StoryRequest, GenerationConfig, StoryProjectRequest } from '../art
 
 export interface GenerateTabProps {
   onHighlightNodes?: (nodes: string[]) => void
-}
-
-function PromptLog({ entries }: { entries: { callNumber: number; messages: { role: string; content: string }[] }[] }) {
-  const [expandedCall, setExpandedCall] = useState<number | null>(null)
-  return (
-    <div style={{ marginTop: 12 }}>
-      <span style={LABEL}>Prompts Sent ({entries.length})</span>
-      <div style={{ marginTop: 4 }}>
-        {entries.map((entry) => (
-          <div key={entry.callNumber} style={{ marginBottom: 4 }}>
-            <button
-              onClick={() => setExpandedCall(expandedCall === entry.callNumber ? null : entry.callNumber)}
-              style={{
-                width: '100%', textAlign: 'left', padding: '4px 8px', fontSize: 10,
-                background: 'var(--bg-primary)', border: '1px solid var(--border)',
-                borderRadius: 3, cursor: 'pointer', color: 'var(--text-primary)',
-                fontFamily: 'monospace',
-              }}
-            >
-              {expandedCall === entry.callNumber ? '\u25BC' : '\u25B6'} Call #{entry.callNumber} — {entry.messages.length} messages, {entry.messages.reduce((n, m) => n + m.content.length, 0)} chars
-            </button>
-            {expandedCall === entry.callNumber && (
-              <div style={{
-                border: '1px solid var(--border)', borderTop: 'none',
-                borderRadius: '0 0 3px 3px', maxHeight: 400, overflowY: 'auto',
-              }}>
-                {entry.messages.map((msg, j) => (
-                  <div key={j} style={{ padding: '6px 8px', borderBottom: '1px solid var(--border)' }}>
-                    <div style={{ fontSize: 10, fontWeight: 600, color: msg.role === 'system' ? '#f59e0b' : '#3b82f6', marginBottom: 2 }}>
-                      {msg.role}
-                    </div>
-                    <pre style={{ fontSize: 10, lineHeight: 1.4, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, color: 'var(--text-primary)' }}>
-                      {msg.content}
-                    </pre>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
 }
 
 export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
@@ -97,14 +53,8 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const [savedInstance, setSavedInstance] = useState(false)
   const [projectName, setProjectName] = useState('')
 
-  const logRef = useRef<HTMLDivElement>(null)
   const storyRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight
-  }, [events])
-
-  // Auto-scroll story view when new prose arrives
   useEffect(() => {
     if (storyRef.current) storyRef.current.scrollTop = storyRef.current.scrollHeight
   }, [sceneDrafts])
@@ -116,47 +66,34 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const buildRequest = useCallback((): StoryRequest => {
     const runId = `RUN_${new Date().toISOString().slice(0, 10).replace(/-/g, '_')}_${String(Math.floor(Math.random() * 9999)).padStart(4, '0')}`
     return {
-      schema_version: '1.0.0',
-      run_id: runId,
-      generated_at: new Date().toISOString(),
-      source_corpus_hash: '',
-      premise,
-      medium: 'novel',
-      length_target: 'short_story',
+      schema_version: '1.0.0', run_id: runId, generated_at: new Date().toISOString(),
+      source_corpus_hash: '', premise, medium: 'novel', length_target: 'short_story',
       audience: { age_band: 'adult', content_limits: [] },
-      requested_genre: genre,
-      requested_archetype: archetype,
-      tone_preference: tone,
+      requested_genre: genre, requested_archetype: archetype, tone_preference: tone,
       constraints: { must_include: [], must_exclude: [] },
     }
   }, [premise, archetype, genre, tone])
 
-  // Build Structure — no LLM needed, creates contract + backbone for Randomize/Manual Entry
   const handleBuildStructure = useCallback(() => {
     const req = buildRequest()
     const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: 0 }
     void startRun(req, config, 'backbone', null)
   }, [buildRequest, startRun])
 
-  // Generate Story — LLM, runs full pipeline through prose
   const handleGenerateStory = useCallback(async () => {
     const req = buildRequest()
     const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: maxLlmCalls }
     const reqState = useRequestStore.getState()
     const effectiveSkipValidation = reqState.fastDraft || reqState.skipValidation
 
-    // Always try bridge connection
     let adapter = reqState.bridgeAdapter
     if (!adapter) {
       try {
         await connectBridge()
         adapter = useRequestStore.getState().bridgeAdapter
-      } catch {
-        // fall through — will run without LLM
-      }
+      } catch { /* fall through */ }
     }
 
-    // Build planning adapter if a separate planning model is configured
     let planningAdapter = null
     if (reqState.openaiPlanningModel && reqState.llmBackend === 'openai') {
       planningAdapter = new OpenAICompatibleAdapter({
@@ -183,18 +120,11 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
     const genState = useGenerationStore.getState()
     const reqState = useRequestStore.getState()
     const reqData: StoryProjectRequest = {
-      premise: reqState.premise,
-      archetype: reqState.archetype,
-      genre: reqState.genre,
-      tone: reqState.tone,
-      llmBackend: reqState.llmBackend,
-      bridgeUrl: reqState.bridgeUrl,
-      maxLlmCalls: reqState.maxLlmCalls,
-      openaiBaseUrl: reqState.openaiBaseUrl,
-      openaiModel: reqState.openaiModel,
-      skipValidation: reqState.skipValidation,
-      fastDraft: reqState.fastDraft,
-      openaiPlanningModel: reqState.openaiPlanningModel,
+      premise: reqState.premise, archetype: reqState.archetype, genre: reqState.genre,
+      tone: reqState.tone, llmBackend: reqState.llmBackend, bridgeUrl: reqState.bridgeUrl,
+      maxLlmCalls: reqState.maxLlmCalls, openaiBaseUrl: reqState.openaiBaseUrl,
+      openaiModel: reqState.openaiModel, skipValidation: reqState.skipValidation,
+      fastDraft: reqState.fastDraft, openaiPlanningModel: reqState.openaiPlanningModel,
     }
     const name = projectName.trim() || reqState.premise.slice(0, 40) || 'Untitled'
     const project = exportProject(name, reqData, genState)
@@ -254,29 +184,17 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const canSaveInstance = !running && detailBindings != null
   const hasStory = sceneDrafts.size > 0
 
-  // Collect scene prose in order — use plan scenes (S01, S02...) which match sceneDrafts keys
+  // Scene prose in order
   const sceneEntries = plan
     ? plan.scenes.map((scene) => {
         const beat = plan.beats.find((b) => b.beat_id === scene.beat_id)
-        return {
-          beatLabel: beat?.summary ?? scene.beat_id,
-          sceneGoal: scene.scene_goal,
-          prose: sceneDrafts.get(scene.scene_id),
-          sceneId: scene.scene_id,
-        }
+        return { beatLabel: beat?.summary ?? scene.beat_id, sceneGoal: scene.scene_goal, prose: sceneDrafts.get(scene.scene_id), sceneId: scene.scene_id }
       })
     : backbone
       ? backbone.beats.flatMap((beat) =>
-          beat.scenes.map((scene) => ({
-            beatLabel: beat.label,
-            sceneGoal: scene.scene_goal,
-            prose: sceneDrafts.get(scene.scene_id),
-            sceneId: scene.scene_id,
-          }))
-        )
+          beat.scenes.map((scene) => ({ beatLabel: beat.label, sceneGoal: scene.scene_goal, prose: sceneDrafts.get(scene.scene_id), sceneId: scene.scene_id })))
       : []
 
-  // Find the last scene that has prose (for "writing..." indicator)
   let lastProseIdx = -1
   for (let j = sceneEntries.length - 1; j >= 0; j--) {
     if (sceneEntries[j].prose) { lastProseIdx = j; break }
@@ -284,15 +202,16 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
 
   return (
     <div style={{ padding: '10px 12px' }}>
-      {/* Status badge */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+
+      {/* ═══════════════════════════════════════════════════════
+          ZONE 1 — Actions
+          ═══════════════════════════════════════════════════════ */}
+
+      {/* Status + progress */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
         <span style={{
-          fontSize: 11,
-          fontWeight: 600,
-          padding: '2px 8px',
-          borderRadius: 3,
-          color: stateInfo.color,
-          background: `${stateInfo.color}18`,
+          fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 3,
+          color: stateInfo.color, background: `${stateInfo.color}18`,
         }}>
           {stateInfo.label}
         </span>
@@ -303,206 +222,107 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         )}
       </div>
 
-      {/* Generation Progress */}
+      {/* Progress steps — compact inline */}
       {(contract || backbone || detailBindings || plan || sceneDrafts.size > 0 || chapterManifest) && (
-        <div style={{ marginBottom: 10 }}>
-          <ProgressStep label="Contract"
-            description={contract ? `${contract.archetype.spine_nodes.length} spine nodes, ${contract.genre.hard_constraints.length} hard constraints` : undefined}
-            done={!!contract} />
-          <ProgressStep label="Backbone"
-            description={backbone ? `${backbone.beats.length} beats, ${backbone.chapter_partition.length} chapters` : undefined}
-            done={!!backbone} />
-          <ProgressStep label="Detail Bindings"
-            description={detailBindings ? `${detailBindings.entity_registry.characters.length} characters, ${Object.keys(detailBindings.slot_bindings ?? {}).length} slots bound` : undefined}
-            done={!!detailBindings} />
-          <ProgressStep label="Scene Plan"
-            description={plan ? `${plan.scenes.length} scenes planned` : undefined}
-            done={!!plan} />
-          <ProgressStep label="Scene Drafts"
-            description={sceneDrafts.size > 0 ? `${sceneDrafts.size} scenes written` : undefined}
-            done={sceneDrafts.size > 0} />
-          <ProgressStep label="Chapters"
-            description={chapterManifest ? `${chapterManifest.chapters.length} chapters assembled` : undefined}
-            done={!!chapterManifest} />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 10px', marginBottom: 10, fontSize: 10 }}>
+          <ProgressChip label="Contract" done={!!contract} />
+          <ProgressChip label="Backbone" done={!!backbone} />
+          <ProgressChip label="Details" done={!!detailBindings} />
+          <ProgressChip label="Plan" done={!!plan} />
+          <ProgressChip label="Drafts" done={sceneDrafts.size > 0} count={sceneDrafts.size > 0 ? sceneDrafts.size : undefined} />
+          <ProgressChip label="Chapters" done={!!chapterManifest} count={chapterManifest?.chapters.length} />
         </div>
       )}
 
-      {/* Performance options */}
-      <div style={{ marginBottom: 10, padding: '6px 8px', background: 'var(--bg-secondary)', borderRadius: 4, border: '1px solid var(--border)' }}>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, marginBottom: 4 }}>
-          <input
-            type="checkbox"
-            checked={fastDraft}
-            onChange={(e) => setFastDraft(e.target.checked)}
-            disabled={running}
-          />
-          <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Fast Draft</span>
-          <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>
-            — skip validation, batch beats, lower token limits (~60-70% faster)
-          </span>
-        </label>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, marginLeft: 20 }}>
-          <input
-            type="checkbox"
-            checked={fastDraft || skipValidation}
-            onChange={(e) => setSkipValidation(e.target.checked)}
-            disabled={running || fastDraft}
-          />
-          <span style={{ color: 'var(--text-secondary)' }}>Skip validation/repair</span>
-          <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>
-            (~72 fewer LLM calls)
-          </span>
-        </label>
-      </div>
-
-      {/* Build Structure button — no LLM needed */}
-      {!backbone && (
-        <div style={{ marginBottom: 8 }}>
-          <button
-            onClick={handleBuildStructure}
-            disabled={running || !premise.trim()}
-            style={{
-              width: '100%',
-              padding: '8px 12px',
-              fontSize: 12,
-              fontWeight: 600,
-              borderRadius: 4,
-              border: '1px solid #8b5cf6',
-              background: running ? 'var(--border)' : '#8b5cf618',
-              color: running ? 'var(--text-muted)' : '#8b5cf6',
-              cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
-              transition: 'all 0.15s',
-            }}
-          >
+      {/* Buttons */}
+      <div style={{ display: 'flex', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
+        {!backbone && (
+          <button onClick={handleBuildStructure} disabled={running || !premise.trim()} style={{
+            flex: 1, minWidth: 120, padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
+            border: '1px solid #8b5cf6', background: running ? 'var(--border)' : '#8b5cf618',
+            color: running || !premise.trim() ? 'var(--text-muted)' : '#8b5cf6',
+            cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
+          }}>
             Build Structure
           </button>
-          <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
-            Creates contract + backbone from corpus data. No LLM needed. Enables Randomize &amp; Manual Entry on Elements tab.
-          </span>
-        </div>
-      )}
-
-      {/* Generate Story button */}
-      <div style={{ marginBottom: 12 }}>
-        <button
-          onClick={handleGenerateStory}
-          disabled={running || !premise.trim()}
-          style={{
-            width: '100%',
-            padding: '10px 12px',
-            fontSize: 12,
-            fontWeight: 600,
-            borderRadius: 4,
-            border: 'none',
-            background: running ? 'var(--border)' : 'var(--accent)',
-            color: running ? 'var(--text-muted)' : '#fff',
-            cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
-            transition: 'all 0.15s',
-          }}
-        >
+        )}
+        <button onClick={handleGenerateStory} disabled={running || !premise.trim()} style={{
+          flex: 1, minWidth: 120, padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
+          border: 'none', background: running ? 'var(--border)' : 'var(--accent)',
+          color: running || !premise.trim() ? 'var(--text-muted)' : '#fff',
+          cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
+        }}>
           Generate Story
         </button>
-      </div>
-
-      {/* Stop button — visible while running */}
-      {running && (
-        <div style={{ marginBottom: 12 }}>
-          <button
-            onClick={cancelRun}
-            style={{
-              width: '100%',
-              padding: '8px 12px',
-              fontSize: 12,
-              fontWeight: 600,
-              borderRadius: 4,
-              border: '1px solid #ef4444',
-              background: '#ef444418',
-              color: '#ef4444',
-              cursor: 'pointer',
-              transition: 'all 0.15s',
-            }}
-          >
-            Stop Generation
-          </button>
-        </div>
-      )}
-
-      {/* Clear / Save buttons */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
-        {hasResults && !running && (
-          <button
-            onClick={clearRun}
-            style={{
-              flex: 1,
-              padding: '6px 10px',
-              fontSize: 11,
-              borderRadius: 4,
-              border: '1px solid var(--border)',
-              color: 'var(--text-muted)',
-              cursor: 'pointer',
-              transition: 'all 0.15s',
-            }}
-          >
-            Clear Results
+        {running && (
+          <button onClick={cancelRun} style={{
+            padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
+            border: '1px solid #ef4444', background: '#ef444418', color: '#ef4444', cursor: 'pointer',
+          }}>
+            Stop
           </button>
         )}
+      </div>
+
+      {/* Options row — compact */}
+      <div style={{ display: 'flex', gap: 12, marginBottom: 10, fontSize: 10 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
+          <input type="checkbox" checked={fastDraft} onChange={(e) => setFastDraft(e.target.checked)} disabled={running} />
+          <span style={{ fontWeight: 600 }}>Fast Draft</span>
+        </label>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', color: 'var(--text-muted)' }}>
+          <input type="checkbox" checked={fastDraft || skipValidation} onChange={(e) => setSkipValidation(e.target.checked)} disabled={running || fastDraft} />
+          Skip validation
+        </label>
+      </div>
+
+      {/* Secondary actions */}
+      <div style={{ display: 'flex', gap: 6, marginBottom: 10, flexWrap: 'wrap' }}>
+        {hasResults && !running && (
+          <button onClick={clearRun} style={smallBtn}>Clear</button>
+        )}
         {canSaveInstance && (
-          <button
-            onClick={handleSaveInstance}
-            disabled={savedInstance}
-            style={{
-              flex: 1,
-              padding: '6px 10px',
-              fontSize: 11,
-              fontWeight: 600,
-              borderRadius: 4,
-              border: savedInstance ? '1px solid #22c55e40' : '1px solid var(--accent)',
-              background: savedInstance ? '#22c55e18' : 'var(--accent)18',
-              color: savedInstance ? '#22c55e' : 'var(--accent)',
-              cursor: savedInstance ? 'default' : 'pointer',
-              transition: 'all 0.15s',
-            }}
-          >
-            {savedInstance ? 'Saved' : 'Save as Instance'}
+          <button onClick={handleSaveInstance} disabled={savedInstance} style={{
+            ...smallBtn, color: savedInstance ? '#22c55e' : 'var(--accent)', border: savedInstance ? '1px solid #22c55e40' : smallBtn.border,
+          }}>
+            {savedInstance ? 'Saved' : 'Save Instance'}
           </button>
         )}
         {hasStory && !running && (
-          <button
-            onClick={handleExportStory}
-            style={{
-              flex: 1,
-              padding: '6px 10px',
-              fontSize: 11,
-              fontWeight: 600,
-              borderRadius: 4,
-              border: '1px solid #22c55e',
-              background: '#22c55e18',
-              color: '#22c55e',
-              cursor: 'pointer',
-              transition: 'all 0.15s',
-            }}
-          >
-            Export Story (.md)
-          </button>
+          <button onClick={handleExportStory} style={{ ...smallBtn, color: '#22c55e' }}>Export .md</button>
+        )}
+        <button onClick={handleImport} disabled={running} style={smallBtn}>Load Project</button>
+        {hasResults && (
+          <button onClick={handleExport} disabled={running} style={smallBtn}>Save Project</button>
         )}
       </div>
 
-      {/* Error display */}
+      {/* Project name (only if results exist) */}
+      {hasResults && (
+        <input
+          type="text" value={projectName} onChange={(e) => setProjectName(e.target.value)}
+          placeholder={premise.slice(0, 40) || 'Project name'}
+          style={{
+            width: '100%', padding: '4px 8px', fontSize: 11, borderRadius: 4, marginBottom: 10,
+            border: '1px solid var(--border)', background: 'var(--bg-primary)',
+            color: 'var(--text-primary)', boxSizing: 'border-box',
+          }}
+        />
+      )}
+
+      {/* Error */}
       {error && (
         <div style={{
-          padding: '8px 10px',
-          marginBottom: 10,
-          fontSize: 11,
-          color: '#ef4444',
-          background: 'rgba(239,68,68,0.08)',
-          borderRadius: 4,
-          border: '1px solid rgba(239,68,68,0.2)',
+          padding: '8px 10px', marginBottom: 10, fontSize: 11, color: '#ef4444',
+          background: 'rgba(239,68,68,0.08)', borderRadius: 4, border: '1px solid rgba(239,68,68,0.2)',
         }}>
           {error}
         </div>
       )}
 
-      {/* Story prose output — always visible */}
+      {/* ═══════════════════════════════════════════════════════
+          ZONE 2 — Story Output
+          ═══════════════════════════════════════════════════════ */}
       <div style={{ marginBottom: 12 }}>
         <span style={LABEL}>
           Story
@@ -515,15 +335,10 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         <div
           ref={storyRef}
           style={{
-          marginTop: 4,
-          minHeight: 60,
-          maxHeight: 500,
-          overflowY: 'auto',
-          background: 'var(--bg-primary)',
-          border: '1px solid var(--border)',
-          borderRadius: 4,
-          padding: 8,
-        }}>
+            marginTop: 4, minHeight: 60, maxHeight: 500, overflowY: 'auto',
+            background: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: 4, padding: 8,
+          }}
+        >
           {sceneEntries.some((s) => s.prose) ? (
             sceneEntries.map((entry, idx) => {
               if (!entry.prose) return null
@@ -541,12 +356,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
                       </span>
                     )}
                   </div>
-                  <div style={{
-                    fontSize: 12,
-                    lineHeight: 1.6,
-                    color: 'var(--text-primary)',
-                    whiteSpace: 'pre-wrap',
-                  }}>
+                  <div style={{ fontSize: 12, lineHeight: 1.6, color: 'var(--text-primary)', whiteSpace: 'pre-wrap' }}>
                     {entry.prose}
                   </div>
                 </div>
@@ -560,22 +370,12 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         </div>
       </div>
 
-      {/* Event log */}
+      {/* ═══════════════════════════════════════════════════════
+          ZONE 3 — Debug (all collapsed by default)
+          ═══════════════════════════════════════════════════════ */}
       {events.length > 0 && (
-        <div>
-          <span style={LABEL}>Event Log</span>
-          <div
-            ref={logRef}
-            style={{
-              marginTop: 4,
-              maxHeight: 200,
-              overflowY: 'auto',
-              background: 'var(--bg-primary)',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              padding: 6,
-            }}
-          >
+        <Disclosure title="Event Log" persistKey="gen-event-log" defaultCollapsed badge={`${events.length}`}>
+          <div style={{ maxHeight: 200, overflowY: 'auto', padding: '4px 8px' }}>
             {events.map((ev, i) => {
               const info = STATE_LABELS[ev.state] ?? { label: ev.state, color: 'var(--text-muted)' }
               return (
@@ -583,77 +383,25 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
                   <span style={{ color: 'var(--text-muted)', fontFamily: 'monospace', flexShrink: 0 }}>
                     {new Date(ev.timestamp).toLocaleTimeString()}
                   </span>
-                  <span style={{ color: info.color, fontWeight: 600, flexShrink: 0 }}>
-                    {info.label}
-                  </span>
-                  <span style={{ color: 'var(--text-muted)' }}>
-                    {ev.message}
-                  </span>
+                  <span style={{ color: info.color, fontWeight: 600, flexShrink: 0 }}>{info.label}</span>
+                  <span style={{ color: 'var(--text-muted)' }}>{ev.message}</span>
                 </div>
               )
             })}
           </div>
-        </div>
+        </Disclosure>
       )}
 
-      {/* Save / Load Project */}
-      <div style={{ marginTop: 12, marginBottom: 12 }}>
-        {hasResults && (
-          <div style={{ marginBottom: 8 }}>
-            <input
-              type="text"
-              value={projectName}
-              onChange={(e) => setProjectName(e.target.value)}
-              placeholder={premise.slice(0, 40) || 'Project name'}
-              style={{
-                width: '100%', padding: '4px 8px', fontSize: 11, borderRadius: 4,
-                border: '1px solid var(--border)', background: 'var(--bg-primary)',
-                color: 'var(--text-primary)', boxSizing: 'border-box',
-              }}
-            />
-          </div>
-        )}
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button
-            onClick={handleImport}
-            disabled={running}
-            style={{
-              flex: 1, padding: '6px 10px', fontSize: 11, borderRadius: 4,
-              border: '1px solid var(--border)', color: 'var(--text-secondary)',
-              cursor: running ? 'not-allowed' : 'pointer',
-            }}
-          >
-            Load Project
-          </button>
-          {hasResults && (
-            <button
-              onClick={handleExport}
-              disabled={running}
-              style={{
-                flex: 1, padding: '6px 10px', fontSize: 11, borderRadius: 4,
-                border: '1px solid var(--border)', color: 'var(--text-secondary)',
-                cursor: running ? 'not-allowed' : 'pointer',
-              }}
-            >
-              Save Project
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* LLM Telemetry */}
       {llmTelemetry.length > 0 && (
-        <Disclosure title="LLM Telemetry" persistKey="gen-llm-telemetry" defaultCollapsed={true}
-          badge={`${llmTelemetry.length} calls`}>
+        <Disclosure title="LLM Telemetry" persistKey="gen-llm-telemetry" defaultCollapsed badge={`${llmTelemetry.length}`}>
           <div style={{ padding: '4px 0' }}>
             <div style={{
               display: 'flex', gap: 12, padding: '4px 8px', marginBottom: 4,
               fontSize: 10, color: 'var(--text-muted)', borderBottom: '1px solid var(--border)',
             }}>
-              <span>Total: {llmTelemetry.length}</span>
               <span>OK: {llmTelemetry.filter(t => t.status === 'success').length}</span>
               <span style={{ color: llmTelemetry.some(t => t.status === 'error') ? '#ef4444' : undefined }}>
-                Errors: {llmTelemetry.filter(t => t.status === 'error').length}
+                Err: {llmTelemetry.filter(t => t.status === 'error').length}
               </span>
               <span>In: {(llmTelemetry.reduce((s, t) => s + t.inputChars, 0) / 1024).toFixed(1)}KB</span>
               <span>Out: {(llmTelemetry.filter(t => t.outputChars).reduce((s, t) => s + (t.outputChars ?? 0), 0) / 1024).toFixed(1)}KB</span>
@@ -680,55 +428,69 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         </Disclosure>
       )}
 
-      {/* Prompt log */}
-      {promptLog.length > 0 && <PromptLog entries={promptLog} />}
+      {promptLog.length > 0 && (
+        <Disclosure title="Prompt Log" persistKey="gen-prompt-log" defaultCollapsed badge={`${promptLog.length}`}>
+          <PromptLogContent entries={promptLog} />
+        </Disclosure>
+      )}
     </div>
   )
 }
 
 // ---------------------------------------------------------------------------
-// Progress step
+// Sub-components
 // ---------------------------------------------------------------------------
 
-function ProgressStep({ label, description, done }: {
-  label: string
-  description?: string
-  done: boolean
-}) {
+const smallBtn: React.CSSProperties = {
+  padding: '4px 10px', fontSize: 10, borderRadius: 3,
+  border: '1px solid var(--border)', color: 'var(--text-secondary)', cursor: 'pointer',
+}
+
+function ProgressChip({ label, done, count }: { label: string; done: boolean; count?: number }) {
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: 8,
-      marginBottom: 6,
-      opacity: done ? 1 : 0.4,
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 3,
+      color: done ? '#22c55e' : 'var(--text-muted)', opacity: done ? 1 : 0.5,
     }}>
-      <span style={{
-        fontSize: 11,
-        color: done ? '#22c55e' : 'var(--text-muted)',
-        flexShrink: 0,
-        marginTop: 1,
-      }}>
-        {done ? '\u2713' : '\u25CB'}
-      </span>
-      <div>
-        <div style={{
-          fontSize: 11,
-          fontWeight: done ? 600 : 400,
-          color: done ? 'var(--text-primary)' : 'var(--text-muted)',
-        }}>
-          {label}
+      <span>{done ? '\u2713' : '\u25CB'}</span>
+      <span style={{ fontWeight: done ? 600 : 400 }}>{label}</span>
+      {count != null && <span style={{ color: 'var(--text-muted)' }}>({count})</span>}
+    </span>
+  )
+}
+
+function PromptLogContent({ entries }: { entries: { callNumber: number; messages: { role: string; content: string }[] }[] }) {
+  const [expandedCall, setExpandedCall] = useState<number | null>(null)
+  return (
+    <div style={{ padding: '4px 8px' }}>
+      {entries.map((entry) => (
+        <div key={entry.callNumber} style={{ marginBottom: 4 }}>
+          <button
+            onClick={() => setExpandedCall(expandedCall === entry.callNumber ? null : entry.callNumber)}
+            style={{
+              width: '100%', textAlign: 'left', padding: '4px 8px', fontSize: 10,
+              background: 'var(--bg-primary)', border: '1px solid var(--border)',
+              borderRadius: 3, cursor: 'pointer', color: 'var(--text-primary)', fontFamily: 'monospace',
+            }}
+          >
+            {expandedCall === entry.callNumber ? '\u25BC' : '\u25B6'} Call #{entry.callNumber} — {entry.messages.length} msgs, {entry.messages.reduce((n, m) => n + m.content.length, 0)} chars
+          </button>
+          {expandedCall === entry.callNumber && (
+            <div style={{ border: '1px solid var(--border)', borderTop: 'none', borderRadius: '0 0 3px 3px', maxHeight: 400, overflowY: 'auto' }}>
+              {entry.messages.map((msg, j) => (
+                <div key={j} style={{ padding: '6px 8px', borderBottom: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, color: msg.role === 'system' ? '#f59e0b' : '#3b82f6', marginBottom: 2 }}>
+                    {msg.role}
+                  </div>
+                  <pre style={{ fontSize: 10, lineHeight: 1.4, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, color: 'var(--text-primary)' }}>
+                    {msg.content}
+                  </pre>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        {description && (
-          <div style={{
-            fontSize: 10,
-            color: 'var(--text-muted)',
-            marginTop: 1,
-          }}>
-            {description}
-          </div>
-        )}
-      </div>
+      ))}
     </div>
   )
 }

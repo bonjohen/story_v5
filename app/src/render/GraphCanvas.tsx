@@ -97,6 +97,7 @@ export const GraphCanvas = memo(function GraphCanvas({
       userZoomingEnabled: true,
       userPanningEnabled: true,
       boxSelectionEnabled: false,
+      wheelSensitivity: 0.5,
       minZoom: 0.15,
       maxZoom: 3,
     })
@@ -116,6 +117,20 @@ export const GraphCanvas = memo(function GraphCanvas({
     cyRef.current = cy
     onCyReady?.(cy)
 
+    // Ctrl+wheel: boost zoom sensitivity to 2.0
+    const container = containerRef.current
+    const ctrlWheelHandler = (e: WheelEvent) => {
+      if (!e.ctrlKey) return
+      e.preventDefault()
+      const zoomFactor = Math.pow(10, -e.deltaY / 300) // ~2.0 sensitivity
+      const rect = container.getBoundingClientRect()
+      cy.zoom({
+        level: cy.zoom() * zoomFactor,
+        renderedPosition: { x: e.clientX - rect.left, y: e.clientY - rect.top },
+      })
+    }
+    container.addEventListener('wheel', ctrlWheelHandler, { passive: false })
+
     // Ensure graph is properly fitted after layout + container are settled
     let destroyed = false
     requestAnimationFrame(() => {
@@ -125,6 +140,7 @@ export const GraphCanvas = memo(function GraphCanvas({
 
     return () => {
       destroyed = true
+      container.removeEventListener('wheel', ctrlWheelHandler)
       cy.removeAllListeners()
       cy.destroy()
       cyRef.current = null

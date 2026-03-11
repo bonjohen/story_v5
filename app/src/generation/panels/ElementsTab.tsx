@@ -1,15 +1,12 @@
 /**
  * ElementsTab — unified view of all story elements.
  * Consolidates template slots, entity registry, and genre constraints
- * into category-based sections (Characters, Relationships, Places, Objects)
- * with editable fields alongside template/constraint context.
+ * into category-based sections (Characters, Places, Objects, Concepts).
  */
 
 import { useCallback, useEffect, useState, useMemo } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { useRequestStore } from '../store/requestStore.ts'
-import { useElementStore } from '../../store/elementStore.ts'
-import { useGraphStore } from '../../store/graphStore.ts'
 import { useUIStore } from '../../store/uiStore.ts'
 import { buildFillDetailsPrompt, parseFillDetailsResponse } from '../agents/fillDetailsTemplate.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
@@ -36,24 +33,6 @@ const COLORS = {
   rule: '#ef4444',
 } as const
 
-const SEVERITY_BADGE: Record<string, { bg: string; text: string }> = {
-  required: { bg: 'rgba(239,68,68,0.15)', text: '#ef4444' },
-  recommended: { bg: 'rgba(245,158,11,0.15)', text: '#f59e0b' },
-  optional: { bg: 'rgba(107,114,128,0.15)', text: '#6b7280' },
-}
-
-function SeverityBadge({ severity }: { severity: string }) {
-  const c = SEVERITY_BADGE[severity] ?? SEVERITY_BADGE.optional
-  return (
-    <span style={{
-      fontSize: 8, padding: '1px 4px', borderRadius: 2,
-      background: c.bg, color: c.text, fontWeight: 600, textTransform: 'uppercase',
-    }}>
-      {severity}
-    </span>
-  )
-}
-
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -62,6 +41,42 @@ function nextId(prefix: string, existing: { id: string }[]): string {
   let n = existing.length + 1
   while (existing.some((e) => e.id === `${prefix}_${String(n).padStart(2, '0')}`)) n++
   return `${prefix}_${String(n).padStart(2, '0')}`
+}
+
+const fieldInput: React.CSSProperties = { ...INPUT, fontSize: 11, padding: '3px 6px', marginTop: 2 }
+
+// ---------------------------------------------------------------------------
+// Reusable slot row
+// ---------------------------------------------------------------------------
+
+function SlotRow({ slot, binding, color, editable, onUpdate }: {
+  slot: { key: string; required: boolean; description?: string }
+  binding?: { bound_value?: string } | null
+  color: string
+  editable: boolean
+  onUpdate: (key: string, value: string) => void
+}) {
+  return (
+    <div style={{
+      padding: '4px 8px', marginBottom: 2, fontSize: 11, background: 'var(--bg-elevated)', borderRadius: 3,
+      borderLeft: `3px solid ${slot.required ? color : 'var(--border)'}`,
+      display: 'flex', gap: 6, alignItems: 'center',
+    }}>
+      <span style={{ fontWeight: 500, minWidth: 80, flexShrink: 0 }}>{slot.key}</span>
+      {editable ? (
+        <input
+          value={binding?.bound_value ?? ''}
+          placeholder={slot.description || 'unfilled'}
+          onChange={(e) => onUpdate(slot.key, e.target.value)}
+          style={{ ...fieldInput, flex: 1, marginTop: 0 }}
+        />
+      ) : binding?.bound_value ? (
+        <span style={{ color: '#22c55e', fontSize: 10 }}>{binding.bound_value}</span>
+      ) : (
+        <span style={{ color: 'var(--text-muted)', fontSize: 10, fontStyle: 'italic' }}>{slot.description || 'unfilled'}</span>
+      )}
+    </div>
+  )
 }
 
 // ---------------------------------------------------------------------------
@@ -86,21 +101,11 @@ export function ElementsTab() {
   const locked = useUIStore((s) => s.elementsLocked)
   const toggleLock = useUIStore((s) => s.toggleElementsLock)
 
-  // Genre constraints from elementStore
-  const genreDir = useGraphStore((s) => s.genreDir)
-  const loadGenreConstraints = useElementStore((s) => s.loadGenreConstraints)
-  const genreConstraints = useElementStore((s) => s.genreConstraints)
-  const constraints = genreDir ? genreConstraints.get(genreDir) ?? null : null
-
-  useEffect(() => {
-    if (genreDir) void loadGenreConstraints(genreDir)
-  }, [genreDir, loadGenreConstraints])
 
   const [fillingDetails, setFillingDetails] = useState(false)
   const [fillError, setFillError] = useState<string | null>(null)
   const [fillAbort, setFillAbort] = useState<AbortController | null>(null)
   const [fillLog, setFillLog] = useState<string[]>([])
-  const [promptPreview, setPromptPreview] = useState<string | null>(null)
 
   useEffect(() => {
     if (running) setFillError(null)
@@ -108,31 +113,28 @@ export function ElementsTab() {
 
   // --- Slot data from backbone ---
 
-  const allSlots = useMemo(() => {
-    const slots: Record<string, { category: string; required: boolean; description?: string }> = {}
+  const slotsByCategory = useMemo(() => {
+    const map: Record<string, { key: string; required: boolean; description?: string }[]> = {}
     if (backbone) {
+      const seen = new Set<string>()
       for (const beat of backbone.beats) {
         for (const scene of beat.scenes) {
           for (const [key, slot] of Object.entries(scene.slots)) {
-            if (!slots[key]) slots[key] = { category: slot.category, required: slot.required, description: slot.description }
+            if (!seen.has(key)) {
+              seen.add(key)
+              const cat = slot.category
+              if (!map[cat]) map[cat] = []
+              map[cat].push({ key, required: slot.required, description: slot.description })
+            }
           }
         }
       }
     }
-    return slots
+    return map
   }, [backbone])
 
-  const slotsByCategory = useMemo(() => {
-    const map: Record<string, { key: string; required: boolean; description?: string }[]> = {}
-    for (const [key, slot] of Object.entries(allSlots)) {
-      const cat = slot.category
-      if (!map[cat]) map[cat] = []
-      map[cat].push({ key, required: slot.required, description: slot.description })
-    }
-    return map
-  }, [allSlots])
-
   const registry = detailBindings?.entity_registry
+  const isEditable = !locked
 
   // --- Actions ---
 
@@ -166,7 +168,7 @@ export function ElementsTab() {
         adapter = useRequestStore.getState().bridgeAdapter
       }
       if (!adapter) {
-        setFillError('LLM not connected. Configure and connect via the Pipeline tab.')
+        setFillError('LLM not connected. Configure and connect via the Setup tab.')
         setFillingDetails(false)
         setFillAbort(null)
         return
@@ -175,7 +177,6 @@ export function ElementsTab() {
 
       const messages = buildFillDetailsPrompt(request, contract, backbone)
       const fullText = messages.map((m) => `[${m.role}]\n${m.content}`).join('\n\n')
-      setPromptPreview(fullText)
       addLog(`Sending prompt (${(fullText.length / 1024).toFixed(1)}KB)...`)
 
       const response = adapter.completeJson
@@ -390,6 +391,9 @@ export function ElementsTab() {
       generated_at: new Date().toISOString(), source_corpus_hash: bb?.source_corpus_hash ?? '',
       entity_registry: { characters, places, objects }, slot_bindings: slotBindings,
     })
+    useUIStore.setState((s) => ({
+      collapsedSections: { ...s.collapsedSections, 'elem-characters': false },
+    }))
   }, [setDetailBindings])
 
   // Update a slot binding value (auto-initializes bindings if needed)
@@ -397,7 +401,6 @@ export function ElementsTab() {
     const state = useGenerationStore.getState()
     let current = state.detailBindings
     if (!current) {
-      // Auto-init from backbone slots if no bindings exist yet
       initFromSlots()
       current = useGenerationStore.getState().detailBindings
       if (!current) return
@@ -417,9 +420,6 @@ export function ElementsTab() {
     })
   }, [initFromSlots, setDetailBindings])
 
-  const fieldInput: React.CSSProperties = { ...INPUT, fontSize: 11, padding: '3px 6px', marginTop: 2 }
-  const isEditable = !locked
-
   // --- Counts ---
   const charSlots = slotsByCategory['character'] ?? []
   const placeSlots = slotsByCategory['place'] ?? []
@@ -428,488 +428,14 @@ export function ElementsTab() {
   const charCount = registry?.characters.length ?? 0
   const placeCount = registry?.places.length ?? 0
   const objectCount = registry?.objects.length ?? 0
-  const relConstraintCount = constraints?.relationship_constraints.length ?? 0
-  const ruleCount = constraints?.element_rules.length ?? 0
 
   return (
     <div style={{ padding: '10px 12px' }}>
-      {/* Lock toggle + Manual Entry */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 6, marginBottom: 6 }}>
-        {!registry && backbone && !locked && (
-          <button onClick={initFromSlots} style={{
-            fontSize: 10, padding: '2px 8px', borderRadius: 3,
-            border: '1px solid var(--border)', color: 'var(--text-muted)', cursor: 'pointer',
-          }}>
-            Manual Entry
-          </button>
-        )}
-        <button
-          onClick={toggleLock}
-          title={locked ? 'Unlock Elements' : 'Lock Elements'}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 4,
-            fontSize: 10, padding: '2px 8px', borderRadius: 3,
-            border: `1px solid ${locked ? '#f59e0b' : 'var(--border)'}`,
-            background: locked ? '#f59e0b18' : 'transparent',
-            color: locked ? '#f59e0b' : 'var(--text-muted)', cursor: 'pointer',
-          }}
-        >
-          {locked ? '\u{1F512}' : '\u{1F513}'} {locked ? 'Locked' : 'Unlocked'}
-        </button>
-      </div>
 
-      {/* Fill All Details + Randomize */}
-      {backbone && contract && !running && !locked && (
-        <div style={{ marginBottom: 12 }}>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={handleFillDetails} disabled={fillingDetails} style={{
-              flex: 1, padding: '8px 12px', fontSize: 12, fontWeight: 600, borderRadius: 4,
-              border: '1px solid #8b5cf6',
-              background: fillingDetails ? 'var(--border)' : '#8b5cf618',
-              color: fillingDetails ? 'var(--text-muted)' : '#8b5cf6',
-              cursor: fillingDetails ? 'wait' : 'pointer', transition: 'all 0.15s',
-            }}>
-              {fillingDetails ? 'Filling Details...' : 'Fill All Details (1 LLM Call)'}
-            </button>
-            <button onClick={handleRandomize} disabled={fillingDetails} style={{
-              padding: '8px 12px', fontSize: 12, fontWeight: 600, borderRadius: 4,
-              border: '1px solid #22c55e', background: '#22c55e18', color: '#22c55e',
-              cursor: fillingDetails ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap',
-            }} title="Fill all slots with randomly selected sample characters, places, and objects">
-              Randomize
-            </button>
-            {fillingDetails && (
-              <button onClick={handleCancelFill} style={{
-                padding: '8px 12px', fontSize: 12, fontWeight: 600, borderRadius: 4,
-                border: '1px solid #ef4444', background: '#ef444418', color: '#ef4444', cursor: 'pointer',
-              }}>Stop</button>
-            )}
-          </div>
-          <span style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3, display: 'block', lineHeight: 1.4 }}>
-            Generates characters, places, objects, events, arcs, and timeline in a single LLM call.
-          </span>
-          {fillError && (
-            <div style={{
-              marginTop: 6, padding: '6px 8px', fontSize: 11, color: '#ef4444',
-              background: 'rgba(239,68,68,0.08)', borderRadius: 4, border: '1px solid rgba(239,68,68,0.2)',
-              whiteSpace: 'pre-wrap', wordBreak: 'break-word',
-            }}>{fillError}</div>
-          )}
-        </div>
-      )}
-
-      {/* Fill Details log */}
-      {fillLog.length > 0 && (
-        <div style={{ marginBottom: 12 }}>
-          <div style={{
-            maxHeight: 150, overflowY: 'auto', background: 'var(--bg-primary)',
-            border: '1px solid var(--border)', borderRadius: 4, padding: 6,
-          }}>
-            {fillLog.map((entry, i) => (
-              <div key={i} style={{ fontSize: 10, padding: '1px 0', color: 'var(--text-muted)', fontFamily: 'monospace' }}>{entry}</div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Prompt preview */}
-      {promptPreview && (
-        <div style={{ marginBottom: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)' }}>Prompt Sent ({(promptPreview.length / 1024).toFixed(1)}KB)</span>
-            <button onClick={() => setPromptPreview(null)} style={{
-              fontSize: 10, padding: '1px 6px', borderRadius: 3, border: '1px solid var(--border)', color: 'var(--text-muted)', cursor: 'pointer',
-            }}>Hide</button>
-          </div>
-          <pre style={{
-            marginTop: 4, maxHeight: 300, overflowY: 'auto', background: 'var(--bg-primary)',
-            border: '1px solid var(--border)', borderRadius: 4, padding: 8, fontSize: 10,
-            lineHeight: 1.4, color: 'var(--text-muted)', whiteSpace: 'pre-wrap', wordBreak: 'break-word',
-          }}>{promptPreview}</pre>
-        </div>
-      )}
-
-      {/* ================================================================= */}
-      {/*  CHARACTERS                                                       */}
-      {/* ================================================================= */}
-      <Disclosure title="Characters" persistKey="elem-characters" defaultCollapsed
-        badge={`${charCount || charSlots.length || constraints?.character_constraints.length || 0}`}>
-        <div style={{ padding: '4px 8px', ...(locked ? { opacity: 0.7, pointerEvents: 'none' as const } : {}) }}>
-          {/* Genre character constraints */}
-          {constraints && constraints.character_constraints.length > 0 && (
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4 }}>
-                Genre Requirements
-              </div>
-              {constraints.character_constraints.map((c) => (
-                <div key={c.role} style={{
-                  padding: '4px 8px', marginBottom: 3, background: `${COLORS.character}08`, borderRadius: 3,
-                  borderLeft: `2px solid ${c.severity === 'required' ? '#ef4444' : c.severity === 'recommended' ? '#f59e0b' : '#6b7280'}`,
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 1 }}>
-                    <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.character }}>{String(c.role).replace(/_/g, ' ')}</span>
-                    <SeverityBadge severity={c.severity} />
-                    {c.min_count != null && <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>min {c.min_count}</span>}
-                  </div>
-                  <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{c.description}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Template slots for characters */}
-          {charSlots.length > 0 && (
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4 }}>
-                Template Slots
-              </div>
-              {charSlots.map((slot) => {
-                const binding = detailBindings?.slot_bindings?.[slot.key]
-                return (
-                  <div key={slot.key} style={{
-                    padding: '4px 8px', marginBottom: 2, fontSize: 11, background: 'var(--bg-elevated)', borderRadius: 3,
-                    borderLeft: `3px solid ${slot.required ? COLORS.character : 'var(--border)'}`,
-                    display: 'flex', gap: 6, alignItems: 'center',
-                  }}>
-                    <span style={{ fontWeight: 500, minWidth: 80, flexShrink: 0 }}>{slot.key}</span>
-                    {isEditable ? (
-                      <input
-                        value={binding?.bound_value ?? ''}
-                        placeholder={slot.description || 'unfilled'}
-                        onChange={(e) => updateSlotBinding(slot.key, e.target.value)}
-                        style={{ ...fieldInput, flex: 1, marginTop: 0 }}
-                      />
-                    ) : binding?.bound_value ? (
-                      <span style={{ color: '#22c55e', fontSize: 10 }}>{binding.bound_value}</span>
-                    ) : (
-                      <span style={{ color: 'var(--text-muted)', fontSize: 10, fontStyle: 'italic' }}>{slot.description || 'unfilled'}</span>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          )}
-
-          {/* Editable characters */}
-          {registry && (
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-                <span style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
-                  Entities ({registry.characters.length})
-                </span>
-                {isEditable && (
-                  <button onClick={addCharacter} title="Add character" style={{
-                    fontSize: 11, fontWeight: 700, width: 20, height: 20, lineHeight: '18px',
-                    textAlign: 'center', borderRadius: 3, border: '1px solid #f59e0b40',
-                    color: '#f59e0b', background: '#f59e0b10', cursor: 'pointer',
-                  }}>+</button>
-                )}
-              </div>
-              {registry.characters.map((ch) => (
-                <div key={ch.id} style={{
-                  padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: `3px solid ${COLORS.character}`,
-                }}>
-                  <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
-                    <input value={ch.name} placeholder="Name" onChange={(e) => updateCharacter(ch.id, 'name', e.target.value)} style={{ ...fieldInput, flex: 1, fontWeight: 600 }} />
-                    <input value={ch.role} placeholder="Role" onChange={(e) => updateCharacter(ch.id, 'role', e.target.value)} style={{ ...fieldInput, width: 80, fontSize: 10, color: COLORS.character }} />
-                    {isEditable && <button onClick={() => removeCharacter(ch.id)} title="Remove" style={{ fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer', padding: '0 4px' }}>×</button>}
-                  </div>
-                  <input value={ch.traits?.join(', ') ?? ''} placeholder="Traits (comma-separated)" onChange={(e) => updateCharacter(ch.id, 'traits', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
-                  <input value={ch.motivations?.join(', ') ?? ''} placeholder="Motivations (comma-separated)" onChange={(e) => updateCharacter(ch.id, 'motivations', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
-                  <input value={ch.flaw ?? ''} placeholder="Flaw" onChange={(e) => updateCharacter(ch.id, 'flaw', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
-                  <input value={ch.relationships?.join(', ') ?? ''} placeholder="Relationships (comma-separated)" onChange={(e) => updateCharacter(ch.id, 'relationships', e.target.value)} style={fieldInput} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {!registry && charSlots.length === 0 && (!constraints || constraints.character_constraints.length === 0) && (
-            <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>No character data. Build structure or select a genre.</p>
-          )}
-        </div>
-      </Disclosure>
-
-      {/* ================================================================= */}
-      {/*  RELATIONSHIPS                                                    */}
-      {/* ================================================================= */}
-      <Disclosure title="Relationships" persistKey="elem-relationships" defaultCollapsed
-        badge={`${relConstraintCount}`}>
-        <div style={{ padding: '4px 8px' }}>
-          {constraints && constraints.relationship_constraints.length > 0 ? (
-            constraints.relationship_constraints.map((r) => (
-              <div key={r.type} style={{
-                padding: '4px 8px', marginBottom: 3, background: `${COLORS.relationship}08`, borderRadius: 3,
-                borderLeft: `2px solid ${r.severity === 'required' ? '#ef4444' : r.severity === 'recommended' ? '#f59e0b' : '#6b7280'}`,
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 1 }}>
-                  <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.relationship }}>{String(r.type).replace(/_/g, ' ')}</span>
-                  <SeverityBadge severity={r.severity} />
-                </div>
-                <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{r.description}</div>
-                {r.between_roles && (
-                  <div style={{ fontSize: 9, color: 'var(--text-muted)', marginTop: 2 }}>
-                    Between: {r.between_roles.join(' \u2194 ')}
-                  </div>
-                )}
-              </div>
-            ))
-          ) : (
-            <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>No relationship constraints. Select a genre to see requirements.</p>
-          )}
-        </div>
-      </Disclosure>
-
-      {/* ================================================================= */}
-      {/*  PLACES                                                           */}
-      {/* ================================================================= */}
-      <Disclosure title="Places" persistKey="elem-places" defaultCollapsed
-        badge={`${placeCount || placeSlots.length || constraints?.place_constraints.length || 0}`}>
-        <div style={{ padding: '4px 8px', ...(locked ? { opacity: 0.7, pointerEvents: 'none' as const } : {}) }}>
-          {/* Genre place constraints */}
-          {constraints && constraints.place_constraints.length > 0 && (
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4 }}>
-                Genre Requirements
-              </div>
-              {constraints.place_constraints.map((p) => (
-                <div key={p.type} style={{
-                  padding: '4px 8px', marginBottom: 3, background: `${COLORS.place}08`, borderRadius: 3,
-                  borderLeft: `2px solid ${p.severity === 'required' ? '#ef4444' : p.severity === 'recommended' ? '#f59e0b' : '#6b7280'}`,
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 1 }}>
-                    <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.place }}>{String(p.type).replace(/_/g, ' ')}</span>
-                    <SeverityBadge severity={p.severity} />
-                  </div>
-                  <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{p.description}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Template slots for places */}
-          {placeSlots.length > 0 && (
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4 }}>
-                Template Slots
-              </div>
-              {placeSlots.map((slot) => {
-                const binding = detailBindings?.slot_bindings?.[slot.key]
-                return (
-                  <div key={slot.key} style={{
-                    padding: '4px 8px', marginBottom: 2, fontSize: 11, background: 'var(--bg-elevated)', borderRadius: 3,
-                    borderLeft: `3px solid ${slot.required ? COLORS.place : 'var(--border)'}`,
-                    display: 'flex', gap: 6, alignItems: 'center',
-                  }}>
-                    <span style={{ fontWeight: 500, minWidth: 80, flexShrink: 0 }}>{slot.key}</span>
-                    {isEditable ? (
-                      <input
-                        value={binding?.bound_value ?? ''}
-                        placeholder={slot.description || 'unfilled'}
-                        onChange={(e) => updateSlotBinding(slot.key, e.target.value)}
-                        style={{ ...fieldInput, flex: 1, marginTop: 0 }}
-                      />
-                    ) : binding?.bound_value ? (
-                      <span style={{ color: '#22c55e', fontSize: 10 }}>{binding.bound_value}</span>
-                    ) : (
-                      <span style={{ color: 'var(--text-muted)', fontSize: 10, fontStyle: 'italic' }}>{slot.description || 'unfilled'}</span>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          )}
-
-          {/* Editable places */}
-          {registry && (
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-                <span style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Entities ({registry.places.length})</span>
-                {isEditable && (
-                  <button onClick={addPlace} title="Add place" style={{
-                    fontSize: 11, fontWeight: 700, width: 20, height: 20, lineHeight: '18px',
-                    textAlign: 'center', borderRadius: 3, border: '1px solid #3b82f640', color: '#3b82f6', background: '#3b82f610', cursor: 'pointer',
-                  }}>+</button>
-                )}
-              </div>
-              {registry.places.map((pl) => (
-                <div key={pl.id} style={{
-                  padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: `3px solid ${COLORS.place}`,
-                }}>
-                  <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
-                    <input value={pl.name} placeholder="Name" onChange={(e) => updatePlace(pl.id, 'name', e.target.value)} style={{ ...fieldInput, flex: 1, fontWeight: 600 }} />
-                    <input value={pl.type} placeholder="Type" onChange={(e) => updatePlace(pl.id, 'type', e.target.value)} style={{ ...fieldInput, width: 80, fontSize: 10 }} />
-                    {isEditable && <button onClick={() => removePlace(pl.id)} title="Remove" style={{ fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer', padding: '0 4px' }}>×</button>}
-                  </div>
-                  <input value={pl.atmosphere ?? ''} placeholder="Atmosphere" onChange={(e) => updatePlace(pl.id, 'atmosphere', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
-                  <input value={pl.features?.join(', ') ?? ''} placeholder="Features (comma-separated)" onChange={(e) => updatePlace(pl.id, 'features', e.target.value)} style={fieldInput} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {!registry && placeSlots.length === 0 && (!constraints || constraints.place_constraints.length === 0) && (
-            <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>No place data. Build structure or select a genre.</p>
-          )}
-        </div>
-      </Disclosure>
-
-      {/* ================================================================= */}
-      {/*  OBJECTS                                                          */}
-      {/* ================================================================= */}
-      <Disclosure title="Objects" persistKey="elem-objects" defaultCollapsed
-        badge={`${objectCount || objectSlots.length || constraints?.object_constraints.length || 0}`}>
-        <div style={{ padding: '4px 8px', ...(locked ? { opacity: 0.7, pointerEvents: 'none' as const } : {}) }}>
-          {/* Genre object constraints */}
-          {constraints && constraints.object_constraints.length > 0 && (
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4 }}>
-                Genre Requirements
-              </div>
-              {constraints.object_constraints.map((o) => (
-                <div key={o.type} style={{
-                  padding: '4px 8px', marginBottom: 3, background: `${COLORS.object}08`, borderRadius: 3,
-                  borderLeft: `2px solid ${o.severity === 'required' ? '#ef4444' : o.severity === 'recommended' ? '#f59e0b' : '#6b7280'}`,
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 1 }}>
-                    <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.object }}>{String(o.type).replace(/_/g, ' ')}</span>
-                    <SeverityBadge severity={o.severity} />
-                  </div>
-                  <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{o.description}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Template slots for objects */}
-          {objectSlots.length > 0 && (
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4 }}>
-                Template Slots
-              </div>
-              {objectSlots.map((slot) => {
-                const binding = detailBindings?.slot_bindings?.[slot.key]
-                return (
-                  <div key={slot.key} style={{
-                    padding: '4px 8px', marginBottom: 2, fontSize: 11, background: 'var(--bg-elevated)', borderRadius: 3,
-                    borderLeft: `3px solid ${slot.required ? COLORS.object : 'var(--border)'}`,
-                    display: 'flex', gap: 6, alignItems: 'center',
-                  }}>
-                    <span style={{ fontWeight: 500, minWidth: 80, flexShrink: 0 }}>{slot.key}</span>
-                    {isEditable ? (
-                      <input
-                        value={binding?.bound_value ?? ''}
-                        placeholder={slot.description || 'unfilled'}
-                        onChange={(e) => updateSlotBinding(slot.key, e.target.value)}
-                        style={{ ...fieldInput, flex: 1, marginTop: 0 }}
-                      />
-                    ) : binding?.bound_value ? (
-                      <span style={{ color: '#22c55e', fontSize: 10 }}>{binding.bound_value}</span>
-                    ) : (
-                      <span style={{ color: 'var(--text-muted)', fontSize: 10, fontStyle: 'italic' }}>{slot.description || 'unfilled'}</span>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          )}
-
-          {/* Editable objects */}
-          {registry && (
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-                <span style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Entities ({registry.objects.length})</span>
-                {isEditable && (
-                  <button onClick={addObject} title="Add object" style={{
-                    fontSize: 11, fontWeight: 700, width: 20, height: 20, lineHeight: '18px',
-                    textAlign: 'center', borderRadius: 3, border: '1px solid #22c55e40', color: '#22c55e', background: '#22c55e10', cursor: 'pointer',
-                  }}>+</button>
-                )}
-              </div>
-              {registry.objects.map((obj) => (
-                <div key={obj.id} style={{
-                  padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: `3px solid ${COLORS.object}`,
-                }}>
-                  <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
-                    <input value={obj.name} placeholder="Name" onChange={(e) => updateObject(obj.id, 'name', e.target.value)} style={{ ...fieldInput, flex: 1, fontWeight: 600 }} />
-                    <input value={obj.type} placeholder="Type" onChange={(e) => updateObject(obj.id, 'type', e.target.value)} style={{ ...fieldInput, width: 80, fontSize: 10 }} />
-                    {isEditable && <button onClick={() => removeObject(obj.id)} title="Remove" style={{ fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer', padding: '0 4px' }}>×</button>}
-                  </div>
-                  <input value={obj.significance ?? ''} placeholder="Significance" onChange={(e) => updateObject(obj.id, 'significance', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
-                  <input value={obj.properties?.join(', ') ?? ''} placeholder="Properties (comma-separated)" onChange={(e) => updateObject(obj.id, 'properties', e.target.value)} style={fieldInput} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {!registry && objectSlots.length === 0 && (!constraints || constraints.object_constraints.length === 0) && (
-            <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>No object data. Build structure or select a genre.</p>
-          )}
-        </div>
-      </Disclosure>
-
-      {/* ================================================================= */}
-      {/*  CONCEPT SLOTS                                                    */}
-      {/* ================================================================= */}
-      {conceptSlots.length > 0 && (
-        <Disclosure title="Concepts" persistKey="elem-concepts" defaultCollapsed badge={`${conceptSlots.length}`}>
-          <div style={{ padding: '4px 8px' }}>
-            {conceptSlots.map((slot) => {
-              const binding = detailBindings?.slot_bindings?.[slot.key]
-              return (
-                <div key={slot.key} style={{
-                  padding: '4px 8px', marginBottom: 2, fontSize: 11, background: 'var(--bg-elevated)', borderRadius: 3,
-                  borderLeft: `3px solid ${slot.required ? COLORS.concept : 'var(--border)'}`,
-                  display: 'flex', gap: 6, alignItems: 'center',
-                }}>
-                  <span style={{ fontWeight: 500, minWidth: 80, flexShrink: 0 }}>{slot.key}</span>
-                  {isEditable ? (
-                    <input
-                      value={binding?.bound_value ?? ''}
-                      placeholder={slot.description || 'unfilled'}
-                      onChange={(e) => updateSlotBinding(slot.key, e.target.value)}
-                      style={{ ...fieldInput, flex: 1, marginTop: 0 }}
-                    />
-                  ) : binding?.bound_value ? (
-                    <span style={{ color: '#22c55e', fontSize: 10 }}>{binding.bound_value}</span>
-                  ) : (
-                    <span style={{ color: 'var(--text-muted)', fontSize: 10, fontStyle: 'italic' }}>{slot.description || 'unfilled'}</span>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </Disclosure>
-      )}
-
-      {/* ================================================================= */}
-      {/*  ELEMENT RULES                                                    */}
-      {/* ================================================================= */}
-      {constraints && constraints.element_rules.length > 0 && (
-        <Disclosure title="Element Rules" persistKey="elem-rules" defaultCollapsed badge={`${ruleCount}`}>
-          <div style={{ padding: '4px 8px' }}>
-            {constraints.element_rules.map((rule) => (
-              <div key={rule.rule_id} style={{
-                marginBottom: 6, padding: '6px 8px', background: 'rgba(255,255,255,0.03)', borderRadius: 4,
-                borderLeft: `2px solid ${rule.severity === 'required' ? '#ef4444' : rule.severity === 'recommended' ? '#f59e0b' : '#6b7280'}`,
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-                  <span style={{ fontSize: 9, fontFamily: 'monospace', color: 'var(--text-muted)' }}>{rule.rule_id}</span>
-                  <SeverityBadge severity={rule.severity} />
-                  <span style={{ fontSize: 8, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{rule.applies_to}</span>
-                </div>
-                <div style={{ fontSize: 11, lineHeight: 1.5, color: 'var(--text-primary)' }}>{rule.description}</div>
-                <div style={{ fontSize: 10, lineHeight: 1.4, color: 'var(--text-muted)', marginTop: 3, fontStyle: 'italic' }}>
-                  Test: {rule.testable_condition}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Disclosure>
-      )}
-
-      {/* Build Structure */}
+      {/* ── ACTION BAR ─────────────────────────────────────── */}
+      {/* Build Structure — top of tab, the critical first action */}
       {!backbone && !running && (
-        <div style={{ marginTop: 12, marginBottom: 12 }}>
+        <div style={{ marginBottom: 12 }}>
           <button
             onClick={handleBuildStructure}
             disabled={!premise.trim()}
@@ -931,6 +457,208 @@ export function ElementsTab() {
             </p>
           )}
         </div>
+      )}
+
+      {/* Lock + Manual Entry + Fill/Randomize — compact toolbar */}
+      {backbone && (
+        <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 8, flexWrap: 'wrap' }}>
+          {!registry && !locked && (
+            <button onClick={initFromSlots} style={{
+              fontSize: 10, padding: '3px 8px', borderRadius: 3,
+              border: '1px solid var(--border)', color: 'var(--text-muted)', cursor: 'pointer',
+            }}>
+              Manual Entry
+            </button>
+          )}
+          {contract && !running && !locked && (
+            <>
+              <button onClick={handleFillDetails} disabled={fillingDetails} style={{
+                padding: '3px 10px', fontSize: 10, fontWeight: 600, borderRadius: 3,
+                border: '1px solid #8b5cf6', background: fillingDetails ? 'var(--border)' : '#8b5cf618',
+                color: fillingDetails ? 'var(--text-muted)' : '#8b5cf6',
+                cursor: fillingDetails ? 'wait' : 'pointer',
+              }}>
+                {fillingDetails ? 'Filling...' : 'Fill All (LLM)'}
+              </button>
+              <button onClick={handleRandomize} disabled={fillingDetails} style={{
+                padding: '3px 10px', fontSize: 10, fontWeight: 600, borderRadius: 3,
+                border: '1px solid #22c55e', background: '#22c55e18', color: '#22c55e',
+                cursor: fillingDetails ? 'not-allowed' : 'pointer',
+              }} title="Fill all slots with randomly selected sample characters, places, and objects">
+                Randomize
+              </button>
+              {fillingDetails && (
+                <button onClick={handleCancelFill} style={{
+                  padding: '3px 8px', fontSize: 10, fontWeight: 600, borderRadius: 3,
+                  border: '1px solid #ef4444', background: '#ef444418', color: '#ef4444', cursor: 'pointer',
+                }}>Stop</button>
+              )}
+            </>
+          )}
+          <div style={{ flex: 1 }} />
+          <button
+            onClick={toggleLock}
+            title={locked ? 'Unlock Elements' : 'Lock Elements'}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 4,
+              fontSize: 10, padding: '2px 8px', borderRadius: 3,
+              border: `1px solid ${locked ? '#f59e0b' : 'var(--border)'}`,
+              background: locked ? '#f59e0b18' : 'transparent',
+              color: locked ? '#f59e0b' : 'var(--text-muted)', cursor: 'pointer',
+            }}
+          >
+            {locked ? '\u{1F512}' : '\u{1F513}'}
+          </button>
+        </div>
+      )}
+
+      {/* Fill Details feedback */}
+      {fillError && (
+        <div style={{
+          marginBottom: 8, padding: '6px 8px', fontSize: 11, color: '#ef4444',
+          background: 'rgba(239,68,68,0.08)', borderRadius: 4, border: '1px solid rgba(239,68,68,0.2)',
+          whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+        }}>{fillError}</div>
+      )}
+      {fillLog.length > 0 && (
+        <Disclosure title="Fill Log" persistKey="elem-fill-log" defaultCollapsed badge={`${fillLog.length}`}>
+          <div style={{ maxHeight: 120, overflowY: 'auto', padding: '4px 8px' }}>
+            {fillLog.map((entry, i) => (
+              <div key={i} style={{ fontSize: 10, padding: '1px 0', color: 'var(--text-muted)', fontFamily: 'monospace' }}>{entry}</div>
+            ))}
+          </div>
+        </Disclosure>
+      )}
+
+      {/* ── CHARACTERS ─────────────────────────────────────── */}
+      <Disclosure title={`Characters (${charCount || charSlots.length || 0})`} persistKey="elem-characters">
+        <div style={{ padding: '4px 8px', ...(locked ? { opacity: 0.7, pointerEvents: 'none' as const } : {}) }}>
+          {charSlots.map((slot) => (
+            <SlotRow key={slot.key} slot={slot} binding={detailBindings?.slot_bindings?.[slot.key]}
+              color={COLORS.character} editable={isEditable} onUpdate={updateSlotBinding} />
+          ))}
+
+          {registry && registry.characters.length > 0 && (
+            <div style={{ marginTop: charSlots.length > 0 ? 6 : 0 }}>
+              {registry.characters.map((ch) => (
+                <div key={ch.id} style={{
+                  padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: `3px solid ${COLORS.character}`,
+                }}>
+                  <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
+                    <input value={ch.name} placeholder="Name" onChange={(e) => updateCharacter(ch.id, 'name', e.target.value)} style={{ ...fieldInput, flex: 1, fontWeight: 600 }} />
+                    <input value={ch.role} placeholder="Role" onChange={(e) => updateCharacter(ch.id, 'role', e.target.value)} style={{ ...fieldInput, width: 80, fontSize: 10, color: COLORS.character }} />
+                    {isEditable && <button onClick={() => removeCharacter(ch.id)} title="Remove" style={{ fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer', padding: '0 4px' }}>×</button>}
+                  </div>
+                  <input value={ch.traits?.join(', ') ?? ''} placeholder="Traits (comma-separated)" onChange={(e) => updateCharacter(ch.id, 'traits', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
+                  <input value={ch.motivations?.join(', ') ?? ''} placeholder="Motivations" onChange={(e) => updateCharacter(ch.id, 'motivations', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
+                  <input value={ch.flaw ?? ''} placeholder="Flaw" onChange={(e) => updateCharacter(ch.id, 'flaw', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
+                  <input value={ch.relationships?.join(', ') ?? ''} placeholder="Relationships" onChange={(e) => updateCharacter(ch.id, 'relationships', e.target.value)} style={fieldInput} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {isEditable && registry && (
+            <button onClick={addCharacter} title="Add character" style={{
+              marginTop: 4, fontSize: 10, padding: '2px 10px', borderRadius: 3,
+              border: '1px solid #f59e0b40', color: '#f59e0b', background: '#f59e0b10', cursor: 'pointer',
+            }}>+ Add</button>
+          )}
+
+          {!registry && charSlots.length === 0 && (
+            <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>No character data. Build structure first.</p>
+          )}
+        </div>
+      </Disclosure>
+
+      {/* ── PLACES ─────────────────────────────────────────── */}
+      <Disclosure title={`Places (${placeCount || placeSlots.length || 0})`} persistKey="elem-places" defaultCollapsed>
+        <div style={{ padding: '4px 8px', ...(locked ? { opacity: 0.7, pointerEvents: 'none' as const } : {}) }}>
+          {placeSlots.map((slot) => (
+            <SlotRow key={slot.key} slot={slot} binding={detailBindings?.slot_bindings?.[slot.key]}
+              color={COLORS.place} editable={isEditable} onUpdate={updateSlotBinding} />
+          ))}
+
+          {registry && registry.places.length > 0 && (
+            <div style={{ marginTop: placeSlots.length > 0 ? 6 : 0 }}>
+              {registry.places.map((pl) => (
+                <div key={pl.id} style={{
+                  padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: `3px solid ${COLORS.place}`,
+                }}>
+                  <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
+                    <input value={pl.name} placeholder="Name" onChange={(e) => updatePlace(pl.id, 'name', e.target.value)} style={{ ...fieldInput, flex: 1, fontWeight: 600 }} />
+                    <input value={pl.type} placeholder="Type" onChange={(e) => updatePlace(pl.id, 'type', e.target.value)} style={{ ...fieldInput, width: 80, fontSize: 10 }} />
+                    {isEditable && <button onClick={() => removePlace(pl.id)} title="Remove" style={{ fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer', padding: '0 4px' }}>×</button>}
+                  </div>
+                  <input value={pl.atmosphere ?? ''} placeholder="Atmosphere" onChange={(e) => updatePlace(pl.id, 'atmosphere', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
+                  <input value={pl.features?.join(', ') ?? ''} placeholder="Features" onChange={(e) => updatePlace(pl.id, 'features', e.target.value)} style={fieldInput} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {isEditable && registry && (
+            <button onClick={addPlace} title="Add place" style={{
+              marginTop: 4, fontSize: 10, padding: '2px 10px', borderRadius: 3,
+              border: '1px solid #3b82f640', color: '#3b82f6', background: '#3b82f610', cursor: 'pointer',
+            }}>+ Add</button>
+          )}
+
+          {!registry && placeSlots.length === 0 && (
+            <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>No place data. Build structure first.</p>
+          )}
+        </div>
+      </Disclosure>
+
+      {/* ── OBJECTS ─────────────────────────────────────────── */}
+      <Disclosure title={`Objects (${objectCount || objectSlots.length || 0})`} persistKey="elem-objects" defaultCollapsed>
+        <div style={{ padding: '4px 8px', ...(locked ? { opacity: 0.7, pointerEvents: 'none' as const } : {}) }}>
+          {objectSlots.map((slot) => (
+            <SlotRow key={slot.key} slot={slot} binding={detailBindings?.slot_bindings?.[slot.key]}
+              color={COLORS.object} editable={isEditable} onUpdate={updateSlotBinding} />
+          ))}
+
+          {registry && registry.objects.length > 0 && (
+            <div style={{ marginTop: objectSlots.length > 0 ? 6 : 0 }}>
+              {registry.objects.map((obj) => (
+                <div key={obj.id} style={{
+                  padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: `3px solid ${COLORS.object}`,
+                }}>
+                  <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
+                    <input value={obj.name} placeholder="Name" onChange={(e) => updateObject(obj.id, 'name', e.target.value)} style={{ ...fieldInput, flex: 1, fontWeight: 600 }} />
+                    <input value={obj.type} placeholder="Type" onChange={(e) => updateObject(obj.id, 'type', e.target.value)} style={{ ...fieldInput, width: 80, fontSize: 10 }} />
+                    {isEditable && <button onClick={() => removeObject(obj.id)} title="Remove" style={{ fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer', padding: '0 4px' }}>×</button>}
+                  </div>
+                  <input value={obj.significance ?? ''} placeholder="Significance" onChange={(e) => updateObject(obj.id, 'significance', e.target.value)} style={{ ...fieldInput, marginBottom: 2 }} />
+                  <input value={obj.properties?.join(', ') ?? ''} placeholder="Properties" onChange={(e) => updateObject(obj.id, 'properties', e.target.value)} style={fieldInput} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {isEditable && registry && (
+            <button onClick={addObject} title="Add object" style={{
+              marginTop: 4, fontSize: 10, padding: '2px 10px', borderRadius: 3,
+              border: '1px solid #22c55e40', color: '#22c55e', background: '#22c55e10', cursor: 'pointer',
+            }}>+ Add</button>
+          )}
+
+          {!registry && objectSlots.length === 0 && (
+            <p style={{ fontSize: 10, color: 'var(--text-muted)' }}>No object data. Build structure first.</p>
+          )}
+        </div>
+      </Disclosure>
+
+      {/* ── CONCEPTS ───────────────────────────────────────── */}
+      {conceptSlots.length > 0 && (
+        <Disclosure title={`Concepts (${conceptSlots.length})`} persistKey="elem-concepts" defaultCollapsed>
+          <div style={{ padding: '4px 8px' }}>
+            {conceptSlots.map((slot) => (
+              <SlotRow key={slot.key} slot={slot} binding={detailBindings?.slot_bindings?.[slot.key]}
+                color={COLORS.concept} editable={isEditable} onUpdate={updateSlotBinding} />
+            ))}
+          </div>
+        </Disclosure>
       )}
     </div>
   )

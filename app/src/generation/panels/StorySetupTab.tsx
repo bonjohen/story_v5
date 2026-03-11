@@ -40,16 +40,20 @@ export function StorySetupTab() {
   const openaiBaseUrl = useRequestStore((s) => s.openaiBaseUrl)
   const openaiModel = useRequestStore((s) => s.openaiModel)
   const openaiApiKey = useRequestStore((s) => s.openaiApiKey)
+  const openaiPlanningModel = useRequestStore((s) => s.openaiPlanningModel)
   const setOpenaiBaseUrl = useRequestStore((s) => s.setOpenaiBaseUrl)
   const setOpenaiModel = useRequestStore((s) => s.setOpenaiModel)
   const setOpenaiApiKey = useRequestStore((s) => s.setOpenaiApiKey)
+  const setOpenaiPlanningModel = useRequestStore((s) => s.setOpenaiPlanningModel)
   const bridgeUrl = useRequestStore((s) => s.bridgeUrl)
   const setBridgeUrl = useRequestStore((s) => s.setBridgeUrl)
   const bridgeStatus = useRequestStore((s) => s.bridgeStatus)
   const connectBridge = useRequestStore((s) => s.connectBridge)
   const disconnectBridge = useRequestStore((s) => s.disconnectBridge)
-  const maxLlmCalls = useRequestStore((s) => s.maxLlmCalls)
-  const setMaxLlmCalls = useRequestStore((s) => s.setMaxLlmCalls)
+  const sendHello = useRequestStore((s) => s.sendHello)
+  const helloResponse = useRequestStore((s) => s.helloResponse)
+  const helloLoading = useRequestStore((s) => s.helloLoading)
+
 
   // Premise lookup
   type LookupMap = Record<string, PremiseEntry>
@@ -218,17 +222,23 @@ export function StorySetupTab() {
         </div>
       )}
 
-      {/* LLM Connection */}
-      <Disclosure title="LLM Connection" persistKey="setup-llm" defaultCollapsed={false}
+      {/* LLM Connection — inline status + backend selector */}
+      <Disclosure title="LLM Connection" persistKey="setup-llm"
         badge={bridgeStatus === 'connected' ? openaiModel : bridgeStatus}>
         <div style={{ padding: '4px 0 10px' }}>
-          {/* Status + connect */}
-          <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 8 }}>
+          {/* Backend + Connect in one row */}
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 8 }}>
+            <select value={llmBackend} onChange={(e) => { setLlmBackend(e.target.value as LlmBackend); disconnectBridge() }}
+              disabled={disabled} style={{ ...INPUT, flex: 1, marginTop: 0, fontSize: 11 }}>
+              <option value="none">None (template only)</option>
+              <option value="openai">OpenAI-Compatible</option>
+              <option value="bridge">Claude Code Bridge</option>
+            </select>
             <button
               onClick={() => void connectBridge()}
               disabled={disabled || bridgeStatus === 'connecting' || bridgeStatus === 'connected'}
               style={{
-                padding: '5px 12px', fontSize: 11, fontWeight: 600, borderRadius: 4,
+                padding: '5px 12px', fontSize: 11, fontWeight: 600, borderRadius: 4, whiteSpace: 'nowrap',
                 border: 'none', cursor: bridgeStatus === 'connected' ? 'default' : 'pointer',
                 background: bridgeStatus === 'connected' ? '#22c55e' : bridgeStatus === 'error' ? '#ef4444' : 'var(--accent)',
                 color: '#fff', transition: 'all 0.15s',
@@ -237,60 +247,77 @@ export function StorySetupTab() {
               {bridgeStatus === 'connected' ? 'Connected' : bridgeStatus === 'connecting' ? '...' : bridgeStatus === 'error' ? 'Retry' : 'Connect'}
             </button>
             {bridgeStatus === 'connected' && (
-              <button onClick={disconnectBridge} style={{ fontSize: 10, color: 'var(--text-muted)' }}>Disconnect</button>
+              <button onClick={disconnectBridge} style={{ fontSize: 10, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>×</button>
             )}
-            <span style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace' }}>
-              {bridgeStatus === 'connected' ? openaiModel : ''}
-            </span>
           </div>
 
-          {/* Backend */}
-          <label style={{ display: 'block', marginBottom: 6 }}>
-            <span style={LABEL}>Backend</span>
-            <select value={llmBackend} onChange={(e) => { setLlmBackend(e.target.value as LlmBackend); disconnectBridge() }} disabled={disabled} style={INPUT}>
-              <option value="none">None (template only)</option>
-              <option value="openai">OpenAI-Compatible (Ollama, OpenRouter, etc.)</option>
-              <option value="bridge">Claude Code Bridge</option>
-            </select>
-          </label>
+          {/* Hello test (only when connected) */}
+          {bridgeStatus === 'connected' && (
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 6 }}>
+              <button
+                onClick={() => void sendHello()}
+                disabled={helloLoading}
+                style={{
+                  padding: '3px 8px', fontSize: 10, fontWeight: 600, borderRadius: 3,
+                  border: '1px solid var(--border)', cursor: 'pointer',
+                  background: 'var(--bg-secondary)', color: 'var(--text)',
+                }}
+              >
+                {helloLoading ? '...' : 'Test'}
+              </button>
+              {helloResponse && (
+                <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'monospace', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {helloResponse.slice(0, 80)}{helloResponse.length > 80 ? '...' : ''}
+                </span>
+              )}
+            </div>
+          )}
 
+          {/* OpenAI-specific fields */}
           {llmBackend === 'openai' && (
             <>
-              <label style={{ display: 'block', marginBottom: 6 }}>
-                <span style={LABEL}>Base URL</span>
-                <input type="text" value={openaiBaseUrl} onChange={(e) => setOpenaiBaseUrl(e.target.value)}
-                  disabled={disabled || bridgeStatus === 'connected'} placeholder="http://localhost:11434/v1"
-                  style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }} />
-              </label>
-              <label style={{ display: 'block', marginBottom: 6 }}>
-                <span style={LABEL}>Model</span>
-                <input type="text" value={openaiModel} onChange={(e) => setOpenaiModel(e.target.value)}
-                  disabled={disabled || bridgeStatus === 'connected'} placeholder="llama3:8b-instruct-q8_0"
-                  style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }} />
-              </label>
-              <label style={{ display: 'block', marginBottom: 6 }}>
-                <span style={LABEL}>API Key (optional for local)</span>
-                <input type="password" value={openaiApiKey} onChange={(e) => setOpenaiApiKey(e.target.value)}
-                  disabled={disabled || bridgeStatus === 'connected'} placeholder="leave empty for Ollama"
-                  style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }} />
-              </label>
+              <div style={{ display: 'flex', gap: 6, marginBottom: 6 }}>
+                <label style={{ flex: 2 }}>
+                  <span style={{ ...LABEL, fontSize: 9 }}>Base URL</span>
+                  <input type="text" value={openaiBaseUrl} onChange={(e) => setOpenaiBaseUrl(e.target.value)}
+                    disabled={disabled || bridgeStatus === 'connected'} placeholder="http://localhost:11434/v1"
+                    style={{ ...INPUT, fontFamily: 'monospace', fontSize: 10 }} />
+                </label>
+                <label style={{ flex: 1 }}>
+                  <span style={{ ...LABEL, fontSize: 9 }}>Model</span>
+                  <input type="text" value={openaiModel} onChange={(e) => setOpenaiModel(e.target.value)}
+                    disabled={disabled || bridgeStatus === 'connected'} placeholder="llama3-8k"
+                    style={{ ...INPUT, fontFamily: 'monospace', fontSize: 10 }} />
+                </label>
+              </div>
+              <div style={{ display: 'flex', gap: 6, marginBottom: 6 }}>
+                <label style={{ flex: 1 }}>
+                  <span style={{ ...LABEL, fontSize: 9 }}>API Key (optional)</span>
+                  <input type="password" value={openaiApiKey} onChange={(e) => setOpenaiApiKey(e.target.value)}
+                    disabled={disabled || bridgeStatus === 'connected'} placeholder="leave empty for Ollama"
+                    style={{ ...INPUT, fontFamily: 'monospace', fontSize: 10 }} />
+                </label>
+                <label style={{ flex: 1 }}>
+                  <span style={{ ...LABEL, fontSize: 9 }}>Planning Model</span>
+                  <input type="text" value={openaiPlanningModel} onChange={(e) => setOpenaiPlanningModel(e.target.value)}
+                    disabled={disabled || bridgeStatus === 'connected'} placeholder="e.g. deepseek-r1:1.5b"
+                    style={{ ...INPUT, fontFamily: 'monospace', fontSize: 10 }} />
+                </label>
+              </div>
+              <div style={{ fontSize: 9, color: 'var(--text-muted)', lineHeight: 1.3, padding: '2px 4px' }}>
+                Ollama tip: set <code>OLLAMA_KEEP_ALIVE=-1</code> and <code>OLLAMA_FLASH_ATTENTION=1</code> before <code>ollama serve</code>
+              </div>
             </>
           )}
 
           {llmBackend === 'bridge' && (
             <label style={{ display: 'block', marginBottom: 6 }}>
-              <span style={LABEL}>Bridge URL</span>
+              <span style={{ ...LABEL, fontSize: 9 }}>Bridge URL</span>
               <input type="text" value={bridgeUrl} onChange={(e) => setBridgeUrl(e.target.value)}
                 disabled={disabled || bridgeStatus === 'connected'} placeholder="ws://127.0.0.1:8765"
-                style={{ ...INPUT, fontFamily: 'monospace', fontSize: 11 }} />
+                style={{ ...INPUT, fontFamily: 'monospace', fontSize: 10 }} />
             </label>
           )}
-
-          <label style={{ display: 'block' }}>
-            <span style={LABEL}>Max LLM Calls</span>
-            <input type="number" value={maxLlmCalls} onChange={(e) => setMaxLlmCalls(Number(e.target.value))}
-              disabled={disabled} min={1} max={100} style={{ ...INPUT, width: 80 }} />
-          </label>
         </div>
       </Disclosure>
     </div>
