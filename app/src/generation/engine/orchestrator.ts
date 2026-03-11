@@ -28,11 +28,15 @@ import { compileTemplatePack } from './templateCompiler.ts'
 import { assembleBackbone } from './backboneAssembler.ts'
 import { synthesizeDetails } from './detailSynthesizer.ts'
 import { buildPlan } from './planner.ts'
-import { writeScene, writeSceneStreaming } from '../agents/writerAgent.ts'
+import { writeScene, writeSceneStreaming, writeBeatPoint, writeBeatPointStreaming } from '../agents/writerAgent.ts'
 import { validateScenes } from '../validators/validationEngine.ts'
 import { repair } from './repairEngine.ts'
 import { buildTrace, generateComplianceReport } from './traceEngine.ts'
 import { assembleChapters } from './chapterAssembler.ts'
+import { expandSceneBeats, DEFAULT_BEAT_EXPANSION } from './sceneBeatExpander.ts'
+import { enhanceBeatExpansion } from '../agents/beatExpansionAgent.ts'
+import { stitchScene, smoothScene } from './sceneStitcher.ts'
+import type { SceneBeatExpansion } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -99,9 +103,11 @@ const VALID_TRANSITIONS: Record<OrchestratorState, OrchestratorState[]> = {
   TEMPLATES_COMPILED: ['BACKBONE_ASSEMBLED', 'FAILED'],
   BACKBONE_ASSEMBLED: ['DETAILS_BOUND', 'COMPLETED', 'FAILED'],  // COMPLETED for backbone mode
   DETAILS_BOUND: ['PLANNED', 'COMPLETED', 'FAILED'],             // COMPLETED for detailed-outline mode
-  PLANNED: ['GENERATING_SCENE', 'COMPLETED', 'FAILED'],
-  GENERATING_SCENE: ['VALIDATING_SCENE', 'GENERATING_SCENE', 'CHAPTERS_ASSEMBLED', 'COMPLETED', 'FAILED'],
-  VALIDATING_SCENE: ['REPAIRING_SCENE', 'GENERATING_SCENE', 'CHAPTERS_ASSEMBLED', 'COMPLETED', 'FAILED'],
+  PLANNED: ['EXPANDING_BEATS', 'GENERATING_SCENE', 'COMPLETED', 'FAILED'],
+  EXPANDING_BEATS: ['GENERATING_BEAT_POINT', 'GENERATING_SCENE', 'FAILED'],
+  GENERATING_SCENE: ['VALIDATING_SCENE', 'GENERATING_SCENE', 'EXPANDING_BEATS', 'CHAPTERS_ASSEMBLED', 'COMPLETED', 'FAILED'],
+  GENERATING_BEAT_POINT: ['GENERATING_BEAT_POINT', 'GENERATING_SCENE', 'VALIDATING_SCENE', 'FAILED'],
+  VALIDATING_SCENE: ['REPAIRING_SCENE', 'GENERATING_SCENE', 'EXPANDING_BEATS', 'CHAPTERS_ASSEMBLED', 'COMPLETED', 'FAILED'],
   REPAIRING_SCENE: ['VALIDATING_SCENE', 'COMPLETED', 'FAILED'],
   CHAPTERS_ASSEMBLED: ['COMPLETED', 'FAILED'],
   COMPLETED: [],
@@ -394,10 +400,14 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       return result
     }
 
-    // 5. Generate scenes
+    // 5. Generate scenes (with optional beat expansion)
     checkCancelled()
     const sceneDrafts = new Map<string, string>()
     const totalScenes = plan.scenes.length
+    const beatExpansionConfig = config.beat_expansion ?? DEFAULT_BEAT_EXPANSION
+    const useBeatExpansion = beatExpansionConfig.enabled && (mode === 'draft' || mode === 'chapters')
+    const allBeatExpansions: SceneBeatExpansion[] = []
+
     for (let si = 0; si < plan.scenes.length; si++) {
       const scene = plan.scenes[si]
       checkCancelled()
@@ -412,13 +422,57 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       const sceneName = roleMatch ? roleMatch[1] : scene.scene_goal
       const sceneLabel = `${si + 1}/${totalScenes}: ${sceneName}`
 
-      transition('GENERATING_SCENE', `Writing ${sceneLabel}`)
-      const sceneIndex = plan.scenes.indexOf(scene)
-      const priorScenes = plan.scenes.slice(0, sceneIndex)
-      const writeResult = onSceneChunk
-        ? await writeSceneStreaming(scene, beat, contract, llm, (chunk) => onSceneChunk(scene.scene_id, chunk), plan, priorScenes)
-        : await writeScene(scene, beat, contract, llm, plan, priorScenes)
-      sceneDrafts.set(scene.scene_id, writeResult.content)
+      if (useBeatExpansion) {
+        // --- Beat expansion path ---
+
+        // 5a. Deterministic beat expansion
+        transition('EXPANDING_BEATS', `Expanding beats for ${sceneLabel}`)
+        let expansion = expandSceneBeats(scene, beat, contract, beatExpansionConfig)
+
+        // 5b. LLM-enhanced micro-goals (if LLM available)
+        if (llm) {
+          expansion = await enhanceBeatExpansion(llm, scene, beat, contract, expansion, plan)
+        }
+        allBeatExpansions.push(expansion)
+
+        // 5c. Write each beat point
+        const beatPointProse = new Map<string, string>()
+        const priorBeatProse: string[] = []
+
+        for (let bpi = 0; bpi < expansion.beat_points.length; bpi++) {
+          checkCancelled()
+          const bp = expansion.beat_points[bpi]
+          transition('GENERATING_BEAT_POINT', `Writing beat ${bpi + 1}/${expansion.beat_points.length}: ${bp.type} (${sceneLabel})`)
+
+          const bpResult = onSceneChunk
+            ? await writeBeatPointStreaming(bp, scene, beat, contract, llm, (chunk) => onSceneChunk(scene.scene_id, chunk), plan, priorBeatProse)
+            : await writeBeatPoint(bp, scene, beat, contract, llm, plan, priorBeatProse)
+
+          beatPointProse.set(bp.beat_point_id, bpResult.content)
+          priorBeatProse.push(bpResult.content)
+        }
+
+        // 5d. Stitch beat prose into scene
+        let sceneProse = stitchScene(beatPointProse, expansion, scene, beat)
+
+        // 5e. Optional scene-level smoothing
+        if (llm) {
+          sceneProse = await smoothScene(sceneProse, beat, contract.genre.name, llm)
+        }
+
+        transition('GENERATING_SCENE', `Scene ${sceneLabel} assembled from ${expansion.beat_points.length} beat points`)
+        sceneDrafts.set(scene.scene_id, sceneProse)
+
+      } else {
+        // --- Fast Draft path (original behavior) ---
+        transition('GENERATING_SCENE', `Writing ${sceneLabel}`)
+        const sceneIndex = plan.scenes.indexOf(scene)
+        const priorScenes = plan.scenes.slice(0, sceneIndex)
+        const writeResult = onSceneChunk
+          ? await writeSceneStreaming(scene, beat, contract, llm, (chunk) => onSceneChunk(scene.scene_id, chunk), plan, priorScenes)
+          : await writeScene(scene, beat, contract, llm, plan, priorScenes)
+        sceneDrafts.set(scene.scene_id, writeResult.content)
+      }
 
       // 6. Validate + 7. Repair — skip entirely when skipValidation is enabled
       if (!skipValidation) {
@@ -427,7 +481,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
           contract,
           scenes: [scene],
           beats: [beat],
-          sceneDrafts: new Map([[scene.scene_id, writeResult.content]]),
+          sceneDrafts: new Map([[scene.scene_id, sceneDrafts.get(scene.scene_id)!]]),
           config,
           llm,
           plan,
@@ -466,10 +520,14 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
             llm,
             plan,
           })
-          // Use fresh result from re-validation (no mutation of old reference)
           currentSceneResult = validation.scenes[0]
         }
       }
+    }
+
+    // Store beat expansions on the plan
+    if (allBeatExpansions.length > 0) {
+      plan.scene_beat_expansions = allBeatExpansions
     }
 
     result.sceneDrafts = sceneDrafts

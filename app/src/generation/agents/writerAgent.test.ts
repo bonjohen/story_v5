@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { writeScene, buildWriterPrompt } from './writerAgent.ts'
+import { writeScene, buildWriterPrompt, buildBeatPointWriterPrompt, writeBeatPoint } from './writerAgent.ts'
 import { MockLLMAdapter } from './llmAdapter.ts'
-import type { StoryContract, Scene, Beat } from '../artifacts/types.ts'
+import type { StoryContract, Scene, Beat, SceneBeatPoint } from '../artifacts/types.ts'
 
 function makeContract(): StoryContract {
   return {
@@ -68,6 +68,61 @@ describe('writerAgent', () => {
     expect(result.scene_id).toBe('S01')
     expect(result.content).toContain('Origin')
     expect(result.content).toContain('Science Fiction')
+    expect(result.model).toBe('template')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Beat point writer
+// ---------------------------------------------------------------------------
+
+function makeBeatPoint(): SceneBeatPoint {
+  return {
+    beat_point_id: 'S01_BP01',
+    scene_id: 'S01',
+    sequence: 1,
+    type: 'setup',
+    micro_goal: 'Establish the space station environment and introduce the hero.',
+    characters_active: ['Hero'],
+    emotional_target: { tension: 0.2, hope: 0.5, fear: 0.1 },
+    weight: 'short',
+  }
+}
+
+describe('beatPointWriter', () => {
+  it('builds prompt with beat point micro-goal and type', () => {
+    const messages = buildBeatPointWriterPrompt(makeBeatPoint(), makeScene(), makeBeat(), makeContract())
+    expect(messages).toHaveLength(2)
+    expect(messages[0].content).toContain('setup')
+    expect(messages[0].content).toContain('100-200 words')
+    expect(messages[1].content).toContain('Establish the space station environment')
+  })
+
+  it('includes word count guidance based on weight', () => {
+    const longBp = { ...makeBeatPoint(), weight: 'long' as const }
+    const messages = buildBeatPointWriterPrompt(longBp, makeScene(), makeBeat(), makeContract())
+    expect(messages[0].content).toContain('400-600 words')
+  })
+
+  it('includes prior beat prose for continuity', () => {
+    const priorProse = ['The station hummed with quiet energy.']
+    const messages = buildBeatPointWriterPrompt(makeBeatPoint(), makeScene(), makeBeat(), makeContract(), null, priorProse)
+    const content = messages.map((m) => m.content).join('\n')
+    expect(content).toContain('station hummed')
+  })
+
+  it('generates beat point with mock LLM', async () => {
+    const llm = new MockLLMAdapter(['The docking bay stretched out before her...'])
+    const result = await writeBeatPoint(makeBeatPoint(), makeScene(), makeBeat(), makeContract(), llm)
+    expect(result.beat_point_id).toBe('S01_BP01')
+    expect(result.scene_id).toBe('S01')
+    expect(result.content).toBe('The docking bay stretched out before her...')
+  })
+
+  it('generates template beat point without LLM', async () => {
+    const result = await writeBeatPoint(makeBeatPoint(), makeScene(), makeBeat(), makeContract(), null)
+    expect(result.beat_point_id).toBe('S01_BP01')
+    expect(result.content).toContain('scene opens')
     expect(result.model).toBe('template')
   })
 })

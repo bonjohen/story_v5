@@ -17,5 +17,11 @@
   "composition_defaults": {
     "allow_blend": true,
     "allow_hybrid": false
+  },
+  "beat_expansion": {
+    "enabled": true,
+    "max_beats_per_scene": 8,
+    "min_beats_per_scene": 4,
+    "batch_size": 1
   }
 }

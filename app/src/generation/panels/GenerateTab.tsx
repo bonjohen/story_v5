@@ -84,9 +84,16 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
 
   const handleGenerateStory = useCallback(async () => {
     const req = buildRequest()
-    const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: maxLlmCalls }
     const reqState = useRequestStore.getState()
     const effectiveSkipValidation = reqState.fastDraft || reqState.skipValidation
+    // Fast Draft disables beat expansion; otherwise use defaults with higher LLM budget
+    const beatExpansionEnabled = !reqState.fastDraft
+    const effectiveMaxCalls = beatExpansionEnabled ? Math.max(maxLlmCalls, 60) : maxLlmCalls
+    const config: GenerationConfig = {
+      ...DEFAULT_CONFIG,
+      max_llm_calls: effectiveMaxCalls,
+      beat_expansion: { ...DEFAULT_CONFIG.beat_expansion!, enabled: beatExpansionEnabled },
+    }
 
     let adapter = reqState.bridgeAdapter
     if (!adapter) {
@@ -292,7 +299,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       <div style={{ display: 'flex', gap: 12, marginBottom: 10, fontSize: 10 }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
           <input type="checkbox" checked={fastDraft} onChange={(e) => setFastDraft(e.target.checked)} disabled={running} />
-          <span style={{ fontWeight: 600 }}>Fast Draft</span>
+          <span style={{ fontWeight: 600 }} title="Skip beat expansion — one LLM call per scene instead of per-beat-point">Fast Draft</span>
         </label>
         <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', color: 'var(--text-muted)' }}>
           <input type="checkbox" checked={fastDraft || skipValidation} onChange={(e) => setSkipValidation(e.target.checked)} disabled={running || fastDraft} />

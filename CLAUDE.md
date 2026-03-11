@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## CRITICAL: Plan Before Implementing
+
+- **ALWAYS create a plan document before doing any implementation work.** When the user asks you to build, fix, refactor, or implement something, write a plan document in `docs/` first (e.g., `docs/feature_name_plan.md`) and present it for review.
+- **Do NOT start writing code until the user has reviewed and approved the plan.**
+- Plan documents should include: goals, affected files, step-by-step approach, and any open questions.
+- Small, obvious fixes (typos, one-line changes) are exempt — use judgment.
+
 ## CRITICAL: LLM Backend Rules
 
 - **NEVER use an Anthropic API key.** Do not import, configure, or wire `AnthropicAdapter` or any direct API key-based adapter.

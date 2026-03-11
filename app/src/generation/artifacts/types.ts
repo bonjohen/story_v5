@@ -34,7 +34,9 @@ export type OrchestratorState =
   | 'BACKBONE_ASSEMBLED'
   | 'DETAILS_BOUND'
   | 'PLANNED'
+  | 'EXPANDING_BEATS'
   | 'GENERATING_SCENE'
+  | 'GENERATING_BEAT_POINT'
   | 'VALIDATING_SCENE'
   | 'REPAIRING_SCENE'
   | 'CHAPTERS_ASSEMBLED'
@@ -351,6 +353,47 @@ export interface StoryPlan extends RunMetadata {
   coverage_targets: CoverageTargets
   /** Named element roster for the story (populated by planner). */
   element_roster?: ElementRoster
+  /** Expanded beat points per scene (populated by SceneBeatExpander). */
+  scene_beat_expansions?: SceneBeatExpansion[]
+}
+
+// ---------------------------------------------------------------------------
+// 5.6b — Scene Beat Expansion
+// ---------------------------------------------------------------------------
+
+/** Type of dramatic action within a scene beat point. */
+export type SceneBeatType =
+  | 'setup'         // Establish setting, mood, character positions
+  | 'escalation'    // Raise stakes, introduce complication
+  | 'turning_point' // Reversal, surprise, key decision
+  | 'dialogue'      // Character exchange that advances plot or reveals character
+  | 'action'        // Physical action, confrontation, movement
+  | 'reaction'      // Character processes what just happened
+  | 'revelation'    // New information changes the scene's direction
+  | 'resolution'    // Scene-level closure, sets up transition to next scene
+
+/** A single dramatic beat within a scene. */
+export interface SceneBeatPoint {
+  beat_point_id: string            // e.g., "S01_BP01"
+  scene_id: string                 // FK to parent scene
+  sequence: number                 // order within the scene (1-based)
+  type: SceneBeatType
+  micro_goal: string               // 1-2 sentences: what must happen
+  characters_active: string[]      // roster IDs participating in this beat
+  emotional_target: {              // where this beat sits on the scene's arc
+    tension: number                // 0-1 relative to scene
+    hope: number
+    fear: number
+  }
+  weight: 'short' | 'medium' | 'long'  // approximate prose length guidance
+  notes?: string                   // optional writer guidance
+}
+
+/** The expanded beat structure for a single scene. */
+export interface SceneBeatExpansion {
+  scene_id: string
+  beat_points: SceneBeatPoint[]
+  scene_arc_summary: string        // 1-sentence summary of the scene's internal arc
 }
 
 // ---------------------------------------------------------------------------
@@ -435,6 +478,13 @@ export interface RepairPolicy {
   full_rewrite_threshold: number  // blocking errors before full rewrite
 }
 
+export interface BeatExpansionConfig {
+  enabled: boolean                  // default: true (false = current Fast Draft behavior)
+  max_beats_per_scene: number       // default: 8
+  min_beats_per_scene: number       // default: 4
+  batch_size: number                // beats per LLM call (default: 1, max: 3)
+}
+
 export interface GenerationConfig {
   signals_policy: SignalsPolicy
   tone_policy: TonePolicy
@@ -442,6 +492,8 @@ export interface GenerationConfig {
   coverage_targets: CoverageTargets
   /** Hard cap on total LLM calls per run. Orchestrator stops gracefully when reached. Default: 20 */
   max_llm_calls: number
+  /** Scene beat expansion settings. When enabled, scenes are expanded into 4-8 internal beat points. */
+  beat_expansion?: BeatExpansionConfig
 }
 
 // ---------------------------------------------------------------------------

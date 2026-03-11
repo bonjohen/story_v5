@@ -11,6 +11,7 @@ import type {
   Scene,
   Beat,
   RosterEntry,
+  SceneBeatPoint,
 } from '../artifacts/types.ts'
 
 // ---------------------------------------------------------------------------
@@ -280,6 +281,188 @@ export async function writeSceneStreaming(
     content,
     model: 'claude-code-stream',
   }
+}
+
+// ---------------------------------------------------------------------------
+// Beat-point prose generation
+// ---------------------------------------------------------------------------
+
+/** Weight → approximate word count guidance. */
+const WEIGHT_GUIDANCE: Record<string, string> = {
+  short: 'approximately 100-200 words',
+  medium: 'approximately 250-400 words',
+  long: 'approximately 400-600 words',
+}
+
+/**
+ * Build a prompt for writing prose for a single beat point within a scene.
+ */
+export function buildBeatPointWriterPrompt(
+  beatPoint: SceneBeatPoint,
+  scene: Scene,
+  _beat: Beat,
+  contract: StoryContract,
+  plan?: StoryPlan | null,
+  priorBeatProse?: string[],
+): LLMMessage[] {
+  const contentLimits = contract.global_boundaries.content_limits.join(', ') || 'none'
+  const wordGuidance = WEIGHT_GUIDANCE[beatPoint.weight] || WEIGHT_GUIDANCE.medium
+
+  // Build character context for active characters in this beat point
+  const roster = plan?.element_roster
+  const activeCharNames = beatPoint.characters_active.map((id) => {
+    if (!roster) return id
+    const entry = roster.characters.find((c) => c.id === id)
+    return entry ? `${entry.name} (${entry.role_or_type})` : id
+  })
+
+  // Build continuity context from prior beat prose
+  const continuityContext = priorBeatProse && priorBeatProse.length > 0
+    ? `The story so far in this scene (for continuity — do NOT repeat this content):\n${priorBeatProse.slice(-2).join('\n\n').slice(-800)}`
+    : null
+
+  return [
+    {
+      role: 'system',
+      content: [
+        `You are a fiction writer. Write narrative prose for a ${contract.genre.name} story.`,
+        `Tone: ${contract.genre.tone_marker.join(', ')}`,
+        contentLimits !== 'none' ? `Content limits: ${contentLimits}` : '',
+        '',
+        'IMPORTANT:',
+        '- Output ONLY narrative prose — no headings, labels, preamble, or meta-commentary.',
+        '- Do NOT echo the beat type, micro-goal, or constraint names in your output.',
+        '- Do NOT write "Here is the scene" or similar introductions.',
+        '- Start directly with the story text.',
+        `- Write ${wordGuidance}.`,
+        `- This is a "${beatPoint.type}" beat — match the dramatic function:`,
+        beatPoint.type === 'setup' ? '  Establish atmosphere, place the characters, ground the reader.' : '',
+        beatPoint.type === 'escalation' ? '  Raise tension, introduce complications, narrow options.' : '',
+        beatPoint.type === 'turning_point' ? '  Deliver a reversal, surprise, or key decision that changes direction.' : '',
+        beatPoint.type === 'dialogue' ? '  Write character dialogue that advances plot or reveals character.' : '',
+        beatPoint.type === 'action' ? '  Write physical action, movement, or confrontation in vivid detail.' : '',
+        beatPoint.type === 'reaction' ? '  Show internal response, emotional processing, recalibration.' : '',
+        beatPoint.type === 'revelation' ? '  Reveal new information that changes understanding.' : '',
+        beatPoint.type === 'resolution' ? '  Close with consequence — what happened here is irreversible.' : '',
+      ].filter(Boolean).join('\n'),
+    },
+    {
+      role: 'user',
+      content: [
+        `What must happen: ${beatPoint.micro_goal}`,
+        `Characters active: ${activeCharNames.join(', ') || '(scene characters)'}`,
+        `Setting: ${sanitize(scene.setting || '(established earlier)')}`,
+        '',
+        ...(continuityContext ? [continuityContext, ''] : []),
+        'Write this beat as narrative prose. Start directly with the story.',
+      ].filter(Boolean).join('\n'),
+    },
+  ]
+}
+
+/** Result from writing a beat point. */
+export interface WriteBeatPointResult {
+  beat_point_id: string
+  scene_id: string
+  content: string
+  model: string
+  usage?: { input_tokens: number; output_tokens: number }
+}
+
+/**
+ * Generate prose for a single beat point using the LLM.
+ * Falls back to template prose if no LLM is provided.
+ */
+export async function writeBeatPoint(
+  beatPoint: SceneBeatPoint,
+  scene: Scene,
+  beat: Beat,
+  contract: StoryContract,
+  llm: LLMAdapter | null,
+  plan?: StoryPlan | null,
+  priorBeatProse?: string[],
+): Promise<WriteBeatPointResult> {
+  if (!llm) {
+    return {
+      beat_point_id: beatPoint.beat_point_id,
+      scene_id: scene.scene_id,
+      content: buildTemplateBeatPoint(beatPoint, scene, beat, contract),
+      model: 'template',
+    }
+  }
+
+  const messages = buildBeatPointWriterPrompt(beatPoint, scene, beat, contract, plan, priorBeatProse)
+  const response = await llm.complete(messages)
+
+  return {
+    beat_point_id: beatPoint.beat_point_id,
+    scene_id: scene.scene_id,
+    content: stripPreamble(response.content),
+    model: response.model,
+    usage: response.usage,
+  }
+}
+
+/**
+ * Generate prose for a single beat point using streaming.
+ * Falls back to non-streaming writeBeatPoint if completeStream is not available.
+ */
+export async function writeBeatPointStreaming(
+  beatPoint: SceneBeatPoint,
+  scene: Scene,
+  beat: Beat,
+  contract: StoryContract,
+  llm: LLMAdapter | null,
+  onChunk: (chunk: string) => void,
+  plan?: StoryPlan | null,
+  priorBeatProse?: string[],
+): Promise<WriteBeatPointResult> {
+  if (!llm || !llm.completeStream) {
+    return writeBeatPoint(beatPoint, scene, beat, contract, llm, plan, priorBeatProse)
+  }
+
+  const messages = buildBeatPointWriterPrompt(beatPoint, scene, beat, contract, plan, priorBeatProse)
+  const chunks: string[] = []
+
+  for await (const chunk of llm.completeStream(messages)) {
+    chunks.push(chunk)
+    onChunk(chunk)
+  }
+
+  return {
+    beat_point_id: beatPoint.beat_point_id,
+    scene_id: scene.scene_id,
+    content: stripPreamble(chunks.join('')),
+    model: 'claude-code-stream',
+  }
+}
+
+/**
+ * Template-based beat point prose generator (no LLM required).
+ * Produces deterministic prose based on beat point type and context.
+ */
+function buildTemplateBeatPoint(
+  beatPoint: SceneBeatPoint,
+  scene: Scene,
+  beat: Beat,
+  contract: StoryContract,
+): string {
+  const roleMatch = beat.summary.match(/^\[([^\]]+)\]/)
+  const role = roleMatch ? roleMatch[1] : beat.archetype_node_id
+  const genreName = contract.genre.name
+
+  const typeDescriptions: Record<string, string> = {
+    setup: `The scene opens with an establishing moment. This is the ${role.toLowerCase()} phase of a ${genreName} story, and the atmosphere must be set with care. The characters find themselves in ${scene.setting || 'a place shaped by what came before'}, each carrying the weight of the narrative's demands.`,
+    escalation: `The pressure mounts. What began as a simple situation reveals its complications — the kind that a ${genreName} story builds with deliberate precision. The characters face a narrowing of options, each path forward carrying its own cost.`,
+    turning_point: `The moment pivots. Everything that has been building finds its fulcrum here — a reversal that the ${role.toLowerCase()} phase demands. This is the scene's structural keystone: remove it, and the narrative collapses.`,
+    dialogue: `The characters speak, and in speaking, reveal. Their exchange is not merely conversation but negotiation — of terms, of trust, of the story's fundamental tensions. Every line advances the ${genreName} narrative toward its inevitable conclusion.`,
+    action: `Motion and consequence. The scene's conflict manifests in physical terms — bodies in space, choices enacted through doing rather than deliberating. The ${genreName} genre demands that action carry weight, and here it does.`,
+    reaction: `A beat of processing. The characters absorb what has occurred, and in their reactions we understand the true weight of the turning point. This is where the emotional truth of the ${role.toLowerCase()} reveals itself.`,
+    revelation: `New information surfaces — the kind that recontextualizes everything that came before. In a ${genreName} story, revelations are never merely informational; they are emotional detonations.`,
+    resolution: `The scene finds its closing cadence. What happened here cannot be undone, and the characters carry its consequences forward into whatever comes next. The ${role.toLowerCase()} has done its work.`,
+  }
+
+  return typeDescriptions[beatPoint.type] || `The narrative advances through this ${beatPoint.type} beat, serving the demands of the ${role.toLowerCase()} phase.`
 }
 
 // ---------------------------------------------------------------------------

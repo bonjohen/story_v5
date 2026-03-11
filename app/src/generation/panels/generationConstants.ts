@@ -11,6 +11,7 @@ export const DEFAULT_CONFIG: GenerationConfig = {
   repair_policy: { max_attempts_per_scene: 2, full_rewrite_threshold: 3 },
   coverage_targets: { hard_constraints_min_coverage: 1.0, soft_constraints_min_coverage: 0.6 },
   max_llm_calls: 20,
+  beat_expansion: { enabled: true, max_beats_per_scene: 8, min_beats_per_scene: 4, batch_size: 1 },
 }
 
 export const ARCHETYPE_OPTIONS = [
@@ -57,7 +58,9 @@ export const STATE_LABELS: Record<string, { label: string; color: string }> = {
   BACKBONE_ASSEMBLED: { label: 'Backbone Assembled', color: '#f59e0b' },
   DETAILS_BOUND: { label: 'Details Bound', color: '#f59e0b' },
   PLANNED: { label: 'Planned', color: '#f59e0b' },
+  EXPANDING_BEATS: { label: 'Expanding Beats...', color: '#8b5cf6' },
   GENERATING_SCENE: { label: 'Writing...', color: '#8b5cf6' },
+  GENERATING_BEAT_POINT: { label: 'Writing Beat...', color: '#8b5cf6' },
   VALIDATING_SCENE: { label: 'Validating...', color: '#8b5cf6' },
   REPAIRING_SCENE: { label: 'Repairing...', color: '#f97316' },
   CHAPTERS_ASSEMBLED: { label: 'Chapters Assembled', color: '#8b5cf6' },
