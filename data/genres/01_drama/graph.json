@@ -64,7 +64,7 @@
       "label": "Emotional Stakes Must Be Real",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The central conflict must carry genuine emotional weight â€” characters must have something to lose that the audience can feel.",
+      "definition": "The central conflict must carry genuine emotional weight — characters must have something to lose that the audience can feel.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -104,7 +104,7 @@
         "Choice that sacrifices one relationship for another"
       ],
       "failure_modes": [
-        "Characters are purely reactive â€” things happen to them but they never decide",
+        "Characters are purely reactive — things happen to them but they never decide",
         "Choices have no visible consequences"
       ],
       "signals_in_text": [
@@ -118,7 +118,7 @@
       "label": "Grounded in Plausible Human Experience",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The story must feel psychologically and emotionally plausible â€” characters behave in ways consistent with recognizable human motivation, even in extraordinary circumstances.",
+      "definition": "The story must feel psychologically and emotionally plausible — characters behave in ways consistent with recognizable human motivation, even in extraordinary circumstances.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -145,7 +145,7 @@
       "label": "Conflict Is Primarily Interpersonal",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The central tension arises from relationships between characters â€” disagreements, betrayals, competing needs, or failures of understanding â€” rather than from external spectacle.",
+      "definition": "The central tension arises from relationships between characters — disagreements, betrayals, competing needs, or failures of understanding — rather than from external spectacle.",
       "entry_conditions": [
         "Characters and relationships established"
       ],
@@ -200,7 +200,7 @@
       "label": "Social Drama",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Drama where systemic forces â€” class, race, institutions, economic pressure â€” create the conditions for interpersonal conflict.",
+      "definition": "Drama where systemic forces — class, race, institutions, economic pressure — create the conditions for interpersonal conflict.",
       "entry_conditions": [
         "Core constraints apply",
         "Social or institutional systems are visible forces in the story"
@@ -284,7 +284,7 @@
       "label": "Confined or Intimate Setting",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "Drama tends toward settings that concentrate interpersonal pressure â€” small spaces, closed communities, institutions â€” rather than sprawling geographies.",
+      "definition": "Drama tends toward settings that concentrate interpersonal pressure — small spaces, closed communities, institutions — rather than sprawling geographies.",
       "entry_conditions": [
         "Subgenre pattern selected"
       ],
@@ -313,7 +313,7 @@
       "label": "Time Compression or Deadline",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "Drama often compresses time to intensify stakes â€” a weekend, a trial period, a final visit, a deadline â€” forcing decisions that might otherwise be deferred.",
+      "definition": "Drama often compresses time to intensify stakes — a weekend, a trial period, a final visit, a deadline — forcing decisions that might otherwise be deferred.",
       "entry_conditions": [
         "Setting established"
       ],
@@ -341,7 +341,7 @@
       "label": "Social Rules Constrain Behavior",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The story's social context imposes rules â€” spoken or unspoken â€” that characters must navigate, resist, or break at personal cost.",
+      "definition": "The story's social context imposes rules — spoken or unspoken — that characters must navigate, resist, or break at personal cost.",
       "entry_conditions": [
         "Setting and community established"
       ],
@@ -370,7 +370,7 @@
       "label": "Confrontation Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "At least one scene where characters directly face the central interpersonal conflict â€” not through action but through dialogue, accusation, confession, or silence.",
+      "definition": "At least one scene where characters directly face the central interpersonal conflict — not through action but through dialogue, accusation, confession, or silence.",
       "entry_conditions": [
         "Tension has built sufficiently"
       ],
@@ -399,7 +399,7 @@
       "label": "Irreversible Choice Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "A scene where the protagonist makes a decision that cannot be undone â€” choosing one relationship over another, telling or withholding a truth, staying or leaving.",
+      "definition": "A scene where the protagonist makes a decision that cannot be undone — choosing one relationship over another, telling or withholding a truth, staying or leaving.",
       "entry_conditions": [
         "Stakes are clear",
         "Available options have been established"
@@ -419,7 +419,7 @@
       ],
       "signals_in_text": [
         "Character visibly weighs options",
-        "Scene ends with a door closed â€” literally or figuratively"
+        "Scene ends with a door closed — literally or figuratively"
       ],
       "severity": "hard"
     },
@@ -428,7 +428,7 @@
       "label": "Aftermath / New Normal Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "A scene showing the world after the central conflict has resolved â€” demonstrating that choices had lasting consequences and the characters are changed.",
+      "definition": "A scene showing the world after the central conflict has resolved — demonstrating that choices had lasting consequences and the characters are changed.",
       "entry_conditions": [
         "Central conflict has reached resolution"
       ],
@@ -456,7 +456,7 @@
       "label": "Sustained Serious Tone",
       "role": "Tone Marker",
       "level": null,
-      "definition": "Drama requires a predominant tone of seriousness â€” events are treated as consequential, emotions are not played for laughs, and the narrative voice respects the gravity of what characters experience.",
+      "definition": "Drama requires a predominant tone of seriousness — events are treated as consequential, emotions are not played for laughs, and the narrative voice respects the gravity of what characters experience.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -483,7 +483,7 @@
       "label": "Unearned Emotional Manipulation",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "Drama fails when emotional responses are manufactured through contrivance â€” convenient deaths, coincidences, or suffering without narrative logic â€” rather than earned through character and choice.",
+      "definition": "Drama fails when emotional responses are manufactured through contrivance — convenient deaths, coincidences, or suffering without narrative logic — rather than earned through character and choice.",
       "entry_conditions": [
         "Emotional moments occur in the story"
       ],
@@ -496,7 +496,7 @@
         "Suffering without agency"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation"
+        "This node IS the failure mode — its presence indicates a genre violation"
       ],
       "signals_in_text": [
         "Emotional peaks feel unconnected to prior scenes",
@@ -509,7 +509,7 @@
       "label": "Purely Passive Protagonist",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "Drama fails when the central character never makes a meaningful choice â€” when things happen to them but they never act with agency.",
+      "definition": "Drama fails when the central character never makes a meaningful choice — when things happen to them but they never act with agency.",
       "entry_conditions": [
         "Protagonist is established"
       ],
@@ -522,7 +522,7 @@
         "Character carried by plot convenience"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation"
+        "This node IS the failure mode — its presence indicates a genre violation"
       ],
       "signals_in_text": [
         "Key turning points happen without protagonist input",
@@ -636,7 +636,7 @@
       "preconditions": [
         "Emotional stakes are rooted in family bonds"
       ],
-      "effects_on_stakes": "Stakes become specifically familial â€” love, loyalty, inheritance, belonging",
+      "effects_on_stakes": "Stakes become specifically familial — love, loyalty, inheritance, belonging",
       "effects_on_character": "Characters defined by family roles and history",
       "common_alternatives": [
         "Social drama",
@@ -779,7 +779,7 @@
         "Deadline may be verdict date, sentencing, or statute of limitations"
       ],
       "anti_patterns": [
-        "Trial has no time pressure â€” proceedings feel endless"
+        "Trial has no time pressure — proceedings feel endless"
       ],
       "severity": "soft"
     },
@@ -830,7 +830,7 @@
       "preconditions": [
         "Time pressure established"
       ],
-      "effects_on_stakes": "Choice cannot be deferred â€” act now or lose the chance",
+      "effects_on_stakes": "Choice cannot be deferred — act now or lose the chance",
       "effects_on_character": "Character must commit under pressure",
       "common_alternatives": [
         "Choice may be proactive or a refusal to act that itself has consequences"
@@ -910,7 +910,7 @@
       "effects_on_character": "Characters become puppets of plot rather than agents",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     },
@@ -918,7 +918,7 @@
       "edge_id": "DR_E91_PASSIVE_WARNING",
       "from": "DR_N11_CONSEQUENTIAL_CHOICE",
       "to": "DR_N91_PASSIVE_PROTAGONIST",
-      "label": "Choices required â€” passivity violates genre",
+      "label": "Choices required — passivity violates genre",
       "meaning": "prohibits element",
       "preconditions": [
         "Protagonist faces situations but never decides"
@@ -927,7 +927,7 @@
       "effects_on_character": "Character becomes an observer of their own story",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     }

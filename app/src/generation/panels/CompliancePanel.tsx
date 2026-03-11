@@ -5,13 +5,10 @@
 
 import { useState, useCallback } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
+import { STATUS_COLORS as THEME_STATUS } from '../../theme/colors.ts'
 import type { CheckStatus, SceneValidation, ValidationCheck } from '../artifacts/types.ts'
 
-const STATUS_COLORS: Record<CheckStatus, string> = {
-  pass: '#22c55e',
-  warn: '#f59e0b',
-  fail: '#ef4444',
-}
+const STATUS_COLORS: Record<CheckStatus, string> = THEME_STATUS as Record<CheckStatus, string>
 
 const STATUS_ICONS: Record<CheckStatus, string> = {
   pass: '\u2713',

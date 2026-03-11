@@ -8,6 +8,7 @@ import { useRequestStore } from '../store/requestStore.ts'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { useGraphStore } from '../../store/graphStore.ts'
 import { useUIStore } from '../../store/uiStore.ts'
+import { UI_COLORS, STATUS_COLORS } from '../../theme/colors.ts'
 import { loadPremiseLookup, lookupPremise } from '../engine/premiseLookup.ts'
 import type { PremiseEntry } from '../engine/premiseLookup.ts'
 import type { LlmBackend } from '../store/requestStore.ts'
@@ -122,9 +123,9 @@ export function StorySetupTab() {
           style={{
             display: 'flex', alignItems: 'center', gap: 4,
             fontSize: 10, padding: '2px 8px', borderRadius: 3,
-            border: `1px solid ${locked ? '#f59e0b' : 'var(--border)'}`,
+            border: `1px solid ${locked ? UI_COLORS.archetype : 'var(--border)'}`,
             background: locked ? '#f59e0b18' : 'transparent',
-            color: locked ? '#f59e0b' : 'var(--text-muted)',
+            color: locked ? UI_COLORS.archetype : 'var(--text-muted)',
             cursor: 'pointer',
           }}
         >
@@ -203,7 +204,7 @@ export function StorySetupTab() {
           background: '#f59e0b08',
           marginBottom: 10,
         }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 4 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: UI_COLORS.archetype, marginBottom: 4 }}>
             Contract Summary
           </div>
           <div style={{ fontSize: 11, color: 'var(--text-primary)', lineHeight: 1.5 }}>
@@ -240,7 +241,7 @@ export function StorySetupTab() {
               style={{
                 padding: '5px 12px', fontSize: 11, fontWeight: 600, borderRadius: 4, whiteSpace: 'nowrap',
                 border: 'none', cursor: bridgeStatus === 'connected' ? 'default' : 'pointer',
-                background: bridgeStatus === 'connected' ? '#22c55e' : bridgeStatus === 'error' ? '#ef4444' : 'var(--accent)',
+                background: bridgeStatus === 'connected' ? STATUS_COLORS.connected : bridgeStatus === 'error' ? STATUS_COLORS.error : 'var(--accent)',
                 color: '#fff', transition: 'all 0.15s',
               }}
             >

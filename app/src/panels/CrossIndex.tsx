@@ -6,6 +6,7 @@
  */
 
 import { useState, useEffect, useMemo } from 'react'
+import { UI_COLORS, COMPAT_COLORS } from '../theme/colors.ts'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 import { useGraphStore } from '../store/graphStore.ts'
 
@@ -178,7 +179,7 @@ export function CrossIndexPanel({ graph }: CrossIndexProps) {
           <div style={{
             fontSize: 11,
             fontWeight: 600,
-            color: '#f59e0b',
+            color: UI_COLORS.warning,
             marginBottom: 4,
           }}>
             Failure Modes (this node)
@@ -188,9 +189,9 @@ export function CrossIndexPanel({ graph }: CrossIndexProps) {
               padding: '4px 8px',
               marginBottom: 3,
               fontSize: 11,
-              background: 'rgba(245, 158, 11, 0.08)',
+              background: `${UI_COLORS.warning}14`,
               borderRadius: 3,
-              color: '#fbbf24',
+              color: UI_COLORS.warning,
             }}>
               {f}
             </div>
@@ -214,21 +215,21 @@ export function CrossIndexPanel({ graph }: CrossIndexProps) {
             <CompatSection
               title="Naturally Compatible"
               items={compatibility.naturally_compatible}
-              color="#22c55e"
+              color={COMPAT_COLORS.naturally_compatible}
             />
           )}
           {compatibility.occasionally_compatible.length > 0 && (
             <CompatSection
               title="Occasionally Compatible"
               items={compatibility.occasionally_compatible}
-              color="#f59e0b"
+              color={COMPAT_COLORS.occasionally_compatible}
             />
           )}
           {compatibility.rarely_compatible.length > 0 && (
             <CompatSection
               title="Rarely Compatible"
               items={compatibility.rarely_compatible}
-              color="#ef4444"
+              color={COMPAT_COLORS.rarely_compatible}
             />
           )}
         </div>

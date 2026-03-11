@@ -6,19 +6,14 @@
 import { useEffect } from 'react'
 import { useElementStore } from '../../store/elementStore.ts'
 import { useGraphStore } from '../../store/graphStore.ts'
+import { ENTITY_COLORS, SEVERITY_COLORS } from '../../theme/colors.ts'
 
-const COLORS = {
-  character: '#f59e0b',
-  relationship: '#a855f7',
-  place: '#3b82f6',
-  object: '#22c55e',
-  rule: '#ef4444',
-} as const
+const COLORS = ENTITY_COLORS
 
 const SEVERITY_BADGE: Record<string, { bg: string; text: string }> = {
-  required: { bg: 'rgba(239,68,68,0.15)', text: '#ef4444' },
-  recommended: { bg: 'rgba(245,158,11,0.15)', text: '#f59e0b' },
-  optional: { bg: 'rgba(107,114,128,0.15)', text: '#6b7280' },
+  required: { bg: `${SEVERITY_COLORS.required}26`, text: SEVERITY_COLORS.required },
+  recommended: { bg: `${SEVERITY_COLORS.recommended}26`, text: SEVERITY_COLORS.recommended },
+  optional: { bg: `${SEVERITY_COLORS.optional}26`, text: SEVERITY_COLORS.optional },
 }
 
 function SeverityBadge({ severity }: { severity: string }) {

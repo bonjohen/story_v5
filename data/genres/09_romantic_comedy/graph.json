@@ -37,7 +37,7 @@
       "label": "Romantic Comedy Promise",
       "role": "Genre Promise",
       "level": 1,
-      "definition": "The audience is promised a love story told through humor, wit, and social friction â€” two people who are wrong for each other (or think they are) will navigate comic obstacles and arrive at romantic union or reconciliation. Both the love story and the comedy are contractual: neither can be dropped without betraying the genre.",
+      "definition": "The audience is promised a love story told through humor, wit, and social friction — two people who are wrong for each other (or think they are) will navigate comic obstacles and arrive at romantic union or reconciliation. Both the love story and the comedy are contractual: neither can be dropped without betraying the genre.",
       "entry_conditions": [
         "Story is positioned as romantic comedy"
       ],
@@ -51,8 +51,8 @@
         "Fake relationship / marriage of convenience"
       ],
       "failure_modes": [
-        "Delivers romance without consistent humor â€” becomes melodrama",
-        "Delivers humor without genuine romantic feeling â€” becomes pure comedy",
+        "Delivers romance without consistent humor — becomes melodrama",
+        "Delivers humor without genuine romantic feeling — becomes pure comedy",
         "Neither romance nor comedy land with sufficient force"
       ],
       "signals_in_text": [
@@ -67,7 +67,7 @@
       "label": "Romance and Humor Must Be Co-Equal Engines",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Neither romance nor comedy may dominate exclusively. The story fails if it becomes so romantic that humor evaporates, or so comedic that genuine feeling is sacrificed. Every major scene should serve both the love story and the comic texture â€” an argument is both funny and emotionally revealing, a misunderstanding both absurd and genuinely threatening to the relationship.",
+      "definition": "Neither romance nor comedy may dominate exclusively. The story fails if it becomes so romantic that humor evaporates, or so comedic that genuine feeling is sacrificed. Every major scene should serve both the love story and the comic texture — an argument is both funny and emotionally revealing, a misunderstanding both absurd and genuinely threatening to the relationship.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -81,8 +81,8 @@
         "Playful banter that doubles as flirtation"
       ],
       "failure_modes": [
-        "Story drifts into straight romance â€” humor becomes occasional relief rather than engine",
-        "Story drifts into pure comedy â€” romantic feeling is treated ironically and never believed",
+        "Story drifts into straight romance — humor becomes occasional relief rather than engine",
+        "Story drifts into pure comedy — romantic feeling is treated ironically and never believed",
         "Comedy undercuts genuine emotional moments before they can land"
       ],
       "signals_in_text": [
@@ -97,7 +97,7 @@
       "label": "Couple Must Be Mismatched or in Conflict Before Coming Together",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The central couple must begin in a state of mismatch, opposition, or conflict â€” they are from different worlds, hold opposing values, have incompatible goals, or actively dislike each other. This initial friction is the source of both the comedy and the romantic tension. Union is only meaningful if it overcomes genuine incompatibility.",
+      "definition": "The central couple must begin in a state of mismatch, opposition, or conflict — they are from different worlds, hold opposing values, have incompatible goals, or actively dislike each other. This initial friction is the source of both the comedy and the romantic tension. Union is only meaningful if it overcomes genuine incompatibility.",
       "entry_conditions": [
         "Genre promise established",
         "Central couple introduced"
@@ -113,7 +113,7 @@
         "Forced proximity despite mutual resistance"
       ],
       "failure_modes": [
-        "Couple is compatible from the start â€” obstacles are purely external rather than relational",
+        "Couple is compatible from the start — obstacles are purely external rather than relational",
         "Mismatch is superficial and resolved too quickly to generate sustained comedy or tension",
         "Conflict is so serious that romantic union feels implausible"
       ],
@@ -129,7 +129,7 @@
       "label": "Social Friction Generates Both the Comedy and the Obstacles",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "In romantic comedy, it is social friction â€” the web of friends, family, coworkers, rivals, and expectations â€” that creates both the humor and the impediments to love. The obstacles are not purely internal (characters' fears) or purely external (circumstance); they are socially generated. Other people complicate, witness, amplify, and ultimately validate the relationship.",
+      "definition": "In romantic comedy, it is social friction — the web of friends, family, coworkers, rivals, and expectations — that creates both the humor and the impediments to love. The obstacles are not purely internal (characters' fears) or purely external (circumstance); they are socially generated. Other people complicate, witness, amplify, and ultimately validate the relationship.",
       "entry_conditions": [
         "Genre promise established",
         "Social world around the couple established"
@@ -145,9 +145,9 @@
         "Third parties who misread or meddle in the central relationship"
       ],
       "failure_modes": [
-        "Couple exists in social isolation â€” no one cares what they do",
+        "Couple exists in social isolation — no one cares what they do",
         "Friction is purely internal (therapy drama) without comic social dimension",
-        "Social world is present but inert â€” characters have no real social stakes"
+        "Social world is present but inert — characters have no real social stakes"
       ],
       "signals_in_text": [
         "Secondary characters have strong opinions about the central couple",
@@ -173,11 +173,11 @@
         "Grand romantic gesture that is also slightly ridiculous and self-aware",
         "Truth-telling scene that is both honest and comic in its delivery",
         "Final reunion that releases both romantic and comic tension simultaneously",
-        "Epilogue showing couple in their new dynamic â€” still playful, clearly together"
+        "Epilogue showing couple in their new dynamic — still playful, clearly together"
       ],
       "failure_modes": [
-        "Resolution is purely earnest â€” every comic note is abandoned for sincerity",
-        "Resolution is purely comic â€” romance is undercut by irony or joke",
+        "Resolution is purely earnest — every comic note is abandoned for sincerity",
+        "Resolution is purely comic — romance is undercut by irony or joke",
         "Romantic union happens off-screen or is insufficiently dramatized",
         "Comic final obstacle is resolved without romantic acknowledgment"
       ],
@@ -193,7 +193,7 @@
       "label": "Screwball Romance",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Fast-paced romantic comedy driven by rapid verbal sparring, battle-of-wills dynamics, and social-class friction between the leads. The couple's romantic attraction manifests primarily as conflict â€” they fight because they are drawn to each other, and the audience reads the chemistry beneath the combat. Resolution comes when both characters stop performing superiority and admit desire.",
+      "definition": "Fast-paced romantic comedy driven by rapid verbal sparring, battle-of-wills dynamics, and social-class friction between the leads. The couple's romantic attraction manifests primarily as conflict — they fight because they are drawn to each other, and the audience reads the chemistry beneath the combat. Resolution comes when both characters stop performing superiority and admit desire.",
       "entry_conditions": [
         "Core constraints apply",
         "Leads are both witty and evenly matched",
@@ -209,15 +209,15 @@
         "Chaotic pursuit where one character disrupts the other's ordered life"
       ],
       "failure_modes": [
-        "Verbal exchanges are one-sided â€” only one character is funny or dominant",
+        "Verbal exchanges are one-sided — only one character is funny or dominant",
         "Sparring tips into genuine cruelty or contempt that poisons the romantic possibility",
         "Pace slackens and the witty-combat energy dissipates",
-        "Chemistry never convinces â€” audience doesn't believe the attraction beneath the fighting"
+        "Chemistry never convinces — audience doesn't believe the attraction beneath the fighting"
       ],
       "signals_in_text": [
         "Rapid-fire dialogue with overlapping or interrupted speech",
         "Characters regularly outmaneuver each other in alternating victories",
-        "Physical comedy accompanies verbal sparring â€” pratfalls, chases, physical slapstick",
+        "Physical comedy accompanies verbal sparring — pratfalls, chases, physical slapstick",
         "Leads are clearly watching each other even as they pretend not to care"
       ],
       "severity": "soft"
@@ -243,7 +243,7 @@
         "New hire disrupts established workplace dynamics and one senior employee's composure"
       ],
       "failure_modes": [
-        "Workplace is merely a backdrop â€” professional stakes don't shape the romance or comedy",
+        "Workplace is merely a backdrop — professional stakes don't shape the romance or comedy",
         "Professional conflict resolves too early, leaving only a generic love story",
         "Power imbalance is played for drama rather than comedy, poisoning the genre tone",
         "Secondary coworkers are undifferentiated and fail to amplify comic stakes"
@@ -272,13 +272,13 @@
       ],
       "typical_variants": [
         "Long-term friends who confess simultaneously after years of mutual denial",
-        "One friend pines while the other pursues unsuitable partners â€” each new partner raises comic and dramatic stakes",
+        "One friend pines while the other pursues unsuitable partners — each new partner raises comic and dramatic stakes",
         "External event or third party forces both to confront suppressed feelings",
         "Friends who bet or make a pact about love that backfires on them both"
       ],
       "failure_modes": [
-        "Friendship is stated but not shown â€” audience doesn't see why they'd be friends",
-        "Dramatic irony is absent â€” audience knows no more than the characters",
+        "Friendship is stated but not shown — audience doesn't see why they'd be friends",
+        "Dramatic irony is absent — audience knows no more than the characters",
         "Transition from friendship to romance is abrupt and insufficiently earned",
         "Comedy relies on repetitive near-miss rather than escalating comic situation"
       ],
@@ -295,7 +295,7 @@
       "label": "Fake Relationship / Marriage of Convenience",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Romantic comedy in which the leads enter a false or pragmatic romantic arrangement â€” pretending to date, agreeing to a marriage of convenience, or staging a relationship for social or professional purposes. Comedy arises from their attempts to perform romance while denying real feelings; the central irony is that the fake relationship reveals genuine compatibility and attraction the characters must eventually acknowledge.",
+      "definition": "Romantic comedy in which the leads enter a false or pragmatic romantic arrangement — pretending to date, agreeing to a marriage of convenience, or staging a relationship for social or professional purposes. Comedy arises from their attempts to perform romance while denying real feelings; the central irony is that the fake relationship reveals genuine compatibility and attraction the characters must eventually acknowledge.",
       "entry_conditions": [
         "Core constraints apply",
         "The leads establish a contractual or performative romantic arrangement for external reasons",
@@ -313,9 +313,9 @@
       ],
       "failure_modes": [
         "The external reason for the fake relationship is implausible or unearned",
-        "Characters fall for each other too quickly â€” the fake arrangement phase is too short",
+        "Characters fall for each other too quickly — the fake arrangement phase is too short",
         "Conflict when the fake relationship is exposed is resolved without sufficient comic consequence",
-        "Real feelings are declared too easily â€” the denial phase is not mined for comic and romantic tension"
+        "Real feelings are declared too easily — the denial phase is not mined for comic and romantic tension"
       ],
       "signals_in_text": [
         "Characters explicitly negotiate the terms of their arrangement",
@@ -330,7 +330,7 @@
       "label": "Setting Forces Repeated Interaction Between Leads",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The romantic comedy setting must make it impossible or very difficult for the leads to avoid each other. Forced proximity is a structural necessity: if the characters can simply walk away from the friction, the comedy deflates. The setting â€” shared workplace, same social circle, neighboring apartments, road trip, shared living space, recurring professional obligation â€” engineers repeated contact and escalating mutual knowledge.",
+      "definition": "The romantic comedy setting must make it impossible or very difficult for the leads to avoid each other. Forced proximity is a structural necessity: if the characters can simply walk away from the friction, the comedy deflates. The setting — shared workplace, same social circle, neighboring apartments, road trip, shared living space, recurring professional obligation — engineers repeated contact and escalating mutual knowledge.",
       "entry_conditions": [
         "Subgenre pattern selected",
         "Central couple established with initial mismatch or conflict"
@@ -347,13 +347,13 @@
       ],
       "failure_modes": [
         "Characters can easily avoid each other and the story must contrive reasons they don't",
-        "Proximity is established early but not maintained â€” the setting loses its forcing function",
+        "Proximity is established early but not maintained — the setting loses its forcing function",
         "Forced proximity produces only tolerance rather than escalating comic friction and growing intimacy"
       ],
       "signals_in_text": [
         "Leads encounter each other in multiple distinct contexts generated by the setting",
         "Each encounter leaves them both more aware of the other, even if that awareness is expressed as irritation",
-        "The setting itself is commented on â€” characters acknowledge they keep running into each other"
+        "The setting itself is commented on — characters acknowledge they keep running into each other"
       ],
       "severity": "hard"
     },
@@ -378,9 +378,9 @@
         "Greek chorus of coworkers or neighbors who track the relationship's progress"
       ],
       "failure_modes": [
-        "Secondary characters are decorative â€” they observe but don't affect the story",
+        "Secondary characters are decorative — they observe but don't affect the story",
         "No character in the social world perceives or comments on the central couple's dynamic",
-        "Social audience is present but uniformly supportive â€” no friction or competing perspective",
+        "Social audience is present but uniformly supportive — no friction or competing perspective",
         "Best friend or confidant only serves to receive exposition without comic effect"
       ],
       "signals_in_text": [
@@ -396,7 +396,7 @@
       "label": "Public vs. Private Behavior Diverges",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "A reliable source of romantic comedy is the gap between how characters behave in public (performing indifference, composure, or antipathy) and how they behave in private (revealing vulnerability, longing, or genuine self). This divergence drives both comedy â€” the performance is funny in its transparency â€” and romance â€” the private moments are where genuine feeling surfaces. Settings that allow both public and private scenes exploit this gap effectively.",
+      "definition": "A reliable source of romantic comedy is the gap between how characters behave in public (performing indifference, composure, or antipathy) and how they behave in private (revealing vulnerability, longing, or genuine self). This divergence drives both comedy — the performance is funny in its transparency — and romance — the private moments are where genuine feeling surfaces. Settings that allow both public and private scenes exploit this gap effectively.",
       "entry_conditions": [
         "Setting established with both social/public and private contexts",
         "Leads have reason to maintain a public performance that differs from private feeling"
@@ -411,9 +411,9 @@
         "One character witnesses the other's private behavior and cannot un-know what they've seen"
       ],
       "failure_modes": [
-        "Characters behave identically in public and private â€” no gap to exploit",
+        "Characters behave identically in public and private — no gap to exploit",
         "Public performance is so convincing that audience forgets the private truth",
-        "Private moments are never shown â€” only public behavior exists, leaving romance underdeveloped"
+        "Private moments are never shown — only public behavior exists, leaving romance underdeveloped"
       ],
       "signals_in_text": [
         "Scene structure alternates between public social scenes and private or semi-private encounters",
@@ -427,7 +427,7 @@
       "label": "Meet-Cute or Charged First Encounter Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "An early scene â€” often the first encounter between leads â€” that establishes the mismatch, generates the first major comic beat, and simultaneously signals the romantic possibility. The meet-cute is charged with both friction and potential: it is funny, slightly awkward or adversarial, and yet the audience perceives chemistry that the characters deny or misread. This scene sets the entire tonal and relational contract for the story.",
+      "definition": "An early scene — often the first encounter between leads — that establishes the mismatch, generates the first major comic beat, and simultaneously signals the romantic possibility. The meet-cute is charged with both friction and potential: it is funny, slightly awkward or adversarial, and yet the audience perceives chemistry that the characters deny or misread. This scene sets the entire tonal and relational contract for the story.",
       "entry_conditions": [
         "Story opening establishes world and leads",
         "Neither character has yet acknowledged any romantic feeling for the other"
@@ -443,15 +443,15 @@
         "Forced collaboration on a shared problem neither wanted to share"
       ],
       "failure_modes": [
-        "First encounter is too smooth â€” no friction, no comic beat, no memorable incongruity",
+        "First encounter is too smooth — no friction, no comic beat, no memorable incongruity",
         "Characters are immediately and mutually attracted with no comedy of mismatch",
-        "Encounter is memorable to the audience but not to the characters â€” no lasting impression is made",
-        "Comic element overwhelms any romantic signal â€” audience sees only comedy, not chemistry"
+        "Encounter is memorable to the audience but not to the characters — no lasting impression is made",
+        "Comic element overwhelms any romantic signal — audience sees only comedy, not chemistry"
       ],
       "signals_in_text": [
         "Scene has a specific, memorable premise that distinguishes it from an ordinary introduction",
         "Both leads leave the encounter having formed a strong (and usually wrong) impression of the other",
-        "Audience is given more information than the characters â€” sees potential they cannot yet see",
+        "Audience is given more information than the characters — sees potential they cannot yet see",
         "Scene ends with an unresolved tension that makes the next encounter inevitable"
       ],
       "severity": "hard"
@@ -461,7 +461,7 @@
       "label": "Misunderstanding Escalation Scene (Comedy Peaks)",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "A scene or sequence â€” typically in the middle act â€” where a misunderstanding, deception, or comic complication reaches its maximum intensity. This is where the comedy peaks: the situation is at its most absurd, the misreading of the relationship is at its most entrenched, and the gap between what is true and what the characters believe is at its widest. This scene is also the romantic nadir â€” the couple is furthest from each other just as the audience most wants them together.",
+      "definition": "A scene or sequence — typically in the middle act — where a misunderstanding, deception, or comic complication reaches its maximum intensity. This is where the comedy peaks: the situation is at its most absurd, the misreading of the relationship is at its most entrenched, and the gap between what is true and what the characters believe is at its widest. This scene is also the romantic nadir — the couple is furthest from each other just as the audience most wants them together.",
       "entry_conditions": [
         "Central misunderstanding or comic complication established earlier",
         "Leads have made some romantic progress that is now at risk",
@@ -479,7 +479,7 @@
       ],
       "failure_modes": [
         "Misunderstanding peaks too early and the story has nowhere to go",
-        "Comic escalation is separate from the romantic arc â€” funny but doesn't affect the relationship",
+        "Comic escalation is separate from the romantic arc — funny but doesn't affect the relationship",
         "Peak moment is visible only to the audience but doesn't shift the characters' actions or feelings",
         "Scene relies on single big misunderstanding rather than layered accumulated comic pressure"
       ],
@@ -487,7 +487,7 @@
         "Maximum number of wrong assumptions are active simultaneously",
         "Characters make decisions based on false information that will have lasting consequences",
         "Audience feels the delicious agony of knowing what the characters don't",
-        "Scene ends with the couple at their greatest emotional distance â€” reunion seems genuinely difficult from here"
+        "Scene ends with the couple at their greatest emotional distance — reunion seems genuinely difficult from here"
       ],
       "severity": "hard"
     },
@@ -496,7 +496,7 @@
       "label": "Grand Romantic Gesture / Truth-Telling Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "The climactic scene in which the misunderstanding is dispelled, the truth is told, and one or both leads makes a grand romantic gesture â€” an act that requires genuine vulnerability and public commitment. This scene must pay off the entire comic and romantic arc: the gesture is both sincere and suffused with the personality and humor of the characters. It should be emotionally earned, not merely conventional.",
+      "definition": "The climactic scene in which the misunderstanding is dispelled, the truth is told, and one or both leads makes a grand romantic gesture — an act that requires genuine vulnerability and public commitment. This scene must pay off the entire comic and romantic arc: the gesture is both sincere and suffused with the personality and humor of the characters. It should be emotionally earned, not merely conventional.",
       "entry_conditions": [
         "Comic misunderstanding or obstacle has been cleared or is in the process of clearing",
         "At least one lead has fully recognized and accepted their feelings",
@@ -509,22 +509,22 @@
         "Public declaration in front of the social audience (airport, party, workplace, family gathering)",
         "Private truth-telling that requires the character to abandon their defensive posture entirely",
         "Grand physical gesture that requires comic self-deprecation (the romantic is slightly ridiculous and knows it)",
-        "Characters finally speaking honestly after long comic evasion â€” the truth is funny precisely because it's obvious in retrospect",
-        "Gesture that directly references the meet-cute or a specific earlier moment â€” the arc completes with specific emotional resonance"
+        "Characters finally speaking honestly after long comic evasion — the truth is funny precisely because it's obvious in retrospect",
+        "Gesture that directly references the meet-cute or a specific earlier moment — the arc completes with specific emotional resonance"
       ],
       "failure_modes": [
-        "Gesture is generic â€” could belong to any love story, with no connection to this couple's specific comic history",
-        "Truth-telling is too easy â€” character confesses without having to overcome anything",
+        "Gesture is generic — could belong to any love story, with no connection to this couple's specific comic history",
+        "Truth-telling is too easy — character confesses without having to overcome anything",
         "Grand gesture is played entirely for laughs with no genuine emotional vulnerability",
         "Resolution happens in private with no social witness, depriving the scene of its full tonal charge",
-        "One character does all the work â€” the other merely receives without reciprocal act or revelation"
+        "One character does all the work — the other merely receives without reciprocal act or revelation"
       ],
       "signals_in_text": [
         "Scene directly inverts or completes an earlier scene from the story",
-        "Character must physically move toward the other person â€” the gesture requires effort and risk",
+        "Character must physically move toward the other person — the gesture requires effort and risk",
         "Comic self-awareness coexists with genuine sincerity in the same moment",
-        "Secondary characters react â€” the social world confirms the resolution",
-        "Final exchange has the rhythm and wit of the couple's established dynamic â€” they are recognizably themselves, and better"
+        "Secondary characters react — the social world confirms the resolution",
+        "Final exchange has the rhythm and wit of the couple's established dynamic — they are recognizably themselves, and better"
       ],
       "severity": "soft"
     },
@@ -533,7 +533,7 @@
       "label": "Wit, Warmth, and Playful Energy",
       "role": "Tone Marker",
       "level": null,
-      "definition": "Romantic comedy requires a tone that holds wit, warmth, and playful energy in balance. Wit without warmth becomes cold and cynical â€” the comedy punishes rather than celebrates. Warmth without wit becomes saccharine â€” the story feels naive rather than charming. Playful energy is the animating quality that makes the audience feel they are in good hands: the narrative knows it is playing a game and plays it with skill and affection.",
+      "definition": "Romantic comedy requires a tone that holds wit, warmth, and playful energy in balance. Wit without warmth becomes cold and cynical — the comedy punishes rather than celebrates. Warmth without wit becomes saccharine — the story feels naive rather than charming. Playful energy is the animating quality that makes the audience feel they are in good hands: the narrative knows it is playing a game and plays it with skill and affection.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -547,16 +547,16 @@
         "Dry and self-aware (modern rom-com that acknowledges genre conventions)"
       ],
       "failure_modes": [
-        "Tone becomes mean-spirited â€” humor is at characters' lasting expense",
+        "Tone becomes mean-spirited — humor is at characters' lasting expense",
         "Warmth collapses into sentimentality that undercuts the comedy",
         "Playful energy disappears during the 'dark night of the soul' third act and never fully returns",
-        "Wit is verbal only â€” physical performance and situation are played straight, creating tonal imbalance"
+        "Wit is verbal only — physical performance and situation are played straight, creating tonal imbalance"
       ],
       "signals_in_text": [
         "Narrative voice or dialogue style maintains lightness even when describing painful emotional situations",
-        "Characters can be embarrassed or hurt and still be funny â€” their suffering is temporary and affectionately observed",
+        "Characters can be embarrassed or hurt and still be funny — their suffering is temporary and affectionately observed",
         "The story's irony never extends to contempt for the couple or for romantic love itself",
-        "Secondary characters contribute to tone â€” the world around the leads is also warm and playful"
+        "Secondary characters contribute to tone — the world around the leads is also warm and playful"
       ],
       "severity": "hard"
     },
@@ -571,22 +571,22 @@
         "Comic situations are funny but do not reveal character or deepen romantic stakes"
       ],
       "exit_conditions": [
-        "This node represents genre failure â€” there is no successful exit condition; the story must be revised at the level of character, casting, or structural design"
+        "This node represents genre failure — there is no successful exit condition; the story must be revised at the level of character, casting, or structural design"
       ],
       "typical_variants": [
-        "Leads are conventionally matched but temperamentally inert together â€” technically appropriate but without spark",
-        "Comedy is situation-driven but character-agnostic â€” any two people could be in these scenes",
+        "Leads are conventionally matched but temperamentally inert together — technically appropriate but without spark",
+        "Comedy is situation-driven but character-agnostic — any two people could be in these scenes",
         "Romantic feeling is stated in dialogue but never dramatized through behavior or choice",
         "Comic tone is sustained at the expense of the emotional truth the romance requires to feel real"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates the genre contract has been violated"
+        "This node IS the failure mode — its presence indicates the genre contract has been violated"
       ],
       "signals_in_text": [
         "Audience cannot articulate what each character sees in the other",
         "Comic scenes could be swapped between different characters without loss",
         "Romantic declarations feel like genre obligation rather than character truth",
-        "The resolution produces no emotional release â€” audience acknowledges it intellectually but does not feel it"
+        "The resolution produces no emotional release — audience acknowledges it intellectually but does not feel it"
       ],
       "severity": "hard"
     }
@@ -601,7 +601,7 @@
       "preconditions": [
         "Genre promise established"
       ],
-      "effects_on_stakes": "Every scene must serve both the love story and the comic arc â€” stakes are measured in both romantic and comedic currency simultaneously",
+      "effects_on_stakes": "Every scene must serve both the love story and the comic arc — stakes are measured in both romantic and comedic currency simultaneously",
       "effects_on_character": "Characters must be written so their behavior generates humor and reveals genuine romantic feeling in the same action",
       "common_alternatives": [
         "Dramedy shifts the balance toward emotional weight",
@@ -624,12 +624,12 @@
         "Central couple identified"
       ],
       "effects_on_stakes": "Romantic union carries weight only because incompatibility was genuine and had to be overcome",
-      "effects_on_character": "Characters must change or reveal hidden compatibility through the comic arc â€” they cannot simply wait out the obstacles",
+      "effects_on_character": "Characters must change or reveal hidden compatibility through the comic arc — they cannot simply wait out the obstacles",
       "common_alternatives": [
         "Literary romance may begin with compatibility and introduce external obstacles instead"
       ],
       "anti_patterns": [
-        "Leads are immediately and mutually attracted â€” obstacles are purely circumstantial and the comic friction never runs through their relationship"
+        "Leads are immediately and mutually attracted — obstacles are purely circumstantial and the comic friction never runs through their relationship"
       ],
       "severity": "hard"
     },
@@ -649,7 +649,7 @@
         "Psychological romance locates all obstacles in internal character conflict without social dimension"
       ],
       "anti_patterns": [
-        "Social world is decorative â€” present in scenes but does not generate friction, complications, or comic situations"
+        "Social world is decorative — present in scenes but does not generate friction, complications, or comic situations"
       ],
       "severity": "hard"
     },
@@ -663,7 +663,7 @@
         "Genre promise established"
       ],
       "effects_on_stakes": "Audience anticipates a resolution that fulfills both the romantic contract (union or commitment) and the comic contract (the final obstacle is overcome with wit or charm)",
-      "effects_on_character": "Characters must arrive at union in a way that is consistent with their comic personalities â€” the resolution must feel like them",
+      "effects_on_character": "Characters must arrive at union in a way that is consistent with their comic personalities — the resolution must feel like them",
       "common_alternatives": [
         "Pure romance ends with unalloyed sincerity",
         "Pure comedy may ironize the romantic ending"
@@ -683,7 +683,7 @@
       "preconditions": [
         "Genre promise established"
       ],
-      "effects_on_stakes": "Tone signals that the audience is safe â€” even painful moments in the story will ultimately resolve in warmth rather than devastation",
+      "effects_on_stakes": "Tone signals that the audience is safe — even painful moments in the story will ultimately resolve in warmth rather than devastation",
       "effects_on_character": "Characters' vulnerabilities are observed with affection rather than contempt or clinical detachment",
       "common_alternatives": [
         "Dark romantic comedy may hold more ironic distance while still preserving warmth",
@@ -705,8 +705,8 @@
         "Mismatch is primarily one of temperament, wit, and social position",
         "Both leads are capable of verbal sparring"
       ],
-      "effects_on_stakes": "Romantic stakes are embedded in the verbal combat â€” winning the argument and winning the person are connected",
-      "effects_on_character": "Characters are defined by their speed, wit, and social agility â€” the comedy reveals who they really are under the performance",
+      "effects_on_stakes": "Romantic stakes are embedded in the verbal combat — winning the argument and winning the person are connected",
+      "effects_on_character": "Characters are defined by their speed, wit, and social agility — the comedy reveals who they really are under the performance",
       "common_alternatives": [
         "Workplace rom-com",
         "Friends-to-lovers",
@@ -727,7 +727,7 @@
         "Mismatch is rooted in professional hierarchy, competing goals, or incompatible work styles",
         "Professional setting creates ongoing friction"
       ],
-      "effects_on_stakes": "Romantic stakes compete with professional stakes â€” choosing each other may cost something professionally",
+      "effects_on_stakes": "Romantic stakes compete with professional stakes — choosing each other may cost something professionally",
       "effects_on_character": "Characters must integrate their professional identity with their emerging romantic self",
       "common_alternatives": [
         "Screwball",
@@ -747,9 +747,9 @@
       "meaning": "branches into subtype",
       "preconditions": [
         "Leads are established friends who are well-matched but deny romantic potential",
-        "Comedy arises from dramatic irony â€” audience sees what characters cannot"
+        "Comedy arises from dramatic irony — audience sees what characters cannot"
       ],
-      "effects_on_stakes": "Romantic stakes include the friendship itself â€” admission of love risks losing what already exists",
+      "effects_on_stakes": "Romantic stakes include the friendship itself — admission of love risks losing what already exists",
       "effects_on_character": "Characters must overcome self-protective denial and risk the established relationship for romantic possibility",
       "common_alternatives": [
         "Screwball",
@@ -757,7 +757,7 @@
         "Fake relationship"
       ],
       "anti_patterns": [
-        "Friendship is stated but not shown â€” no real warmth or history between leads"
+        "Friendship is stated but not shown — no real warmth or history between leads"
       ],
       "severity": "soft"
     },
@@ -793,7 +793,7 @@
         "Screwball subgenre selected",
         "Both leads are present in a shared world"
       ],
-      "effects_on_stakes": "Setting provides ongoing occasions for verbal combat â€” the arena for sparring must be sustainable",
+      "effects_on_stakes": "Setting provides ongoing occasions for verbal combat — the arena for sparring must be sustainable",
       "effects_on_character": "Characters have no escape from each other and must evolve their dynamic in the face of repeated encounter",
       "common_alternatives": [
         "High society gatherings",
@@ -814,7 +814,7 @@
       "preconditions": [
         "Workplace rom-com subgenre selected"
       ],
-      "effects_on_stakes": "Coworkers witness and amplify the romantic arc â€” professional and social reputation are at stake alongside personal feeling",
+      "effects_on_stakes": "Coworkers witness and amplify the romantic arc — professional and social reputation are at stake alongside personal feeling",
       "effects_on_character": "Leads must manage their public professional image while navigating private romantic feelings",
       "common_alternatives": [
         "Close friend group",
@@ -822,7 +822,7 @@
         "Rival company employees"
       ],
       "anti_patterns": [
-        "Workplace exists but coworkers are inert â€” they observe without affecting the story"
+        "Workplace exists but coworkers are inert — they observe without affecting the story"
       ],
       "severity": "soft"
     },
@@ -835,14 +835,14 @@
       "preconditions": [
         "Friends-to-lovers subgenre selected"
       ],
-      "effects_on_stakes": "The friendship is public; the romantic feeling is private â€” the gap between them generates sustained comic irony and dramatic pressure",
+      "effects_on_stakes": "The friendship is public; the romantic feeling is private — the gap between them generates sustained comic irony and dramatic pressure",
       "effects_on_character": "Characters must maintain the friend performance while managing feelings that complicate it",
       "common_alternatives": [
         "Professional context where friendship is also publicly defined",
         "Family setting where both leads are known as friends"
       ],
       "anti_patterns": [
-        "Characters' private feelings are visible to everyone â€” no gap between public and private behavior to exploit"
+        "Characters' private feelings are visible to everyone — no gap between public and private behavior to exploit"
       ],
       "severity": "hard"
     },
@@ -856,7 +856,7 @@
         "Fake relationship subgenre selected",
         "A social audience must believe in the fake relationship"
       ],
-      "effects_on_stakes": "The fake relationship exists for the benefit of the social audience â€” without them, there is no reason for the performance and no comic stakes",
+      "effects_on_stakes": "The fake relationship exists for the benefit of the social audience — without them, there is no reason for the performance and no comic stakes",
       "effects_on_character": "Leads must calibrate their performance for the audience while managing real feelings that complicate it",
       "common_alternatives": [
         "Family gathering requiring sustained performance",
@@ -864,7 +864,7 @@
         "Social circle where both leads are known"
       ],
       "anti_patterns": [
-        "Fake relationship is performed but no one cares whether it is real â€” social stakes are absent"
+        "Fake relationship is performed but no one cares whether it is real — social stakes are absent"
       ],
       "severity": "soft"
     },
@@ -877,7 +877,7 @@
       "preconditions": [
         "Fake relationship subgenre selected"
       ],
-      "effects_on_stakes": "The entire comic premise is the gap between public performance (romantic partners) and private reality (contractual strangers or reluctant collaborators) â€” this gap must be sustained and mined",
+      "effects_on_stakes": "The entire comic premise is the gap between public performance (romantic partners) and private reality (contractual strangers or reluctant collaborators) — this gap must be sustained and mined",
       "effects_on_character": "Each private moment threatens to collapse the public performance; each public performance infiltrates and reshapes the private reality",
       "common_alternatives": [],
       "anti_patterns": [
@@ -895,14 +895,14 @@
         "Setting established with its forcing mechanism",
         "Neither lead has yet made a strong impression on the other"
       ],
-      "effects_on_stakes": "The first encounter establishes both the comic dynamic and the romantic possibility â€” it must happen in a context that makes subsequent forced contact feel inevitable",
+      "effects_on_stakes": "The first encounter establishes both the comic dynamic and the romantic possibility — it must happen in a context that makes subsequent forced contact feel inevitable",
       "effects_on_character": "Characters form strong first impressions (usually wrong) that will take the whole story to revise",
       "common_alternatives": [
         "Meet-cute may precede the forcing mechanism and retroactively explain why they are in the same world",
         "First encounter may be unpleasant enough to motivate one character to try to escape the setting"
       ],
       "anti_patterns": [
-        "First encounter is a mundane introduction â€” no friction, no comedy, no romantic charge"
+        "First encounter is a mundane introduction — no friction, no comedy, no romantic charge"
       ],
       "severity": "hard"
     },
@@ -916,7 +916,7 @@
         "Social audience established and active",
         "Central misunderstanding in motion"
       ],
-      "effects_on_stakes": "Misunderstandings don't stay between the two leads â€” they travel through the social network and generate secondary misreadings that compound the original",
+      "effects_on_stakes": "Misunderstandings don't stay between the two leads — they travel through the social network and generate secondary misreadings that compound the original",
       "effects_on_character": "Characters receive distorted information about each other mediated through the social audience, making correction harder",
       "common_alternatives": [
         "Best friend who gives wrong advice based on their own misreading",
@@ -924,7 +924,7 @@
         "Parent or authority figure who intervenes based on false information"
       ],
       "anti_patterns": [
-        "Misunderstanding exists only between the two leads â€” no social amplification â€” remains a two-person problem with an easy fix"
+        "Misunderstanding exists only between the two leads — no social amplification — remains a two-person problem with an easy fix"
       ],
       "severity": "hard"
     },
@@ -946,7 +946,7 @@
         "Written or digital communication seen by the wrong person"
       ],
       "anti_patterns": [
-        "Public-private gap exists but is never witnessed by the wrong person â€” no misunderstanding generated"
+        "Public-private gap exists but is never witnessed by the wrong person — no misunderstanding generated"
       ],
       "severity": "hard"
     },
@@ -960,10 +960,10 @@
         "Meet-cute has established a specific wrong impression or dynamic",
         "Story has built on that wrong impression across subsequent scenes"
       ],
-      "effects_on_stakes": "The escalation scene reveals how much the wrong impression has shaped both characters' choices â€” the cost of the misunderstanding becomes clear",
+      "effects_on_stakes": "The escalation scene reveals how much the wrong impression has shaped both characters' choices — the cost of the misunderstanding becomes clear",
       "effects_on_character": "Both leads have been acting on a false understanding of each other that must now be confronted",
       "common_alternatives": [
-        "The first impression may be reversed â€” the escalation makes clear how wrong the initial read was"
+        "The first impression may be reversed — the escalation makes clear how wrong the initial read was"
       ],
       "anti_patterns": [
         "Escalation scene has no connection to the specific wrong impression established in the meet-cute"
@@ -980,14 +980,14 @@
         "Misunderstanding has peaked and begun to clear, or is cleared in the same scene as the gesture",
         "At least one character now has accurate information about the other's true feelings or situation"
       ],
-      "effects_on_stakes": "The grand gesture is only possible after the misunderstanding clears â€” it requires the character to act on truth rather than false impression",
-      "effects_on_character": "Character making the gesture must be willing to be vulnerable and possibly wrong â€” the gesture is a risk, not a certainty",
+      "effects_on_stakes": "The grand gesture is only possible after the misunderstanding clears — it requires the character to act on truth rather than false impression",
+      "effects_on_character": "Character making the gesture must be willing to be vulnerable and possibly wrong — the gesture is a risk, not a certainty",
       "common_alternatives": [
         "Gesture precipitates the clearing of misunderstanding rather than following it",
         "Both leads make gestures simultaneously as they arrive at truth together"
       ],
       "anti_patterns": [
-        "Grand gesture is made while misunderstanding is still active â€” character declares love based on false information, which undercuts the romantic weight"
+        "Grand gesture is made while misunderstanding is still active — character declares love based on false information, which undercuts the romantic weight"
       ],
       "severity": "soft"
     },
@@ -1000,10 +1000,10 @@
       "preconditions": [
         "Both romantic and comic arcs are active and awaiting resolution"
       ],
-      "effects_on_stakes": "The gesture scene must pay off both arcs simultaneously â€” it is not enough to declare love; the declaration must also be emotionally and tonally consistent with the story's comic personality",
-      "effects_on_character": "The character making the gesture reveals who they have become through the comic arc â€” they are wiser, more vulnerable, and still themselves",
+      "effects_on_stakes": "The gesture scene must pay off both arcs simultaneously — it is not enough to declare love; the declaration must also be emotionally and tonally consistent with the story's comic personality",
+      "effects_on_character": "The character making the gesture reveals who they have become through the comic arc — they are wiser, more vulnerable, and still themselves",
       "common_alternatives": [
-        "Resolution may be split across two scenes â€” the comic resolution slightly precedes the romantic declaration",
+        "Resolution may be split across two scenes — the comic resolution slightly precedes the romantic declaration",
         "Both characters contribute to the gesture in ways that reflect their respective arcs"
       ],
       "anti_patterns": [
@@ -1022,11 +1022,11 @@
         "Leads are present but audience perceives no attraction",
         "Comedy operates independently of romantic feeling"
       ],
-      "effects_on_stakes": "Without chemistry, romantic stakes collapse â€” audience has no investment in whether the couple unites",
-      "effects_on_character": "Without heart in the comedy, characters are comic functions rather than people â€” audience cannot root for them",
+      "effects_on_stakes": "Without chemistry, romantic stakes collapse — audience has no investment in whether the couple unites",
+      "effects_on_character": "Without heart in the comedy, characters are comic functions rather than people — audience cannot root for them",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern description â€” it names what the promise forbids"
+        "This edge IS the anti-pattern description — it names what the promise forbids"
       ],
       "severity": "hard"
     },
@@ -1043,7 +1043,7 @@
       "effects_on_character": "Characters become either comic functions (funny but not lovable) or romantic ideals (beautiful but not funny) rather than full people",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge names the failure state â€” it identifies what must not happen"
+        "This edge names the failure state — it identifies what must not happen"
       ],
       "severity": "hard"
     },
@@ -1056,11 +1056,11 @@
       "preconditions": [
         "Tone has shifted to cold wit without warmth, or warm sentiment without wit"
       ],
-      "effects_on_stakes": "Cold wit produces comedy without heart â€” audience laughs but does not feel; warm sentiment without wit produces romance without chemistry â€” audience feels but is not charmed",
+      "effects_on_stakes": "Cold wit produces comedy without heart — audience laughs but does not feel; warm sentiment without wit produces romance without chemistry — audience feels but is not charmed",
       "effects_on_character": "Characters become either comedians or romantic leads rather than both simultaneously",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge names the tonal failure â€” either half of the tonal equation without the other"
+        "This edge names the tonal failure — either half of the tonal equation without the other"
       ],
       "severity": "hard"
     }

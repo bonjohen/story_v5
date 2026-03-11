@@ -36,7 +36,7 @@
       "label": "Young Adult Promise",
       "role": "Genre Promise",
       "level": 1,
-      "definition": "The audience is promised stories in which a young protagonist navigates the turbulent crossing from childhood into selfhood â€” where identity, belonging, first experiences, and contested authority produce choices that feel absolutely world-defining from inside the protagonist's perspective.",
+      "definition": "The audience is promised stories in which a young protagonist navigates the turbulent crossing from childhood into selfhood — where identity, belonging, first experiences, and contested authority produce choices that feel absolutely world-defining from inside the protagonist's perspective.",
       "entry_conditions": [
         "Story is positioned as Young Adult"
       ],
@@ -65,7 +65,7 @@
       "label": "Protagonist Must Be in the Process of Identity Formation",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The central character must not yet know who they are â€” they are actively constructing a self, testing values, and discovering what they believe, want, and are willing to defend. Identity formation is not backstory; it is the live event of the narrative.",
+      "definition": "The central character must not yet know who they are — they are actively constructing a self, testing values, and discovering what they believe, want, and are willing to defend. Identity formation is not backstory; it is the live event of the narrative.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -93,7 +93,7 @@
       "label": "First Experiences Carry Disproportionate Emotional Weight",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "In YA, firsts â€” first love, first betrayal, first public failure, first moral compromise, first act of courage â€” are not merely plot events; they are orienting experiences that restructure the protagonist's understanding of the world. The narrative must honor this weight rather than minimize it.",
+      "definition": "In YA, firsts — first love, first betrayal, first public failure, first moral compromise, first act of courage — are not merely plot events; they are orienting experiences that restructure the protagonist's understanding of the world. The narrative must honor this weight rather than minimize it.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -111,7 +111,7 @@
       ],
       "signals_in_text": [
         "Narrative slows and expands around first-experience scenes",
-        "Protagonist's body and senses are foregrounded â€” physical specificity signals emotional intensity",
+        "Protagonist's body and senses are foregrounded — physical specificity signals emotional intensity",
         "The experience is described as if nothing like it has happened before, because for this character nothing has"
       ],
       "severity": "hard"
@@ -121,7 +121,7 @@
       "label": "Authority Structures Must Be Visible and Tested",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Parents, schools, social institutions, and systemic rules must appear as real forces in the story â€” not as neutral scenery but as entities that exert pressure, demand conformity, or obstruct the protagonist's self-determination. These structures must also be tested: challenged, questioned, circumvented, or in some cases rightfully accepted.",
+      "definition": "Parents, schools, social institutions, and systemic rules must appear as real forces in the story — not as neutral scenery but as entities that exert pressure, demand conformity, or obstruct the protagonist's self-determination. These structures must also be tested: challenged, questioned, circumvented, or in some cases rightfully accepted.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -129,14 +129,14 @@
         "At least one authority structure is actively engaged as a force the protagonist must navigate or resist"
       ],
       "typical_variants": [
-        "Parental authority â€” protective, controlling, or absent",
-        "Institutional authority â€” school rules, government systems, religious structures",
-        "Social authority â€” peer hierarchies, popularity codes, community norms"
+        "Parental authority — protective, controlling, or absent",
+        "Institutional authority — school rules, government systems, religious structures",
+        "Social authority — peer hierarchies, popularity codes, community norms"
       ],
       "failure_modes": [
         "Authority figures are cardboard villains with no internal logic, making the conflict trivial",
         "Authority is mentioned but never actually constrains the protagonist",
-        "All authority is validated â€” protagonist simply learns to obey"
+        "All authority is validated — protagonist simply learns to obey"
       ],
       "signals_in_text": [
         "Adult characters have agendas that conflict with the protagonist's",
@@ -150,7 +150,7 @@
       "label": "Choices Must Feel World-Defining from the Protagonist's Perspective",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Every major choice the protagonist makes must feel â€” from inside their experience â€” as if the entire shape of their life hinges on it. The narrative must sustain and honor this subjective absoluteness, even when an adult reader might recognize the choice as one of many. The genre contract requires that the protagonist's perspective governs the emotional register.",
+      "definition": "Every major choice the protagonist makes must feel — from inside their experience — as if the entire shape of their life hinges on it. The narrative must sustain and honor this subjective absoluteness, even when an adult reader might recognize the choice as one of many. The genre contract requires that the protagonist's perspective governs the emotional register.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -194,11 +194,11 @@
         "Friendship-to-rivalry or rivalry-to-friendship arc"
       ],
       "failure_modes": [
-        "Realism becomes an excuse for low stakes â€” nothing feels consequential",
+        "Realism becomes an excuse for low stakes — nothing feels consequential",
         "Contemporary setting treated as mere backdrop rather than active social pressure system"
       ],
       "signals_in_text": [
-        "Specific, named social textures â€” school lunch tables, texts, social media dynamics, family dinner conversations",
+        "Specific, named social textures — school lunch tables, texts, social media dynamics, family dinner conversations",
         "Conflict rooted in who knows what about whom and who belongs where"
       ],
       "severity": "soft"
@@ -208,7 +208,7 @@
       "label": "YA Dystopian / Speculative",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "YA in a speculative or dystopian world where external systems â€” oppressive governments, magical hierarchies, post-apocalyptic social orders â€” literalize and externalize the pressures of identity formation, authority, and belonging that are internal in contemporary realism. The speculative premise must remain tethered to the YA emotional core.",
+      "definition": "YA in a speculative or dystopian world where external systems — oppressive governments, magical hierarchies, post-apocalyptic social orders — literalize and externalize the pressures of identity formation, authority, and belonging that are internal in contemporary realism. The speculative premise must remain tethered to the YA emotional core.",
       "entry_conditions": [
         "Core constraints apply",
         "Setting operates by speculative or altered rules"
@@ -222,7 +222,7 @@
         "Post-catastrophe world requiring a new moral order to be built"
       ],
       "failure_modes": [
-        "World-building crowds out character interiority â€” protagonist becomes a plot function",
+        "World-building crowds out character interiority — protagonist becomes a plot function",
         "Speculative premise is decorative rather than generating genuine YA identity pressure"
       ],
       "signals_in_text": [
@@ -248,10 +248,10 @@
       "typical_variants": [
         "First love that ends in loss but produces growth",
         "First love that survives at cost of significant self-disclosure",
-        "Love triangle as identity mirror â€” who the protagonist chooses reflects who they are becoming"
+        "Love triangle as identity mirror — who the protagonist chooses reflects who they are becoming"
       ],
       "failure_modes": [
-        "Romance is wish-fulfillment without risk â€” protagonist gets the relationship and it costs them nothing",
+        "Romance is wish-fulfillment without risk — protagonist gets the relationship and it costs them nothing",
         "Love interest is purely a prize rather than a person who challenges the protagonist's self-concept"
       ],
       "signals_in_text": [
@@ -323,7 +323,7 @@
       "label": "Peer Relationships Define the Social World",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "Friends, rivals, love interests, and frenemies are the primary relational fabric of the story. Adult relationships matter but the world the protagonist lives in moment-to-moment is constituted by peer dynamics â€” loyalty, betrayal, attraction, exclusion, and solidarity among near-equals.",
+      "definition": "Friends, rivals, love interests, and frenemies are the primary relational fabric of the story. Adult relationships matter but the world the protagonist lives in moment-to-moment is constituted by peer dynamics — loyalty, betrayal, attraction, exclusion, and solidarity among near-equals.",
       "entry_conditions": [
         "Setting and social world established"
       ],
@@ -351,7 +351,7 @@
       "label": "Adult World as Both Shelter and Cage",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The adult world in YA must function ambivalently â€” it provides the protagonist with real protection, resources, and care (shelter) while also constraining, misunderstanding, or threatening to absorb or erase the protagonist's emerging self (cage). Neither pure villain nor pure ally, the adult world is the complex backdrop against which the protagonist must define themselves.",
+      "definition": "The adult world in YA must function ambivalently — it provides the protagonist with real protection, resources, and care (shelter) while also constraining, misunderstanding, or threatening to absorb or erase the protagonist's emerging self (cage). Neither pure villain nor pure ally, the adult world is the complex backdrop against which the protagonist must define themselves.",
       "entry_conditions": [
         "Setting and adult characters established"
       ],
@@ -364,8 +364,8 @@
         "Mentor who empowers the protagonist but whose own limitations become a ceiling to break through"
       ],
       "failure_modes": [
-        "Adults are uniformly villainous â€” protagonist is right about everything, adults about nothing",
-        "Adults are uniformly right â€” protagonist's resistance is framed as mere immaturity to be corrected"
+        "Adults are uniformly villainous — protagonist is right about everything, adults about nothing",
+        "Adults are uniformly right — protagonist's resistance is framed as mere immaturity to be corrected"
       ],
       "signals_in_text": [
         "Adult characters have legible and sometimes sympathetic reasons for their constraints",
@@ -379,7 +379,7 @@
       "label": "Identity-Defining Choice Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "At least one scene where the protagonist must make a choice that is explicitly about who they are â€” not merely what to do next, but what kind of person they are committed to being. This scene may involve a public declaration, a private decision, or a refusal that costs the protagonist something they valued.",
+      "definition": "At least one scene where the protagonist must make a choice that is explicitly about who they are — not merely what to do next, but what kind of person they are committed to being. This scene may involve a public declaration, a private decision, or a refusal that costs the protagonist something they valued.",
       "entry_conditions": [
         "Stakes are established",
         "Protagonist's identity is under pressure"
@@ -410,7 +410,7 @@
       "label": "First Experience / Crossing Threshold Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "At least one scene staging the protagonist's first crossing of a significant experiential threshold â€” first kiss, first act of rebellion, first time they are seen clearly by another person, first confrontation with genuine loss or injustice. The scene must honor the subjective magnitude of the first rather than treating it as ordinary.",
+      "definition": "At least one scene staging the protagonist's first crossing of a significant experiential threshold — first kiss, first act of rebellion, first time they are seen clearly by another person, first confrontation with genuine loss or injustice. The scene must honor the subjective magnitude of the first rather than treating it as ordinary.",
       "entry_conditions": [
         "Protagonist is established as inexperienced in this domain",
         "The threshold experience has been anticipated or foreshadowed"
@@ -425,14 +425,14 @@
         "First encounter with death, loss, or systemic injustice at close range"
       ],
       "failure_modes": [
-        "First experience is underwritten â€” happens quickly and is moved past",
+        "First experience is underwritten — happens quickly and is moved past",
         "Narrator or other characters minimize the experience as it occurs, robbing it of its charge",
         "The 'first' is unclear because prior experiences have been mentioned offhandedly"
       ],
       "signals_in_text": [
         "Scene slows significantly",
         "Sensory detail is heightened",
-        "Interior language shifts â€” syntax or diction becomes more charged than baseline narration",
+        "Interior language shifts — syntax or diction becomes more charged than baseline narration",
         "A before and after is visible in how the protagonist carries themselves in subsequent scenes"
       ],
       "severity": "hard"
@@ -442,7 +442,7 @@
       "label": "Confrontation with Authority or System Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "At least one scene where the protagonist directly engages with an authority structure â€” not merely chafing privately but in active confrontation: an argument with a parent, a challenge to an institutional rule, a refusal to comply with a systemic demand. The scene must have stakes and consequences.",
+      "definition": "At least one scene where the protagonist directly engages with an authority structure — not merely chafing privately but in active confrontation: an argument with a parent, a challenge to an institutional rule, a refusal to comply with a systemic demand. The scene must have stakes and consequences.",
       "entry_conditions": [
         "Authority structure has been established",
         "Protagonist's need to resist or engage has been built"
@@ -453,7 +453,7 @@
       ],
       "typical_variants": [
         "Direct argument with a parent where both parties reveal something true about themselves",
-        "Institutional challenge â€” filing a complaint, staging a protest, refusing a direct order",
+        "Institutional challenge — filing a complaint, staging a protest, refusing a direct order",
         "Exposure of authority hypocrisy in a public or semi-public setting"
       ],
       "failure_modes": [
@@ -473,7 +473,7 @@
       "label": "Emotional Intensity and Urgent Sincerity",
       "role": "Tone Marker",
       "level": null,
-      "definition": "YA requires a sustained commitment to the emotional reality of teen experience â€” treating feelings as genuine, urgent, and worthy of full narrative attention. Ironic distance, arch detachment, and retrospective wisdom are permitted only when they emerge from within the protagonist's voice, not imposed from outside. The default register is sincere and present-tense in its emotional commitment.",
+      "definition": "YA requires a sustained commitment to the emotional reality of teen experience — treating feelings as genuine, urgent, and worthy of full narrative attention. Ironic distance, arch detachment, and retrospective wisdom are permitted only when they emerge from within the protagonist's voice, not imposed from outside. The default register is sincere and present-tense in its emotional commitment.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -503,7 +503,7 @@
       "label": "Condescension Toward Teen Experience",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "YA fails when an adult perspective is imposed on teen feelings â€” when the narrative signals (through narrator commentary, adult character pronouncements, or tonal deflation) that the protagonist's experiences are less real, less important, or less worthy of full attention because they belong to an adolescent. This may take the form of ironic undercutting, premature wisdom, or the framing of intense teen emotion as a developmental phase to be outgrown rather than a genuine human experience to be honored.",
+      "definition": "YA fails when an adult perspective is imposed on teen feelings — when the narrative signals (through narrator commentary, adult character pronouncements, or tonal deflation) that the protagonist's experiences are less real, less important, or less worthy of full attention because they belong to an adolescent. This may take the form of ironic undercutting, premature wisdom, or the framing of intense teen emotion as a developmental phase to be outgrown rather than a genuine human experience to be honored.",
       "entry_conditions": [
         "Emotional intensity is occurring in the story"
       ],
@@ -516,7 +516,7 @@
         "Teen feelings are described with clinical or ironic distance that drains them of charge"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation"
+        "This node IS the failure mode — its presence indicates a genre violation"
       ],
       "signals_in_text": [
         "Narratorial voice shifts to a wiser, older register at emotional peaks",
@@ -527,10 +527,10 @@
     },
     {
       "node_id": "YA_N91_ABSENT_FORMATION",
-      "label": "Static Identity â€” No Formation Occurs",
+      "label": "Static Identity — No Formation Occurs",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "YA fails when the protagonist arrives fully formed and leaves unchanged â€” when the story is a series of events that happen to a person whose identity is never in genuine flux. The genre requires that the protagonist's sense of self be live material throughout the narrative, shaped by what they experience and choose.",
+      "definition": "YA fails when the protagonist arrives fully formed and leaves unchanged — when the story is a series of events that happen to a person whose identity is never in genuine flux. The genre requires that the protagonist's sense of self be live material throughout the narrative, shaped by what they experience and choose.",
       "entry_conditions": [
         "Protagonist is established"
       ],
@@ -543,11 +543,11 @@
         "Growth is declared at the end without being dramatized through scenes"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation"
+        "This node IS the failure mode — its presence indicates a genre violation"
       ],
       "signals_in_text": [
         "Protagonist's self-description at the end of the story matches their self-description at the beginning",
-        "No scenes hinge on who the protagonist is â€” only on what they do",
+        "No scenes hinge on who the protagonist is — only on what they do",
         "Other characters do not respond to the protagonist differently as the story progresses"
       ],
       "severity": "hard"
@@ -569,7 +569,7 @@
         "Some YA stories emphasize the social or romantic dimension more than the explicitly internal one, but identity formation remains the substrate"
       ],
       "anti_patterns": [
-        "Protagonist is fully formed adult-in-miniature â€” genre promise is broken from the first page"
+        "Protagonist is fully formed adult-in-miniature — genre promise is broken from the first page"
       ],
       "severity": "hard"
     },
@@ -583,9 +583,9 @@
         "Genre promise established"
       ],
       "effects_on_stakes": "First experiences must be treated as discoveries rather than repetitions",
-      "effects_on_character": "Character has not been here before â€” their inexperience is authentic and must be narratively protected",
+      "effects_on_character": "Character has not been here before — their inexperience is authentic and must be narratively protected",
       "common_alternatives": [
-        "Some YA protagonists are experienced in one domain but a first-timer in another â€” the asymmetry itself is the story"
+        "Some YA protagonists are experienced in one domain but a first-timer in another — the asymmetry itself is the story"
       ],
       "anti_patterns": [
         "Firsts are underwritten because the author has been there before and forgets the reader's proxy hasn't"
@@ -604,10 +604,10 @@
       "effects_on_stakes": "Authority structures create the external pressure that forces identity choices",
       "effects_on_character": "Protagonist's identity is partly defined by how they position themselves relative to authority",
       "common_alternatives": [
-        "In some YA the primary authority is peer rather than institutional â€” the popular crowd as the constraining system"
+        "In some YA the primary authority is peer rather than institutional — the popular crowd as the constraining system"
       ],
       "anti_patterns": [
-        "Authority is invisible â€” protagonist faces no external pressure, making their choices purely internal and untested"
+        "Authority is invisible — protagonist faces no external pressure, making their choices purely internal and untested"
       ],
       "severity": "hard"
     },
@@ -621,12 +621,12 @@
         "Genre promise established"
       ],
       "effects_on_stakes": "The subjective magnitude of choices must be honored regardless of their objective scale",
-      "effects_on_character": "Character experiences choices as irreversible and total â€” the narrative must sustain that experience",
+      "effects_on_character": "Character experiences choices as irreversible and total — the narrative must sustain that experience",
       "common_alternatives": [
         "Some YA achieves world-defining weight through accumulation of small choices rather than one large one"
       ],
       "anti_patterns": [
-        "Narrator contextualizes choices as 'not that big a deal' â€” deflates genre promise"
+        "Narrator contextualizes choices as 'not that big a deal' — deflates genre promise"
       ],
       "severity": "hard"
     },
@@ -642,7 +642,7 @@
       "effects_on_stakes": "Tone signals that what happens matters fully and is not to be ironized away",
       "effects_on_character": "Character's feelings are the authoritative measure of a scene's significance",
       "common_alternatives": [
-        "Dark or cynical YA can maintain sincerity within a grim register â€” sincerity does not require optimism"
+        "Dark or cynical YA can maintain sincerity within a grim register — sincerity does not require optimism"
       ],
       "anti_patterns": [
         "Detached, ironic narrator treats teen experience as entertainment rather than genuine lived reality"
@@ -658,7 +658,7 @@
       "preconditions": [
         "Setting is the contemporary world without speculative alteration"
       ],
-      "effects_on_stakes": "Stakes are grounded in social reality â€” what people actually see, judge, and remember",
+      "effects_on_stakes": "Stakes are grounded in social reality — what people actually see, judge, and remember",
       "effects_on_character": "Identity is formed through real social friction rather than fantastical tests",
       "common_alternatives": [
         "YA dystopian",
@@ -707,7 +707,7 @@
         "Adventure/fantasy"
       ],
       "anti_patterns": [
-        "Romance present but does not produce genuine self-knowledge â€” protagonist is the same after as before"
+        "Romance present but does not produce genuine self-knowledge — protagonist is the same after as before"
       ],
       "severity": "soft"
     },
@@ -759,10 +759,10 @@
       "preconditions": [
         "Contemporary realism subgenre selected"
       ],
-      "effects_on_stakes": "Peer relationships are the primary social stakes â€” belonging and exclusion are felt daily",
+      "effects_on_stakes": "Peer relationships are the primary social stakes — belonging and exclusion are felt daily",
       "effects_on_character": "Identity is continuously reflected and contested through peer interaction",
       "common_alternatives": [
-        "Some YA features a protagonist who is isolated from peers â€” but the isolation itself must be a felt condition, not a narrative convenience"
+        "Some YA features a protagonist who is isolated from peers — but the isolation itself must be a felt condition, not a narrative convenience"
       ],
       "anti_patterns": [
         "Protagonist navigates major life events without engaging meaningfully with any peers"
@@ -781,7 +781,7 @@
       "effects_on_stakes": "The system's classifications and rankings are the hierarchy the protagonist must navigate or resist",
       "effects_on_character": "Who the system says the protagonist is comes into conflict with who they are becoming",
       "common_alternatives": [
-        "Hierarchy may be faction-based, ability-based, or caste-based â€” the structural function is the same"
+        "Hierarchy may be faction-based, ability-based, or caste-based — the structural function is the same"
       ],
       "anti_patterns": [
         "Dystopian hierarchy is defeated externally rather than being meaningfully engaged with as an identity-shaping force"
@@ -797,10 +797,10 @@
       "preconditions": [
         "YA romance subgenre selected"
       ],
-      "effects_on_stakes": "Romantic choices have social consequences within the peer world â€” who you love reflects on who you are publicly",
-      "effects_on_character": "Romance cannot be separated from social belonging â€” the choice of partner is also a social statement",
+      "effects_on_stakes": "Romantic choices have social consequences within the peer world — who you love reflects on who you are publicly",
+      "effects_on_character": "Romance cannot be separated from social belonging — the choice of partner is also a social statement",
       "common_alternatives": [
-        "Some YA romance explicitly breaks from the peer world â€” but the break itself must be a cost that is felt"
+        "Some YA romance explicitly breaks from the peer world — but the break itself must be a cost that is felt"
       ],
       "anti_patterns": [
         "Romance occurs in social vacuum with no peer response, consequence, or observation"
@@ -819,7 +819,7 @@
       "effects_on_stakes": "Leaving or challenging the adult world is part of the adventure's meaning",
       "effects_on_character": "The protagonist's break from adult structures is the crucible in which their self is formed",
       "common_alternatives": [
-        "Some YA adventure features a mentor adult who is genuinely helpful â€” but even this relationship must be grown past"
+        "Some YA adventure features a mentor adult who is genuinely helpful — but even this relationship must be grown past"
       ],
       "anti_patterns": [
         "Adventure is completed through adult guidance with no genuine self-determination by the protagonist"
@@ -876,10 +876,10 @@
       "effects_on_stakes": "Confrontation puts the relationship with the adult world at genuine risk",
       "effects_on_character": "Protagonist must engage directly with authority rather than only suffering or resenting it privately",
       "common_alternatives": [
-        "Confrontation may be with a system rather than an individual â€” filing a grievance, organizing a response, exposing a hypocrisy"
+        "Confrontation may be with a system rather than an individual — filing a grievance, organizing a response, exposing a hypocrisy"
       ],
       "anti_patterns": [
-        "Protagonist resists authority only internally â€” no external confrontation ever occurs"
+        "Protagonist resists authority only internally — no external confrontation ever occurs"
       ],
       "severity": "hard"
     },
@@ -898,7 +898,7 @@
         "In some YA the threshold scene precedes the identity choice and creates the conditions for it"
       ],
       "anti_patterns": [
-        "Identity choice is made but no threshold is crossed â€” everything remains theoretically reversible"
+        "Identity choice is made but no threshold is crossed — everything remains theoretically reversible"
       ],
       "severity": "hard"
     },
@@ -914,7 +914,7 @@
       "effects_on_stakes": "Authority responds to the protagonist's changed state, making the confrontation necessary",
       "effects_on_character": "Having crossed the threshold, the protagonist must now defend or declare the new self to authority",
       "common_alternatives": [
-        "Confrontation may precede the threshold experience â€” authority's opposition catalyzes the crossing"
+        "Confrontation may precede the threshold experience — authority's opposition catalyzes the crossing"
       ],
       "anti_patterns": [
         "Threshold is crossed but authority takes no notice and no confrontation results"
@@ -933,7 +933,7 @@
       "effects_on_stakes": "Confrontation raises the cost of the identity choice to its maximum",
       "effects_on_character": "What authority demands or reveals forces the protagonist to choose who they finally are",
       "common_alternatives": [
-        "In some YA the confrontation IS the identity choice â€” they are the same scene"
+        "In some YA the confrontation IS the identity choice — they are the same scene"
       ],
       "anti_patterns": [
         "Confrontation resolves without producing any crystallization of the protagonist's identity"
@@ -944,18 +944,18 @@
       "edge_id": "YA_E70_ALL_TO_ADULT_SHELTER",
       "from": "YA_N12_AUTHORITY_VISIBLE",
       "to": "YA_N42_ADULT_WORLD_SHELTER_CAGE",
-      "label": "Visible authority must be ambivalent â€” shelter and cage simultaneously",
+      "label": "Visible authority must be ambivalent — shelter and cage simultaneously",
       "meaning": "introduces setting rule",
       "preconditions": [
         "Authority structures are established"
       ],
       "effects_on_stakes": "The ambivalence of authority raises the cost of both compliance and resistance",
-      "effects_on_character": "Protagonist cannot dismiss authority as simply wrong â€” they must navigate its genuine complexity",
+      "effects_on_character": "Protagonist cannot dismiss authority as simply wrong — they must navigate its genuine complexity",
       "common_alternatives": [
         "Some YA resolves the ambivalence by story's end, but only after genuinely inhabiting it"
       ],
       "anti_patterns": [
-        "Authority is either pure villain or pure helper â€” protagonist's navigation is too easy in either direction"
+        "Authority is either pure villain or pure helper — protagonist's navigation is too easy in either direction"
       ],
       "severity": "hard"
     },
@@ -968,11 +968,11 @@
       "preconditions": [
         "Emotional intensity is occurring but is undercut by narratorial or adult perspective"
       ],
-      "effects_on_stakes": "Stakes are deflated â€” reader is positioned above rather than with the protagonist",
+      "effects_on_stakes": "Stakes are deflated — reader is positioned above rather than with the protagonist",
       "effects_on_character": "Character's feelings are implicitly invalidated, making the story a corrective rather than an experience",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     },
@@ -980,7 +980,7 @@
       "edge_id": "YA_E91_FORMATION_WARNING",
       "from": "YA_N10_IDENTITY_FORMATION",
       "to": "YA_N91_ABSENT_FORMATION",
-      "label": "Identity formation required â€” static protagonist violates genre",
+      "label": "Identity formation required — static protagonist violates genre",
       "meaning": "prohibits element",
       "preconditions": [
         "Protagonist faces events but their identity remains unchanged throughout"
@@ -989,7 +989,7 @@
       "effects_on_character": "Character is a plot vehicle rather than a being in the process of becoming",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     }

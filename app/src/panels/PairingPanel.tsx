@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { useGraphStore } from '../store/graphStore.ts'
+import { UI_COLORS, COMPAT_COLORS } from '../theme/colors.ts'
 
 // ---------------------------------------------------------------------------
 // Types for cross-reference data
@@ -128,7 +129,7 @@ export function PairingPanel() {
           label="Archetype"
           name={archetypeName}
           meta={archetypeMeta}
-          color="#f59e0b"
+          color={UI_COLORS.archetype}
           placeholder="Select an archetype"
         />
         <div style={{
@@ -145,7 +146,7 @@ export function PairingPanel() {
           label="Genre"
           name={genreName}
           meta={genreMeta}
-          color="#8b5cf6"
+          color={UI_COLORS.genre}
           placeholder="Select a genre"
         />
       </div>
@@ -297,19 +298,19 @@ const TIER_INFO = {
   naturally_compatible: {
     label: 'Naturally Compatible',
     description: 'This pairing is common and structurally reinforcing',
-    color: '#22c55e',
+    color: COMPAT_COLORS.naturally_compatible,
     icon: '\u2605',
   },
   occasionally_compatible: {
     label: 'Occasionally Compatible',
     description: 'Works with deliberate adaptation',
-    color: '#f59e0b',
+    color: COMPAT_COLORS.occasionally_compatible,
     icon: '\u25C9',
   },
   rarely_compatible: {
     label: 'Rarely Compatible',
     description: 'Unusual and structurally challenging',
-    color: '#ef4444',
+    color: COMPAT_COLORS.rarely_compatible,
     icon: '\u26A0',
   },
 } as const

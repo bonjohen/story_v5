@@ -36,7 +36,7 @@
       "label": "Romance Promise",
       "role": "Genre Promise",
       "level": 1,
-      "definition": "The audience is promised an emotional journey centered on love and intimate connection â€” a story where two people are drawn together, tested by real obstacles, and must choose each other through acts of vulnerability and courage. The relationship itself is the plot.",
+      "definition": "The audience is promised an emotional journey centered on love and intimate connection — a story where two people are drawn together, tested by real obstacles, and must choose each other through acts of vulnerability and courage. The relationship itself is the plot.",
       "entry_conditions": [
         "Story is positioned as romance"
       ],
@@ -57,7 +57,7 @@
       "signals_in_text": [
         "Opening pages or scenes establish one or both leads with an unmet emotional need",
         "The potential relationship is felt as significant from the first encounter",
-        "Narrative attention â€” scene time, interiority, sensory detail â€” is concentrated on the emotional dynamic between the leads"
+        "Narrative attention — scene time, interiority, sensory detail — is concentrated on the emotional dynamic between the leads"
       ],
       "severity": "hard"
     },
@@ -95,7 +95,7 @@
       "label": "Emotional Vulnerability Must Be Present in Both Parties",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Both leads must have something real at stake emotionally â€” wounds, fears, or needs that the relationship threatens to expose and ultimately heals. A Romance where only one character is emotionally invested produces an unbalanced dynamic that cannot sustain the genre's promise. Vulnerability is not weakness; it is the specific courage that romantic love requires.",
+      "definition": "Both leads must have something real at stake emotionally — wounds, fears, or needs that the relationship threatens to expose and ultimately heals. A Romance where only one character is emotionally invested produces an unbalanced dynamic that cannot sustain the genre's promise. Vulnerability is not weakness; it is the specific courage that romantic love requires.",
       "entry_conditions": [
         "Genre promise established",
         "Both leads established as characters with interior lives"
@@ -104,18 +104,18 @@
         "Both characters have visible emotional wounds or fears that the relationship forces them to confront"
       ],
       "typical_variants": [
-        "Symmetrical wounds â€” both characters bear comparable emotional scars from past loss or betrayal",
-        "Complementary wounds â€” one character's fear of abandonment meets another's fear of engulfment",
-        "Hidden vulnerability â€” a character who presents as invulnerable is gradually revealed to be deeply at risk"
+        "Symmetrical wounds — both characters bear comparable emotional scars from past loss or betrayal",
+        "Complementary wounds — one character's fear of abandonment meets another's fear of engulfment",
+        "Hidden vulnerability — a character who presents as invulnerable is gradually revealed to be deeply at risk"
       ],
       "failure_modes": [
         "One lead is a wish-fulfillment object with no interior life or risk",
         "Vulnerability is stated in backstory but never felt in present-tense scenes",
-        "Characters protect themselves perfectly throughout â€” no real emotional exposure occurs"
+        "Characters protect themselves perfectly throughout — no real emotional exposure occurs"
       ],
       "signals_in_text": [
         "Scenes where a character reveals more than they intended to",
-        "Moments of internal resistance â€” characters pulling back from closeness even when they want it",
+        "Moments of internal resistance — characters pulling back from closeness even when they want it",
         "Physical or verbal tells that betray emotion the character is trying to conceal"
       ],
       "severity": "hard"
@@ -125,7 +125,7 @@
       "label": "Obstacles to the Relationship Must Be Genuine and Consequential",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The forces keeping the leads apart must be rooted in real character psychology, authentic circumstance, or genuine social pressure â€” not merely misunderstanding that a single honest conversation would dissolve. The reader must feel that the relationship faces true resistance. Obstacles must raise the cost of choosing each other, not merely delay it.",
+      "definition": "The forces keeping the leads apart must be rooted in real character psychology, authentic circumstance, or genuine social pressure — not merely misunderstanding that a single honest conversation would dissolve. The reader must feel that the relationship faces true resistance. Obstacles must raise the cost of choosing each other, not merely delay it.",
       "entry_conditions": [
         "Genre promise established",
         "Leads have been established as drawn to each other"
@@ -145,7 +145,7 @@
         "The obstacle disappears conveniently without the characters overcoming it through effort or change"
       ],
       "signals_in_text": [
-        "Characters make choices that increase distance even when closeness is available â€” and we understand why",
+        "Characters make choices that increase distance even when closeness is available — and we understand why",
         "Third parties or circumstances intervene in ways that have genuine stakes",
         "Resolution of the obstacle requires one or both characters to change, risk, or sacrifice something real"
       ],
@@ -156,7 +156,7 @@
       "label": "The Relationship Outcome Must Feel Earned, Not Given",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The emotional resolution of a Romance â€” whether a Happily Ever After (HEA) or a Happy For Now (HFN) â€” must be the consequence of choices the characters made, courage they demonstrated, and growth they achieved. It cannot arrive as a gift. Both characters must actively choose each other across the final barrier. The reader must feel that the relationship was won, not merely received.",
+      "definition": "The emotional resolution of a Romance — whether a Happily Ever After (HEA) or a Happy For Now (HFN) — must be the consequence of choices the characters made, courage they demonstrated, and growth they achieved. It cannot arrive as a gift. Both characters must actively choose each other across the final barrier. The reader must feel that the relationship was won, not merely received.",
       "entry_conditions": [
         "Obstacles have been established",
         "Both characters have been tested"
@@ -168,12 +168,12 @@
         "Both characters must separately decide to risk everything before reunion is possible",
         "One character makes a grand gesture that costs them something significant",
         "The resolution requires admitting a fundamental truth that was previously hidden",
-        "Happy For Now ending where the relationship is real but explicitly provisional â€” and that provisionality feels honest"
+        "Happy For Now ending where the relationship is real but explicitly provisional — and that provisionality feels honest"
       ],
       "failure_modes": [
         "External circumstances force the characters together without either one choosing",
         "Misunderstanding is resolved by a third party explaining rather than characters confronting it directly",
-        "The final union is too easy â€” the last obstacle evaporates rather than being overcome",
+        "The final union is too easy — the last obstacle evaporates rather than being overcome",
         "Resolution occurs but one character has not demonstrated growth"
       ],
       "signals_in_text": [
@@ -188,7 +188,7 @@
       "label": "Contemporary Romance",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Romance set in the present day or recent past, within recognizable modern social contexts â€” workplaces, cities, families, digital life. The central relationship navigates obstacles drawn from contemporary experience: career ambition, social media, modern dating culture, economic pressure, diverse identity politics, and the specific textures of contemporary intimacy.",
+      "definition": "Romance set in the present day or recent past, within recognizable modern social contexts — workplaces, cities, families, digital life. The central relationship navigates obstacles drawn from contemporary experience: career ambition, social media, modern dating culture, economic pressure, diverse identity politics, and the specific textures of contemporary intimacy.",
       "entry_conditions": [
         "Core constraints apply",
         "Setting is the present or recent past",
@@ -207,7 +207,7 @@
       "failure_modes": [
         "Contemporary setting is window dressing with no effect on the emotional dynamic",
         "Modern trappings (apps, social media) substitute for genuine character depth",
-        "Resolution depends on reverting to non-contemporary norms â€” woman gives up career, social pressures conveniently disappear"
+        "Resolution depends on reverting to non-contemporary norms — woman gives up career, social pressures conveniently disappear"
       ],
       "signals_in_text": [
         "Characters reference or are shaped by contemporary social contexts",
@@ -221,7 +221,7 @@
       "label": "Historical Romance",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Romance set in a past era â€” most commonly the British Regency, Victorian period, Medieval, or American frontier â€” where the social rules of the time create distinctive and consequential constraints on the relationship. Class, reputation, gender roles, chaperonage, and arranged marriage become structural forces against which the central relationship must fight. Historical accuracy serves emotional truth, not the reverse.",
+      "definition": "Romance set in a past era — most commonly the British Regency, Victorian period, Medieval, or American frontier — where the social rules of the time create distinctive and consequential constraints on the relationship. Class, reputation, gender roles, chaperonage, and arranged marriage become structural forces against which the central relationship must fight. Historical accuracy serves emotional truth, not the reverse.",
       "entry_conditions": [
         "Core constraints apply",
         "Setting is a historical period with research-supported social rules",
@@ -237,13 +237,13 @@
         "American frontier/Western romance (physical danger, community-building, gendered labor)"
       ],
       "failure_modes": [
-        "Historical setting is costume-deep â€” characters think and speak like contemporary people in period dress",
+        "Historical setting is costume-deep — characters think and speak like contemporary people in period dress",
         "Social stakes of the era are ignored when they would be inconvenient to the plot",
         "Anachronistic attitudes presented without tension (completely modern feminist heroine with no friction in a rigidly patriarchal world)"
       ],
       "signals_in_text": [
         "Period-appropriate social constraints create real obstacles for the central relationship",
-        "Characters navigate â€” resist, comply with, or subvert â€” the rules of their world with period-specific vocabulary",
+        "Characters navigate — resist, comply with, or subvert — the rules of their world with period-specific vocabulary",
         "Physical world details (clothing, transport, domestic life) are sensory and specific"
       ],
       "severity": "soft"
@@ -253,11 +253,11 @@
       "label": "Paranormal / Fantasy Romance",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Romance in which one or both leads are supernatural beings, or in which a fantasy or paranormal world provides the structural context for the central relationship. The otherworldly element must create or deepen the romantic obstacles â€” not merely decorate them. A vampire who cannot be with a human, a fae bond that forces closeness before trust is earned, a magic system that literalizes emotional stakes â€” the genre works when the fantastical and the emotional are inseparable.",
+      "definition": "Romance in which one or both leads are supernatural beings, or in which a fantasy or paranormal world provides the structural context for the central relationship. The otherworldly element must create or deepen the romantic obstacles — not merely decorate them. A vampire who cannot be with a human, a fae bond that forces closeness before trust is earned, a magic system that literalizes emotional stakes — the genre works when the fantastical and the emotional are inseparable.",
       "entry_conditions": [
         "Core constraints apply",
         "One or more supernatural / fantastical element is present",
-        "The fantastical element intersects with the romantic obstacle â€” it is not separable from the emotional arc"
+        "The fantastical element intersects with the romantic obstacle — it is not separable from the emotional arc"
       ],
       "exit_conditions": [
         "Romantic resolution requires navigating the specific challenges of the supernatural or fantastical context"
@@ -269,14 +269,14 @@
         "Witches, shifters, demons (power differentials with emotional resonance, pack/coven as community stakes)"
       ],
       "failure_modes": [
-        "Paranormal element is window dressing â€” remove it and the romance is identical",
+        "Paranormal element is window dressing — remove it and the romance is identical",
         "Supernatural power solves emotional problems that should require vulnerability and choice",
-        "World-building detail crowds out the emotional arc â€” reader knows more about the magic system than about what the characters feel"
+        "World-building detail crowds out the emotional arc — reader knows more about the magic system than about what the characters feel"
       ],
       "signals_in_text": [
         "The fantastical element creates a specific obstacle or intimacy that has no mundane equivalent",
         "Supernatural rules generate consequences that directly affect the relationship's progression",
-        "The love interest's otherness is part of the attraction and part of the danger â€” held in tension, not resolved early"
+        "The love interest's otherness is part of the attraction and part of the danger — held in tension, not resolved early"
       ],
       "severity": "soft"
     },
@@ -285,7 +285,7 @@
       "label": "Romantic Suspense",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Romance in which a thriller-level external threat â€” murder, kidnapping, stalking, espionage, organized crime â€” runs parallel to the developing central relationship. Both arcs must be fully functional: the romance must not be reducible to a subplot, and the suspense must generate genuine danger rather than mere action beats. The ideal Romantic Suspense story uses the threat to accelerate intimacy (forced proximity, life-or-death disclosure) while using the relationship to personalize the stakes of the danger.",
+      "definition": "Romance in which a thriller-level external threat — murder, kidnapping, stalking, espionage, organized crime — runs parallel to the developing central relationship. Both arcs must be fully functional: the romance must not be reducible to a subplot, and the suspense must generate genuine danger rather than mere action beats. The ideal Romantic Suspense story uses the threat to accelerate intimacy (forced proximity, life-or-death disclosure) while using the relationship to personalize the stakes of the danger.",
       "entry_conditions": [
         "Core constraints apply",
         "A credible external threat to life or safety exists alongside the romantic arc",
@@ -295,8 +295,8 @@
         "Both the external threat and the romantic obstacle are resolved in ways that feel connected to each other"
       ],
       "typical_variants": [
-        "Protector romance (bodyguard, law enforcement, military â€” professional duty vs. personal feeling)",
-        "Investigation romance (detective / amateur sleuth â€” solving the crime requires trusting the love interest)",
+        "Protector romance (bodyguard, law enforcement, military — professional duty vs. personal feeling)",
+        "Investigation romance (detective / amateur sleuth — solving the crime requires trusting the love interest)",
         "On-the-run romance (shared danger accelerates intimacy, forced trust before earned trust)",
         "Conspiracy romance (one or both leads discovers a threat that only the other can help address)"
       ],
@@ -306,7 +306,7 @@
         "The love interest is the antagonist of the suspense plot in a way that makes romantic resolution feel dishonest"
       ],
       "signals_in_text": [
-        "External threat and emotional resistance escalate in parallel â€” when danger peaks, so does romantic tension",
+        "External threat and emotional resistance escalate in parallel — when danger peaks, so does romantic tension",
         "Life-or-death situations force revelations the characters would not have made in safety",
         "Resolution of the suspense plot changes the conditions of the relationship in a way both characters must actively navigate"
       ],
@@ -317,7 +317,7 @@
       "label": "Setting Must Create Proximity Between Leads",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "Romance settings must engineer circumstances in which the two leads cannot avoid sustained contact. Forced proximity is the genre's primary structural mechanism for generating intimacy before emotional readiness â€” it creates the conditions under which vulnerability emerges involuntarily, walls come down through repetition, and feelings accumulate faster than defenses can be rebuilt. The proximity must be credible and specific to the chosen setting.",
+      "definition": "Romance settings must engineer circumstances in which the two leads cannot avoid sustained contact. Forced proximity is the genre's primary structural mechanism for generating intimacy before emotional readiness — it creates the conditions under which vulnerability emerges involuntarily, walls come down through repetition, and feelings accumulate faster than defenses can be rebuilt. The proximity must be credible and specific to the chosen setting.",
       "entry_conditions": [
         "Subgenre pattern selected",
         "Central pairing established"
@@ -334,11 +334,11 @@
       "failure_modes": [
         "Characters spend more time apart than together and relationship still deepens without earning it",
         "Proximity is stated but scenes consistently skip the contact that would generate intimacy",
-        "Characters can easily leave or avoid each other but inexplicably choose not to â€” for no reason the reader feels"
+        "Characters can easily leave or avoid each other but inexplicably choose not to — for no reason the reader feels"
       ],
       "signals_in_text": [
         "Setting geography or social architecture makes separation difficult or costly",
-        "Characters reference the unavoidability of contact â€” and sometimes resent it",
+        "Characters reference the unavoidability of contact — and sometimes resent it",
         "Intimacy develops in the gaps and textures of repeated shared experience, not in grand set pieces alone"
       ],
       "severity": "soft"
@@ -348,7 +348,7 @@
       "label": "Social and Cultural Barriers Must Be Visible",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The setting must make legible the social, cultural, economic, or community-level forces that stand between the leads. These barriers externalize the internal obstacles â€” they show the reader what each character stands to lose by choosing the other. Barriers must be felt as real by the characters and by their communities, not merely acknowledged as existing.",
+      "definition": "The setting must make legible the social, cultural, economic, or community-level forces that stand between the leads. These barriers externalize the internal obstacles — they show the reader what each character stands to lose by choosing the other. Barriers must be felt as real by the characters and by their communities, not merely acknowledged as existing.",
       "entry_conditions": [
         "Subgenre setting established",
         "Community or social world around the leads is defined"
@@ -360,13 +360,13 @@
         "Class difference that produces visible social discomfort when characters cross the line",
         "Family opposition that is shown in scenes rather than merely referenced",
         "Professional ethics or institutional rules that carry real penalties if broken",
-        "Community expectation that produces social friction â€” gossip, judgment, ostracism â€” when violated",
+        "Community expectation that produces social friction — gossip, judgment, ostracism — when violated",
         "Cultural or religious difference that generates genuine tension rather than exoticized backdrop"
       ],
       "failure_modes": [
         "Barriers are mentioned in dialogue but never affect a single scene's outcome",
         "Secondary characters tell the leads the barrier exists but no one acts on it",
-        "Barriers dissolve immediately when the leads decide to be together â€” no social cost paid"
+        "Barriers dissolve immediately when the leads decide to be together — no social cost paid"
       ],
       "signals_in_text": [
         "Third parties respond to the leads' proximity with concern, disapproval, or interference",
@@ -380,7 +380,7 @@
       "label": "Private Spaces vs. Public Performance Contrast",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "Romance settings must establish a clear distinction between who the characters are in public â€” performing competence, social role, emotional control â€” and who they are in private with each other. The private space is where genuine intimacy lives. The contrast between public mask and private self is a central engine of romantic tension: what the character allows themselves to feel or say only when no one else is watching becomes the measure of how far the relationship has progressed.",
+      "definition": "Romance settings must establish a clear distinction between who the characters are in public — performing competence, social role, emotional control — and who they are in private with each other. The private space is where genuine intimacy lives. The contrast between public mask and private self is a central engine of romantic tension: what the character allows themselves to feel or say only when no one else is watching becomes the measure of how far the relationship has progressed.",
       "entry_conditions": [
         "Setting establishes a public social world for both characters",
         "Private context for at least one encounter between the leads is created"
@@ -389,15 +389,15 @@
         "At least one scene establishes a meaningful difference between a character's public presentation and their private self as revealed to the love interest"
       ],
       "typical_variants": [
-        "Public antagonism / private attraction â€” characters who perform hostility in public drop it in private",
-        "Public composure / private vulnerability â€” the character who is always in control breaks down only when alone with the love interest",
-        "Public distance / private confession â€” what cannot be admitted in front of others escapes in unguarded moments",
-        "Public scandal / private truth â€” community perception of a character is wrong, and only the love interest sees truly"
+        "Public antagonism / private attraction — characters who perform hostility in public drop it in private",
+        "Public composure / private vulnerability — the character who is always in control breaks down only when alone with the love interest",
+        "Public distance / private confession — what cannot be admitted in front of others escapes in unguarded moments",
+        "Public scandal / private truth — community perception of a character is wrong, and only the love interest sees truly"
       ],
       "failure_modes": [
-        "Characters behave identically in public and private â€” no contrast, no revelation",
-        "Private scenes are simply action scenes moved indoors â€” they do not generate intimacy",
-        "The private self is stated but not dramatized â€” told via backstory rather than shown through behavior"
+        "Characters behave identically in public and private — no contrast, no revelation",
+        "Private scenes are simply action scenes moved indoors — they do not generate intimacy",
+        "The private self is stated but not dramatized — told via backstory rather than shown through behavior"
       ],
       "signals_in_text": [
         "Scene transitions from public to private spaces are marked with shifts in character register and dialogue style",
@@ -411,32 +411,32 @@
       "label": "Meeting / Attraction Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "The Romance must include a scene â€” early in the narrative â€” that establishes both the attraction and the obstacle between the leads simultaneously. Whether a classic meet-cute, a charged hostile first encounter, or the moment two estranged people see each other for the first time after a rupture, this scene must do two things at once: the reader must feel why these two people are drawn together, and feel why it will be complicated. The meeting contains the whole romance in miniature.",
+      "definition": "The Romance must include a scene — early in the narrative — that establishes both the attraction and the obstacle between the leads simultaneously. Whether a classic meet-cute, a charged hostile first encounter, or the moment two estranged people see each other for the first time after a rupture, this scene must do two things at once: the reader must feel why these two people are drawn together, and feel why it will be complicated. The meeting contains the whole romance in miniature.",
       "entry_conditions": [
         "Both leads are introduced",
         "Forced proximity or coincidence brings them into contact"
       ],
       "exit_conditions": [
-        "Attraction â€” chemical, intellectual, or emotional â€” is established and felt by the reader",
+        "Attraction — chemical, intellectual, or emotional — is established and felt by the reader",
         "At least one obstacle or source of complication is planted simultaneously",
         "The reader is invested in whether these two people will find their way to each other"
       ],
       "typical_variants": [
-        "The meet-cute â€” accident, coincidence, or absurd circumstance that creates charm alongside friction",
-        "The charged hostile encounter â€” enemies, rivals, or strangers with immediate antagonism that reads as repressed attraction",
-        "The reunion â€” second-chance romance opening on the moment estranged lovers see each other again with all unresolved feeling intact",
-        "The slow-burn delayed recognition â€” characters interact without initial attraction; a single moment shifts everything"
+        "The meet-cute — accident, coincidence, or absurd circumstance that creates charm alongside friction",
+        "The charged hostile encounter — enemies, rivals, or strangers with immediate antagonism that reads as repressed attraction",
+        "The reunion — second-chance romance opening on the moment estranged lovers see each other again with all unresolved feeling intact",
+        "The slow-burn delayed recognition — characters interact without initial attraction; a single moment shifts everything"
       ],
       "failure_modes": [
-        "Meeting scene generates attraction without any complication â€” too easy from the first moment",
-        "Meeting scene establishes the obstacle but not the attraction â€” reader doesn't understand why these two",
+        "Meeting scene generates attraction without any complication — too easy from the first moment",
+        "Meeting scene establishes the obstacle but not the attraction — reader doesn't understand why these two",
         "Meeting is narrated after the fact rather than dramatized in present scene",
-        "The leads' first meeting is inert â€” no chemistry, no friction, no narrative promise"
+        "The leads' first meeting is inert — no chemistry, no friction, no narrative promise"
       ],
       "signals_in_text": [
-        "Sensory detail is heightened during the meeting â€” how the other person looks, sounds, smells is registered with unusual attention",
+        "Sensory detail is heightened during the meeting — how the other person looks, sounds, smells is registered with unusual attention",
         "Internal monologue betrays awareness the character is trying to suppress",
-        "Dialogue carries double meaning â€” surface meaning and charged subtext operate simultaneously",
+        "Dialogue carries double meaning — surface meaning and charged subtext operate simultaneously",
         "Scene ends with both leads affected, though they may not admit it"
       ],
       "severity": "hard"
@@ -446,7 +446,7 @@
       "label": "Intimacy Breakthrough Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "A scene â€” typically in the second act â€” in which an emotional or physical barrier between the leads is overcome for the first time. This is not the final resolution; it is the first proof that the wall can come down, the first genuine crossing of the emotional distance. It raises the stakes of the story because now both characters know what they stand to lose. The breakthrough makes the eventual setback devastating and makes the final resolution feel possible rather than wished-for.",
+      "definition": "A scene — typically in the second act — in which an emotional or physical barrier between the leads is overcome for the first time. This is not the final resolution; it is the first proof that the wall can come down, the first genuine crossing of the emotional distance. It raises the stakes of the story because now both characters know what they stand to lose. The breakthrough makes the eventual setback devastating and makes the final resolution feel possible rather than wished-for.",
       "entry_conditions": [
         "Sustained tension between the leads has been established over multiple scenes",
         "At least one attempt at closeness has already been deflected or interrupted",
@@ -454,25 +454,25 @@
       ],
       "exit_conditions": [
         "A genuine moment of emotional or physical intimacy occurs that both characters register as crossing a line",
-        "The breakthrough is not immediately retracted â€” both characters must sit with having let their guard down",
-        "Stakes of the central relationship visibly rise â€” there is now something to lose"
+        "The breakthrough is not immediately retracted — both characters must sit with having let their guard down",
+        "Stakes of the central relationship visibly rise — there is now something to lose"
       ],
       "typical_variants": [
-        "First kiss or first physical intimacy â€” the crossing of physical distance that admits emotional desire",
-        "First confession â€” a character admits something true and painful that they have never admitted before",
-        "The moment of genuine help â€” one character allows the other to see them in need and accepts the help",
-        "The shared secret â€” an intimacy built from mutual disclosure that creates a private world between the leads"
+        "First kiss or first physical intimacy — the crossing of physical distance that admits emotional desire",
+        "First confession — a character admits something true and painful that they have never admitted before",
+        "The moment of genuine help — one character allows the other to see them in need and accepts the help",
+        "The shared secret — an intimacy built from mutual disclosure that creates a private world between the leads"
       ],
       "failure_modes": [
-        "Breakthrough occurs but is immediately walked back in the same scene â€” played as a false alarm",
-        "Breakthrough is physical but without emotional resonance â€” the scene is erotic but not intimate",
+        "Breakthrough occurs but is immediately walked back in the same scene — played as a false alarm",
+        "Breakthrough is physical but without emotional resonance — the scene is erotic but not intimate",
         "Breakthrough happens off-page and is referenced rather than dramatized",
-        "Breakthrough is too easy â€” no prior resistance means no genuine barrier was crossed"
+        "Breakthrough is too easy — no prior resistance means no genuine barrier was crossed"
       ],
       "signals_in_text": [
-        "Scene is paced slower than surrounding material â€” language becomes more precise, breath is held",
+        "Scene is paced slower than surrounding material — language becomes more precise, breath is held",
         "Both characters' interiority registers the significance of what has happened",
-        "Aftermath of the scene is treated with as much care as the event itself â€” how characters handle the morning after",
+        "Aftermath of the scene is treated with as much care as the event itself — how characters handle the morning after",
         "Reader can point to this scene as the moment the story's emotional stakes became personal and specific"
       ],
       "severity": "hard"
@@ -482,34 +482,34 @@
       "label": "Grand Gesture / Declaration / Commitment Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "The Romance climax requires a scene in which one or both characters make a public, costly, or irrevocable declaration of love and commitment â€” choosing each other in a way that cannot be unsaid. The grand gesture must be specific to who these characters are: it must cost the person making it something real, it must address the specific wound or fear of the person receiving it, and it must require an act of courage rather than mere romantic sentiment. It is the genre's culminating proof that the relationship was earned.",
+      "definition": "The Romance climax requires a scene in which one or both characters make a public, costly, or irrevocable declaration of love and commitment — choosing each other in a way that cannot be unsaid. The grand gesture must be specific to who these characters are: it must cost the person making it something real, it must address the specific wound or fear of the person receiving it, and it must require an act of courage rather than mere romantic sentiment. It is the genre's culminating proof that the relationship was earned.",
       "entry_conditions": [
-        "The central crisis â€” the darkest moment of the relationship â€” has occurred",
+        "The central crisis — the darkest moment of the relationship — has occurred",
         "Both characters have been forced to confront what they truly want and what it costs",
         "The reader believes the resolution is not guaranteed"
       ],
       "exit_conditions": [
         "One or both characters make an active, costly choice to claim the relationship",
         "The gesture addresses the specific obstacle or wound that has kept them apart",
-        "The other character must choose to receive or accept â€” both parties are active",
+        "The other character must choose to receive or accept — both parties are active",
         "HEA or HFN is established with emotional authenticity"
       ],
       "typical_variants": [
-        "The chase / pursuit â€” running through airports, standing in rain, showing up without guarantee of welcome",
-        "The admission â€” saying the exact true thing the character has been most afraid to say, in front of witnesses or alone",
-        "The sacrifice â€” giving up something the character valued to show the relationship matters more",
-        "The show of faith â€” the character who was most afraid of commitment demonstrates they have changed"
+        "The chase / pursuit — running through airports, standing in rain, showing up without guarantee of welcome",
+        "The admission — saying the exact true thing the character has been most afraid to say, in front of witnesses or alone",
+        "The sacrifice — giving up something the character valued to show the relationship matters more",
+        "The show of faith — the character who was most afraid of commitment demonstrates they have changed"
       ],
       "failure_modes": [
-        "Grand gesture is generic â€” the same speech could appear in any romance, attached to any pair",
-        "Gesture addresses the wrong thing â€” does not speak to the specific wound or fear of this relationship",
+        "Grand gesture is generic — the same speech could appear in any romance, attached to any pair",
+        "Gesture addresses the wrong thing — does not speak to the specific wound or fear of this relationship",
         "Receiving character simply accepts without their own moment of active choice",
-        "Gesture is too easy â€” no real cost, no real risk of rejection, no proof of change",
-        "Resolution is too quick after the crisis â€” no weight, no breath, no earned pause before reunion"
+        "Gesture is too easy — no real cost, no real risk of rejection, no proof of change",
+        "Resolution is too quick after the crisis — no weight, no breath, no earned pause before reunion"
       ],
       "signals_in_text": [
-        "Scene is physically specific â€” location, time of day, clothing, weather are chosen to carry emotional meaning",
-        "Dialogue in the gesture scene is stripped of deflection â€” characters finally say what they mean",
+        "Scene is physically specific — location, time of day, clothing, weather are chosen to carry emotional meaning",
+        "Dialogue in the gesture scene is stripped of deflection — characters finally say what they mean",
         "Physical contact, if it occurs, is described with intensity proportionate to the emotional journey that preceded it",
         "Final lines of the scene carry the full emotional weight of everything that came before"
       ],
@@ -520,30 +520,30 @@
       "label": "Emotional Intensity and Romantic Atmosphere",
       "role": "Tone Marker",
       "level": null,
-      "definition": "Romance requires a sustained tone of emotional heightening â€” the sense that what the characters feel for each other matters, that the world around them is alive to their feeling, and that the stakes of love are treated with the full seriousness they deserve. This is not sentimentality; it is intensity. The genre's atmosphere is one where small gestures carry enormous weight, where a look across a room can be as significant as a battle, and where the reader's emotional engagement is the primary measure of the story's success.",
+      "definition": "Romance requires a sustained tone of emotional heightening — the sense that what the characters feel for each other matters, that the world around them is alive to their feeling, and that the stakes of love are treated with the full seriousness they deserve. This is not sentimentality; it is intensity. The genre's atmosphere is one where small gestures carry enormous weight, where a look across a room can be as significant as a battle, and where the reader's emotional engagement is the primary measure of the story's success.",
       "entry_conditions": [
         "Genre promise established",
         "Central relationship is established as the primary story engine"
       ],
       "exit_conditions": [
-        "Tone is sustained throughout scenes involving the central relationship â€” narration, dialogue, pacing, and sensory detail all serve the emotional register"
+        "Tone is sustained throughout scenes involving the central relationship — narration, dialogue, pacing, and sensory detail all serve the emotional register"
       ],
       "typical_variants": [
-        "Warm and aspirational â€” the world of the story is charged with possibility and beauty",
-        "Aching and bittersweet â€” love is real but so is the cost; emotional intensity includes pain",
-        "Playful and sharp â€” banter and wit carry the attraction; humor is part of the intimacy, not a deflection from it",
-        "Dark and intense â€” desire is tangled with danger, power, or transgression; tone is smoldering rather than bright"
+        "Warm and aspirational — the world of the story is charged with possibility and beauty",
+        "Aching and bittersweet — love is real but so is the cost; emotional intensity includes pain",
+        "Playful and sharp — banter and wit carry the attraction; humor is part of the intimacy, not a deflection from it",
+        "Dark and intense — desire is tangled with danger, power, or transgression; tone is smoldering rather than bright"
       ],
       "failure_modes": [
-        "Tone is emotionally flat â€” the love story is narrated at the same temperature as directions to the grocery store",
-        "Ironic distance prevents reader investment â€” the story is winking at itself rather than committing to the feeling",
-        "Tone is consistent but wrong â€” comic register when the emotional moment demands gravity, or grave register during scenes of playful connection"
+        "Tone is emotionally flat — the love story is narrated at the same temperature as directions to the grocery store",
+        "Ironic distance prevents reader investment — the story is winking at itself rather than committing to the feeling",
+        "Tone is consistent but wrong — comic register when the emotional moment demands gravity, or grave register during scenes of playful connection"
       ],
       "signals_in_text": [
-        "Sensory detail is deployed selectively and deliberately around the love interest â€” they are always described with more precision than the world around them",
+        "Sensory detail is deployed selectively and deliberately around the love interest — they are always described with more precision than the world around them",
         "Pacing slows during scenes of genuine intimacy, as though the narrative itself is reluctant to leave",
         "Internal monologue treats the emotional experience with full seriousness regardless of whether the character wants to",
-        "Even mundane scenes between the leads â€” making coffee, arguing over nothing â€” carry an undertow of significance"
+        "Even mundane scenes between the leads — making coffee, arguing over nothing — carry an undertow of significance"
       ],
       "severity": "hard"
     },
@@ -552,7 +552,7 @@
       "label": "Relationship Without Genuine Obstacles",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "Romance fails when the central relationship proceeds without genuine resistance â€” when obstacles are nominal, when the characters' union never feels truly in jeopardy, when attraction converts to love without either character having to risk or change anything. A love story where nothing really stands in the way produces no tension, no earned resolution, and no emotional payoff. The reader is told they should care about the outcome of a question that was never in doubt.",
+      "definition": "Romance fails when the central relationship proceeds without genuine resistance — when obstacles are nominal, when the characters' union never feels truly in jeopardy, when attraction converts to love without either character having to risk or change anything. A love story where nothing really stands in the way produces no tension, no earned resolution, and no emotional payoff. The reader is told they should care about the outcome of a question that was never in doubt.",
       "entry_conditions": [
         "Central relationship is in progress"
       ],
@@ -560,17 +560,17 @@
         "Obstacles are established that make the outcome genuinely uncertain"
       ],
       "typical_variants": [
-        "Obstacles exist only as misunderstandings that any conversation would resolve â€” and characters inexplicably never have that conversation",
+        "Obstacles exist only as misunderstandings that any conversation would resolve — and characters inexplicably never have that conversation",
         "The only obstacle is one character's vague reluctance, which evaporates without being addressed",
-        "External obstacles (disapproving parents, rival suitors) are present but carry no real weight â€” they disappear when the plot needs them to",
-        "Both characters are perfectly suited, perfectly available, and perfectly willing â€” the story is simply waiting for them to notice each other"
+        "External obstacles (disapproving parents, rival suitors) are present but carry no real weight — they disappear when the plot needs them to",
+        "Both characters are perfectly suited, perfectly available, and perfectly willing — the story is simply waiting for them to notice each other"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation that robs the Romance of its central promise"
+        "This node IS the failure mode — its presence indicates a genre violation that robs the Romance of its central promise"
       ],
       "signals_in_text": [
         "The reader cannot articulate what would have to change for the relationship to fail",
-        "The midpoint crisis is mild â€” a bump rather than a break",
+        "The midpoint crisis is mild — a bump rather than a break",
         "Resolution scene lacks weight because nothing was truly at stake to resolve",
         "Characters express love easily and early with no visible cost to doing so"
       ],
@@ -587,10 +587,10 @@
       "preconditions": [
         "Genre promise established"
       ],
-      "effects_on_stakes": "All narrative stakes must be filtered through the central relationship â€” what happens matters because of what it means for the couple",
+      "effects_on_stakes": "All narrative stakes must be filtered through the central relationship — what happens matters because of what it means for the couple",
       "effects_on_character": "Both leads must be defined primarily by their relationship to each other, not by their relationship to external plot goals",
       "common_alternatives": [
-        "Some Romance novels use dual protagonists with separate external arcs that converge â€” but the relationship must still be the primary engine, not merely one thread among many"
+        "Some Romance novels use dual protagonists with separate external arcs that converge — but the relationship must still be the primary engine, not merely one thread among many"
       ],
       "anti_patterns": [
         "External plot resolves independently of the relationship status",
@@ -608,10 +608,10 @@
         "Genre promise established",
         "Both leads are introduced"
       ],
-      "effects_on_stakes": "If only one character is vulnerable, the reader cannot root for the relationship â€” they root for one character's unrequited feeling, which is a different and lesser emotional contract",
+      "effects_on_stakes": "If only one character is vulnerable, the reader cannot root for the relationship — they root for one character's unrequited feeling, which is a different and lesser emotional contract",
       "effects_on_character": "Both characters must be established with interior emotional lives, not just one sympathetic narrator and one idealized object",
       "common_alternatives": [
-        "Some romances reveal the second character's vulnerability slowly â€” it may not be apparent on first meeting but must emerge before the midpoint"
+        "Some romances reveal the second character's vulnerability slowly — it may not be apparent on first meeting but must emerge before the midpoint"
       ],
       "anti_patterns": [
         "Love interest exists as fantasy fulfillment with no interior life",
@@ -628,8 +628,8 @@
       "preconditions": [
         "Genre promise established"
       ],
-      "effects_on_stakes": "Without genuine obstacles, the relationship outcome is not in question â€” there is nothing to root for, nothing to fear losing",
-      "effects_on_character": "Obstacles must be rooted in who the characters actually are, not in external contrivance alone â€” the most powerful obstacles are the ones the characters themselves create through their wounds and fears",
+      "effects_on_stakes": "Without genuine obstacles, the relationship outcome is not in question — there is nothing to root for, nothing to fear losing",
+      "effects_on_character": "Obstacles must be rooted in who the characters actually are, not in external contrivance alone — the most powerful obstacles are the ones the characters themselves create through their wounds and fears",
       "common_alternatives": [
         "External obstacles alone can work if they are genuinely severe",
         "Internal obstacles alone can work if they are psychologically specific and credibly intractable"
@@ -650,8 +650,8 @@
         "Genre promise established",
         "Obstacles have been established"
       ],
-      "effects_on_stakes": "The resolution must feel proportionate to the difficulty of the journey â€” the HEA or HFN must be the consequence of what the characters did, not what happened to them",
-      "effects_on_character": "Both characters must demonstrate growth or courage in the final act â€” passive resolution violates the genre contract",
+      "effects_on_stakes": "The resolution must feel proportionate to the difficulty of the journey — the HEA or HFN must be the consequence of what the characters did, not what happened to them",
+      "effects_on_character": "Both characters must demonstrate growth or courage in the final act — passive resolution violates the genre contract",
       "common_alternatives": [
         "HFN (Happy For Now) is a valid alternative to HEA when the story is honest about its provisionality and earns the happiness even if it does not guarantee permanence"
       ],
@@ -670,10 +670,10 @@
       "preconditions": [
         "Genre promise established"
       ],
-      "effects_on_stakes": "Tone signals to the reader that what the characters feel deserves to be taken seriously â€” the emotional register of the prose validates the importance of the love story",
-      "effects_on_character": "Characters' inner lives must be rendered with genuine attention â€” what they feel, resist feeling, and refuse to admit they feel must all be present on the page",
+      "effects_on_stakes": "Tone signals to the reader that what the characters feel deserves to be taken seriously — the emotional register of the prose validates the importance of the love story",
+      "effects_on_character": "Characters' inner lives must be rendered with genuine attention — what they feel, resist feeling, and refuse to admit they feel must all be present on the page",
       "common_alternatives": [
-        "Comedy-inflected romance uses wit and banter as intimacy rather than earnest declaration â€” but even comedic romance must commit to the emotional stakes in its key scenes"
+        "Comedy-inflected romance uses wit and banter as intimacy rather than earnest declaration — but even comedic romance must commit to the emotional stakes in its key scenes"
       ],
       "anti_patterns": [
         "Ironic narrative distance that prevents the reader from investing",
@@ -691,7 +691,7 @@
         "Core constraints apply",
         "Setting is present day or recent past"
       ],
-      "effects_on_stakes": "Contemporary obstacles â€” career, identity, family pressure, modern dating complexity â€” frame what the characters stand to lose",
+      "effects_on_stakes": "Contemporary obstacles — career, identity, family pressure, modern dating complexity — frame what the characters stand to lose",
       "effects_on_character": "Characters are shaped by recognizably contemporary social and psychological reality",
       "common_alternatives": [
         "Historical romance",
@@ -699,7 +699,7 @@
         "Romantic suspense"
       ],
       "anti_patterns": [
-        "Contemporary setting with no effect on the emotional dynamic â€” might as well be any era"
+        "Contemporary setting with no effect on the emotional dynamic — might as well be any era"
       ],
       "severity": "soft"
     },
@@ -713,7 +713,7 @@
         "Core constraints apply",
         "Setting is a researched historical period with period-appropriate social rules"
       ],
-      "effects_on_stakes": "Period social structures â€” marriage market, class, chaperonage, reputation â€” become primary obstacles and carry genuine consequences for the characters' lives",
+      "effects_on_stakes": "Period social structures — marriage market, class, chaperonage, reputation — become primary obstacles and carry genuine consequences for the characters' lives",
       "effects_on_character": "Characters are historically situated beings navigating the genuine constraints of their time, not modern people in costume",
       "common_alternatives": [
         "Contemporary romance",
@@ -735,8 +735,8 @@
         "Core constraints apply",
         "Supernatural or fantastical element intersects with romantic obstacle"
       ],
-      "effects_on_stakes": "The fantastical element creates obstacles that have no mundane equivalent â€” immortality, danger, otherness, magical compulsion â€” and raises the stakes of love to potentially cosmic or existential levels",
-      "effects_on_character": "The love interest's supernatural nature is part of the attraction and part of the danger â€” characters must navigate not just emotional risk but world-level difference",
+      "effects_on_stakes": "The fantastical element creates obstacles that have no mundane equivalent — immortality, danger, otherness, magical compulsion — and raises the stakes of love to potentially cosmic or existential levels",
+      "effects_on_character": "The love interest's supernatural nature is part of the attraction and part of the danger — characters must navigate not just emotional risk but world-level difference",
       "common_alternatives": [
         "Contemporary romance",
         "Historical romance"
@@ -757,8 +757,8 @@
         "Core constraints apply",
         "Credible external threat to life or safety runs parallel to the romantic arc"
       ],
-      "effects_on_stakes": "Danger and romance escalate together â€” the external threat personalizes the cost of losing the love interest while the relationship personalizes the cost of the external danger",
-      "effects_on_character": "Life-or-death situations accelerate intimacy and force disclosure â€” characters reveal themselves under pressure before they would have chosen to",
+      "effects_on_stakes": "Danger and romance escalate together — the external threat personalizes the cost of losing the love interest while the relationship personalizes the cost of the external danger",
+      "effects_on_character": "Life-or-death situations accelerate intimacy and force disclosure — characters reveal themselves under pressure before they would have chosen to",
       "common_alternatives": [
         "Contemporary romance",
         "Paranormal romance"
@@ -778,10 +778,10 @@
       "preconditions": [
         "Contemporary subgenre selected"
       ],
-      "effects_on_stakes": "Modern institutional and social settings â€” workplaces, shared housing, overlapping friend groups â€” create credible proximity that forces the relationship to develop",
+      "effects_on_stakes": "Modern institutional and social settings — workplaces, shared housing, overlapping friend groups — create credible proximity that forces the relationship to develop",
       "effects_on_character": "Characters cannot retreat into pure avoidance when professional, social, or logistical reality requires continued contact",
       "common_alternatives": [
-        "Proximity may be digital as well as physical in contemporary settings â€” forced emotional proximity via online communication has its own texture"
+        "Proximity may be digital as well as physical in contemporary settings — forced emotional proximity via online communication has its own texture"
       ],
       "anti_patterns": [
         "Characters in a shared workplace or community setting who somehow never interact"
@@ -798,9 +798,9 @@
         "Contemporary subgenre selected"
       ],
       "effects_on_stakes": "Modern class, professional, or cultural barriers are shown in scenes where crossing them produces real social friction or consequence",
-      "effects_on_character": "Characters carry awareness of how their world will respond to the relationship â€” internalized social pressure is as real as external enforcement",
+      "effects_on_character": "Characters carry awareness of how their world will respond to the relationship — internalized social pressure is as real as external enforcement",
       "common_alternatives": [
-        "Contemporary barriers may be subtler than historical ones â€” internal class anxiety, professional reputation, family disappointment rather than legal prohibition"
+        "Contemporary barriers may be subtler than historical ones — internal class anxiety, professional reputation, family disappointment rather than legal prohibition"
       ],
       "anti_patterns": [
         "Social barriers referenced in backstory but never shown to affect a single present-tense scene"
@@ -817,8 +817,8 @@
         "Historical subgenre selected",
         "Period-appropriate social structures are established"
       ],
-      "effects_on_stakes": "Historical social barriers â€” class, reputation, legal status â€” carry existential weight; crossing them has consequences that can destroy a character's life and livelihood",
-      "effects_on_character": "Characters navigate with full awareness that violation of period social rules has irreversible consequences â€” reputation once lost cannot be recovered, marriages once contracted cannot be undone",
+      "effects_on_stakes": "Historical social barriers — class, reputation, legal status — carry existential weight; crossing them has consequences that can destroy a character's life and livelihood",
+      "effects_on_character": "Characters navigate with full awareness that violation of period social rules has irreversible consequences — reputation once lost cannot be recovered, marriages once contracted cannot be undone",
       "common_alternatives": [
         "Historical barriers may be primarily external (legal, economic) or primarily internal (internalized class consciousness, religious scruple, honor codes)"
       ],
@@ -837,10 +837,10 @@
       "preconditions": [
         "Historical subgenre selected"
       ],
-      "effects_on_stakes": "In eras with strict social surveillance â€” Regency ballrooms, Victorian drawing rooms, medieval courts â€” the distinction between public performance and private truth is not aesthetic but existential; being seen is being judged",
-      "effects_on_character": "Characters develop acute awareness of being observed â€” their public performance is a survival strategy, and private moments with the love interest represent dangerous relief from that performance",
+      "effects_on_stakes": "In eras with strict social surveillance — Regency ballrooms, Victorian drawing rooms, medieval courts — the distinction between public performance and private truth is not aesthetic but existential; being seen is being judged",
+      "effects_on_character": "Characters develop acute awareness of being observed — their public performance is a survival strategy, and private moments with the love interest represent dangerous relief from that performance",
       "common_alternatives": [
-        "Some historical settings (frontier, war) collapse the public/private distinction through shared danger â€” intimacy develops in the absence of social performance, not in contrast to it"
+        "Some historical settings (frontier, war) collapse the public/private distinction through shared danger — intimacy develops in the absence of social performance, not in contrast to it"
       ],
       "anti_patterns": [
         "Historical setting where characters behave identically in ballrooms and bedrooms",
@@ -857,13 +857,13 @@
       "preconditions": [
         "Paranormal/fantasy subgenre selected"
       ],
-      "effects_on_stakes": "Fated mate bonds, magical compulsion, shared danger, or world-crossing necessity can engineer intimacy that exceeds what either character would have chosen â€” raising the stakes of whether they can choose to want what they are already drawn toward",
-      "effects_on_character": "Characters must navigate the difference between what they feel (possibly magically amplified or imposed) and what they genuinely choose â€” this is the paranormal romance's specific emotional challenge",
+      "effects_on_stakes": "Fated mate bonds, magical compulsion, shared danger, or world-crossing necessity can engineer intimacy that exceeds what either character would have chosen — raising the stakes of whether they can choose to want what they are already drawn toward",
+      "effects_on_character": "Characters must navigate the difference between what they feel (possibly magically amplified or imposed) and what they genuinely choose — this is the paranormal romance's specific emotional challenge",
       "common_alternatives": [
-        "Not all paranormal romances use magical proximity â€” some use shared mission or survival as the proximity mechanism"
+        "Not all paranormal romances use magical proximity — some use shared mission or survival as the proximity mechanism"
       ],
       "anti_patterns": [
-        "Paranormal bond resolves all resistance â€” characters are compelled together without any choice, removing the emotional agency that makes romance meaningful"
+        "Paranormal bond resolves all resistance — characters are compelled together without any choice, removing the emotional agency that makes romance meaningful"
       ],
       "severity": "soft"
     },
@@ -876,13 +876,13 @@
       "preconditions": [
         "Setting has established unavoidable contact between the leads"
       ],
-      "effects_on_stakes": "The meeting scene's charge is intensified when the characters know â€” or sense â€” they will not easily escape each other; first impressions carry extra weight when there is no exit",
-      "effects_on_character": "Characters enter the meeting scene with their full public persona operational â€” the gap between that persona and the private self that will eventually emerge is established here",
+      "effects_on_stakes": "The meeting scene's charge is intensified when the characters know — or sense — they will not easily escape each other; first impressions carry extra weight when there is no exit",
+      "effects_on_character": "Characters enter the meeting scene with their full public persona operational — the gap between that persona and the private self that will eventually emerge is established here",
       "common_alternatives": [
-        "Some romances separate the first meeting from the beginning of sustained proximity â€” characters meet briefly, separate, then are forced together later"
+        "Some romances separate the first meeting from the beginning of sustained proximity — characters meet briefly, separate, then are forced together later"
       ],
       "anti_patterns": [
-        "First meeting is inert â€” no chemistry, no friction, no sense that these people will matter to each other"
+        "First meeting is inert — no chemistry, no friction, no sense that these people will matter to each other"
       ],
       "severity": "hard"
     },
@@ -895,8 +895,8 @@
       "preconditions": [
         "Social barriers have been established with real consequences"
       ],
-      "effects_on_stakes": "When barriers are real, crossing them for the first time carries genuine risk â€” the intimacy breakthrough is not just emotionally significant but socially costly",
-      "effects_on_character": "A character who allows genuine intimacy across a social barrier has made a choice they cannot fully unmake â€” the barrier's existence means the breakthrough is also an exposure",
+      "effects_on_stakes": "When barriers are real, crossing them for the first time carries genuine risk — the intimacy breakthrough is not just emotionally significant but socially costly",
+      "effects_on_character": "A character who allows genuine intimacy across a social barrier has made a choice they cannot fully unmake — the barrier's existence means the breakthrough is also an exposure",
       "common_alternatives": [
         "In stories where barriers are primarily internal, the breakthrough scene may be invisible to the social world but internally seismic"
       ],
@@ -915,13 +915,13 @@
         "Public/private contrast has been established",
         "Characters have been shown in both registers"
       ],
-      "effects_on_stakes": "The intimacy breakthrough scene is most powerful when it occurs in a private context that contrasts with the characters' public performance â€” it is the first time one character sees the other without the mask",
-      "effects_on_character": "The character who reveals their private self takes a specific risk â€” if the other person does not respond well, the mask cannot be reassembled as though nothing happened",
+      "effects_on_stakes": "The intimacy breakthrough scene is most powerful when it occurs in a private context that contrasts with the characters' public performance — it is the first time one character sees the other without the mask",
+      "effects_on_character": "The character who reveals their private self takes a specific risk — if the other person does not respond well, the mask cannot be reassembled as though nothing happened",
       "common_alternatives": [
-        "Some breakthroughs occur in public settings â€” forced emotion in a social context can be even more exposing than a private scene"
+        "Some breakthroughs occur in public settings — forced emotion in a social context can be even more exposing than a private scene"
       ],
       "anti_patterns": [
-        "Intimacy breakthrough occurs but the scene is not private â€” characters perform the breakthrough for an audience, which changes its meaning"
+        "Intimacy breakthrough occurs but the scene is not private — characters perform the breakthrough for an audience, which changes its meaning"
       ],
       "severity": "hard"
     },
@@ -934,13 +934,13 @@
       "preconditions": [
         "Meeting scene has established both attraction and obstacle"
       ],
-      "effects_on_stakes": "The intimacy breakthrough gains its power from the specific nature of the obstacle established in the meeting â€” it should feel like the thing that was always in the way has been, for a moment, moved",
-      "effects_on_character": "The person the characters have been performing since the meeting is dropped, even briefly â€” the breakthrough is the first moment of being seen rather than observed",
+      "effects_on_stakes": "The intimacy breakthrough gains its power from the specific nature of the obstacle established in the meeting — it should feel like the thing that was always in the way has been, for a moment, moved",
+      "effects_on_character": "The person the characters have been performing since the meeting is dropped, even briefly — the breakthrough is the first moment of being seen rather than observed",
       "common_alternatives": [
-        "Extended timelines between meeting and breakthrough are valid â€” slow-burn romance earns the breakthrough through accumulated tension"
+        "Extended timelines between meeting and breakthrough are valid — slow-burn romance earns the breakthrough through accumulated tension"
       ],
       "anti_patterns": [
-        "Breakthrough has no relationship to the obstacle established at the meeting â€” feels disconnected from the emotional logic of the story"
+        "Breakthrough has no relationship to the obstacle established at the meeting — feels disconnected from the emotional logic of the story"
       ],
       "severity": "hard"
     },
@@ -956,12 +956,12 @@
         "Both characters have confronted what they truly want and what it costs"
       ],
       "effects_on_stakes": "The breakthrough scene established that real intimacy is possible between these two people; the grand gesture scene must prove that the characters will choose it even knowing the full cost",
-      "effects_on_character": "The grand gesture must speak directly to the wound established in the story â€” it cannot be generic; it must address the specific fear or need that was first visible when the characters' private selves were exposed",
+      "effects_on_character": "The grand gesture must speak directly to the wound established in the story — it cannot be generic; it must address the specific fear or need that was first visible when the characters' private selves were exposed",
       "common_alternatives": [
-        "The grand gesture may come from either character, or may be exchanged â€” both characters choosing each other simultaneously is its own form of climax"
+        "The grand gesture may come from either character, or may be exchanged — both characters choosing each other simultaneously is its own form of climax"
       ],
       "anti_patterns": [
-        "Grand gesture occurs without a prior genuine intimacy â€” it has no specific emotional target because we never saw what these characters truly revealed to each other",
+        "Grand gesture occurs without a prior genuine intimacy — it has no specific emotional target because we never saw what these characters truly revealed to each other",
         "Gesture is made but receiving character is entirely passive"
       ],
       "severity": "soft"
@@ -975,11 +975,11 @@
       "preconditions": [
         "Central relationship is proceeding without genuine obstacles or resistance from within the characters"
       ],
-      "effects_on_stakes": "Stakes disappear â€” a relationship that faces no genuine resistance produces no narrative tension and no emotional payoff",
-      "effects_on_character": "Characters who are never tested cannot demonstrate growth â€” the relationship is received rather than won, and the reader cannot root for an outcome that was never in doubt",
+      "effects_on_stakes": "Stakes disappear — a relationship that faces no genuine resistance produces no narrative tension and no emotional payoff",
+      "effects_on_character": "Characters who are never tested cannot demonstrate growth — the relationship is received rather than won, and the reader cannot root for an outcome that was never in doubt",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes exactly what Romance must not do"
+        "This edge IS the anti-pattern — it describes exactly what Romance must not do"
       ],
       "severity": "hard"
     }

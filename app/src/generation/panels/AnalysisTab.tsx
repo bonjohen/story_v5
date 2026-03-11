@@ -18,6 +18,7 @@ import { TemplatesPanel } from './TemplatesPanel.tsx'
 import { GenreRequirementsPanel } from './GenreRequirementsPanel.tsx'
 import { useGraphStore } from '../../store/graphStore.ts'
 import { useGenerationStore } from '../store/generationStore.ts'
+import { UI_COLORS, NODE_ROLE_COLORS } from '../../theme/colors.ts'
 
 interface AnalysisTabProps {
   onHighlightNodes: (nodes: string[]) => void
@@ -101,10 +102,10 @@ export function AnalysisTab({ onHighlightNodes }: AnalysisTabProps) {
                 {genBackbone.beats.map((beat, i) => {
                   const obligationCount = beat.scenes.reduce((n, s) => n + s.genre_obligations.length, 0)
                   return (
-                    <div key={i} style={{ padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: '3px solid #f59e0b' }}>
+                    <div key={i} style={{ padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)', borderRadius: 4, borderLeft: `3px solid ${NODE_ROLE_COLORS[beat.role ?? ''] ?? UI_COLORS.archetype}` }}>
                       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', marginBottom: 2 }}>
                         <span style={{ fontWeight: 600 }}>{beat.label}</span>
-                        {beat.role && <span style={{ fontSize: 9, fontWeight: 600, textTransform: 'uppercase', color: '#f59e0b' }}>{beat.role}</span>}
+                        {beat.role && <span style={{ fontSize: 9, fontWeight: 600, textTransform: 'uppercase', color: NODE_ROLE_COLORS[beat.role] ?? UI_COLORS.archetype }}>{beat.role}</span>}
                       </div>
                       {beat.definition && <div style={{ fontSize: 10, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{beat.definition}</div>}
                       <div style={{ fontSize: 9, color: 'var(--text-muted)' }}>

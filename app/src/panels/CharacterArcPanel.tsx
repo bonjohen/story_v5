@@ -6,18 +6,14 @@
 
 import { useEffect, useState, useMemo } from 'react'
 import { useElementStore } from '../store/elementStore.ts'
+import { EMOTION_COLORS } from '../theme/colors.ts'
 import type { EmotionalArcPoint } from '../store/elementStore.ts'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 
 const DIMENSIONS = ['tension', 'hope', 'fear', 'resolution'] as const
 type Dimension = typeof DIMENSIONS[number]
 
-const DIM_COLORS: Record<Dimension, string> = {
-  tension: '#ef4444',
-  hope: '#22c55e',
-  fear: '#a855f7',
-  resolution: '#3b82f6',
-}
+const DIM_COLORS: Record<Dimension, string> = EMOTION_COLORS
 
 interface CharacterArcPanelProps {
   graph: NormalizedGraph
@@ -27,7 +23,8 @@ interface CharacterArcPanelProps {
 
 export function CharacterArcPanel({ graph, selectedNodeId, onSelectNode }: CharacterArcPanelProps) {
   const graphType = graph.graph.type
-  const dir = graph.graph.id
+  // graph.graph.id is "archetype_01_heros_journey" but directory is "01_heros_journey"
+  const dir = graph.graph.id.replace(/^archetype_/, '')
 
   const loadEmotionalArcs = useElementStore((s) => s.loadEmotionalArcs)
   const emotionalArcs = useElementStore((s) => s.emotionalArcs)

@@ -38,7 +38,8 @@ interface TimelinePanelProps {
 
 export function TimelinePanel({ graph, selectedNodeId, onSelectNode }: TimelinePanelProps) {
   const graphType = graph.graph.type
-  const dir = graph.graph.id
+  // graph.graph.id is "archetype_01_heros_journey" but directory is "01_heros_journey"
+  const dir = graph.graph.id.replace(/^archetype_/, '')
 
   const loadArchetypeElements = useElementStore((s) => s.loadArchetypeElements)
   const archetypeTimelines = useElementStore((s) => s.archetypeTimelines)

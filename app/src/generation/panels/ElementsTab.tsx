@@ -11,6 +11,7 @@ import { useUIStore } from '../../store/uiStore.ts'
 import { buildFillDetailsPrompt, parseFillDetailsResponse } from '../agents/fillDetailsTemplate.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
 import { INPUT, DEFAULT_CONFIG } from './generationConstants.ts'
+import { ENTITY_COLORS, STATUS_COLORS } from '../../theme/colors.ts'
 import type { StoryRequest, GenerationConfig } from '../artifacts/types.ts'
 import type {
   StoryDetailBindings,
@@ -20,18 +21,7 @@ import type {
 } from '../artifacts/types.ts'
 import { randomCharacter, randomPlace, randomObject } from './sampleElements.ts'
 
-// ---------------------------------------------------------------------------
-// Colors
-// ---------------------------------------------------------------------------
-
-const COLORS = {
-  character: '#f59e0b',
-  relationship: '#a855f7',
-  place: '#3b82f6',
-  object: '#22c55e',
-  concept: '#8b5cf6',
-  rule: '#ef4444',
-} as const
+const COLORS = ENTITY_COLORS
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -71,7 +61,7 @@ function SlotRow({ slot, binding, color, editable, onUpdate }: {
           style={{ ...fieldInput, flex: 1, marginTop: 0 }}
         />
       ) : binding?.bound_value ? (
-        <span style={{ color: '#22c55e', fontSize: 10 }}>{binding.bound_value}</span>
+        <span style={{ color: STATUS_COLORS.pass, fontSize: 10 }}>{binding.bound_value}</span>
       ) : (
         <span style={{ color: 'var(--text-muted)', fontSize: 10, fontStyle: 'italic' }}>{slot.description || 'unfilled'}</span>
       )}
@@ -442,7 +432,7 @@ export function ElementsTab() {
             style={{
               width: '100%', padding: '10px 12px', fontSize: 12, fontWeight: 600,
               borderRadius: 4, border: '1px solid #f59e0b',
-              background: '#f59e0b18', color: !premise.trim() ? 'var(--text-muted)' : '#f59e0b',
+              background: `${ENTITY_COLORS.character}18`, color: !premise.trim() ? 'var(--text-muted)' : ENTITY_COLORS.character,
               cursor: !premise.trim() ? 'not-allowed' : 'pointer', transition: 'all 0.15s',
             }}
           >
@@ -475,14 +465,14 @@ export function ElementsTab() {
               <button onClick={handleFillDetails} disabled={fillingDetails} style={{
                 padding: '3px 10px', fontSize: 10, fontWeight: 600, borderRadius: 3,
                 border: '1px solid #8b5cf6', background: fillingDetails ? 'var(--border)' : '#8b5cf618',
-                color: fillingDetails ? 'var(--text-muted)' : '#8b5cf6',
+                color: fillingDetails ? 'var(--text-muted)' : ENTITY_COLORS.concept,
                 cursor: fillingDetails ? 'wait' : 'pointer',
               }}>
                 {fillingDetails ? 'Filling...' : 'Fill All (LLM)'}
               </button>
               <button onClick={handleRandomize} disabled={fillingDetails} style={{
                 padding: '3px 10px', fontSize: 10, fontWeight: 600, borderRadius: 3,
-                border: '1px solid #22c55e', background: '#22c55e18', color: '#22c55e',
+                border: `1px solid ${STATUS_COLORS.pass}`, background: `${STATUS_COLORS.pass}18`, color: STATUS_COLORS.pass,
                 cursor: fillingDetails ? 'not-allowed' : 'pointer',
               }} title="Fill all slots with randomly selected sample characters, places, and objects">
                 Randomize
@@ -490,7 +480,7 @@ export function ElementsTab() {
               {fillingDetails && (
                 <button onClick={handleCancelFill} style={{
                   padding: '3px 8px', fontSize: 10, fontWeight: 600, borderRadius: 3,
-                  border: '1px solid #ef4444', background: '#ef444418', color: '#ef4444', cursor: 'pointer',
+                  border: `1px solid ${STATUS_COLORS.fail}`, background: `${STATUS_COLORS.fail}18`, color: STATUS_COLORS.fail, cursor: 'pointer',
                 }}>Stop</button>
               )}
             </>
@@ -502,9 +492,9 @@ export function ElementsTab() {
             style={{
               display: 'flex', alignItems: 'center', gap: 4,
               fontSize: 10, padding: '2px 8px', borderRadius: 3,
-              border: `1px solid ${locked ? '#f59e0b' : 'var(--border)'}`,
-              background: locked ? '#f59e0b18' : 'transparent',
-              color: locked ? '#f59e0b' : 'var(--text-muted)', cursor: 'pointer',
+              border: `1px solid ${locked ? ENTITY_COLORS.character : 'var(--border)'}`,
+              background: locked ? `${ENTITY_COLORS.character}18` : 'transparent',
+              color: locked ? ENTITY_COLORS.character : 'var(--text-muted)', cursor: 'pointer',
             }}
           >
             {locked ? '\u{1F512}' : '\u{1F513}'}
@@ -515,7 +505,7 @@ export function ElementsTab() {
       {/* Fill Details feedback */}
       {fillError && (
         <div style={{
-          marginBottom: 8, padding: '6px 8px', fontSize: 11, color: '#ef4444',
+          marginBottom: 8, padding: '6px 8px', fontSize: 11, color: STATUS_COLORS.fail,
           background: 'rgba(239,68,68,0.08)', borderRadius: 4, border: '1px solid rgba(239,68,68,0.2)',
           whiteSpace: 'pre-wrap', wordBreak: 'break-word',
         }}>{fillError}</div>
@@ -561,7 +551,7 @@ export function ElementsTab() {
           {isEditable && registry && (
             <button onClick={addCharacter} title="Add character" style={{
               marginTop: 4, fontSize: 10, padding: '2px 10px', borderRadius: 3,
-              border: '1px solid #f59e0b40', color: '#f59e0b', background: '#f59e0b10', cursor: 'pointer',
+              border: `1px solid ${ENTITY_COLORS.character}40`, color: ENTITY_COLORS.character, background: `${ENTITY_COLORS.character}10`, cursor: 'pointer',
             }}>+ Add</button>
           )}
 
@@ -600,7 +590,7 @@ export function ElementsTab() {
           {isEditable && registry && (
             <button onClick={addPlace} title="Add place" style={{
               marginTop: 4, fontSize: 10, padding: '2px 10px', borderRadius: 3,
-              border: '1px solid #3b82f640', color: '#3b82f6', background: '#3b82f610', cursor: 'pointer',
+              border: `1px solid ${ENTITY_COLORS.place}40`, color: ENTITY_COLORS.place, background: `${ENTITY_COLORS.place}10`, cursor: 'pointer',
             }}>+ Add</button>
           )}
 
@@ -639,7 +629,7 @@ export function ElementsTab() {
           {isEditable && registry && (
             <button onClick={addObject} title="Add object" style={{
               marginTop: 4, fontSize: 10, padding: '2px 10px', borderRadius: 3,
-              border: '1px solid #22c55e40', color: '#22c55e', background: '#22c55e10', cursor: 'pointer',
+              border: `1px solid ${ENTITY_COLORS.object}40`, color: ENTITY_COLORS.object, background: `${ENTITY_COLORS.object}10`, cursor: 'pointer',
             }}>+ Add</button>
           )}
 

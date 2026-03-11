@@ -36,7 +36,7 @@
       "label": "Literary Fiction Promise",
       "role": "Genre Promise",
       "level": 1,
-      "definition": "The reader is promised a story in which the inner lives of characters, the precision of language, and the weight of ideas carry more authority than plot mechanics â€” a work where meaning accretes slowly and resists easy resolution.",
+      "definition": "The reader is promised a story in which the inner lives of characters, the precision of language, and the weight of ideas carry more authority than plot mechanics — a work where meaning accretes slowly and resists easy resolution.",
       "entry_conditions": [
         "Story is positioned as literary fiction"
       ],
@@ -65,7 +65,7 @@
       "label": "Character Interiority Is the Primary Engine",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The story's momentum comes from what happens inside the character â€” perception, memory, desire, self-deception, and the slow accumulation of understanding â€” rather than from external plot events. External events serve the interior, not the reverse.",
+      "definition": "The story's momentum comes from what happens inside the character — perception, memory, desire, self-deception, and the slow accumulation of understanding — rather than from external plot events. External events serve the interior, not the reverse.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -95,12 +95,12 @@
       "label": "Language and Style Are Expressive Tools",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Prose style is not a neutral delivery mechanism but an active carrier of meaning. Sentence rhythm, word choice, imagery, and structural decisions express character psychology, thematic content, and emotional register â€” the how of telling is inseparable from the what.",
+      "definition": "Prose style is not a neutral delivery mechanism but an active carrier of meaning. Sentence rhythm, word choice, imagery, and structural decisions express character psychology, thematic content, and emotional register — the how of telling is inseparable from the what.",
       "entry_conditions": [
         "Genre promise established"
       ],
       "exit_conditions": [
-        "Prose style makes choices that would change the story's meaning if altered â€” it is not interchangeable with plainer language"
+        "Prose style makes choices that would change the story's meaning if altered — it is not interchangeable with plainer language"
       ],
       "typical_variants": [
         "Lyrical and image-dense prose",
@@ -125,7 +125,7 @@
       "label": "Thematic Complexity Without Easy Answers",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The story engages with ideas â€” about identity, mortality, memory, justice, love, power, or meaning â€” in ways that complicate rather than resolve. The work holds contradictions open rather than collapsing them into a thesis.",
+      "definition": "The story engages with ideas — about identity, mortality, memory, justice, love, power, or meaning — in ways that complicate rather than resolve. The work holds contradictions open rather than collapsing them into a thesis.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -154,7 +154,7 @@
       "label": "Ambiguity Is a Feature, Not a Defect",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The work deliberately withholds certainty â€” about character motivation, event causality, moral judgment, or meaning â€” because ambiguity reflects the actual texture of human experience and invites the reader into active interpretation rather than passive reception.",
+      "definition": "The work deliberately withholds certainty — about character motivation, event causality, moral judgment, or meaning — because ambiguity reflects the actual texture of human experience and invites the reader into active interpretation rather than passive reception.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -170,7 +170,7 @@
       "failure_modes": [
         "Ambiguity introduced but resolved by the end",
         "Withholding information for suspense rather than meaning",
-        "Vagueness confused with ambiguity â€” the story is unclear rather than productively uncertain"
+        "Vagueness confused with ambiguity — the story is unclear rather than productively uncertain"
       ],
       "signals_in_text": [
         "Key events are rendered from angles that prevent certainty",
@@ -184,7 +184,7 @@
       "label": "Psychological Realism",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Literary fiction grounded in the accurate, detailed rendering of how real human minds work â€” the irrationality of desire, the distortions of memory, the persistence of trauma, the gap between self-image and behavior â€” in recognizable social settings.",
+      "definition": "Literary fiction grounded in the accurate, detailed rendering of how real human minds work — the irrationality of desire, the distortions of memory, the persistence of trauma, the gap between self-image and behavior — in recognizable social settings.",
       "entry_conditions": [
         "Core constraints apply",
         "Story operates within plausible real-world conditions"
@@ -199,7 +199,7 @@
         "Portrait of a relationship's interior dynamics"
       ],
       "failure_modes": [
-        "Psychology is named but not shown â€” characters are told to be depressed rather than rendered as depressed",
+        "Psychology is named but not shown — characters are told to be depressed rather than rendered as depressed",
         "Inner life is consistent and rational rather than contradictory and partial"
       ],
       "signals_in_text": [
@@ -214,7 +214,7 @@
       "label": "Experimental and Postmodern",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Literary fiction that foregrounds and subverts its own conventions â€” treating form, narrative voice, structure, and the act of storytelling as subjects of inquiry alongside content. The artifice of fiction is visible and intentional.",
+      "definition": "Literary fiction that foregrounds and subverts its own conventions — treating form, narrative voice, structure, and the act of storytelling as subjects of inquiry alongside content. The artifice of fiction is visible and intentional.",
       "entry_conditions": [
         "Core constraints apply",
         "Formal experimentation is a primary expressive strategy"
@@ -230,7 +230,7 @@
         "Genre pastiche used to defamiliarize familiar material"
       ],
       "failure_modes": [
-        "Experimentation is decorative rather than expressive â€” the story would be identical with conventional form",
+        "Experimentation is decorative rather than expressive — the story would be identical with conventional form",
         "Difficulty as performance rather than necessity",
         "Form obscures rather than deepens meaning"
       ],
@@ -246,7 +246,7 @@
       "label": "Domestic Literary Fiction",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Literary fiction set within the texture of ordinary domestic life â€” marriage, family, home, routine â€” where the apparent smallness of the world makes the interior stakes larger by contrast, and where the symbolic weight of everyday objects and rituals carries the theme.",
+      "definition": "Literary fiction set within the texture of ordinary domestic life — marriage, family, home, routine — where the apparent smallness of the world makes the interior stakes larger by contrast, and where the symbolic weight of everyday objects and rituals carries the theme.",
       "entry_conditions": [
         "Core constraints apply",
         "Setting is domestic and quotidian"
@@ -262,7 +262,7 @@
       ],
       "failure_modes": [
         "Domestic detail is realistic texture without symbolic function",
-        "The small world of the story is simply small â€” no magnification occurs",
+        "The small world of the story is simply small — no magnification occurs",
         "Ordinary life depicted without the precision that makes it resonate"
       ],
       "signals_in_text": [
@@ -277,7 +277,7 @@
       "label": "Social and Political Literary Fiction",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "Literary fiction that places individual consciousness in dialogue with systemic forces â€” history, ideology, class, race, power â€” without collapsing the personal into the political or using characters as mere representatives of social positions.",
+      "definition": "Literary fiction that places individual consciousness in dialogue with systemic forces — history, ideology, class, race, power — without collapsing the personal into the political or using characters as mere representatives of social positions.",
       "entry_conditions": [
         "Core constraints apply",
         "Social or political systems are active forces shaping character interiority"
@@ -308,7 +308,7 @@
       "label": "Mundane Settings Carry Symbolic Weight",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The literal setting â€” a house, a room, a street, a workplace â€” functions simultaneously as a plausible physical location and as a carrier of symbolic meaning. The work's thematic content is embedded in concrete particulars rather than stated abstractly.",
+      "definition": "The literal setting — a house, a room, a street, a workplace — functions simultaneously as a plausible physical location and as a carrier of symbolic meaning. The work's thematic content is embedded in concrete particulars rather than stated abstractly.",
       "entry_conditions": [
         "Subgenre pattern selected"
       ],
@@ -321,9 +321,9 @@
         "A journey through a city as a map of a character's psychological state"
       ],
       "failure_modes": [
-        "Symbolism is announced rather than embedded â€” characters explain what things mean",
+        "Symbolism is announced rather than embedded — characters explain what things mean",
         "Physical settings are described accurately but without resonance",
-        "Symbolic register is inconsistent â€” some objects carry weight, others are inert"
+        "Symbolic register is inconsistent — some objects carry weight, others are inert"
       ],
       "signals_in_text": [
         "Descriptions of settings that exceed what narrative economy would require",
@@ -337,7 +337,7 @@
       "label": "Time May Be Non-Linear or Subjective",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The story's handling of time is shaped by consciousness rather than chronology. Memory, anticipation, association, and trauma may cause time to fold, compress, expand, or loop â€” because the interior experience of time is not linear, and rendering it truthfully requires non-linear structure.",
+      "definition": "The story's handling of time is shaped by consciousness rather than chronology. Memory, anticipation, association, and trauma may cause time to fold, compress, expand, or loop — because the interior experience of time is not linear, and rendering it truthfully requires non-linear structure.",
       "entry_conditions": [
         "Subgenre pattern selected"
       ],
@@ -350,14 +350,14 @@
         "Time collapse in which past and present coexist in a single perception"
       ],
       "failure_modes": [
-        "Non-linearity is decorative â€” the story could be told chronologically without loss",
+        "Non-linearity is decorative — the story could be told chronologically without loss",
         "Temporal jumps create confusion rather than meaning",
         "The past is revealed as backstory rather than as living force"
       ],
       "signals_in_text": [
         "Present-tense scenes interrupted by memories that are rendered with equal vividness",
         "The reader understands an earlier scene differently in light of a later revelation",
-        "Time markers are absent or unstable â€” when exactly is 'now' is uncertain"
+        "Time markers are absent or unstable — when exactly is 'now' is uncertain"
       ],
       "severity": "soft"
     },
@@ -366,12 +366,12 @@
       "label": "Interior Life Is As Vivid As Exterior Events",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The rendering of a character's inner life â€” their thoughts, feelings, perceptions, associations, and interpretations â€” receives the same quality of attention and narrative space as external events. Interior experience is not compressed or summarized.",
+      "definition": "The rendering of a character's inner life — their thoughts, feelings, perceptions, associations, and interpretations — receives the same quality of attention and narrative space as external events. Interior experience is not compressed or summarized.",
       "entry_conditions": [
         "Setting and POV established"
       ],
       "exit_conditions": [
-        "Interior passages are as fully rendered as scene â€” they have texture, duration, and specificity"
+        "Interior passages are as fully rendered as scene — they have texture, duration, and specificity"
       ],
       "typical_variants": [
         "Long passages of perception during an apparently uneventful moment",
@@ -379,7 +379,7 @@
         "Scenes where what is happening externally is less important than how the character is registering it"
       ],
       "failure_modes": [
-        "Interior life is reported in summary â€” 'she felt sad' rather than shown",
+        "Interior life is reported in summary — 'she felt sad' rather than shown",
         "Interiority is limited to moments of crisis and absent from ordinary scenes",
         "Thoughts are logical and articulate rather than associative and partial"
       ],
@@ -395,13 +395,13 @@
       "label": "Interiority Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "At least one extended scene â€” or a pattern of scenes â€” that provides deep, unmediated access to the protagonist's inner life: their self-deceptions, contradictions, desires they cannot articulate, and the texture of how they actually perceive their world.",
+      "definition": "At least one extended scene — or a pattern of scenes — that provides deep, unmediated access to the protagonist's inner life: their self-deceptions, contradictions, desires they cannot articulate, and the texture of how they actually perceive their world.",
       "entry_conditions": [
         "Character and situation established",
         "POV access to character granted"
       ],
       "exit_conditions": [
-        "The reader knows something true about the character's inner life that the character either does not know or cannot say â€” the gap between their self-understanding and what the text reveals is visible"
+        "The reader knows something true about the character's inner life that the character either does not know or cannot say — the gap between their self-understanding and what the text reveals is visible"
       ],
       "typical_variants": [
         "Stream-of-consciousness passage during an ordinary moment",
@@ -410,7 +410,7 @@
       ],
       "failure_modes": [
         "Interiority scene is a monologue of articulate self-analysis rather than rendered consciousness",
-        "Character's inner life is identical to their outer presentation â€” no gap, no revelation",
+        "Character's inner life is identical to their outer presentation — no gap, no revelation",
         "Scene ends without having added anything to reader's understanding of the character's inner world"
       ],
       "signals_in_text": [
@@ -425,7 +425,7 @@
       "label": "Epiphany or Shift-in-Understanding Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "A scene in which a character arrives at a new understanding â€” of themselves, of another person, of their situation, or of the world â€” that is earned by everything that has come before. The shift is genuine but not necessarily redemptive; it may be a loss of illusion, a recognition of complicity, or the clarification of a grief.",
+      "definition": "A scene in which a character arrives at a new understanding — of themselves, of another person, of their situation, or of the world — that is earned by everything that has come before. The shift is genuine but not necessarily redemptive; it may be a loss of illusion, a recognition of complicity, or the clarification of a grief.",
       "entry_conditions": [
         "Sufficient interior life has been established that a shift in understanding is meaningful",
         "The story has built up the conditions for recognition"
@@ -436,10 +436,10 @@
       "typical_variants": [
         "Sudden recognition that reorganizes everything previously understood",
         "Gradual, quiet shift that the character can barely name",
-        "Negative epiphany â€” a recognition that something hoped for is not true"
+        "Negative epiphany — a recognition that something hoped for is not true"
       ],
       "failure_modes": [
-        "Epiphany is announced rather than rendered â€” character explains what they have understood",
+        "Epiphany is announced rather than rendered — character explains what they have understood",
         "Shift in understanding is not earned by prior material",
         "Epiphany is redemptive and tidy when the story's material called for something more complicated"
       ],
@@ -455,7 +455,7 @@
       "label": "Ambiguous or Resonant Ending Scene",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "The final scene or ending withholds narrative closure in favor of resonance â€” leaving the reader with an image, a feeling, or an open question that continues to work on them after the text ends. The story does not resolve its tensions so much as find the right note on which to leave them.",
+      "definition": "The final scene or ending withholds narrative closure in favor of resonance — leaving the reader with an image, a feeling, or an open question that continues to work on them after the text ends. The story does not resolve its tensions so much as find the right note on which to leave them.",
       "entry_conditions": [
         "The story's central tensions have been fully developed",
         "The thematic and emotional material has reached a natural point of rest without requiring resolution"
@@ -463,7 +463,7 @@
       "exit_conditions": [
         "The ending image or moment is specific and earned, not vague",
         "The ending changes or deepens the meaning of what came before",
-        "The reader is left with something to hold â€” an image, a phrase, an unresolved perception"
+        "The reader is left with something to hold — an image, a phrase, an unresolved perception"
       ],
       "typical_variants": [
         "A final image that crystallizes the story's central question",
@@ -473,12 +473,12 @@
       "failure_modes": [
         "Ending is deliberately obscure to mimic profundity",
         "All tension is resolved clearly before the ending arrives",
-        "The final note is sentimental rather than precise â€” gestures at feeling without locating it"
+        "The final note is sentimental rather than precise — gestures at feeling without locating it"
       ],
       "signals_in_text": [
         "The last scene is quieter and more condensed than what precedes it",
         "A single concrete detail carries disproportionate weight",
-        "The prose in the final passage achieves a different register â€” more open, more still"
+        "The prose in the final passage achieves a different register — more open, more still"
       ],
       "severity": "soft"
     },
@@ -487,7 +487,7 @@
       "label": "Contemplative, Precise, Emotionally Layered Tone",
       "role": "Tone Marker",
       "level": null,
-      "definition": "The dominant tone of literary fiction is one of sustained, careful attention â€” to language, to inner life, to the weight of ordinary things. It is not detached or cold; it is emotionally available but controlled, allowing feeling to accumulate through precision rather than through declaration.",
+      "definition": "The dominant tone of literary fiction is one of sustained, careful attention — to language, to inner life, to the weight of ordinary things. It is not detached or cold; it is emotionally available but controlled, allowing feeling to accumulate through precision rather than through declaration.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -495,18 +495,18 @@
         "Tone is maintained through prose register, scene pacing, and the quality of attention given to detail"
       ],
       "typical_variants": [
-        "Austere and crystalline â€” every word chosen with visible care",
-        "Lyrical and associative â€” language moves by feeling as much as by logic",
-        "Ironic and clear-eyed â€” distance that does not preclude feeling"
+        "Austere and crystalline — every word chosen with visible care",
+        "Lyrical and associative — language moves by feeling as much as by logic",
+        "Ironic and clear-eyed — distance that does not preclude feeling"
       ],
       "failure_modes": [
-        "Contemplation slides into inertia â€” nothing is at stake because the prose will not commit",
+        "Contemplation slides into inertia — nothing is at stake because the prose will not commit",
         "Precision becomes coldness and emotional access is closed off",
-        "Emotional layering is replaced by emotional statement â€” the text tells rather than holds"
+        "Emotional layering is replaced by emotional statement — the text tells rather than holds"
       ],
       "signals_in_text": [
         "The prose creates space for the reader to feel rather than instructing them what to feel",
-        "Pacing is deliberate â€” scenes have room to breathe",
+        "Pacing is deliberate — scenes have room to breathe",
         "Emotional weight is carried by concrete particulars, not abstract assertions"
       ],
       "severity": "hard"
@@ -516,7 +516,7 @@
       "label": "Beautiful Prose Concealing Empty Story",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "Literary fiction fails when stylistic sophistication substitutes for rather than serves psychological depth, thematic seriousness, and human truth. The prose is accomplished but there is no character to care about, no idea being explored, and no felt experience being rendered â€” only the performance of literary ambition.",
+      "definition": "Literary fiction fails when stylistic sophistication substitutes for rather than serves psychological depth, thematic seriousness, and human truth. The prose is accomplished but there is no character to care about, no idea being explored, and no felt experience being rendered — only the performance of literary ambition.",
       "entry_conditions": [
         "Prose style is elevated"
       ],
@@ -529,7 +529,7 @@
         "Immaculate sentences that describe nothing of consequence"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation"
+        "This node IS the failure mode — its presence indicates a genre violation"
       ],
       "signals_in_text": [
         "Sentences can be appreciated in isolation but do not accumulate",
@@ -543,7 +543,7 @@
       "label": "Interiority Subordinated to Plot",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "Literary fiction fails when the inner life of characters is treated as connective tissue between plot events â€” when interiority appears only to explain or react to what has happened externally, and the story's engine is event rather than perception.",
+      "definition": "Literary fiction fails when the inner life of characters is treated as connective tissue between plot events — when interiority appears only to explain or react to what has happened externally, and the story's engine is event rather than perception.",
       "entry_conditions": [
         "Story presents as literary fiction"
       ],
@@ -556,7 +556,7 @@
         "Emotional states that exist to motivate the next plot point rather than as experiences in themselves"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation"
+        "This node IS the failure mode — its presence indicates a genre violation"
       ],
       "signals_in_text": [
         "Interiority is absent from scenes that are not plot-critical",
@@ -576,7 +576,7 @@
       "preconditions": [
         "Genre promise established"
       ],
-      "effects_on_stakes": "Stakes are interior â€” understanding, identity, perception â€” not primarily external",
+      "effects_on_stakes": "Stakes are interior — understanding, identity, perception — not primarily external",
       "effects_on_character": "Characters must be rendered from the inside; their consciousness is the narrative's primary subject",
       "common_alternatives": [
         "Some literary fiction distributes interiority across an ensemble rather than centering one consciousness"
@@ -601,7 +601,7 @@
         "Minimalist literary fiction may pursue expressive plainness rather than lyrical density, but the choice is still purposeful"
       ],
       "anti_patterns": [
-        "Prose style is interchangeable â€” could be replaced by simpler language without loss"
+        "Prose style is interchangeable — could be replaced by simpler language without loss"
       ],
       "severity": "hard"
     },
@@ -633,7 +633,7 @@
       "preconditions": [
         "Genre promise established"
       ],
-      "effects_on_stakes": "Certainty is not the promised payoff â€” the reader is invited to work, not to receive answers",
+      "effects_on_stakes": "Certainty is not the promised payoff — the reader is invited to work, not to receive answers",
       "effects_on_character": "Characters' motivations and inner states may not be fully knowable even to the reader",
       "common_alternatives": [
         "Some literary fiction maintains clarity about character and event while sustaining thematic complexity"
@@ -672,14 +672,14 @@
         "Interiority is the primary engine",
         "Story operates within recognizable real-world conditions"
       ],
-      "effects_on_stakes": "Stakes are psychological â€” self-knowledge, accurate perception, the cost of self-deception",
+      "effects_on_stakes": "Stakes are psychological — self-knowledge, accurate perception, the cost of self-deception",
       "effects_on_character": "Characters have detailed, internally consistent (if contradictory) psychologies rooted in recognizable human experience",
       "common_alternatives": [
         "Experimental fiction",
         "Domestic literary fiction"
       ],
       "anti_patterns": [
-        "Psychology is labeled but not rendered â€” characters are described as damaged without the damage being shown"
+        "Psychology is labeled but not rendered — characters are described as damaged without the damage being shown"
       ],
       "severity": "soft"
     },
@@ -694,13 +694,13 @@
         "Form itself becomes a subject of inquiry"
       ],
       "effects_on_stakes": "The conventions of storytelling are among the things the story interrogates",
-      "effects_on_character": "Character is constructed through and by form â€” the shape of the telling is the shape of the consciousness",
+      "effects_on_character": "Character is constructed through and by form — the shape of the telling is the shape of the consciousness",
       "common_alternatives": [
         "Psychological realism",
         "Social literary fiction"
       ],
       "anti_patterns": [
-        "Formal experimentation that is purely aesthetic â€” structure does not carry meaning"
+        "Formal experimentation that is purely aesthetic — structure does not carry meaning"
       ],
       "severity": "soft"
     },
@@ -715,7 +715,7 @@
         "Setting is domestic or familial"
       ],
       "effects_on_stakes": "The ordinary world becomes the site of extraordinary interior experience",
-      "effects_on_character": "Characters are defined by their relationships to home, family, and routine â€” and by the gap between those roles and their inner selves",
+      "effects_on_character": "Characters are defined by their relationships to home, family, and routine — and by the gap between those roles and their inner selves",
       "common_alternatives": [
         "Psychological realism",
         "Social literary fiction"
@@ -742,7 +742,7 @@
         "Domestic literary fiction"
       ],
       "anti_patterns": [
-        "Social forces described but never internalized â€” characters are outside history rather than inside it"
+        "Social forces described but never internalized — characters are outside history rather than inside it"
       ],
       "severity": "soft"
     },
@@ -761,7 +761,7 @@
         "Setting may be realistic without heavy symbolism if psychological rendering carries the full weight"
       ],
       "anti_patterns": [
-        "Settings are described accurately but perceived identically by all characters â€” no filtering through psychology"
+        "Settings are described accurately but perceived identically by all characters — no filtering through psychology"
       ],
       "severity": "hard"
     },
@@ -774,7 +774,7 @@
       "preconditions": [
         "Psychological realism subgenre selected"
       ],
-      "effects_on_stakes": "Interior events â€” recognitions, denials, shifts in feeling â€” are as consequential as exterior ones",
+      "effects_on_stakes": "Interior events — recognitions, denials, shifts in feeling — are as consequential as exterior ones",
       "effects_on_character": "The rendering of consciousness is as detailed and specific as the rendering of event",
       "common_alternatives": [
         "Some psychological realism operates with a cooler distance, but interior access remains privileged"
@@ -793,13 +793,13 @@
       "preconditions": [
         "Experimental subgenre selected"
       ],
-      "effects_on_stakes": "Temporal structure itself becomes meaningful â€” when something happened is part of the story's meaning",
+      "effects_on_stakes": "Temporal structure itself becomes meaningful — when something happened is part of the story's meaning",
       "effects_on_character": "Character is constructed through the accumulation of temporally displaced fragments rather than linear development",
       "common_alternatives": [
         "Some experimental work disrupts space or voice rather than time"
       ],
       "anti_patterns": [
-        "Non-linearity that is decorative â€” the chronological story would be identical"
+        "Non-linearity that is decorative — the chronological story would be identical"
       ],
       "severity": "soft"
     },
@@ -813,7 +813,7 @@
         "Domestic literary fiction subgenre selected"
       ],
       "effects_on_stakes": "The specific domestic object or routine carries the story's thematic content",
-      "effects_on_character": "Characters are revealed through their relationship to domestic things â€” how they care for them, neglect them, or transform them",
+      "effects_on_character": "Characters are revealed through their relationship to domestic things — how they care for them, neglect them, or transform them",
       "common_alternatives": [
         "Domestic detail may operate as precise social observation rather than symbol while still being purposeful"
       ],
@@ -831,8 +831,8 @@
       "preconditions": [
         "Social/political literary fiction subgenre selected"
       ],
-      "effects_on_stakes": "The political becomes personal â€” ideological forces are felt in the body, in daily life, in the texture of thought",
-      "effects_on_character": "Character's interiority is partially constituted by the social world â€” their self-understanding bears the marks of their historical position",
+      "effects_on_stakes": "The political becomes personal — ideological forces are felt in the body, in daily life, in the texture of thought",
+      "effects_on_character": "Character's interiority is partially constituted by the social world — their self-understanding bears the marks of their historical position",
       "common_alternatives": [
         "Some social literary fiction operates at a greater critical distance, but even then the social is filtered through particular consciousness"
       ],
@@ -853,7 +853,7 @@
       "effects_on_stakes": "The character's perception of symbolic settings becomes a privileged window into their inner life",
       "effects_on_character": "How a character sees the meaningful world around them reveals what they cannot directly say about themselves",
       "common_alternatives": [
-        "Interiority scenes may also occur in purely neutral settings â€” the trigger is not always symbolic"
+        "Interiority scenes may also occur in purely neutral settings — the trigger is not always symbolic"
       ],
       "anti_patterns": [
         "Symbolic setting is described but no character perceives or responds to it with interiority"
@@ -869,8 +869,8 @@
       "preconditions": [
         "Non-linear or subjective time is in use"
       ],
-      "effects_on_stakes": "Memory and anticipation are rendered with the same vividness as present experience â€” all are interior events",
-      "effects_on_character": "The character's relationship to time â€” what they return to, what they cannot escape â€” is part of their characterization",
+      "effects_on_stakes": "Memory and anticipation are rendered with the same vividness as present experience — all are interior events",
+      "effects_on_character": "The character's relationship to time — what they return to, what they cannot escape — is part of their characterization",
       "common_alternatives": [
         "Linear narrative may also achieve deep interiority through other means"
       ],
@@ -894,7 +894,7 @@
         "Some literary fiction achieves interiority through free indirect discourse woven through action scenes rather than through separated interior passages"
       ],
       "anti_patterns": [
-        "Interior life exists only in scenes where a character is physically still â€” missing from scenes of action or dialogue"
+        "Interior life exists only in scenes where a character is physically still — missing from scenes of action or dialogue"
       ],
       "severity": "hard"
     },
@@ -908,10 +908,10 @@
         "Sustained interior rendering has established a character's patterns of thought, perception, and self-deception"
       ],
       "effects_on_stakes": "The epiphany is only meaningful because the reader has seen what it is departing from",
-      "effects_on_character": "The shift in understanding is rooted in established psychology â€” it is surprising but inevitable in retrospect",
+      "effects_on_character": "The shift in understanding is rooted in established psychology — it is surprising but inevitable in retrospect",
       "common_alternatives": [
         "Epiphany may be collective rather than individual in some literary fiction",
-        "Some works resist epiphany â€” the refusal to understand is itself the revelation"
+        "Some works resist epiphany — the refusal to understand is itself the revelation"
       ],
       "anti_patterns": [
         "Epiphany occurs without the prior interior work that would make it earned"
@@ -930,10 +930,10 @@
       "effects_on_stakes": "The ending holds the weight of the shift without resolving everything the shift opened up",
       "effects_on_character": "Character's new understanding is demonstrated through a final image or action that contains rather than explains what has changed",
       "common_alternatives": [
-        "Some literary fiction ends before or instead of an epiphany â€” the absence of shift is the ending's meaning"
+        "Some literary fiction ends before or instead of an epiphany — the absence of shift is the ending's meaning"
       ],
       "anti_patterns": [
-        "Epiphany is followed by resolution that closes all ambiguity â€” the ending explains what the epiphany meant"
+        "Epiphany is followed by resolution that closes all ambiguity — the ending explains what the epiphany meant"
       ],
       "severity": "soft"
     },
@@ -950,7 +950,7 @@
       "effects_on_character": "No character emerges with recognizable interior life despite accomplished prose",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     },
@@ -963,11 +963,11 @@
       "preconditions": [
         "Story claims interiority as engine but is actually driven by event"
       ],
-      "effects_on_stakes": "Interior life is instrumentalized â€” it exists to service plot rather than as the story's subject",
+      "effects_on_stakes": "Interior life is instrumentalized — it exists to service plot rather than as the story's subject",
       "effects_on_character": "Characters become agents of a plot rather than consciousnesses that are the story's reason for being",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     }

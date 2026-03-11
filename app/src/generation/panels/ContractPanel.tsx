@@ -7,6 +7,7 @@
 import { useState, useCallback } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { ReadAloudButton } from './ReadAloudButton.tsx'
+import { UI_COLORS, SEVERITY_COLORS, STATUS_COLORS } from '../../theme/colors.ts'
 
 interface ContractPanelProps {
   onHighlightNodes?: (nodeIds: string[]) => void
@@ -49,8 +50,8 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
             fontSize: 10,
             padding: '1px 6px',
             borderRadius: 3,
-            background: 'rgba(245,158,11,0.12)',
-            color: '#f59e0b',
+            background: `${UI_COLORS.archetype}1f`,
+            color: UI_COLORS.archetype,
           }}>
             {archetype.name}
           </span>
@@ -58,8 +59,8 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
             fontSize: 10,
             padding: '1px 6px',
             borderRadius: 3,
-            background: 'rgba(139,92,246,0.12)',
-            color: '#8b5cf6',
+            background: `${UI_COLORS.genre}1f`,
+            color: UI_COLORS.genre,
           }}>
             {genre.name}
           </span>
@@ -90,7 +91,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
           }} />
           {global_boundaries.musts.length > 0 && (
             <div style={{ marginBottom: 6, marginTop: 6 }}>
-              <span style={{ fontSize: 10, fontWeight: 600, color: '#22c55e' }}>Must Include</span>
+              <span style={{ fontSize: 10, fontWeight: 600, color: STATUS_COLORS.pass }}>Must Include</span>
               {global_boundaries.musts.map((m, i) => (
                 <div key={i} style={{ padding: '2px 0', color: 'var(--text-muted)' }}>{m}</div>
               ))}
@@ -98,7 +99,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
           )}
           {global_boundaries.must_nots.length > 0 && (
             <div style={{ marginBottom: 6 }}>
-              <span style={{ fontSize: 10, fontWeight: 600, color: '#ef4444' }}>Must Exclude</span>
+              <span style={{ fontSize: 10, fontWeight: 600, color: STATUS_COLORS.fail }}>Must Exclude</span>
               {global_boundaries.must_nots.map((m, i) => (
                 <div key={i} style={{ padding: '2px 0', color: 'var(--text-muted)' }}>{m}</div>
               ))}
@@ -192,7 +193,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
             return parts.join('\n\n')
           }} />
           <div style={{ marginBottom: 6, marginTop: 6 }}>
-            <span style={{ fontSize: 10, fontWeight: 600, color: '#ef4444' }}>
+            <span style={{ fontSize: 10, fontWeight: 600, color: SEVERITY_COLORS.hard }}>
               Hard ({genre.hard_constraints.length})
             </span>
             {genre.hard_constraints.map((c) => (
@@ -203,7 +204,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
                   padding: '2px 6px',
                   fontSize: 10,
                   fontFamily: 'monospace',
-                  color: '#ef4444',
+                  color: SEVERITY_COLORS.hard,
                   cursor: 'pointer',
                   borderRadius: 3,
                   transition: 'background 0.1s',
@@ -216,7 +217,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
             ))}
           </div>
           <div>
-            <span style={{ fontSize: 10, fontWeight: 600, color: '#f59e0b' }}>
+            <span style={{ fontSize: 10, fontWeight: 600, color: SEVERITY_COLORS.soft }}>
               Soft ({genre.soft_constraints.length})
             </span>
             {genre.soft_constraints.map((c) => (
@@ -227,7 +228,7 @@ export function ContractPanel({ onHighlightNodes }: ContractPanelProps) {
                   padding: '2px 6px',
                   fontSize: 10,
                   fontFamily: 'monospace',
-                  color: '#f59e0b',
+                  color: SEVERITY_COLORS.soft,
                   cursor: 'pointer',
                   borderRadius: 3,
                   transition: 'background 0.1s',

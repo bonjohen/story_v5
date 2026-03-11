@@ -8,76 +8,14 @@ import { useGraphStore } from '../store/graphStore.ts'
 import { ConstraintChecklist } from './ConstraintChecklist.tsx'
 import { Disclosure } from '../components/Disclosure.tsx'
 import { toArray } from '../utils/arrays.ts'
+import { NODE_ROLE_COLORS, NODE_ROLE_SYMBOLS, EDGE_MEANING_COLORS, UI_COLORS } from '../theme/colors.ts'
 import type { GraphNode, GraphEdge } from '../types/graph.ts'
 import type { NormalizedGraph } from '../graph-engine/index.ts'
 
-/** Symbol indicators for roles (colorblind-accessible secondary signal) */
-const ROLE_SYMBOLS: Record<string, string> = {
-  'Origin': '\u25B6',        // play
-  'Disruption': '\u26A1',    // lightning
-  'Commitment': '\u2717',    // crossmark
-  'Catalyst': '\u2605',      // star
-  'Threshold': '\u2192',     // arrow
-  'Trial': '\u2694',         // swords
-  'Escalation': '\u25B2',    // triangle up
-  'Crisis': '\u26A0',        // warning
-  'Descent': '\u25BC',       // triangle down
-  'Transformation': '\u21BB',// cycle
-  'Revelation': '\u25C9',    // fisheye
-  'Irreversible Cost': '\u2718',// heavy X
-  'Resolution': '\u2714',    // checkmark
-  'Reckoning': '\u2696',     // scales
-  // Genre roles
-  'Genre Promise': '\u25B6',
-  'Core Constraint': '\u2717',
-  'Subgenre Pattern': '\u25CB',// circle
-  'World/Setting Rules': '\u2302',// house
-  'Scene Obligations': '\u25A0',// square
-  'Tone Marker': '\u266A',   // music note
-  'Anti-Pattern': '\u2298',  // circled slash
-}
+const ROLE_SYMBOLS = NODE_ROLE_SYMBOLS
+const ROLE_COLORS = NODE_ROLE_COLORS
 
-/** Color map for archetype node roles — matches Cytoscape canvas colors in styles.ts */
-const ROLE_COLORS: Record<string, string> = {
-  'Origin': '#22c55e',       // start
-  'Disruption': '#f97316',   // escalation category
-  'Commitment': '#14b8a6',   // commitment (teal)
-  'Catalyst': '#06b6d4',     // catalyst (cyan)
-  'Threshold': '#14b8a6',    // commitment category
-  'Trial': '#64748b',        // neutral category
-  'Escalation': '#f97316',   // escalation
-  'Crisis': '#dc2626',       // crisis
-  'Descent': '#6366f1',      // descent (indigo)
-  'Transformation': '#a855f7', // transformation
-  'Revelation': '#3b82f6',   // revelation (blue)
-  'Irreversible Cost': '#ef4444', // irreversible (red)
-  'Resolution': '#eab308',   // terminal
-  'Reckoning': '#dc2626',    // crisis category
-  // Genre roles — match canvas category colors
-  'Genre Promise': '#22c55e',     // start
-  'Core Constraint': '#f97316',   // escalation
-  'Subgenre Pattern': '#3b82f6',  // revelation
-  'World/Setting Rules': '#06b6d4', // catalyst
-  'Scene Obligations': '#14b8a6', // commitment
-  'Tone Marker': '#06b6d4',      // tone (cyan)
-  'Anti-Pattern': '#ef4444',     // antipattern (red)
-}
-
-/** Color map for edge meanings */
-const MEANING_COLORS: Record<string, string> = {
-  'Escalation': '#f97316',
-  'Constraint': '#3b82f6',
-  'Revelation': '#06b6d4',
-  'Disruption': '#ef4444',
-  'Transformation': '#a855f7',
-  'Resolution': '#22c55e',
-  'Branching': '#8b5cf6',
-  'Prohibition': '#dc2626',
-  'Refinement': '#3b82f6',
-  'Narrows': '#f59e0b',
-  'Requires': '#ef4444',
-  'Forbids': '#dc2626',
-}
+const MEANING_COLORS = EDGE_MEANING_COLORS
 
 interface DetailPanelProps {
   node?: GraphNode | null
@@ -104,7 +42,7 @@ export function DetailPanel({
 
   const graphName = graph?.graph.name ?? 'Unknown'
   const graphType = graph?.graph.type === 'genre' ? 'Genre' : 'Archetype'
-  const graphTypeColor = graph?.graph.type === 'genre' ? '#f59e0b' : '#3b82f6'
+  const graphTypeColor = graph?.graph.type === 'genre' ? UI_COLORS.genre : UI_COLORS.archetype
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -323,7 +261,7 @@ function CollapsibleSection({ title, items, warn }: {
     <Disclosure title={title} badge={filtered.length} persistKey={`detail-${title.toLowerCase().replace(/\s+/g, '-')}`}>
       <ul style={{ paddingLeft: 16, margin: 0, fontSize: 12, lineHeight: 1.65, padding: '0 12px 4px 28px' }}>
         {filtered.map((item, i) => (
-          <li key={i} style={{ color: warn ? '#fbbf24' : 'var(--text-primary)' }}>
+          <li key={i} style={{ color: warn ? UI_COLORS.warning : 'var(--text-primary)' }}>
             {item}
           </li>
         ))}

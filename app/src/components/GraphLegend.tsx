@@ -4,45 +4,32 @@
  */
 
 import { useState, memo } from 'react'
+import { NODE_ROLE_COLORS, NODE_ROLE_SYMBOLS, EDGE_MEANING_COLORS, EDGE_MEANING_STYLES } from '../theme/colors.ts'
 
-// Canonical role colors — must match DetailPanel.tsx ROLE_COLORS and styles.ts canvas colors
-const ARCHETYPE_ROLES: { role: string; color: string; symbol: string }[] = [
-  { role: 'Origin', color: '#22c55e', symbol: '\u25B6' },
-  { role: 'Catalyst', color: '#06b6d4', symbol: '\u2605' },
-  { role: 'Disruption', color: '#f97316', symbol: '\u26A1' },
-  { role: 'Threshold', color: '#14b8a6', symbol: '\u2192' },
-  { role: 'Commitment', color: '#14b8a6', symbol: '\u2717' },
-  { role: 'Trial', color: '#64748b', symbol: '\u2694' },
-  { role: 'Escalation', color: '#f97316', symbol: '\u25B2' },
-  { role: 'Descent', color: '#6366f1', symbol: '\u25BC' },
-  { role: 'Crisis', color: '#dc2626', symbol: '\u26A0' },
-  { role: 'Revelation', color: '#3b82f6', symbol: '\u25C9' },
-  { role: 'Transformation', color: '#a855f7', symbol: '\u21BB' },
-  { role: 'Irreversible Cost', color: '#ef4444', symbol: '\u2718' },
-  { role: 'Reckoning', color: '#dc2626', symbol: '\u2696' },
-  { role: 'Resolution', color: '#eab308', symbol: '\u2714' },
+// Build role arrays from centralized constants
+const ARCHETYPE_ROLE_NAMES = [
+  'Origin', 'Catalyst', 'Disruption', 'Threshold', 'Commitment',
+  'Trial', 'Escalation', 'Descent', 'Crisis', 'Revelation',
+  'Transformation', 'Irreversible Cost', 'Reckoning', 'Resolution',
+]
+const GENRE_ROLE_NAMES = [
+  'Genre Promise', 'Core Constraint', 'Subgenre Pattern',
+  'World/Setting Rules', 'Scene Obligations', 'Tone Marker', 'Anti-Pattern',
+]
+const EDGE_MEANING_NAMES = [
+  'Escalation', 'Constraint', 'Revelation', 'Disruption',
+  'Transformation', 'Resolution', 'Branching', 'Prohibition',
 ]
 
-const GENRE_ROLES: { role: string; color: string; symbol: string }[] = [
-  { role: 'Genre Promise', color: '#22c55e', symbol: '\u25B6' },
-  { role: 'Core Constraint', color: '#f97316', symbol: '\u2717' },
-  { role: 'Subgenre Pattern', color: '#3b82f6', symbol: '\u25CB' },
-  { role: 'World/Setting Rules', color: '#06b6d4', symbol: '\u2302' },
-  { role: 'Scene Obligations', color: '#14b8a6', symbol: '\u25A0' },
-  { role: 'Tone Marker', color: '#06b6d4', symbol: '\u266A' },
-  { role: 'Anti-Pattern', color: '#ef4444', symbol: '\u2298' },
-]
-
-const EDGE_MEANINGS: { meaning: string; color: string; style: string }[] = [
-  { meaning: 'Escalation', color: '#f97316', style: 'solid' },
-  { meaning: 'Constraint', color: '#3b82f6', style: 'dashed' },
-  { meaning: 'Revelation', color: '#60a5fa', style: 'solid' },
-  { meaning: 'Disruption', color: '#ef4444', style: 'solid' },
-  { meaning: 'Transformation', color: '#a855f7', style: 'solid' },
-  { meaning: 'Resolution', color: '#22c55e', style: 'solid' },
-  { meaning: 'Branching', color: '#8b5cf6', style: 'dotted' },
-  { meaning: 'Prohibition', color: '#dc2626', style: 'dashed' },
-]
+const ARCHETYPE_ROLES = ARCHETYPE_ROLE_NAMES.map((role) => ({
+  role, color: NODE_ROLE_COLORS[role] ?? '#64748b', symbol: NODE_ROLE_SYMBOLS[role] ?? '\u25CF',
+}))
+const GENRE_ROLES = GENRE_ROLE_NAMES.map((role) => ({
+  role, color: NODE_ROLE_COLORS[role] ?? '#64748b', symbol: NODE_ROLE_SYMBOLS[role] ?? '\u25CF',
+}))
+const EDGE_MEANINGS = EDGE_MEANING_NAMES.map((meaning) => ({
+  meaning, color: EDGE_MEANING_COLORS[meaning] ?? '#64748b', style: EDGE_MEANING_STYLES[meaning] ?? 'solid',
+}))
 
 // Maps raw edge meaning strings to legend category names
 // (mirrors MEANING_CATEGORY_MAP in styles.ts but maps to display names)

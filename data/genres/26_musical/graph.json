@@ -36,7 +36,7 @@
       "label": "Musical Promise",
       "role": "Genre Promise",
       "level": 1,
-      "definition": "The audience is promised a story where emotion is so intense it transcends spoken dialogue â€” where characters sing and move because the interior life demands a fuller outlet than words alone can provide. This promise establishes a heightened reality in which the audience agrees to accept song as a natural extension of feeling rather than an interruption of it. Critically, the promise is not merely spectacle: every number must justify itself by revealing something about character or advancing the story's stakes, or the contract with the audience breaks.",
+      "definition": "The audience is promised a story where emotion is so intense it transcends spoken dialogue — where characters sing and move because the interior life demands a fuller outlet than words alone can provide. This promise establishes a heightened reality in which the audience agrees to accept song as a natural extension of feeling rather than an interruption of it. Critically, the promise is not merely spectacle: every number must justify itself by revealing something about character or advancing the story's stakes, or the contract with the audience breaks.",
       "entry_conditions": [
         "Story is positioned as a musical"
       ],
@@ -94,7 +94,7 @@
       "label": "Emotional Escalation Justifies the Musical Break",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "A character bursts into song because the emotion has reached a pitch that spoken language cannot contain â€” the transition from dialogue to song must feel inevitable, not arbitrary. This escalation principle means writers must engineer the scene leading into every number so that the audience feels the pressure building and experiences the song as release rather than interruption. When the escalation is missing, the musical break feels like a commercial or a variety act grafted onto drama.",
+      "definition": "A character bursts into song because the emotion has reached a pitch that spoken language cannot contain — the transition from dialogue to song must feel inevitable, not arbitrary. This escalation principle means writers must engineer the scene leading into every number so that the audience feels the pressure building and experiences the song as release rather than interruption. When the escalation is missing, the musical break feels like a commercial or a variety act grafted onto drama.",
       "entry_conditions": [
         "Genre promise established",
         "Scenes leading into numbers are structured to build emotional pressure"
@@ -124,7 +124,7 @@
       "label": "The World Must Establish When and Why Characters Sing",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "Every musical must negotiate its own relationship between speech and song â€” whether characters are aware they are singing, whether song is diegetic or internal, whether the world is naturalistic or frankly theatrical. This negotiation must happen early and be held consistently, because the audience's suspension of disbelief depends on a stable contract. A musical that shifts its rules mid-story about who can sing, when, and why will lose the audience's trust in the most basic premise of the form.",
+      "definition": "Every musical must negotiate its own relationship between speech and song — whether characters are aware they are singing, whether song is diegetic or internal, whether the world is naturalistic or frankly theatrical. This negotiation must happen early and be held consistently, because the audience's suspension of disbelief depends on a stable contract. A musical that shifts its rules mid-story about who can sing, when, and why will lose the audience's trust in the most basic premise of the form.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -142,7 +142,7 @@
         "The world treats one number as theatrical and the next as realistic with no tonal bridge"
       ],
       "signals_in_text": [
-        "Early numbers establish the mode â€” the audience learns from the first songs how singing works in this world",
+        "Early numbers establish the mode — the audience learns from the first songs how singing works in this world",
         "Supporting characters' relationship to song is consistent with the protagonist's",
         "Musical logic is maintained even when the subject matter is dark or comedic"
       ],
@@ -153,7 +153,7 @@
       "label": "Musical and Narrative Structure Must Be Integrated",
       "role": "Core Constraint",
       "level": 2,
-      "definition": "The architecture of the musical â€” where acts break, where reprises fall, where the final number lands â€” must mirror and reinforce the story's dramatic structure, not run parallel to it. Act-break numbers must heighten the central dramatic question; reprises must carry transformed emotional meaning from their originals; the final number must resolve or crystallize what the story has been building. When musical structure and narrative structure drift apart, the form fragments into separate entertainment and story.",
+      "definition": "The architecture of the musical — where acts break, where reprises fall, where the final number lands — must mirror and reinforce the story's dramatic structure, not run parallel to it. Act-break numbers must heighten the central dramatic question; reprises must carry transformed emotional meaning from their originals; the final number must resolve or crystallize what the story has been building. When musical structure and narrative structure drift apart, the form fragments into separate entertainment and story.",
       "entry_conditions": [
         "Genre promise established",
         "Story structure is being designed alongside musical structure"
@@ -183,7 +183,7 @@
       "label": "Classic Book Musical",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "The integrated musical play: a through-line narrative with defined characters, spoken dialogue scenes alternating with numbers, and a dramatic arc that depends on both song and book scenes to function. The book musical is built on the principle that the spoken scenes and the sung scenes should be indistinguishable in their dramatic seriousness â€” neither is filler for the other. Story and character are the organizing principles, and the musical numbers are the moments where the story's emotional core breaks through the surface of ordinary speech.",
+      "definition": "The integrated musical play: a through-line narrative with defined characters, spoken dialogue scenes alternating with numbers, and a dramatic arc that depends on both song and book scenes to function. The book musical is built on the principle that the spoken scenes and the sung scenes should be indistinguishable in their dramatic seriousness — neither is filler for the other. Story and character are the organizing principles, and the musical numbers are the moments where the story's emotional core breaks through the surface of ordinary speech.",
       "entry_conditions": [
         "Core constraints apply",
         "Story has a clear protagonist, objective, and dramatic arc"
@@ -203,7 +203,7 @@
       ],
       "signals_in_text": [
         "Dialogue scenes move the plot and build toward numbers rather than summarizing them",
-        "Characters' spoken and sung voices are continuous â€” same person, different register",
+        "Characters' spoken and sung voices are continuous — same person, different register",
         "The climax and resolution use both song and dialogue as equally essential tools"
       ],
       "severity": "soft"
@@ -213,7 +213,7 @@
       "label": "Jukebox Musical",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "A musical built around pre-existing songs from a specific artist, band, or era, where the narrative is constructed to justify and emotionally inhabit those songs rather than commissioned for an original score. The central craft challenge of the jukebox musical is making the audience forget they know the songs â€” or better, making their prior knowledge deepen the emotional experience â€” by placing familiar music in dramatically charged contexts that reveal new dimensions in lyrics the audience may have heard hundreds of times. When this works, the form creates a double pleasure: recognition and discovery simultaneously.",
+      "definition": "A musical built around pre-existing songs from a specific artist, band, or era, where the narrative is constructed to justify and emotionally inhabit those songs rather than commissioned for an original score. The central craft challenge of the jukebox musical is making the audience forget they know the songs — or better, making their prior knowledge deepen the emotional experience — by placing familiar music in dramatically charged contexts that reveal new dimensions in lyrics the audience may have heard hundreds of times. When this works, the form creates a double pleasure: recognition and discovery simultaneously.",
       "entry_conditions": [
         "Core constraints apply",
         "Pre-existing song catalog is the musical foundation"
@@ -229,7 +229,7 @@
       "failure_modes": [
         "Songs are placed in the order that makes biographical or chronological sense rather than dramatic sense",
         "The story exists only as delivery mechanism for hit songs, with no dramatic stakes of its own",
-        "Lyrics don't match the dramatic context â€” the song's original meaning fights the scene's meaning"
+        "Lyrics don't match the dramatic context — the song's original meaning fights the scene's meaning"
       ],
       "signals_in_text": [
         "Song placement is motivated by the character's dramatic need in the scene, not the song's original context",
@@ -243,7 +243,7 @@
       "label": "Rock Opera / Sung-Through Musical",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "A musical form in which spoken dialogue is replaced entirely or nearly entirely by sung text, demanding that the music carry all the work of exposition, characterization, dramatic escalation, and emotional resolution that book musicals distribute between spoken scenes and songs. The sung-through form intensifies the integration requirement â€” there is no relief valve of ordinary speech, so every melodic phrase must serve the drama. The rock opera variant brings the energy, distortion, and expressive vocabulary of rock music to this total-immersion approach, often in service of elevated or mythological subject matter.",
+      "definition": "A musical form in which spoken dialogue is replaced entirely or nearly entirely by sung text, demanding that the music carry all the work of exposition, characterization, dramatic escalation, and emotional resolution that book musicals distribute between spoken scenes and songs. The sung-through form intensifies the integration requirement — there is no relief valve of ordinary speech, so every melodic phrase must serve the drama. The rock opera variant brings the energy, distortion, and expressive vocabulary of rock music to this total-immersion approach, often in service of elevated or mythological subject matter.",
       "entry_conditions": [
         "Core constraints apply",
         "Narrative and character are carried entirely through music and lyric"
@@ -262,7 +262,7 @@
         "Recitative passages connecting dramatic numbers feel dramatically inert"
       ],
       "signals_in_text": [
-        "No spoken dialogue â€” all text is lyric or sung recitative",
+        "No spoken dialogue — all text is lyric or sung recitative",
         "Musical motifs carry dramatic meaning that would be carried by spoken exposition in a book show",
         "Emotional climaxes are built through musical escalation rather than dialogue confrontation"
       ],
@@ -273,10 +273,10 @@
       "label": "Musical Comedy",
       "role": "Subgenre Pattern",
       "level": 3,
-      "definition": "A musical in which comedy is the primary mode and the musical numbers amplify, accelerate, and crystallize the comedy rather than interrupting it. Musical comedy depends on a specific tonal contract: the audience knows bad things are unlikely to end badly, and the heightened emotional reality of the form is deployed in service of wit, physical absurdity, social satire, and romantic confusion. Songs in musical comedy often work by the comic principle of the unexpected â€” rhymes that surprise, emotions that seem disproportionate, situations revealed to be more complicated than anyone admitted.",
+      "definition": "A musical in which comedy is the primary mode and the musical numbers amplify, accelerate, and crystallize the comedy rather than interrupting it. Musical comedy depends on a specific tonal contract: the audience knows bad things are unlikely to end badly, and the heightened emotional reality of the form is deployed in service of wit, physical absurdity, social satire, and romantic confusion. Songs in musical comedy often work by the comic principle of the unexpected — rhymes that surprise, emotions that seem disproportionate, situations revealed to be more complicated than anyone admitted.",
       "entry_conditions": [
         "Core constraints apply",
-        "Primary mode is comedic â€” situations escalate absurdly, resolution is happy or at least satisfying"
+        "Primary mode is comedic — situations escalate absurdly, resolution is happy or at least satisfying"
       ],
       "exit_conditions": [
         "Comic situations are resolved, romantic complications untangled, and the tone lands as celebratory"
@@ -303,7 +303,7 @@
       "label": "Heightened Emotional Reality",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "The world of a musical operates at a register of emotional intensity slightly or significantly above naturalistic reality, where feelings are larger, desires more urgent, and the expression of interiority more immediate than in everyday life. This heightening is not a failure of realism but the genre's fundamental operating principle â€” it is the atmospheric condition that makes song feel natural rather than strange. The production design, staging, and prose style must all contribute to establishing and maintaining this heightened register, because if the world is too flat and naturalistic, singing will feel absurd rather than inevitable.",
+      "definition": "The world of a musical operates at a register of emotional intensity slightly or significantly above naturalistic reality, where feelings are larger, desires more urgent, and the expression of interiority more immediate than in everyday life. This heightening is not a failure of realism but the genre's fundamental operating principle — it is the atmospheric condition that makes song feel natural rather than strange. The production design, staging, and prose style must all contribute to establishing and maintaining this heightened register, because if the world is too flat and naturalistic, singing will feel absurd rather than inevitable.",
       "entry_conditions": [
         "Subgenre pattern selected",
         "World-building choices are being made"
@@ -318,7 +318,7 @@
       ],
       "failure_modes": [
         "World is established in a register so flatly naturalistic that singing becomes jarring",
-        "Heightening is inconsistent â€” some scenes feel like a musical, others like a straight drama",
+        "Heightening is inconsistent — some scenes feel like a musical, others like a straight drama",
         "The emotional register drops sharply between numbers and never recovers before the next"
       ],
       "signals_in_text": [
@@ -333,7 +333,7 @@
       "label": "Musical Numbers Have Narrative Function",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "Within the established world, every musical number is understood â€” by the story's logic and the audience â€” to serve a specific dramatic purpose: to reveal, to transform, to challenge, or to resolve. This is the structural analog of the heightened reality rule: just as the world accepts song as expression, the narrative architecture makes room for song as event. Numbers are not interruptions but nodes in the dramatic structure where the story's energy concentrates and changes direction.",
+      "definition": "Within the established world, every musical number is understood — by the story's logic and the audience — to serve a specific dramatic purpose: to reveal, to transform, to challenge, or to resolve. This is the structural analog of the heightened reality rule: just as the world accepts song as expression, the narrative architecture makes room for song as event. Numbers are not interruptions but nodes in the dramatic structure where the story's energy concentrates and changes direction.",
       "entry_conditions": [
         "Subgenre pattern selected",
         "Story structure is being architected"
@@ -363,7 +363,7 @@
       "label": "Ensemble Supports the Emotional Landscape",
       "role": "Setting Rule",
       "level": 4,
-      "definition": "In the musical, the ensemble â€” chorus, supporting players, community â€” is not mere background but an active participant in establishing and amplifying the emotional world. The ensemble reflects, contests, and magnifies the protagonist's interior state, functioning as a social body that gives scale and context to individual feeling. When a character's joy is shared by the ensemble, it becomes communal celebration; when they are isolated from the ensemble's movement or song, it dramatizes alienation. The ensemble's relationship to the central numbers is itself a storytelling tool.",
+      "definition": "In the musical, the ensemble — chorus, supporting players, community — is not mere background but an active participant in establishing and amplifying the emotional world. The ensemble reflects, contests, and magnifies the protagonist's interior state, functioning as a social body that gives scale and context to individual feeling. When a character's joy is shared by the ensemble, it becomes communal celebration; when they are isolated from the ensemble's movement or song, it dramatizes alienation. The ensemble's relationship to the central numbers is itself a storytelling tool.",
       "entry_conditions": [
         "Subgenre pattern selected",
         "Community or ensemble characters are part of the story"
@@ -378,7 +378,7 @@
       ],
       "failure_modes": [
         "Ensemble is present only as spectacle, with no relationship to the story's dramatic content",
-        "Ensemble numbers feel disconnected from the story world â€” a cast performing rather than a community feeling",
+        "Ensemble numbers feel disconnected from the story world — a cast performing rather than a community feeling",
         "Protagonist is isolated from the ensemble in ways that are never narratively meaningful"
       ],
       "signals_in_text": [
@@ -393,7 +393,7 @@
       "label": "I Want Song",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "Early in the story â€” typically within the first act â€” the protagonist must express through song what they want, need, or dream of in a way that speech has not yet been able to fully articulate. This number is foundational: it establishes the protagonist's desire as the engine of the story, gives the audience the emotional investment they need to follow the character through whatever comes next, and sets the thematic stakes of the entire piece. Without a clear I Want song, the audience has no compass for the protagonist's journey and no emotional framework for evaluating whether the story ultimately delivers what it promised.",
+      "definition": "Early in the story — typically within the first act — the protagonist must express through song what they want, need, or dream of in a way that speech has not yet been able to fully articulate. This number is foundational: it establishes the protagonist's desire as the engine of the story, gives the audience the emotional investment they need to follow the character through whatever comes next, and sets the thematic stakes of the entire piece. Without a clear I Want song, the audience has no compass for the protagonist's journey and no emotional framework for evaluating whether the story ultimately delivers what it promised.",
       "entry_conditions": [
         "Protagonist is established in their current world",
         "Desire is present but not yet fully expressed"
@@ -407,7 +407,7 @@
         "Dream song: protagonist articulates an imagined future that contrasts with their present reality"
       ],
       "failure_modes": [
-        "The protagonist's desire is stated in dialogue but never sung â€” the emotional commitment of the I Want form is avoided",
+        "The protagonist's desire is stated in dialogue but never sung — the emotional commitment of the I Want form is avoided",
         "The song expresses a desire so vague it gives the story no direction",
         "The protagonist's stated desire in the I Want song has no relationship to what the story actually pursues"
       ],
@@ -423,7 +423,7 @@
       "label": "Showstopper / Act-Break Number",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "At the structural peaks of the story â€” typically the act-one finale and the climax â€” there must be a number of sufficient emotional and theatrical power to earn the break or the resolution. The act-break showstopper does not merely entertain; it crystallizes the central dramatic question at its most unresolved and sends the audience into the interval (or the story's final movement) with maximum investment. This number must be the largest emotional statement the show has made up to that point â€” anything smaller will feel like a structural failure, a story that has not yet found its gear.",
+      "definition": "At the structural peaks of the story — typically the act-one finale and the climax — there must be a number of sufficient emotional and theatrical power to earn the break or the resolution. The act-break showstopper does not merely entertain; it crystallizes the central dramatic question at its most unresolved and sends the audience into the interval (or the story's final movement) with maximum investment. This number must be the largest emotional statement the show has made up to that point — anything smaller will feel like a structural failure, a story that has not yet found its gear.",
       "entry_conditions": [
         "Dramatic tension has been built to a peak",
         "The story is at a structural break or climax"
@@ -439,12 +439,12 @@
       ],
       "failure_modes": [
         "Act break lands on a moment of low emotional intensity, leaving the audience disengaged at intermission",
-        "The showstopper is visually spectacular but emotionally empty â€” it impresses without involving",
+        "The showstopper is visually spectacular but emotionally empty — it impresses without involving",
         "The climactic number is smaller or less emotionally decisive than numbers earlier in the show"
       ],
       "signals_in_text": [
         "The number builds continuously from its opening to a peak that cannot be exceeded in that moment",
-        "After the number, the story cannot continue in the same way â€” something has broken open",
+        "After the number, the story cannot continue in the same way — something has broken open",
         "The theatrical or cinematic resources are at their maximum in this number"
       ],
       "severity": "hard"
@@ -454,7 +454,7 @@
       "label": "Reprise or Transformation Number",
       "role": "Scene Obligation",
       "level": 5,
-      "definition": "Late in the story, a number from earlier returns in transformed form â€” same melody, altered meaning â€” to show how the character or situation has changed. The reprise is one of musical theater's most powerful tools precisely because it leverages what the audience already knows: the original number carries its full emotional history into the new context, and the contrast between the two hearings does work that no new song can replicate. When a reprise works, it proves that the story has genuinely changed something; when it fails, it is merely a reminder that this song exists.",
+      "definition": "Late in the story, a number from earlier returns in transformed form — same melody, altered meaning — to show how the character or situation has changed. The reprise is one of musical theater's most powerful tools precisely because it leverages what the audience already knows: the original number carries its full emotional history into the new context, and the contrast between the two hearings does work that no new song can replicate. When a reprise works, it proves that the story has genuinely changed something; when it fails, it is merely a reminder that this song exists.",
       "entry_conditions": [
         "An earlier number established a melody and emotional context that the story will need to revisit",
         "Character or situation has changed significantly"
@@ -468,14 +468,14 @@
         "Broken reprise: the melody is attempted but cannot be completed, dramatizing loss or defeat"
       ],
       "failure_modes": [
-        "Reprise is placed without dramatic motivation â€” the song returns because it was popular, not because the story needs it",
+        "Reprise is placed without dramatic motivation — the song returns because it was popular, not because the story needs it",
         "The reprise lyrics are identical to the original, missing the opportunity to show transformation",
         "Reprise arrives before the story has changed enough to warrant the return"
       ],
       "signals_in_text": [
         "The melody of the original is recognizable but harmonically or rhythmically altered to signal transformation",
         "Lyric changes, however small, carry the weight of everything that has happened since the original",
-        "The character's relationship to the song has visibly changed â€” they sing it differently now"
+        "The character's relationship to the song has visibly changed — they sing it differently now"
       ],
       "severity": "hard"
     },
@@ -484,7 +484,7 @@
       "label": "Heightened, Emotionally Expansive, Performative Tone",
       "role": "Tone Marker",
       "level": null,
-      "definition": "The musical operates in a tone that is simultaneously more emotionally exposed than naturalistic drama and more self-aware about the performative nature of that exposure. Characters in musicals feel things at full volume and express those feelings with a directness â€” through body, voice, and movement â€” that ordinary social life suppresses. This tone is not ironic about its own intensity; it holds the performative quality and the genuine emotional investment together without embarrassment, trusting the audience to accept that largeness of feeling is not the same as falseness of feeling.",
+      "definition": "The musical operates in a tone that is simultaneously more emotionally exposed than naturalistic drama and more self-aware about the performative nature of that exposure. Characters in musicals feel things at full volume and express those feelings with a directness — through body, voice, and movement — that ordinary social life suppresses. This tone is not ironic about its own intensity; it holds the performative quality and the genuine emotional investment together without embarrassment, trusting the audience to accept that largeness of feeling is not the same as falseness of feeling.",
       "entry_conditions": [
         "Genre promise established"
       ],
@@ -513,12 +513,12 @@
       "label": "Songs That Halt Narrative Momentum",
       "role": "Anti-Pattern",
       "level": null,
-      "definition": "The defining failure mode of the musical is numbers that stop the story rather than advancing it â€” where the audience recognizes that the plot has paused for entertainment and begins to wait for the next scene. This failure occurs when songs are placed for variety or spectacle rather than dramatic necessity, when they repeat in lyric form what dialogue has already established, or when they function as intermissions from the drama rather than its intensification. A show plagued by narrative-halting numbers trains the audience to disengage during songs, which is the catastrophic inversion of the musical form's fundamental promise.",
+      "definition": "The defining failure mode of the musical is numbers that stop the story rather than advancing it — where the audience recognizes that the plot has paused for entertainment and begins to wait for the next scene. This failure occurs when songs are placed for variety or spectacle rather than dramatic necessity, when they repeat in lyric form what dialogue has already established, or when they function as intermissions from the drama rather than its intensification. A show plagued by narrative-halting numbers trains the audience to disengage during songs, which is the catastrophic inversion of the musical form's fundamental promise.",
       "entry_conditions": [
         "Musical numbers occur in the story"
       ],
       "exit_conditions": [
-        "Each number is verified to advance plot, reveal character, or change a relationship â€” not merely to entertain"
+        "Each number is verified to advance plot, reveal character, or change a relationship — not merely to entertain"
       ],
       "typical_variants": [
         "The obligatory novelty number: a song placed for variety that no one in the show needs",
@@ -526,7 +526,7 @@
         "The production number trap: spectacle so lavish it overwhelms dramatic purpose"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a genre violation",
+        "This node IS the failure mode — its presence indicates a genre violation",
         "Show is otherwise well-constructed but one or more numbers are identifiable halts"
       ],
       "signals_in_text": [
@@ -554,7 +554,7 @@
         "Diegetic confusion: the show is unclear whether characters hear each other's songs or only the audience does"
       ],
       "failure_modes": [
-        "This node IS the failure mode â€” its presence indicates a foundational genre violation",
+        "This node IS the failure mode — its presence indicates a foundational genre violation",
         "Even individual numbers may be strong, but the show as a whole lacks coherent musical identity"
       ],
       "signals_in_text": [
@@ -597,7 +597,7 @@
       "effects_on_stakes": "Stakes must be built into scenes leading to numbers so that the musical break feels like release rather than intrusion",
       "effects_on_character": "Characters must have an emotional state at the moment of singing that speech cannot adequately express",
       "common_alternatives": [
-        "Comedy numbers may use surprise escalation â€” the absurdity of the situation rather than emotional intensity justifies the song"
+        "Comedy numbers may use surprise escalation — the absurdity of the situation rather than emotional intensity justifies the song"
       ],
       "anti_patterns": [
         "Characters begin singing with no buildup, making song feel mechanical"
@@ -614,9 +614,9 @@
         "Genre promise established"
       ],
       "effects_on_stakes": "The plausibility of the entire form depends on the world's acceptance of song as natural expression",
-      "effects_on_character": "All characters must operate within the same musical logic â€” who can sing, when, and how",
+      "effects_on_character": "All characters must operate within the same musical logic — who can sing, when, and how",
       "common_alternatives": [
-        "Some musicals deliberately violate their own logic as a thematic device â€” but the logic must be established before it is broken"
+        "Some musicals deliberately violate their own logic as a thematic device — but the logic must be established before it is broken"
       ],
       "anti_patterns": [
         "Musical convention applied inconsistently, undermining audience trust in the form"
@@ -670,7 +670,7 @@
       "preconditions": [
         "Story has a clear dramatic through-line with defined characters and spoken dialogue"
       ],
-      "effects_on_stakes": "Both book scenes and numbers carry the plot â€” neither is filler",
+      "effects_on_stakes": "Both book scenes and numbers carry the plot — neither is filler",
       "effects_on_character": "Character consistency must be maintained across spoken and sung modes",
       "common_alternatives": [
         "Rock opera",
@@ -712,7 +712,7 @@
       "preconditions": [
         "Story and music are being designed as a single integrated artifact with no spoken dialogue"
       ],
-      "effects_on_stakes": "Music must carry all dramatic information â€” no spoken fallback for exposition or character clarification",
+      "effects_on_stakes": "Music must carry all dramatic information — no spoken fallback for exposition or character clarification",
       "effects_on_character": "Every aspect of character must be expressible in lyric and melody",
       "common_alternatives": [
         "Book musical",
@@ -740,7 +740,7 @@
         "Jukebox musical"
       ],
       "anti_patterns": [
-        "Comedy that never uses the musical form's specific comic possibilities â€” surprise rhyme, tonal mismatch, physical comedy amplified by rhythm"
+        "Comedy that never uses the musical form's specific comic possibilities — surprise rhyme, tonal mismatch, physical comedy amplified by rhythm"
       ],
       "severity": "soft"
     },
@@ -856,7 +856,7 @@
         "Some shows use the act-break as a quiet devastating moment rather than a large showstopper, but must compensate with accumulated prior intensity"
       ],
       "anti_patterns": [
-        "Showstopper placed at a moment of low dramatic stakes â€” visually spectacular but emotionally arbitrary"
+        "Showstopper placed at a moment of low dramatic stakes — visually spectacular but emotionally arbitrary"
       ],
       "severity": "hard"
     },
@@ -890,7 +890,7 @@
         "I Want song established the protagonist's desire",
         "Story has complicated and tested that desire"
       ],
-      "effects_on_stakes": "Showstopper must directly engage with the desire stated in the I Want song â€” its achievement, obstruction, or transformation",
+      "effects_on_stakes": "Showstopper must directly engage with the desire stated in the I Want song — its achievement, obstruction, or transformation",
       "effects_on_character": "Character is at maximum distance from or proximity to their stated desire at the showstopper",
       "common_alternatives": [
         "The showstopper may reveal the desire was wrong or insufficient, setting up act two's redefinition"
@@ -913,7 +913,7 @@
       "effects_on_stakes": "Reprise payoff must feel proportionate to the emotional investment of the showstopper",
       "effects_on_character": "Character's transformation from showstopper to reprise is the arc of act two in compressed form",
       "common_alternatives": [
-        "Broken reprise â€” the transformation fails and the melody cannot be completed â€” may serve as tragic resolution"
+        "Broken reprise — the transformation fails and the melody cannot be completed — may serve as tragic resolution"
       ],
       "anti_patterns": [
         "Reprise arrives too soon after the showstopper, before the story has done the work the transformation requires"
@@ -933,7 +933,7 @@
       "effects_on_character": "Characters appear to pause their dramatic arc to perform",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     },
@@ -951,7 +951,7 @@
       "effects_on_character": "Characters' singing feels like authorial imposition rather than expressive necessity",
       "common_alternatives": [],
       "anti_patterns": [
-        "This edge IS the anti-pattern â€” it describes what to avoid"
+        "This edge IS the anti-pattern — it describes what to avoid"
       ],
       "severity": "hard"
     }

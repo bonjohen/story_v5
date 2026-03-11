@@ -4,29 +4,16 @@
  * plus entry/exit conditions, signals, obligations, and anti-patterns.
  */
 
-import { useState, useMemo, useCallback, type ReactNode } from 'react'
+import { useState, useMemo, useCallback, useEffect, type ReactNode } from 'react'
 import { useGenerationStore } from '../store/generationStore.ts'
 import { useRequestStore } from '../store/requestStore.ts'
+import { useGraphStore } from '../../store/graphStore.ts'
+import { useElementStore } from '../../store/elementStore.ts'
+import { ENTITY_COLORS, NODE_ROLE_COLORS, SEVERITY_COLORS, UI_COLORS } from '../../theme/colors.ts'
 import type { DetailCharacter } from '../artifacts/types.ts'
 
-const CATEGORY_COLORS: Record<string, string> = {
-  character: '#f59e0b',
-  place: '#3b82f6',
-  object: '#22c55e',
-  concept: '#a855f7',
-}
-
-const ROLE_COLORS: Record<string, string> = {
-  Origin: '#22c55e',
-  Disruption: '#ef4444',
-  Catalyst: '#f97316',
-  Threshold: '#8b5cf6',
-  Trial: '#3b82f6',
-  Descent: '#6366f1',
-  Crisis: '#ef4444',
-  Transformation: '#a855f7',
-  Resolution: '#22c55e',
-}
+const CATEGORY_COLORS: Record<string, string> = ENTITY_COLORS
+const ROLE_COLORS = NODE_ROLE_COLORS
 
 type ViewMode = 'genre' | 'beats' | 'cast' | 'places' | 'relationships' | 'objects'
 
@@ -36,6 +23,17 @@ export function TemplatesPanel() {
   const detailBindings = useGenerationStore((s) => s.detailBindings)
   const slotOverrides = useRequestStore((s) => s.slotOverrides)
   const setSlotOverride = useRequestStore((s) => s.setSlotOverride)
+
+  // Fallback: load example elements from corpus when no generation data
+  const archetypeDir = useGraphStore((s) => s.archetypeDir)
+  const loadArchetypeElements = useElementStore((s) => s.loadArchetypeElements)
+  const exampleElements = useElementStore((s) => s.exampleElements)
+
+  useEffect(() => {
+    if (archetypeDir) void loadArchetypeElements(archetypeDir)
+  }, [archetypeDir, loadArchetypeElements])
+
+  const exampleData = archetypeDir ? exampleElements.get(archetypeDir) : undefined
 
   const [viewMode, setViewMode] = useState<ViewMode>('genre')
   const [expandedBeat, setExpandedBeat] = useState<string | null>(null)
@@ -72,21 +70,57 @@ export function TemplatesPanel() {
     return map
   }, [backbone, detailBindings, slotOverrides])
 
-  // Entities from detail bindings
+  // Entities from detail bindings, with fallback to corpus example data
   const characters = useMemo(() => {
-    if (!detailBindings?.entity_registry.characters) return []
-    return Object.values(detailBindings.entity_registry.characters)
-  }, [detailBindings])
+    if (detailBindings?.entity_registry.characters) {
+      return Object.values(detailBindings.entity_registry.characters)
+    }
+    // Fallback: convert example characters to DetailCharacter shape
+    if (exampleData?.characters) {
+      return exampleData.characters.map((c) => ({
+        id: c.id,
+        name: c.name,
+        role: c.role,
+        archetype_function: c.description ?? '',
+        traits: c.traits ?? [],
+        motivations: c.motivations ?? [],
+        flaw: '',
+        arc_direction: c.arc_type ?? '',
+        backstory: '',
+        relationships: c.relationships?.map((r) => `${r.target_id}: ${r.description}`) ?? [],
+        distinguishing_feature: '',
+      } satisfies DetailCharacter))
+    }
+    return []
+  }, [detailBindings, exampleData])
 
   const places = useMemo(() => {
-    if (!detailBindings?.entity_registry.places) return []
-    return detailBindings.entity_registry.places
-  }, [detailBindings])
+    if (detailBindings?.entity_registry.places) return detailBindings.entity_registry.places
+    if (exampleData?.places) {
+      return exampleData.places.map((p) => ({
+        id: p.id,
+        name: p.name,
+        type: p.type,
+        features: p.rules ?? [],
+        atmosphere: p.atmosphere ?? '',
+      }))
+    }
+    return []
+  }, [detailBindings, exampleData])
 
   const objects = useMemo(() => {
-    if (!detailBindings?.entity_registry.objects) return []
-    return detailBindings.entity_registry.objects
-  }, [detailBindings])
+    if (detailBindings?.entity_registry.objects) return detailBindings.entity_registry.objects
+    if (exampleData?.objects) {
+      return exampleData.objects.map((o) => ({
+        id: o.id,
+        name: o.name,
+        type: o.type,
+        significance: o.significance ?? '',
+        properties: o.rules ?? [],
+      }))
+    }
+    return []
+  }, [detailBindings, exampleData])
 
   // Collect all relationships from characters
   const relationships = useMemo(() => {
@@ -100,6 +134,8 @@ export function TemplatesPanel() {
     }
     return rels
   }, [characters])
+
+  const usingExampleData = !detailBindings && !!exampleData
 
   const hasData = !!templatePack || !!backbone
 
@@ -294,7 +330,7 @@ export function TemplatesPanel() {
                               marginBottom: 3,
                               borderRadius: 3,
                               background: ob.severity === 'hard' ? 'rgba(245,158,11,0.08)' : 'rgba(139,92,246,0.08)',
-                              borderLeft: `2px solid ${ob.severity === 'hard' ? '#f59e0b' : '#8b5cf6'}`,
+                              borderLeft: `2px solid ${ob.severity === 'hard' ? SEVERITY_COLORS.hard : SEVERITY_COLORS.soft}`,
                               color: 'var(--text-secondary)',
                             }}>
                               <span style={{ fontWeight: 600 }}>{genreTmpl?.label ?? ob.label}</span>
@@ -305,7 +341,7 @@ export function TemplatesPanel() {
                                 borderRadius: 2,
                                 fontWeight: 600,
                                 textTransform: 'uppercase',
-                                color: ob.severity === 'hard' ? '#f59e0b' : '#8b5cf6',
+                                color: ob.severity === 'hard' ? SEVERITY_COLORS.hard : SEVERITY_COLORS.soft,
                               }}>
                                 {ob.severity === 'hard' ? 'Required' : 'Suggested'}
                               </span>
@@ -324,7 +360,7 @@ export function TemplatesPanel() {
                     {tmpl && tmpl.failure_modes_to_avoid.length > 0 && (
                       <Section label="Avoid">
                         {tmpl.failure_modes_to_avoid.map((f, i) => (
-                          <div key={i} style={{ fontSize: 10, color: '#fbbf24', lineHeight: 1.4, marginBottom: 2 }}>
+                          <div key={i} style={{ fontSize: 10, color: UI_COLORS.warning, lineHeight: 1.4, marginBottom: 2 }}>
                             {'\u2718'} {f}
                           </div>
                         ))}
@@ -343,9 +379,9 @@ export function TemplatesPanel() {
               padding: '8px 10px',
               background: 'var(--bg-elevated)',
               borderRadius: 6,
-              borderLeft: '3px solid #06b6d4',
+              borderLeft: `3px solid ${UI_COLORS.tone}`,
             }}>
-              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: '#06b6d4', marginBottom: 4 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: UI_COLORS.tone, marginBottom: 4 }}>
                 Tone: {templatePack.tone_guidance.tone_description}
               </div>
               {templatePack.tone_guidance.directives.map((d, i) => (
@@ -382,11 +418,12 @@ export function TemplatesPanel() {
       {/* Cast view */}
       {viewMode === 'cast' && (
         <div>
+          {usingExampleData && <ExampleDataBanner />}
           {characters.length > 0 ? (
             characters.map((ch) => <CharacterCard key={ch.id} character={ch} />)
           ) : (
             <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
-              No characters yet. Run generation to populate the cast.
+              No characters yet. Select an archetype or run generation.
             </div>
           )}
         </div>
@@ -395,6 +432,7 @@ export function TemplatesPanel() {
       {/* Places view */}
       {viewMode === 'places' && (
         <div>
+          {usingExampleData && <ExampleDataBanner />}
           {places.length > 0 ? (
             places.map((p) => (
               <div key={p.id} style={{
@@ -402,10 +440,10 @@ export function TemplatesPanel() {
                 marginBottom: 3,
                 background: 'var(--bg-elevated)',
                 borderRadius: 4,
-                borderLeft: '3px solid #3b82f6',
+                borderLeft: `3px solid ${ENTITY_COLORS.place}`,
               }}>
                 <div style={{ fontWeight: 600, fontSize: 12 }}>{p.name}</div>
-                <span style={{ fontSize: 9, color: '#3b82f6', fontWeight: 600, textTransform: 'uppercase' }}>{p.type}</span>
+                <span style={{ fontSize: 9, color: ENTITY_COLORS.place, fontWeight: 600, textTransform: 'uppercase' }}>{p.type}</span>
                 {p.features && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{p.features.join(' | ')}</div>}
                 {p.atmosphere && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, fontStyle: 'italic', lineHeight: 1.4 }}>{p.atmosphere}</div>}
               </div>
@@ -421,6 +459,7 @@ export function TemplatesPanel() {
       {/* Relationships view */}
       {viewMode === 'relationships' && (
         <div>
+          {usingExampleData && <ExampleDataBanner />}
           {relationships.length > 0 ? (
             relationships.map((r, i) => (
               <div key={i} style={{
@@ -428,9 +467,9 @@ export function TemplatesPanel() {
                 marginBottom: 3,
                 background: 'var(--bg-elevated)',
                 borderRadius: 4,
-                borderLeft: '3px solid #a855f7',
+                borderLeft: `3px solid ${ENTITY_COLORS.relationship}`,
               }}>
-                <div style={{ fontWeight: 600, fontSize: 12, color: '#f59e0b' }}>{r.character}</div>
+                <div style={{ fontWeight: 600, fontSize: 12, color: ENTITY_COLORS.character }}>{r.character}</div>
                 <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{r.relationship}</div>
               </div>
             ))
@@ -445,6 +484,7 @@ export function TemplatesPanel() {
       {/* Objects view */}
       {viewMode === 'objects' && (
         <div>
+          {usingExampleData && <ExampleDataBanner />}
           {objects.length > 0 ? (
             objects.map((o) => (
               <div key={o.id} style={{
@@ -452,10 +492,10 @@ export function TemplatesPanel() {
                 marginBottom: 3,
                 background: 'var(--bg-elevated)',
                 borderRadius: 4,
-                borderLeft: '3px solid #22c55e',
+                borderLeft: `3px solid ${ENTITY_COLORS.object}`,
               }}>
                 <div style={{ fontWeight: 600, fontSize: 12 }}>{o.name}</div>
-                <span style={{ fontSize: 9, color: '#22c55e', fontWeight: 600, textTransform: 'uppercase' }}>{o.type}</span>
+                <span style={{ fontSize: 9, color: ENTITY_COLORS.object, fontWeight: 600, textTransform: 'uppercase' }}>{o.type}</span>
                 {o.significance && <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 2, lineHeight: 1.4 }}>{o.significance}</div>}
                 {o.properties && <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.4 }}>{o.properties.join(' | ')}</div>}
               </div>
@@ -623,6 +663,18 @@ function dedupeSlots(slots: [string, { slot_name: string; category: string; requ
   })
 }
 
+function ExampleDataBanner() {
+  return (
+    <div style={{
+      fontSize: 9, color: '#06b6d4', background: 'rgba(6,182,212,0.08)',
+      padding: '4px 8px', borderRadius: 3, marginBottom: 6,
+      borderLeft: '2px solid #06b6d4',
+    }}>
+      Showing example data from corpus. Run generation to see your story's data.
+    </div>
+  )
+}
+
 function Section({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div style={{ marginBottom: 8 }}>
@@ -767,7 +819,7 @@ function GenreConstraintCard({ tmpl }: {
           textTransform: 'uppercase',
           padding: '1px 5px',
           borderRadius: 3,
-          color: tmpl.severity === 'hard' ? '#f59e0b' : '#8b5cf6',
+          color: tmpl.severity === 'hard' ? SEVERITY_COLORS.hard : SEVERITY_COLORS.soft,
           background: tmpl.severity === 'hard' ? 'rgba(245,158,11,0.12)' : 'rgba(139,92,246,0.12)',
         }}>
           {tmpl.severity === 'hard' ? 'Required' : 'Suggested'} L{tmpl.level}

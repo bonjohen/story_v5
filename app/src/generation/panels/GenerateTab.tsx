@@ -11,6 +11,7 @@ import { exportProject, downloadProject, parseProject } from '../artifacts/story
 import { OpenAICompatibleAdapter } from '../agents/openaiCompatibleAdapter.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
 import { STATE_LABELS, LABEL, DEFAULT_CONFIG } from './generationConstants.ts'
+import { ENTITY_COLORS, STATUS_COLORS, UI_COLORS } from '../../theme/colors.ts'
 import type { StoryRequest, GenerationConfig, StoryProjectRequest } from '../artifacts/types.ts'
 
 export interface GenerateTabProps {
@@ -240,7 +241,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           <button onClick={handleBuildStructure} disabled={running || !premise.trim()} style={{
             flex: 1, minWidth: 120, padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
             border: '1px solid #8b5cf6', background: running ? 'var(--border)' : '#8b5cf618',
-            color: running || !premise.trim() ? 'var(--text-muted)' : '#8b5cf6',
+            color: running || !premise.trim() ? 'var(--text-muted)' : ENTITY_COLORS.concept,
             cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
           }}>
             Build Structure
@@ -257,7 +258,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         {running && (
           <button onClick={cancelRun} style={{
             padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
-            border: '1px solid #ef4444', background: '#ef444418', color: '#ef4444', cursor: 'pointer',
+            border: `1px solid ${STATUS_COLORS.fail}`, background: `${STATUS_COLORS.fail}18`, color: STATUS_COLORS.fail, cursor: 'pointer',
           }}>
             Stop
           </button>
@@ -283,13 +284,13 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         )}
         {canSaveInstance && (
           <button onClick={handleSaveInstance} disabled={savedInstance} style={{
-            ...smallBtn, color: savedInstance ? '#22c55e' : 'var(--accent)', border: savedInstance ? '1px solid #22c55e40' : smallBtn.border,
+            ...smallBtn, color: savedInstance ? STATUS_COLORS.pass : 'var(--accent)', border: savedInstance ? `1px solid ${STATUS_COLORS.pass}40` : smallBtn.border,
           }}>
             {savedInstance ? 'Saved' : 'Save Instance'}
           </button>
         )}
         {hasStory && !running && (
-          <button onClick={handleExportStory} style={{ ...smallBtn, color: '#22c55e' }}>Export .md</button>
+          <button onClick={handleExportStory} style={{ ...smallBtn, color: STATUS_COLORS.pass }}>Export .md</button>
         )}
         <button onClick={handleImport} disabled={running} style={smallBtn}>Load Project</button>
         {hasResults && (
@@ -313,7 +314,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       {/* Error */}
       {error && (
         <div style={{
-          padding: '8px 10px', marginBottom: 10, fontSize: 11, color: '#ef4444',
+          padding: '8px 10px', marginBottom: 10, fontSize: 11, color: STATUS_COLORS.fail,
           background: 'rgba(239,68,68,0.08)', borderRadius: 4, border: '1px solid rgba(239,68,68,0.2)',
         }}>
           {error}
@@ -348,7 +349,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
                   onMouseEnter={() => onHighlightNodes?.([entry.sceneId])}
                   onMouseLeave={() => onHighlightNodes?.([])}
                 >
-                  <div style={{ fontSize: 10, fontWeight: 600, color: '#f59e0b', marginBottom: 3 }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, color: UI_COLORS.archetype, marginBottom: 3 }}>
                     {entry.beatLabel} — {entry.sceneGoal}
                     {running && isLast && (
                       <span style={{ color: 'var(--text-muted)', fontWeight: 400, animation: 'pulse 1.5s infinite', marginLeft: 6 }}>
@@ -400,7 +401,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
               fontSize: 10, color: 'var(--text-muted)', borderBottom: '1px solid var(--border)',
             }}>
               <span>OK: {llmTelemetry.filter(t => t.status === 'success').length}</span>
-              <span style={{ color: llmTelemetry.some(t => t.status === 'error') ? '#ef4444' : undefined }}>
+              <span style={{ color: llmTelemetry.some(t => t.status === 'error') ? STATUS_COLORS.fail : undefined }}>
                 Err: {llmTelemetry.filter(t => t.status === 'error').length}
               </span>
               <span>In: {(llmTelemetry.reduce((s, t) => s + t.inputChars, 0) / 1024).toFixed(1)}KB</span>
@@ -411,14 +412,14 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
                 <div key={t.callNumber} style={{
                   display: 'flex', gap: 6, alignItems: 'baseline', padding: '2px 8px',
                   fontSize: 10, fontFamily: 'monospace',
-                  color: t.status === 'error' ? '#ef4444' : t.status === 'success' ? 'var(--text-secondary)' : 'var(--text-muted)',
+                  color: t.status === 'error' ? STATUS_COLORS.fail : t.status === 'success' ? 'var(--text-secondary)' : 'var(--text-muted)',
                 }}>
                   <span style={{ width: 24, flexShrink: 0, textAlign: 'right' }}>#{t.callNumber}</span>
                   <span style={{ width: 55, flexShrink: 0 }}>{t.method === 'completeJson' ? 'json' : t.method === 'completeStream' ? 'stream' : 'text'}</span>
                   <span style={{ width: 50, flexShrink: 0 }}>{(t.inputChars / 1024).toFixed(1)}K in</span>
                   <span style={{ width: 50, flexShrink: 0 }}>{t.outputChars != null ? `${(t.outputChars / 1024).toFixed(1)}K out` : '...'}</span>
                   <span style={{ width: 40, flexShrink: 0 }}>{t.durationMs != null ? `${(t.durationMs / 1000).toFixed(1)}s` : ''}</span>
-                  <span style={{ fontWeight: 600, color: t.status === 'error' ? '#ef4444' : t.status === 'success' ? '#22c55e' : '#f59e0b' }}>
+                  <span style={{ fontWeight: 600, color: t.status === 'error' ? STATUS_COLORS.fail : t.status === 'success' ? STATUS_COLORS.pass : STATUS_COLORS.warn }}>
                     {t.status === 'error' ? 'FAIL' : t.status === 'success' ? 'OK' : 'WAIT'}
                   </span>
                 </div>
@@ -450,7 +451,7 @@ function ProgressChip({ label, done, count }: { label: string; done: boolean; co
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3,
-      color: done ? '#22c55e' : 'var(--text-muted)', opacity: done ? 1 : 0.5,
+      color: done ? STATUS_COLORS.pass : 'var(--text-muted)', opacity: done ? 1 : 0.5,
     }}>
       <span>{done ? '\u2713' : '\u25CB'}</span>
       <span style={{ fontWeight: done ? 600 : 400 }}>{label}</span>
@@ -479,7 +480,7 @@ function PromptLogContent({ entries }: { entries: { callNumber: number; messages
             <div style={{ border: '1px solid var(--border)', borderTop: 'none', borderRadius: '0 0 3px 3px', maxHeight: 400, overflowY: 'auto' }}>
               {entry.messages.map((msg, j) => (
                 <div key={j} style={{ padding: '6px 8px', borderBottom: '1px solid var(--border)' }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, color: msg.role === 'system' ? '#f59e0b' : '#3b82f6', marginBottom: 2 }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, color: msg.role === 'system' ? UI_COLORS.archetype : 'var(--accent)', marginBottom: 2 }}>
                     {msg.role}
                   </div>
                   <pre style={{ fontSize: 10, lineHeight: 1.4, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, color: 'var(--text-primary)' }}>
