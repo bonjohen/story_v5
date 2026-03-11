@@ -21,6 +21,7 @@ import type {
 } from '../artifacts/types.ts'
 import type { OrchestratorEvent, OrchestratorResult, LLMCallTelemetry } from '../engine/orchestrator.ts'
 import { orchestrate } from '../engine/orchestrator.ts'
+import { assembleChapters } from '../engine/chapterAssembler.ts'
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import { FetchDataProvider } from '../engine/corpusLoader.ts'
 import type { StorySnapshot } from '../artifacts/storySnapshot.ts'
@@ -72,6 +73,7 @@ export interface GenerationStoreState {
   loadResult: (result: OrchestratorResult, request: StoryRequest) => void
   loadSnapshot: (snapshot: StorySnapshot) => void
   setDetailBindings: (bindings: StoryDetailBindings) => void
+  assembleChaptersFromState: () => Promise<void>
   selectScene: (sceneId: string | null) => void
   clearRun: () => void
 }
@@ -110,7 +112,7 @@ const INITIAL_STATE = {
 
 let activeAbortController: AbortController | null = null
 
-export const useGenerationStore = create<GenerationStoreState>((set) => ({
+export const useGenerationStore = create<GenerationStoreState>((set, get) => ({
   ...INITIAL_STATE,
 
   startRun: async (request, config, mode = 'contract-only', llm = null, runOptions = {}) => {
@@ -246,6 +248,13 @@ export const useGenerationStore = create<GenerationStoreState>((set) => ({
   loadSnapshot: (snapshot) => set(snapshotToStoreState(snapshot)),
 
   setDetailBindings: (bindings) => set({ detailBindings: bindings }),
+
+  assembleChaptersFromState: async () => {
+    const { backbone, sceneDrafts, plan } = get()
+    if (!backbone || sceneDrafts.size === 0) return
+    const result = await assembleChapters(backbone, sceneDrafts, null, plan)
+    set({ chapterManifest: result.manifest })
+  },
 
   selectScene: (sceneId) => set({ selectedSceneId: sceneId }),
 

@@ -37,6 +37,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const promptLog = useGenerationStore((s) => s.promptLog)
   const llmTelemetry = useGenerationStore((s) => s.llmTelemetry)
   const loadSnapshot = useGenerationStore((s) => s.loadSnapshot)
+  const assembleChaptersFromState = useGenerationStore((s) => s.assembleChaptersFromState)
 
   const premise = useRequestStore((s) => s.premise)
   const archetype = useRequestStore((s) => s.archetype)
@@ -310,6 +311,9 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           }}>
             {savedInstance ? 'Saved' : 'Save Instance'}
           </button>
+        )}
+        {hasStory && !running && !chapterManifest && (
+          <button onClick={() => assembleChaptersFromState()} style={{ ...smallBtn, color: 'var(--accent)' }}>Assemble Chapters</button>
         )}
         {hasStory && !running && (
           <button onClick={handleExportStory} style={{ ...smallBtn, color: STATUS_COLORS.pass }}>Export .md</button>

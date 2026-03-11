@@ -499,9 +499,10 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     // 10. Compliance report
     result.complianceReport = generateComplianceReport(trace, finalValidation, contract)
 
-    // 11. Chapter assembly (for chapters mode)
-    if (mode === 'chapters') {
-      const chapterResult = await assembleChapters(currentBackbone, sceneDrafts, llm)
+    // 11. Chapter assembly — always run when we have drafts and a backbone with chapters
+    if (currentBackbone.chapter_partition.length > 0 && sceneDrafts.size > 0) {
+      const editorialLlm = mode === 'chapters' ? llm : null
+      const chapterResult = await assembleChapters(currentBackbone, sceneDrafts, editorialLlm, plan)
       result.chapterManifest = chapterResult.manifest
       result.chapterTexts = chapterResult.chapters
       transition('CHAPTERS_ASSEMBLED', `${chapterResult.manifest.total_chapter_count} chapters assembled`)

@@ -16,6 +16,7 @@ import type { LLMAdapter } from '../agents/llmAdapter.ts'
 import { runEditorialAgent } from '../agents/editorialAgent.ts'
 import type {
   StoryBackbone,
+  StoryPlan,
   ChapterManifest,
   ChapterEntry,
 } from '../artifacts/types.ts'
@@ -32,12 +33,33 @@ export interface ChapterAssemblerResult {
 /**
  * Assemble chapter documents from a backbone and scene drafts.
  * If an LLM is provided, runs an editorial pass on each chapter.
+ *
+ * The plan parameter bridges the ID mismatch between backbone scene IDs
+ * (SCN_*) and plan scene IDs (S01, S02, ...) used as sceneDraft keys.
+ * When provided, backbone scene IDs are remapped to plan scene IDs positionally.
  */
 export async function assembleChapters(
   backbone: StoryBackbone,
   sceneDrafts: Map<string, string>,
   llm?: LLMAdapter | null,
+  plan?: StoryPlan | null,
 ): Promise<ChapterAssemblerResult> {
+  // Build a mapping from backbone scene IDs to sceneDraft keys.
+  // If the plan is provided and its scene IDs differ from the backbone's,
+  // use a positional mapping (backbone scene order → plan scene order).
+  const sceneIdMap = buildSceneIdMap(backbone, sceneDrafts, plan)
+
+  // Remap sceneDrafts so lookups work with backbone scene IDs
+  const remappedDrafts = new Map<string, string>()
+  for (const [backboneId, draftKey] of sceneIdMap) {
+    const draft = sceneDrafts.get(draftKey)
+    if (draft) remappedDrafts.set(backboneId, draft)
+  }
+  // Also include any drafts that already match backbone IDs directly
+  for (const [key, val] of sceneDrafts) {
+    if (!remappedDrafts.has(key)) remappedDrafts.set(key, val)
+  }
+
   // Build scene ordering from backbone beats
   const sceneOrder = buildSceneOrder(backbone)
 
@@ -57,7 +79,7 @@ export async function assembleChapters(
   // Phase 1: Deterministic stitch
   const chapters = new Map<string, string>()
   for (const entry of chapterEntries) {
-    const rawText = stitchChapter(entry, sceneDrafts, sceneOrder)
+    const rawText = stitchChapter(entry, remappedDrafts, sceneOrder)
     chapters.set(entry.chapter_id, rawText)
   }
 
@@ -96,6 +118,45 @@ export async function assembleChapters(
 // ---------------------------------------------------------------------------
 // Scene ordering
 // ---------------------------------------------------------------------------
+
+/**
+ * Build a mapping from backbone scene IDs to sceneDraft keys.
+ * If sceneDrafts already uses backbone IDs, returns identity mapping.
+ * Otherwise, maps positionally: backbone scene N → plan scene N.
+ */
+function buildSceneIdMap(
+  backbone: StoryBackbone,
+  sceneDrafts: Map<string, string>,
+  plan?: StoryPlan | null,
+): Map<string, string> {
+  const backboneSceneIds = buildSceneOrder(backbone)
+  const map = new Map<string, string>()
+
+  // Check if sceneDrafts already uses backbone scene IDs
+  const directMatch = backboneSceneIds.some((id) => sceneDrafts.has(id))
+  if (directMatch) {
+    for (const id of backboneSceneIds) map.set(id, id)
+    return map
+  }
+
+  // Use plan scene IDs for positional mapping
+  if (plan) {
+    const planSceneIds = plan.scenes.map((s) => s.scene_id)
+    for (let i = 0; i < backboneSceneIds.length && i < planSceneIds.length; i++) {
+      map.set(backboneSceneIds[i], planSceneIds[i])
+    }
+    return map
+  }
+
+  // Fallback: try sequential S01, S02, ... mapping
+  for (let i = 0; i < backboneSceneIds.length; i++) {
+    const seqId = `S${String(i + 1).padStart(2, '0')}`
+    if (sceneDrafts.has(seqId)) {
+      map.set(backboneSceneIds[i], seqId)
+    }
+  }
+  return map
+}
 
 function buildSceneOrder(backbone: StoryBackbone): string[] {
   const order: string[] = []
