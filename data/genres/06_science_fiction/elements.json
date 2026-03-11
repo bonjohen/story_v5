@@ -6,7 +6,11 @@
     { "role": "protagonist", "severity": "required", "description": "A character who engages with the speculative premise — either shaped by, investigating, or resisting it.", "min_count": 1 },
     { "role": "antagonist", "severity": "recommended", "description": "A force representing the dangers of the speculative premise — may be a person, system, or the technology itself." }
   ],
-  "relationship_constraints": [],
+  "relationship_constraints": [
+    { "type": "human_technology_tension", "severity": "required", "description": "A relationship defined by how characters relate to the speculative premise — trust, dependence, fear, or control over the technology or system.", "between_roles": ["protagonist", "antagonist"] },
+    { "type": "crew_hierarchy", "severity": "optional", "description": "A structured authority relationship shaped by the demands of the speculative environment — ship crews, research teams, colony governance.", "between_roles": ["protagonist", "ally"] },
+    { "type": "creator_creation", "severity": "optional", "description": "A relationship between a maker and what they made — scientist and experiment, programmer and AI, designer and engineered being.", "between_roles": ["protagonist", "antagonist"] }
+  ],
   "place_constraints": [
     { "type": "special_world", "severity": "required", "description": "An environment shaped by the speculative premise — must differ from present reality in specific, detailed ways." },
     { "type": "ordinary_world", "severity": "optional", "description": "A baseline reality (past or present) that contrasts with the speculative setting." }

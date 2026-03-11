@@ -69,6 +69,7 @@ export interface InstanceStoreState {
 
   // --- World Rule CRUD ---
   addWorldRule: (rule: WorldRule) => void
+  updateWorldRule: (id: string, changes: Partial<WorldRule>) => void
   removeWorldRule: (id: string) => void
 
   // --- Export/Import ---
@@ -396,6 +397,24 @@ export const useInstanceStore = create<InstanceStoreState>()(
           const updated = touchInstance({
             ...inst,
             lore: { ...inst.lore, world_rules: [...inst.lore.world_rules, rule] },
+          })
+          const instances = { ...s.instances, [inst.metadata.instance_id]: updated }
+          return { instances, index: rebuildIndex(instances) }
+        })
+      },
+
+      updateWorldRule: (id, changes) => {
+        set((s) => {
+          const inst = s.activeInstanceId ? s.instances[s.activeInstanceId] : null
+          if (!inst) return s
+          const updated = touchInstance({
+            ...inst,
+            lore: {
+              ...inst.lore,
+              world_rules: inst.lore.world_rules.map((r) =>
+                r.id === id ? { ...r, ...changes } : r,
+              ),
+            },
           })
           const instances = { ...s.instances, [inst.metadata.instance_id]: updated }
           return { instances, index: rebuildIndex(instances) }

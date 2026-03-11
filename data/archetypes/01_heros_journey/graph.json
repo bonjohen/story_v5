@@ -25,7 +25,7 @@
       "narrows options": 1,
       "triggers crisis": 1,
       "enables transformation": 1,
-      "raises cost": 1,
+      "compels return": 1,
       "demands sacrifice": 1,
       "restores equilibrium": 1
     }
@@ -427,7 +427,7 @@
       "from": "HJ_N08_REWARD",
       "to": "HJ_N09_ROAD_BACK",
       "label": "Begins Return",
-      "meaning": "raises cost",
+      "meaning": "compels return",
       "preconditions": "Reward is in hand; the special world is no longer the destination",
       "effects_on_stakes": "New threats emerge from possessing the reward or from the antagonist's remnants",
       "effects_on_character": "Tests whether the transformation is durable under pressure",

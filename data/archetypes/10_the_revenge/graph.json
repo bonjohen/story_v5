@@ -13,7 +13,7 @@
       "Catalyst": 1,
       "Trial": 1,
       "Revelation": 1,
-      "Crisis": 1,
+      "Reckoning": 1,
       "Resolution": 1
     },
     "edgesPerMeaning": {
@@ -201,7 +201,7 @@
     {
       "node_id": "RV_N07_FINAL_RECKONING",
       "label": "Final Reckoning",
-      "role": "Crisis",
+      "role": "Reckoning",
       "definition": "The protagonist confronts the primary antagonist in the decisive moment. The encounter resolves the revenge but also determines the protagonist's ultimate fate — redeemed, destroyed, or hollowed out.",
       "entry_conditions": [
         "The moral crossroads has been passed",

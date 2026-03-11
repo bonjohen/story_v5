@@ -123,7 +123,7 @@ export const useElementStore = create<ElementStoreState>((set, get) => ({
     set({ loadingConstraints: true, constraintError: null })
 
     try {
-      const url = `${import.meta.env.BASE_URL}data/genres/${dir}/element_constraints.json`
+      const url = `${import.meta.env.BASE_URL}data/genres/${dir}/elements.json`
       const response = await fetch(url)
       if (response.ok) {
         const data = await response.json() as GenreElementConstraints

@@ -60,7 +60,7 @@ export function compileContract(
   // Extract element requirements from archetype elements.json
   const elementRequirements = buildElementRequirements(selection.primary_archetype, corpus)
 
-  // Extract element constraints from genre element_constraints.json
+  // Extract element constraints from genre elements.json
   const { elementConstraints, elementRules } = buildElementConstraints(selection.primary_genre, corpus)
 
   return {
@@ -319,7 +319,7 @@ function buildElementRequirements(
 }
 
 // ---------------------------------------------------------------------------
-// Element constraints (from genre element_constraints.json)
+// Element constraints (from genre elements.json)
 // ---------------------------------------------------------------------------
 
 function buildElementConstraints(

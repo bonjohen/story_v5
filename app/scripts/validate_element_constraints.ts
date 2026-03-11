@@ -54,7 +54,7 @@ console.log('=== Genre Element Constraints Validation ===\n')
 let filesFound = 0
 
 for (const dir of dirs) {
-  const constraintPath = join(genreDir, dir, 'element_constraints.json')
+  const constraintPath = join(genreDir, dir, 'elements.json')
 
   if (!existsSync(constraintPath)) continue
   filesFound++

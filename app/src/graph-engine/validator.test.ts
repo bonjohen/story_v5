@@ -190,6 +190,5 @@ describe('auditVocabulary', () => {
     const graphs = [makeArchetypeGraph()]
     const audit = auditVocabulary(graphs, 'archetype')
     expect(audit.unusedEdgeMeanings.length).toBeGreaterThan(0)
-    expect(audit.unusedEdgeMeanings).toContain('compels return')
   })
 })

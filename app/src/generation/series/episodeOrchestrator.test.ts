@@ -94,7 +94,7 @@ function makeMinimalProvider(): DataProvider {
       if (p in files) return Promise.resolve(true)
       if (p.includes('variants.json')) return Promise.resolve(false)
       if (p.includes('elements.json')) return Promise.resolve(false)
-      if (p.includes('element_constraints.json')) return Promise.resolve(false)
+      if (p.includes('elements.json') && p.includes('genres')) return Promise.resolve(false)
       return Promise.resolve(false)
     },
   }

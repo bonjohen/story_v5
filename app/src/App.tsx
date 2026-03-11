@@ -173,7 +173,7 @@ export default function App() {
               transition: 'all 0.15s',
             }}
           >
-            Export
+            Export Graph
           </button>
         )}
 

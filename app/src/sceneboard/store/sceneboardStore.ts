@@ -3,6 +3,7 @@
  */
 
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { SceneCard, SceneStatus, LaneMode } from '../types.ts'
 import type { StoryBackbone, StoryPlan } from '../../generation/artifacts/types.ts'
 
@@ -27,7 +28,7 @@ export interface SceneBoardStoreState {
   clearBoard: () => void
 }
 
-export const useSceneBoardStore = create<SceneBoardStoreState>((set) => ({
+export const useSceneBoardStore = create<SceneBoardStoreState>()(persist((set) => ({
   cards: [],
   laneMode: 'chapter',
   filterCharacter: null,
@@ -132,4 +133,11 @@ export const useSceneBoardStore = create<SceneBoardStoreState>((set) => ({
   },
 
   clearBoard: () => set({ cards: [], selectedCardId: null }),
+}), {
+  name: 'story-sceneboard-store',
+  partialize: (state) => ({
+    cards: state.cards,
+    laneMode: state.laneMode,
+    selectedCardId: state.selectedCardId,
+  }),
 }))

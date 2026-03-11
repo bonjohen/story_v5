@@ -10,6 +10,7 @@
  */
 
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import { BridgeAdapter } from '../bridge/bridgeAdapter.ts'
 import { OpenAICompatibleAdapter } from '../agents/openaiCompatibleAdapter.ts'
 import type { LLMAdapter } from '../agents/llmAdapter.ts'
@@ -77,7 +78,7 @@ export interface RequestStoreState {
   loadFromProject: (req: StoryProjectRequest) => void
 }
 
-export const useRequestStore = create<RequestStoreState>((set, get) => ({
+export const useRequestStore = create<RequestStoreState>()(persist((set, get) => ({
   premise: '',
   archetype: 'The Hero\'s Journey',
   genre: 'Drama',
@@ -186,5 +187,25 @@ export const useRequestStore = create<RequestStoreState>((set, get) => ({
     skipValidation: req.skipValidation ?? false,
     fastDraft: req.fastDraft ?? false,
     openaiPlanningModel: req.openaiPlanningModel ?? '',
+    slotOverrides: req.slotOverrides ?? {},
+    mode: req.mode ?? 'detailed-outline',
+  }),
+}), {
+  name: 'story-request-store',
+  partialize: (state) => ({
+    premise: state.premise,
+    archetype: state.archetype,
+    genre: state.genre,
+    mode: state.mode,
+    tone: state.tone,
+    llmBackend: state.llmBackend,
+    bridgeUrl: state.bridgeUrl,
+    maxLlmCalls: state.maxLlmCalls,
+    openaiBaseUrl: state.openaiBaseUrl,
+    openaiModel: state.openaiModel,
+    openaiPlanningModel: state.openaiPlanningModel,
+    skipValidation: state.skipValidation,
+    fastDraft: state.fastDraft,
+    slotOverrides: state.slotOverrides,
   }),
 }))

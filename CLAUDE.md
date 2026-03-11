@@ -65,9 +65,11 @@ This is a **data and content project** that models storytelling structures as fo
 
 7. **UI Upgrade (Progressive Disclosure)** — restructured the interface around progressive disclosure: hamburger menu + NavDrawer replacing toolbar buttons, collapsible generation panel, info panel with accordion groups instead of 14 flat tabs, single-graph focus mode with optional split view, mobile-responsive CSS with 44px touch targets, and consistent AppShellBar across all sub-pages. See `docs/user_interface_upgrade_plan.md` (8-phase plan).
 
-8. **Generation UI Redesign** — replaced the monolithic GenerationPanel with 4 focused tabs: Story Setup (archetype/genre selection, premise, tone, LLM connection), Elements (editable entity CRUD for characters/places/objects), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Generate Story button, event log, prose output, save/load projects, export story .md). Plus a Graph tab for Cytoscape visualization. See `docs/generation_ui_redesign_plan.md`.
+8. **Generation UI Redesign** — replaced the monolithic GenerationPanel with 5 focused tabs: Setup (archetype/genre selection, premise, tone, LLM connection), Elements (editable entity CRUD for characters/places/objects), Graph (Cytoscape visualization with legend overlay), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Generate Story button, event log, prose output, save/load projects, export story .md). See `docs/generation_ui_redesign_plan.md`.
 
 9. **UI Refactor 1** — removed the "Hide generation panel" toggle (panel always visible), cleaned LLM output (stripPreamble, no beat IDs in prose), preserved elements across generation runs, human-friendly event log messages, unified StoryProject save/load (replaces snapshot import/export, captures both requestStore settings and generation artifacts). Dead files (GenerationPanel.tsx, PipelineTab.tsx) deleted. See `docs/ui_refactor_1_design.md`.
+
+10. **UI Simplification & Color Centralization** — centralized all UI colors into `app/src/theme/colors.ts` (node roles, edge meanings, entity categories, severity, status, compatibility, emotions). Added collapsible GraphLegend overlay highlighting active role/meaning on selection. Mouse wheel zoom sensitivity tuning (0.5x normal, 2x with Ctrl). Disclosure section improvements (element counts in titles, top section expanded by default, indented children). Build Structure button for offline Randomize/Manual Entry. Fixed timeline/arc data lookups and mojibake em dashes in genre graphs.
 
 ## Repository Structure
 
@@ -75,9 +77,15 @@ This is a **data and content project** that models storytelling structures as fo
 docs/                              ← Active planning and specs
   generation_ui_redesign_plan.md   ← 5-tab generation UI redesign (complete)
   ui_refactor_1_design.md          ← UI data element inventory + save/load design
+  ui_refactor_1_plan.md            ← UI refactor 1 implementation plan
   story_elements_and_timelines.md  ← Story elements and timeline design
   story_elements_and_timelines_plan.md ← Implementation plan
   user_interface_upgrade_plan.md   ← 8-phase UI upgrade plan (complete)
+  element_constraint_data_analysis.md ← Element constraint data analysis
+  archetypes.json                  ← Archetype metadata (names, descriptions)
+  genres.json                      ← Genre metadata (names, descriptions)
+  JCODEMUNCH_INTEGRATION_GUIDE.md  ← jcodemunch MCP integration guide
+  JCODEMUNCH_INTEGRATION_DETAILS.md ← jcodemunch MCP integration details
   archive/                         ← Completed plans and historical docs
     v0_plan.md                     ← Original statement of work
     goal_1.md, goal_2.md           ← Task trackers (complete)
@@ -86,9 +94,16 @@ docs/                              ← Active planning and specs
     interactive_viewer_plan.md     ← 8-phase viewer implementation plan
     backbone_synthesis_assembly.md ← Backbone pipeline design
     backbone_synthesis_assembly_plan.md ← 8-phase backbone plan
+    data_layer_design.md           ← SQLite data layer design
     data_layer_design_plan.md      ← 9-phase SQLite data layer plan
     claude_code_cli_interface_*.md ← CLI adapter design, usage, plan
+    competition_review.md          ← Author surfaces design (complete)
     competition_review_plan.md     ← Author surfaces plan (complete)
+    composition_removal.md         ← Composition removal design
+    composition_removal_plan.md    ← Composition removal plan
+    story_design.md                ← Story design doc
+    story_generation_plan.md       ← Story generation plan
+    script_site_revisions.md       ← Script site revisions
     code_review.md, code_review_2_plan.md ← Bug audit plans (complete)
 
 data/                              ← Deliverable outputs
@@ -133,11 +148,16 @@ app/                               ← Interactive viewer (React + TypeScript + 
     panels/                        ← Shared panels (DetailPanel, PairingPanel, ExportPanel, etc.)
     render/                        ← Cytoscape canvas, styles, element builders
     graph-engine/                  ← Normalizer, validator, data index, example parser
+    theme/                         ← Centralized color system (colors.ts)
+    hooks/                         ← Custom React hooks (useKeyboardNav, useTraceNavigation, useWakeLock)
+    schemas/                       ← JSON schemas (graph.schema.json)
+    utils/                         ← Utility functions (arrays.ts)
+    analysis/                      ← Analysis components
     generation/                    ← Story generation pipeline
       engine/                      ← Core engines (templateCompiler, backboneAssembler, detailSynthesizer, chapterAssembler, orchestrator, etc.)
       agents/                      ← LLM adapters and agent prompts (ClaudeCodeAdapter, detailAgent, writerAgent, etc.)
       artifacts/                   ← Types, JSON schemas, I/O helpers
-      panels/                      ← Generation UI tabs (StorySetupTab, ElementsTab, AnalysisTab, GenerateTab) + legacy PipelineTab/GenerationPanel
+      panels/                      ← Generation UI tabs (StorySetupTab, ElementsTab, AnalysisTab, GenerateTab)
       store/                       ← Generation Zustand stores (generationStore, requestStore)
       series/                      ← Series/episode generation subsystem
     store/                         ← Zustand stores (graphStore, settingsStore, uiStore)
@@ -169,6 +189,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 7 — UI Upgrade (Progressive Disclosure)**: Complete. All 8 phases implemented (AppShell/NavDrawer, collapsible gen panel, info panel accordion, single-graph focus, mobile touch, disclosure widgets, sub-page consistency, polish).
 - **Goal 8 — Generation UI Redesign**: Complete. All 8 phases implemented (extract constants, PipelineTab, StorySetupTab, ElementsTab, GenerateTab, rewire App.tsx, slim down GenerationPanel, polish/mobile). Plus Analysis tab added post-plan.
 - **UI Refactor 1**: Complete. Removed gen panel toggle, cleaned LLM output, preserved elements across runs, human-friendly events, unified StoryProject save/load, dead file cleanup. See `docs/ui_refactor_1_design.md`.
+- **UI Simplification & Color Centralization**: Complete. Centralized color system (`theme/colors.ts`), GraphLegend overlay, zoom tuning, disclosure improvements, Build Structure button, timeline/arc fixes, mojibake fixes.
 
 ## Key Conventions
 
@@ -217,7 +238,7 @@ Deferred work was tracked in `docs/v-next.md`. All 42 items are now resolved.
 - **Build**: `cd app && npm run build` runs `tsc -b && vite build`
 - **Typecheck only**: `cd app && npm run typecheck`
 - **Tests**: `cd app && npx vitest run` (all tests), `cd app && npx vitest run src/store` (specific folder)
-- **Routes**: `/` (main app — always-visible generation panel with Setup/Elements/Graph/Analysis/Generate tabs), `/story` (story workspace), `/sceneboard` (scene board), `/timeline` (timeline view), `/encyclopedia` (encyclopedia), `/manuscript` (manuscript editor), `/notes` (notes browser), `/scripts` (walkthrough scripts), `/series` (series browser), `/db` (database management)
+- **Routes**: `/` (main app — 5-tab generation panel: Setup/Elements/Graph/Analysis/Generate), `/story` (story workspace), `/sceneboard` (scene board), `/timeline` (timeline view), `/encyclopedia` (encyclopedia), `/manuscript` (manuscript editor), `/notes` (notes browser), `/scripts` (walkthrough scripts), `/series` (series browser), `/db` (database management)
 
 ### Bug Tracking
 

@@ -126,6 +126,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       maxLlmCalls: reqState.maxLlmCalls, openaiBaseUrl: reqState.openaiBaseUrl,
       openaiModel: reqState.openaiModel, skipValidation: reqState.skipValidation,
       fastDraft: reqState.fastDraft, openaiPlanningModel: reqState.openaiPlanningModel,
+      slotOverrides: reqState.slotOverrides, mode: reqState.mode,
     }
     const name = projectName.trim() || reqState.premise.slice(0, 40) || 'Untitled'
     const project = exportProject(name, reqData, genState)
@@ -184,6 +185,20 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const hasResults = contract || plan
   const canSaveInstance = !running && detailBindings != null
   const hasStory = sceneDrafts.size > 0
+
+  // Gate: Generate Story requires backbone + populated elements
+  const hasElements = detailBindings != null && (
+    detailBindings.entity_registry.characters.length > 0 ||
+    detailBindings.entity_registry.places.length > 0
+  )
+  const canGenerate = !running && premise.trim() !== '' && !!backbone && hasElements
+  const generateBlockReason = !premise.trim()
+    ? 'Enter a premise on the Setup tab first'
+    : !backbone
+      ? 'Build Structure first to create the story backbone'
+      : !hasElements
+        ? 'Populate elements on the Elements tab (use Randomize or enter manually)'
+        : null
 
   // Scene prose in order
   const sceneEntries = plan
@@ -247,14 +262,21 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
             Build Structure
           </button>
         )}
-        <button onClick={handleGenerateStory} disabled={running || !premise.trim()} style={{
-          flex: 1, minWidth: 120, padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
-          border: 'none', background: running ? 'var(--border)' : 'var(--accent)',
-          color: running || !premise.trim() ? 'var(--text-muted)' : '#fff',
-          cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
-        }}>
-          Generate Story
-        </button>
+        <div style={{ flex: 1, minWidth: 120, position: 'relative' }} title={generateBlockReason ?? undefined}>
+          <button onClick={handleGenerateStory} disabled={!canGenerate} style={{
+            width: '100%', padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
+            border: 'none', background: canGenerate ? 'var(--accent)' : 'var(--border)',
+            color: canGenerate ? '#fff' : 'var(--text-muted)',
+            cursor: canGenerate ? 'pointer' : 'not-allowed',
+          }}>
+            Generate Story
+          </button>
+          {generateBlockReason && !running && (
+            <div style={{ fontSize: 9, color: 'var(--text-muted)', marginTop: 2, textAlign: 'center' }}>
+              {generateBlockReason}
+            </div>
+          )}
+        </div>
         {running && (
           <button onClick={cancelRun} style={{
             padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
@@ -365,7 +387,11 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
             })
           ) : (
             <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0 }}>
-              No story yet. Click "Generate Story" to write prose.
+              {!backbone
+                ? 'Click "Build Structure" to create the story backbone, then populate elements before generating.'
+                : !hasElements
+                  ? 'Structure built. Go to the Elements tab to populate characters and places, then return here to generate.'
+                  : 'Ready to generate. Click "Generate Story" to write prose.'}
             </p>
           )}
         </div>
@@ -453,7 +479,7 @@ function ProgressChip({ label, done, count }: { label: string; done: boolean; co
       display: 'inline-flex', alignItems: 'center', gap: 3,
       color: done ? STATUS_COLORS.pass : 'var(--text-muted)', opacity: done ? 1 : 0.5,
     }}>
-      <span>{done ? '\u2713' : '\u25CB'}</span>
+      <span>{done ? '\u2611' : '\u2610'}</span>
       <span style={{ fontWeight: done ? 600 : 400 }}>{label}</span>
       {count != null && <span style={{ color: 'var(--text-muted)' }}>({count})</span>}
     </span>

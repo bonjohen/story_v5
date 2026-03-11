@@ -2,7 +2,7 @@
   "title": "Cross-Archetype Index",
   "description": "Reuse map identifying shared structural concepts (node roles and edge meanings) across all 15 archetype graphs. Generated from the controlled vocabulary in data/vocabulary/archetype_node_roles.json and data/vocabulary/archetype_edge_vocabulary.json.",
   "node_role_index": {
-    "summary": "14 distinct node roles across 120 total node instances. Origin and Resolution are universal (all 15 archetypes). Crisis appears in all 15 but has two instances in The Hero's Journey.",
+    "summary": "14 distinct node roles across 120 total node instances. Origin and Resolution are universal (all 15 archetypes). Crisis appears in 14 of 15 (two instances in The Hero's Journey). Reckoning is used in The Revenge.",
     "roles": [
       {
         "role": "Origin",
@@ -51,9 +51,9 @@
       },
       {
         "role": "Crisis",
-        "instance_count": 16,
-        "archetype_count": 15,
-        "note": "Present in all 15 archetypes. The Hero's Journey has two Crisis nodes (The Ordeal and Resurrection).",
+        "instance_count": 15,
+        "archetype_count": 14,
+        "note": "Present in 14 of 15 archetypes. The Hero's Journey has two Crisis nodes (The Ordeal and Resurrection). The Revenge uses Reckoning instead of Crisis for its climactic node.",
         "instances": [
           { "archetype": "The Hero's Journey", "node_id": "HJ_N07_ORDEAL", "label": "The Ordeal" },
           { "archetype": "The Hero's Journey", "node_id": "HJ_N10_RESURRECTION", "label": "Resurrection" },
@@ -64,7 +64,6 @@
           { "archetype": "Rebirth", "node_id": "RB_N04_ORDEAL_OF_TRUTH", "label": "Ordeal of Truth" },
           { "archetype": "Comedy (Restoration of Order)", "node_id": "CO_N04_DARK_MOMENT", "label": "Dark Moment" },
           { "archetype": "Coming of Age", "node_id": "CA_N05_CRISIS_OF_IDENTITY", "label": "Crisis of Identity" },
-          { "archetype": "The Revenge", "node_id": "RV_N07_FINAL_RECKONING", "label": "Final Reckoning" },
           { "archetype": "The Escape", "node_id": "ES_N06_ESCAPE_ATTEMPT", "label": "The Escape Attempt" },
           { "archetype": "The Sacrifice", "node_id": "SA_N06_SACRIFICIAL_ACT", "label": "The Sacrificial Act" },
           { "archetype": "The Mystery Unveiled", "node_id": "MU_N07_CONFRONTATION", "label": "Confrontation with Truth" },
@@ -226,11 +225,20 @@
           { "archetype": "Coming of Age", "node_id": "CA_N06_LOSS_OF_INNOCENCE", "label": "Loss of Innocence" },
           { "archetype": "The Rise and Fall", "node_id": "RF_N07_FALL", "label": "The Fall" }
         ]
+      },
+      {
+        "role": "Reckoning",
+        "instance_count": 1,
+        "archetype_count": 1,
+        "note": "A moment of moral or practical accounting. Currently assigned only to The Revenge's climactic node.",
+        "instances": [
+          { "archetype": "The Revenge", "node_id": "RV_N07_FINAL_RECKONING", "label": "Final Reckoning" }
+        ]
       }
     ]
   },
   "edge_meaning_index": {
-    "summary": "15 edge meanings defined in the controlled vocabulary; 14 are used across 120 total edge instances. 'compels return' is defined but not used in any current graph. 'disrupts order' is universal (all 15 archetypes). 'restores equilibrium' appears in 14 of 15.",
+    "summary": "15 edge meanings defined in the controlled vocabulary; all 15 are used across 120 total edge instances. 'disrupts order' is universal (all 15 archetypes). 'restores equilibrium' appears in 14 of 15.",
     "meanings": [
       {
         "meaning": "disrupts order",
@@ -369,11 +377,10 @@
       },
       {
         "meaning": "raises cost",
-        "instance_count": 6,
-        "archetype_count": 6,
+        "instance_count": 5,
+        "archetype_count": 5,
         "note": "Increases what the character stands to lose.",
         "instances": [
-          { "archetype": "The Hero's Journey", "edge_id": "HJ_E08_ROAD_BACK", "label": "Begins Return" },
           { "archetype": "Rags to Riches", "edge_id": "RR_E04_REACHES_TOP", "label": "Reaches the Top" },
           { "archetype": "Tragedy", "edge_id": "TR_E03_REAPS_REWARD", "label": "Reaps the Reward" },
           { "archetype": "Comedy (Restoration of Order)", "edge_id": "CO_E03_THREATENS_HARM", "label": "Threatens Real Harm" },
@@ -452,9 +459,12 @@
       },
       {
         "meaning": "compels return",
-        "instance_count": 0,
-        "archetype_count": 0,
-        "note": "Defined in the controlled vocabulary but not used in any current archetype graph. Reserved for future use or hybrid patterns."
+        "instance_count": 1,
+        "archetype_count": 1,
+        "note": "Forces or draws the character back toward the ordinary world. Assigned to the Hero's Journey's return transition.",
+        "instances": [
+          { "archetype": "The Hero's Journey", "edge_id": "HJ_E08_ROAD_BACK", "label": "Begins Return" }
+        ]
       }
     ]
   },
@@ -465,7 +475,7 @@
     "Forces commitment is the most common non-universal edge meaning (13 instances across 11 archetypes), reflecting that most story structures require an irreversible commitment point.",
     "The Hero's Journey is the most structurally complex archetype with 12 nodes and 12 edges, including variant branches (Refusal of the Call) and doubled roles (two Crisis nodes, two Trial nodes).",
     "Three archetypes share the Irreversible Cost role — Tragedy, Coming of Age, and The Rise and Fall — identifying them as the archetypes where permanent loss is a structural node rather than an edge effect.",
-    "The Reckoning role defined in the controlled vocabulary is not assigned to any node in the current 15 graphs. It may apply to hybrid or variant patterns.",
-    "Compels return is the only edge meaning defined in the vocabulary but unused in any current graph."
+    "The Reckoning role is assigned to The Revenge's Final Reckoning node (RV_N07), distinguishing it from the Crisis role used in other climactic confrontations.",
+    "All 15 edge meanings in the controlled vocabulary are now assigned to at least one edge. 'compels return' is used in the Hero's Journey for the Reward-to-Road Back transition."
   ]
 }

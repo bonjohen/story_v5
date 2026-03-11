@@ -251,7 +251,7 @@ async function loadGenreElementConstraints(
   const results = await Promise.all(
     GENRE_DIRS.map(async (dir) => {
       try {
-        const raw = await provider.loadJson(`genres/${dir}/element_constraints.json`) as GenreElementConstraints
+        const raw = await provider.loadJson(`genres/${dir}/elements.json`) as GenreElementConstraints
         return { dir, constraints: raw }
       } catch {
         return null // File doesn't exist — skip silently

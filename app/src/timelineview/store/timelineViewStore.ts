@@ -3,6 +3,7 @@
  */
 
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { TimelineEvent } from '../types.ts'
 import type { StoryBackbone } from '../../generation/artifacts/types.ts'
 import type { StoryInstance } from '../../instance/types.ts'
@@ -24,7 +25,7 @@ export interface TimelineViewStoreState {
   clearTimeline: () => void
 }
 
-export const useTimelineViewStore = create<TimelineViewStoreState>((set) => ({
+export const useTimelineViewStore = create<TimelineViewStoreState>()(persist((set) => ({
   events: [],
   selectedEventId: null,
   showSwimLanes: false,
@@ -95,4 +96,12 @@ export const useTimelineViewStore = create<TimelineViewStoreState>((set) => ({
   })),
 
   clearTimeline: () => set({ events: [], selectedEventId: null }),
+}), {
+  name: 'story-timeline-store',
+  partialize: (state) => ({
+    events: state.events,
+    selectedEventId: state.selectedEventId,
+    showSwimLanes: state.showSwimLanes,
+    showDependencies: state.showDependencies,
+  }),
 }))

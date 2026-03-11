@@ -831,6 +831,10 @@ export interface StoryProjectRequest {
   fastDraft?: boolean
   /** Optional separate model for planning calls (beat summaries, scene goals, validation). */
   openaiPlanningModel?: string
+  /** User-edited slot overrides keyed by slot_name. */
+  slotOverrides?: Record<string, string>
+  /** Generation mode (detailed-outline, full-prose, etc.). */
+  mode?: GenerationMode
 }
 
 /** Shape of an exported generation snapshot (mirrors storySnapshot.ts). */

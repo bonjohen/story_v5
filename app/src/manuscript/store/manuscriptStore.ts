@@ -3,6 +3,7 @@
  */
 
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { ManuscriptChapter, ManuscriptScene, EditStatus } from '../types.ts'
 import type { ChapterManifest, StoryBackbone } from '../../generation/artifacts/types.ts'
 
@@ -38,7 +39,7 @@ function chapterStatus(scenes: ManuscriptScene[]): EditStatus {
   return 'draft'
 }
 
-export const useManuscriptStore = create<ManuscriptStoreState>((set, get) => ({
+export const useManuscriptStore = create<ManuscriptStoreState>()(persist((set, get) => ({
   chapters: [],
   selectedChapterId: null,
   selectedSceneId: null,
@@ -162,4 +163,12 @@ export const useManuscriptStore = create<ManuscriptStoreState>((set, get) => ({
   },
 
   clearManuscript: () => set({ chapters: [], selectedChapterId: null, selectedSceneId: null }),
+}), {
+  name: 'story-manuscript-store',
+  partialize: (state) => ({
+    chapters: state.chapters,
+    selectedChapterId: state.selectedChapterId,
+    selectedSceneId: state.selectedSceneId,
+    showDiff: state.showDiff,
+  }),
 }))
