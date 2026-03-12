@@ -72,17 +72,21 @@ This is a **data and content project** that models storytelling structures as fo
 
 7. **UI Upgrade (Progressive Disclosure)** — restructured the interface around progressive disclosure: hamburger menu + NavDrawer replacing toolbar buttons, collapsible generation panel, info panel with accordion groups instead of 14 flat tabs, single-graph focus mode with optional split view, mobile-responsive CSS with 44px touch targets, and consistent AppShellBar across all sub-pages. See `docs/user_interface_upgrade_plan.md` (8-phase plan).
 
-8. **Generation UI Redesign** — replaced the monolithic GenerationPanel with 5 focused tabs: Setup (archetype/genre selection, premise, tone, LLM connection), Elements (editable entity CRUD for characters/places/objects), Graph (Cytoscape visualization with legend overlay), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (Generate Story button, event log, prose output, save/load projects, export story .md). See `docs/generation_ui_redesign_plan.md`.
+8. **Generation UI Redesign** — replaced the monolithic GenerationPanel with 5 focused tabs: Setup (archetype/genre selection, premise, tone, narrative voice, compatibility display, entity CRUD, Build Structure, Generate Story Graph, LLM connection, event log), Elements (story rules, constraints, structure overview), Graph (Cytoscape visualization with legend overlay), Analysis (graph canvases, statistics, node/edge detail, cross-index, timeline, character arcs, generation artifacts), and Generate (chapter-by-chapter generation, chapter prose output, save/load projects, export story .md). See `docs/generation_ui_redesign_plan.md`.
 
 9. **UI Refactor 1** — removed the "Hide generation panel" toggle (panel always visible), cleaned LLM output (stripPreamble, no beat IDs in prose), preserved elements across generation runs, human-friendly event log messages, unified StoryProject save/load (replaces snapshot import/export, captures both requestStore settings and generation artifacts). Dead files (GenerationPanel.tsx, PipelineTab.tsx) deleted. See `docs/ui_refactor_1_design.md`.
 
 10. **UI Simplification & Color Centralization** — centralized all UI colors into `app/src/theme/colors.ts` (node roles, edge meanings, entity categories, severity, status, compatibility, emotions). Added collapsible GraphLegend overlay highlighting active role/meaning on selection. Mouse wheel zoom sensitivity tuning (0.5x normal, 2x with Ctrl). Disclosure section improvements (element counts in titles, top section expanded by default, indented children). Build Structure button for offline Randomize/Manual Entry. Fixed timeline/arc data lookups and mojibake em dashes in genre graphs.
+
+11. **UI Refactor 2 — Setup/Generate Split & Polish** — separated "Generate Story Graph" (Setup tab) and "Generate Chapter" (Generate tab) into independent activities with separate event logs, LLM telemetry, and prompt logs. Chapter generation now preserves existing artifacts and skips completed pipeline steps via `existingArtifacts` parameter. Added LLM Connection Dialog with test-both-models functionality and separate Save/Close buttons. Moved event log and LLM telemetry to Setup tab. Added Narrative Voice field, compatibility display on Setup tab, simplified Export Graph to JSON-only download. Fixed Disclosure nested `<button>` HTML violation, surfaced LLM connectivity errors in UI. See `docs/separate_logs_and_chapter_gen_plan.md`.
 
 ## Repository Structure
 
 ```
 docs/                              ← Active planning and specs
   generation_ui_redesign_plan.md   ← 5-tab generation UI redesign (complete)
+  separate_logs_and_chapter_gen_plan.md ← Separate logs + chapter generation plan (complete)
+  workflow_tab_plan.md             ← Workflow tab pipeline graph plan (pending)
   ui_refactor_1_design.md          ← UI data element inventory + save/load design
   ui_refactor_1_plan.md            ← UI refactor 1 implementation plan
   story_elements_and_timelines.md  ← Story elements and timeline design
@@ -197,6 +201,7 @@ app/                               ← Interactive viewer (React + TypeScript + 
 - **Goal 8 — Generation UI Redesign**: Complete. All 8 phases implemented (extract constants, PipelineTab, StorySetupTab, ElementsTab, GenerateTab, rewire App.tsx, slim down GenerationPanel, polish/mobile). Plus Analysis tab added post-plan.
 - **UI Refactor 1**: Complete. Removed gen panel toggle, cleaned LLM output, preserved elements across runs, human-friendly events, unified StoryProject save/load, dead file cleanup. See `docs/ui_refactor_1_design.md`.
 - **UI Simplification & Color Centralization**: Complete. Centralized color system (`theme/colors.ts`), GraphLegend overlay, zoom tuning, disclosure improvements, Build Structure button, timeline/arc fixes, mojibake fixes.
+- **UI Refactor 2 — Setup/Generate Split**: Complete. Separate event logs for Setup vs Generate, chapter generation with artifact preservation, LLM connection dialog with test, compatibility on Setup tab, narrative voice field, export simplification. See `docs/separate_logs_and_chapter_gen_plan.md`.
 
 ## Key Conventions
 

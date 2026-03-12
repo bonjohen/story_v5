@@ -80,21 +80,19 @@ export function PairingPanel() {
     const genreEntry = matrix.genres.find((g) => g.genre.toLowerCase() === genreLower)
     if (!genreEntry) return null
 
-    // Check each tier (case-insensitive exact match)
+    // Check each tier (case-insensitive, allowing parenthesized suffixes in matrix names)
     const archLower = archetypeName.toLowerCase()
-    const natural = genreEntry.naturally_compatible.find((c) =>
-      c.archetype.toLowerCase() === archLower
-    )
+    const matchArch = (c: CompatibilityEntry) => {
+      const cl = c.archetype.toLowerCase()
+      return cl === archLower || cl.startsWith(archLower + ' (')
+    }
+    const natural = genreEntry.naturally_compatible.find(matchArch)
     if (natural) return { tier: 'naturally_compatible' as const, rationale: natural.rationale }
 
-    const occasional = genreEntry.occasionally_compatible.find((c) =>
-      c.archetype.toLowerCase() === archLower
-    )
+    const occasional = genreEntry.occasionally_compatible.find(matchArch)
     if (occasional) return { tier: 'occasionally_compatible' as const, rationale: occasional.rationale }
 
-    const rare = genreEntry.rarely_compatible.find((c) =>
-      c.archetype.toLowerCase() === archLower
-    )
+    const rare = genreEntry.rarely_compatible.find(matchArch)
     if (rare) return { tier: 'rarely_compatible' as const, rationale: rare.rationale }
 
     return null

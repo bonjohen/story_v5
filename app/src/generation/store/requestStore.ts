@@ -26,6 +26,8 @@ export interface RequestStoreState {
   genre: string
   mode: GenerationMode
   tone: string
+  narrativeVoice: string
+  workingTitle: string
   llmBackend: LlmBackend
   bridgeUrl: string
   maxLlmCalls: number
@@ -54,6 +56,8 @@ export interface RequestStoreState {
   // Hello test — response from a quick "Hello" probe sent to the LLM
   helloResponse: string | null
   helloLoading: boolean
+  // Last connection/LLM error message (surfaced in UI)
+  bridgeError: string | null
 
   // Actions
   setPremise: (v: string) => void
@@ -61,6 +65,8 @@ export interface RequestStoreState {
   setGenre: (v: string) => void
   setMode: (v: GenerationMode) => void
   setTone: (v: string) => void
+  setNarrativeVoice: (v: string) => void
+  setWorkingTitle: (v: string) => void
   setLlmBackend: (v: LlmBackend) => void
   setBridgeUrl: (v: string) => void
   setMaxLlmCalls: (v: number) => void
@@ -80,17 +86,19 @@ export interface RequestStoreState {
 
 export const useRequestStore = create<RequestStoreState>()(persist((set, get) => ({
   premise: '',
-  archetype: 'The Hero\'s Journey',
-  genre: 'Drama',
+  archetype: '',
+  genre: '',
   mode: 'detailed-outline',
   tone: '',
+  narrativeVoice: '',
+  workingTitle: '',
   llmBackend: 'openai' as LlmBackend,
   bridgeUrl: 'ws://127.0.0.1:8765',
   maxLlmCalls: 20,
   openaiBaseUrl: 'http://localhost:11434/v1',
   openaiModel: 'llama3-8k',
   openaiApiKey: '',
-  openaiPlanningModel: '',
+  openaiPlanningModel: 'deepseek-r1:1.5b',
   skipValidation: false,
   fastDraft: false,
   bridgeStatus: 'disconnected',
@@ -98,12 +106,15 @@ export const useRequestStore = create<RequestStoreState>()(persist((set, get) =>
   slotOverrides: {},
   helloResponse: null,
   helloLoading: false,
+  bridgeError: null,
 
   setPremise: (v) => set({ premise: v }),
   setArchetype: (v) => set({ archetype: v }),
   setGenre: (v) => set({ genre: v }),
   setMode: (v) => set({ mode: v }),
   setTone: (v) => set({ tone: v }),
+  setNarrativeVoice: (v) => set({ narrativeVoice: v }),
+  setWorkingTitle: (v) => set({ workingTitle: v }),
   setLlmBackend: (v) => set({ llmBackend: v }),
   setBridgeUrl: (v) => set({ bridgeUrl: v }),
   setMaxLlmCalls: (v) => set({ maxLlmCalls: Math.max(1, Math.min(100, v)) }),
@@ -128,7 +139,7 @@ export const useRequestStore = create<RequestStoreState>()(persist((set, get) =>
     }
 
     const backend = llmBackend === 'none' ? 'openai' : llmBackend
-    set({ llmBackend: backend, bridgeStatus: 'connecting', helloResponse: null, helloLoading: true })
+    set({ llmBackend: backend, bridgeStatus: 'connecting', helloResponse: null, helloLoading: true, bridgeError: null })
 
     try {
       let adapter: LLMAdapter
@@ -149,8 +160,9 @@ export const useRequestStore = create<RequestStoreState>()(persist((set, get) =>
       const response = await adapter.complete([{ role: 'user', content: 'Hello' }])
       const reply = response.content.trim().slice(0, 200)
       set({ bridgeAdapter: adapter, bridgeStatus: 'connected', helloResponse: reply, helloLoading: false })
-    } catch {
-      set({ bridgeAdapter: null, bridgeStatus: 'error', helloResponse: null, helloLoading: false })
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      set({ bridgeAdapter: null, bridgeStatus: 'error', helloResponse: null, helloLoading: false, bridgeError: msg })
     }
   },
 
@@ -159,18 +171,19 @@ export const useRequestStore = create<RequestStoreState>()(persist((set, get) =>
     if (bridgeAdapter && 'disconnect' in bridgeAdapter) {
       (bridgeAdapter as BridgeAdapter).disconnect()
     }
-    set({ bridgeAdapter: null, bridgeStatus: 'disconnected', helloResponse: null })
+    set({ bridgeAdapter: null, bridgeStatus: 'disconnected', helloResponse: null, bridgeError: null })
   },
 
   sendHello: async () => {
     const { bridgeAdapter, bridgeStatus } = get()
     if (bridgeStatus !== 'connected' || !bridgeAdapter) return
-    set({ helloLoading: true, helloResponse: null })
+    set({ helloLoading: true, helloResponse: null, bridgeError: null })
     try {
       const response = await bridgeAdapter.complete([{ role: 'user', content: 'Hello' }])
       set({ helloResponse: response.content.trim().slice(0, 200), helloLoading: false })
-    } catch {
-      set({ helloResponse: '[error]', helloLoading: false })
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      set({ helloResponse: null, helloLoading: false, bridgeError: msg })
     }
   },
 
@@ -179,6 +192,8 @@ export const useRequestStore = create<RequestStoreState>()(persist((set, get) =>
     archetype: req.archetype,
     genre: req.genre,
     tone: req.tone,
+    narrativeVoice: req.narrativeVoice ?? '',
+    workingTitle: req.workingTitle ?? '',
     llmBackend: req.llmBackend,
     bridgeUrl: req.bridgeUrl,
     maxLlmCalls: req.maxLlmCalls,
@@ -192,12 +207,9 @@ export const useRequestStore = create<RequestStoreState>()(persist((set, get) =>
   }),
 }), {
   name: 'story-request-store',
+  version: 3,
   partialize: (state) => ({
-    premise: state.premise,
-    archetype: state.archetype,
-    genre: state.genre,
-    mode: state.mode,
-    tone: state.tone,
+    // Only persist LLM connection settings — story content fields reset on refresh
     llmBackend: state.llmBackend,
     bridgeUrl: state.bridgeUrl,
     maxLlmCalls: state.maxLlmCalls,
@@ -206,6 +218,5 @@ export const useRequestStore = create<RequestStoreState>()(persist((set, get) =>
     openaiPlanningModel: state.openaiPlanningModel,
     skipValidation: state.skipValidation,
     fastDraft: state.fastDraft,
-    slotOverrides: state.slotOverrides,
   }),
 }))

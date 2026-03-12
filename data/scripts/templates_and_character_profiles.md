@@ -60,7 +60,7 @@ The backstory prompt and distinguishing feature are also genre-aware. A Fantasy 
 
 ## Using the Templates panel
 
-Open the Templates panel by clicking the Templates tab in the info panel after running generation. The Slots sub-view is the most useful starting point.
+Open the Templates panel from the Analysis tab's generation artifacts section after running generation. The Slots sub-view is the most useful starting point.
 
 Expand a character card to see all nine metadata fields. Compare two characters — the protagonist and the antagonist, say — and notice how their profiles create natural opposition: the protagonist's flaw is the antagonist's strength, and vice versa. The relationships field explicitly names how characters relate to each other.
 

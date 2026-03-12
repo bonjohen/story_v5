@@ -11,6 +11,8 @@ interface DisclosureProps {
   title: string
   /** Optional badge text (e.g., item count) */
   badge?: string | number
+  /** Optional action element rendered at the right side of the title bar (e.g., an Add button). */
+  titleAction?: React.ReactNode
   /** Key for persisting collapsed state. If omitted, uses local state. */
   persistKey?: string
   /** Default collapsed state (only used when no persisted state exists). */
@@ -23,6 +25,7 @@ interface DisclosureProps {
 export const Disclosure = memo(function Disclosure({
   title,
   badge,
+  titleAction,
   persistKey,
   defaultCollapsed = false,
   depth = 0,
@@ -41,8 +44,11 @@ export const Disclosure = memo(function Disclosure({
 
   return (
     <div>
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         onClick={toggle}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle() } }}
         aria-expanded={!isCollapsed}
         style={{
           display: 'flex',
@@ -60,6 +66,7 @@ export const Disclosure = memo(function Disclosure({
           transition: 'background 0.1s',
           borderLeft: depth > 0 ? `2px solid var(--border)` : 'none',
           marginLeft: depth > 0 ? indent - 12 : 0,
+          cursor: 'pointer',
         }}
       >
         <span style={{
@@ -69,7 +76,13 @@ export const Disclosure = memo(function Disclosure({
         }}>
           {'\u25BC'}
         </span>
-        <span style={{ flex: 1 }}>{title}</span>
+        <span>{title}</span>
+        {titleAction && (
+          <span onClick={(e) => e.stopPropagation()} style={{ textTransform: 'none', letterSpacing: 0 }}>
+            {titleAction}
+          </span>
+        )}
+        <span style={{ flex: 1 }} />
         {badge !== undefined && badge !== '' && (
           <span style={{
             fontSize: 9,
@@ -81,7 +94,7 @@ export const Disclosure = memo(function Disclosure({
             {badge}
           </span>
         )}
-      </button>
+      </div>
       {!isCollapsed && (
         <div style={{ paddingLeft: 12 + indent }}>{children}</div>
       )}

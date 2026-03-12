@@ -887,6 +887,20 @@ export interface StoryProjectRequest {
   slotOverrides?: Record<string, string>
   /** Generation mode (detailed-outline, full-prose, etc.). */
   mode?: GenerationMode
+  /** User-defined working title for the story. */
+  workingTitle?: string
+  /** Narrative voice / POV style. */
+  narrativeVoice?: string
+}
+
+// ---------------------------------------------------------------------------
+// Story Rules Overrides (user edits to constraints, custom rules, scene notes)
+// ---------------------------------------------------------------------------
+
+export interface StoryRulesOverrides {
+  constraintOverrides: Record<string, { enabled: boolean; severity?: 'hard' | 'soft' }>
+  customRules: Array<{ id: string; description: string; severity: 'required' | 'recommended' | 'optional' }>
+  sceneNotes: Record<string, string>
 }
 
 /** Shape of an exported generation snapshot (mirrors storySnapshot.ts). */
@@ -921,6 +935,10 @@ export interface StoryProject {
   savedAt: string
   request: StoryProjectRequest
   generation: StorySnapshot
+  /** User-edited rules overrides (constraint toggles, custom rules, scene notes). */
+  rulesOverrides?: StoryRulesOverrides
+  /** Per-chapter assembled prose, keyed by chapter ID. */
+  chapterProse?: Record<string, string>
 }
 
 // ---------------------------------------------------------------------------

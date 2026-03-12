@@ -23,6 +23,7 @@ export interface UIStoreState {
   // Collapsed sections — keyed by section ID
   collapsedSections: Record<string, boolean>
   toggleSection: (id: string) => void
+  setSection: (id: string, collapsed: boolean) => void
   isSectionCollapsed: (id: string) => boolean
 
   // Lock switches — prevent edits to Setup / Elements tabs
@@ -30,6 +31,10 @@ export interface UIStoreState {
   elementsLocked: boolean
   toggleSetupLock: () => void
   toggleElementsLock: () => void
+
+  // LLM Connection dialog
+  llmDialogOpen: boolean
+  setLlmDialogOpen: (v: boolean) => void
 }
 
 export const useUIStore = create<UIStoreState>()(
@@ -53,12 +58,22 @@ export const useUIStore = create<UIStoreState>()(
             [id]: !s.collapsedSections[id],
           },
         })),
+      setSection: (id, collapsed) =>
+        set((s) => ({
+          collapsedSections: {
+            ...s.collapsedSections,
+            [id]: collapsed,
+          },
+        })),
       isSectionCollapsed: (id) => !!get().collapsedSections[id],
 
       setupLocked: false,
       elementsLocked: false,
       toggleSetupLock: () => set((s) => ({ setupLocked: !s.setupLocked })),
       toggleElementsLock: () => set((s) => ({ elementsLocked: !s.elementsLocked })),
+
+      llmDialogOpen: false,
+      setLlmDialogOpen: (v) => set({ llmDialogOpen: v }),
     }),
     {
       name: 'story-ui-prefs',

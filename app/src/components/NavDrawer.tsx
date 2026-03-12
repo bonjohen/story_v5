@@ -47,6 +47,7 @@ const NAV_GROUPS: NavGroup[] = [
     title: 'System',
     items: [
       { label: 'Database', path: '/db', color: '#22c55e' },
+      { label: 'LLM Connection', path: '#llm', color: '#06b6d4' },
     ],
   },
 ]
@@ -54,13 +55,19 @@ const NAV_GROUPS: NavGroup[] = [
 export function NavDrawer() {
   const navOpen = useUIStore((s) => s.navOpen)
   const setNavOpen = useUIStore((s) => s.setNavOpen)
+  const setLlmDialogOpen = useUIStore((s) => s.setLlmDialogOpen)
   const navigate = useNavigate()
   const location = useLocation()
 
   const handleNav = useCallback((path: string) => {
+    if (path === '#llm') {
+      setNavOpen(false)
+      setLlmDialogOpen(true)
+      return
+    }
     navigate(path)
     setNavOpen(false)
-  }, [navigate, setNavOpen])
+  }, [navigate, setNavOpen, setLlmDialogOpen])
 
   if (!navOpen) return null
 

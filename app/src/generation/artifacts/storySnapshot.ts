@@ -19,6 +19,7 @@ import type {
   StoryProject,
   StoryProjectRequest,
   StorySnapshot,
+  StoryRulesOverrides,
 } from './types.ts'
 import type { OrchestratorEvent } from '../engine/orchestrator.ts'
 
@@ -146,6 +147,7 @@ export function exportProject(
   projectName: string,
   requestState: StoryProjectRequest,
   generationState: Parameters<typeof exportSnapshot>[0],
+  options?: { rulesOverrides?: StoryRulesOverrides | null; chapterProse?: Record<string, string> },
 ): StoryProject {
   return {
     _format: 'story_v5_project',
@@ -154,6 +156,8 @@ export function exportProject(
     savedAt: new Date().toISOString(),
     request: requestState,
     generation: exportSnapshot(generationState),
+    rulesOverrides: options?.rulesOverrides ?? undefined,
+    chapterProse: options?.chapterProse && Object.keys(options.chapterProse).length > 0 ? options.chapterProse : undefined,
   }
 }
 

@@ -140,17 +140,17 @@ cd app
 npm run dev
 ```
 
-Open localhost 5173 — or visit the deployed site at the project's GitHub Pages URL. You'll see a generation panel with five tabs across the top: Pipeline, Setup, Elements, Analysis, and Generate. Navigation to other surfaces (Story Workspace, Scene Board, Timeline, etc.) is through the hamburger menu in the top-left corner.
+Open localhost 5173 — or visit the deployed site at the project's GitHub Pages URL. You'll see a generation panel with five tabs across the top: Setup, Elements, Graph, Analysis, and Generate. Navigation to other surfaces (Story Workspace, Scene Board, Timeline, etc.) is through the hamburger menu in the top-left corner. LLM connection settings are also in the menu under System > LLM Connection.
 
-The **Setup** tab has the same fields as the JSON request — archetype picker, genre picker, premise text area, tone, and blend/hybrid options. When you enable genre blending or hybrid archetypes, a dropdown appears letting you choose the specific secondary genre or hybrid archetype, or you can leave it on auto-select. All form values persist across tab switches. A contract summary appears inline once generation has run.
+The **Setup** tab is where you do everything before generation. At the top is an action bar with three buttons: **Randomize** (picks random archetype, genre, premise, tone, and working title), **Build Structure** (creates template slots from archetype + genre without any LLM calls), and **Generate Story Graph** (runs the full pipeline including prose generation). Below are fields for Working Title, Archetype, Genre, Premise, and Tone — all start empty on a fresh page load. A contract summary appears inline once structure has been built. After building structure, entity editing sections appear: Characters, Places, and Objects — each with an [Add] button in the disclosure title and a Randomize button to populate from sample data. Style Directives (voice, pacing, lexicon) appear after backbone creation.
 
-The **Elements** tab shows the backbone slot templates and an editable entity registry — characters with name, role, traits, motivations, flaw, and arc direction; places with atmosphere and features; objects with significance and properties. You can add, edit, and remove entities directly, or use the "Fill All Details" button to have the LLM populate everything from the contract and backbone context in a single call.
+The **Elements** tab is for editing story rules and constraints. It shows hard and soft constraints from the contract with toggle checkboxes to enable/disable each one, a Custom Rules section for adding user-defined rules with severity levels, and a Story Structure section showing the chapter partition and beat/scene tree with per-scene notes.
+
+The **Graph** tab shows the Cytoscape graph visualization with a collapsible legend overlay.
 
 The **Analysis** tab expands to full width and shows the graph canvases — you can toggle between Archetype, Genre, or Compare (side-by-side) views. Below the canvas are collapsible sections for node/edge detail, pairing analysis, statistics, elements, and cross-index. If a story has been generated, additional sections appear for templates, contract, backbone beats, plan, story prose, compliance, and chapters.
 
-The **Generate** tab has two buttons: "Build Structure" runs the deterministic pipeline (contract + backbone + templates) without any LLM calls. "Generate Story" runs the full pipeline including prose generation. The event log scrolls as the pipeline progresses, and generated scenes appear inline as they complete. You can save the result as a story instance or clear and start over.
-
-The **Pipeline** tab manages the LLM connection (via the Claude Code CLI bridge that starts automatically with the dev server), import/export of generation snapshots, and telemetry.
+The **Generate** tab provides chapter-by-chapter generation. It shows the working title, a chapter list derived from the backbone's chapter partition with per-chapter status indicators and generate buttons, options for Fast Draft and Skip Validation, chapter prose output, an event log, and project save/load/export controls.
 
 On the Analysis tab, the graph canvas gets an overlay during generation: nodes covered by the story are highlighted in green, anti-pattern nodes are highlighted in red, and the currently active scene's nodes pulse.
 

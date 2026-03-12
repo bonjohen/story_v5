@@ -18,6 +18,7 @@ import type {
   StoryBackbone,
   StoryDetailBindings,
   ChapterManifest,
+  StoryRulesOverrides,
 } from '../artifacts/types.ts'
 import type { OrchestratorEvent, OrchestratorResult, LLMCallTelemetry } from '../engine/orchestrator.ts'
 import { orchestrate } from '../engine/orchestrator.ts'
@@ -64,15 +65,32 @@ export interface GenerationStoreState {
   // UI selection
   selectedSceneId: string | null
 
+  // Rules overrides (user edits to constraints/rules)
+  rulesOverrides: StoryRulesOverrides | null
+
+  // Per-chapter assembled prose
+  chapterProse: Record<string, string>
+
   // Error
   error: string | null
 
+  // Chapter generation — separate logs so setup logs are preserved
+  chapterEvents: OrchestratorEvent[]
+  chapterLlmTelemetry: LLMCallTelemetry[]
+  chapterPromptLog: GenerationStoreState['promptLog']
+  chapterError: string | null
+  chapterRunning: boolean
+
   // Actions
   startRun: (request: StoryRequest, config: GenerationConfig, mode?: GenerationMode, llm?: LLMAdapter | null, runOptions?: { skipValidation?: boolean; planningLlm?: LLMAdapter | null }) => Promise<void>
+  startChapterRun: (config: GenerationConfig, llm: LLMAdapter | null, runOptions?: { skipValidation?: boolean; planningLlm?: LLMAdapter | null }) => Promise<void>
   cancelRun: () => void
+  cancelChapterRun: () => void
   loadResult: (result: OrchestratorResult, request: StoryRequest) => void
   loadSnapshot: (snapshot: StorySnapshot) => void
   setDetailBindings: (bindings: StoryDetailBindings) => void
+  setRulesOverrides: (overrides: StoryRulesOverrides | null) => void
+  setChapterProse: (id: string, prose: string) => void
   assembleChaptersFromState: () => Promise<void>
   selectScene: (sceneId: string | null) => void
   clearRun: () => void
@@ -102,8 +120,15 @@ const INITIAL_STATE = {
   events: [] as OrchestratorEvent[],
   llmTelemetry: [] as LLMCallTelemetry[],
   promptLog: [] as GenerationStoreState['promptLog'],
+  rulesOverrides: null as StoryRulesOverrides | null,
+  chapterProse: {} as Record<string, string>,
   selectedSceneId: null as string | null,
   error: null as string | null,
+  chapterEvents: [] as OrchestratorEvent[],
+  chapterLlmTelemetry: [] as LLMCallTelemetry[],
+  chapterPromptLog: [] as GenerationStoreState['promptLog'],
+  chapterError: null as string | null,
+  chapterRunning: false,
 }
 
 // ---------------------------------------------------------------------------
@@ -111,6 +136,7 @@ const INITIAL_STATE = {
 // ---------------------------------------------------------------------------
 
 let activeAbortController: AbortController | null = null
+let chapterAbortController: AbortController | null = null
 
 export const useGenerationStore = create<GenerationStoreState>((set, get) => ({
   ...INITIAL_STATE,
@@ -222,6 +248,104 @@ export const useGenerationStore = create<GenerationStoreState>((set, get) => ({
     set({ running: false, error: 'Generation cancelled' })
   },
 
+  startChapterRun: async (config, llm, runOptions = {}) => {
+    // Cancel any existing chapter run
+    chapterAbortController?.abort()
+    const abortController = new AbortController()
+    chapterAbortController = abortController
+
+    const state = get()
+    if (!state.request || !state.backbone) return
+
+    // Reset only chapter-specific logs — preserve ALL existing artifacts and setup logs
+    set({
+      chapterEvents: [],
+      chapterLlmTelemetry: [],
+      chapterPromptLog: [],
+      chapterError: null,
+      chapterRunning: true,
+      // Clear previous chapter outputs so they rebuild
+      sceneDrafts: new Map(),
+      chapterManifest: null,
+    })
+
+    try {
+      const provider = new FetchDataProvider(`${import.meta.env.BASE_URL}data`)
+      const result = await orchestrate({
+        request: state.request,
+        provider,
+        config,
+        llm,
+        planningLlm: runOptions.planningLlm ?? null,
+        mode: 'draft',
+        existingDetailBindings: state.detailBindings,
+        signal: abortController.signal,
+        skipValidation: runOptions.skipValidation ?? false,
+        existingArtifacts: {
+          selection: state.selection ?? undefined,
+          contract: state.contract ?? undefined,
+          templatePack: state.templatePack ?? undefined,
+          backbone: state.backbone ?? undefined,
+          plan: state.plan ?? undefined,
+        },
+        onEvent: (event) => {
+          set((s) => ({
+            status: event.state,
+            chapterEvents: [...s.chapterEvents, event],
+          }))
+        },
+        onSceneChunk: (sceneId, chunk) => {
+          set((s) => {
+            const drafts = new Map(s.sceneDrafts)
+            drafts.set(sceneId, (drafts.get(sceneId) ?? '') + chunk)
+            return { sceneDrafts: drafts }
+          })
+        },
+        onPrompt: (callNumber, messages) => {
+          set((s) => ({
+            chapterPromptLog: [...s.chapterPromptLog, { callNumber, messages: messages.map(m => ({ role: m.role, content: m.content })) }],
+          }))
+        },
+        onArtifact: (partial) => {
+          set((s) => ({
+            selection: partial.selection ?? s.selection,
+            contract: partial.contract ?? s.contract,
+            templatePack: partial.templatePack ?? s.templatePack,
+            backbone: partial.backbone ?? s.backbone,
+            detailBindings: partial.detailBindings ?? s.detailBindings,
+            plan: partial.plan ?? s.plan,
+          }))
+        },
+      })
+
+      set({
+        status: result.state,
+        chapterRunning: false,
+        sceneDrafts: result.sceneDrafts ?? new Map(),
+        validation: result.validation ?? null,
+        trace: result.trace ?? null,
+        complianceReport: result.complianceReport ?? null,
+        chapterManifest: result.chapterManifest ?? null,
+        chapterLlmTelemetry: result.llmTelemetry ?? [],
+        chapterError: result.error ?? null,
+      })
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      const isCancelled = msg === 'Generation cancelled'
+      set((s) => ({
+        status: isCancelled ? s.status : 'FAILED',
+        chapterRunning: false,
+        chapterError: msg,
+      }))
+    }
+  },
+
+  cancelChapterRun: () => {
+    chapterAbortController?.abort()
+    chapterAbortController = null
+    set({ chapterRunning: false, chapterError: 'Generation cancelled' })
+  },
+
   loadResult: (result, request) => {
     set({
       status: result.state,
@@ -248,6 +372,10 @@ export const useGenerationStore = create<GenerationStoreState>((set, get) => ({
   loadSnapshot: (snapshot) => set(snapshotToStoreState(snapshot)),
 
   setDetailBindings: (bindings) => set({ detailBindings: bindings }),
+
+  setRulesOverrides: (overrides) => set({ rulesOverrides: overrides }),
+
+  setChapterProse: (id, prose) => set((s) => ({ chapterProse: { ...s.chapterProse, [id]: prose } })),
 
   assembleChaptersFromState: async () => {
     const { backbone, sceneDrafts, plan } = get()

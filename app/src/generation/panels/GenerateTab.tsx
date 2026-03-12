@@ -1,5 +1,7 @@
 /**
- * GenerateTab — three zones: Actions (top), Output (middle), Debug (bottom).
+ * GenerateTab — chapter-by-chapter generation selection.
+ * Shows chapter list from backbone, per-chapter generate buttons,
+ * chapter prose output, event log, and project save/load.
  */
 
 import { useCallback, useRef, useEffect, useState } from 'react'
@@ -11,8 +13,8 @@ import { exportProject, downloadProject, parseProject } from '../artifacts/story
 import { OpenAICompatibleAdapter } from '../agents/openaiCompatibleAdapter.ts'
 import { Disclosure } from '../../components/Disclosure.tsx'
 import { STATE_LABELS, LABEL, DEFAULT_CONFIG } from './generationConstants.ts'
-import { ENTITY_COLORS, STATUS_COLORS, UI_COLORS } from '../../theme/colors.ts'
-import type { StoryRequest, GenerationConfig, StoryProjectRequest } from '../artifacts/types.ts'
+import { STATUS_COLORS, UI_COLORS } from '../../theme/colors.ts'
+import type { GenerationConfig, StoryProjectRequest } from '../artifacts/types.ts'
 
 export interface GenerateTabProps {
   onHighlightNodes?: (nodes: string[]) => void
@@ -20,29 +22,28 @@ export interface GenerateTabProps {
 
 export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const status = useGenerationStore((s) => s.status)
-  const running = useGenerationStore((s) => s.running)
-  const events = useGenerationStore((s) => s.events)
-  const error = useGenerationStore((s) => s.error)
+  const running = useGenerationStore((s) => s.chapterRunning)
+  const events = useGenerationStore((s) => s.chapterEvents)
+  const error = useGenerationStore((s) => s.chapterError)
   const contract = useGenerationStore((s) => s.contract)
   const plan = useGenerationStore((s) => s.plan)
-  const startRun = useGenerationStore((s) => s.startRun)
+  const startChapterRun = useGenerationStore((s) => s.startChapterRun)
   const clearRun = useGenerationStore((s) => s.clearRun)
-  const cancelRun = useGenerationStore((s) => s.cancelRun)
+  const cancelRun = useGenerationStore((s) => s.cancelChapterRun)
   const detailBindings = useGenerationStore((s) => s.detailBindings)
   const selection = useGenerationStore((s) => s.selection)
   const request = useGenerationStore((s) => s.request)
   const sceneDrafts = useGenerationStore((s) => s.sceneDrafts)
   const backbone = useGenerationStore((s) => s.backbone)
   const chapterManifest = useGenerationStore((s) => s.chapterManifest)
-  const promptLog = useGenerationStore((s) => s.promptLog)
-  const llmTelemetry = useGenerationStore((s) => s.llmTelemetry)
+  // chapterProse/rulesOverrides restored from project import via handleImport
+  const promptLog = useGenerationStore((s) => s.chapterPromptLog)
+  const llmTelemetry = useGenerationStore((s) => s.chapterLlmTelemetry)
   const loadSnapshot = useGenerationStore((s) => s.loadSnapshot)
   const assembleChaptersFromState = useGenerationStore((s) => s.assembleChaptersFromState)
 
   const premise = useRequestStore((s) => s.premise)
-  const archetype = useRequestStore((s) => s.archetype)
-  const genre = useRequestStore((s) => s.genre)
-  const tone = useRequestStore((s) => s.tone)
+  const workingTitle = useRequestStore((s) => s.workingTitle)
   const maxLlmCalls = useRequestStore((s) => s.maxLlmCalls)
   const connectBridge = useRequestStore((s) => s.connectBridge)
   const loadFromProject = useRequestStore((s) => s.loadFromProject)
@@ -54,6 +55,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
   const loadInstance = useInstanceStore((s) => s.loadInstance)
   const [savedInstance, setSavedInstance] = useState(false)
   const [projectName, setProjectName] = useState('')
+  const [selectedChapters, setSelectedChapters] = useState<Set<string>>(new Set())
 
   const storyRef = useRef<HTMLDivElement>(null)
 
@@ -65,28 +67,30 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
     if (running) setSavedInstance(false)
   }, [running])
 
-  const buildRequest = useCallback((): StoryRequest => {
-    const runId = `RUN_${new Date().toISOString().slice(0, 10).replace(/-/g, '_')}_${String(Math.floor(Math.random() * 9999)).padStart(4, '0')}`
-    return {
-      schema_version: '1.0.0', run_id: runId, generated_at: new Date().toISOString(),
-      source_corpus_hash: '', premise, medium: 'novel', length_target: 'short_story',
-      audience: { age_band: 'adult', content_limits: [] },
-      requested_genre: genre, requested_archetype: archetype, tone_preference: tone,
-      constraints: { must_include: [], must_exclude: [] },
-    }
-  }, [premise, archetype, genre, tone])
+  // Derive chapter list from backbone or chapterManifest
+  const chapters = chapterManifest?.chapters
+    ?? backbone?.chapter_partition.map((cp) => ({
+      chapter_id: cp.chapter_id,
+      title: cp.title ?? cp.chapter_id,
+      scene_ids: backbone.beats
+        .filter((b) => cp.beat_ids.includes(b.beat_id))
+        .flatMap((b) => b.scenes.map((s) => s.scene_id)),
+      tone_goals: cp.tone_goal,
+    }))
+    ?? []
 
-  const handleBuildStructure = useCallback(() => {
-    const req = buildRequest()
-    const config: GenerationConfig = { ...DEFAULT_CONFIG, max_llm_calls: 0 }
-    void startRun(req, config, 'backbone', null)
-  }, [buildRequest, startRun])
+  // Chapter status: check if all scenes have drafts
+  const getChapterStatus = useCallback((sceneIds: string[]): 'done' | 'partial' | 'pending' => {
+    if (sceneIds.length === 0) return 'pending'
+    const done = sceneIds.filter((id) => sceneDrafts.has(id)).length
+    if (done === sceneIds.length) return 'done'
+    if (done > 0) return 'partial'
+    return 'pending'
+  }, [sceneDrafts])
 
-  const handleGenerateStory = useCallback(async () => {
-    const req = buildRequest()
+  const handleGenerateChapters = useCallback(async () => {
     const reqState = useRequestStore.getState()
     const effectiveSkipValidation = reqState.fastDraft || reqState.skipValidation
-    // Fast Draft disables beat expansion; otherwise use defaults with higher LLM budget
     const beatExpansionEnabled = !reqState.fastDraft
     const effectiveMaxCalls = beatExpansionEnabled ? Math.max(maxLlmCalls, 60) : maxLlmCalls
     const config: GenerationConfig = {
@@ -112,11 +116,20 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       })
     }
 
-    void startRun(req, config, 'draft', adapter ?? null, {
+    void startChapterRun(config, adapter ?? null, {
       skipValidation: effectiveSkipValidation,
       planningLlm: planningAdapter,
     })
-  }, [buildRequest, maxLlmCalls, startRun, connectBridge])
+  }, [maxLlmCalls, startChapterRun, connectBridge])
+
+  const toggleChapter = useCallback((chId: string) => {
+    setSelectedChapters((prev) => {
+      const next = new Set(prev)
+      if (next.has(chId)) next.delete(chId)
+      else next.add(chId)
+      return next
+    })
+  }, [])
 
   const handleSaveInstance = useCallback(() => {
     if (!detailBindings) return
@@ -135,9 +148,13 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
       openaiModel: reqState.openaiModel, skipValidation: reqState.skipValidation,
       fastDraft: reqState.fastDraft, openaiPlanningModel: reqState.openaiPlanningModel,
       slotOverrides: reqState.slotOverrides, mode: reqState.mode,
+      workingTitle: reqState.workingTitle, narrativeVoice: reqState.narrativeVoice,
     }
-    const name = projectName.trim() || reqState.premise.slice(0, 40) || 'Untitled'
-    const project = exportProject(name, reqData, genState)
+    const name = projectName.trim() || reqState.workingTitle || reqState.premise.slice(0, 40) || 'Untitled'
+    const project = exportProject(name, reqData, genState, {
+      rulesOverrides: genState.rulesOverrides,
+      chapterProse: genState.chapterProse,
+    })
     downloadProject(project)
   }, [projectName])
 
@@ -155,6 +172,15 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           loadFromProject(project.request)
           loadSnapshot(project.generation)
           setProjectName(project.projectName)
+          // Restore rules overrides and chapter prose if present
+          if (project.rulesOverrides) {
+            useGenerationStore.getState().setRulesOverrides(project.rulesOverrides)
+          }
+          if (project.chapterProse) {
+            for (const [id, prose] of Object.entries(project.chapterProse)) {
+              useGenerationStore.getState().setChapterProse(id, prose)
+            }
+          }
         } catch (err) {
           console.error('Failed to import project:', err)
           alert(`Import failed: ${err instanceof Error ? err.message : String(err)}`)
@@ -178,7 +204,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         : []
     const parts = entries.filter((e) => e.prose).map((e) => `## ${e.label}\n\n${e.prose}`)
     if (parts.length === 0) return
-    const title = request?.premise?.slice(0, 60) || 'Story'
+    const title = workingTitle || request?.premise?.slice(0, 60) || 'Story'
     const md = `# ${title}\n\n${parts.join('\n\n---\n\n')}\n`
     const blob = new Blob([md], { type: 'text/markdown' })
     const url = URL.createObjectURL(blob)
@@ -187,49 +213,22 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
     a.download = `${request?.run_id ?? 'story'}.md`
     a.click()
     URL.revokeObjectURL(url)
-  }, [plan, backbone, sceneDrafts, request])
+  }, [plan, backbone, sceneDrafts, request, workingTitle])
 
   const stateInfo = STATE_LABELS[status] ?? { label: status, color: 'var(--text-muted)' }
   const hasResults = contract || plan
   const canSaveInstance = !running && detailBindings != null
   const hasStory = sceneDrafts.size > 0
 
-  // Gate: Generate Story requires backbone + populated elements
+  // Gate: Generate requires backbone + populated elements
   const hasElements = detailBindings != null && (
     detailBindings.entity_registry.characters.length > 0 ||
     detailBindings.entity_registry.places.length > 0
   )
   const canGenerate = !running && premise.trim() !== '' && !!backbone && hasElements
-  const generateBlockReason = !premise.trim()
-    ? 'Enter a premise on the Setup tab first'
-    : !backbone
-      ? 'Build Structure first to create the story backbone'
-      : !hasElements
-        ? 'Populate elements on the Elements tab (use Randomize or enter manually)'
-        : null
-
-  // Scene prose in order
-  const sceneEntries = plan
-    ? plan.scenes.map((scene) => {
-        const beat = plan.beats.find((b) => b.beat_id === scene.beat_id)
-        return { beatLabel: beat?.summary ?? scene.beat_id, sceneGoal: scene.scene_goal, prose: sceneDrafts.get(scene.scene_id), sceneId: scene.scene_id }
-      })
-    : backbone
-      ? backbone.beats.flatMap((beat) =>
-          beat.scenes.map((scene) => ({ beatLabel: beat.label, sceneGoal: scene.scene_goal, prose: sceneDrafts.get(scene.scene_id), sceneId: scene.scene_id })))
-      : []
-
-  let lastProseIdx = -1
-  for (let j = sceneEntries.length - 1; j >= 0; j--) {
-    if (sceneEntries[j].prose) { lastProseIdx = j; break }
-  }
 
   return (
     <div style={{ padding: '10px 12px' }}>
-
-      {/* ═══════════════════════════════════════════════════════
-          ZONE 1 — Actions
-          ═══════════════════════════════════════════════════════ */}
 
       {/* Status + progress */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
@@ -246,7 +245,14 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         )}
       </div>
 
-      {/* Progress steps — compact inline */}
+      {/* Working Title display */}
+      {workingTitle && (
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 8 }}>
+          {workingTitle}
+        </div>
+      )}
+
+      {/* Progress chips */}
       {(contract || backbone || detailBindings || plan || sceneDrafts.size > 0 || chapterManifest) && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 10px', marginBottom: 10, fontSize: 10 }}>
           <ProgressChip label="Contract" done={!!contract} />
@@ -258,32 +264,58 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         </div>
       )}
 
-      {/* Buttons */}
+      {/* ── CHAPTER LIST ─────────────────────────────────────── */}
+      {chapters.length > 0 && (
+        <Disclosure title={`Chapters (${chapters.length})`} persistKey="gen-chapters">
+          <div style={{ padding: '4px 8px' }}>
+            {chapters.map((ch) => {
+              const sceneIds = 'scene_ids' in ch ? ch.scene_ids : []
+              const chStatus = getChapterStatus(sceneIds)
+              const statusColor = chStatus === 'done' ? STATUS_COLORS.pass : chStatus === 'partial' ? STATUS_COLORS.warn : 'var(--text-muted)'
+              const isSelected = selectedChapters.has(ch.chapter_id)
+
+              return (
+                <div key={ch.chapter_id} style={{
+                  padding: '6px 8px', marginBottom: 4, background: 'var(--bg-elevated)',
+                  borderRadius: 4, borderLeft: `3px solid ${statusColor}`,
+                }}>
+                  <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleChapter(ch.chapter_id)}
+                      style={{ flexShrink: 0 }}
+                    />
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-primary)' }}>
+                        {ch.title || ch.chapter_id}
+                      </div>
+                      <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
+                        {sceneIds.length} scenes
+                        <span style={{ marginLeft: 8, color: statusColor, fontWeight: 600 }}>
+                          {chStatus === 'done' ? 'Done' : chStatus === 'partial' ? 'Partial' : 'Pending'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </Disclosure>
+      )}
+
+      {/* Generate buttons */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
-        {!backbone && (
-          <button onClick={handleBuildStructure} disabled={running || !premise.trim()} style={{
-            flex: 1, minWidth: 120, padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
-            border: '1px solid #8b5cf6', background: running ? 'var(--border)' : '#8b5cf618',
-            color: running || !premise.trim() ? 'var(--text-muted)' : ENTITY_COLORS.concept,
-            cursor: running || !premise.trim() ? 'not-allowed' : 'pointer',
-          }}>
-            Build Structure
-          </button>
-        )}
-        <div style={{ flex: 1, minWidth: 120, position: 'relative' }} title={generateBlockReason ?? undefined}>
-          <button onClick={handleGenerateStory} disabled={!canGenerate} style={{
+        <div style={{ flex: 1, minWidth: 120 }}>
+          <button onClick={() => void handleGenerateChapters()} disabled={!canGenerate} style={{
             width: '100%', padding: '8px 10px', fontSize: 11, fontWeight: 600, borderRadius: 4,
             border: 'none', background: canGenerate ? 'var(--accent)' : 'var(--border)',
             color: canGenerate ? '#fff' : 'var(--text-muted)',
             cursor: canGenerate ? 'pointer' : 'not-allowed',
           }}>
-            Generate Story
+            {selectedChapters.size > 0 ? `Generate Selected (${selectedChapters.size})` : 'Generate All'}
           </button>
-          {generateBlockReason && !running && (
-            <div style={{ fontSize: 9, color: 'var(--text-muted)', marginTop: 2, textAlign: 'center' }}>
-              {generateBlockReason}
-            </div>
-          )}
         </div>
         {running && (
           <button onClick={cancelRun} style={{
@@ -295,7 +327,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         )}
       </div>
 
-      {/* Options row — compact */}
+      {/* Options row */}
       <div style={{ display: 'flex', gap: 12, marginBottom: 10, fontSize: 10 }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
           <input type="checkbox" checked={fastDraft} onChange={(e) => setFastDraft(e.target.checked)} disabled={running} />
@@ -306,6 +338,78 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
           Skip validation
         </label>
       </div>
+
+      {/* Error */}
+      {error && (
+        <div style={{
+          padding: '8px 10px', marginBottom: 10, fontSize: 11, color: STATUS_COLORS.fail,
+          background: 'rgba(239,68,68,0.08)', borderRadius: 4, border: '1px solid rgba(239,68,68,0.2)',
+        }}>
+          {error}
+        </div>
+      )}
+
+      {/* ── CHAPTER PROSE OUTPUT ─────────────────────────────── */}
+      {chapters.length > 0 && sceneDrafts.size > 0 && (
+        <div style={{ marginBottom: 12 }}>
+          <span style={LABEL}>
+            Story Output
+            <span style={{ fontSize: 10, fontWeight: 400, color: 'var(--text-muted)', marginLeft: 6 }}>
+              {sceneDrafts.size} scenes written
+            </span>
+          </span>
+          <div ref={storyRef} style={{
+            marginTop: 4, maxHeight: 500, overflowY: 'auto',
+            background: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: 4, padding: 8,
+          }}>
+            {chapters.map((ch) => {
+              const sceneIds = 'scene_ids' in ch ? ch.scene_ids : []
+              const scenesWithProse = sceneIds.filter((id) => sceneDrafts.has(id))
+              if (scenesWithProse.length === 0) return null
+              return (
+                <Disclosure
+                  key={ch.chapter_id}
+                  title={ch.title || ch.chapter_id}
+                  persistKey={`gen-prose-${ch.chapter_id}`}
+                >
+                  <div style={{ padding: '4px 8px' }}>
+                    {sceneIds.map((sceneId) => {
+                      const prose = sceneDrafts.get(sceneId)
+                      if (!prose) return null
+                      const scene = backbone?.beats.flatMap(b => b.scenes).find(s => s.scene_id === sceneId)
+                      return (
+                        <div key={sceneId} style={{ marginBottom: 12 }}
+                          onMouseEnter={() => onHighlightNodes?.([sceneId])}
+                          onMouseLeave={() => onHighlightNodes?.([])}
+                        >
+                          <div style={{ fontSize: 10, fontWeight: 600, color: UI_COLORS.archetype, marginBottom: 3 }}>
+                            {scene?.scene_goal ?? sceneId}
+                          </div>
+                          <div style={{ fontSize: 12, lineHeight: 1.6, color: 'var(--text-primary)', whiteSpace: 'pre-wrap' }}>
+                            {prose}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </Disclosure>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Fallback when no chapters yet */}
+      {chapters.length === 0 && (
+        <div style={{
+          padding: '8px 10px', marginBottom: 10, fontSize: 11, color: 'var(--text-muted)',
+          background: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: 4,
+        }}>
+          {!backbone
+            ? 'Build Structure on the Setup tab first to see chapters here.'
+            : 'No chapters found in the backbone. Generate a story graph first.'}
+        </div>
+      )}
 
       {/* Secondary actions */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 10, flexWrap: 'wrap' }}>
@@ -331,11 +435,11 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         )}
       </div>
 
-      {/* Project name (only if results exist) */}
+      {/* Project name */}
       {hasResults && (
         <input
           type="text" value={projectName} onChange={(e) => setProjectName(e.target.value)}
-          placeholder={premise.slice(0, 40) || 'Project name'}
+          placeholder={workingTitle || premise.slice(0, 40) || 'Project name'}
           style={{
             width: '100%', padding: '4px 8px', fontSize: 11, borderRadius: 4, marginBottom: 10,
             border: '1px solid var(--border)', background: 'var(--bg-primary)',
@@ -344,73 +448,7 @@ export function GenerateTab({ onHighlightNodes }: GenerateTabProps) {
         />
       )}
 
-      {/* Error */}
-      {error && (
-        <div style={{
-          padding: '8px 10px', marginBottom: 10, fontSize: 11, color: STATUS_COLORS.fail,
-          background: 'rgba(239,68,68,0.08)', borderRadius: 4, border: '1px solid rgba(239,68,68,0.2)',
-        }}>
-          {error}
-        </div>
-      )}
-
-      {/* ═══════════════════════════════════════════════════════
-          ZONE 2 — Story Output
-          ═══════════════════════════════════════════════════════ */}
-      <div style={{ marginBottom: 12 }}>
-        <span style={LABEL}>
-          Story
-          {sceneEntries.length > 0 && (
-            <span style={{ fontSize: 10, fontWeight: 400, color: 'var(--text-muted)', marginLeft: 6 }}>
-              {sceneEntries.filter((s) => s.prose).length}/{sceneEntries.length} scenes
-            </span>
-          )}
-        </span>
-        <div
-          ref={storyRef}
-          style={{
-            marginTop: 4, minHeight: 60, maxHeight: 500, overflowY: 'auto',
-            background: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: 4, padding: 8,
-          }}
-        >
-          {sceneEntries.some((s) => s.prose) ? (
-            sceneEntries.map((entry, idx) => {
-              if (!entry.prose) return null
-              const isLast = idx === lastProseIdx
-              return (
-                <div key={entry.sceneId} style={{ marginBottom: 12 }}
-                  onMouseEnter={() => onHighlightNodes?.([entry.sceneId])}
-                  onMouseLeave={() => onHighlightNodes?.([])}
-                >
-                  <div style={{ fontSize: 10, fontWeight: 600, color: UI_COLORS.archetype, marginBottom: 3 }}>
-                    {entry.beatLabel} — {entry.sceneGoal}
-                    {running && isLast && (
-                      <span style={{ color: 'var(--text-muted)', fontWeight: 400, animation: 'pulse 1.5s infinite', marginLeft: 6 }}>
-                        writing...
-                      </span>
-                    )}
-                  </div>
-                  <div style={{ fontSize: 12, lineHeight: 1.6, color: 'var(--text-primary)', whiteSpace: 'pre-wrap' }}>
-                    {entry.prose}
-                  </div>
-                </div>
-              )
-            })
-          ) : (
-            <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0 }}>
-              {!backbone
-                ? 'Click "Build Structure" to create the story backbone, then populate elements before generating.'
-                : !hasElements
-                  ? 'Structure built. Go to the Elements tab to populate characters and places, then return here to generate.'
-                  : 'Ready to generate. Click "Generate Story" to write prose.'}
-            </p>
-          )}
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════
-          ZONE 3 — Debug (all collapsed by default)
-          ═══════════════════════════════════════════════════════ */}
+      {/* ── DEBUG ────────────────────────────────────────────── */}
       {events.length > 0 && (
         <Disclosure title="Event Log" persistKey="gen-event-log" defaultCollapsed badge={`${events.length}`}>
           <div style={{ maxHeight: 200, overflowY: 'auto', padding: '4px 8px' }}>

@@ -150,7 +150,7 @@ Several Zustand stores manage the application state.
 
 **elementStore.ts** manages story element data — loaded archetype templates, example instances, template timelines, genre element constraints, and emotional arc profiles. Data is loaded lazily when an archetype or genre is viewed and cached for subsequent access.
 
-**requestStore.ts** (in the generation folder) maintains persistent form state for the generation panel's Setup tab — premise, archetype, genre, tone, blend/hybrid settings, and slot overrides. These values survive tab switches and panel navigation.
+**requestStore.ts** (in the generation folder) maintains form state for the generation panel's Setup tab — premise, archetype, genre, tone, and LLM connection settings. Story content fields (premise, archetype, genre, tone, working title) reset on page refresh; only LLM connection settings persist to localStorage.
 
 ### app/src/render — the graph canvas
 
@@ -234,7 +234,7 @@ This is the engine that turns a story request into a finished story with full co
 
 **store/generationStore.ts** is the Zustand store for the generation UI — run status, loaded artifacts, selected scene, and actions to start, load, select, and clear runs.
 
-**panels/** contains the generation UI organized as five focused tabs: PipelineTab for LLM connection and telemetry, StorySetupTab for archetype/genre/premise/tone selection, ElementsTab for editable entity management (characters, places, objects), AnalysisTab for graph visualization and all inspection panels (contract, backbone, plan, story, compliance), and GenerateTab for running the pipeline and viewing prose output.
+**panels/** contains the generation UI organized as five focused tabs: StorySetupTab for story configuration (archetype/genre/premise/tone/working title), entity editing (characters/places/objects), structure building, and story graph generation; ElementsTab for editing story rules, constraints, custom rules, and scene notes; GraphViewer for Cytoscape visualization; AnalysisTab for graph canvases and all inspection panels (contract, backbone, plan, story, compliance); and GenerateTab for chapter-by-chapter generation, prose output, and project save/load. LLM connection settings are in a separate dialog accessible from the navigation menu.
 
 ### app/scripts — data processing tools
 

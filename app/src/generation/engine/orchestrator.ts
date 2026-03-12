@@ -89,6 +89,14 @@ export interface OrchestratorOptions {
   signal?: AbortSignal
   /** Skip the validation/repair cycle for faster generation. */
   skipValidation?: boolean
+  /** Pre-computed artifacts — skip pipeline steps that already have results. */
+  existingArtifacts?: {
+    selection?: SelectionResult
+    contract?: StoryContract
+    templatePack?: TemplatePack
+    backbone?: StoryBackbone
+    plan?: StoryPlan
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -243,7 +251,7 @@ function instrumentedLLM(
  * Returns all artifacts produced during the run.
  */
 export async function orchestrate(options: OrchestratorOptions): Promise<OrchestratorResult> {
-  const { request, provider, config, llm: rawLlm = null, planningLlm: rawPlanningLlm = null, mode = 'draft', onEvent, onSceneChunk, onArtifact, existingDetailBindings, onPrompt, signal, skipValidation = false } = options
+  const { request, provider, config, llm: rawLlm = null, planningLlm: rawPlanningLlm = null, mode = 'draft', onEvent, onSceneChunk, onArtifact, existingDetailBindings, onPrompt, signal, skipValidation = false, existingArtifacts } = options
 
   function checkCancelled() {
     if (signal?.aborted) throw new Error('Generation cancelled')
@@ -319,22 +327,46 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
   }
 
   try {
-    // 1. Load corpus
+    // 1. Load corpus (skip if existing)
     checkCancelled()
-    const corpus = await loadCorpus(provider)
-    transition('LOADED_CORPUS', 'Story structure library loaded')
+    let corpus
+    if (existingArtifacts?.selection && existingArtifacts?.contract && existingArtifacts?.templatePack && existingArtifacts?.backbone) {
+      // All downstream artifacts provided — load corpus just for validation data
+      corpus = await loadCorpus(provider)
+      transition('LOADED_CORPUS', 'Corpus loaded (using existing artifacts)')
+    } else {
+      corpus = await loadCorpus(provider)
+      transition('LOADED_CORPUS', 'Story structure library loaded')
+    }
 
     // 2. Selection
-    const { selection } = runSelection(request, corpus)
-    result.selection = selection
-    onArtifact?.({ selection })
-    transition('SELECTED', `Using ${selection.primary_archetype} archetype with ${selection.primary_genre} genre`)
+    let selection: SelectionResult
+    if (existingArtifacts?.selection) {
+      selection = existingArtifacts.selection
+      result.selection = selection
+      onArtifact?.({ selection })
+      transition('SELECTED', `Using existing selection: ${selection.primary_archetype} / ${selection.primary_genre}`)
+    } else {
+      const sel = runSelection(request, corpus)
+      selection = sel.selection
+      result.selection = selection
+      onArtifact?.({ selection })
+      transition('SELECTED', `Using ${selection.primary_archetype} archetype with ${selection.primary_genre} genre`)
+    }
 
     // 3. Contract
-    const contract = compileContract(selection, request, corpus, config)
-    result.contract = contract
-    onArtifact?.({ contract })
-    transition('CONTRACT_READY', `Story contract ready: ${contract.phase_guidelines.length} phases, ${contract.genre.hard_constraints.length} hard constraints`)
+    let contract: StoryContract
+    if (existingArtifacts?.contract) {
+      contract = existingArtifacts.contract
+      result.contract = contract
+      onArtifact?.({ contract })
+      transition('CONTRACT_READY', `Using existing contract (${contract.phase_guidelines.length} phases)`)
+    } else {
+      contract = compileContract(selection, request, corpus, config)
+      result.contract = contract
+      onArtifact?.({ contract })
+      transition('CONTRACT_READY', `Story contract ready: ${contract.phase_guidelines.length} phases, ${contract.genre.hard_constraints.length} hard constraints`)
+    }
 
     // Stop here for contract-only mode
     if (mode === 'contract-only') {
@@ -344,17 +376,33 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
     }
 
     // 3.5. Template compilation
-    const templatePack = compileTemplatePack(selection, contract, corpus)
-    result.templatePack = templatePack
-    onArtifact?.({ templatePack })
-    transition('TEMPLATES_COMPILED', `${Object.keys(templatePack.archetype_node_templates).length} beat templates and ${Object.keys(templatePack.genre_level_templates).length} genre rules compiled`)
+    let templatePack: TemplatePack
+    if (existingArtifacts?.templatePack) {
+      templatePack = existingArtifacts.templatePack
+      result.templatePack = templatePack
+      onArtifact?.({ templatePack })
+      transition('TEMPLATES_COMPILED', `Using existing templates (${Object.keys(templatePack.archetype_node_templates).length} beat templates)`)
+    } else {
+      templatePack = compileTemplatePack(selection, contract, corpus)
+      result.templatePack = templatePack
+      onArtifact?.({ templatePack })
+      transition('TEMPLATES_COMPILED', `${Object.keys(templatePack.archetype_node_templates).length} beat templates and ${Object.keys(templatePack.genre_level_templates).length} genre rules compiled`)
+    }
 
     // 3.6. Backbone assembly
-    const backbone = assembleBackbone(contract, templatePack)
-    let currentBackbone = backbone
-    result.backbone = backbone
-    onArtifact?.({ backbone })
-    transition('BACKBONE_ASSEMBLED', `Story outline: ${backbone.beats.length} beats across ${backbone.chapter_partition.length} chapters`)
+    let currentBackbone: StoryBackbone
+    if (existingArtifacts?.backbone) {
+      currentBackbone = existingArtifacts.backbone
+      result.backbone = currentBackbone
+      onArtifact?.({ backbone: currentBackbone })
+      transition('BACKBONE_ASSEMBLED', `Using existing backbone (${currentBackbone.beats.length} beats, ${currentBackbone.chapter_partition.length} chapters)`)
+    } else {
+      const backbone = assembleBackbone(contract, templatePack)
+      currentBackbone = backbone
+      result.backbone = backbone
+      onArtifact?.({ backbone })
+      transition('BACKBONE_ASSEMBLED', `Story outline: ${backbone.beats.length} beats across ${backbone.chapter_partition.length} chapters`)
+    }
 
     // Stop here for backbone mode
     if (mode === 'backbone') {
@@ -371,7 +419,7 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       transition('DETAILS_BOUND', `Using your ${detailBindings.entity_registry.characters.length} characters, ${detailBindings.entity_registry.places.length} places, ${detailBindings.entity_registry.objects.length} objects`)
     } else {
       const useLlmForDetails = (mode === 'draft' || mode === 'chapters') ? llm : null
-      const { bindings, updatedBackbone } = await synthesizeDetails(request, backbone, useLlmForDetails)
+      const { bindings, updatedBackbone } = await synthesizeDetails(request, currentBackbone, useLlmForDetails)
       detailBindings = bindings
       currentBackbone = updatedBackbone
       result.backbone = currentBackbone
@@ -387,11 +435,19 @@ export async function orchestrate(options: OrchestratorOptions): Promise<Orchest
       return result
     }
 
-    // 4. Plan — use planningLlm for beat/scene summaries
-    const plan = await buildPlan({ contract, corpus, config, llm: planningLlm, selection, detailBindings })
-    result.plan = plan
-    onArtifact?.({ plan })
-    transition('PLANNED', `Scene plan ready: ${plan.scenes.length} scenes across ${plan.beats.length} beats`)
+    // 4. Plan — use existing or build new
+    let plan: StoryPlan
+    if (existingArtifacts?.plan) {
+      plan = existingArtifacts.plan
+      result.plan = plan
+      onArtifact?.({ plan })
+      transition('PLANNED', `Using existing plan (${plan.scenes.length} scenes, ${plan.beats.length} beats)`)
+    } else {
+      plan = await buildPlan({ contract, corpus, config, llm: planningLlm, selection, detailBindings })
+      result.plan = plan
+      onArtifact?.({ plan })
+      transition('PLANNED', `Scene plan ready: ${plan.scenes.length} scenes across ${plan.beats.length} beats`)
+    }
 
     // Stop here for outline mode
     if (mode === 'outline') {

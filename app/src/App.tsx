@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, memo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { SettingsPanel } from './components/SettingsPanel.tsx'
-import { ExportPanel } from './panels/ExportPanel.tsx'
+import { LLMConnectionDialog } from './components/LLMConnectionDialog.tsx'
 import { AppShellBar } from './components/AppShell.tsx'
 import { GraphViewer } from './components/GraphViewer.tsx'
 import { StorySetupTab } from './generation/panels/StorySetupTab.tsx'
@@ -11,6 +11,7 @@ import { GenerateTab } from './generation/panels/GenerateTab.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
 import { useGenerationStore } from './generation/store/generationStore.ts'
+import { useUIStore } from './store/uiStore.ts'
 import { useDbInit } from './db/useDbInit.ts'
 import { useRequestStore } from './generation/store/requestStore.ts'
 import { nameToDir } from './generation/panels/generationConstants.ts'
@@ -43,17 +44,19 @@ export default function App() {
   const settingsOpen = useSettingsStore((s) => s.settingsOpen)
   const toggleSettings = useSettingsStore((s) => s.toggleSettings)
 
+  // LLM dialog
+  const llmDialogOpen = useUIStore((s) => s.llmDialogOpen)
+
   // Generation state
   const genStatus = useGenerationStore((s) => s.status)
   const genSceneDrafts = useGenerationStore((s) => s.sceneDrafts)
-  const genBackbone = useGenerationStore((s) => s.backbone)
+  const genContract = useGenerationStore((s) => s.contract)
+  const genRulesOverrides = useGenerationStore((s) => s.rulesOverrides)
 
   // Database init
   const dbStatus = useDbInit()
 
   // UI state
-  const [showExport, setShowExport] = useState(false)
-  const exportCyRef = useRef(null)
   const [genTab, setGenTab] = useState<'pipeline' | 'setup' | 'elements' | 'graph' | 'analysis' | 'generate'>('setup')
   const [manifestError, setManifestError] = useState<string | null>(null)
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
@@ -156,19 +159,27 @@ export default function App() {
           <span style={{ fontSize: 11, color: '#22c55e' }}>Complete</span>
         )}
 
-        {/* Export */}
+        {/* Export graph JSON */}
         {currentGraph && (
           <button
-            onClick={() => setShowExport((v) => !v)}
-            aria-label="Export graph"
+            onClick={() => {
+              const json = JSON.stringify(currentGraph.graph, null, 2)
+              const blob = new Blob([json], { type: 'application/json' })
+              const url = URL.createObjectURL(blob)
+              const a = document.createElement('a')
+              a.href = url
+              a.download = `${currentGraph.graph.id ?? 'graph'}.json`
+              a.click()
+              URL.revokeObjectURL(url)
+            }}
+            aria-label="Export graph JSON"
             style={{
               fontSize: 11,
               padding: '3px 10px',
               borderRadius: 4,
-              border: '1px solid',
-              borderColor: showExport ? 'var(--accent)' : 'var(--border)',
-              background: showExport ? 'var(--accent)18' : 'transparent',
-              color: showExport ? 'var(--accent)' : 'var(--text-muted)',
+              border: '1px solid var(--border)',
+              background: 'transparent',
+              color: 'var(--text-muted)',
               cursor: 'pointer',
               transition: 'all 0.15s',
             }}
@@ -218,15 +229,7 @@ export default function App() {
 
       {/* Settings panel overlay */}
       {settingsOpen && <SettingsPanel />}
-
-      {/* Export panel overlay */}
-      {showExport && currentGraph && (
-        <ExportPanel
-          graph={currentGraph}
-          cyRef={exportCyRef}
-          onClose={() => setShowExport(false)}
-        />
-      )}
+      {llmDialogOpen && <LLMConnectionDialog />}
 
       {/* Main layout: Generation panel (left) + graph viewer (center) */}
       <div className="main-layout" style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
@@ -246,10 +249,10 @@ export default function App() {
             flexShrink: 0,
           }}>
             <GenTab label="Setup" active={genTab === 'setup'} onClick={() => setGenTab('setup')} highlight />
-            <GenTab label="Elements" active={genTab === 'elements'} onClick={() => setGenTab('elements')} badge={!!genBackbone} />
+            <GenTab label="Elements" active={genTab === 'elements'} onClick={() => setGenTab('elements')} badge={!!genContract || !!genRulesOverrides} />
+            <GenTab label="Generate" active={genTab === 'generate'} onClick={() => setGenTab('generate')} badge={genSceneDrafts.size > 0 || (genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED')} />
             <GenTab label="Graph" active={genTab === 'graph'} onClick={() => setGenTab('graph')} badge={!!currentGraph} />
             <GenTab label="Analysis" active={genTab === 'analysis'} onClick={() => setGenTab('analysis')} />
-            <GenTab label="Generate" active={genTab === 'generate'} onClick={() => setGenTab('generate')} badge={genSceneDrafts.size > 0 || (genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED')} />
           </div>
           <div style={{ flex: 1, overflowY: genTab === 'graph' ? 'hidden' : 'auto', display: 'flex', flexDirection: 'column' }}>
             {genTab === 'setup' && <StorySetupTab />}
