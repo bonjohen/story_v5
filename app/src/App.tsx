@@ -8,6 +8,7 @@ import { StorySetupTab } from './generation/panels/StorySetupTab.tsx'
 import { ElementsTab } from './generation/panels/ElementsTab.tsx'
 import { AnalysisTab } from './generation/panels/AnalysisTab.tsx'
 import { GenerateTab } from './generation/panels/GenerateTab.tsx'
+import { WorkflowTab } from './generation/panels/WorkflowTab.tsx'
 import { useGraphStore } from './store/graphStore.ts'
 import { useSettingsStore } from './store/settingsStore.ts'
 import { useGenerationStore } from './generation/store/generationStore.ts'
@@ -57,7 +58,7 @@ export default function App() {
   const dbStatus = useDbInit()
 
   // UI state
-  const [genTab, setGenTab] = useState<'pipeline' | 'setup' | 'elements' | 'graph' | 'analysis' | 'generate'>('setup')
+  const [genTab, setGenTab] = useState<'setup' | 'elements' | 'graph' | 'analysis' | 'generate' | 'workflow'>('setup')
   const [manifestError, setManifestError] = useState<string | null>(null)
   const [genHighlightNodes, setGenHighlightNodes] = useState<string[]>([])
 
@@ -253,13 +254,15 @@ export default function App() {
             <GenTab label="Generate" active={genTab === 'generate'} onClick={() => setGenTab('generate')} badge={genSceneDrafts.size > 0 || (genStatus !== 'IDLE' && genStatus !== 'COMPLETED' && genStatus !== 'FAILED')} />
             <GenTab label="Graph" active={genTab === 'graph'} onClick={() => setGenTab('graph')} badge={!!currentGraph} />
             <GenTab label="Analysis" active={genTab === 'analysis'} onClick={() => setGenTab('analysis')} />
+            <GenTab label="Workflow" active={genTab === 'workflow'} onClick={() => setGenTab('workflow')} />
           </div>
-          <div style={{ flex: 1, overflowY: genTab === 'graph' ? 'hidden' : 'auto', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: 1, overflowY: genTab === 'graph' || genTab === 'workflow' ? 'hidden' : 'auto', display: 'flex', flexDirection: 'column' }}>
             {genTab === 'setup' && <StorySetupTab />}
             {genTab === 'elements' && <ElementsTab />}
             {genTab === 'graph' && <GraphViewer genHighlightNodes={genHighlightNodes} />}
             {genTab === 'analysis' && <AnalysisTab onHighlightNodes={setGenHighlightNodes} />}
             {genTab === 'generate' && <GenerateTab onHighlightNodes={setGenHighlightNodes} />}
+            {genTab === 'workflow' && <WorkflowTab />}
           </div>
         </div>
       </div>

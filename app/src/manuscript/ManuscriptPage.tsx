@@ -35,7 +35,7 @@ export function ManuscriptPage() {
   const sceneDrafts = useGenerationStore((s) => s.sceneDrafts)
   const backbone = useGenerationStore((s) => s.backbone)
 
-  // Auto-populate
+  // Auto-populate when no manuscript exists yet and generation data is available
   const [autoPopulated, setAutoPopulated] = useState(false)
   useEffect(() => {
     if (autoPopulated || chapters.length > 0) return
@@ -44,6 +44,26 @@ export function ManuscriptPage() {
       setAutoPopulated(true)
     }
   }, [chapterManifest, sceneDrafts, backbone, autoPopulated, chapters.length, populateFromGeneration])
+
+  // Check if generation has newer prose than the manuscript
+  const hasGenerationProse = chapterManifest && sceneDrafts.size > 0
+  const manuscriptHasNoProse = chapters.length > 0 && chapters.every((ch) =>
+    ch.scenes.every((sc) => !sc.draft_text),
+  )
+
+  const handleReloadFromGeneration = () => {
+    if (chapterManifest && sceneDrafts.size > 0) {
+      populateFromGeneration(chapterManifest, sceneDrafts, backbone)
+      setAutoPopulated(true)
+    }
+  }
+
+  // Auto-reload if manuscript has structure but no prose and generation now has prose
+  useEffect(() => {
+    if (manuscriptHasNoProse && hasGenerationProse) {
+      populateFromGeneration(chapterManifest!, sceneDrafts, backbone)
+    }
+  }, [manuscriptHasNoProse, hasGenerationProse]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const selectedChapter = chapters.find((ch) => ch.id === selectedChapterId)
   const selectedSceneObj = selectedChapter?.scenes.find((sc) => sc.id === selectedSceneId)
@@ -88,6 +108,14 @@ export function ManuscriptPage() {
             }}
           >
             Show Draft
+          </button>
+        )}
+
+        {hasGenerationProse && (
+          <button onClick={handleReloadFromGeneration}
+            title="Replace manuscript with latest generated prose"
+            style={{ fontSize: 11, padding: '3px 10px', borderRadius: 3, border: '1px solid #3b82f6', background: '#3b82f618', color: '#3b82f6', cursor: 'pointer', fontWeight: 600 }}>
+            Reload from Generation
           </button>
         )}
 
